@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --no-lint",
+    "build": "next build",
     "build:web": "npm run build && node scripts/copy-static.js",
     "start": "next start",
     "lint": "next lint",
@@ -23,7 +23,7 @@
     "csv-parse": "^6.1.0",
     "csv-parser": "^3.2.0",
     "lucide-react": "^0.479.0",
-    "next": "^15.2.4",
+    "next": "^16.1.1",
     "papaparse": "^5.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
