@@ -13,6 +13,16 @@ import type { VitalsData } from "@/lib/types";
 import { prepareVitalsData } from "@/lib/transform-data";
 import { ReferenceArea } from "recharts";
 
+type GameData = {
+  currentPatientIndex: number;
+  selectedPatients: Array<{
+    id: string;
+    file?: string;
+  }>;
+  diagnoses?: any[];
+  startTime?: string;
+};
+
 import {
   LineChart,
   Line,
@@ -57,9 +67,9 @@ const UNIFIED_MARGIN = {
 
 const CLINICAL_LABELS: Record<string, string> = {
   // ===== Gases =====
-  fio2: "FiO₂",
-  feo2: "FeO₂",
-  inco2: "Inspired CO₂",
+  gas_fio2: "FiO₂",
+  gas_feo2: "FeO₂",
+  gas_inco2: "Inspired CO₂",
 
   // ===== Ventilation =====
   vent_rr: "Respiratory Rate",
@@ -291,7 +301,8 @@ function drugColor(key: string) {
 
 function mergeSeries(seriesMap: Record<string, { time: number; value: number }[]>) {
   const keys = Object.keys(seriesMap);
-  const rows: Record<number, Record<string, number | null>> = {};
+  const rows: Record<number, Record<string, number | null> & { time: number }> = {};
+
 
   for (const [k, arr] of Object.entries(seriesMap)) {
     for (const { time, value } of arr) {
@@ -317,14 +328,18 @@ function formatTime(mins: number) {
 const buildSeries = <K extends string>(
   m?: Record<K, { time: number; value: number }[]>,
   color?: (k: K) => string
-): SeriesMeta[] =>
-  Object.entries(m ?? {})
-    .filter(([_, a]) => a.some(p => Number.isFinite(p.value)))
+): SeriesMeta[] => {
+  const entries = Object.entries(m ?? {}) as [K, { time: number; value: number }[]][];
+
+  return entries
+    .filter(([, a]) => a.some(p => Number.isFinite(p.value)))
     .map(([k]) => ({
       key: k,
       label: CLINICAL_LABELS[k] ?? k,
-      color: color ? color(k as K) : drugColor(k),
+      color: color ? color(k) : drugColor(k),
     }));
+};
+
 
 function useVoiceNote() {
   const recognitionRef = useRef<any>(null);
@@ -819,12 +834,13 @@ export default function Dashboard() {
 
   const gasSeriesMap = useMemo(
     () => ({
-      fio2: vitals?.gases?.fio2 ?? [],
-      feo2: vitals?.gases?.feo2 ?? [],
-      inco2: vitals?.gases?.inco2 ?? [],
+      gas_fio2: vitals?.gases?.fio2 ?? [],
+      gas_feo2: vitals?.gases?.feo2 ?? [],
+      gas_inco2: vitals?.gases?.inco2 ?? [],
     }),
     [vitals]
   );
+  
   
     const gasSeries = buildSeries(
       gasSeriesMap,
@@ -1022,7 +1038,7 @@ const ventControlSeries = buildSeries(
           </div>
 
 
-      {patientMeta && (
+          {patientMeta && patientContext && (
           <ChartCard>
             <h3 className="mb-2 text-sm font-bold text-gray-800">
               Preoperative Demographics & Surgery
@@ -1046,7 +1062,7 @@ const ventControlSeries = buildSeries(
           </ChartCard>
         )}
 
-{preop && (
+{preop && patientContext && (
   <ChartCard>
 
     {/* ================= Medical History ================= */}
@@ -1107,19 +1123,19 @@ const ventControlSeries = buildSeries(
       </div>
 
       <div className="grid grid-cols-6 gap-3 text-sm text-gray-700">
-      <div>Estimated Blood Loss: {patientContext.fluids_blood.intraop_ebl ?? "-"} mL</div>
-      <div>Urine Output: {patientContext.fluids_blood.intraop_uo ?? "-"} mL</div>
-      <div>Crystalloid: {patientContext.fluids_blood.intraop_crystalloid ?? "-"} mL</div>
-      <div>Colloid: {patientContext.fluids_blood.intraop_colloid ?? "-"} mL</div>
-      <div>RBC Transfusion: {patientContext.fluids_blood.intraop_rbc ?? "-"} units</div>
-      <div>FFP: {patientContext.fluids_blood.intraop_ffp ?? "-"} units</div>
+      <div>Estimated Blood Loss: {patientContext.fluids_blood?.intraop_ebl ?? "-"} mL</div>
+      <div>Urine Output: {patientContext.fluids_blood?.intraop_uo ?? "-"} mL</div>
+      <div>Crystalloid: {patientContext.fluids_blood?.intraop_crystalloid ?? "-"} mL</div>
+      <div>Colloid: {patientContext.fluids_blood?.intraop_colloid ?? "-"} mL</div>
+      <div>RBC Transfusion: {patientContext.fluids_blood?.intraop_rbc ?? "-"} units</div>
+      <div>FFP: {patientContext.fluids_blood?.intraop_ffp ?? "-"} units</div>
 
-      <div>Propofol: {patientContext.intraop_bolus.intraop_ppf ?? "-"} mg</div>
-      <div>Midazolam: {patientContext.intraop_bolus.intraop_mdz ?? "-"} mg</div>
-      <div>Fentanyl: {patientContext.intraop_bolus.intraop_ftn ?? "-"} µg</div>
-      <div>Rocuronium: {patientContext.intraop_bolus.intraop_rocu ?? "-"} mg</div>
-      <div>Phenylephrine: {patientContext.intraop_bolus.intraop_phe ?? "-"} µg</div>
-
+      <div>Propofol: {patientContext.intraop_bolus?.intraop_ppf ?? "-"} mg</div>
+      <div>Midazolam: {patientContext.intraop_bolus?.intraop_mdz ?? "-"} mg</div>
+      <div>Fentanyl: {patientContext.intraop_bolus?.intraop_ftn ?? "-"} µg</div>
+      <div>Rocuronium: {patientContext.intraop_bolus?.intraop_rocu ?? "-"} mg</div>
+      <div>Phenylephrine: {patientContext.intraop_bolus?.intraop_phe ?? "-"} µg</div>
+  
       </div>
     </div>
   </ChartCard>
