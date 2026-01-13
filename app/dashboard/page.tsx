@@ -1,17 +1,15 @@
 "use client";
+import { ReferenceArea, ReferenceLine, Label } from "recharts";
 import { useAbnormalAnnotations } from "@/lib/useAbnormalAnnotations";
 import type { PatientMeta, PreopData } from "@/lib/types";
 import { preparePreopData } from "@/lib/prepare-preop";
-import Papa from "papaparse";
 import { useEffect, useRef, useState, useMemo, memo } from "react";
 import type { PatientContext } from "@/lib/types";
-
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 import type { VitalsData } from "@/lib/types";
 import { prepareVitalsData } from "@/lib/transform-data";
-import { ReferenceArea } from "recharts";
 
 type GameData = {
   currentPatientIndex: number;
@@ -45,6 +43,15 @@ type SeriesMeta = {
 type TimeSeriesChartProps = { data: Array<Record<string, number | null>>; series: SeriesMeta[]; height?: number; yDomain?: [number, number]; yLabel?: string; syncId?: string; };
 
 const VITALS = ["MAP", "SBP", "DBP", "ETCO2", "HR", "SpO2"] as const;
+
+type TimeInterval = {
+  start: number;   // minute
+  end: number;     // minute
+  label: string;
+  color: string;
+  opacity?: number;
+};
+
 type VitalKey = typeof VITALS[number];
 type AbnormalPiece = {
  feature: VitalKey;
@@ -60,8 +67,8 @@ type AbnormalPiece = {
 const UNIFIED_MARGIN = {
   top: 10,
   right: 20,
-  bottom: 0,
-  left: 60,   // 给 YAxis + label + ticks 预留足够空间
+  bottom: 28,   // ✅ 给旋转后的 X tick 留空间
+  left: 60,
 };
 
 
@@ -165,10 +172,11 @@ const PANEL_COLORS = {
   },
 
   gas: {
-    fio2: "#BF1A1A",   // 金黄
-    feo2: "#007E6E",   // 深橙
-    inco2: "#2979ff",  // 蓝
+    gas_fio2: "#BF1A1A",
+    gas_feo2: "#007E6E",
+    gas_inco2: "#2979ff",
   },
+  
 
   // ✅ 新增：Hemodynamics（红棕系）
   hemodynamics: {
@@ -417,7 +425,7 @@ function useVoiceNote() {
 function TimeSeriesChart({
   data,
   series,
-  height = 140,
+  height = 280,
   yDomain = [0, 200],
   yLabel,
   syncId = "timeSync",
@@ -426,12 +434,37 @@ function TimeSeriesChart({
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data} syncId={syncId} margin={UNIFIED_MARGIN}>
         <CartesianGrid stroke="#444" strokeDasharray="3 3" />
+     
+
         <XAxis
-          dataKey="time"
-          type="number"
-          allowDataOverflow
-          tickFormatter={(m) => `min ${m}`}
-        />
+            dataKey="time"
+            type="number"
+            allowDataOverflow
+            interval={0}
+            ticks={(() => {
+              const maxT = Math.max(...data.map(d => Number(d.time ?? 0)));
+              if (!Number.isFinite(maxT) || maxT <= 0) return [0];
+              const out: number[] = [];
+              for (let t = 0; t <= Math.ceil(maxT / 20) * 20; t += 20) out.push(t);
+              return out;
+            })()}
+            tick={({ x, y, payload }) => (
+              <g transform={`translate(${x},${y})`}>
+                <text
+                  x={0}
+                  y={0}
+                  dy={12}
+                  textAnchor="end"
+                  fill="#111"
+                  fontSize={11}
+                  transform="rotate(-35)"
+                >
+                  {`min ${payload.value}`}
+                </text>
+              </g>
+            )}
+          />
+
 
         <YAxis
           yAxisId="left"
@@ -476,7 +509,9 @@ export default function Dashboard() {
     return performance.now() - sessionStartRef.current;
   };
   
-
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  
   const actionLogRef = useRef<
     {
       type: string;
@@ -526,14 +561,16 @@ export default function Dashboard() {
       },
     };
   };
-  
-  const submitCurrentSession = async () => {
+  const submitCurrentSession = async (): Promise<boolean> => {
     const payload = collectSubmissionPayload();
   
     console.log("===== SUBMISSION PAYLOAD =====");
     console.log(payload);
   
     try {
+      setSubmitting(true);
+      setSubmitError(null);
+  
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -542,18 +579,24 @@ export default function Dashboard() {
         body: JSON.stringify(payload),
       });
   
-      // 可选：如果你希望只有成功才算提交
       if (!res.ok) {
-        console.error("Submit failed:", res.status, await res.text());
-        return;
+        const msg = await res.text();
+        console.error("Submit failed:", res.status, msg);
+        setSubmitError(`Submit failed (${res.status})`);
+        return false;
       }
   
-      // ✅ 关键：标记已提交
       setHasSubmitted(true);
+      return true;
     } catch (e) {
       console.error("Submit exception:", e);
+      setSubmitError("Submit exception");
+      return false;
+    } finally {
+      setSubmitting(false);
     }
   };
+  
   
   const router = useRouter();
   const [patientContext, setPatientContext] = useState<PatientContext | null>(null);
@@ -638,6 +681,14 @@ export default function Dashboard() {
       const lower = headers.map((h) => h.toLowerCase());
       const firstRow = lines[0].split(",");
       const ctx: PatientContext = {
+        caseTime: {
+          casestart: numOrUndef(firstRow[lower.indexOf("casestart")]),
+          caseend:  numOrUndef(firstRow[lower.indexOf("caseend")]),
+          anestart: numOrUndef(firstRow[lower.indexOf("anestart")]),
+          aneend:   numOrUndef(firstRow[lower.indexOf("aneend")]),
+          opstart:  numOrUndef(firstRow[lower.indexOf("opstart")]),
+          opend:    numOrUndef(firstRow[lower.indexOf("opend")]),
+        },
         airway: {
           cormack: firstRow[lower.indexOf("cormack")] || undefined,
           airway: firstRow[lower.indexOf("airway")] || undefined,
@@ -675,6 +726,16 @@ export default function Dashboard() {
         },
       };
       setPatientContext(ctx);
+
+      console.log("[CASE TIME]", {
+        casestart: ctx.caseTime?.casestart,
+        caseend: ctx.caseTime?.caseend,
+        anestart: ctx.caseTime?.anestart,
+        aneend: ctx.caseTime?.aneend,
+        opstart: ctx.caseTime?.opstart,
+        opend: ctx.caseTime?.opend,
+      });
+      
       
       const preopData = preparePreopData(headers, firstRow);
       setPreop(preopData);
@@ -832,6 +893,91 @@ export default function Dashboard() {
     [bindChartHandlers, vitalChartData]
   );
 
+  const timeIntervals = useMemo(() => {
+    const t = patientContext?.caseTime;
+    if (!t) return [];
+    if (Number.isFinite(t.anestart) && Number.isFinite(t.casestart) && t.anestart! < t.casestart!) {
+      t.anestart = t.casestart;
+    }
+    const intervals: {
+      start: number;
+      end: number;
+      label: string;
+      color: string;
+      opacity: number;
+    }[] = [];
+  
+    const ok = (x: any) => Number.isFinite(x);
+  
+    // 颜色定义（你要的三色）
+    const COLOR_SURGERY = "#90CAF9";   // 浅蓝：手术期
+    const COLOR_ANES    = "#FFCC80";   // 浅橙：麻醉非手术段
+    const COLOR_OTHER   = "#A5D6A7";   // 灰色：case非麻醉段
+  
+    const OP_SURGERY = 0.16;
+    const OP_ANES    = 0.16;
+    const OP_OTHER   = 0.12;
+  
+    // 1) casestart ~ anestart（灰色）
+    if (ok(t.casestart) && ok(t.anestart) && t.casestart! < t.anestart!) {
+      intervals.push({
+        start: t.casestart!,
+        end: t.anestart!,
+        label: "Pre-Anesthesia (Case)",
+        color: COLOR_OTHER,
+        opacity: OP_OTHER,
+      });
+    }
+  
+    // 2) anestart ~ opstart（浅橙）
+    if (ok(t.anestart) && ok(t.opstart) && t.anestart! < t.opstart!) {
+      intervals.push({
+        start: t.anestart!,
+        end: t.opstart!,
+        label: "Anesthesia (Pre-op)",
+        color: COLOR_ANES,
+        opacity: OP_ANES,
+      });
+    }
+  
+    // 3) opstart ~ opend（浅蓝）
+    if (ok(t.opstart) && ok(t.opend) && t.opstart! < t.opend!) {
+      intervals.push({
+        start: t.opstart!,
+        end: t.opend!,
+        label: "Surgery",
+        color: COLOR_SURGERY,
+        opacity: OP_SURGERY,
+      });
+    }
+  
+    // 4) opend ~ aneend（浅橙）
+    if (ok(t.opend) && ok(t.aneend) && t.opend! < t.aneend!) {
+      intervals.push({
+        start: t.opend!,
+        end: t.aneend!,
+        label: "Anesthesia (Post-op)",
+        color: COLOR_ANES,
+        opacity: OP_ANES,
+      });
+    }
+  
+    // 5) aneend ~ caseend（灰色）
+    if (ok(t.aneend) && ok(t.caseend) && t.aneend! < t.caseend!) {
+      intervals.push({
+        start: t.aneend!,
+        end: t.caseend!,
+        label: "Post-Anesthesia (Case)",
+        color: COLOR_OTHER,
+        opacity: OP_OTHER,
+      });
+    }
+  
+    return intervals;
+  }, [patientContext]);
+  
+
+  
   const gasSeriesMap = useMemo(
     () => ({
       gas_fio2: vitals?.gases?.fio2 ?? [],
@@ -958,64 +1104,94 @@ const ventControlSeries = buildSeries(
             </h1>
              {/* ===== Right: Action Buttons ===== */}
   <div className="flex items-center gap-3">
+    {/* ✅ Submitted badge */}
+      {hasSubmitted && (
+        <span
+          className="
+            inline-flex items-center gap-2
+            rounded-full border border-green-200
+            bg-green-50 px-3 py-1
+            text-sm font-semibold text-green-700
+          "
+        >
+          ✅ Submitted
+        </span>
+      )}
+
     {/* Submit */}
     <button
-      type="button"
-      onClick={async () => {
-        logAction("submit_session");
-        await submitCurrentSession();
-      }}
-      className="
-        px-4 py-1.5 rounded-md
-        text-sm font-semibold
-        bg-blue-600 text-white
-        hover:bg-blue-700
-      "
-    >
-      Submit
-    </button>
+  type="button"
+  disabled={hasSubmitted || submitting}
+  onClick={async () => {
+    logAction("submit_session");
+    await submitCurrentSession();
+  }}
+  className={`
+    px-4 py-1.5 rounded-md
+    text-sm font-semibold
+    transition
+    ${
+      hasSubmitted
+        ? "bg-green-200 text-green-800 cursor-not-allowed"
+        : submitting
+        ? "bg-blue-300 text-white cursor-wait"
+        : "bg-blue-600 text-white hover:bg-blue-700"
+    }
+  `}
+>
+  {hasSubmitted ? "Submitted" : submitting ? "Submitting..." : "Submit"}
+</button>
+
+{submitError && (
+  <span className="text-sm font-semibold text-red-600">
+    {submitError}
+  </span>
+)}
+
 
     {/* Next */}
     <button
-      type="button"
-      onClick={async () => {
-        // ✅ 只有还没 submit 才弹确认 + 自动 submit
-        if (!hasSubmitted) {
-          const ok = window.confirm(
-            "You are about to submit this case and move to the next patient.\n\nThis action cannot be undone. Continue?"
-          );
-      
-          if (!ok) {
-            logAction("next_cancelled");
-            return;
-          }
-      
-          logAction("next_with_submit");
-          await submitCurrentSession();
-        } else {
-          // 已提交过，直接 next，不提示
-          logAction("next_after_submit");
-        }
-      
-        // ③ 切换到下一个 patient
-        const nextIndex = currentPatientIndex + 1;
-        if (nextIndex < selectedPatients.length) {
-          setCurrentPatientIndex(nextIndex);
-          loadPatient(selectedPatients[nextIndex].id);
-        } else {
-          alert("No more patients.");
-        }
-      }}
-      
-      className="
-        px-4 py-1.5 rounded-md
-        text-sm font-semibold
-        bg-gray-200 text-gray-800
-        hover:bg-gray-300
-      "
-    >
-      Next
-    </button>
+  type="button"
+  disabled={submitting}
+  onClick={async () => {
+    // ✅ 只有还没 submit 才弹确认 + 自动 submit
+    if (!hasSubmitted) {
+      const ok = window.confirm(
+        "You are about to submit this case and move to the next patient.\n\nThis action cannot be undone. Continue?"
+      );
+
+      if (!ok) {
+        logAction("next_cancelled");
+        return;
+      }
+
+      logAction("next_with_submit");
+      const success = await submitCurrentSession();
+
+      // ✅ 提交失败：不允许跳转到下一个
+      if (!success) return;
+    } else {
+      logAction("next_after_submit");
+    }
+
+    const nextIndex = currentPatientIndex + 1;
+    if (nextIndex < selectedPatients.length) {
+      setCurrentPatientIndex(nextIndex);
+      loadPatient(selectedPatients[nextIndex].id);
+    } else {
+      alert("No more patients.");
+    }
+  }}
+  className={`
+    px-4 py-1.5 rounded-md
+    text-sm font-semibold
+    transition
+    ${submitting ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}
+  `}
+>
+  Next
+</button>
+
 
     {/* Log out */}
     <button
@@ -1406,8 +1582,8 @@ const ventControlSeries = buildSeries(
 
       {/* 右侧 chart */}
       <div className="flex-1">
-        <div style={{ position: "relative", width: "100%", height: 260,cursor: abnormalDraft ? "crosshair" : "default", }}>
-          <ResponsiveContainer width="100%" height={260}>
+        <div style={{ position: "relative", width: "100%", height: 360,cursor: abnormalDraft ? "crosshair" : "default", }}>
+          <ResponsiveContainer width="100%" height={360}>
             <LineChart
             {...chartHandlers}  
               data={vitalChartData}
@@ -1421,14 +1597,115 @@ const ventControlSeries = buildSeries(
                 dataKey="time"
                 type="number"
                 allowDataOverflow
-                tickFormatter={formatTime}
+                interval={0}
+                ticks={(() => {
+                  const maxT = Math.max(...vitalChartData.map(d => Number(d.time ?? 0)));
+                  if (!Number.isFinite(maxT) || maxT <= 0) return [0];
+                  const out: number[] = [];
+                  for (let t = 0; t <= Math.ceil(maxT / 20) * 20; t += 20) out.push(t);
+                  return out;
+                })()}
+                tick={({ x, y, payload }) => (
+                  <g transform={`translate(${x},${y})`}>
+                    <text
+                      x={0}
+                      y={0}
+                      dy={14}
+                      textAnchor="end"
+                      fill="#111"
+                      fontSize={11}
+                      transform="rotate(-35)"
+                    >
+                      {`min ${payload.value}`}
+                    </text>
+                  </g>
+                )}
               />
+
+
+                <XAxis
+                  xAxisId="top"
+                  dataKey="time"
+                  type="number"
+                  allowDataOverflow
+                  orientation="top"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={false}
+                  interval={0}
+                  ticks={(() => {
+                    const maxT = Math.max(...vitalChartData.map(d => Number(d.time ?? 0)));
+                    if (!Number.isFinite(maxT) || maxT <= 0) return [0];
+                    const out: number[] = [];
+                    for (let t = 0; t <= Math.ceil(maxT / 20) * 20; t += 20) out.push(t);
+                    return out;
+                  })()}
+                />
+
+
 
               <YAxis
                 yAxisId="left"
                 domain={[0, 200]}
                 ticks={Array.from({ length: 21 }, (_, i) => i * 10)}
               />
+
+              {/* ===== Case / Anesthesia / Surgery Intervals ===== */}
+              {timeIntervals.map((t) => (
+                <ReferenceArea
+                  key={t.label}
+                  x1={t.start}
+                  x2={t.end}
+                  yAxisId="left"
+                  y1={0}
+                  y2={200}
+                  fill={t.color}
+                  fillOpacity={t.opacity}
+                  stroke="none"
+                  ifOverflow="extendDomain"
+                />
+              ))}
+
+              {/* ===== Case Time Markers (vertical lines + top labels) ===== */}
+              {(() => {
+                const t = patientContext?.caseTime;
+                if (!t) return null;
+
+                const markers = [
+                  { x: t.casestart, label: "Case Start", dy: 0 },
+                  { x: t.anestart, label: "Anesthesia Start", dy: 14 },
+                  { x: t.opstart, label: "Operation Start", dy: 0 },
+                  { x: t.opend, label: "Operation End", dy: 14 },
+                  { x: t.aneend, label: "Anesthesia End", dy: 0 },
+                  { x: t.caseend, label: "Case End", dy: 14 },
+                ].filter(m => Number.isFinite(m.x));
+
+                return markers.map(m => (
+                  <ReferenceLine
+                  key={m.label}
+                  x={m.x as number}
+                  xAxisId="top"
+                  yAxisId="left"   // ✅ 关键：必须和你现有 YAxis 对齐
+                  stroke="#111"
+                  strokeDasharray="4 4"
+                  ifOverflow="extendDomain"
+                >
+                
+                    <Label
+                      value={m.label}
+                      position="top"
+                      offset={10}
+                      dy={m.dy}
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 700,
+                        fill: "#111",
+                      }}
+                    />
+                  </ReferenceLine>
+                ));
+              })()}
+
 
               {/* 已保存的异常区间 */}
               {abnormalPieces.map((p) => {
@@ -1675,11 +1952,7 @@ const ventControlSeries = buildSeries(
     </div>
   </ChartCard>
 )}
-
-
 </div>
-
-
           {/* ===== 原来的所有内容到这里结束 ===== */}
           </div> {/* RIGHT COLUMN */}
       </div>   {/* GRID */}
@@ -1688,10 +1961,4 @@ const ventControlSeries = buildSeries(
   </main>
 );
 
-
 }
-
-
-
-
-

@@ -9,6 +9,15 @@ export type RawPatientData = {
   };
 };
 
+export type CaseTime = {
+  casestart?: number;
+  caseend?: number;
+  anestart?: number;
+  aneend?: number;
+  opstart?: number;
+  opend?: number;
+};
+
 
 export interface DataPoint {
   time: number;   // minute index
@@ -232,6 +241,7 @@ export type IntraopBolusData = {
 
 // ---------- Extended Patient Context ----------
 export interface PatientContext {
+  caseTime?: CaseTime;  
   airway?: AirwayData;
   access?: AccessData;
   fluids_blood?: FluidsBloodData;
