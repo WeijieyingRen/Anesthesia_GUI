@@ -1,13 +1,4 @@
-// lib/transform-data.ts
-import type {
-  RawPatientData,
-  VitalsData,
-  PatientContext,
-  AirwayData,
-  AccessData,
-  FluidsBloodData,
-  IntraopBolusData,
-} from "./types";
+import type { VitalsData } from "@/lib/types";
 // ---- helpers ----
 const num = (v: any) => (v === null || v === undefined || v === "" ? NaN : Number(v));
 
@@ -40,177 +31,225 @@ const lastFinite = (arr: number[]) => {
   return null;
 };
 
-// ---- main ----
-export function prepareVitalsData(rawData: RawPatientData): VitalsData {
-  if (!rawData || !rawData.vitals) {
-    throw new Error("Invalid input: rawData with vitals is required");
-  }
-  const patient = rawData.patient
-  const v = rawData.vitals.values ?? {};
-  const t =
-    v.time ??
-    v.time_index_minutes ??
-    v.time_index ??
-    v.minute ??
-    [];
+type Row = Record<string, any>;
 
-  // --- Core vitals ---
-// --- Core vitals (raw arrays) ---
-const raw_dbp = v.phys_dbp ?? [];
-const raw_sbp = v.phys_sbp ?? [];
-const raw_map = v.phys_map ?? [];
-const raw_spo2 = v.phys_spo2 ?? [];
-const raw_etco2 = v.phys_etco2 ?? [];
-const raw_hr = v.phys_hr ?? [];
-
-// --- Core vitals (time series for UI) ---
-const dbp = mkSeries(t, raw_dbp);
-const sbp = mkSeries(t, raw_sbp);
-const map = mkSeries(t, raw_map);
-const spo2 = mkSeries(t, raw_spo2);
-const etco2 = mkSeries(t, raw_etco2);
-const hr = mkSeries(t, raw_hr);
-
-
-  // --- Gases (wave) ---
-  const gases = {
-    fio2:  mkSeries(t, v.gas_fio2  ?? []),
-    feo2:  mkSeries(t, v.gas_feo2  ?? []),
-    inco2: mkSeries(t, v.gas_inco2 ?? []),
-  };
-
-  const ventilation = {
-    vent_rr:         mkSeries(t, v.vent_rr ?? []),
-    vent_tv:         mkSeries(t, v.vent_tv ?? []),
-    vent_mv:         mkSeries(t, v.vent_mv ?? []),
-    vent_peep:       mkSeries(t, v.vent_peep ?? []),
-    vent_pip:        mkSeries(t, v.vent_pip ?? []),
-    vent_pplat:      mkSeries(t, v.vent_pplat ?? []),
-    vent_compliance: mkSeries(t, v.vent_compliance ?? []),
-  };
- 
-  const hemodynamics = {
-    hemo_co:  mkSeries(t, v.hemo_co ?? []),
-    hemo_ci:  mkSeries(t, v.hemo_ci ?? []),
-    hemo_svr: mkSeries(t, v.hemo_svr ?? []),
-    hemo_cvp: mkSeries(t, v.hemo_cvp ?? []),
-    hemo_svv: mkSeries(t, v.hemo_svv ?? []),
-  };
-  
-  const depth = {
-    depth_bis: mkSeries(t, v.depth_bis ?? []),
-    depth_sr:  mkSeries(t, v.depth_sr ?? []),
-    depth_mac: mkSeries(t, v.depth_mac ?? []),
-  };
-  
-   // ---------- NEW: static intraoperative context ----------
-   const airway: AirwayData = {
-    airway: v.airway,
-    tubesize: v.tubesize,
-    dltubesize: v.dltubesize,
-    lmasize: v.lmasize,
-  };
-
-  const access: AccessData = {
-    iv1: v.iv1,
-    iv2: v.iv2,
-    aline1: v.aline1,
-    aline2: v.aline2,
-    cline1: v.cline1,
-    cline2: v.cline2,
-  };
-
-  const fluids_blood: FluidsBloodData = {
-    intraop_ebl: v.intraop_ebl,
-    intraop_uo: v.intraop_uo,
-    intraop_crystalloid: v.intraop_crystalloid,
-    intraop_colloid: v.intraop_colloid,
-    intraop_rbc: v.intraop_rbc,
-    intraop_ffp: v.intraop_ffp,
-  };
-
-  const intraop_bolus: IntraopBolusData = {
-    intraop_ppf: v.intraop_ppf,
-    intraop_mdz: v.intraop_mdz,
-    intraop_ftn: v.intraop_ftn,
-    intraop_rocu: v.intraop_rocu,
-    intraop_vecu: v.intraop_vecu,
-    intraop_eph: v.intraop_eph,
-    intraop_phe: v.intraop_phe,
-    intraop_epi: v.intraop_epi,
-    intraop_ca: v.intraop_ca,
-  };
-
-  // --- Medications (continuous / infusion waves, NOT bolus) ---
-  const meds = {
-    pressors: {
-      vasopressors_norepinephrine: mkSeries(t, v.vasopressors_norepinephrine ?? []),
-      vasopressors_phenylephrine: mkSeries(t, v.vasopressors_phenylephrine ?? []),
-      vasopressors_vasopressin:   mkSeries(t, v.vasopressors_vasopressin ?? []),
-      vasopressors_epinephrine:   mkSeries(t, v.vasopressors_epinephrine ?? []),
-  
-    },
-    vasodilators: {
-      vasodilators_nitroglycerin:        mkSeries(t, v.vasodilators_nitroglycerin ?? []),
-      vasodilators_sodium_nitroprusside: mkSeries(t, v.vasodilators_sodium_nitroprusside ?? []),
-  
-    },
-    inotropes: {
-      inotropes_dobutamine:       mkSeries(t, v.inotropes_dobutamine ?? []),
-      inotropes_dopamine:         mkSeries(t, v.inotropes_dopamine ?? []),
-      inotropes_milrinone:        mkSeries(t, v.inotropes_milrinone ?? []),
-      inotropes_prostaglandin_e1: mkSeries(t, v.inotropes_prostaglandin_e1 ?? []),
-  
-    },
-    sedatives: {
-      sedatives_propofol:               mkSeries(t, v.sedatives_propofol ?? []),
-      sedatives_dexmedetomidine_low:    mkSeries(t, v.sedatives_dexmedetomidine_low ?? []),
-      sedatives_dexmedetomidine_high:   mkSeries(t, v.sedatives_dexmedetomidine_high ?? []),
-  
-    },
-    opioids: {
-      opioids_remifentanil_low:  mkSeries(t, v.opioids_remifentanil_low ?? []),
-      opioids_remifentanil_high: mkSeries(t, v.opioids_remifentanil_high ?? []),
-  
-    },
-    nmbas: {    
-      nmbas_rocuronium:  mkSeries(t, v.nmbas_rocuronium ?? []),
-      nmbas_vecuronium:  mkSeries(t, v.nmbas_vecuronium ?? []),
-  }
+type PrepareVitalsInput = {
+  id: string;
+  phyRows: Row[];
+  medBolusRows: Row[];
+  medInfusionRows: Row[];
+  fluidInRows: Row[];
+  fluidOutRows: Row[];
 };
 
-
-const context: PatientContext = {
-  airway,
-  access,
-  fluids_blood,
-  intraop_bolus,
+const toNum = (v: any): number | null => {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
 };
 
-  // --- Current values (optional snapshot) ---
-  const currentValues = {
-    SBP: lastFinite(raw_sbp.map(num)),
-    DBP: lastFinite(raw_dbp.map(num)),
-    MAP: lastFinite(raw_map.map(num)),
-    HR: lastFinite(raw_hr.map(num)),
-    SpO2: lastFinite(raw_spo2.map(num)),
-    ETCO2: lastFinite(raw_etco2.map(num)),
+const buildSeriesFromWide = (
+  rows: Row[],
+  timeCol: string,
+  valueCol: string
+): { time: number; value: number }[] => {
+  return rows
+    .map((r) => ({
+      time: Number(r[timeCol]),
+      value: Number(r[valueCol]),
+    }))
+    .filter((x) => Number.isFinite(x.time) && Number.isFinite(x.value));
+};
+
+const pickMedSeries = (
+  rows: Row[],
+  medNames: string[],
+  timeCol: string,
+  doseCol: string,
+  nameCol: string
+): { time: number; value: number }[] => {
+  const keep = new Set(medNames.map((x) => x.toLowerCase()));
+  return rows
+    .map((r) => {
+      const med = String(r[nameCol] ?? "").toLowerCase().trim();
+      return {
+        med,
+        time: Number(r[timeCol]),
+        value: Number(r[doseCol]),
+      };
+    })
+    .filter((x) => keep.has(x.med) && Number.isFinite(x.time) && Number.isFinite(x.value))
+    .map((x) => ({ time: x.time, value: x.value }));
+};
+
+const pickIntervalSeries = (
+  rows: Row[],
+  medNames: string[],
+  startCol: string,
+  endCol: string,
+  doseCol: string,
+  nameCol: string
+): { time: number; value: number }[] => {
+  const keep = new Set(medNames.map((x) => x.toLowerCase()));
+  const out: { time: number; value: number }[] = [];
+
+  for (const r of rows) {
+    const med = String(r[nameCol] ?? "").toLowerCase().trim();
+    if (!keep.has(med)) continue;
+
+    const start = Number(r[startCol]);
+    const end = Number(r[endCol]);
+    const dose = Number(r[doseCol]);
+
+    if (!Number.isFinite(start) || !Number.isFinite(dose)) continue;
+
+    out.push({ time: start, value: dose });
+
+    if (Number.isFinite(end)) {
+      out.push({ time: end, value: dose });
+    }
+  }
+
+  return out.sort((a, b) => a.time - b.time);
+};
+
+export function prepareVitalsData({
+  id,
+  phyRows,
+  medBolusRows,
+  medInfusionRows,
+  fluidInRows,
+  fluidOutRows,
+}: PrepareVitalsInput): VitalsData {
+  const MAP = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "ARTM");
+  const SBP = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "ARTS");
+  const DBP = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "ARTD");
+  const HR = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "HR_EKG");
+  const SpO2 = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "SPO2 %");
+  const ETCO2 = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "ETCO2 (mmHg)");
+
+  const fio2 = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "FiO2");
+  const feo2 = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "inO2 %");
+  const inco2 = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "inN2O %");
+
+  const vent_rr = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "RR");
+  const vent_tv = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "TV");
+  const vent_mv = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "MV");
+  const vent_peep = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "PEEP (cm H2O)");
+  const vent_pip = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "PIP");
+  const vent_pplat = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "Plateau PIP");
+  const vent_compliance = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "Mean PIP");
+
+  const hemo_co: { time: number; value: number }[] = [];
+  const hemo_ci: { time: number; value: number }[] = [];
+  const hemo_svr: { time: number; value: number }[] = [];
+  const hemo_cvp = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "CVP");
+  const hemo_svv: { time: number; value: number }[] = [];
+
+  const depth_bis = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "PSI/BIS/Entropy");
+  const depth_sr: { time: number; value: number }[] = [];
+  const depth_mac = buildSeriesFromWide(phyRows, "relative_anesthesia_time", "etMAC exhaled");
+
+  const pressors = {
+    vasopressors_norepinephrine: [
+      ...pickMedSeries(medBolusRows, ["norepinephrine"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["norepinephrine"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
+
+    vasopressors_phenylephrine: [
+      ...pickMedSeries(medBolusRows, ["phenylephrine"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["phenylephrine"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
+
+    vasopressors_vasopressin: [
+      ...pickMedSeries(medBolusRows, ["vasopressin"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["vasopressin"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
+
+    vasopressors_epinephrine: [
+      ...pickMedSeries(medBolusRows, ["epinephrine"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["epinephrine"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
   };
-  
+
+  const vasodilators = {
+    vasodilators_nitroglycerin: [
+      ...pickMedSeries(medBolusRows, ["nitroglycerin"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["nitroglycerin"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
+
+    vasodilators_sodium_nitroprusside: [
+      ...pickMedSeries(medBolusRows, ["nitroprusside"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["nitroprusside"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
+  };
+
+  const inotropes = {
+    inotropes_dobutamine: pickIntervalSeries(medInfusionRows, ["dobutamine"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    inotropes_dopamine: pickIntervalSeries(medInfusionRows, ["dopamine"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    inotropes_milrinone: pickIntervalSeries(medInfusionRows, ["milrinone"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    inotropes_prostaglandin_e1: [],
+  };
+
+  const sedatives = {
+    sedatives_propofol: [
+      ...pickMedSeries(medBolusRows, ["propofol"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+      ...pickIntervalSeries(medInfusionRows, ["propofol"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    ].sort((a, b) => a.time - b.time),
+    sedatives_dexmedetomidine_low: pickIntervalSeries(medInfusionRows, ["dexmedetomidine"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    sedatives_dexmedetomidine_high: [],
+  };
+
+  const opioids = {
+    opioids_remifentanil_low: pickIntervalSeries(medInfusionRows, ["remifentanil"], "relative_anesthesia_start", "relative_anesthesia_end", "dose", "med_concept_desc"),
+    opioids_remifentanil_high: [],
+  };
+
+  const nmbas = {
+    nmbas_rocuronium: pickMedSeries(medBolusRows, ["rocuronium"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+    nmbas_vecuronium: pickMedSeries(medBolusRows, ["vecuronium"], "relative_anesthesia_time", "dose", "med_concept_desc"),
+  };
+
   return {
-    patient,
-    SBP: sbp,
-    DBP: dbp,
-    MAP: map,
-    HR: hr,
-    SpO2: spo2,
-    ETCO2: etco2,
-    gases,
-    ventilation,
-    hemodynamics,
-    depth,
-    meds,
-    currentValues,
+    id,
+    MAP,
+    SBP,
+    DBP,
+    HR,
+    SpO2,
+    ETCO2,
+    gases: {
+      fio2,
+      feo2,
+      inco2,
+    },
+    meds: {
+      pressors,
+      vasodilators,
+      inotropes,
+      sedatives,
+      opioids,
+      nmbas,
+    },
+    ventilation: {
+      vent_rr,
+      vent_tv,
+      vent_mv,
+      vent_peep,
+      vent_pip,
+      vent_pplat,
+      vent_compliance,
+    },
+    hemodynamics: {
+      hemo_co,
+      hemo_ci,
+      hemo_svr,
+      hemo_cvp,
+      hemo_svv,
+    },
+    depth: {
+      depth_bis,
+      depth_sr,
+      depth_mac,
+    },
   };
-  
 }

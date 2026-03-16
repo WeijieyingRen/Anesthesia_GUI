@@ -1,0 +1,17 @@
+{
+  "task": "detect",
+  "caseId": "C3D85E5C-F6C9-F011-921A-005056BFF837",
+  "eventId": "evt-1773644783798",
+  "eventTitle": "TEMP Window",
+  "episodeLabel": "Selected TEMP 213-242 min",
+  "annotation": {
+    "vital": "TEMP",
+    "startMin": 213,
+    "endMin": 242,
+    "eventType": "Hypotension",
+    "severity": "Mild",
+    "confidence": 3,
+    "note": "deded"
+  },
+  "submittedAt": "2026-03-16T07:26:41.203Z"
+}

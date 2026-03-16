@@ -18,22 +18,22 @@ import {
 type CsvRow = Record<string, any>;
 
 interface CaseMeta {
-  id: string;            // "patient_001" (no extension)
-  file: string;          // "patient_001.csv"
-  age: number | null;    // parsed from CSV (best-effort)
-  weight: number | null; // parsed from CSV (best-effort)
+  id: string;
+  folder: string;
+  age: number | null;
+  weight: number | null;
 }
 
-interface GameData {
+type GameData = {
   currentPatientIndex: number;
-  selectedPatients: Array<{ id: string; file: string }>;
+  selectedPatients: Array<{ id: string; folder: string }>;
   diagnoses: Array<string | null>;
   startTime: string;
-}
+};
 
 // ------------ Config ------------
-const CSV_BASE = "/data/patients_csv";
-const CASE_COUNT = 3; // how many cases you want to show
+const CSV_BASE = "/data";
+const CASE_COUNT = 10; // how many cases you want to show
 
 export default function PatientList() {
   const router = useRouter();
@@ -51,19 +51,25 @@ export default function PatientList() {
     return a;
   };
 
-  const loadCsvList = async (): Promise<string[]> => {
+  const loadPatientFolders = async (): Promise<string[]> => {
     try {
       const res = await fetch(`${CSV_BASE}/manifest.json`, { cache: "no-store" });
       if (!res.ok) throw new Error(`manifest ${res.status} ${res.statusText}`);
+  
       const m = (await res.json()) as { patients: string[] };
-      const files = Array.isArray(m.patients) ? m.patients : [];
-      if (!files.length) throw new Error("manifest has no patients");
-      return files;
-    } catch {
-      // fallback if no manifest yet
-      return ["patient_1.csv", "patient_2.csv", "patient_3.csv"];
+      console.log("manifest content:", m);
+  
+      const folders = Array.isArray(m.patients) ? m.patients : [];
+      console.log("folders from manifest:", folders);
+  
+      if (!folders.length) throw new Error("manifest has no patients");
+      return folders;
+    } catch (e) {
+      console.error("loadPatientFolders failed:", e);
+      return ["patient_1", "patient_2", "patient_3"];
     }
   };
+
 
   const parseCsv = (text: string): CsvRow[] => {
     const parsed = Papa.parse<CsvRow>(text, { header: true, dynamicTyping: true });
@@ -103,45 +109,51 @@ export default function PatientList() {
   };
 
   useEffect(() => {
-    // ensure participant info exists (keep your flow)
     const participantInfo = localStorage.getItem("participantInfo");
     if (!participantInfo) {
       router.push("/participant-info");
       return;
     }
-
+  
     (async () => {
       try {
-        // 1) list files
-        const files = await loadCsvList();
-        if (!files.length) throw new Error("No patient files found");
-
-        // 2) pick N files
-        // const chosen = shuffle(files).slice(0, Math.min(CASE_COUNT, files.length));
-        const chosen = files.slice(0, Math.min(CASE_COUNT, files.length));
-
-        // 3) fetch + parse each, extract age/weight
+        const folders = await loadPatientFolders();
+        if (!folders.length) throw new Error("No patient folders found");
+  
+        const chosen = folders.slice(0, Math.min(CASE_COUNT, folders.length));
+  
         const metas: CaseMeta[] = [];
-        for (const file of chosen) {
+        for (const folder of chosen) {
           try {
-            const res = await fetch(`${CSV_BASE}/${file}`, { cache: "no-store" });
+            const res = await fetch(`${CSV_BASE}/${folder}/case_info.csv`, { cache: "no-store" });
             if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
             const text = await res.text();
-            const rows = parseCsv(text);
-            const { age, weight } = extractAgeWeight(rows);
-            metas.push({ id: file.replace(/\.csv$/i, ""), file, age, weight });
+            const rows = Papa.parse<CsvRow>(text, {
+              header: true,
+              dynamicTyping: true,
+              skipEmptyLines: true,
+            }).data;
+  
+            const first = rows[0] ?? {};
+            metas.push({
+              id: folder,
+              folder,
+              age: Number.isFinite(Number(first["aims_patient_age_years"]))
+                ? Number(first["aims_patient_age_years"])
+                : null,
+              weight: null,
+            });
           } catch (e) {
-            console.warn(`Could not read ${file}:`, e);
-            metas.push({ id: file.replace(/\.csv$/i, ""), file, age: null, weight: null });
+            console.warn(`Could not read ${folder}:`, e);
+            metas.push({ id: folder, folder, age: null, weight: null });
           }
         }
-
+  
         setCases(metas);
-
-        // 4) initialize game data for later pages (dashboard can load by file)
+  
         const gameData: GameData = {
           currentPatientIndex: 0,
-          selectedPatients: metas.map((m) => ({ id: m.id, file: m.file })),
+          selectedPatients: metas.map((m) => ({ id: m.id, folder: m.folder })),
           diagnoses: Array(metas.length).fill(null),
           startTime: new Date().toISOString(),
         };
@@ -199,7 +211,7 @@ export default function PatientList() {
                 <div className="flex justify-between items-start">
                   <CardTitle>Case {i + 1}</CardTitle>
                 </div>
-                <CardDescription>{c.id}.csv</CardDescription>
+                <CardDescription>{c.folder}</CardDescription>
               </CardHeader>
               <CardContent className="pt-4">
                 <div className="space-y-2">

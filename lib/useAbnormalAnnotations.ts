@@ -16,7 +16,7 @@ export type AbnormalPiece = {
   centerY: number;
   yAxisId: "left" | "right";
   etiology: string;
-  confidence: number;
+  confidence: number | null;
 };
 
 type Draft = {

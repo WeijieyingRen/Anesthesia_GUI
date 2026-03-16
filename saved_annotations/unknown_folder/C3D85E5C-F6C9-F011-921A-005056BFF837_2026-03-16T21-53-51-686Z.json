@@ -1,0 +1,17 @@
+{
+  "task": "detect",
+  "caseId": "C3D85E5C-F6C9-F011-921A-005056BFF837",
+  "eventId": "evt-1773697685613",
+  "eventTitle": "MAP Window",
+  "episodeLabel": "Selected MAP 107-177 min",
+  "annotation": {
+    "vital": "MAP",
+    "startMin": 107,
+    "endMin": 177,
+    "eventType": "Hypertension",
+    "severity": "Moderate",
+    "confidence": 3,
+    "note": "def"
+  },
+  "submittedAt": "2026-03-16T21:53:47.777Z"
+}
