@@ -8,8 +8,6 @@ import { prepareVitalsData } from "@/lib/transform-data";
 import type {
   PatientDemographic,
   SurgeryContext,
-  TimelineStatic,
-  TimelineEvent,
   PreopAssessment,
   LabData,
 } from "@/lib/types";
@@ -615,8 +613,6 @@ export default function Dashboard() {
   const router = useRouter();
   const [demographic, setDemographic] = useState<PatientDemographic | null>(null);
   const [surgeryContext, setSurgeryContext] = useState<SurgeryContext | null>(null);
-  const [timelineStatic, setTimelineStatic] = useState<TimelineStatic | null>(null);
-  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
   const [preop, setPreop] = useState<PreopAssessment | null>(null);
   const [lab, setLab] = useState<LabData | null>(null);
 

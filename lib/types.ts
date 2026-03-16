@@ -8,6 +8,24 @@ export interface PatientDemographic {
   bmi?: number;
 }
 
+export type TimelineStatic = {
+  anesthesia_start?: string;
+  induction?: string;
+  intubation?: string;
+  procedure_start?: string;
+  procedure_end?: string;
+  extubation?: string;
+  anesthesia_stop?: string;
+  emergence?: string;
+  anesthesia_timeout?: string;
+};
+
+export type TimelineEvent = {
+  observation_time?: string;
+  event_type: string;
+  event_value: any;
+};
+
 export interface SurgeryContext {
   procedure_room?: string;
   department?: string;

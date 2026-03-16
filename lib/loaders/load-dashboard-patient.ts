@@ -2,8 +2,6 @@ import Papa from "papaparse";
 import type {
   PatientDemographic,
   SurgeryContext,
-  TimelineStatic,
-  TimelineEvent,
   PreopAssessment,
   LabData,
 } from "@/lib/types";
@@ -124,8 +122,6 @@ export type DashboardPatientData = {
   caseId: string;
   demographic: PatientDemographic | null;
   surgeryContext: SurgeryContext | null;
-  timelineStatic: TimelineStatic | null;
-  timelineEvents: TimelineEvent[];
   preop: PreopAssessment | null;
   lab: LabData | null;
 };
