@@ -15,7 +15,7 @@ import type {
 import { prepareDemographicData } from "@/lib/prepare_raw_data/demographic";
 import { prepareSurgeryContextData } from "@/lib/prepare_raw_data/surgery_context";
 import {
-  prepareTimelineStaticData,
+  prepareTimelineContextData,
   prepareTimelineDynamicEvents,
 } from "@/lib/prepare_raw_data/timeline_context";
 import { preparePreopData } from "@/lib/prepare_raw_data/preop";
@@ -745,7 +745,7 @@ export default function Dashboard() {
       );
       setSurgeryContext(surgeryContextData);
       
-      const timelineStaticData = prepareTimelineStaticData(caseStatic);
+      const timelineStaticData = prepareTimelineContextData(caseStatic);
       setTimelineStatic(timelineStaticData);
       
       const timelineDynamicData = prepareTimelineDynamicEvents(caseDynamicRows);

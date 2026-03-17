@@ -18,16 +18,17 @@ type TimelineContextPanelProps = {
 const SVG_WIDTH = 1000;
 
 /**
- * 为了和 VitalChart 对齐：
- * VitalChart 左边 legend 列 = 220
- * 右边 chart 的 YAxis width = 35
- * ScatterChart margin.right = 20
- *
- * 所以 plot 左边界约等于 220 + 35 = 255
- * plot 右边界留 20
+ * 必须和 VitalChart 保持一致：
+ * 左侧 legend: 220
+ * YAxis width: 35
+ * chart right margin: 20
  */
-const PLOT_LEFT = 225;
-const RIGHT_PAD = 20;
+const LEGEND_WIDTH = 220;
+const YAXIS_WIDTH = 35;
+const CHART_RIGHT_MARGIN = 20;
+
+const PLOT_LEFT = 240
+const RIGHT_PAD = 30;
 const PLOT_WIDTH = SVG_WIDTH - PLOT_LEFT - RIGHT_PAD;
 
 const TOP_PAD = 4;
@@ -210,6 +211,7 @@ export default function TimelineContextPanel({
 
   if (!context) return null;
   if (!packedEvents.length) return null;
+  if (!Number.isFinite(xEnd) || xEnd <= 0) return null;
 
   return (
     <div className="rounded-lg border bg-white px-1 py-0.5 shadow-sm">
@@ -242,8 +244,7 @@ export default function TimelineContextPanel({
               y={TOP_PAD}
               width={Math.max(
                 2,
-                ((episodeWindow.endMin - episodeWindow.startMin) / xEnd) *
-                  PLOT_WIDTH
+                ((episodeWindow.endMin - episodeWindow.startMin) / xEnd) * PLOT_WIDTH
               )}
               height={SVG_HEIGHT - TOP_PAD - BOTTOM_PAD}
               fill="#DBEAFE"
@@ -253,16 +254,17 @@ export default function TimelineContextPanel({
               strokeDasharray="4 3"
             />
           )}
+
           <text
-          x={12}
-          y={AXIS_Y + 1}
-          fontSize={15}
-          fontWeight={800}
-          fill="#374151"
-          dominantBaseline="middle"
-        >
-          Timeline
-        </text>
+            x={12}
+            y={AXIS_Y + 1}
+            fontSize={15}
+            fontWeight={800}
+            fill="#374151"
+            dominantBaseline="middle"
+          >
+            Timeline
+          </text>
 
           <line
             x1={PLOT_LEFT}
@@ -293,7 +295,7 @@ export default function TimelineContextPanel({
             const isPositioning = event.group === "positioning";
 
             const stemBase = isPositioning ? 12 : 4;
-            const stemStep = isPositioning ? 6 : 6;
+            const stemStep = 6;
             const stemLen = stemBase + event.level * stemStep;
 
             let connectorY =
@@ -305,8 +307,6 @@ export default function TimelineContextPanel({
                 : getBottomLabelDx(event.clusterRank);
 
             const labelX = x + labelDx;
-            const anchor = "middle";
-
             const labelY =
               event.side === "top"
                 ? TOP_LABEL_Y
@@ -357,7 +357,7 @@ export default function TimelineContextPanel({
                 <text
                   x={labelX}
                   y={labelY}
-                  textAnchor={anchor}
+                  textAnchor="middle"
                   fontSize={10.5}
                   fontWeight={600}
                   fill={c.text}

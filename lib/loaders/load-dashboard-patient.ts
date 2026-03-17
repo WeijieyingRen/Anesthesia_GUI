@@ -8,7 +8,7 @@ import type {
 import { prepareDemographicData } from "@/lib/prepare_raw_data/demographic";
 import { prepareSurgeryContextData } from "@/lib/prepare_raw_data/surgery_context";
 import {
-  prepareTimelineStaticData,
+  prepareTimelineContextData,
   prepareTimelineDynamicEvents,
 } from "@/lib/prepare_raw_data/timeline_context";
 import { preparePreopData } from "@/lib/prepare_raw_data/preop";
@@ -155,7 +155,7 @@ export async function loadDashboardPatient(folder: string): Promise<DashboardPat
     caseId,
     demographic: prepareDemographicData(caseInfo, patientAttr, preopRow, caseId),
     surgeryContext: prepareSurgeryContextData(caseInfo, caseStatic, preopRow),
-    timelineStatic: prepareTimelineStaticData(caseStatic),
+    timelineStatic: prepareTimelineContextData(caseStatic),
     timelineEvents: prepareTimelineDynamicEvents(caseDynamicRows),
     preop: preparePreopData(preopRow),
     lab: prepareLabData(labRow),
