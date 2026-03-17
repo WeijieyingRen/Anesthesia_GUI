@@ -19,6 +19,26 @@ export type TimelineStatic = {
   emergence?: string;
   anesthesia_timeout?: string;
 };
+export type TimelineContextEvent = {
+  source: "static" | "dynamic";
+  group: "milestone" | "airway" | "positioning" | "block" | "surgical";
+  event_type: string;
+  label: string;
+  raw_value?: any;
+  observation_time?: string;
+  relative_min?: number;
+};
+
+export type TimelineContextData = {
+  case_badges: string[];
+  current_stage?: string;
+  milestone_events: TimelineContextEvent[];
+  nearby_events: TimelineContextEvent[];
+  airway_events: TimelineContextEvent[];
+  positioning_events: TimelineContextEvent[];
+  block_events: TimelineContextEvent[];
+  surgical_events: TimelineContextEvent[];
+};
 
 export type TimelineEvent = {
   observation_time?: string;
@@ -188,4 +208,6 @@ export type FluidPanelData = {
   bolus: Record<string, FluidBolusPoint[]>;
   infusion: Record<string, FluidInfusionSegment[]>;
   output: Record<string, FluidOutputPoint[]>;
+  raw_input_rows?: Record<string, any>[];
+  raw_output_rows?: Record<string, any>[];
 };

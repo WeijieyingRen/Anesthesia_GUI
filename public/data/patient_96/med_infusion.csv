@@ -1,0 +1,5 @@
+mpog_dose_id,mpog_case_id,mpog_med_concept_id,dose_type,start_time,end_time,medication,dose,unit,route,aims_patient_dosing_weight,med_concept_desc,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+9A8675F4-E912-F011-9211-005056BFF837,48B8DCD7-970B-EF11-920A-005056BFF837,10354,2,2024-04-06 01:06:00+00:00,2024-04-06 01:15:00+00:00,phenylephrine,0.4,mcg/kg/min,Intravenous,84.500000000,phenylephrine,2024-04-06 00:35:00+00:00,31.0,40.0
+958675F4-E912-F011-9211-005056BFF837,48B8DCD7-970B-EF11-920A-005056BFF837,10377,2,2024-04-06 01:34:00+00:00,2024-04-06 01:41:00+00:00,propofol injection,100.0,mcg/kg/min,Intravenous,84.500000000,propofol,2024-04-06 00:35:00+00:00,59.0,66.0
+968675F4-E912-F011-9211-005056BFF837,48B8DCD7-970B-EF11-920A-005056BFF837,10377,2,2024-04-06 01:41:00+00:00,2024-04-06 01:56:00+00:00,propofol injection,125.0,mcg/kg/min,Intravenous,84.500000000,propofol,2024-04-06 00:35:00+00:00,66.0,81.0
+978675F4-E912-F011-9211-005056BFF837,48B8DCD7-970B-EF11-920A-005056BFF837,10377,2,2024-04-06 01:56:00+00:00,2024-04-06 02:35:00+00:00,propofol injection,75.0,mcg/kg/min,Intravenous,84.500000000,propofol,2024-04-06 00:35:00+00:00,81.0,120.0

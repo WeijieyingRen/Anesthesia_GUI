@@ -1,0 +1,4 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+6F74A3AE-5405-F011-9211-005056BFF837,371E8348-5A25-EE11-9200-005056BFF837,10457,1,2023-07-13 13:45:00+00:00,2023-07-13 22:12:00+00:00,electrolyte-R (Normosol-R) IV infusion,25.0,mL/hr,Intravenous,normosol,fluid_input,2023-07-13 14:02:00+00:00,-17.0,490.0
+3374A3AE-5405-F011-9211-005056BFF837,371E8348-5A25-EE11-9200-005056BFF837,10457,1,2023-07-13 14:17:00+00:00,2023-07-13 15:57:00+00:00,normosol,800.0,mL,Intravenous,normosol,fluid_input,2023-07-13 14:02:00+00:00,15.0,115.0
+FB73A3AE-5405-F011-9211-005056BFF837,371E8348-5A25-EE11-9200-005056BFF837,10460,1,2023-07-13 15:04:00+00:00,2023-07-13 15:04:00+00:00,D5W IV infusion,3.0,mL,Other,dextrose / water 5%,fluid_input,2023-07-13 14:02:00+00:00,62.0,62.0

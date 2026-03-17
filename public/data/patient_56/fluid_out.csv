@@ -1,0 +1,6 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+F3A0E9D6-DE4D-F011-9215-005056BFF837,93E6B186-310A-F011-9211-005056BFF837,10497,2,2025-03-21 14:53:00+00:00,,Urine,100.0,ML,Unknown Route,urine output,fluid_output,2025-03-21 14:05:00+00:00,48.0,
+F2A0E9D6-DE4D-F011-9215-005056BFF837,93E6B186-310A-F011-9211-005056BFF837,10497,2,2025-03-21 17:06:00+00:00,,Urine,100.0,ML,Unknown Route,urine output,fluid_output,2025-03-21 14:05:00+00:00,181.0,
+F5A0E9D6-DE4D-F011-9215-005056BFF837,93E6B186-310A-F011-9211-005056BFF837,10499,2,2025-03-21 19:46:00+00:00,,Estimated Blood Loss (ml),200.0,ML,Unknown Route,estimated blood loss,fluid_output,2025-03-21 14:05:00+00:00,341.0,
+F4A0E9D6-DE4D-F011-9215-005056BFF837,93E6B186-310A-F011-9211-005056BFF837,10497,2,2025-03-21 19:46:00+00:00,,Urine,200.0,ML,Unknown Route,urine output,fluid_output,2025-03-21 14:05:00+00:00,341.0,
+71A0E9D6-DE4D-F011-9215-005056BFF837,93E6B186-310A-F011-9211-005056BFF837,10497,2,2025-03-21 20:06:00+00:00,,Urine,100.0,ML,Unknown Route,urine output,fluid_output,2025-03-21 14:05:00+00:00,361.0,

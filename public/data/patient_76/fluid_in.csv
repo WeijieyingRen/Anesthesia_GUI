@@ -1,0 +1,4 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+86D1BC98-09E0-F011-921B-005056BFF837,FC947761-5A9C-F011-9218-005056BFF837,10454,1,2025-09-23 20:39:00+00:00,2025-09-23 22:41:00+00:00,normal saline,50.0,mL/hr,Intravenous,saline 0.9%,fluid_input,2025-09-23 20:07:00+00:00,32.0,154.0
+2BD1BC98-09E0-F011-921B-005056BFF837,FC947761-5A9C-F011-9218-005056BFF837,10454,1,2025-09-23 22:41:00+00:00,2025-09-23 22:41:00+00:00,NS for irrigation,1650.0,mL,Irrigation,saline 0.9%,fluid_input,2025-09-23 20:07:00+00:00,154.0,154.0
+87D1BC98-09E0-F011-921B-005056BFF837,FC947761-5A9C-F011-9218-005056BFF837,10454,1,2025-09-23 22:41:00+00:00,2025-09-23 22:41:00+00:00,normal saline,101.67,mL,Intravenous,saline 0.9%,fluid_input,2025-09-23 20:07:00+00:00,154.0,154.0

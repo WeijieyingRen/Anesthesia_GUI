@@ -1,0 +1,4 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+2A465424-7D05-F011-9211-005056BFF837,201B2C55-A2FF-ED11-91FC-005056BFF837,10499,2,2023-05-26 18:15:00+00:00,,Estimated Blood Loss (ml),50.0,ML,Unknown Route,estimated blood loss,fluid_output,2023-05-26 15:34:00+00:00,161.0,
+2C465424-7D05-F011-9211-005056BFF837,201B2C55-A2FF-ED11-91FC-005056BFF837,10499,2,2023-05-26 20:11:00+00:00,,Estimated Blood Loss (ml),50.0,ML,Unknown Route,estimated blood loss,fluid_output,2023-05-26 15:34:00+00:00,277.0,
+2B465424-7D05-F011-9211-005056BFF837,201B2C55-A2FF-ED11-91FC-005056BFF837,10497,2,2023-05-26 20:52:00+00:00,,Urine,250.0,ML,Unknown Route,urine output,fluid_output,2023-05-26 15:34:00+00:00,318.0,

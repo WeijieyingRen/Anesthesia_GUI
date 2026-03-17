@@ -583,7 +583,7 @@ export default function FluidEvalPanel({
     <div className="min-h-[640px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 5: Evaluate whether related fluid treatment was appropriate for the
+          Panel 3C: Evaluate whether related fluid treatment was appropriate for the
           selected event.
           {noFluidCaptured
             ? " No related fluid event was captured, so this panel can be skipped."

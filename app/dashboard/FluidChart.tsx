@@ -92,17 +92,17 @@ function inferFluidColor(name: string) {
   const n = normalizeName(name);
 
   if (n.includes("albumin")) return "#f4b183";
-  if (n === "lr") return "#9fd36a";
+  if (n === "lr") return "#66bb6a";
   if (n.includes("normosol")) return "#8fc7e8";
-  if (n.includes("ns + kcl")) return "#b7c4d7";
+  if (n.includes("ns + kcl")) return "#bcdffb";
   if (n === "ns") return "#d9d9d9";
   if (n.includes("d5") || n.includes("d10")) return "#f2df4a";
   if (n.includes("hypertonic")) return "#e85a47";
   if (n.includes("hetastarch")) return "#d7b7db";
 
-  if (n.includes("estimated blood loss")) return "#cfcfcf";
-  if (n.includes("urine output")) return "#cfcfcf";
-  if (n.includes("emesis")) return "#cfcfcf";
+  if (n.includes("estimated blood loss")) return "#b91c1c";
+  if (n.includes("urine output")) return "#1d4ed8";
+  if (n.includes("emesis")) return "#374151";
 
   return "#cfcfcf";
 }
@@ -303,14 +303,14 @@ export default function FluidChart({
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
 
-<div
-  className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-  style={{ height: viewHeight }}
->
+      <div
+        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
+        style={{ height: viewHeight }}
+      >
         <div className="grid grid-cols-[220px_1fr] gap-0">
           <div className="border-r pr-0" style={{ height: contentHeight }}>
             <div>
-            {visibleRowsReindexed.map((row) => {
+              {visibleRowsReindexed.map((row) => {
                 const hidden = hiddenNames.includes(row.name);
                 const active = visibleRowsReindexed.some((r) => r.name === row.name);
                 const color = inferFluidColor(row.name);
@@ -529,7 +529,10 @@ export default function FluidChart({
                       const text = String(
                         p.label ?? `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
                       );
-                      const boxWidth = Math.max(28, Math.min(110, estimateTextWidth(text, 10) + 14));
+                      const boxWidth = Math.max(
+                        28,
+                        Math.min(110, estimateTextWidth(text, 10) + 14)
+                      );
                       const boxHeight = 16;
                       const arrowTipX = cx;
                       const arrowBaseX = cx + 6;
@@ -563,7 +566,7 @@ export default function FluidChart({
                             height={boxHeight}
                             rx={2}
                             ry={2}
-                            fill="#dff7f3"
+                            fill="white"
                             stroke={color}
                             strokeWidth={1.5}
                           />
@@ -584,11 +587,14 @@ export default function FluidChart({
                     {/* output */}
                     {row.output.map((p, idx) => {
                       const cx = PLOT_LEFT + (p.time / finalXEnd) * PLOT_WIDTH;
-                      const outputColor = "#374151";
+                      const outputColor = color;
                       const text = String(
                         p.label ?? `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
                       );
-                      const boxWidth = Math.max(28, Math.min(110, estimateTextWidth(text, 10) + 14));
+                      const boxWidth = Math.max(
+                        28,
+                        Math.min(110, estimateTextWidth(text, 10) + 14)
+                      );
                       const boxHeight = 16;
                       const left = cx + 6;
                       const top = centerY - boxHeight / 2;
@@ -615,7 +621,7 @@ export default function FluidChart({
                             height={boxHeight}
                             rx={2}
                             ry={2}
-                            fill="#f3f4f6"
+                            fill="white"
                             stroke={outputColor}
                             strokeWidth={1.2}
                           />

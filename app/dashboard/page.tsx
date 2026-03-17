@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import AnnotationSidebar from "./annotation/AnnotationSidebar";
@@ -19,11 +19,14 @@ import { prepareDemographicData } from "@/lib/prepare_raw_data/demographic";
 import { prepareSurgeryContextData } from "@/lib/prepare_raw_data/surgery_context";
 import { preparePreopData } from "@/lib/prepare_raw_data/preop";
 import { prepareLabData } from "@/lib/prepare_raw_data/lab";
+import { prepareTimelineContextData } from "@/lib/prepare_raw_data/timeline_context";
 import { prepareVitalsDataRaw } from "@/lib/prepare_raw_data/vitals";
 import { prepareMedicationData } from "@/lib/prepare_raw_data/medications";
 import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
+import TimelineContextPanel from "./TimelineContextPanel";
+
 type CsvRow = Record<string, any>;
 
 type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
@@ -254,7 +257,9 @@ export default function DashboardPage() {
   const [medInfusionRowsState, setMedInfusionRowsState] = useState<CsvRow[]>([]);
   const [fluids, setFluids] = useState<FluidPanelData | null>(null);
   const [fluidInRowsState, setFluidInRowsState] = useState<CsvRow[]>([]);
-const [fluidOutRowsState, setFluidOutRowsState] = useState<CsvRow[]>([]);
+  const [fluidOutRowsState, setFluidOutRowsState] = useState<CsvRow[]>([]);
+  const [caseStaticRowState, setCaseStaticRowState] = useState<CsvRow | null>(null);
+  const [caseDynamicRowsState, setCaseDynamicRowsState] = useState<CsvRow[]>([]);
 
   const [anesthesiaStart, setAnesthesiaStart] = useState<string | null>(null);
   const [anesthesiaStop, setAnesthesiaStop] = useState<string | null>(null);
@@ -432,6 +437,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
         caseInfoRows,
         patientAttrRows,
         caseStaticRows,
+        caseDynamicRows,
         preopRows,
         labRows,
         phyRows,
@@ -443,6 +449,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
         fetchCsvRows(folder, "case_info.csv"),
         fetchCsvRows(folder, "patients_attributes_case.csv"),
         fetchCsvRows(folder, "case_static.csv"),
+        fetchCsvRows(folder, "case_dynamic_events.csv"),
         fetchCsvRows(folder, "preop.csv"),
         fetchCsvRows(folder, "lab.csv"),
         fetchCsvRows(folder, "phy_data.csv"),
@@ -451,10 +458,12 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
         fetchCsvRows(folder, "fluid_in.csv"),
         fetchCsvRows(folder, "fluid_out.csv"),
       ]);
-
+  
       const caseInfo = caseInfoRows[0] ?? {};
       const patientAttr = patientAttrRows[0] ?? {};
       const caseStatic = caseStaticRows[0] ?? {};
+      setCaseStaticRowState(caseStatic);
+      setCaseDynamicRowsState(caseDynamicRows);
       setAnesthesiaStart(caseStatic["anesthesia_start"] ?? null);
       setAnesthesiaStop(caseStatic["anesthesia_stop"] ?? null);
       const preopRow = preopRows[0] ?? {};
@@ -582,6 +591,18 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
     { length: Math.floor(sharedTimelineEnd / 15) + 1 },
     (_, i) => i * 15
   );
+
+  const timelineContext = useMemo(() => {
+    if (!caseStaticRowState) return null;
+  
+    return prepareTimelineContextData(
+      caseStaticRowState,
+      caseDynamicRowsState,
+      selectedWindow?.startMin,
+      selectedWindow?.endMin,
+      15
+    );
+  }, [caseStaticRowState, caseDynamicRowsState, selectedWindow]);
 
   if (loading) {
     return (
@@ -1054,73 +1075,52 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
       {/* 右侧 timeline */}
       <div className="min-w-0 space-y-4">
-        <UnifiedTimelineCard
-          vitals={vitals}
-          medications={medications}
-          fluids={fluids}
-          anesthesiaStart={anesthesiaStart}
-          anesthesiaStop={anesthesiaStop}
-          timelineEnd={sharedTimelineEnd}
-          ticks={sharedXTicks}
-          selectedDetectVital={selectedDetectVital}
-          onChangeSelectedDetectVital={setSelectedDetectVital}
-          selectedWindow={selectedWindow}
-          onChangeSelectedWindow={setSelectedWindow}
-          onCreateEventFromWindow={handleCreateEventFromWindow}
-          gas={{
-            FiO2: vitals.gas["FiO2"],
-            "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-            "Air (L/min)": vitals.gas["Air (L/min)"],
-            "N2O (L/min)": vitals.gas["N2O (L/min)"],
-            "inO2 %": vitals.gas["inO2 %"],
-            "inN2O %": vitals.gas["inN2O %"],
-            "inSevoflurane %": vitals.gas["inSevoflurane %"],
-            inIsoflurane: vitals.gas["inIsoflurane"],
-            "etMAC exhaled": vitals.gas["etMAC exhaled"],
-          }}
-        />
-      </div>
+  <TimelineContextPanel
+    context={timelineContext}
+    xEnd={sharedTimelineEnd}
+    xTicks={sharedXTicks}
+    timeZero={anesthesiaStart}
+    episodeWindow={
+      selectedWindow
+        ? {
+            startMin: selectedWindow.startMin,
+            endMin: selectedWindow.endMin,
+          }
+        : null
+    }
+  />
+
+      <UnifiedTimelineCard
+        vitals={vitals}
+        medications={medications}
+        fluids={fluids}
+        anesthesiaStart={anesthesiaStart}
+        anesthesiaStop={anesthesiaStop}
+        timelineEnd={sharedTimelineEnd}
+        ticks={sharedXTicks}
+        selectedDetectVital={selectedDetectVital}
+        onChangeSelectedDetectVital={setSelectedDetectVital}
+        selectedWindow={selectedWindow}
+        onChangeSelectedWindow={setSelectedWindow}
+        onCreateEventFromWindow={handleCreateEventFromWindow}
+        gas={{
+          FiO2: vitals.gas["FiO2"],
+          "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+          "Air (L/min)": vitals.gas["Air (L/min)"],
+          "N2O (L/min)": vitals.gas["N2O (L/min)"],
+          "inO2 %": vitals.gas["inO2 %"],
+          "inN2O %": vitals.gas["inN2O %"],
+          "inSevoflurane %": vitals.gas["inSevoflurane %"],
+          inIsoflurane: vitals.gas["inIsoflurane"],
+          "etMAC exhaled": vitals.gas["etMAC exhaled"],
+        }}
+      />
+    </div>
     </div>
   )}
 </SectionCard>
         
-          <SectionCard title="Voice Note">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="text-sm text-gray-600">
-                Free dictation / free-text note for this patient.
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  if (voiceNote.recording) {
-                    logAction("voice_stop");
-                    voiceNote.stop();
-                  } else {
-                    logAction("voice_start");
-                    voiceNote.start();
-                  }
-                }}
-                className={`rounded-md px-3 py-2 text-sm font-semibold ${
-                  voiceNote.recording
-                    ? "bg-red-600 text-white"
-                    : "bg-blue-600 text-white"
-                }`}
-              >
-                {voiceNote.recording ? "Stop Recording" : "Start Recording"}
-              </button>
-            </div>
-
-            <textarea
-              className="min-h-[180px] w-full rounded-md border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Speak or type your note here…"
-              value={voiceNote.text}
-              onChange={(e) => voiceNote.setText(e.target.value)}
-            />
-
-            <div className="mt-2 text-xs text-gray-500">
-              Voice transcription uses browser speech recognition. Please review and edit.
-            </div>
-          </SectionCard>
+       
         </div>
       </div>
     </main>

@@ -1,0 +1,5 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+D31700AD-FC45-F011-9214-005056BFF837,BE4451E4-5502-F011-9211-005056BFF837,10457,1,2025-03-11 15:34:00+00:00,2025-03-11 17:45:00+00:00,normosol,600.0,mL,Intravenous,normosol,fluid_input,2025-03-11 15:34:00+00:00,0.0,131.0
+D41700AD-FC45-F011-9214-005056BFF837,BE4451E4-5502-F011-9211-005056BFF837,10454,1,2025-03-11 15:49:00+00:00,2025-03-11 17:45:00+00:00,normal saline,50.0,mL/hr,Intravenous,saline 0.9%,fluid_input,2025-03-11 15:34:00+00:00,15.0,131.0
+D51700AD-FC45-F011-9214-005056BFF837,BE4451E4-5502-F011-9211-005056BFF837,10454,1,2025-03-11 17:45:00+00:00,2025-03-11 17:45:00+00:00,normal saline,96.67,mL,Intravenous,saline 0.9%,fluid_input,2025-03-11 15:34:00+00:00,131.0,131.0
+191800AD-FC45-F011-9214-005056BFF837,BE4451E4-5502-F011-9211-005056BFF837,10464,1,2025-03-11 20:45:57+00:00,2025-03-12 05:22:00+00:00,NS + KCl 20 mEq/L IV infusion,75.0,mL/hr,Intravenous,saline w/kcl 0.9% + 20 meq/l,fluid_input,2025-03-11 15:34:00+00:00,311.95,828.0

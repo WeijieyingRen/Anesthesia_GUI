@@ -592,7 +592,7 @@ export default function MedEvalPanel({
     <div className="min-h-[640px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 3: Evaluate whether related medication treatment was appropriate
+          Panel 3B: Evaluate whether related medication treatment was appropriate
           for the selected event.
         </div>
 

@@ -1,0 +1,4 @@
+mpog_dose_id,mpog_case_id,mpog_med_concept_id,dose_type,start_time,end_time,medication,dose,unit,route,aims_patient_dosing_weight,med_concept_desc,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+49B5012C-20DC-F011-921A-005056BFF837,89BE1A60-5CC0-EF11-920E-005056BFF837,10377,2,2024-12-17 15:27:00+00:00,2024-12-17 19:14:00+00:00,propofol,50.0,mcg/kg/min,Intravenous,116.300000000,propofol,2024-12-17 15:10:00+00:00,17.0,244.0
+37B5012C-20DC-F011-921A-005056BFF837,89BE1A60-5CC0-EF11-920E-005056BFF837,10149,2,2024-12-17 15:47:00+00:00,2024-12-17 19:00:00+00:00,dexmedetomidine,0.3,mcg/kg/hr,Intravenous,58.000000000,dexmedetomidine,2024-12-17 15:10:00+00:00,37.0,230.0
+4FB5012C-20DC-F011-921A-005056BFF837,89BE1A60-5CC0-EF11-920E-005056BFF837,10354,2,2024-12-17 18:11:00+00:00,2024-12-17 18:52:00+00:00,phenylephrine injection vial,0.2,mcg/kg/min,Intravenous,116.300000000,phenylephrine,2024-12-17 15:10:00+00:00,181.0,222.0
