@@ -145,7 +145,6 @@ async function fetchTextFile(folder: string, filename: string): Promise<string> 
   return (await res.text()).trim();
 }
 
-
 function useVoiceNote() {
   const recognitionRef = useRef<any>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -154,7 +153,7 @@ function useVoiceNote() {
   const [recording, setRecording] = useState(false);
   const [text, setText] = useState("");
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
- 
+
   const start = async () => {
     setText("");
     setAudioBlob(null);
@@ -216,6 +215,7 @@ function useVoiceNote() {
     stop,
   };
 }
+
 function hasAnyVitalData(vitals: VitalPanelData | null) {
   if (!vitals) return false;
 
@@ -236,7 +236,6 @@ function hasAnyVitalData(vitals: VitalPanelData | null) {
     )
   );
 }
-
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -269,80 +268,23 @@ export default function DashboardPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
+
   const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("detect");
   const episodeSelectedTask: AnnotationTaskKey =
-  selectedTask === "summary" ? "detect" : selectedTask;
+    selectedTask === "summary" ? "detect" : selectedTask;
   const [annotationLevel, setAnnotationLevel] = useState<"episode" | "patient">("episode");
 
-const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
-const [selectedWindow, setSelectedWindow] = useState<SelectedWindow | null>(null);
+  const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
+  const [selectedWindow, setSelectedWindow] = useState<SelectedWindow | null>(null);
 
-const [sidebarEvents, setSidebarEvents] = useState<SidebarEventItem[]>([]);
-function handleCreateEventFromWindow(window: SelectedWindow) {
-  const duplicate = sidebarEvents.some(
-    (e) =>
-      e.vital === window.vital &&
-      e.startMin === window.startMin &&
-      e.endMin === window.endMin
-  );
+  const [sidebarEvents, setSidebarEvents] = useState<SidebarEventItem[]>([]);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
-  if (duplicate) {
-    logAction("window_create_duplicate_ignored", {
-      vital: window.vital,
-      startMin: window.startMin,
-      endMin: window.endMin,
-      y1: window.y1,
-      y2: window.y2,
-    });
-    return;
-  }
-
-  const sameVitalCount = sidebarEvents.filter(
-    (e) => e.vital === window.vital
-  ).length;
-
-  const nextIndex = sameVitalCount + 1;
-
-  const newEvent: SidebarEventItem = {
-    id: `evt-${Date.now()}`,
-    vital: window.vital,
-    title: `${window.vital}-${nextIndex}`,
-    episodeLabel: `${window.startMin}–${window.endMin} min`,
-    startMin: window.startMin,
-    endMin: window.endMin,
-    y1: window.y1,
-    y2: window.y2,
-    completed: {
-      detect: false,
-      mechanism: false,
-      gasEval: false,
-      medEval: false,
-      fluidEval: false,
-      response: false
-    },
-  };
-
-  setSidebarEvents((prev) => [...prev, newEvent]);
-  setSelectedEventId(newEvent.id);
-  setSelectedDetectVital(newEvent.vital);
-  setSelectedWindow(window);
-  setSelectedTask("detect");
-
-  logAction("window_create_event", {
-    eventId: newEvent.id,
-    title: newEvent.title,
-    vital: newEvent.vital,
-    startMin: newEvent.startMin,
-    endMin: newEvent.endMin,
-    y1: newEvent.y1,
-    y2: newEvent.y2,
-  });
-}
-  
-const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const voiceNote = useVoiceNote();
   const selectedEvent =
-  sidebarEvents.find((item) => item.id === selectedEventId) ?? null;
+    sidebarEvents.find((item) => item.id === selectedEventId) ?? null;
+
   const sessionStartRef = useRef<number>(performance.now());
   const actionLogRef = useRef<
     Array<{
@@ -351,7 +293,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
       payload?: Record<string, any>;
     }>
   >([]);
-  
+
   function logAction(type: string, payload?: Record<string, any>) {
     const ts = performance.now() - sessionStartRef.current;
     actionLogRef.current.push({
@@ -361,19 +303,106 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
     });
     console.log("[ACTION]", { type, ts, payload });
   }
-  
+
+  function validateBeforeFinalSubmit(): string | null {
+    if (sidebarEvents.length === 0) {
+      return "Please create and complete at least one episode event before submitting.";
+    }
+
+    const incompleteEvents = sidebarEvents.filter(
+      (event) =>
+        !event.completed.detect ||
+        !event.completed.mechanism ||
+        !event.completed.gasEval ||
+        !event.completed.medEval ||
+        !event.completed.fluidEval ||
+        !event.completed.response
+    );
+
+    if (incompleteEvents.length > 0) {
+      return `There are ${incompleteEvents.length} episode event(s) with incomplete subtasks.`;
+    }
+
+    if (!patientSummaryCompleted) {
+      return "Please complete and save the patient-level summary before submitting.";
+    }
+
+    return null;
+  }
+
+  function handleCreateEventFromWindow(window: SelectedWindow) {
+    const duplicate = sidebarEvents.some(
+      (e) =>
+        e.vital === window.vital &&
+        e.startMin === window.startMin &&
+        e.endMin === window.endMin
+    );
+
+    if (duplicate) {
+      logAction("window_create_duplicate_ignored", {
+        vital: window.vital,
+        startMin: window.startMin,
+        endMin: window.endMin,
+        y1: window.y1,
+        y2: window.y2,
+      });
+      return;
+    }
+
+    const sameVitalCount = sidebarEvents.filter(
+      (e) => e.vital === window.vital
+    ).length;
+
+    const nextIndex = sameVitalCount + 1;
+
+    const newEvent: SidebarEventItem = {
+      id: `evt-${Date.now()}`,
+      vital: window.vital,
+      title: `${window.vital}-${nextIndex}`,
+      episodeLabel: `${window.startMin}–${window.endMin} min`,
+      startMin: window.startMin,
+      endMin: window.endMin,
+      y1: window.y1,
+      y2: window.y2,
+      completed: {
+        detect: false,
+        mechanism: false,
+        gasEval: false,
+        medEval: false,
+        fluidEval: false,
+        response: false,
+      },
+    };
+
+    setSidebarEvents((prev) => [...prev, newEvent]);
+    setSelectedEventId(newEvent.id);
+    setSelectedDetectVital(newEvent.vital);
+    setSelectedWindow(window);
+    setSelectedTask("detect");
+
+    logAction("window_create_event", {
+      eventId: newEvent.id,
+      title: newEvent.title,
+      vital: newEvent.vital,
+      startMin: newEvent.startMin,
+      endMin: newEvent.endMin,
+      y1: newEvent.y1,
+      y2: newEvent.y2,
+    });
+  }
+
   const TASK_ORDER: AnnotationTaskKey[] = [
     "detect",
     "mechanism",
     "gasEval",
     "medEval",
     "fluidEval",
-    "response"
+    "response",
   ];
-  
+
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
     if (!selectedEventId) return;
-  
+
     setSidebarEvents((prev) =>
       prev.map((event) =>
         event.id === selectedEventId
@@ -387,13 +416,12 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
           : event
       )
     );
-  
+
     const currentIndex = TASK_ORDER.indexOf(task);
     if (currentIndex >= 0 && currentIndex < TASK_ORDER.length - 1) {
       setSelectedTask(TASK_ORDER[currentIndex + 1]);
     }
   }
-  
 
   useEffect(() => {
     const raw = localStorage.getItem("gameData");
@@ -416,17 +444,16 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
     }
   }, [router]);
 
-
   async function loadPatient(folder: string) {
     try {
       sessionStartRef.current = performance.now();
       actionLogRef.current = [];
       setHasSubmitted(false);
+      setPatientSummaryCompleted(false);
       setSubmitError(null);
       setLoadError(null);
       setLoading(true);
 
-      
       setSelectedTask("detect");
       setSelectedDetectVital("MAP");
       setSelectedWindow(null);
@@ -462,7 +489,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
         fetchCsvRows(folder, "fluid_in.csv"),
         fetchCsvRows(folder, "fluid_out.csv"),
       ]);
-  
+
       const caseInfo = caseInfoRows[0] ?? {};
       const patientAttr = patientAttrRows[0] ?? {};
       const caseStatic = caseStaticRows[0] ?? {};
@@ -484,24 +511,18 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
       setPreop(preparePreopData(preopRow));
       setLab(prepareLabData(labRow));
       setVitals(prepareVitalsDataRaw(phyRows));
-      
+
       setMedBolusRowsState(medBolusRows);
       setMedInfusionRowsState(medInfusionRows);
       setFluidInRowsState(fluidInRows);
       setFluidOutRowsState(fluidOutRows);
-      
+
       setMedications(
-        prepareMedicationData(
-          medBolusRows,
-          medInfusionRows
-        )
+        prepareMedicationData(medBolusRows, medInfusionRows)
       );
 
       setFluids(
-        prepareFluidData(
-          fluidInRows,
-          fluidOutRows
-        )
+        prepareFluidData(fluidInRows, fluidOutRows)
       );
     } catch (e: any) {
       console.error("Failed to load patient:", e);
@@ -525,6 +546,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
         selectedDetectVital,
         selectedWindow,
         sidebarEvents,
+        patientSummaryCompleted,
       },
       data: {
         demographic,
@@ -578,16 +600,16 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
       setSubmitting(false);
     }
   };
-  
+
   const sharedTimelineEnd = (() => {
     if (!anesthesiaStart || !anesthesiaStop) return 240;
-  
+
     const start = new Date(anesthesiaStart);
     const stop = new Date(anesthesiaStop);
-  
+
     const diffMin = Math.ceil((stop.getTime() - start.getTime()) / 60000);
     if (!Number.isFinite(diffMin) || diffMin <= 0) return 240;
-  
+
     return Math.ceil(diffMin / 15) * 15;
   })();
 
@@ -598,7 +620,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
-  
+
     return prepareTimelineContextData(
       caseStaticRowState,
       caseDynamicRowsState,
@@ -654,9 +676,9 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
               type="button"
               onClick={async () => {
                 logAction("go_back_patient");
-              
+
                 const prevIndex = currentPatientIndex - 1;
-              
+
                 if (prevIndex >= 0) {
                   setCurrentPatientIndex(prevIndex);
                   await loadPatient(selectedPatients[prevIndex].folder);
@@ -669,82 +691,92 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
               Back
             </button>
 
-       
+            {hasSubmitted && (
+              <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
+                ✅ Submitted
+              </span>
+            )}
 
-  {hasSubmitted && (
-    <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
-      ✅ Submitted
-    </span>
-  )}
+            <button
+              type="button"
+              disabled={hasSubmitted || submitting}
+              onClick={async () => {
+                const validationError = validateBeforeFinalSubmit();
+                if (validationError) {
+                  setSubmitError(validationError);
+                  return;
+                }
 
-  <button
-    type="button"
-    disabled={hasSubmitted || submitting}
-    onClick={async () => {
-      logAction("submit_session");
-      await submitCurrentSession();
-    }}
-    className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-      hasSubmitted
-        ? "cursor-not-allowed bg-green-200 text-green-800"
-        : submitting
-        ? "cursor-wait bg-blue-300 text-white"
-        : "bg-blue-600 text-white hover:bg-blue-700"
-    }`}
-  >
-    {hasSubmitted ? "Submitted" : submitting ? "Submitting..." : "Submit"}
-  </button>
+                logAction("submit_session");
+                await submitCurrentSession();
+              }}
+              className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                hasSubmitted
+                  ? "cursor-not-allowed bg-green-200 text-green-800"
+                  : submitting
+                  ? "cursor-wait bg-blue-300 text-white"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              {hasSubmitted ? "Submitted" : submitting ? "Submitting..." : "Submit"}
+            </button>
 
-  <button
-    type="button"
-    disabled={submitting}
-    onClick={async () => {
-      if (!hasSubmitted) {
-        const ok = window.confirm(
-          "You have not submitted your annotation yet.\n\nThis action cannot be undone. Continue?"
-        );
+            <button
+              type="button"
+              disabled={submitting}
+              onClick={async () => {
+                if (!hasSubmitted) {
+                  const validationError = validateBeforeFinalSubmit();
+                  if (validationError) {
+                    setSubmitError(validationError);
+                    return;
+                  }
 
-        if (!ok) {
-          logAction("next_cancelled");
-          return;
-        }
+                  const ok = window.confirm(
+                    "You have not submitted your annotation yet.\n\nThis action cannot be undone. Continue?"
+                  );
 
-        logAction("next_with_submit");
-        const success = await submitCurrentSession();
-        if (!success) return;
-      } else {
-        logAction("next_after_submit");
-      }
+                  if (!ok) {
+                    logAction("next_cancelled");
+                    return;
+                  }
 
-      const nextIndex = currentPatientIndex + 1;
-      if (nextIndex < selectedPatients.length) {
-        setCurrentPatientIndex(nextIndex);
-        await loadPatient(selectedPatients[nextIndex].folder);
-      } else {
-        alert("No more patients.");
-      }
-    }}
-    className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-      submitting
-        ? "cursor-not-allowed bg-blue-300 text-white"
-        : "bg-blue-600 text-white hover:bg-blue-700"
-    }`}
-  >
-    Next
-  </button>
+                  logAction("next_with_submit");
+                  const success = await submitCurrentSession();
+                  if (!success) return;
+                } else {
+                  logAction("next_after_submit");
+                }
 
-  <button
-  type="button"
-  onClick={() => {
-    logAction("home_and_logout");
-    localStorage.removeItem("gameData");
-    router.push("/patient-list");
-  }}
-  className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
->
-  Home & Logout
-</button>
-</div>
+                const nextIndex = currentPatientIndex + 1;
+                if (nextIndex < selectedPatients.length) {
+                  setCurrentPatientIndex(nextIndex);
+                  await loadPatient(selectedPatients[nextIndex].folder);
+                } else {
+                  alert("No more patients.");
+                }
+              }}
+              className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                submitting
+                  ? "cursor-not-allowed bg-blue-300 text-white"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              Next
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                logAction("home_and_logout");
+                localStorage.removeItem("gameData");
+                router.push("/patient-list");
+              }}
+              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Home & Logout
+            </button>
+          </div>
         </div>
 
         {submitError && (
@@ -766,7 +798,6 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
                       { label: "Race", value: demographic.race },
                       { label: "Height", value: demographic.height },
                       { label: "Weight", value: demographic.weight },
-      
                     ]}
                   />
                 </div>
@@ -853,276 +884,269 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
                 </div>
               )}
             </div>
-            
           </SectionCard>
 
           <SectionCard title="Annotation Tasks">
-  {!vitals || !hasAnyVitalData(vitals) ? (
-    <div className="text-sm text-gray-500">No intraoperative data available.</div>
-  ) : (
-    <div className="grid grid-cols-[minmax(420px,1fr)_minmax(0,2fr)] gap-4 items-start">
-      {/* 左侧 annotation panel */}
-      <div className="min-w-0 max-w-[640px]">
-        <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-          <div className="border-b bg-white px-4 py-3 space-y-3">
-            {/* 一级：Episode / Patient */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                Task Categories
-              </span>
+            {!vitals || !hasAnyVitalData(vitals) ? (
+              <div className="text-sm text-gray-500">No intraoperative data available.</div>
+            ) : (
+              <div className="grid grid-cols-[minmax(420px,1fr)_minmax(0,2fr)] gap-4 items-start">
+                <div className="min-w-0 max-w-[640px]">
+                  <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+                    <div className="border-b bg-white px-4 py-3 space-y-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                          Task Categories
+                        </span>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setAnnotationLevel("episode");
-                  logAction("annotation_level_click", { level: "episode" });
-                }}
-                className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                  annotationLevel === "episode"
-                    ? "border-blue-600 bg-blue-600 text-white"
-                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                Episode Level
-              </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAnnotationLevel("episode");
+                            logAction("annotation_level_click", { level: "episode" });
+                          }}
+                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                            annotationLevel === "episode"
+                              ? "border-blue-600 bg-blue-600 text-white"
+                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          Episode Level
+                        </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setAnnotationLevel("patient");
-                  setSelectedTask("summary");
-                  logAction("annotation_level_click", { level: "patient" });
-                }}
-                className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                  annotationLevel === "patient"
-                    ? "border-blue-600 bg-blue-600 text-white"
-                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                Patient Level
-              </button>
-            </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAnnotationLevel("patient");
+                            setSelectedTask("summary");
+                            logAction("annotation_level_click", { level: "patient" });
+                          }}
+                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                            annotationLevel === "patient"
+                              ? "border-blue-600 bg-blue-600 text-white"
+                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          Patient Level
+                        </button>
+                      </div>
 
-            {/* 二级：具体任务 */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                {annotationLevel === "episode" ? "SubTasks" : "Patient Task"}
-              </span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                          {annotationLevel === "episode" ? "SubTasks" : "Patient Task"}
+                        </span>
 
-              {annotationLevel === "episode" ? (
-                <>
-                  {(
-                    ["detect", "mechanism", "gasEval", "medEval", "fluidEval", "response"] as const
-                  ).map((task) => {
-                    const active = selectedTask === task;
+                        {annotationLevel === "episode" ? (
+                          <>
+                            {(
+                              ["detect", "mechanism", "gasEval", "medEval", "fluidEval", "response"] as const
+                            ).map((task) => {
+                              const active = selectedTask === task;
 
-                    const labelMap = {
-                      detect: "Detection",
-                      mechanism: "Mechanism",
-                      gasEval: "GasEval",
-                      medEval: "MedEval",
-                      fluidEval: "FluidEval",
-                      response: "Response",
-                    };
+                              const labelMap = {
+                                detect: "Detection",
+                                mechanism: "Mechanism",
+                                gasEval: "GasEval",
+                                medEval: "MedEval",
+                                fluidEval: "FluidEval",
+                                response: "Response",
+                              };
 
-                    return (
-                      <button
-                        key={task}
-                        type="button"
-                        onClick={() => {
-                          setSelectedTask(task);
-                          logAction("task_tab_click", {
-                            task,
-                            selectedEventId,
-                          });
-                        }}
-                        className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                          active
-                            ? "border-blue-600 bg-blue-600 text-white"
-                            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                        }`}
-                      >
-                        {labelMap[task]}
-                      </button>
-                    );
-                  })}
-                </>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedTask("summary");
-                    logAction("task_tab_click", {
-                      task: "summary",
-                      selectedEventId: null,
-                    });
-                  }}
-                  className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                    selectedTask === "summary"
-                      ? "border-blue-600 bg-blue-600 text-white"
-                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  Summary
-                </button>
-              )}
-            </div>
-          </div>
+                              return (
+                                <button
+                                  key={task}
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedTask(task);
+                                    logAction("task_tab_click", {
+                                      task,
+                                      selectedEventId,
+                                    });
+                                  }}
+                                  className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                    active
+                                      ? "border-blue-600 bg-blue-600 text-white"
+                                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                                  }`}
+                                >
+                                  {labelMap[task]}
+                                </button>
+                              );
+                            })}
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedTask("summary");
+                              logAction("task_tab_click", {
+                                task: "summary",
+                                selectedEventId: null,
+                              });
+                            }}
+                            className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                              selectedTask === "summary"
+                                ? "border-blue-600 bg-blue-600 text-white"
+                                : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                            }`}
+                          >
+                            Summary
+                          </button>
+                        )}
+                      </div>
+                    </div>
 
-          {annotationLevel === "episode" ? (
-            <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
-              <div className="border-r">
-              <AnnotationSidebar
-              selectedTask={episodeSelectedTask}
-              onChangeTask={setSelectedTask}
-              events={sidebarEvents}
-              selectedEventId={selectedEventId}
-              onSelectEvent={(eventId) => {
-                const event = sidebarEvents.find((e) => e.id === eventId);
-                if (!event) return;
+                    {annotationLevel === "episode" ? (
+                      <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
+                        <div className="border-r">
+                        <AnnotationSidebar
+                          selectedTask={episodeSelectedTask}
+                          onChangeTask={setSelectedTask}
+                          events={sidebarEvents}
+                          selectedEventId={selectedEventId}
+                          onSelectEvent={(eventId) => {
+                            const event = sidebarEvents.find((e) => e.id === eventId);
+                            if (!event) return;
 
-                setSelectedEventId(eventId);
-                setSelectedDetectVital(event.vital as DetectVital);
-                setSelectedWindow({
-                  vital: event.vital as DetectVital,
-                  startMin: event.startMin,
-                  endMin: event.endMin,
-                  y1: event.y1,
-                  y2: event.y2,
-                });
+                            setSelectedEventId(eventId);
+                            setSelectedDetectVital(event.vital as DetectVital);
+                            setSelectedWindow({
+                              vital: event.vital as DetectVital,
+                              startMin: event.startMin,
+                              endMin: event.endMin,
+                              y1: event.y1,
+                              y2: event.y2,
+                            });
 
-                logAction("sidebar_event_select", {
-                  eventId,
-                  title: event.title,
-                  vital: event.vital,
-                  startMin: event.startMin,
-                  endMin: event.endMin,
-                });
-              }}
-            />
-              </div>
+                            logAction("sidebar_event_select", {
+                              eventId,
+                              title: event.title,
+                              vital: event.vital,
+                              startMin: event.startMin,
+                              endMin: event.endMin,
+                            });
+                          }}
+                          onDeleteEvent={(eventId) => {
+                            const remaining = sidebarEvents.filter((e) => e.id !== eventId);
+                            setSidebarEvents(remaining);
 
-              <div className="min-w-0">
-                <TaskWorkspace
-                  task={episodeSelectedTask}
-                  onChangeTask={setSelectedTask}
-                  onSaveAndNextStep={(finishedTask) => {
-                    if (!selectedEventId) return;
-
-                    setSidebarEvents((prev) =>
-                      prev.map((event) =>
-                        event.id === selectedEventId
-                          ? {
-                              ...event,
-                              completed: {
-                                ...event.completed,
-                                [finishedTask]: true,
-                              },
+                            if (selectedEventId === eventId) {
+                              if (remaining.length > 0) {
+                                const nextEvent = remaining[0];
+                                setSelectedEventId(nextEvent.id);
+                                setSelectedDetectVital(nextEvent.vital as DetectVital);
+                                setSelectedWindow({
+                                  vital: nextEvent.vital as DetectVital,
+                                  startMin: nextEvent.startMin,
+                                  endMin: nextEvent.endMin,
+                                  y1: nextEvent.y1,
+                                  y2: nextEvent.y2,
+                                });
+                              } else {
+                                setSelectedEventId(null);
+                                setSelectedWindow(null);
+                              }
                             }
-                          : event
-                      )
-                    );
-                    const nextTaskMap: Record<AnnotationTaskKey, AnnotationTaskKey | null> = {
-                      detect: "mechanism",
-                      mechanism: "gasEval",
-                      gasEval: "medEval",
-                      medEval: "fluidEval",
-                      fluidEval: "response",
-                      response: null,
-                    };
 
-                    const nextTask = nextTaskMap[finishedTask];
-                    if (nextTask) {
-                      setSelectedTask(nextTask);
+                            logAction("sidebar_event_delete", { eventId });
+                          }}
+                        />
+                        </div>
+
+                        <div className="min-w-0">
+                          <TaskWorkspace
+                            task={episodeSelectedTask}
+                            onChangeTask={setSelectedTask}
+                            onSaveAndNextStep={(finishedTask) => {
+                              handleSaveAndNextStep(finishedTask);
+                            }}
+                            selectedEvent={selectedEvent}
+                            caseId={caseId}
+                            selectedDetectVital={selectedDetectVital}
+                            selectedWindow={selectedWindow}
+                            anesthesiaStart={anesthesiaStart}
+                            medications={medications}
+                            gasData={{
+                              FiO2: vitals.gas["FiO2"],
+                              "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+                              "Air (L/min)": vitals.gas["Air (L/min)"],
+                              "N2O (L/min)": vitals.gas["N2O (L/min)"],
+                              "inO2 %": vitals.gas["inO2 %"],
+                              "inN2O %": vitals.gas["inN2O %"],
+                              "inSevoflurane %": vitals.gas["inSevoflurane %"],
+                              inIsoflurane: vitals.gas["inIsoflurane"],
+                              "etMAC exhaled": vitals.gas["etMAC exhaled"],
+                            }}
+                            medBolusRows={medBolusRowsState}
+                            medInfusionRows={medInfusionRowsState}
+                            fluidInRows={fluidInRowsState}
+                            fluidOutRows={fluidOutRowsState}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="bg-white">
+                        <SummaryPanel
+                          caseId={caseId}
+                          eventId="patient-summary"
+                          eventTitle="Patient-level Summary"
+                          episodeLabel={`Patient ${currentPatientIndex + 1}`}
+                          startMin={0}
+                          endMin={sharedTimelineEnd}
+                          onSaveAndNextStep={() => {
+                            setPatientSummaryCompleted(true);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="min-w-0 space-y-4">
+                  <TimelineContextPanel
+                    context={timelineContext}
+                    xEnd={sharedTimelineEnd}
+                    xTicks={sharedXTicks}
+                    timeZero={anesthesiaStart}
+                    episodeWindow={
+                      selectedWindow
+                        ? {
+                            startMin: selectedWindow.startMin,
+                            endMin: selectedWindow.endMin,
+                          }
+                        : null
                     }
-                  }}
-                  selectedEvent={selectedEvent}
-                  caseId={caseId}
-                  selectedDetectVital={selectedDetectVital}
-                  selectedWindow={selectedWindow}
-                  anesthesiaStart={anesthesiaStart}
-                  medications={medications}
-                  gasData={{
-                    FiO2: vitals.gas["FiO2"],
-                    "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-                    "Air (L/min)": vitals.gas["Air (L/min)"],
-                    "N2O (L/min)": vitals.gas["N2O (L/min)"],
-                    "inO2 %": vitals.gas["inO2 %"],
-                    "inN2O %": vitals.gas["inN2O %"],
-                    "inSevoflurane %": vitals.gas["inSevoflurane %"],
-                    inIsoflurane: vitals.gas["inIsoflurane"],
-                    "etMAC exhaled": vitals.gas["etMAC exhaled"],
-                  }}
-                  medBolusRows={medBolusRowsState}
-                  medInfusionRows={medInfusionRowsState}
-                  fluidInRows={fluidInRowsState}
-                  fluidOutRows={fluidOutRowsState}
-                />
+                  />
+
+                  <UnifiedTimelineCard
+                    vitals={vitals}
+                    medications={medications}
+                    fluids={fluids}
+                    anesthesiaStart={anesthesiaStart}
+                    anesthesiaStop={anesthesiaStop}
+                    timelineEnd={sharedTimelineEnd}
+                    ticks={sharedXTicks}
+                    selectedDetectVital={selectedDetectVital}
+                    onChangeSelectedDetectVital={setSelectedDetectVital}
+                    selectedWindow={selectedWindow}
+                    onChangeSelectedWindow={setSelectedWindow}
+                    onCreateEventFromWindow={handleCreateEventFromWindow}
+                    gas={{
+                      FiO2: vitals.gas["FiO2"],
+                      "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+                      "Air (L/min)": vitals.gas["Air (L/min)"],
+                      "N2O (L/min)": vitals.gas["N2O (L/min)"],
+                      "inO2 %": vitals.gas["inO2 %"],
+                      "inN2O %": vitals.gas["inN2O %"],
+                      "inSevoflurane %": vitals.gas["inSevoflurane %"],
+                      inIsoflurane: vitals.gas["inIsoflurane"],
+                      "etMAC exhaled": vitals.gas["etMAC exhaled"],
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="bg-white">
-              <SummaryPanel
-                caseId={caseId}
-                eventId="patient-summary"
-                eventTitle="Patient-level Summary"
-                episodeLabel={`Patient ${currentPatientIndex + 1}`}
-                startMin={0}
-                endMin={sharedTimelineEnd}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* 右侧 timeline */}
-      <div className="min-w-0 space-y-4">
-  <TimelineContextPanel
-    context={timelineContext}
-    xEnd={sharedTimelineEnd}
-    xTicks={sharedXTicks}
-    timeZero={anesthesiaStart}
-    episodeWindow={
-      selectedWindow
-        ? {
-            startMin: selectedWindow.startMin,
-            endMin: selectedWindow.endMin,
-          }
-        : null
-    }
-  />
-
-      <UnifiedTimelineCard
-        vitals={vitals}
-        medications={medications}
-        fluids={fluids}
-        anesthesiaStart={anesthesiaStart}
-        anesthesiaStop={anesthesiaStop}
-        timelineEnd={sharedTimelineEnd}
-        ticks={sharedXTicks}
-        selectedDetectVital={selectedDetectVital}
-        onChangeSelectedDetectVital={setSelectedDetectVital}
-        selectedWindow={selectedWindow}
-        onChangeSelectedWindow={setSelectedWindow}
-        onCreateEventFromWindow={handleCreateEventFromWindow}
-        gas={{
-          FiO2: vitals.gas["FiO2"],
-          "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-          "Air (L/min)": vitals.gas["Air (L/min)"],
-          "N2O (L/min)": vitals.gas["N2O (L/min)"],
-          "inO2 %": vitals.gas["inO2 %"],
-          "inN2O %": vitals.gas["inN2O %"],
-          "inSevoflurane %": vitals.gas["inSevoflurane %"],
-          inIsoflurane: vitals.gas["inIsoflurane"],
-          "etMAC exhaled": vitals.gas["etMAC exhaled"],
-        }}
-      />
-    </div>
-    </div>
-  )}
-</SectionCard>
-        
-       
+            )}
+          </SectionCard>
         </div>
       </div>
     </main>

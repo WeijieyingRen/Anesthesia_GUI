@@ -8,6 +8,7 @@ type AnnotationSidebarProps = {
   events: SidebarEventItem[];
   selectedEventId: string | null;
   onSelectEvent: (eventId: string) => void;
+  onDeleteEvent: (eventId: string) => void;
 };
 
 const TASK_ORDER: AnnotationTaskKey[] = [
@@ -23,6 +24,7 @@ export default function AnnotationSidebar({
   events,
   selectedEventId,
   onSelectEvent,
+  onDeleteEvent,
 }: AnnotationSidebarProps) {
   return (
     <div className="p-4">
@@ -37,11 +39,18 @@ export default function AnnotationSidebar({
           const hasAnyCompleted = doneTasks > 0;
 
           return (
-            <button
+            <div
               key={event.id}
-              type="button"
+              role="button"
+              tabIndex={0}
               onClick={() => onSelectEvent(event.id)}
-              className={`w-full rounded-xl border px-2.5 py-1.5 text-left transition ${
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onSelectEvent(event.id);
+                }
+              }}
+              className={`w-full rounded-xl border px-2.5 py-1.5 text-left transition cursor-pointer ${
                 hasAnyCompleted
                   ? active
                     ? "border-gray-400 bg-gray-200"
@@ -51,17 +60,32 @@ export default function AnnotationSidebar({
                   : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
               }`}
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="min-w-0 truncate text-sm font-semibold text-gray-800">
-                  {event.title}
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-sm font-semibold text-gray-800">
+                    {event.title}
+                  </div>
+
+                  <div className="mt-1 text-xs font-medium text-gray-600">
+                    {doneTasks}/{TASK_ORDER.length}
+                  </div>
                 </div>
 
-                <div className="shrink-0 text-xs font-medium text-gray-600">
-                  {doneTasks}/{TASK_ORDER.length}
-                </div>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDeleteEvent(event.id);
+                  }}
+                  className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-gray-400 hover:bg-red-50 hover:text-red-600"
+                  title="Delete event"
+                  aria-label={`Delete ${event.title}`}
+                >
+                  ×
+                </button>
               </div>
 
-              <div className="mt-1.5 flex items-center gap-1">
+              <div className="mt-2 flex items-center gap-1">
                 {TASK_ORDER.map((task) => {
                   const completed = event.completed[task];
 
@@ -79,7 +103,7 @@ export default function AnnotationSidebar({
                   );
                 })}
               </div>
-            </button>
+            </div>
           );
         })}
 

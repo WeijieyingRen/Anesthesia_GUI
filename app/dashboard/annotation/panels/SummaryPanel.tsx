@@ -9,6 +9,7 @@ type SummaryPanelProps = {
   episodeLabel?: string;
   startMin?: number;
   endMin?: number;
+  onSaveAndNextStep?: () => void;
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
@@ -37,6 +38,7 @@ export default function SummaryPanel({
   episodeLabel = "Episode 1",
   startMin = 84,
   endMin = 102,
+  onSaveAndNextStep,
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState(
     "During this episode, the patient experienced a clinically significant MAP drop between 84 and 102 minutes. The event was identified as hypotension. The likely mechanism was suspected to be vasodilation and relative hypovolemia. A vasopressor bolus was administered and judged to be appropriate in timing and choice. The patient showed partial to expected hemodynamic recovery after treatment."
@@ -95,7 +97,7 @@ export default function SummaryPanel({
   }
 
   function stopVoiceNote() {
-    recognitionRef.current?.stop();
+    recognitionRef.current?.stop?.();
     setRecording(false);
   }
 
@@ -127,7 +129,7 @@ export default function SummaryPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const res = await fetch("/api/annotation", {
+      const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -142,6 +144,7 @@ export default function SummaryPanel({
 
       setSaveStatus("success");
       setSaveMessage("Summary saved successfully.");
+      onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
       setSaveMessage(error?.message || "Failed to save summary.");
@@ -164,10 +167,7 @@ export default function SummaryPanel({
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-          <TaskBlock
-            title="Task 1. Intraoperative Record"
-            noBorder
-          >
+          <TaskBlock title="Task 1. Intraoperative Record" noBorder>
             <div className="mb-3 text-sm text-gray-600">
               Please generate a concise intraoperative record for this patient,
               integrating the detected abnormal event, likely mechanism,
