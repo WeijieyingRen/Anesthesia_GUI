@@ -1156,7 +1156,12 @@ export default function Dashboard() {
                                   type="button"
                                   className="font-bold hover:text-gray-700"
                                   onClick={() => {
-                                    const next = p.confidence >= 5 ? 1 : p.confidence + 1;
+                                    const currentConfidence =
+                                    typeof p.confidence === "number" && Number.isFinite(p.confidence)
+                                        ? p.confidence
+                                        : 3;
+
+                                    const next = currentConfidence >= 5 ? 1 : currentConfidence + 1;
                                     logAction("confidence_change", {
                                       feature: p.feature,
                                       pieceIndex: p.pieceIndex,
