@@ -11,7 +11,6 @@ import {
   Tooltip,
   ZAxis,
   ReferenceLine,
-  ReferenceArea,
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
 
@@ -82,7 +81,8 @@ function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] 
 
 function getRowBackground(key: string) {
   if (key === "HR") return "#e4f3e4";
-  if (key === "ARTS" || key === "ARTD" || key === "ARTM") return "#ffdede";
+  if (key === "ARTS" || key === "ARTD" || key === "ARTM" || key === "NIBP_MAP")
+    return "#ffdede";
   if (key === "SPO2 %") return "#e7e5ff";
   if (key === "RR") return "#e3f0ff";
   if (key === "CVP") return "#ece8ff";
@@ -270,13 +270,47 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   return `${hh}:${mm}`;
 }
 
-function getSelectedSeriesKey(vital: DetectVital): string | null {
-  if (vital === "MAP") return "NIBP_MAP";
-  if (vital === "HR") return "HR";
-  if (vital === "SPO2") return "SPO2 %";
-  if (vital === "RR") return "RR";
-  if (vital === "ETCO2") return "ETCO2";
-  if (vital === "TEMP") return "TEMP";
+function getSelectedSeriesKey(
+  series: Record<string, TimeValuePoint[] | undefined>,
+  vital: DetectVital
+): string | null {
+  if (vital === "MAP") {
+    if (series["ARTM"]) return "ARTM";
+    if (series["NIBP_MAP"]) return "NIBP_MAP";
+    return null;
+  }
+
+  if (vital === "HR") {
+    if (series["HR"]) return "HR";
+    return null;
+  }
+
+  if (vital === "SPO2") {
+    if (series["SPO2 %"]) return "SPO2 %";
+    return null;
+  }
+
+  if (vital === "RR") {
+    if (series["RR"]) return "RR";
+    return null;
+  }
+
+  if (vital === "ETCO2") {
+    if (series["ETCO2"]) return "ETCO2";
+    if (series["ETCO2 (mmHg)"]) return "ETCO2 (mmHg)";
+    return null;
+  }
+
+  if (vital === "TEMP") {
+    if (series["TEMP"]) return "TEMP";
+    if (series["TMP Bladder"]) return "TMP Bladder";
+    if (series["TMP Esophageal"]) return "TMP Esophageal";
+    if (series["TMP Blood"]) return "TMP Blood";
+    if (series["TMP Nasopharyngeal"]) return "TMP Nasopharyngeal";
+    if (series["TMP Rectal"]) return "TMP Rectal";
+    return null;
+  }
+
   return null;
 }
 
@@ -287,7 +321,7 @@ function getWindowYBounds(
   endMin: number,
   yDomain?: [number, number]
 ): { y1: number; y2: number } | null {
-  const key = getSelectedSeriesKey(selectedVital);
+  const key = getSelectedSeriesKey(series, selectedVital);
   if (!key) return null;
 
   const data = (series[key] ?? []).filter(
@@ -390,8 +424,26 @@ export default function VitalChart({
   const chartMarginTop = showTopTimeAxis ? 5 : 10;
   const chartMarginBottom = showXAxis ? 15 : 10;
   const leftLegendTopSpacer = showTopTimeAxis ? 50 : 0;
+
   function clampY(y: number) {
     return Math.max(domainMin, Math.min(domainMax, y));
+  }
+
+  function minuteToPixel(minute: number) {
+    const el = chartOverlayRef.current;
+    if (!el || effectiveXEnd <= 0) return 0;
+    const rect = el.getBoundingClientRect();
+    return (minute / effectiveXEnd) * rect.width;
+  }
+
+  function valueToPixel(value: number) {
+    const el = chartOverlayRef.current;
+    if (!el) return 0;
+
+    const rect = el.getBoundingClientRect();
+    const plotHeight = Math.max(1, rect.height - chartMarginTop - chartMarginBottom);
+    const ratio = (domainMax - value) / (domainMax - domainMin);
+    return chartMarginTop + ratio * plotHeight;
   }
 
   function clientXToMinute(clientX: number) {
@@ -435,18 +487,33 @@ export default function VitalChart({
   function getHoverMode(minute: number, value: number): DragMode {
     if (!selectedWindow) return null;
 
-    const xEdgeThresholdMin = Math.max(pixelToMinute(10), 2);
-    const yEdgeThresholdVal = Math.max(pixelToValue(10), 4);
+    const xEdgeThresholdMin = Math.max(pixelToMinute(16), 3);
+    const yEdgeThresholdVal = Math.max(pixelToValue(16), 6);
 
     const { startMin, endMin, y1, y2 } = selectedWindow;
 
     const withinX = minute >= startMin && minute <= endMin;
     const withinY = value >= y1 && value <= y2;
 
-    const nearLeft = Math.abs(minute - startMin) <= xEdgeThresholdMin && value >= y1 && value <= y2;
-    const nearRight = Math.abs(minute - endMin) <= xEdgeThresholdMin && value >= y1 && value <= y2;
-    const nearTop = Math.abs(value - y2) <= yEdgeThresholdVal && minute >= startMin && minute <= endMin;
-    const nearBottom = Math.abs(value - y1) <= yEdgeThresholdVal && minute >= startMin && minute <= endMin;
+    const nearLeft =
+      Math.abs(minute - startMin) <= xEdgeThresholdMin &&
+      value >= y1 &&
+      value <= y2;
+
+    const nearRight =
+      Math.abs(minute - endMin) <= xEdgeThresholdMin &&
+      value >= y1 &&
+      value <= y2;
+
+    const nearTop =
+      Math.abs(value - y2) <= yEdgeThresholdVal &&
+      minute >= startMin &&
+      minute <= endMin;
+
+    const nearBottom =
+      Math.abs(value - y1) <= yEdgeThresholdVal &&
+      minute >= startMin &&
+      minute <= endMin;
 
     if (nearLeft) return "resize-left";
     if (nearRight) return "resize-right";
@@ -612,6 +679,22 @@ export default function VitalChart({
     minCreateWidthMin,
   ]);
 
+  const overlayBox = useMemo(() => {
+    if (!displayWindow) return null;
+
+    const left = minuteToPixel(displayWindow.startMin);
+    const right = minuteToPixel(displayWindow.endMin);
+    const top = valueToPixel(displayWindow.y2);
+    const bottom = valueToPixel(displayWindow.y1);
+
+    return {
+      left,
+      top,
+      width: Math.max(2, right - left),
+      height: Math.max(2, bottom - top),
+    };
+  }, [displayWindow]);
+
   const interactionCursor = useMemo(() => {
     if (isDragging) {
       if (dragMode === "move") return "grabbing";
@@ -651,7 +734,7 @@ export default function VitalChart({
       ) : null}
 
       <div className="grid grid-cols-[220px_1fr] gap-0">
-      <div className="border-r pr-0">
+        <div className="border-r pr-0">
           <div style={{ height: leftLegendTopSpacer }} />
           <div className="space-y-1">
             {keys.map((key) => {
@@ -721,7 +804,6 @@ export default function VitalChart({
                 axisLine={false}
                 tickLine={false}
                 height={0}
-                label={undefined}
               />
 
               <YAxis
@@ -739,20 +821,20 @@ export default function VitalChart({
               <ZAxis range={[40, 40]} />
 
               {showTopTimeAxis &&
-              topTimeSlots.map((slot) => (
-                <ReferenceLine
-                  key={`top-time-${slot.center}`}
-                  x={slot.center}
-                  strokeOpacity={0}
-                  label={{
-                    value: slot.label,
-                    position: "insideTop",
-                    offset: 10,
-                    fill: "#4b5563",
-                    fontSize: 16,
-                  }}
-                />
-              ))}
+                topTimeSlots.map((slot) => (
+                  <ReferenceLine
+                    key={`top-time-${slot.center}`}
+                    x={slot.center}
+                    strokeOpacity={0}
+                    label={{
+                      value: slot.label,
+                      position: "insideTop",
+                      offset: 10,
+                      fill: "#4b5563",
+                      fontSize: 16,
+                    }}
+                  />
+                ))}
 
               {(xTicks ?? []).map((tick) => (
                 <ReferenceLine
@@ -763,33 +845,7 @@ export default function VitalChart({
                 />
               ))}
 
-              <ReferenceLine
-                y={domainMin}
-                stroke="#4b5563"
-                strokeWidth={2.2}
-              />
-
-              {displayWindow && (
-                <ReferenceArea
-                  x1={displayWindow.startMin}
-                  x2={displayWindow.endMin}
-                  fill="lightblue"
-                  fillOpacity={0.75}
-                  strokeOpacity={0}
-                />
-              )}
-
-              {displayWindow && (
-                <ReferenceArea
-                  x1={displayWindow.startMin}
-                  x2={displayWindow.endMin}
-                  y1={displayWindow.y1}
-                  y2={displayWindow.y2}
-                  fillOpacity={0}
-                  stroke="#FA9447"
-                  strokeWidth={2.5}
-                />
-              )}
+              <ReferenceLine y={domainMin} stroke="#4b5563" strokeWidth={2.2} />
 
               <Tooltip labelFormatter={(label) => `Time: ${label} min`} />
 
@@ -815,7 +871,7 @@ export default function VitalChart({
 
           <div
             ref={chartOverlayRef}
-            className="absolute inset-0 z-10"
+            className="absolute inset-0 z-20"
             style={{ cursor: interactionCursor }}
             onMouseDown={(e) => {
               if (effectiveXEnd <= 0) return;
@@ -976,7 +1032,6 @@ export default function VitalChart({
 
               if (nextWindow) {
                 onChangeSelectedWindow?.(nextWindow);
-              
                 if (dragMode === "create") {
                   onCreateEventFromWindow?.(nextWindow);
                 }
@@ -998,7 +1053,107 @@ export default function VitalChart({
                 setHoverMode(null);
               }
             }}
-          />
+          >
+            {overlayBox && (
+              <div
+                className="pointer-events-none absolute"
+                style={{
+                  left: overlayBox.left,
+                  top: overlayBox.top,
+                  width: overlayBox.width,
+                  height: overlayBox.height,
+                  background: "rgba(250, 230, 40, 0.22)",
+                  border: "4px solid #e6d200",
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    left: -18,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "#f97316",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    textShadow: "0 0 3px white",
+                  }}
+                >
+                  ◀
+                </div>
+
+                <div
+                  style={{
+                    position: "absolute",
+                    right: -18,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "#f97316",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    textShadow: "0 0 3px white",
+                  }}
+                >
+                  ▶
+                </div>
+
+                <div
+                  style={{
+                    position: "absolute",
+                    left: -6,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: 12,
+                    height: 28,
+                    borderRadius: 6,
+                    background: "#f97316",
+                    border: "2px solid white",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    right: -6,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: 12,
+                    height: 28,
+                    borderRadius: 6,
+                    background: "#f97316",
+                    border: "2px solid white",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: -6,
+                    transform: "translateX(-50%)",
+                    width: 28,
+                    height: 12,
+                    borderRadius: 6,
+                    background: "#f97316",
+                    border: "2px solid white",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    bottom: -6,
+                    transform: "translateX(-50%)",
+                    width: 28,
+                    height: 12,
+                    borderRadius: 6,
+                    background: "#f97316",
+                    border: "2px solid white",
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

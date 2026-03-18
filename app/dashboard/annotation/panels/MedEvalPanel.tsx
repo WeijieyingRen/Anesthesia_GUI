@@ -58,7 +58,7 @@ function RadioPill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
+      className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition ${
         selected
           ? toneClass
           : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
@@ -143,7 +143,6 @@ function extractTreatmentsFromWindow(
     }
   }
 
-  // 1) bolus
   const matchedBolus: any[] = [];
 
   for (const item of medBolusRows ?? []) {
@@ -168,7 +167,6 @@ function extractTreatmentsFromWindow(
     pushLabel(label);
   }
 
-  // 2) infusion: group by medication name
   const infusionGroups = new Map<string, any[]>();
 
   for (const item of medInfusionRows ?? []) {
@@ -296,10 +294,11 @@ export default function MedEvalPanel({
     );
   }, [medBolusRows, medInfusionRows, startMin, endMin]);
 
+  const noTreatmentCaptured = candidateTreatments.length === 0;
+
   const [interventionNote, setInterventionNote] = React.useState("");
   const [selectedTreatment, setSelectedTreatment] = React.useState("");
 
-  // 当前编辑框内容
   const [timing, setTiming] = React.useState<TimingValue>("");
   const [choice, setChoice] = React.useState<ChoiceValue>("");
   const [dose, setDose] = React.useState<DoseValue>("");
@@ -307,7 +306,6 @@ export default function MedEvalPanel({
     React.useState<OverallJudgmentValue>("");
   const [rationale, setRationale] = React.useState("");
 
-  // 每个 treatment 独立保存一份评价
   const [treatmentEvalMap, setTreatmentEvalMap] = React.useState<
     Record<string, TreatmentEval>
   >({});
@@ -376,7 +374,7 @@ export default function MedEvalPanel({
 
       return next;
     });
-  }, [candidateTreatments]);
+  }, [candidateTreatments, treatmentEvalMap]);
 
   const completedTreatmentCount = React.useMemo(() => {
     return candidateTreatments.filter((t) =>
@@ -394,18 +392,17 @@ export default function MedEvalPanel({
   const treatmentProgressLabel =
     candidateTreatments.length > 0
       ? `${completedTreatmentCount}/${candidateTreatments.length} completed`
-      : "0/0";
+      : "Skipped (no treatment captured)";
 
   function validateMedEval() {
     if (!interventionNote || interventionNote.trim() === "") {
       return "Task 1 incomplete: please describe whether intervention was needed and what was most important.";
     }
 
-    if (candidateTreatments.length === 0) {
-      return "Task 2 incomplete: no treatment was captured for this event window.";
+    if (noTreatmentCaptured) {
+      return null;
     }
 
-    // 先把当前 treatment 的编辑内容视为已填写，合并进临时 map 再校验
     const mergedMap: Record<string, TreatmentEval> = {
       ...treatmentEvalMap,
     };
@@ -496,6 +493,8 @@ export default function MedEvalPanel({
         interventionNote,
         selectedTreatment,
         candidateTreatments,
+        treatmentCaptured: !noTreatmentCaptured,
+        treatmentSkipped: noTreatmentCaptured,
         treatmentEvalMap,
       },
       submittedAt: new Date().toISOString(),
@@ -510,13 +509,13 @@ export default function MedEvalPanel({
       interventionNote,
       selectedTreatment,
       candidateTreatments,
+      noTreatmentCaptured,
       treatmentEvalMap,
     ]
   );
 
   async function handleSaveMedEval() {
-    // 先把当前 treatment 存进去
-    if (selectedTreatment) {
+    if (!noTreatmentCaptured && selectedTreatment) {
       const currentEval = buildCurrentTreatmentEval();
       setTreatmentEvalMap((prev) => ({
         ...prev,
@@ -539,14 +538,16 @@ export default function MedEvalPanel({
         ...payload,
         annotation: {
           ...payload.annotation,
-          treatmentEvalMap: {
-            ...treatmentEvalMap,
-            ...(selectedTreatment
-              ? {
-                  [selectedTreatment]: buildCurrentTreatmentEval(),
-                }
-              : {}),
-          },
+          treatmentEvalMap: noTreatmentCaptured
+            ? {}
+            : {
+                ...treatmentEvalMap,
+                ...(selectedTreatment
+                  ? {
+                      [selectedTreatment]: buildCurrentTreatmentEval(),
+                    }
+                  : {}),
+              },
         },
       };
 
@@ -564,7 +565,11 @@ export default function MedEvalPanel({
       }
 
       setSaveStatus("success");
-      setSaveMessage("All treatments were completed and saved successfully.");
+      setSaveMessage(
+        noTreatmentCaptured
+          ? "No treatment was captured. Tasks 2–4 were skipped and the panel was saved successfully."
+          : "All treatments were completed and saved successfully."
+      );
 
       onSaveAndNextStep?.();
     } catch (error: any) {
@@ -637,23 +642,22 @@ export default function MedEvalPanel({
               <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-gray-600">
                 {treatmentProgressLabel}
               </span>
-              {currentTreatmentIndex >= 0 && (
+              {!noTreatmentCaptured && currentTreatmentIndex >= 0 && (
                 <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
                   current {currentTreatmentIndex + 1}/{candidateTreatments.length}
                 </span>
               )}
             </div>
 
-            {candidateTreatments.length === 0 ? (
-              <div className="text-sm text-red-500">
-                No medication found within this event window and the following 10
-                minutes.
+            {noTreatmentCaptured ? (
+              <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
+                No medication was captured within this event window and the
+                following 10 minutes. Tasks 2–4 will be skipped automatically.
               </div>
             ) : (
               <select
                 value={selectedTreatment}
                 onChange={(e) => {
-                  // 切换前先保存当前 treatment
                   if (selectedTreatment) {
                     persistCurrentTreatmentToMap(selectedTreatment);
                   }
@@ -679,160 +683,180 @@ export default function MedEvalPanel({
           </TaskBlock>
 
           <TaskBlock title="Task 3. Evaluate timing, treatment choice, dose, and overall judgment">
-            <div className="space-y-4">
-              <div>
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Evaluate Timing
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <RadioPill
-                    label="Appropriate"
-                    selected={timing === "Appropriate"}
-                    selectedTone="green"
-                    onClick={() => setTiming("Appropriate")}
-                  />
-                  <RadioPill
-                    label="Delayed"
-                    selected={timing === "Delayed"}
-                    selectedTone="green"
-                    onClick={() => setTiming("Delayed")}
-                  />
-                  <RadioPill
-                    label="Too Early"
-                    selected={timing === "Too Early"}
-                    selectedTone="green"
-                    onClick={() => setTiming("Too Early")}
-                  />
-                </div>
+            {noTreatmentCaptured ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                Skipped because no treatment was captured for this event window.
               </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                    Evaluate Timing
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <RadioPill
+                      label="Appropriate"
+                      selected={timing === "Appropriate"}
+                      selectedTone="green"
+                      onClick={() => setTiming("Appropriate")}
+                    />
+                    <RadioPill
+                      label="Delayed"
+                      selected={timing === "Delayed"}
+                      selectedTone="green"
+                      onClick={() => setTiming("Delayed")}
+                    />
+                    <RadioPill
+                      label="Too Early"
+                      selected={timing === "Too Early"}
+                      selectedTone="green"
+                      onClick={() => setTiming("Too Early")}
+                    />
+                  </div>
+                </div>
 
-              <div>
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Choice
+                <div>
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                    Choice
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <RadioPill
+                      label="Appropriate"
+                      selected={choice === "Appropriate"}
+                      selectedTone="orange"
+                      onClick={() => setChoice("Appropriate")}
+                    />
+                    <RadioPill
+                      label="Suboptimal"
+                      selected={choice === "Suboptimal"}
+                      selectedTone="orange"
+                      onClick={() => setChoice("Suboptimal")}
+                    />
+                    <RadioPill
+                      label="Inappropriate"
+                      selected={choice === "Inappropriate"}
+                      selectedTone="orange"
+                      onClick={() => setChoice("Inappropriate")}
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <RadioPill
-                    label="Appropriate"
-                    selected={choice === "Appropriate"}
-                    selectedTone="orange"
-                    onClick={() => setChoice("Appropriate")}
-                  />
-                  <RadioPill
-                    label="Suboptimal"
-                    selected={choice === "Suboptimal"}
-                    selectedTone="orange"
-                    onClick={() => setChoice("Suboptimal")}
-                  />
-                  <RadioPill
-                    label="Inappropriate"
-                    selected={choice === "Inappropriate"}
-                    selectedTone="orange"
-                    onClick={() => setChoice("Inappropriate")}
-                  />
-                </div>
-              </div>
 
-              <div>
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Dose
+                <div>
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                    Dose
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <RadioPill
+                      label="Too Low"
+                      selected={dose === "Too Low"}
+                      selectedTone="blue"
+                      onClick={() => setDose("Too Low")}
+                    />
+                    <RadioPill
+                      label="Reasonable"
+                      selected={dose === "Reasonable"}
+                      selectedTone="blue"
+                      onClick={() => setDose("Reasonable")}
+                    />
+                    <RadioPill
+                      label="Too High"
+                      selected={dose === "Too High"}
+                      selectedTone="blue"
+                      onClick={() => setDose("Too High")}
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <RadioPill
-                    label="Too Low"
-                    selected={dose === "Too Low"}
-                    selectedTone="blue"
-                    onClick={() => setDose("Too Low")}
-                  />
-                  <RadioPill
-                    label="Reasonable"
-                    selected={dose === "Reasonable"}
-                    selectedTone="blue"
-                    onClick={() => setDose("Reasonable")}
-                  />
-                  <RadioPill
-                    label="Too High"
-                    selected={dose === "Too High"}
-                    selectedTone="blue"
-                    onClick={() => setDose("Too High")}
-                  />
-                </div>
-              </div>
 
-              <div>
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Overall Judgment
+                <div>
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                    Overall Judgment
+                  </div>
+                  <select
+                    value={overallJudgment}
+                    onChange={(e) =>
+                      setOverallJudgment(e.target.value as OverallJudgmentValue)
+                    }
+                    className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+                  >
+                    <option value="">Select overall judgment</option>
+                    <option value="Appropriate">Appropriate</option>
+                    <option value="Mostly Appropriate">Mostly Appropriate</option>
+                    <option value="Mixed / Uncertain">Mixed / Uncertain</option>
+                    <option value="Suboptimal">Suboptimal</option>
+                    <option value="Inappropriate">Inappropriate</option>
+                  </select>
                 </div>
-                <select
-                  value={overallJudgment}
-                  onChange={(e) =>
-                    setOverallJudgment(e.target.value as OverallJudgmentValue)
-                  }
-                  className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-                >
-                  <option value="">Select overall judgment</option>
-                  <option value="Appropriate">Appropriate</option>
-                  <option value="Mostly Appropriate">Mostly Appropriate</option>
-                  <option value="Mixed / Uncertain">Mixed / Uncertain</option>
-                  <option value="Suboptimal">Suboptimal</option>
-                  <option value="Inappropriate">Inappropriate</option>
-                </select>
               </div>
-            </div>
+            )}
           </TaskBlock>
 
           <TaskBlock title="Task 4. Please explain your treatment evaluation" noBorder>
-            <div className="mb-3 text-sm text-gray-600">
-              Please provide rationale using waveform trends, timing,
-              medications, and perioperative context.
-            </div>
+            {noTreatmentCaptured ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                Skipped because no treatment was captured for this event window.
+              </div>
+            ) : (
+              <>
+                <div className="mb-3 text-sm text-gray-600">
+                  Please provide rationale using waveform trends, timing,
+                  medications, and perioperative context.
+                </div>
 
-            <textarea
-              value={rationale}
-              onChange={(e) => setRationale(e.target.value)}
-              className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder="Describe the rationale for your medical treatment evaluation..."
-            />
+                <textarea
+                  value={rationale}
+                  onChange={(e) => setRationale(e.target.value)}
+                  className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="Describe the rationale for your medical treatment evaluation..."
+                />
 
-            <div className="mt-3">
-              <button
-                type="button"
-                onClick={
-                  recordingTarget === "rationale"
-                    ? stopVoiceNote
-                    : () => startVoiceNote("rationale")
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  recordingTarget === "rationale"
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
-              >
-                {recordingTarget === "rationale"
-                  ? "Stop Recording"
-                  : "Start Recording"}
-              </button>
-            </div>
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "rationale"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("rationale")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "rationale"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "rationale"
+                      ? "Stop Recording"
+                      : "Start Recording"}
+                  </button>
+                </div>
+              </>
+            )}
           </TaskBlock>
 
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">
-              All treatments must be completed before saving.
+              {noTreatmentCaptured
+                ? "No treatment captured. Only Task 1 is required before saving."
+                : "All treatments must be completed before saving."}
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  if (selectedTreatment) {
-                    persistCurrentTreatmentToMap(selectedTreatment);
-                    setSaveStatus("success");
-                    setSaveMessage("Current treatment evaluation saved locally.");
-                  }
-                }}
-                className="rounded-md border border-slate-500 bg-slate-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-600"
-              >
-                Save Current Treatment
-              </button>
+              {!noTreatmentCaptured && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (selectedTreatment) {
+                      persistCurrentTreatmentToMap(selectedTreatment);
+                      setSaveStatus("success");
+                      setSaveMessage(
+                        "Current treatment evaluation saved locally."
+                      );
+                    }
+                  }}
+                  className="rounded-md border border-slate-500 bg-slate-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-600"
+                >
+                  Save Current Treatment
+                </button>
+              )}
 
               <button
                 type="button"
@@ -854,6 +878,8 @@ export default function MedEvalPanel({
               >
                 {saveStatus === "saving"
                   ? "Saving..."
+                  : noTreatmentCaptured
+                  ? "Skip Treatments & Next Step"
                   : "Save All & Next Step"}
               </button>
             </div>

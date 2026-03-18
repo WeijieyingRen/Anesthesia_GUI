@@ -89,6 +89,19 @@ function cleanText(v: any) {
   return String(v ?? "").trim();
 }
 
+function toFiniteNumber(v: any): number | null {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+function firstFiniteNumber(...values: any[]): number | null {
+  for (const v of values) {
+    const n = Number(v);
+    if (Number.isFinite(n)) return n;
+  }
+  return null;
+}
+
 function normalizeFluidName(item: any) {
   return (
     cleanText(item?.fluid_name) ||
@@ -123,10 +136,6 @@ function formatAbsoluteTime(rawTime: any) {
   return `${hh}:${mm}:${ss}`;
 }
 
-function normalizeRoute(item: any) {
-  return cleanText(item?.route).toLowerCase();
-}
-
 function inferFluidType(item: any): "input-bolus" | "input-infusion" | "output" {
   const unit = cleanText(item?.unit).toLowerCase();
   const ioType = Number(item?.io_type);
@@ -146,12 +155,13 @@ function buildFluidCandidateLabel(item: any) {
     formatAbsoluteTime(item?.observation_time) ||
     formatAbsoluteTime(item?.end_time);
 
-  const relStart =
-    item?.relative_anesthesia_start ??
-    item?.relative_anesthesia_time ??
-    item?.relative_anesthesia_end;
+  const relStart = firstFiniteNumber(
+    item?.relative_anesthesia_start,
+    item?.relative_anesthesia_time,
+    item?.relative_anesthesia_end
+  );
 
-  const relEnd = item?.relative_anesthesia_end;
+  const relEnd = firstFiniteNumber(item?.relative_anesthesia_end);
 
   const route = cleanText(item?.route);
 
@@ -162,10 +172,10 @@ function buildFluidCandidateLabel(item: any) {
 
   if (type === "input-infusion") {
     const relRange =
-      Number.isFinite(Number(relStart)) && Number.isFinite(Number(relEnd))
-        ? `${Math.round(Number(relStart))}-${Math.round(Number(relEnd))} min`
-        : Number.isFinite(Number(relStart))
-        ? `${Math.round(Number(relStart))} min`
+      relStart !== null && relEnd !== null
+        ? `${Math.round(relStart)}-${Math.round(relEnd)} min`
+        : relStart !== null
+        ? `${Math.round(relStart)} min`
         : "";
 
     const absRange =
@@ -181,8 +191,7 @@ function buildFluidCandidateLabel(item: any) {
   }
 
   const singleTime =
-    timeText ||
-    (Number.isFinite(Number(relStart)) ? `${Math.round(Number(relStart))} min` : "");
+    timeText || (relStart !== null ? `${Math.round(relStart)} min` : "");
 
   return `${name} [${typeText}]${singleTime ? ` @ ${singleTime}` : ""}${
     doseText ? ` (${doseText})` : ""
@@ -212,40 +221,39 @@ function extractFluidsFromWindow(
     }
   }
 
-  // 1) fluid input rows
   for (const item of fluidInRows ?? []) {
     const type = inferFluidType(item);
 
     if (type === "input-infusion") {
-      const s = Number(item?.relative_anesthesia_start);
-      const e = Number(item?.relative_anesthesia_end);
+      const s = toFiniteNumber(item?.relative_anesthesia_start);
+      const e = firstFiniteNumber(item?.relative_anesthesia_end, item?.relative_anesthesia_start);
 
-      if (!Number.isFinite(s)) continue;
-      const safeEnd = Number.isFinite(e) ? e : s;
+      if (s === null || e === null) continue;
 
-      const overlaps = safeEnd >= windowStart && s <= windowEnd;
+      const overlaps = e >= windowStart && s <= windowEnd;
       if (!overlaps) continue;
 
       pushLabel(buildFluidCandidateLabel(item));
     } else {
-      const t =
-        Number(item?.relative_anesthesia_start) ??
-        Number(item?.relative_anesthesia_time);
+      const t = firstFiniteNumber(
+        item?.relative_anesthesia_start,
+        item?.relative_anesthesia_time
+      );
 
-      if (!Number.isFinite(t)) continue;
+      if (t === null) continue;
       if (t < windowStart || t > windowEnd) continue;
 
       pushLabel(buildFluidCandidateLabel(item));
     }
   }
 
-  // 2) fluid output rows
   for (const item of fluidOutRows ?? []) {
-    const t =
-      Number(item?.relative_anesthesia_start) ??
-      Number(item?.relative_anesthesia_time);
+    const t = firstFiniteNumber(
+      item?.relative_anesthesia_start,
+      item?.relative_anesthesia_time
+    );
 
-    if (!Number.isFinite(t)) continue;
+    if (t === null) continue;
     if (t < windowStart || t > windowEnd) continue;
 
     pushLabel(buildFluidCandidateLabel(item));
@@ -286,7 +294,9 @@ export default function FluidEvalPanel({
   const candidateFluids = React.useMemo(() => {
     return extractFluidsFromWindow(fluidInRows, fluidOutRows, startMin, endMin);
   }, [fluidInRows, fluidOutRows, startMin, endMin]);
+
   const noFluidCaptured = candidateFluids.length === 0;
+
   const [fluidPriorityNote, setFluidPriorityNote] = React.useState("");
   const [selectedFluid, setSelectedFluid] = React.useState("");
 
@@ -378,34 +388,33 @@ export default function FluidEvalPanel({
       ? `${completedFluidCount}/${candidateFluids.length} completed`
       : "0/0";
 
-      function validateFluidEval() {
-        if (noFluidCaptured) {
-          return null;
-        }
-      
-        if (!fluidPriorityNote.trim()) {
-          return "Task 1 incomplete: please explain whether fluid intervention was needed and why.";
-        }
-      
-        const mergedMap: Record<string, FluidEval> = {
-          ...fluidEvalMap,
-        };
-      
-        if (selectedFluid) {
-          mergedMap[selectedFluid] = buildCurrentFluidEval();
-        }
-      
-        const unfinished = candidateFluids.filter(
-          (fluid) => !isFluidEvalComplete(mergedMap[fluid])
-        );
-      
-        if (unfinished.length > 0) {
-          return `You must complete all fluid evaluations before saving. Remaining: ${unfinished.length}.`;
-        }
-      
-        return null;
-      }
+  function validateFluidEval() {
+    if (noFluidCaptured) {
+      return null;
+    }
 
+    if (!fluidPriorityNote.trim()) {
+      return "Task 1 incomplete: please explain whether fluid intervention was needed and why.";
+    }
+
+    const mergedMap: Record<string, FluidEval> = {
+      ...fluidEvalMap,
+    };
+
+    if (selectedFluid) {
+      mergedMap[selectedFluid] = buildCurrentFluidEval();
+    }
+
+    const unfinished = candidateFluids.filter(
+      (fluid) => !isFluidEvalComplete(mergedMap[fluid])
+    );
+
+    if (unfinished.length > 0) {
+      return `You must complete all fluid evaluations before saving. Remaining: ${unfinished.length}.`;
+    }
+
+    return null;
+  }
 
   async function startVoiceNote(target: "priority" | "rationale") {
     const SpeechRecognition =
@@ -478,6 +487,10 @@ export default function FluidEvalPanel({
         fluidPriorityNote,
         selectedFluid,
         candidateFluids,
+        skipped: noFluidCaptured,
+        skipReason: noFluidCaptured
+          ? "No fluid event captured within current window and following 10 minutes."
+          : "",
         fluidEvalMap,
       },
       submittedAt: new Date().toISOString(),
@@ -492,6 +505,7 @@ export default function FluidEvalPanel({
       fluidPriorityNote,
       selectedFluid,
       candidateFluids,
+      noFluidCaptured,
       fluidEvalMap,
     ]
   );
@@ -504,26 +518,22 @@ export default function FluidEvalPanel({
         [selectedFluid]: currentEval,
       }));
     }
-  
+
     const validationError = validateFluidEval();
     if (validationError) {
       setSaveStatus("error");
       setSaveMessage(validationError);
       return;
     }
-  
+
     try {
       setSaveStatus("saving");
       setSaveMessage("");
-  
+
       const finalPayload = {
         ...payload,
         annotation: {
           ...payload.annotation,
-          skipped: noFluidCaptured,
-          skipReason: noFluidCaptured
-            ? "No fluid event captured within current window and following 10 minutes."
-            : "",
           fluidEvalMap: noFluidCaptured
             ? {}
             : {
@@ -536,7 +546,7 @@ export default function FluidEvalPanel({
               },
         },
       };
-  
+
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -544,19 +554,19 @@ export default function FluidEvalPanel({
         },
         body: JSON.stringify(finalPayload),
       });
-  
+
       if (!res.ok) {
         const msg = await res.text();
         throw new Error(msg || `Request failed with status ${res.status}`);
       }
-  
+
       setSaveStatus("success");
       setSaveMessage(
         noFluidCaptured
           ? "No related fluid event was captured. Skipped and moved to next step."
           : "All fluid evaluations were completed and saved successfully."
       );
-  
+
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
@@ -589,24 +599,23 @@ export default function FluidEvalPanel({
             ? " No related fluid event was captured, so this panel can be skipped."
             : ""}
         </div>
-  
+
         <div className="overflow-hidden rounded-xl border">
-          {/* 上半部分：有 fluid 才可编辑；没抓到就整体灰掉 */}
-          <div className={noFluidCaptured ? "opacity-50 pointer-events-none" : ""}>
+          <div className={noFluidCaptured ? "pointer-events-none opacity-50" : ""}>
             <TaskBlock title="Task 1. Was fluid intervention important for this event? Please explain.">
               <div className="mb-1 text-sm text-gray-600">
                 {noFluidCaptured
                   ? "No related fluid event was captured in the current window and the following 10 minutes."
                   : "Consider whether fluid treatment was needed, whether it addressed the likely mechanism, and whether it was more important than medication or other interventions."}
               </div>
-  
+
               <textarea
                 value={fluidPriorityNote}
                 onChange={(e) => setFluidPriorityNote(e.target.value)}
                 className="min-h-[80px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
                 placeholder="Fluid was important because the hypotension appeared more consistent with reduced preload or relative hypovolemia. Volume support addressed the likely cause more directly..."
               />
-  
+
               <div className="mt-3">
                 <button
                   type="button"
@@ -627,7 +636,7 @@ export default function FluidEvalPanel({
                 </button>
               </div>
             </TaskBlock>
-  
+
             <TaskBlock title="Task 2. Select the fluid event being evaluated">
               <div className="mb-2 flex items-center gap-2 text-sm text-gray-600">
                 <span>Progress</span>
@@ -640,7 +649,7 @@ export default function FluidEvalPanel({
                   </span>
                 )}
               </div>
-  
+
               {candidateFluids.length === 0 ? (
                 <div className="text-sm text-red-500">
                   No fluid event found within this event window and the following 10 minutes.
@@ -652,7 +661,7 @@ export default function FluidEvalPanel({
                     if (selectedFluid) {
                       persistCurrentFluidToMap(selectedFluid);
                     }
-  
+
                     const nextFluid = e.target.value;
                     setSelectedFluid(nextFluid);
                     loadFluidFromMap(nextFluid);
@@ -672,7 +681,7 @@ export default function FluidEvalPanel({
                 </select>
               )}
             </TaskBlock>
-  
+
             <TaskBlock title="Task 3. Evaluate timing, treatment choice, dose, and overall judgment">
               <div className="space-y-4">
                 <div>
@@ -700,7 +709,7 @@ export default function FluidEvalPanel({
                     />
                   </div>
                 </div>
-  
+
                 <div>
                   <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                     Choice
@@ -726,7 +735,7 @@ export default function FluidEvalPanel({
                     />
                   </div>
                 </div>
-  
+
                 <div>
                   <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                     Dose / Amount
@@ -752,7 +761,7 @@ export default function FluidEvalPanel({
                     />
                   </div>
                 </div>
-  
+
                 <div>
                   <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                     Overall Judgment
@@ -774,20 +783,20 @@ export default function FluidEvalPanel({
                 </div>
               </div>
             </TaskBlock>
-  
+
             <TaskBlock title="Task 4. Please explain your fluid evaluation" noBorder>
               <div className="mb-3 text-sm text-gray-600">
                 Please provide rationale using vital trends, timing, fluid type,
                 amount, rate, route, and perioperative context.
               </div>
-  
+
               <textarea
                 value={rationale}
                 onChange={(e) => setRationale(e.target.value)}
                 className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
                 placeholder="Describe the rationale for your fluid treatment evaluation..."
               />
-  
+
               <div className="mt-3">
                 <button
                   type="button"
@@ -809,15 +818,14 @@ export default function FluidEvalPanel({
               </div>
             </TaskBlock>
           </div>
-  
-          {/* 底部按钮区：始终可点击，所以放在灰掉区域外面 */}
+
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">
               {noFluidCaptured
                 ? "No fluid event was captured. You can skip this panel directly."
                 : "All fluid events must be completed before saving."}
             </div>
-  
+
             <div className="flex flex-wrap gap-3">
               <button
                 type="button"
@@ -837,7 +845,7 @@ export default function FluidEvalPanel({
               >
                 Save Current Fluid
               </button>
-  
+
               <button
                 type="button"
                 disabled={noFluidCaptured}
@@ -850,7 +858,7 @@ export default function FluidEvalPanel({
               >
                 Reset All
               </button>
-  
+
               <button
                 type="button"
                 onClick={handleSaveFluidEval}
@@ -868,7 +876,7 @@ export default function FluidEvalPanel({
                   : "Save All & Next Step"}
               </button>
             </div>
-  
+
             {saveMessage && (
               <div
                 className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
@@ -884,5 +892,5 @@ export default function FluidEvalPanel({
         </div>
       </div>
     </div>
-    );
+  );
 }

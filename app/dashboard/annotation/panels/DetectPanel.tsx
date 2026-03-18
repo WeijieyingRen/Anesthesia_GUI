@@ -259,7 +259,7 @@ export default function DetectPanel({
 
         <div className="overflow-hidden rounded-xl border">
           <TaskBlock title="Task 1. Confirm bounding box window and confirm the vital (select on the right chart)">
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(140px,170px)_120px_120px]">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-[110px_90px_90px]">
               <div>
                 <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                   Vital

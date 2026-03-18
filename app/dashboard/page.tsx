@@ -868,7 +868,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
             {/* 一级：Episode / Patient */}
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                Task Category
+                Task Categories
               </span>
 
               <button
@@ -906,7 +906,7 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
             {/* 二级：具体任务 */}
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                {annotationLevel === "episode" ? "Episode Tasks" : "Patient Task"}
+                {annotationLevel === "episode" ? "SubTasks" : "Patient Task"}
               </span>
 
               {annotationLevel === "episode" ? (

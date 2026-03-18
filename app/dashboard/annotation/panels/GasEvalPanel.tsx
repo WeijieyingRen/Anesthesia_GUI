@@ -17,7 +17,11 @@ type GasEvalPanelProps = {
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
 type TrendValue = "Increased" | "Decreased" | "Stable" | "Fluctuating" | "";
-type RelevanceValue = "Highly Relevant" | "Possibly Relevant" | "Not Relevant" | "";
+type RelevanceValue =
+  | "Highly Relevant"
+  | "Possibly Relevant"
+  | "Not Relevant"
+  | "";
 type OverallGasJudgment =
   | "Appropriate"
   | "Mostly Appropriate"
@@ -55,7 +59,7 @@ function RadioPill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
+      className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition ${
         selected
           ? toneClass
           : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
@@ -88,67 +92,65 @@ function roundSmart(v: number) {
   if (Math.abs(v) >= 1) return Math.round(v * 10) / 10;
   return Math.round(v * 100) / 100;
 }
+
 function extractGasCandidatesFromWindow(
-    gasData: Record<string, TimeValuePoint[] | undefined> = {},
-    startMin: number,
-    endMin: number
-  ): string[] {
-    const windowStart = Number(startMin);
-    const windowEnd = Number(endMin) + 10;
-  
-    if (!Number.isFinite(windowStart) || !Number.isFinite(windowEnd)) return [];
-  
-    // 只评估临床相关的 gas feature
-    const CLINICALLY_RELEVANT_GAS_KEYS = [
-      "FiO2",
-      "etMAC exhaled",
-      "inSevoflurane %",
-      "inIsoflurane",
-      "O2 (L/Min)",
-      "N2O (L/min)",
-      "inN2O %",
-    ];
-  
-    const results: string[] = [];
-  
-    for (const key of CLINICALLY_RELEVANT_GAS_KEYS) {
-      const arr = gasData[key] ?? [];
-  
-      const points = arr
-        .filter(
-          (p) =>
-            Number.isFinite(p.time) &&
-            Number.isFinite(p.value) &&
-            p.time >= windowStart &&
-            p.time <= windowEnd
-        )
-        .sort((a, b) => a.time - b.time);
-  
-      // 窗口内没有值：不评估
-      if (!points.length) continue;
-  
-      // 窗口内全为 0：不评估
-      const hasAnyNonZero = points.some((p) => Math.abs(p.value) > 1e-9);
-      if (!hasAnyNonZero) continue;
-  
-      const first = points[0];
-      const last = points[points.length - 1];
-  
-      const nonZeroPoints = points.filter((p) => Math.abs(p.value) > 1e-9);
-      const firstNonZero = nonZeroPoints[0] ?? first;
-      const lastNonZero = nonZeroPoints[nonZeroPoints.length - 1] ?? last;
-  
-      const label = `${key} @ ${Math.round(firstNonZero.time)}-${Math.round(
-        lastNonZero.time
-      )} min (start=${roundSmart(firstNonZero.value)}, end=${roundSmart(
-        lastNonZero.value
-      )})`;
-  
-      results.push(label);
-    }
-  
-    return results;
+  gasData: Record<string, TimeValuePoint[] | undefined> = {},
+  startMin: number,
+  endMin: number
+): string[] {
+  const windowStart = Number(startMin);
+  const windowEnd = Number(endMin) + 10;
+
+  if (!Number.isFinite(windowStart) || !Number.isFinite(windowEnd)) return [];
+
+  const CLINICALLY_RELEVANT_GAS_KEYS = [
+    "FiO2",
+    "etMAC exhaled",
+    "inSevoflurane %",
+    "inIsoflurane",
+    "O2 (L/Min)",
+    "N2O (L/min)",
+    "inN2O %",
+  ];
+
+  const results: string[] = [];
+
+  for (const key of CLINICALLY_RELEVANT_GAS_KEYS) {
+    const arr = gasData[key] ?? [];
+
+    const points = arr
+      .filter(
+        (p) =>
+          Number.isFinite(p.time) &&
+          Number.isFinite(p.value) &&
+          p.time >= windowStart &&
+          p.time <= windowEnd
+      )
+      .sort((a, b) => a.time - b.time);
+
+    if (!points.length) continue;
+
+    const hasAnyNonZero = points.some((p) => Math.abs(p.value) > 1e-9);
+    if (!hasAnyNonZero) continue;
+
+    const first = points[0];
+    const last = points[points.length - 1];
+
+    const nonZeroPoints = points.filter((p) => Math.abs(p.value) > 1e-9);
+    const firstNonZero = nonZeroPoints[0] ?? first;
+    const lastNonZero = nonZeroPoints[nonZeroPoints.length - 1] ?? last;
+
+    const label = `${key} @ ${Math.round(firstNonZero.time)}-${Math.round(
+      lastNonZero.time
+    )} min (start=${roundSmart(firstNonZero.value)}, end=${roundSmart(
+      lastNonZero.value
+    )})`;
+
+    results.push(label);
   }
+
+  return results;
+}
 
 function isGasEvalComplete(evalItem?: GasEval | null) {
   if (!evalItem) return false;
@@ -174,6 +176,8 @@ export default function GasEvalPanel({
     return extractGasCandidatesFromWindow(gasData, startMin, endMin);
   }, [gasData, startMin, endMin]);
 
+  const noGasCaptured = candidateGasItems.length === 0;
+
   const [selectedGasItem, setSelectedGasItem] = React.useState("");
   const [trend, setTrend] = React.useState<TrendValue>("");
   const [relevance, setRelevance] = React.useState<RelevanceValue>("");
@@ -181,7 +185,9 @@ export default function GasEvalPanel({
     React.useState<OverallGasJudgment>("");
   const [rationale, setRationale] = React.useState("");
 
-  const [gasEvalMap, setGasEvalMap] = React.useState<Record<string, GasEval>>({});
+  const [gasEvalMap, setGasEvalMap] = React.useState<Record<string, GasEval>>(
+    {}
+  );
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
 
@@ -230,15 +236,16 @@ export default function GasEvalPanel({
       setRationale(saved?.rationale ?? "");
       return next;
     });
-  }, [candidateGasItems]);
+  }, [candidateGasItems, gasEvalMap]);
 
   const completedCount = React.useMemo(() => {
-    return candidateGasItems.filter((x) => isGasEvalComplete(gasEvalMap[x])).length;
+    return candidateGasItems.filter((x) => isGasEvalComplete(gasEvalMap[x]))
+      .length;
   }, [candidateGasItems, gasEvalMap]);
 
   function validateAllGasItems() {
-    if (candidateGasItems.length === 0) {
-      return "No gas features were captured in this event window.";
+    if (noGasCaptured) {
+      return null;
     }
 
     const mergedMap = {
@@ -269,6 +276,8 @@ export default function GasEvalPanel({
         endMin,
         candidateGasItems,
         selectedGasItem,
+        gasCaptured: !noGasCaptured,
+        gasSkipped: noGasCaptured,
         gasEvalMap,
       },
       submittedAt: new Date().toISOString(),
@@ -282,12 +291,13 @@ export default function GasEvalPanel({
       endMin,
       candidateGasItems,
       selectedGasItem,
+      noGasCaptured,
       gasEvalMap,
     ]
   );
 
   async function handleSaveGasEval() {
-    if (selectedGasItem) {
+    if (!noGasCaptured && selectedGasItem) {
       setGasEvalMap((prev) => ({
         ...prev,
         [selectedGasItem]: buildCurrentEval(),
@@ -309,12 +319,14 @@ export default function GasEvalPanel({
         ...payload,
         annotation: {
           ...payload.annotation,
-          gasEvalMap: {
-            ...gasEvalMap,
-            ...(selectedGasItem
-              ? { [selectedGasItem]: buildCurrentEval() }
-              : {}),
-          },
+          gasEvalMap: noGasCaptured
+            ? {}
+            : {
+                ...gasEvalMap,
+                ...(selectedGasItem
+                  ? { [selectedGasItem]: buildCurrentEval() }
+                  : {}),
+              },
         },
       };
 
@@ -332,7 +344,11 @@ export default function GasEvalPanel({
       }
 
       setSaveStatus("success");
-      setSaveMessage("All gas items were completed and saved successfully.");
+      setSaveMessage(
+        noGasCaptured
+          ? "No gas / ventilation feature was captured. Tasks 1–3 were skipped and the panel was saved successfully."
+          : "All gas items were completed and saved successfully."
+      );
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
@@ -354,26 +370,33 @@ export default function GasEvalPanel({
   return (
     <div className="min-h-[640px] bg-white">
       <div className="p-5">
-      <div className="mb-2 text-sm font-semibold text-gray-900">
-    Panel 3A: Evaluate whether gas / ventilation-related features were relevant for the selected event.
-    </div>
+        <div className="mb-2 text-sm font-semibold text-gray-900">
+          Panel 3A: Evaluate whether gas / ventilation-related features were
+          relevant for the selected event.
+        </div>
 
-    <div className="mb-4 text-sm text-gray-600">
-    Assess whether this gas feature changed around the event and whether that change was clinically meaningful for explaining the event or response.
-    </div>
+        <div className="mb-4 text-sm text-gray-600">
+          Assess whether this gas feature changed around the event and whether
+          that change was clinically meaningful for explaining the event or
+          response.
+        </div>
 
         <div className="overflow-hidden rounded-xl border">
           <TaskBlock title="Task 1. Select the gas feature being evaluated">
             <div className="mb-2 flex items-center gap-2 text-sm text-gray-600">
               <span>Progress</span>
               <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-gray-600">
-                {completedCount}/{candidateGasItems.length} completed
+                {noGasCaptured
+                  ? "Skipped (no gas feature captured)"
+                  : `${completedCount}/${candidateGasItems.length} completed`}
               </span>
             </div>
 
-            {candidateGasItems.length === 0 ? (
-              <div className="text-sm text-red-500">
-                No gas / ventilation feature found within this event window and the following 10 minutes.
+            {noGasCaptured ? (
+              <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
+                No gas / ventilation feature was found within this event window
+                and the following 10 minutes. Tasks 1–3 will be skipped
+                automatically.
               </div>
             ) : (
               <select
@@ -401,121 +424,151 @@ export default function GasEvalPanel({
           </TaskBlock>
 
           <TaskBlock title="Task 2. Evaluate trend and relevance">
-          <div className="mb-2 text-[11px] font-semibold tracking-wide text-gray-500">
-                    Trend = how the feature changed. Relevance = whether that change helped explain the event clinically.
+            {noGasCaptured ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                Skipped because no gas / ventilation feature was captured for
+                this event window.
+              </div>
+            ) : (
+              <>
+                <div className="mb-2 text-[11px] font-semibold tracking-wide text-gray-500">
+                  Trend = how the feature changed. Relevance = whether that
+                  change helped explain the event clinically.
                 </div>
 
                 <div className="space-y-4">
-              <div>
-               
-                <div className="flex flex-wrap items-center gap-2">
-                  <RadioPill
-                    label="Increased"
-                    selected={trend === "Increased"}
-                    selectedTone="green"
-                    onClick={() => setTrend("Increased")}
-                  />
-                  <RadioPill
-                    label="Decreased"
-                    selected={trend === "Decreased"}
-                    selectedTone="green"
-                    onClick={() => setTrend("Decreased")}
-                  />
-                  <RadioPill
-                    label="Stable"
-                    selected={trend === "Stable"}
-                    selectedTone="green"
-                    onClick={() => setTrend("Stable")}
-                  />
-                  <RadioPill
-                    label="Fluctuating"
-                    selected={trend === "Fluctuating"}
-                    selectedTone="green"
-                    onClick={() => setTrend("Fluctuating")}
-                  />
-                </div>
-              </div>
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <RadioPill
+                        label="Increased"
+                        selected={trend === "Increased"}
+                        selectedTone="green"
+                        onClick={() => setTrend("Increased")}
+                      />
+                      <RadioPill
+                        label="Decreased"
+                        selected={trend === "Decreased"}
+                        selectedTone="green"
+                        onClick={() => setTrend("Decreased")}
+                      />
+                      <RadioPill
+                        label="Stable"
+                        selected={trend === "Stable"}
+                        selectedTone="green"
+                        onClick={() => setTrend("Stable")}
+                      />
+                      <RadioPill
+                        label="Fluctuating"
+                        selected={trend === "Fluctuating"}
+                        selectedTone="green"
+                        onClick={() => setTrend("Fluctuating")}
+                      />
+                    </div>
+                  </div>
 
-              <div>
-              <div className="mb-2 text-[11px] font-semibold tracking-wide text-gray-500">
-                Relevance = whether the change in this gas feature was clinically related to the selected event or its management.
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <RadioPill
-                    label="Highly Relevant"
-                    selected={relevance === "Highly Relevant"}
-                    selectedTone="orange"
-                    onClick={() => setRelevance("Highly Relevant")}
-                  />
-                  <RadioPill
-                    label="Possibly Relevant"
-                    selected={relevance === "Possibly Relevant"}
-                    selectedTone="orange"
-                    onClick={() => setRelevance("Possibly Relevant")}
-                  />
-                  <RadioPill
-                    label="Not Relevant"
-                    selected={relevance === "Not Relevant"}
-                    selectedTone="orange"
-                    onClick={() => setRelevance("Not Relevant")}
-                  />
-                </div>
-              </div>
+                  <div>
+                    <div className="mb-2 text-[11px] font-semibold tracking-wide text-gray-500">
+                      Relevance = whether the change in this gas feature was
+                      clinically related to the selected event or its management.
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <RadioPill
+                        label="Highly Relevant"
+                        selected={relevance === "Highly Relevant"}
+                        selectedTone="orange"
+                        onClick={() => setRelevance("Highly Relevant")}
+                      />
+                      <RadioPill
+                        label="Possibly Relevant"
+                        selected={relevance === "Possibly Relevant"}
+                        selectedTone="orange"
+                        onClick={() => setRelevance("Possibly Relevant")}
+                      />
+                      <RadioPill
+                        label="Not Relevant"
+                        selected={relevance === "Not Relevant"}
+                        selectedTone="orange"
+                        onClick={() => setRelevance("Not Relevant")}
+                      />
+                    </div>
+                  </div>
 
-              <div>
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Overall Judgment
+                  <div>
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                      Overall Judgment
+                    </div>
+                    <select
+                      value={overallJudgment}
+                      onChange={(e) =>
+                        setOverallJudgment(e.target.value as OverallGasJudgment)
+                      }
+                      className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+                    >
+                      <option value="">Select overall judgment</option>
+                      <option value="Appropriate">Appropriate</option>
+                      <option value="Mostly Appropriate">
+                        Mostly Appropriate
+                      </option>
+                      <option value="Mixed / Uncertain">
+                        Mixed / Uncertain
+                      </option>
+                      <option value="Suboptimal">Suboptimal</option>
+                      <option value="Inappropriate">Inappropriate</option>
+                    </select>
+                  </div>
                 </div>
-                <select
-                  value={overallJudgment}
-                  onChange={(e) =>
-                    setOverallJudgment(e.target.value as OverallGasJudgment)
-                  }
-                  className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-                >
-                  <option value="">Select overall judgment</option>
-                  <option value="Appropriate">Appropriate</option>
-                  <option value="Mostly Appropriate">Mostly Appropriate</option>
-                  <option value="Mixed / Uncertain">Mixed / Uncertain</option>
-                  <option value="Suboptimal">Suboptimal</option>
-                  <option value="Inappropriate">Inappropriate</option>
-                </select>
-              </div>
-            </div>
+              </>
+            )}
           </TaskBlock>
 
           <TaskBlock title="Task 3. Please explain your gas evaluation" noBorder>
+            {noGasCaptured ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                Skipped because no gas / ventilation feature was captured for
+                this event window.
+              </div>
+            ) : (
+              <>
                 <div className="mb-3 text-sm text-gray-600">
-                    Briefly explain why this feature was or was not clinically relevant, based on timing and direction of change.
+                  Briefly explain why this feature was or was not clinically
+                  relevant, based on timing and direction of change.
                 </div>
 
                 <textarea
-              value={rationale}
-              onChange={(e) => setRationale(e.target.value)}
-              className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder="Describe why this gas feature was or was not relevant to the event..."
-            />
+                  value={rationale}
+                  onChange={(e) => setRationale(e.target.value)}
+                  className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="Describe why this gas feature was or was not relevant to the event..."
+                />
+              </>
+            )}
           </TaskBlock>
 
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">
-              All gas items must be completed before saving.
+              {noGasCaptured
+                ? "No gas feature captured. This panel will be skipped automatically."
+                : "All gas items must be completed before saving."}
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  if (selectedGasItem) {
-                    persistCurrentGas();
-                    setSaveStatus("success");
-                    setSaveMessage("Current gas item evaluation saved locally.");
-                  }
-                }}
-                className="rounded-md border border-slate-500 bg-slate-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-600"
-              >
-                Save Current Gas Item
-              </button>
+              {!noGasCaptured && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (selectedGasItem) {
+                      persistCurrentGas();
+                      setSaveStatus("success");
+                      setSaveMessage(
+                        "Current gas item evaluation saved locally."
+                      );
+                    }
+                  }}
+                  className="rounded-md border border-slate-500 bg-slate-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-600"
+                >
+                  Save Current Gas Item
+                </button>
+              )}
 
               <button
                 type="button"
@@ -537,6 +590,8 @@ export default function GasEvalPanel({
               >
                 {saveStatus === "saving"
                   ? "Saving..."
+                  : noGasCaptured
+                  ? "Skip Gas Eval & Next Step"
                   : "Save All & Next Step"}
               </button>
             </div>
