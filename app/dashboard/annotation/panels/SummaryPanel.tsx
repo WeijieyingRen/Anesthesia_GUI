@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { submitAnnotation } from "@/lib/submit";
 
 type SummaryPanelProps = {
   eventId?: string;
@@ -9,6 +10,7 @@ type SummaryPanelProps = {
   episodeLabel?: string;
   startMin?: number;
   endMin?: number;
+  annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -38,6 +40,7 @@ export default function SummaryPanel({
   episodeLabel = "Episode 1",
   startMin = 84,
   endMin = 102,
+  annotatorName,
   onSaveAndNextStep,
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState(
@@ -49,6 +52,11 @@ export default function SummaryPanel({
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const recognitionRef = React.useRef<any>(null);
+  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    panelOpenedAtRef.current = Date.now();
+  }, [caseId, eventId]);
 
   async function startVoiceNote() {
     const SpeechRecognition =
@@ -101,23 +109,6 @@ export default function SummaryPanel({
     setRecording(false);
   }
 
-  const payload = React.useMemo(
-    () => ({
-      task: "summary",
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      annotation: {
-        startMin,
-        endMin,
-        summaryText,
-      },
-      submittedAt: new Date().toISOString(),
-    }),
-    [caseId, eventId, eventTitle, episodeLabel, startMin, endMin, summaryText]
-  );
-
   async function handleSaveSummary() {
     if (!summaryText.trim()) {
       setSaveStatus("error");
@@ -129,18 +120,21 @@ export default function SummaryPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await submitAnnotation({
+        annotator: annotatorName ? { name: annotatorName } : undefined,
+        caseId,
+        eventId,
+        panel: "summary_panel",
+        action: "submit",
+        panelOpenedAt: panelOpenedAtRef.current,
+        answers: {
+          eventTitle,
+          episodeLabel,
+          startMin,
+          endMin,
+          summaryText: summaryText.trim(),
         },
-        body: JSON.stringify(payload),
       });
-
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `Request failed with status ${res.status}`);
-      }
 
       setSaveStatus("success");
       setSaveMessage("Summary saved successfully.");
