@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import type { EventType } from "../types";
+import { submitAnnotation } from "@/lib/submit";
 
 type MechanismPanelProps = {
   eventId?: string;
@@ -11,6 +12,7 @@ type MechanismPanelProps = {
   startMin?: number;
   endMin?: number;
   eventType: EventType;
+  annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -159,6 +161,7 @@ export default function MechanismPanel({
   startMin = 84,
   endMin = 102,
   eventType,
+  annotatorName,
   onSaveAndNextStep,
 }: MechanismPanelProps) {
   const options = MECHANISM_OPTIONS[eventType] ?? [];
@@ -169,6 +172,11 @@ export default function MechanismPanel({
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const recognitionRef = React.useRef<any>(null);
+  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    panelOpenedAtRef.current = Date.now();
+  }, [caseId, eventId]);
 
   function toggleMechanism(option: string) {
     setSelectedMechanisms((prev) => {
@@ -245,38 +253,9 @@ export default function MechanismPanel({
   }
 
   function stopVoiceNote() {
-    recognitionRef.current?.stop();
+    recognitionRef.current?.stop?.();
     setRecording(false);
   }
-
-  const payload = React.useMemo(
-    () => ({
-      task: "mechanism",
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      annotation: {
-        eventType,
-        startMin,
-        endMin,
-        selectedMechanisms,
-        note,
-      },
-      submittedAt: new Date().toISOString(),
-    }),
-    [
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      eventType,
-      startMin,
-      endMin,
-      selectedMechanisms,
-      note,
-    ]
-  );
 
   async function handleSaveMechanism() {
     const validationError = validateMechanism();
@@ -290,22 +269,26 @@ export default function MechanismPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await submitAnnotation({
+        annotator: annotatorName ? { name: annotatorName } : undefined,
+        caseId,
+        eventId,
+        panel: "mechanism_panel",
+        action: "submit",
+        panelOpenedAt: panelOpenedAtRef.current,
+        answers: {
+          eventTitle,
+          episodeLabel,
+          eventType,
+          startMin,
+          endMin,
+          selectedMechanisms,
+          note: note.trim(),
         },
-        body: JSON.stringify(payload),
       });
-
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `Request failed with status ${res.status}`);
-      }
 
       setSaveStatus("success");
       setSaveMessage("Mechanism annotation saved successfully.");
-
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");

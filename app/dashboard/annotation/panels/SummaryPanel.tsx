@@ -44,7 +44,7 @@ export default function SummaryPanel({
   onSaveAndNextStep,
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState(
-    "During this episode, the patient experienced a clinically significant MAP drop between 84 and 102 minutes. The event was identified as hypotension. The likely mechanism was suspected to be vasodilation and relative hypovolemia. A vasopressor bolus was administered and judged to be appropriate in timing and choice. The patient showed partial to expected hemodynamic recovery after treatment."
+    "Intraoperative record here..."
   );
 
   const [recording, setRecording] = React.useState(false);

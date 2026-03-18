@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { submitAnnotation } from "@/lib/submit";
 
 type FluidEvalPanelProps = {
   eventId?: string;
@@ -11,6 +12,7 @@ type FluidEvalPanelProps = {
   endMin?: number;
   fluidInRows?: any[];
   fluidOutRows?: any[];
+  annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -57,7 +59,7 @@ function RadioPill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
+      className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition ${
         selected
           ? toneClass
           : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
@@ -289,6 +291,7 @@ export default function FluidEvalPanel({
   endMin = 102,
   fluidInRows = [],
   fluidOutRows = [],
+  annotatorName,
   onSaveAndNextStep,
 }: FluidEvalPanelProps) {
   const candidateFluids = React.useMemo(() => {
@@ -318,6 +321,11 @@ export default function FluidEvalPanel({
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const recognitionRef = React.useRef<any>(null);
+  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    panelOpenedAtRef.current = Date.now();
+  }, [caseId, eventId]);
 
   function buildCurrentFluidEval(): FluidEval {
     return {
@@ -474,49 +482,20 @@ export default function FluidEvalPanel({
     setRecordingTarget(null);
   }
 
-  const payload = React.useMemo(
-    () => ({
-      task: "fluidEval",
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      annotation: {
-        startMin,
-        endMin,
-        fluidPriorityNote,
-        selectedFluid,
-        candidateFluids,
-        skipped: noFluidCaptured,
-        skipReason: noFluidCaptured
-          ? "No fluid event captured within current window and following 10 minutes."
-          : "",
-        fluidEvalMap,
-      },
-      submittedAt: new Date().toISOString(),
-    }),
-    [
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      startMin,
-      endMin,
-      fluidPriorityNote,
-      selectedFluid,
-      candidateFluids,
-      noFluidCaptured,
-      fluidEvalMap,
-    ]
-  );
-
   async function handleSaveFluidEval() {
+    const mergedFluidEvalMap: Record<string, FluidEval> = noFluidCaptured
+      ? {}
+      : {
+          ...fluidEvalMap,
+          ...(selectedFluid
+            ? {
+                [selectedFluid]: buildCurrentFluidEval(),
+              }
+            : {}),
+        };
+
     if (!noFluidCaptured && selectedFluid) {
-      const currentEval = buildCurrentFluidEval();
-      setFluidEvalMap((prev) => ({
-        ...prev,
-        [selectedFluid]: currentEval,
-      }));
+      setFluidEvalMap(mergedFluidEvalMap);
     }
 
     const validationError = validateFluidEval();
@@ -530,35 +509,28 @@ export default function FluidEvalPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const finalPayload = {
-        ...payload,
-        annotation: {
-          ...payload.annotation,
-          fluidEvalMap: noFluidCaptured
-            ? {}
-            : {
-                ...fluidEvalMap,
-                ...(selectedFluid
-                  ? {
-                      [selectedFluid]: buildCurrentFluidEval(),
-                    }
-                  : {}),
-              },
+      await submitAnnotation({
+        annotator: annotatorName ? { name: annotatorName } : undefined,
+        caseId,
+        eventId,
+        panel: "fluid_eval_panel",
+        action: noFluidCaptured ? "skip" : "submit",
+        panelOpenedAt: panelOpenedAtRef.current,
+        answers: {
+          eventTitle,
+          episodeLabel,
+          startMin,
+          endMin,
+          skipped: noFluidCaptured,
+          skipReason: noFluidCaptured
+            ? "No fluid event captured within current window and following 10 minutes."
+            : "",
+          fluidPriorityNote: noFluidCaptured ? "" : fluidPriorityNote.trim(),
+          selectedFluid: noFluidCaptured ? "" : selectedFluid,
+          candidateFluids,
+          fluidEvalMap: mergedFluidEvalMap,
         },
-      };
-
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(finalPayload),
       });
-
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `Request failed with status ${res.status}`);
-      }
 
       setSaveStatus("success");
       setSaveMessage(
@@ -827,8 +799,6 @@ export default function FluidEvalPanel({
             </div>
 
             <div className="flex flex-wrap gap-3">
-        
-
               <button
                 type="button"
                 disabled={noFluidCaptured}

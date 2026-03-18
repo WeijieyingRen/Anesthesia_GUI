@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { submitAnnotation } from "@/lib/submit";
 
 type MedEvalPanelProps = {
   eventId?: string;
@@ -12,6 +13,7 @@ type MedEvalPanelProps = {
   medications?: any;
   medBolusRows?: any[];
   medInfusionRows?: any[];
+  annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -283,6 +285,7 @@ export default function MedEvalPanel({
   endMin = 102,
   medBolusRows = [],
   medInfusionRows = [],
+  annotatorName,
   onSaveAndNextStep,
 }: MedEvalPanelProps) {
   const candidateTreatments = React.useMemo(() => {
@@ -317,6 +320,11 @@ export default function MedEvalPanel({
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const recognitionRef = React.useRef<any>(null);
+  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    panelOpenedAtRef.current = Date.now();
+  }, [caseId, eventId]);
 
   function buildCurrentTreatmentEval(): TreatmentEval {
     return {
@@ -480,47 +488,21 @@ export default function MedEvalPanel({
     setRecordingTarget(null);
   }
 
-  const payload = React.useMemo(
-    () => ({
-      task: "medEval",
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      annotation: {
-        startMin,
-        endMin,
-        interventionNote,
-        selectedTreatment,
-        candidateTreatments,
-        treatmentCaptured: !noTreatmentCaptured,
-        treatmentSkipped: noTreatmentCaptured,
-        treatmentEvalMap,
-      },
-      submittedAt: new Date().toISOString(),
-    }),
-    [
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      startMin,
-      endMin,
-      interventionNote,
-      selectedTreatment,
-      candidateTreatments,
-      noTreatmentCaptured,
-      treatmentEvalMap,
-    ]
-  );
-
   async function handleSaveMedEval() {
+    const mergedTreatmentEvalMap: Record<string, TreatmentEval> =
+      noTreatmentCaptured
+        ? {}
+        : {
+            ...treatmentEvalMap,
+            ...(selectedTreatment
+              ? {
+                  [selectedTreatment]: buildCurrentTreatmentEval(),
+                }
+              : {}),
+          };
+
     if (!noTreatmentCaptured && selectedTreatment) {
-      const currentEval = buildCurrentTreatmentEval();
-      setTreatmentEvalMap((prev) => ({
-        ...prev,
-        [selectedTreatment]: currentEval,
-      }));
+      setTreatmentEvalMap(mergedTreatmentEvalMap);
     }
 
     const validationError = validateMedEval();
@@ -534,35 +516,29 @@ export default function MedEvalPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const finalPayload = {
-        ...payload,
-        annotation: {
-          ...payload.annotation,
-          treatmentEvalMap: noTreatmentCaptured
-            ? {}
-            : {
-                ...treatmentEvalMap,
-                ...(selectedTreatment
-                  ? {
-                      [selectedTreatment]: buildCurrentTreatmentEval(),
-                    }
-                  : {}),
-              },
+      await submitAnnotation({
+        annotator: annotatorName ? { name: annotatorName } : undefined,
+        caseId,
+        eventId,
+        panel: "med_eval_panel",
+        action: noTreatmentCaptured ? "skip" : "submit",
+        panelOpenedAt: panelOpenedAtRef.current,
+        answers: {
+          eventTitle,
+          episodeLabel,
+          startMin,
+          endMin,
+          treatmentCaptured: !noTreatmentCaptured,
+          treatmentSkipped: noTreatmentCaptured,
+          skipReason: noTreatmentCaptured
+            ? "No medication was captured within this event window and the following 10 minutes."
+            : "",
+          interventionNote: interventionNote.trim(),
+          selectedTreatment: noTreatmentCaptured ? "" : selectedTreatment,
+          candidateTreatments,
+          treatmentEvalMap: mergedTreatmentEvalMap,
         },
-      };
-
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(finalPayload),
       });
-
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `Request failed with status ${res.status}`);
-      }
 
       setSaveStatus("success");
       setSaveMessage(
@@ -840,7 +816,6 @@ export default function MedEvalPanel({
             </div>
 
             <div className="flex flex-wrap gap-3">
-
               <button
                 type="button"
                 onClick={handleReset}

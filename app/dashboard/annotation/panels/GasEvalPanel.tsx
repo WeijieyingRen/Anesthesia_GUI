@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import type { TimeValuePoint } from "@/lib/types";
+import { submitAnnotation } from "@/lib/submit";
 
 type GasEvalPanelProps = {
   eventId?: string;
@@ -11,6 +12,7 @@ type GasEvalPanelProps = {
   startMin?: number;
   endMin?: number;
   gasData?: Record<string, TimeValuePoint[] | undefined>;
+  annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -170,6 +172,7 @@ export default function GasEvalPanel({
   startMin = 84,
   endMin = 102,
   gasData = {},
+  annotatorName,
   onSaveAndNextStep,
 }: GasEvalPanelProps) {
   const candidateGasItems = React.useMemo(() => {
@@ -190,6 +193,12 @@ export default function GasEvalPanel({
   );
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
+
+  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    panelOpenedAtRef.current = Date.now();
+  }, [caseId, eventId]);
 
   function buildCurrentEval(): GasEval {
     return {
@@ -264,44 +273,16 @@ export default function GasEvalPanel({
     return null;
   }
 
-  const payload = React.useMemo(
-    () => ({
-      task: "gasEval",
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      annotation: {
-        startMin,
-        endMin,
-        candidateGasItems,
-        selectedGasItem,
-        gasCaptured: !noGasCaptured,
-        gasSkipped: noGasCaptured,
-        gasEvalMap,
-      },
-      submittedAt: new Date().toISOString(),
-    }),
-    [
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      startMin,
-      endMin,
-      candidateGasItems,
-      selectedGasItem,
-      noGasCaptured,
-      gasEvalMap,
-    ]
-  );
-
   async function handleSaveGasEval() {
+    const mergedGasEvalMap = noGasCaptured
+      ? {}
+      : {
+          ...gasEvalMap,
+          ...(selectedGasItem ? { [selectedGasItem]: buildCurrentEval() } : {}),
+        };
+
     if (!noGasCaptured && selectedGasItem) {
-      setGasEvalMap((prev) => ({
-        ...prev,
-        [selectedGasItem]: buildCurrentEval(),
-      }));
+      setGasEvalMap(mergedGasEvalMap);
     }
 
     const validationError = validateAllGasItems();
@@ -315,33 +296,28 @@ export default function GasEvalPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const finalPayload = {
-        ...payload,
-        annotation: {
-          ...payload.annotation,
-          gasEvalMap: noGasCaptured
-            ? {}
-            : {
-                ...gasEvalMap,
-                ...(selectedGasItem
-                  ? { [selectedGasItem]: buildCurrentEval() }
-                  : {}),
-              },
+      await submitAnnotation({
+        annotator: annotatorName ? { name: annotatorName } : undefined,
+        caseId,
+        eventId,
+        panel: "gas_eval_panel",
+        action: noGasCaptured ? "skip" : "submit",
+        panelOpenedAt: panelOpenedAtRef.current,
+        answers: {
+          eventTitle,
+          episodeLabel,
+          startMin,
+          endMin,
+          gasCaptured: !noGasCaptured,
+          gasSkipped: noGasCaptured,
+          skipReason: noGasCaptured
+            ? "No gas / ventilation feature was found within this event window and the following 10 minutes."
+            : "",
+          candidateGasItems,
+          selectedGasItem: noGasCaptured ? "" : selectedGasItem,
+          gasEvalMap: mergedGasEvalMap,
         },
-      };
-
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(finalPayload),
       });
-
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `Request failed with status ${res.status}`);
-      }
 
       setSaveStatus("success");
       setSaveMessage(

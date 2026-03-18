@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import type { DetectAnnotation, EventType, SeverityLevel, DetectVital } from "../types";
+import type {
+  DetectAnnotation,
+  EventType,
+  SeverityLevel,
+  DetectVital,
+} from "../types";
+import { submitAnnotation } from "@/lib/submit";
 
 type DetectPanelProps = {
   eventId?: string;
@@ -11,6 +17,7 @@ type DetectPanelProps = {
   annotation: DetectAnnotation;
   onChangeAnnotation: React.Dispatch<React.SetStateAction<DetectAnnotation>>;
   anesthesiaStart?: string | null;
+  annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -28,7 +35,15 @@ const EVENT_TYPE_OPTIONS: EventType[] = [
   "Hyperthermia",
 ];
 
-const VITAL_OPTIONS: DetectVital[] = ["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"];
+const VITAL_OPTIONS: DetectVital[] = [
+  "MAP",
+  "HR",
+  "SPO2",
+  "RR",
+  "ETCO2",
+  "TEMP",
+];
+
 const SEVERITY_OPTIONS: SeverityLevel[] = ["Mild", "Moderate", "Severe"];
 
 function OptionChip({
@@ -92,6 +107,7 @@ export default function DetectPanel({
   annotation,
   onChangeAnnotation,
   anesthesiaStart = null,
+  annotatorName,
   onSaveAndNextStep,
 }: DetectPanelProps) {
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
@@ -99,19 +115,11 @@ export default function DetectPanel({
   const [recording, setRecording] = React.useState(false);
 
   const recognitionRef = React.useRef<any>(null);
+  const panelOpenedAtRef = React.useRef<number | null>(null);
 
-  const payload = React.useMemo(
-    () => ({
-      task: "detect",
-      caseId,
-      eventId,
-      eventTitle,
-      episodeLabel,
-      annotation,
-      submittedAt: new Date().toISOString(),
-    }),
-    [caseId, eventId, eventTitle, episodeLabel, annotation]
-  );
+  React.useEffect(() => {
+    panelOpenedAtRef.current = Date.now();
+  }, [caseId, eventId]);
 
   function updateField<K extends keyof DetectAnnotation>(
     key: K,
@@ -164,16 +172,25 @@ export default function DetectPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+      await submitAnnotation({
+        annotator: annotatorName ? { name: annotatorName } : undefined,
+        caseId,
+        eventId,
+        panel: "detect_panel",
+        action: "submit",
+        panelOpenedAt: panelOpenedAtRef.current,
+        answers: {
+          eventTitle,
+          episodeLabel,
+          vital: annotation.vital,
+          startMin: annotation.startMin,
+          endMin: annotation.endMin,
+          eventType: annotation.eventType,
+          severity: annotation.severity,
+          confidence: annotation.confidence,
+          note: annotation.note.trim(),
+        },
       });
-
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || `Request failed with status ${res.status}`);
-      }
 
       setSaveStatus("success");
       setSaveMessage("Detection annotation saved successfully.");
@@ -232,7 +249,7 @@ export default function DetectPanel({
   }
 
   function stopVoiceNote() {
-    recognitionRef.current?.stop();
+    recognitionRef.current?.stop?.();
     setRecording(false);
   }
 
@@ -259,7 +276,7 @@ export default function DetectPanel({
 
         <div className="overflow-hidden rounded-xl border">
           <TaskBlock title="Task 1. Confirm bounding box window and confirm the vital (select on the right chart)">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-[110px_90px_90px]">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-[110px_90px_90px]">
               <div>
                 <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                   Vital
@@ -306,7 +323,9 @@ export default function DetectPanel({
           <TaskBlock title="Task 2. Select the event type">
             <select
               value={annotation.eventType}
-              onChange={(e) => updateField("eventType", e.target.value as EventType | "")}
+              onChange={(e) =>
+                updateField("eventType", e.target.value as EventType | "")
+              }
               className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
             >
               <option value="">Select event type</option>
@@ -368,7 +387,9 @@ export default function DetectPanel({
                   max={5}
                   step={1}
                   value={annotation.confidence ?? 1}
-                  onChange={(e) => updateField("confidence", Number(e.target.value))}
+                  onChange={(e) =>
+                    updateField("confidence", Number(e.target.value))
+                  }
                   className="relative z-10 h-2 w-full cursor-pointer appearance-none bg-transparent"
                 />
               </div>
