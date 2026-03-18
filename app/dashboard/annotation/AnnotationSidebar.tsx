@@ -15,8 +15,8 @@ const TASK_ORDER: AnnotationTaskKey[] = [
   "mechanism",
   "gasEval",
   "medEval",
+  "fluidEval",
   "response",
-  "summary",
 ];
 
 export default function AnnotationSidebar({

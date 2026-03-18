@@ -4,7 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import AnnotationSidebar from "./annotation/AnnotationSidebar";
-import type { AnnotationTaskKey, SidebarEventItem } from "./annotation/types";
+import type {
+  AnnotationTaskKey,
+  DetectVital,
+  WorkspaceTaskKey,
+  SidebarEventItem,
+} from "./annotation/types";
 import type {
   PatientDemographic,
   SurgeryContext,
@@ -28,8 +33,6 @@ import SummaryPanel from "./annotation/panels/SummaryPanel";
 import TimelineContextPanel from "./TimelineContextPanel";
 
 type CsvRow = Record<string, any>;
-
-type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
 
 type SelectedWindow = {
   vital: DetectVital;
@@ -266,7 +269,9 @@ export default function DashboardPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<AnnotationTaskKey>("detect");
+  const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("detect");
+  const episodeSelectedTask: AnnotationTaskKey =
+  selectedTask === "summary" ? "detect" : selectedTask;
   const [annotationLevel, setAnnotationLevel] = useState<"episode" | "patient">("episode");
 
 const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
@@ -313,8 +318,7 @@ function handleCreateEventFromWindow(window: SelectedWindow) {
       gasEval: false,
       medEval: false,
       fluidEval: false,
-      response: false,
-      summary: false,
+      response: false
     },
   };
 
@@ -968,39 +972,39 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
           {annotationLevel === "episode" ? (
             <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
               <div className="border-r">
-                <AnnotationSidebar
-                  selectedTask={selectedTask}
-                  onChangeTask={setSelectedTask}
-                  events={sidebarEvents}
-                  selectedEventId={selectedEventId}
-                  onSelectEvent={(eventId) => {
-                    const event = sidebarEvents.find((e) => e.id === eventId);
-                    if (!event) return;
+              <AnnotationSidebar
+              selectedTask={episodeSelectedTask}
+              onChangeTask={setSelectedTask}
+              events={sidebarEvents}
+              selectedEventId={selectedEventId}
+              onSelectEvent={(eventId) => {
+                const event = sidebarEvents.find((e) => e.id === eventId);
+                if (!event) return;
 
-                    setSelectedEventId(eventId);
-                    setSelectedDetectVital(event.vital);
-                    setSelectedWindow({
-                      vital: event.vital,
-                      startMin: event.startMin,
-                      endMin: event.endMin,
-                      y1: event.y1,
-                      y2: event.y2,
-                    });
+                setSelectedEventId(eventId);
+                setSelectedDetectVital(event.vital as DetectVital);
+                setSelectedWindow({
+                  vital: event.vital as DetectVital,
+                  startMin: event.startMin,
+                  endMin: event.endMin,
+                  y1: event.y1,
+                  y2: event.y2,
+                });
 
-                    logAction("sidebar_event_select", {
-                      eventId,
-                      title: event.title,
-                      vital: event.vital,
-                      startMin: event.startMin,
-                      endMin: event.endMin,
-                    });
-                  }}
-                />
+                logAction("sidebar_event_select", {
+                  eventId,
+                  title: event.title,
+                  vital: event.vital,
+                  startMin: event.startMin,
+                  endMin: event.endMin,
+                });
+              }}
+            />
               </div>
 
               <div className="min-w-0">
                 <TaskWorkspace
-                  task={selectedTask}
+                  task={episodeSelectedTask}
                   onChangeTask={setSelectedTask}
                   onSaveAndNextStep={(finishedTask) => {
                     if (!selectedEventId) return;
@@ -1018,7 +1022,6 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
                           : event
                       )
                     );
-
                     const nextTaskMap: Record<AnnotationTaskKey, AnnotationTaskKey | null> = {
                       detect: "mechanism",
                       mechanism: "gasEval",
@@ -1026,7 +1029,6 @@ const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
                       medEval: "fluidEval",
                       fluidEval: "response",
                       response: null,
-                      summary: null,
                     };
 
                     const nextTask = nextTaskMap[finishedTask];

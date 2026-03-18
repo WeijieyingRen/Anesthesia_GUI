@@ -10,7 +10,7 @@ function toNum(v: any): number | undefined {
 
 function toTempC(v: any): number | undefined {
   const n = toNum(v);
-  if (!Number.isFinite(n)) return undefined;
+  if (n === undefined) return undefined;
   return n > 60 ? (n - 32) * 5 / 9 : n;
 }
 
@@ -56,6 +56,7 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
   const cv: Record<string, TimeValuePoint[]> = {};
   const tmp: Record<string, TimeValuePoint[]> = {};
   const other: Record<string, TimeValuePoint[]> = {};
+
   const hrSource = hasAnyNonNanColumn(phyRows, "HR_ART")
     ? "HR_ART"
     : hasAnyNonNanColumn(phyRows, "HR_EKG")
@@ -74,9 +75,6 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
     const time = toNum(row["relative_anesthesia_time"]);
     if (!Number.isFinite(time)) continue;
 
-    // =========================
-    // Main vitals
-    // =========================
     pushPoint(main, "ARTD", time, toNum(row["ARTD"]));
     pushPoint(main, "ARTM", time, toNum(row["ARTM"]));
     pushPoint(main, "ARTS", time, toNum(row["ARTS"]));
@@ -86,7 +84,6 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
     }
 
     pushPoint(main, "ETCO2 (mmHg)", time, toNum(row["ETCO2 (mmHg)"]));
-
     pushPoint(main, "NIBP_DBP", time, toNum(row["NIBP_DBP"]));
     pushPoint(main, "NIBP_MAP", time, toNum(row["NIBP_MAP"]));
     pushPoint(main, "NIBP_SBP", time, toNum(row["NIBP_SBP"]));
@@ -97,9 +94,6 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
 
     pushPoint(main, "SPO2 %", time, toNum(row["SPO2 %"]));
 
-    // =========================
-    // Gas
-    // =========================
     pushPoint(gas, "Air (L/min)", time, toNum(row["Air (L/min)"]));
     pushPoint(gas, "FiO2", time, toNum(row["FiO2"]));
     pushPoint(gas, "N2O (L/min)", time, toNum(row["N2O (L/min)"]));
@@ -110,9 +104,6 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
     pushPoint(gas, "inSevoflurane %", time, toNum(row["inSevoflurane %"]));
     pushPoint(gas, "etMAC exhaled", time, toNum(row["etMAC exhaled"]));
 
-    // =========================
-    // Ventilation
-    // =========================
     pushPoint(ventilation, "MV", time, toNum(row["MV"]));
     pushPoint(ventilation, "Mean PIP", time, toNum(row["Mean PIP"]));
     pushPoint(ventilation, "PEEP (cm H2O)", time, toNum(row["PEEP (cm H2O)"]));
@@ -122,9 +113,6 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
     pushPoint(ventilation, "RR", time, toNum(row["RR"]));
     pushPoint(ventilation, "RR_ETCO2", time, toNum(row["RR_ETCO2"]));
 
-    // =========================
-    // Hemodynamics
-    // =========================
     pushPoint(hemodynamics, "CVP", time, toNum(row["CVP"]));
     pushPoint(hemodynamics, "PAP_DBP", time, toNum(row["PAP_DBP"]));
     pushPoint(hemodynamics, "PAP_MAP", time, toNum(row["PAP_MAP"]));
@@ -133,9 +121,6 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
     pushPoint(hemodynamics, "rSO2 left", time, toNum(row["rSO2 left"]));
     pushPoint(hemodynamics, "rSO2 right", time, toNum(row["rSO2 right"]));
 
-    // =========================
-    // Depth / neuro monitoring
-    // =========================
     pushPoint(depth, "PSI/BIS/Entropy", time, toNum(row["PSI/BIS/Entropy"]));
     pushPoint(depth, "TOF count", time, toNum(row["TOF count"]));
     pushPoint(depth, "TOF ratio %", time, toNum(row["TOF ratio %"]));
@@ -146,35 +131,15 @@ export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {
     pushPoint(tmp, "TMP Nasopharyngeal", time, toTempC(row["TMP Nasopharyngeal"]));
     pushPoint(tmp, "TMP Rectal", time, toTempC(row["TMP Rectal"]));
 
-    // =========================
-    // CV panel
-    // =========================
-    // =========================
-    // CV panel
-    // =========================
     pushPoint(cv, "CVP", time, toNum(row["CVP"]));
     pushPoint(cv, "PAPS", time, toNum(row["PAPS"]));
     pushPoint(cv, "PAPD", time, toNum(row["PAPD"]));
     pushPoint(cv, "PAPM", time, toNum(row["PAPM"]));
-
     pushPoint(cv, "Cerebral Oximetry Left", time, toNum(row["Cerebral Oximetry Left"]));
     pushPoint(cv, "Cerebral Oximetry Right", time, toNum(row["Cerebral Oximetry Right"]));
-
     pushPoint(cv, "SVO2 %", time, toNum(row["SVO2 %"]));
-
     pushPoint(cv, "ABPS", time, toNum(row["ABPS"]));
     pushPoint(cv, "ABPD", time, toNum(row["ABPD"]));
-
-// 目前没有明确来源，先不画
-// CO
-// CCI
-// CCO
-// ABPM
-
-    // 这些目前你的数据没有，先留空位，后面 GUI 里保留行名即可
-    // CO
-    // CCI
-// CCO
   }
 
   return {

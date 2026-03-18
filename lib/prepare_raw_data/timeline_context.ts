@@ -6,7 +6,10 @@ const toDate = (v: any): Date | undefined => {
   return Number.isNaN(d.getTime()) ? undefined : d;
 };
 
-const toRelativeMinute = (eventTime: any, anesthesiaStart: any): number | undefined => {
+const toRelativeMinute = (
+  eventTime: any,
+  anesthesiaStart: any
+): number | undefined => {
   const t = toDate(eventTime);
   const t0 = toDate(anesthesiaStart);
   if (!t || !t0) return undefined;
@@ -35,7 +38,7 @@ const STATIC_STAGE_KEYS = [
   "procedure_end",
   "extubation",
   "emergence",
-  "anesthesia_stop"
+  "anesthesia_stop",
 ] as const;
 
 const DYNAMIC_EVENT_GROUPS: Record<string, TimelineContextEvent["group"]> = {
@@ -87,7 +90,9 @@ function formatStaticLabel(key: string): string {
 
 function formatDynamicLabel(eventType: string, eventValue: any): string {
   const valueText =
-    typeof eventValue === "string" ? eventValue.trim() : String(eventValue ?? "").trim();
+    typeof eventValue === "string"
+      ? eventValue.trim()
+      : String(eventValue ?? "").trim();
 
   switch (eventType) {
     case "bed_position":
@@ -95,7 +100,9 @@ function formatDynamicLabel(eventType: string, eventValue: any): string {
     case "position":
       return valueText ? `Position: ${valueText}` : "Position";
     case "head_of_bed_positioning":
-      return valueText ? `Head-of-bed: ${valueText}` : "Head-of-bed Positioning";
+      return valueText
+        ? `Head-of-bed: ${valueText}`
+        : "Head-of-bed Positioning";
     case "lma_inserted":
       return "LMA Inserted";
     case "lma_removed":
@@ -172,17 +179,49 @@ function inferCurrentStage(
   const anesthesiaStop = timeOf("anesthesia_stop");
 
   if (induction !== undefined && center < induction) return "Pre-induction";
-  if (induction !== undefined && intubation !== undefined && center >= induction && center <= intubation)
+  if (
+    induction !== undefined &&
+    intubation !== undefined &&
+    center >= induction &&
+    center <= intubation
+  ) {
     return "Induction / Peri-intubation";
-  if (intubation !== undefined && procedureStart !== undefined && center > intubation && center < procedureStart)
+  }
+  if (
+    intubation !== undefined &&
+    procedureStart !== undefined &&
+    center > intubation &&
+    center < procedureStart
+  ) {
     return "Post-intubation / Pre-procedure";
-  if (procedureStart !== undefined && procedureEnd !== undefined && center >= procedureStart && center <= procedureEnd)
+  }
+  if (
+    procedureStart !== undefined &&
+    procedureEnd !== undefined &&
+    center >= procedureStart &&
+    center <= procedureEnd
+  ) {
     return "Intraoperative Procedure";
-  if (procedureEnd !== undefined && extubation !== undefined && center > procedureEnd && center <= extubation)
+  }
+  if (
+    procedureEnd !== undefined &&
+    extubation !== undefined &&
+    center > procedureEnd &&
+    center <= extubation
+  ) {
     return "Post-procedure / Pre-extubation";
-  if (extubation !== undefined && anesthesiaStop !== undefined && center >= extubation && center <= anesthesiaStop)
+  }
+  if (
+    extubation !== undefined &&
+    anesthesiaStop !== undefined &&
+    center >= extubation &&
+    center <= anesthesiaStop
+  ) {
     return "Emergence / Post-extubation";
-  if (anesthesiaStop !== undefined && center > anesthesiaStop) return "Post-anesthesia";
+  }
+  if (anesthesiaStop !== undefined && center > anesthesiaStop) {
+    return "Post-anesthesia";
+  }
 
   return "Perioperative";
 }
@@ -196,8 +235,8 @@ export function prepareTimelineContextData(
 ): TimelineContextData {
   const anesthesiaStart = caseStaticRow["anesthesia_start"] ?? undefined;
 
-  const staticEvents: TimelineContextEvent[] = STATIC_STAGE_KEYS
-    .map((key) => {
+  const staticEvents = STATIC_STAGE_KEYS
+    .map((key): TimelineContextEvent | null => {
       const rawTime = caseStaticRow[key];
       if (!rawTime) return null;
 
@@ -209,7 +248,7 @@ export function prepareTimelineContextData(
         raw_value: rawTime,
         observation_time: rawTime,
         relative_min: toRelativeMinute(rawTime, anesthesiaStart),
-      } satisfies TimelineContextEvent;
+      };
     })
     .filter((x): x is TimelineContextEvent => x !== null)
     .sort((a, b) => (a.relative_min ?? 0) - (b.relative_min ?? 0));
@@ -245,9 +284,7 @@ export function prepareTimelineContextData(
     caseStaticRow["airway_type"]
       ? `Airway Type: ${caseStaticRow["airway_type"]}`
       : null,
-    caseStaticRow["airway"]
-      ? `Airway: ${caseStaticRow["airway"]}`
-      : null,
+    caseStaticRow["airway"] ? `Airway: ${caseStaticRow["airway"]}` : null,
     toYesNo(caseStaticRow["arterial_line_present"]) ? "A-line" : null,
     toYesNo(caseStaticRow["central_line_present"]) ? "Central line" : null,
     toYesNo(caseStaticRow["pa_cath_present"]) ? "PA cath" : null,
@@ -256,16 +293,32 @@ export function prepareTimelineContextData(
     toYesNo(caseStaticRow["tee_present"]) ? "TEE" : null,
     toYesNo(caseStaticRow["tte_present"]) ? "TTE" : null,
     toYesNo(caseStaticRow["bronchoscopy_present"]) ? "Bronchoscopy" : null,
-    toYesNo(caseStaticRow["one_lung_ventilation_present"]) ? "One-lung ventilation" : null,
-    toYesNo(caseStaticRow["two_lung_ventilation_present"]) ? "Two-lung ventilation" : null,
-    toYesNo(caseStaticRow["o2_delivery_for_mac_present"]) ? "O₂ delivery for MAC" : null,
-    toYesNo(caseStaticRow["peripheral_nerve_block_present"]) ? "Peripheral nerve block" : null,
-    toYesNo(caseStaticRow["nerve_block_catheter_present"]) ? "Nerve block catheter" : null,
-    toYesNo(caseStaticRow["neuraxial_block_present"]) ? "Neuraxial block" : null,
+    toYesNo(caseStaticRow["one_lung_ventilation_present"])
+      ? "One-lung ventilation"
+      : null,
+    toYesNo(caseStaticRow["two_lung_ventilation_present"])
+      ? "Two-lung ventilation"
+      : null,
+    toYesNo(caseStaticRow["o2_delivery_for_mac_present"])
+      ? "O₂ delivery for MAC"
+      : null,
+    toYesNo(caseStaticRow["peripheral_nerve_block_present"])
+      ? "Peripheral nerve block"
+      : null,
+    toYesNo(caseStaticRow["nerve_block_catheter_present"])
+      ? "Nerve block catheter"
+      : null,
+    toYesNo(caseStaticRow["neuraxial_block_present"])
+      ? "Neuraxial block"
+      : null,
     toYesNo(caseStaticRow["spinal_block_present"]) ? "Spinal block" : null,
     toYesNo(caseStaticRow["epidural_block_present"]) ? "Epidural block" : null,
-    toYesNo(caseStaticRow["anesthesia_block_epidural_present"]) ? "Anesthesia epidural" : null,
-    toYesNo(caseStaticRow["intentional_hypothermia_present"]) ? "Intentional hypothermia" : null,
+    toYesNo(caseStaticRow["anesthesia_block_epidural_present"])
+      ? "Anesthesia epidural"
+      : null,
+    toYesNo(caseStaticRow["intentional_hypothermia_present"])
+      ? "Intentional hypothermia"
+      : null,
   ].filter((x): x is string => Boolean(x));
 
   let nearbyEvents = dynamicEvents;
@@ -287,7 +340,11 @@ export function prepareTimelineContextData(
 
   return {
     case_badges: caseBadges,
-    current_stage: inferCurrentStage(staticEvents, episodeStartMin, episodeEndMin),
+    current_stage: inferCurrentStage(
+      staticEvents,
+      episodeStartMin,
+      episodeEndMin
+    ),
     milestone_events: staticEvents,
     nearby_events: nearbyEvents,
     airway_events: nearbyEvents.filter((e) => e.group === "airway"),

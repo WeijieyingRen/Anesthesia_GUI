@@ -4,21 +4,25 @@ export type AnnotationTaskKey =
   | "gasEval"
   | "medEval"
   | "fluidEval"
-  | "response"
+  | "response";
 
+export type PatientTaskKey = "summary";
 
-  export type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
-  export type SidebarEventItem = {
-    id: string;
-    vital: string;
-    title: string;
-    episodeLabel: string;
-    startMin: number;
-    endMin: number;
-    y1: number;
-    y2: number;
-    completed: Record<AnnotationTaskKey, boolean>;
-  };
+export type WorkspaceTaskKey = AnnotationTaskKey | PatientTaskKey;
+
+export type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
+
+export type SidebarEventItem = {
+  id: string;
+  vital: DetectVital;
+  title: string;
+  episodeLabel: string;
+  startMin: number;
+  endMin: number;
+  y1: number;
+  y2: number;
+  completed: Record<AnnotationTaskKey, boolean>;
+};
 
 export type EventType =
   | "Hypotension"
@@ -34,7 +38,7 @@ export type EventType =
 export type SeverityLevel = "Mild" | "Moderate" | "Severe";
 
 export type DetectAnnotation = {
-  vital: string;
+  vital: DetectVital;
   startMin: number;
   endMin: number;
   eventType: EventType | "";

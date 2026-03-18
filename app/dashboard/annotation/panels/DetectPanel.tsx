@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type { DetectAnnotation, EventType, SeverityLevel } from "../types";
+import type { DetectAnnotation, EventType, SeverityLevel, DetectVital } from "../types";
 
 type DetectPanelProps = {
   eventId?: string;
@@ -28,7 +28,8 @@ const EVENT_TYPE_OPTIONS: EventType[] = [
   "Hyperthermia",
 ];
 
-const VITAL_OPTIONS = ["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const;
+const VITAL_OPTIONS: DetectVital[] = ["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"];
+const SEVERITY_OPTIONS: SeverityLevel[] = ["Mild", "Moderate", "Severe"];
 
 function OptionChip({
   label,
@@ -43,7 +44,7 @@ function OptionChip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
+      className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition ${
         selected
           ? "border-orange-400 bg-orange-400 text-white"
           : "border-gray-300 bg-white text-gray-700 hover:border-orange-300 hover:text-orange-500"
@@ -119,16 +120,16 @@ export default function DetectPanel({
     onChangeAnnotation((prev) => ({ ...prev, [key]: value }));
   }
 
-  function validateDetection() {
+  function validateDetection(): string | null {
     if (!annotation.vital) {
       return "Task 1 incomplete: please confirm the vital.";
     }
 
-    if (!annotation.eventType || annotation.eventType === "") {
+    if (annotation.eventType === "") {
       return "Task 2 incomplete: please select the event type.";
     }
 
-    if (!annotation.severity || annotation.severity === "") {
+    if (annotation.severity === "") {
       return "Task 3 incomplete: please choose the severity.";
     }
 
@@ -140,7 +141,7 @@ export default function DetectPanel({
       return "Task 4 incomplete: please select confidence from 1 to 5.";
     }
 
-    if (!annotation.note || annotation.note.trim() === "") {
+    if (!annotation.note.trim()) {
       return "Task 5 incomplete: please enter a note before saving.";
     }
 
@@ -176,7 +177,6 @@ export default function DetectPanel({
 
       setSaveStatus("success");
       setSaveMessage("Detection annotation saved successfully.");
-
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
@@ -239,12 +239,9 @@ export default function DetectPanel({
   function handleReset() {
     onChangeAnnotation((prev) => ({
       ...prev,
-      vital: prev.vital,
-      startMin: prev.startMin,
-      endMin: prev.endMin,
-      eventType: "" as EventType | "",
-      severity: "" as SeverityLevel | "",
-      confidence: null as number | null,
+      eventType: "",
+      severity: "",
+      confidence: null,
       note: "",
     }));
     setRecording(false);
@@ -270,7 +267,7 @@ export default function DetectPanel({
                 <select
                   value={annotation.vital}
                   onChange={(e) =>
-                    updateField("vital", e.target.value as DetectAnnotation["vital"])
+                    updateField("vital", e.target.value as DetectVital)
                   }
                   className="w-full rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
                 >
@@ -308,8 +305,8 @@ export default function DetectPanel({
 
           <TaskBlock title="Task 2. Select the event type">
             <select
-              value={annotation.eventType || ""}
-              onChange={(e) => updateField("eventType", e.target.value as EventType)}
+              value={annotation.eventType}
+              onChange={(e) => updateField("eventType", e.target.value as EventType | "")}
               className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
             >
               <option value="">Select event type</option>
@@ -327,7 +324,7 @@ export default function DetectPanel({
                 Severity
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                {(["Mild", "Moderate", "Severe"] as SeverityLevel[]).map((level) => (
+                {SEVERITY_OPTIONS.map((level) => (
                   <OptionChip
                     key={level}
                     label={level}

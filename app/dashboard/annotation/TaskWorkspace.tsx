@@ -114,7 +114,21 @@ export default function TaskWorkspace({
         eventTitle={effectiveEventTitle}
         episodeLabel={effectiveEpisodeLabel}
         annotation={detectAnnotation}
-        onChangeAnnotation={setDetectAnnotation}
+        onChangeAnnotation={(value) => {
+          setDetectAnnotation((prev) => {
+            const fallback: DetectAnnotation = prev ?? {
+              vital: selectedWindow?.vital ?? selectedDetectVital,
+              startMin: selectedWindow?.startMin ?? selectedEvent?.startMin ?? 0,
+              endMin: selectedWindow?.endMin ?? selectedEvent?.endMin ?? 0,
+              eventType: "",
+              severity: "",
+              confidence: null,
+              note: "",
+            };
+        
+            return typeof value === "function" ? value(fallback) : value;
+          });
+        }}
         anesthesiaStart={anesthesiaStart}
         onSaveAndNextStep={() => onSaveAndNextStep("detect")}
       />

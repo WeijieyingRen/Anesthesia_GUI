@@ -4,8 +4,18 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { DiagnosisEntry, PatientMeta } from "@/lib/types";
 
+type DiagnosisEntry = {
+  patientId: string;
+  records?: Record<string, number[]>;
+};
+
+type PatientMeta = {
+  id: string;
+  caseId?: string;
+  patientId?: string;
+  participantId?: string;
+};
 interface ParticipantInfo {
   name: string;
   salutation?: string;
