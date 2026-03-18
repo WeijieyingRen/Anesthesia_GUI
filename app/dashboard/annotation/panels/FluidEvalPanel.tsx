@@ -827,24 +827,7 @@ export default function FluidEvalPanel({
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                disabled={noFluidCaptured}
-                onClick={() => {
-                  if (selectedFluid) {
-                    persistCurrentFluidToMap(selectedFluid);
-                    setSaveStatus("success");
-                    setSaveMessage("Current fluid evaluation saved locally.");
-                  }
-                }}
-                className={`rounded-md px-4 py-2.5 text-sm font-medium text-white ${
-                  noFluidCaptured
-                    ? "cursor-not-allowed bg-gray-300"
-                    : "border border-slate-500 bg-slate-500 hover:bg-slate-600"
-                }`}
-              >
-                Save Current Fluid
-              </button>
+        
 
               <button
                 type="button"

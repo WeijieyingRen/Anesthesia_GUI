@@ -840,23 +840,6 @@ export default function MedEvalPanel({
             </div>
 
             <div className="flex flex-wrap gap-3">
-              {!noTreatmentCaptured && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (selectedTreatment) {
-                      persistCurrentTreatmentToMap(selectedTreatment);
-                      setSaveStatus("success");
-                      setSaveMessage(
-                        "Current treatment evaluation saved locally."
-                      );
-                    }
-                  }}
-                  className="rounded-md border border-slate-500 bg-slate-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-600"
-                >
-                  Save Current Treatment
-                </button>
-              )}
 
               <button
                 type="button"
