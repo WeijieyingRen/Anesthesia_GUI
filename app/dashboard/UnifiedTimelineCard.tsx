@@ -431,7 +431,7 @@ export default function UnifiedTimelineCard({
       />
       {openSections.fluids && (
         <div className="overflow-visible">
-          <FluidChart
+         <FluidChart
             title=""
             fluids={fluids}
             height={190}
@@ -441,6 +441,8 @@ export default function UnifiedTimelineCard({
             timeZero={anesthesiaStart}
             embedded
             highlightWindow={sharedHighlightWindow}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
           />
         </div>
       )}

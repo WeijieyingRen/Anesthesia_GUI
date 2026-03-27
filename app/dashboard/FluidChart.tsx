@@ -271,15 +271,6 @@ export default function FluidChart({
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (scrollRef.current == null) return;
-    if (sharedScrollLeft == null) return;
-
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-    }
-  }, [sharedScrollLeft]);
-
   const visibleRows = useMemo(
     () => rows.filter((r) => !hiddenNames.includes(r.name)),
     [rows, hiddenNames]
@@ -298,7 +289,7 @@ export default function FluidChart({
     Array.from({ length: Math.floor(finalXEnd / 15) + 1 }, (_, i) => i * 15);
 
   const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT;
-  const viewHeight = Math.min(height, Math.max(120, contentHeight));
+  const viewHeight = height;
 
   const contentPlotWidth = useMemo(() => {
     if (finalXEnd <= 0) return 800;
@@ -306,10 +297,20 @@ export default function FluidChart({
   }, [finalXEnd]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
+  const plotWidth = contentWidth - PLOT_RIGHT;
+
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+    }
+  }, [sharedScrollLeft, contentWidth]);
 
   function minuteToPixel(minute: number) {
     if (!finalXEnd || finalXEnd <= 0) return 0;
-    return (minute / finalXEnd) * contentPlotWidth;
+    return (minute / finalXEnd) * plotWidth;
   }
 
   if (!rows.length) {
@@ -322,7 +323,9 @@ export default function FluidChart({
   }
 
   return (
-    <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+    <div
+      className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}
+    >
       {!embedded && title ? (
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
@@ -384,7 +387,7 @@ export default function FluidChart({
 
         <div
           ref={scrollRef}
-          className="overflow-x-auto overflow-y-hidden"
+          className="overflow-x-auto overflow-y-auto"
           style={{ height: viewHeight }}
           onScroll={(e) => {
             onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
@@ -434,14 +437,17 @@ export default function FluidChart({
                 );
               })}
 
-              {Array.from({ length: visibleRowsReindexed.length + 1 }, (_, i) => i).map((i) => {
+              {Array.from(
+                { length: visibleRowsReindexed.length + 1 },
+                (_, i) => i
+              ).map((i) => {
                 const y = i * ROW_HEIGHT;
                 return (
                   <line
                     key={`grid-y-${i}`}
                     x1={0}
                     y1={y}
-                    x2={contentPlotWidth}
+                    x2={plotWidth}
                     y2={y}
                     stroke="#d1d5db"
                     strokeWidth={1}
@@ -458,7 +464,9 @@ export default function FluidChart({
                   <g key={`data-${row.name}`}>
                     {row.infusion.map((seg, idx) => {
                       const x1 = minuteToPixel(seg.start);
-                      const x2 = minuteToPixel(Math.max(seg.end, seg.start + 0.1));
+                      const x2 = minuteToPixel(
+                        Math.max(seg.end, seg.start + 0.1)
+                      );
                       const yTop = rowTop + ROW_HEIGHT * 0.28;
                       const yBottom = rowTop + ROW_HEIGHT * 0.72;
                       const width = x2 - x1;
@@ -468,7 +476,10 @@ export default function FluidChart({
                           ? String(seg.label).trim()
                           : `${formatFluidNumber(seg.rate)} ${seg.unit ?? ""}`.trim();
 
-                      const labelWidth = Math.max(18, estimateTextWidth(label, 10) + 10);
+                      const labelWidth = Math.max(
+                        18,
+                        estimateTextWidth(label, 10) + 10
+                      );
                       const preferredCenterX = x1 + width * 0.72;
                       const minCenterX = x1 + labelWidth / 2 + 2;
                       const maxCenterX = x2 - labelWidth / 2 - 2;
@@ -543,7 +554,8 @@ export default function FluidChart({
                     {row.bolus.map((p, idx) => {
                       const cx = minuteToPixel(p.time);
                       const text = String(
-                        p.label ?? `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
+                        p.label ??
+                          `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
                       );
                       const boxWidth = Math.max(
                         28,
@@ -604,7 +616,8 @@ export default function FluidChart({
                       const cx = minuteToPixel(p.time);
                       const outputColor = color;
                       const text = String(
-                        p.label ?? `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
+                        p.label ??
+                          `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
                       );
                       const boxWidth = Math.max(
                         28,
