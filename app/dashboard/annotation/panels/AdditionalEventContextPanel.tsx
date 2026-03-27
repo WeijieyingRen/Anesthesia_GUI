@@ -3,7 +3,7 @@
 import * as React from "react";
 import { submitAnnotation } from "@/lib/submit";
 
-type SummaryPanelProps = {
+type AdditionalEventContextPanelProps = {
   eventId?: string;
   caseId?: string;
   eventTitle?: string;
@@ -15,6 +15,21 @@ type SummaryPanelProps = {
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
+
+const EVENT_OPTIONS = [
+  { value: "", label: "Select an event..." },
+  { value: "anesthesia_start", label: "Anesthesia Start" },
+  { value: "induction", label: "Induction" },
+  { value: "intubation", label: "Intubation" },
+  { value: "procedure_start", label: "Procedure Start" },
+  { value: "positioning", label: "Positioning" },
+  { value: "intervention", label: "Intervention" },
+  { value: "extubation", label: "Extubation" },
+  { value: "emergence", label: "Emergence" },
+  { value: "procedure_end", label: "Procedure End" },
+  { value: "anesthesia_stop", label: "Anesthesia Stop" },
+  { value: "other", label: "Other" },
+];
 
 function TaskBlock({
   title,
@@ -33,17 +48,19 @@ function TaskBlock({
   );
 }
 
-export default function SummaryPanel({
-  eventId = "patient-summary",
+export default function AdditionalEventContextPanel({
+  eventId = "patient-contextual-event",
   caseId = "unknown_case",
-  eventTitle = "Patient-level Summary",
+  eventTitle = "Additional Contextual Event",
   episodeLabel = "Patient",
   startMin = 0,
   endMin = 0,
   annotatorName,
   onSaveAndNextStep,
-}: SummaryPanelProps) {
-  const [summaryText, setSummaryText] = React.useState("");
+}: AdditionalEventContextPanelProps) {
+  const [eventOfInterest, setEventOfInterest] = React.useState("");
+  const [customEvent, setCustomEvent] = React.useState("");
+  const [eventContext, setEventContext] = React.useState("");
   const [recording, setRecording] = React.useState(false);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
@@ -54,6 +71,16 @@ export default function SummaryPanel({
   React.useEffect(() => {
     panelOpenedAtRef.current = Date.now();
   }, [caseId, eventId]);
+
+  const selectedEventLabel =
+    EVENT_OPTIONS.find((opt) => opt.value === eventOfInterest)?.label ?? "";
+
+  const finalEventText =
+    eventOfInterest === "other"
+      ? customEvent.trim()
+      : selectedEventLabel && selectedEventLabel !== "Select an event..."
+      ? selectedEventLabel
+      : "";
 
   async function startVoiceNote() {
     const SpeechRecognition =
@@ -78,7 +105,8 @@ export default function SummaryPanel({
         const transcript = Array.from(e.results)
           .map((r: any) => r[0].transcript)
           .join("");
-        setSummaryText(transcript);
+
+        setEventContext(transcript);
       };
 
       recognition.onerror = () => {
@@ -106,10 +134,22 @@ export default function SummaryPanel({
     setRecording(false);
   }
 
-  async function handleSaveSummary() {
-    if (!summaryText.trim()) {
+  async function handleSave() {
+    if (!eventOfInterest) {
       setSaveStatus("error");
-      setSaveMessage("Please provide the patient-level summary.");
+      setSaveMessage("Please select an event of interest.");
+      return;
+    }
+
+    if (eventOfInterest === "other" && !customEvent.trim()) {
+      setSaveStatus("error");
+      setSaveMessage("Please specify the event when selecting Other.");
+      return;
+    }
+
+    if (!eventContext.trim()) {
+      setSaveStatus("error");
+      setSaveMessage("Please describe what happened around this event.");
       return;
     }
 
@@ -121,7 +161,7 @@ export default function SummaryPanel({
         annotator: annotatorName ? { name: annotatorName } : undefined,
         caseId,
         eventId,
-        panel: "summary_panel",
+        panel: "additional_event_context_panel",
         action: "submit",
         panelOpenedAt: panelOpenedAtRef.current,
         answers: {
@@ -129,21 +169,24 @@ export default function SummaryPanel({
           episodeLabel,
           startMin,
           endMin,
-          summaryText: summaryText.trim(),
+          eventOfInterest: finalEventText,
+          eventContext: eventContext.trim(),
         },
       });
 
       setSaveStatus("success");
-      setSaveMessage("Summary saved successfully.");
+      setSaveMessage("Additional event context saved successfully.");
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
-      setSaveMessage(error?.message || "Failed to save summary.");
+      setSaveMessage(error?.message || "Failed to save additional event context.");
     }
   }
 
   function handleReset() {
-    setSummaryText("");
+    setEventOfInterest("");
+    setCustomEvent("");
+    setEventContext("");
     setRecording(false);
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
@@ -154,22 +197,49 @@ export default function SummaryPanel({
     <div className="min-h-[640px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Patient-level Panel 1: Overall Intraoperative Summary
+          Patient-level Panel 2: Additional Contextual Event
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-          <TaskBlock title="Task 1. Overall Summary" noBorder>
+          <TaskBlock title="Task 1. Select an event of interest">
             <div className="mb-3 text-sm text-gray-600">
-              Please summarize the overall intraoperative course for this patient,
-              including major abnormal events, likely mechanisms, important
-              interventions, and overall patient response.
+              Select one clinically meaningful event you want to comment on.
+            </div>
+
+            <select
+              value={eventOfInterest}
+              onChange={(e) => setEventOfInterest(e.target.value)}
+              className="w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+            >
+              {EVENT_OPTIONS.map((option) => (
+                <option key={option.value || "empty"} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+
+            {eventOfInterest === "other" && (
+              <input
+                type="text"
+                value={customEvent}
+                onChange={(e) => setCustomEvent(e.target.value)}
+                placeholder="Please specify the event"
+                className="mt-3 w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+              />
+            )}
+          </TaskBlock>
+
+          <TaskBlock title="Task 2. Describe what happened around this event" noBorder>
+            <div className="mb-3 text-sm text-gray-600">
+              Briefly describe what happened before, during, or after this event,
+              such as physiologic changes, clinician actions, medications, or workflow context.
             </div>
 
             <textarea
-              value={summaryText}
-              onChange={(e) => setSummaryText(e.target.value)}
+              value={eventContext}
+              onChange={(e) => setEventContext(e.target.value)}
               className="min-h-[220px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder="Write the overall patient-level intraoperative summary here..."
+              placeholder="Describe what happened around this event..."
             />
 
             <div className="mt-3">
@@ -199,7 +269,7 @@ export default function SummaryPanel({
 
               <button
                 type="button"
-                onClick={handleSaveSummary}
+                onClick={handleSave}
                 disabled={saveStatus === "saving"}
                 className={`rounded-md px-4 py-2.5 text-sm font-medium text-white ${
                   saveStatus === "saving"

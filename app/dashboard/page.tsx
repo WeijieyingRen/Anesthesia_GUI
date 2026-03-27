@@ -30,6 +30,7 @@ import { prepareMedicationData } from "@/lib/prepare_raw_data/medications";
 import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
+import AdditionalEventContextPanel from "./annotation/panels/AdditionalEventContextPanel";
 import TimelineContextPanel from "./TimelineContextPanel";
 
 type CsvRow = Record<string, any>;
@@ -93,6 +94,65 @@ function hasVisibleValue(value: React.ReactNode) {
   return true;
 }
 
+function toFiniteNumber(value: unknown): number | null {
+  if (value === null || value === undefined) return null;
+
+  if (typeof value === "number") {
+    return Number.isFinite(value) ? value : null;
+  }
+
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (
+      trimmed === "" ||
+      trimmed === "-" ||
+      trimmed.toLowerCase() === "nan" ||
+      trimmed.toLowerCase() === "null" ||
+      trimmed.toLowerCase() === "undefined"
+    ) {
+      return null;
+    }
+
+    const parsed = Number(trimmed);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
+  return null;
+}
+
+function formatHeightCm(heightInInches: unknown): string | undefined {
+  const inches = toFiniteNumber(heightInInches);
+  if (inches === null || inches <= 0) return undefined;
+
+  const cm = inches * 2.54;
+  return `${cm.toFixed(1)} cm`;
+}
+
+function formatWeightKg(weightInOunces: unknown): string | undefined {
+  const ounces = toFiniteNumber(weightInOunces);
+  if (ounces === null || ounces <= 0) return undefined;
+
+  const kg = ounces * 0.028349523125;
+  return `${kg.toFixed(1)} kg`;
+}
+
+function formatBmi(heightInInches: unknown, weightInOunces: unknown): string | undefined {
+  const inches = toFiniteNumber(heightInInches);
+  const ounces = toFiniteNumber(weightInOunces);
+
+  if (inches === null || ounces === null || inches <= 0 || ounces <= 0) {
+    return undefined;
+  }
+
+  const heightM = inches * 2.54 / 100;
+  const weightKg = ounces * 0.028349523125;
+
+  if (heightM <= 0) return undefined;
+
+  const bmi = weightKg / (heightM * heightM);
+  return bmi.toFixed(1);
+}
+
 function FieldGrid({
   items,
 }: {
@@ -109,9 +169,7 @@ function FieldGrid({
       {visibleItems.map((item) => (
         <div key={item.label} className="min-w-0 break-words leading-6">
           <span className="font-semibold text-gray-600">{item.label}:</span>{" "}
-          <span className="break-words whitespace-normal text-gray-900">
-            {item.value}
-          </span>
+          <span className="break-words whitespace-normal text-gray-900">{item.value}</span>
         </div>
       ))}
     </div>
@@ -159,8 +217,7 @@ function useVoiceNote() {
     setAudioBlob(null);
 
     const SpeechRecognition =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
       alert("Speech recognition not supported. Please use Chrome or Edge.");
@@ -271,16 +328,23 @@ export default function DashboardPage() {
   const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
 
   const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("detect");
+
   const episodeSelectedTask: AnnotationTaskKey =
-    selectedTask === "summary" ? "detect" : selectedTask;
+    selectedTask === "summary" || selectedTask === "contextualEvent"
+      ? "detect"
+      : selectedTask;
+
   const [annotationLevel, setAnnotationLevel] = useState<"episode" | "patient">("episode");
 
   const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
   const [selectedWindow, setSelectedWindow] = useState<SelectedWindow | null>(null);
+  
+  const [timeResolution, setTimeResolution] = useState<15 | 5 | 1>(15);
+  const [viewStartMin, setViewStartMin] = useState(0);
+  const [sharedScrollLeft, setSharedScrollLeft] = useState(0);
 
   const [sidebarEvents, setSidebarEvents] = useState<SidebarEventItem[]>([]);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-
   const voiceNote = useVoiceNote();
   const selectedEvent =
     sidebarEvents.find((item) => item.id === selectedEventId) ?? null;
@@ -312,9 +376,8 @@ export default function DashboardPage() {
     const incompleteEvents = sidebarEvents.filter(
       (event) =>
         !event.completed.detect ||
+        !event.completed.prevention ||
         !event.completed.mechanism ||
-        !event.completed.gasEval ||
-        !event.completed.medEval ||
         !event.completed.fluidEval ||
         !event.completed.response
     );
@@ -349,10 +412,7 @@ export default function DashboardPage() {
       return;
     }
 
-    const sameVitalCount = sidebarEvents.filter(
-      (e) => e.vital === window.vital
-    ).length;
-
+    const sameVitalCount = sidebarEvents.filter((e) => e.vital === window.vital).length;
     const nextIndex = sameVitalCount + 1;
 
     const newEvent: SidebarEventItem = {
@@ -366,9 +426,8 @@ export default function DashboardPage() {
       y2: window.y2,
       completed: {
         detect: false,
+        prevention: false,
         mechanism: false,
-        gasEval: false,
-        medEval: false,
         fluidEval: false,
         response: false,
       },
@@ -393,9 +452,8 @@ export default function DashboardPage() {
 
   const TASK_ORDER: AnnotationTaskKey[] = [
     "detect",
+    "prevention",
     "mechanism",
-    "gasEval",
-    "medEval",
     "fluidEval",
     "response",
   ];
@@ -460,6 +518,8 @@ export default function DashboardPage() {
       setSidebarEvents([]);
       setSelectedEventId(null);
       setAnnotationLevel("episode");
+      setTimeResolution(15);
+      setViewStartMin(0);
 
       const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
       setCaseId(caseIdFromFile);
@@ -493,21 +553,19 @@ export default function DashboardPage() {
       const caseInfo = caseInfoRows[0] ?? {};
       const patientAttr = patientAttrRows[0] ?? {};
       const caseStatic = caseStaticRows[0] ?? {};
+      const preopRow = preopRows[0] ?? {};
+      const labRow = labRows[0] ?? {};
+
       setCaseStaticRowState(caseStatic);
       setCaseDynamicRowsState(caseDynamicRows);
       setAnesthesiaStart(caseStatic["anesthesia_start"] ?? null);
       setAnesthesiaStop(caseStatic["anesthesia_stop"] ?? null);
-      const preopRow = preopRows[0] ?? {};
-      const labRow = labRows[0] ?? {};
 
       setDemographic(
         prepareDemographicData(caseInfo, patientAttr, preopRow, caseIdFromFile)
       );
 
-      setSurgeryContext(
-        prepareSurgeryContextData(caseInfo, caseStatic, preopRow)
-      );
-
+      setSurgeryContext(prepareSurgeryContextData(caseInfo, caseStatic, preopRow));
       setPreop(preparePreopData(preopRow));
       setLab(prepareLabData(labRow));
       setVitals(prepareVitalsDataRaw(phyRows));
@@ -517,13 +575,8 @@ export default function DashboardPage() {
       setFluidInRowsState(fluidInRows);
       setFluidOutRowsState(fluidOutRows);
 
-      setMedications(
-        prepareMedicationData(medBolusRows, medInfusionRows)
-      );
-
-      setFluids(
-        prepareFluidData(fluidInRows, fluidOutRows)
-      );
+      setMedications(prepareMedicationData(medBolusRows, medInfusionRows));
+      setFluids(prepareFluidData(fluidInRows, fluidOutRows));
     } catch (e: any) {
       console.error("Failed to load patient:", e);
       setLoadError(e?.message ?? "Failed to load patient.");
@@ -613,11 +666,24 @@ export default function DashboardPage() {
     return Math.ceil(diffMin / 15) * 15;
   })();
 
+  const viewWindowWidthMin = useMemo(() => {
+    if (timeResolution === 15) return sharedTimelineEnd;
+    if (timeResolution === 5) return 120;
+    return 45;
+  }, [timeResolution, sharedTimelineEnd]);
+
   const sharedXTicks = Array.from(
     { length: Math.floor(sharedTimelineEnd / 15) + 1 },
     (_, i) => i * 15
   );
 
+  useEffect(() => {
+    const maxStart = Math.max(0, sharedTimelineEnd - viewWindowWidthMin);
+    if (viewStartMin > maxStart) {
+      setViewStartMin(maxStart);
+    }
+  }, [sharedTimelineEnd, viewWindowWidthMin, viewStartMin]);
+  
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
 
@@ -666,9 +732,7 @@ export default function DashboardPage() {
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
           <h1 className="flex items-center gap-4 text-2xl font-bold">
             <span>Patient {currentPatientIndex + 1}</span>
-            <span className="text-base font-normal text-gray-500">
-              Case ID: {caseId}
-            </span>
+            <span className="text-base font-normal text-gray-500">Case ID: {caseId}</span>
           </h1>
 
           <div className="flex items-center gap-3">
@@ -796,8 +860,9 @@ export default function DashboardPage() {
                       { label: "Age", value: demographic.age },
                       { label: "Sex", value: demographic.sex },
                       { label: "Race", value: demographic.race },
-                      { label: "Height", value: demographic.height },
-                      { label: "Weight", value: demographic.weight },
+                      { label: "Height", value: formatHeightCm(demographic.height) },
+                      { label: "Weight", value: formatWeightKg(demographic.weight) },
+                      { label: "BMI", value: formatBmi(demographic.height, demographic.weight) },
                     ]}
                   />
                 </div>
@@ -818,7 +883,6 @@ export default function DashboardPage() {
                       { label: "Actual Procedure", value: surgeryContext.actual_procedure },
                       { label: "Anesthesia Type", value: surgeryContext.anesthesia_type },
                       { label: "Airway", value: surgeryContext.airway },
-                      { label: "Airway Type", value: surgeryContext.airway_type },
                       {
                         label: "Emergent",
                         value:
@@ -835,9 +899,7 @@ export default function DashboardPage() {
 
               {preop && (
                 <div>
-                  <h4 className="mb-1 text-sm font-bold text-gray-800">
-                    Preoperative Assessment
-                  </h4>
+                  <h4 className="mb-1 text-sm font-bold text-gray-800">Preoperative Assessment</h4>
                   <FieldGrid
                     items={[
                       { label: "ASA Status", value: preop.asa_status },
@@ -893,7 +955,7 @@ export default function DashboardPage() {
               <div className="grid grid-cols-[minmax(420px,1fr)_minmax(0,2fr)] gap-4 items-start">
                 <div className="min-w-0 max-w-[640px]">
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-                    <div className="border-b bg-white px-4 py-3 space-y-3">
+                    <div className="space-y-3 border-b bg-white px-4 py-3">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
                           Task Categories
@@ -939,16 +1001,15 @@ export default function DashboardPage() {
                         {annotationLevel === "episode" ? (
                           <>
                             {(
-                              ["detect", "mechanism", "gasEval", "medEval", "fluidEval", "response"] as const
+                              ["detect", "prevention", "mechanism", "fluidEval", "response"] as const
                             ).map((task) => {
                               const active = selectedTask === task;
 
                               const labelMap = {
                                 detect: "Detection",
+                                prevention: "Prevention",
                                 mechanism: "Mechanism",
-                                gasEval: "GasEval",
-                                medEval: "MedEval",
-                                fluidEval: "FluidEval",
+                                fluidEval: "Intervention",
                                 response: "Response",
                               };
 
@@ -975,23 +1036,43 @@ export default function DashboardPage() {
                             })}
                           </>
                         ) : (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setSelectedTask("summary");
-                              logAction("task_tab_click", {
-                                task: "summary",
-                                selectedEventId: null,
-                              });
-                            }}
-                            className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                              selectedTask === "summary"
-                                ? "border-blue-600 bg-blue-600 text-white"
-                                : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                            }`}
-                          >
-                            Summary
-                          </button>
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedTask("summary");
+                                logAction("task_tab_click", {
+                                  task: "summary",
+                                  selectedEventId: null,
+                                });
+                              }}
+                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                selectedTask === "summary"
+                                  ? "border-blue-600 bg-blue-600 text-white"
+                                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                              }`}
+                            >
+                              Summary
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedTask("contextualEvent");
+                                logAction("task_tab_click", {
+                                  task: "contextualEvent",
+                                  selectedEventId: null,
+                                });
+                              }}
+                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                selectedTask === "contextualEvent"
+                                  ? "border-blue-600 bg-blue-600 text-white"
+                                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                              }`}
+                            >
+                              Contextual Event
+                            </button>
+                          </>
                         )}
                       </div>
                     </div>
@@ -999,58 +1080,58 @@ export default function DashboardPage() {
                     {annotationLevel === "episode" ? (
                       <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
                         <div className="border-r">
-                        <AnnotationSidebar
-                          selectedTask={episodeSelectedTask}
-                          onChangeTask={setSelectedTask}
-                          events={sidebarEvents}
-                          selectedEventId={selectedEventId}
-                          onSelectEvent={(eventId) => {
-                            const event = sidebarEvents.find((e) => e.id === eventId);
-                            if (!event) return;
+                          <AnnotationSidebar
+                            selectedTask={episodeSelectedTask}
+                            onChangeTask={setSelectedTask}
+                            events={sidebarEvents}
+                            selectedEventId={selectedEventId}
+                            onSelectEvent={(eventId) => {
+                              const event = sidebarEvents.find((e) => e.id === eventId);
+                              if (!event) return;
 
-                            setSelectedEventId(eventId);
-                            setSelectedDetectVital(event.vital as DetectVital);
-                            setSelectedWindow({
-                              vital: event.vital as DetectVital,
-                              startMin: event.startMin,
-                              endMin: event.endMin,
-                              y1: event.y1,
-                              y2: event.y2,
-                            });
+                              setSelectedEventId(eventId);
+                              setSelectedDetectVital(event.vital as DetectVital);
+                              setSelectedWindow({
+                                vital: event.vital as DetectVital,
+                                startMin: event.startMin,
+                                endMin: event.endMin,
+                                y1: event.y1,
+                                y2: event.y2,
+                              });
 
-                            logAction("sidebar_event_select", {
-                              eventId,
-                              title: event.title,
-                              vital: event.vital,
-                              startMin: event.startMin,
-                              endMin: event.endMin,
-                            });
-                          }}
-                          onDeleteEvent={(eventId) => {
-                            const remaining = sidebarEvents.filter((e) => e.id !== eventId);
-                            setSidebarEvents(remaining);
+                              logAction("sidebar_event_select", {
+                                eventId,
+                                title: event.title,
+                                vital: event.vital,
+                                startMin: event.startMin,
+                                endMin: event.endMin,
+                              });
+                            }}
+                            onDeleteEvent={(eventId) => {
+                              const remaining = sidebarEvents.filter((e) => e.id !== eventId);
+                              setSidebarEvents(remaining);
 
-                            if (selectedEventId === eventId) {
-                              if (remaining.length > 0) {
-                                const nextEvent = remaining[0];
-                                setSelectedEventId(nextEvent.id);
-                                setSelectedDetectVital(nextEvent.vital as DetectVital);
-                                setSelectedWindow({
-                                  vital: nextEvent.vital as DetectVital,
-                                  startMin: nextEvent.startMin,
-                                  endMin: nextEvent.endMin,
-                                  y1: nextEvent.y1,
-                                  y2: nextEvent.y2,
-                                });
-                              } else {
-                                setSelectedEventId(null);
-                                setSelectedWindow(null);
+                              if (selectedEventId === eventId) {
+                                if (remaining.length > 0) {
+                                  const nextEvent = remaining[0];
+                                  setSelectedEventId(nextEvent.id);
+                                  setSelectedDetectVital(nextEvent.vital as DetectVital);
+                                  setSelectedWindow({
+                                    vital: nextEvent.vital as DetectVital,
+                                    startMin: nextEvent.startMin,
+                                    endMin: nextEvent.endMin,
+                                    y1: nextEvent.y1,
+                                    y2: nextEvent.y2,
+                                  });
+                                } else {
+                                  setSelectedEventId(null);
+                                  setSelectedWindow(null);
+                                }
                               }
-                            }
 
-                            logAction("sidebar_event_delete", { eventId });
-                          }}
-                        />
+                              logAction("sidebar_event_delete", { eventId });
+                            }}
+                          />
                         </div>
 
                         <div className="min-w-0">
@@ -1086,17 +1167,28 @@ export default function DashboardPage() {
                       </div>
                     ) : (
                       <div className="bg-white">
-                        <SummaryPanel
-                          caseId={caseId}
-                          eventId="patient-summary"
-                          eventTitle="Patient-level Summary"
-                          episodeLabel={`Patient ${currentPatientIndex + 1}`}
-                          startMin={0}
-                          endMin={sharedTimelineEnd}
-                          onSaveAndNextStep={() => {
-                            setPatientSummaryCompleted(true);
-                          }}
-                        />
+                        {selectedTask === "summary" ? (
+                          <SummaryPanel
+                            caseId={caseId}
+                            eventId="patient-summary"
+                            eventTitle="Patient-level Summary"
+                            episodeLabel={`Patient ${currentPatientIndex + 1}`}
+                            startMin={0}
+                            endMin={sharedTimelineEnd}
+                            onSaveAndNextStep={() => {
+                              setPatientSummaryCompleted(true);
+                            }}
+                          />
+                        ) : selectedTask === "contextualEvent" ? (
+                          <AdditionalEventContextPanel
+                            caseId={caseId}
+                            eventId="patient-contextual-event"
+                            eventTitle="Additional Contextual Event"
+                            episodeLabel={`Patient ${currentPatientIndex + 1}`}
+                            startMin={0}
+                            endMin={sharedTimelineEnd}
+                          />
+                        ) : null}
                       </div>
                     )}
                   </div>
@@ -1116,33 +1208,42 @@ export default function DashboardPage() {
                           }
                         : null
                     }
+                    sharedScrollLeft={sharedScrollLeft}
+                    onSharedScrollLeftChange={setSharedScrollLeft}
                   />
 
-                  <UnifiedTimelineCard
-                    vitals={vitals}
-                    medications={medications}
-                    fluids={fluids}
-                    anesthesiaStart={anesthesiaStart}
-                    anesthesiaStop={anesthesiaStop}
-                    timelineEnd={sharedTimelineEnd}
-                    ticks={sharedXTicks}
-                    selectedDetectVital={selectedDetectVital}
-                    onChangeSelectedDetectVital={setSelectedDetectVital}
-                    selectedWindow={selectedWindow}
-                    onChangeSelectedWindow={setSelectedWindow}
-                    onCreateEventFromWindow={handleCreateEventFromWindow}
-                    gas={{
-                      FiO2: vitals.gas["FiO2"],
-                      "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-                      "Air (L/min)": vitals.gas["Air (L/min)"],
-                      "N2O (L/min)": vitals.gas["N2O (L/min)"],
-                      "inO2 %": vitals.gas["inO2 %"],
-                      "inN2O %": vitals.gas["inN2O %"],
-                      "inSevoflurane %": vitals.gas["inSevoflurane %"],
-                      inIsoflurane: vitals.gas["inIsoflurane"],
-                      "etMAC exhaled": vitals.gas["etMAC exhaled"],
-                    }}
-                  />
+                <UnifiedTimelineCard
+                  vitals={vitals}
+                  medications={medications}
+                  fluids={fluids}
+                  anesthesiaStart={anesthesiaStart}
+                  anesthesiaStop={anesthesiaStop}
+                  timelineEnd={sharedTimelineEnd}
+                  ticks={sharedXTicks}
+                  timeResolution={timeResolution}
+                  onChangeTimeResolution={setTimeResolution}
+                  viewStartMin={viewStartMin}
+                  onChangeViewStartMin={setViewStartMin}
+                  viewWindowWidthMin={viewWindowWidthMin}
+                  selectedDetectVital={selectedDetectVital}
+                  onChangeSelectedDetectVital={setSelectedDetectVital}
+                  selectedWindow={selectedWindow}
+                  onChangeSelectedWindow={setSelectedWindow}
+                  onCreateEventFromWindow={handleCreateEventFromWindow}
+                  sharedScrollLeft={sharedScrollLeft}
+                  onSharedScrollLeftChange={setSharedScrollLeft}
+                  gas={{
+                    FiO2: vitals.gas["FiO2"],
+                    "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+                    "Air (L/min)": vitals.gas["Air (L/min)"],
+                    "N2O (L/min)": vitals.gas["N2O (L/min)"],
+                    "inO2 %": vitals.gas["inO2 %"],
+                    "inN2O %": vitals.gas["inN2O %"],
+                    "inSevoflurane %": vitals.gas["inSevoflurane %"],
+                    inIsoflurane: vitals.gas["inIsoflurane"],
+                    "etMAC exhaled": vitals.gas["etMAC exhaled"],
+                  }}
+                />
                 </div>
               </div>
             )}

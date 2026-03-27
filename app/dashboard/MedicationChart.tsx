@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ResponsiveContainer,
   ScatterChart,
@@ -28,12 +28,15 @@ type MedicationChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+
+  sharedScrollLeft?: number;
+  onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
+
 type HighlightWindow = {
   startMin: number;
   endMin: number;
 };
-
 
 type MarkerType = "bolus-box";
 
@@ -52,6 +55,10 @@ type ScatterPoint = {
   marker: MarkerType;
   color: string;
 };
+
+const LEGEND_COL_WIDTH = 220;
+const AXIS_COL_WIDTH = 42;
+const PLOT_RIGHT = 20;
 
 const MEDICATION_DISPLAY_ORDER = [
   "propofol",
@@ -120,14 +127,11 @@ const ROW_HEIGHT = 25;
 const PLOT_TOP_PAD = 0;
 const PLOT_BOTTOM_PAD = 0;
 
-const RECHARTS_LEFT_MARGIN = 8;
 const RECHARTS_RIGHT_MARGIN = 20;
-const RECHARTS_YAXIS_WIDTH = 35;
 
-const PLOT_LEFT = RECHARTS_LEFT_MARGIN + RECHARTS_YAXIS_WIDTH; // 43
-const PLOT_RIGHT = RECHARTS_RIGHT_MARGIN;
-const SVG_WIDTH = 1000;
-const PLOT_WIDTH = SVG_WIDTH - PLOT_LEFT - PLOT_RIGHT;
+/** 和 Vital / Timeline 保持一致 */
+const PX_PER_15_MIN = 64;
+const PX_PER_MIN = PX_PER_15_MIN / 15;
 
 function normalizeName(name: string) {
   return String(name ?? "").trim().toLowerCase();
@@ -437,70 +441,6 @@ function LegendSwatch({
   );
 }
 
-function BolusBoxMarker(props: any) {
-  const { cx, cy, payload } = props;
-
-  if (cx == null || cy == null || !payload) return null;
-
-  const color = payload.color ?? "#6bcfc5";
-  const text = String(payload.label ?? "");
-  const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
-  const boxHeight = 16;
-
-  // 关键：不要再居中画框
-  // 让“箭头尖端”就是精确时间点，文字框固定放在右侧
-  const arrowTipX = cx;
-  const arrowBaseX = cx + 6;
-  const left = arrowBaseX;
-  const top = cy - boxHeight / 2;
-
-  return (
-    <g>
-      {/* 精确时间竖线，帮助你看清楚真实发生点 */}
-      <line
-        x1={arrowTipX}
-        y1={cy - 9}
-        x2={arrowTipX}
-        y2={cy + 9}
-        stroke={color}
-        strokeWidth={1.2}
-        opacity={0.9}
-      />
-
-      {/* 小箭头：尖端就是事件真实时间 */}
-      <polygon
-        points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
-        fill={color}
-        stroke={color}
-        strokeWidth={1}
-      />
-
-      {/* 文字框放在箭头右边，不再覆盖真实时间点 */}
-      <rect
-        x={left}
-        y={top}
-        width={boxWidth}
-        height={boxHeight}
-        rx={2}
-        ry={2}
-        fill="#dff7f3"
-        stroke={color}
-        strokeWidth={1.5}
-      />
-
-      <text
-        x={left + boxWidth / 2}
-        y={cy + 4}
-        textAnchor="middle"
-        fontSize={10}
-        fill="#1f2937"
-      >
-        {text}
-      </text>
-    </g>
-  );
-}
-
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
   if (!timeZero) return String(offsetMin);
 
@@ -525,15 +465,22 @@ function rectsOverlap(
   );
 }
 
-function getInfusionLabelRects(rows: MedRow[], end: number) {
-  const rectsByRow = new Map<number, Array<{ left: number; right: number; top: number; bottom: number }>>();
+function getInfusionLabelRects(
+  rows: MedRow[],
+  end: number,
+  plotWidth: number
+) {
+  const rectsByRow = new Map<
+    number,
+    Array<{ left: number; right: number; top: number; bottom: number }>
+  >();
 
   for (const row of rows) {
     const rowRects: Array<{ left: number; right: number; top: number; bottom: number }> = [];
 
     for (const seg of row.infusion) {
-      const x1 = PLOT_LEFT + (seg.start / end) * PLOT_WIDTH;
-      const x2 = PLOT_LEFT + (Math.max(seg.end, seg.start + 0.1) / end) * PLOT_WIDTH;
+      const x1 = (seg.start / end) * plotWidth;
+      const x2 = (Math.max(seg.end, seg.start + 0.1) / end) * plotWidth;
 
       const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
       const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
@@ -575,24 +522,28 @@ function BolusOverlaySvg({
   end,
   rows,
   height,
+  svgWidth,
+  plotWidth,
 }: {
   end: number;
   rows: MedRow[];
   height: number;
+  svgWidth: number;
+  plotWidth: number;
 }) {
-  const infusionRectsByRow = getInfusionLabelRects(rows, end);
+  const infusionRectsByRow = getInfusionLabelRects(rows, end, plotWidth);
 
   return (
     <svg
-      width="100%"
+      width={svgWidth}
       height={height}
-      viewBox={`0 0 ${SVG_WIDTH} ${height}`}
+      viewBox={`0 0 ${svgWidth} ${height}`}
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
       {rows.flatMap((row) =>
         row.bolus.map((p, idx) => {
-          const cx = PLOT_LEFT + (p.time / end) * PLOT_WIDTH;
+          const cx = (p.time / end) * plotWidth;
           const cy = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.5;
 
           const color = inferColor(row.name);
@@ -604,7 +555,6 @@ function BolusOverlaySvg({
           const arrowTipX = cx;
           const arrowBaseX = cx + 6;
 
-          // 默认位置：右侧
           const defaultLeft = arrowBaseX;
           const defaultTop = cy - boxHeight / 2;
 
@@ -618,7 +568,6 @@ function BolusOverlaySvg({
           const rowInfusionRects = infusionRectsByRow.get(row.rowIndex) ?? [];
           const hasOverlap = rowInfusionRects.some((r) => rectsOverlap(defaultRect, r));
 
-          // 如果冲突，bolus label 下移
           const shiftedTop = cy + 6;
 
           const finalLeft = defaultLeft;
@@ -628,7 +577,6 @@ function BolusOverlaySvg({
 
           return (
             <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
-              {/* 精确时间竖线 */}
               <line
                 x1={arrowTipX}
                 y1={cy - 9}
@@ -639,7 +587,6 @@ function BolusOverlaySvg({
                 opacity={0.9}
               />
 
-              {/* 箭头尖端 = 精确时间点 */}
               <polygon
                 points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
                 fill={color}
@@ -647,7 +594,6 @@ function BolusOverlaySvg({
                 strokeWidth={1}
               />
 
-              {/* 如果下移了，就画一条连接线 */}
               {hasOverlap && (
                 <line
                   x1={arrowBaseX}
@@ -660,7 +606,6 @@ function BolusOverlaySvg({
                 />
               )}
 
-              {/* label box */}
               <rect
                 x={finalLeft}
                 y={finalTop}
@@ -694,27 +639,30 @@ function InfusionOverlaySvg({
   end,
   rows,
   height,
+  svgWidth,
+  plotWidth,
 }: {
   end: number;
   rows: MedRow[];
   height: number;
+  svgWidth: number;
+  plotWidth: number;
 }) {
   return (
     <svg
-      width="100%"
+      width={svgWidth}
       height={height}
-      viewBox={`0 0 ${SVG_WIDTH} ${height}`}
+      viewBox={`0 0 ${svgWidth} ${height}`}
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
       {rows.flatMap((row) =>
         row.infusion.map((seg, idx) => {
-          const x1 = PLOT_LEFT + (seg.start / end) * PLOT_WIDTH;
-          const x2 = PLOT_LEFT + (Math.max(seg.end, seg.start + 0.1) / end) * PLOT_WIDTH;
+          const x1 = (seg.start / end) * plotWidth;
+          const x2 = (Math.max(seg.end, seg.start + 0.1) / end) * plotWidth;
 
           const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
           const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
-          const yMid = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.5;
 
           const width = x2 - x1;
           const color = inferColor(row.name);
@@ -724,25 +672,19 @@ function InfusionOverlaySvg({
               ? `${formatMedNumber(seg.rate)}`
               : "";
 
-          // label 尺寸估计
           const labelWidth = Math.max(18, label.length * 6 + 10);
           const labelHeight = 12;
 
-          // 放在 segment 内偏右，但不能超出 segment
           const preferredCenterX = x1 + width * 0.72;
           const minCenterX = x1 + labelWidth / 2 + 2;
           const maxCenterX = x2 - labelWidth / 2 - 2;
           const labelCenterX = Math.max(minCenterX, Math.min(preferredCenterX, maxCenterX));
 
-          // 放在条带内部靠下，不和 bolus 抢位置
           const labelY = yBottom - 1;
-
-          // segment 太窄就不显示文字
           const showLabel = width >= labelWidth + 6 && !!label;
 
           return (
             <g key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}>
-              {/* 左边界线 */}
               <line
                 x1={x1}
                 y1={yTop}
@@ -753,7 +695,6 @@ function InfusionOverlaySvg({
                 opacity={0.98}
               />
 
-              {/* 右边界线 */}
               <line
                 x1={x2}
                 y1={yTop}
@@ -764,7 +705,6 @@ function InfusionOverlaySvg({
                 opacity={0.98}
               />
 
-              {/* 如果够宽，就把速率“框”在 segment 里 */}
               {showLabel && (
                 <>
                   <rect
@@ -800,34 +740,45 @@ function InfusionOverlaySvg({
   );
 }
 
+function FixedAxisSpacer({ height }: { height: number }) {
+  return (
+    <div
+      className="border-r bg-white"
+      style={{ width: AXIS_COL_WIDTH, height }}
+    />
+  );
+}
+
 function MedicationGridSvg({
   end,
   ticks,
   rows,
   height,
   highlightWindow,
+  plotWidth,
 }: {
   end: number;
   ticks: number[];
   rows: MedRow[];
   height: number;
   highlightWindow?: HighlightWindow | null;
+  plotWidth: number;
 }) {
   return (
     <svg
-      width="100%"
+      width={plotWidth}
       height={height}
-      viewBox={`0 0 ${SVG_WIDTH} ${height}`}
+      viewBox={`0 0 ${plotWidth} ${height}`}
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
       {highlightWindow && (
         <rect
-          x={PLOT_LEFT + (highlightWindow.startMin / end) * PLOT_WIDTH}
+          x={(highlightWindow.startMin / end) * plotWidth}
           y={0}
           width={Math.max(
             2,
-            ((highlightWindow.endMin - highlightWindow.startMin) / end) * PLOT_WIDTH
+            ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth
           )}
           height={height}
           fill="lightblue"
@@ -835,8 +786,9 @@ function MedicationGridSvg({
           stroke="none"
         />
       )}
+
       {ticks.map((tick) => {
-        const x = PLOT_LEFT + (tick / end) * PLOT_WIDTH;
+        const x = (tick / end) * plotWidth;
         return (
           <line
             key={`grid-x-${tick}`}
@@ -850,21 +802,20 @@ function MedicationGridSvg({
         );
       })}
 
-      {/* horizontal row lines, full width */}
       {Array.from({ length: rows.length + 1 }, (_, i) => i).map((i) => {
-      const y = i * ROW_HEIGHT;
-      return (
-        <line
-          key={`grid-y-${i}`}
-          x1={0}
-          y1={y}
-          x2={PLOT_LEFT + PLOT_WIDTH}
-          y2={y}
-          stroke="#8f8f8f"
-          strokeWidth={0.8}
-        />
-      );
-    })}
+        const y = i * ROW_HEIGHT;
+        return (
+          <line
+            key={`grid-y-${i}`}
+            x1={0}
+            y1={y}
+            x2={plotWidth}
+            y2={y}
+            stroke="#8f8f8f"
+            strokeWidth={0.8}
+          />
+        );
+      })}
     </svg>
   );
 }
@@ -879,9 +830,21 @@ export default function MedicationChart({
   timeZero,
   embedded = false,
   highlightWindow = null,
+  sharedScrollLeft,
+  onSharedScrollLeftChange,
 }: MedicationChartProps) {
   const rows = useMemo(() => buildRows(medications, xEnd), [medications, xEnd]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+    }
+  }, [sharedScrollLeft]);
 
   const visibleRows = useMemo(
     () => rows.filter((row) => !hiddenNames.includes(row.name)),
@@ -904,6 +867,14 @@ export default function MedicationChart({
   const fullContentHeight =
     rows.length * ROW_HEIGHT + PLOT_TOP_PAD + PLOT_BOTTOM_PAD;
 
+  const contentPlotWidth = useMemo(() => {
+    if (end <= 0) return 800;
+    return Math.max(800, Math.ceil(end * PX_PER_MIN));
+  }, [end]);
+
+  const contentWidth = contentPlotWidth + PLOT_RIGHT;
+  const plotWidth = contentPlotWidth;
+
   if (!rows.length) {
     return (
       <div className="rounded-2xl border bg-white p-4 shadow-sm">
@@ -923,169 +894,243 @@ export default function MedicationChart({
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
 
-<div
-  className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-  style={{ height }}
->
-        <div className="grid grid-cols-[220px_1fr] gap-0">
-          <div className="border-r pr-0" style={{ height: fullContentHeight }}>
-            <div>
+      <div
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
+        }}
+      >
+        <div className="border-r pr-0" style={{ height: fullContentHeight }}>
+          <div>
             {visibleRows.map((row) => {
-                const isHidden = hiddenNames.includes(row.name);
-                const color = inferColor(row.name);
-                const stripe = inferStripe(row.name);
-                const totalLabel = getMedicationTotalLabel(row);
+              const isHidden = hiddenNames.includes(row.name);
+              const color = inferColor(row.name);
+              const stripe = inferStripe(row.name);
+              const totalLabel = getMedicationTotalLabel(row);
 
-                return (
-                  <div
-                    key={row.name}
-                    className="relative grid items-center gap-1.5 px-2 text-sm"
-                    style={{
-                      height: ROW_HEIGHT,
-                      boxSizing: "border-box",
-                      gridTemplateColumns: "minmax(0,1fr) 68px 20px",
-                      backgroundColor: "#efefef",
-                      borderBottom: "1px solid #a3a3a3",
-                    }}
-                  >
-                    <div className="min-w-0 truncate text-gray-900">
-                      {row.name}
-                    </div>
-
-                    <div className="truncate text-right text-gray-700">
-                      {totalLabel}
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setHiddenNames((prev) =>
-                          prev.includes(row.name)
-                            ? prev.filter((x) => x !== row.name)
-                            : [...prev, row.name]
-                        );
-                      }}
-                      className="shrink-0 cursor-pointer"
-                      title={isHidden ? `Show ${row.name}` : `Hide ${row.name}`}
-                    >
-                      <LegendSwatch color={color} stripe={stripe} />
-                    </button>
-
-                    <span
-                      className="absolute right-[-1px] bottom-[-1px] block"
-                      style={{
-                        width: "8px",
-                        height: "1px",
-                        backgroundColor: "#a3a3a3",
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div
-            className="relative"
-            style={{
-              width: "100%",
-              height: fullContentHeight,
-              marginLeft: "-1px",
-            }}
-          >
-            {/* 第 1 层：背景网格 */}
-            <div className="absolute inset-0 z-0">
-              <MedicationGridSvg
-                end={end}
-                ticks={ticks}
-                rows={rows}
-                height={fullContentHeight}
-                highlightWindow={highlightWindow}
-              />
-            </div>
-
-            {/* 第 2 层：Recharts 主图 */}
-            <div className="absolute inset-0 z-10">
-              <ResponsiveContainer width="100%" height="100%">
-                <ScatterChart
-                  margin={{
-                    top: 0,
-                    right: RECHARTS_RIGHT_MARGIN,
-                    left: RECHARTS_LEFT_MARGIN,
-                    bottom: 0,
+              return (
+                <div
+                  key={row.name}
+                  className="relative grid items-center gap-1.5 px-2 text-sm"
+                  style={{
+                    height: ROW_HEIGHT,
+                    boxSizing: "border-box",
+                    gridTemplateColumns: "minmax(0,1fr) 68px 20px",
+                    backgroundColor: "#efefef",
+                    borderBottom: "1px solid #a3a3a3",
+                    opacity: isHidden ? 0.45 : 1,
                   }}
                 >
-                  <XAxis
-                    type="number"
-                    dataKey="x"
-                    domain={[0, end]}
-                    ticks={ticks}
-                    interval={0}
-                    allowDecimals={false}
-                    tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
-                    tick={showXAxis ? undefined : false}
-                    axisLine={showXAxis}
-                    tickLine={showXAxis}
-                    height={showXAxis ? 30 : 0}
-                    label={
-                      showXAxis
-                        ? { value: "Time", position: "insideBottom", offset: -4 }
-                        : undefined
-                    }
+                  <div className="min-w-0 truncate text-gray-900">
+                    {row.name}
+                  </div>
+
+                  <div className="truncate text-right text-gray-700">
+                    {totalLabel}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHiddenNames((prev) =>
+                        prev.includes(row.name)
+                          ? prev.filter((x) => x !== row.name)
+                          : [...prev, row.name]
+                      );
+                    }}
+                    className="shrink-0 cursor-pointer"
+                    title={isHidden ? `Show ${row.name}` : `Hide ${row.name}`}
+                  >
+                    <LegendSwatch color={color} stripe={stripe} />
+                  </button>
+
+                  <span
+                    className="absolute right-[-1px] bottom-[-1px] block"
+                    style={{
+                      width: "8px",
+                      height: "1px",
+                      backgroundColor: "#a3a3a3",
+                    }}
                   />
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-                  <YAxis
-                    type="number"
-                    dataKey="y"
-                    domain={[-0.5, rows.length - 0.5]}
-                    ticks={rows.map((row) => row.rowIndex)}
-                    tick={false}
-                    axisLine={false}
-                    tickLine={false}
-                    reversed
-                    width={RECHARTS_YAXIS_WIDTH}
-                  />
+        <FixedAxisSpacer height={fullContentHeight} />
 
-                  <ZAxis range={[30, 30]} />
-                  <Tooltip content={<MedicationTooltip />} />
+        <div
+          className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
+          style={{ height }}
+        >
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto overflow-y-hidden"
+            onScroll={(e) => {
+              onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+            }}
+          >
+            <div
+              className="relative"
+              style={{
+                width: contentWidth,
+                height: fullContentHeight,
+              }}
+            >
+              <div className="absolute inset-0 z-0">
+                <MedicationGridSvg
+                  end={end}
+                  ticks={ticks}
+                  rows={rows}
+                  height={fullContentHeight}
+                  highlightWindow={highlightWindow}
+                  plotWidth={plotWidth}
+                />
+              </div>
+              <div className="absolute inset-0 z-10">
+  <ResponsiveContainer width="100%" height="100%">
+    <ScatterChart
+      margin={{
+        top: 0,
+        right: RECHARTS_RIGHT_MARGIN,
+        left: 0,
+        bottom: 0,
+      }}
+    >
+      <XAxis
+        type="number"
+        dataKey="x"
+        domain={[0, end]}
+        ticks={ticks}
+        interval={0}
+        allowDecimals={false}
+        tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
+        tick={showXAxis ? undefined : false}
+        axisLine={showXAxis}
+        tickLine={showXAxis}
+        height={showXAxis ? 30 : 0}
+        label={
+          showXAxis
+            ? { value: "Time", position: "insideBottom", offset: -4 }
+            : undefined
+        }
+      />
 
-                  {rows.flatMap((row) => {
-                    if (hiddenNames.includes(row.name)) return [];
+      <YAxis
+        type="number"
+        dataKey="y"
+        domain={[-0.5, rows.length - 0.5]}
+        ticks={rows.map((row) => row.rowIndex)}
+        tick={false}
+        axisLine={false}
+        tickLine={false}
+        reversed
+        width={0}
+      />
 
-                    return row.infusion.map((seg, idx) => (
-                      <ReferenceArea
-                        key={`inf-${row.name}-${idx}-${seg.start}-${seg.end}`}
-                        x1={seg.start}
-                        x2={Math.max(seg.end, seg.start + 0.1)}
-                        y1={row.rowIndex - 0.17}
-                        y2={row.rowIndex + 0.17}
-                        fill={inferColor(row.name)}
-                        fillOpacity={1}
-                        stroke={inferColor(row.name)}
-                        strokeWidth={1}
-                      />
-                    ));
-                  })}
+      <ZAxis range={[30, 30]} />
+      <Tooltip content={<MedicationTooltip />} />
 
- 
-                </ScatterChart>
-              </ResponsiveContainer>
-            </div>
+      {rows.flatMap((row) => {
+        if (hiddenNames.includes(row.name)) return [];
 
-            {/* 第 3 层：infusion 分段边界和速率文字 */}
-            <div className="absolute inset-0 z-20 pointer-events-none">
-              <InfusionOverlaySvg
-                end={end}
-                rows={visibleRows}
-                height={fullContentHeight}
+        return row.infusion.map((seg, idx) => (
+          <ReferenceArea
+            key={`inf-${row.name}-${idx}-${seg.start}-${seg.end}`}
+            x1={seg.start}
+            x2={Math.max(seg.end, seg.start + 0.1)}
+            y1={row.rowIndex - 0.17}
+            y2={row.rowIndex + 0.17}
+            fill={inferColor(row.name)}
+            fillOpacity={1}
+            stroke={inferColor(row.name)}
+            strokeWidth={1}
+          />
+        ));
+      })}
+
+      <Scatter
+        data={bolusData}
+        shape={(props: any): React.JSX.Element => {
+          const { cx, cy, payload } = props;
+          if (cx == null || cy == null || !payload) return <g />;
+
+          const color = payload.color ?? "#6bcfc5";
+          const text = String(payload.label ?? "");
+          const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
+          const boxHeight = 16;
+
+          const arrowTipX = cx;
+          const arrowBaseX = cx + 6;
+          const left = arrowBaseX;
+          const top = cy - boxHeight / 2;
+
+          return (
+            <g>
+              <line
+                x1={arrowTipX}
+                y1={cy - 9}
+                x2={arrowTipX}
+                y2={cy + 9}
+                stroke={color}
+                strokeWidth={1.2}
+                opacity={0.9}
               />
-            </div>
-            <div className="absolute inset-0 z-30 pointer-events-none">
-              <BolusOverlaySvg
-                end={end}
-                rows={visibleRows}
-                height={fullContentHeight}
+              <polygon
+                points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
+                fill={color}
+                stroke={color}
+                strokeWidth={1}
               />
+              <rect
+                x={left}
+                y={top}
+                width={boxWidth}
+                height={boxHeight}
+                rx={2}
+                ry={2}
+                fill="#dff7f3"
+                stroke={color}
+                strokeWidth={1.5}
+              />
+              <text
+                x={left + boxWidth / 2}
+                y={cy + 4}
+                textAnchor="middle"
+                fontSize={10}
+                fill="#1f2937"
+              >
+                {text}
+              </text>
+            </g>
+          );
+        }}
+      />
+    </ScatterChart>
+  </ResponsiveContainer>
+</div>
+              
+
+              <div className="absolute inset-0 z-20 pointer-events-none">
+                <InfusionOverlaySvg
+                  end={end}
+                  rows={visibleRows}
+                  height={fullContentHeight}
+                  svgWidth={contentWidth}
+                  plotWidth={plotWidth}
+                />
+              </div>
+
+              <div className="absolute inset-0 z-30 pointer-events-none">
+                <BolusOverlaySvg
+                  end={end}
+                  rows={visibleRows}
+                  height={fullContentHeight}
+                  svgWidth={contentWidth}
+                  plotWidth={plotWidth}
+                />
+              </div>
             </div>
           </div>
         </div>

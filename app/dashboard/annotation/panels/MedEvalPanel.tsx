@@ -1,861 +1,1093 @@
 "use client";
 
-import * as React from "react";
-import { submitAnnotation } from "@/lib/submit";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  ResponsiveContainer,
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ZAxis,
+  ReferenceArea,
+} from "recharts";
 
-type MedEvalPanelProps = {
-  eventId?: string;
-  caseId?: string;
-  eventTitle?: string;
-  episodeLabel?: string;
-  startMin?: number;
-  endMin?: number;
-  medications?: any;
-  medBolusRows?: any[];
-  medInfusionRows?: any[];
-  annotatorName?: string;
-  onSaveAndNextStep?: () => void;
+import type {
+  MedicationPanelData,
+  MedicationBolusPoint,
+  MedicationInfusionSegment,
+} from "@/lib/types";
+
+type MedicationChartProps = {
+  title?: string;
+  medications: MedicationPanelData | null;
+  height?: number;
+  xEnd?: number;
+  xTicks?: number[];
+  showXAxis?: boolean;
+  timeZero?: string | null;
+  embedded?: boolean;
+  highlightWindow?: HighlightWindow | null;
+
+  sharedScrollLeft?: number;
+  onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
 
-type SaveStatus = "idle" | "saving" | "success" | "error";
-
-type TimingValue = "Appropriate" | "Delayed" | "Too Early" | "";
-type ChoiceValue = "Appropriate" | "Suboptimal" | "Inappropriate" | "";
-type DoseValue = "Too Low" | "Reasonable" | "Too High" | "";
-type OverallJudgmentValue =
-  | "Appropriate"
-  | "Mostly Appropriate"
-  | "Mixed / Uncertain"
-  | "Suboptimal"
-  | "Inappropriate"
-  | "";
-
-type TreatmentEval = {
-  timing: TimingValue;
-  choice: ChoiceValue;
-  dose: DoseValue;
-  overallJudgment: OverallJudgmentValue;
-  rationale: string;
+type HighlightWindow = {
+  startMin: number;
+  endMin: number;
 };
 
-function RadioPill({
-  label,
-  selected,
-  onClick,
-  selectedTone = "green",
-}: {
+type MarkerType = "bolus-box";
+
+type MedRow = {
+  name: string;
+  bolus: MedicationBolusPoint[];
+  infusion: MedicationInfusionSegment[];
+  rowIndex: number;
+};
+
+type ScatterPoint = {
+  x: number;
+  y: number;
+  medName: string;
   label: string;
-  selected: boolean;
-  onClick: () => void;
-  selectedTone?: "green" | "blue" | "orange";
-}) {
-  const toneClass =
-    selectedTone === "green"
-      ? "border-green-500 bg-green-100 text-green-700"
-      : selectedTone === "blue"
-      ? "border-sky-500 bg-sky-100 text-sky-700"
-      : "border-orange-400 bg-orange-100 text-orange-700";
+  marker: MarkerType;
+  color: string;
+};
 
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-medium transition ${
-        selected
-          ? toneClass
-          : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
-      }`}
-    >
-      {label}
-    </button>
-  );
+const LEGEND_COL_WIDTH = 220;
+const AXIS_COL_WIDTH = 42;
+const PLOT_RIGHT = 20;
+
+/** 跟 VitalChart 保持一致 */
+const PX_PER_15_MIN = 64;
+const PX_PER_MIN = PX_PER_15_MIN / 15;
+
+const ROW_HEIGHT = 25;
+
+const MEDICATION_DISPLAY_ORDER = [
+  "propofol",
+  "propofol inject",
+  "etomidate",
+  "ketamine",
+  "midazolam",
+  "dexmedetomidine",
+  "fentanyl",
+  "sufentanil",
+  "remifentanil",
+  "hydromorphone",
+  "morphine",
+  "methadone",
+  "meperidine",
+  "oxycodone",
+  "lorazepam",
+  "diazepam",
+  "succinylcholine",
+  "rocuronium",
+  "vecuronium",
+  "cisatracurium",
+  "sugammadex",
+  "neostigmine",
+  "glycopyrrolate",
+  "ephedrine",
+  "phenylephrine",
+  "epinephrine",
+  "norepinephrine",
+  "vasopressin",
+  "dopamine",
+  "dobutamine",
+  "milrinone",
+  "nitroglycerin",
+  "nitroprusside",
+  "esmolol",
+  "labetalol",
+  "hydralazine",
+  "nicardipine",
+  "clevidipine",
+  "ondansetron",
+  "granisetron",
+  "metoclopramide",
+  "promethazine",
+  "prochlorperazine",
+  "dexamethasone",
+  "aprepitant",
+  "fosaprepitant",
+  "cefazolin",
+  "tranexamic acid",
+  "aminocaproic acid",
+  "oxytocin",
+  "calcium chloride",
+  "calcium gluconate",
+  "sodium bicarbonate",
+  "amiodarone",
+  "naloxone",
+  "flumazenil",
+  "albuterol",
+  "ipratropium",
+  "ipratropium/albuterol",
+  "nitric oxide",
+];
+
+function normalizeName(name: string) {
+  return String(name ?? "").trim().toLowerCase();
 }
 
-function TaskBlock({
-  title,
-  children,
-  noBorder = false,
+function sortMedicationNames(names: string[]) {
+  const rank = new Map(
+    MEDICATION_DISPLAY_ORDER.map((name, i) => [normalizeName(name), i])
+  );
+
+  return [...names].sort((a, b) => {
+    const na = normalizeName(a);
+    const nb = normalizeName(b);
+
+    const ra = [...rank.keys()].find((k) => na.includes(k));
+    const rb = [...rank.keys()].find((k) => nb.includes(k));
+
+    const va = ra ? rank.get(ra)! : Number.MAX_SAFE_INTEGER;
+    const vb = rb ? rank.get(rb)! : Number.MAX_SAFE_INTEGER;
+
+    if (va !== vb) return va - vb;
+    return na.localeCompare(nb);
+  });
+}
+
+function inferColor(name: string) {
+  const n = normalizeName(name);
+
+  if (
+    [
+      "propofol",
+      "propofol inject",
+      "etomidate",
+      "ketamine",
+      "midazolam",
+      "dexmedetomidine",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#f2df4a";
+  }
+
+  if (
+    [
+      "fentanyl",
+      "sufentanil",
+      "remifentanil",
+      "hydromorphone",
+      "morphine",
+      "methadone",
+      "meperidine",
+      "oxycodone",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#8fc7e8";
+  }
+
+  if (
+    [
+      "rocuronium",
+      "vecuronium",
+      "cisatracurium",
+      "succinylcholine",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#e85a47";
+  }
+
+  if (
+    [
+      "phenylephrine",
+      "ephedrine",
+      "epinephrine",
+      "norepinephrine",
+      "vasopressin",
+      "dopamine",
+      "dobutamine",
+      "milrinone",
+      "nitroglycerin",
+      "nitroprusside",
+      "esmolol",
+      "labetalol",
+      "hydralazine",
+      "nicardipine",
+      "clevidipine",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#d7b7db";
+  }
+
+  if (
+    [
+      "ondansetron",
+      "granisetron",
+      "metoclopramide",
+      "promethazine",
+      "prochlorperazine",
+      "dexamethasone",
+      "aprepitant",
+      "fosaprepitant",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#e6c36a";
+  }
+
+  if (
+    [
+      "glycopyrrolate",
+      "neostigmine",
+      "naloxone",
+      "flumazenil",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#9fd36a";
+  }
+
+  if (
+    [
+      "cefazolin",
+      "tranexamic acid",
+      "aminocaproic acid",
+      "calcium chloride",
+      "calcium gluconate",
+      "sodium bicarbonate",
+      "oxytocin",
+      "amiodarone",
+      "albuterol",
+      "ipratropium",
+      "ipratropium/albuterol",
+      "nitric oxide",
+    ].some((x) => n.includes(x))
+  ) {
+    return "#d9d9d9";
+  }
+
+  return "#cfcfcf";
+}
+
+function inferStripe(name: string) {
+  const n = normalizeName(name);
+  if (n.includes("sugammadex")) return "red";
+  return null;
+}
+
+function buildRows(
+  medications: MedicationPanelData | null,
+  xEnd?: number
+): MedRow[] {
+  if (!medications) return [];
+
+  const allNames = new Set<string>([
+    ...Object.keys(medications.bolus ?? {}),
+    ...Object.keys(medications.infusion ?? {}),
+  ]);
+
+  const orderedNames = sortMedicationNames([...allNames]);
+
+  const rows = orderedNames.map((name) => {
+    const rawBolus = medications.bolus[name] ?? [];
+    const rawInfusion = medications.infusion[name] ?? [];
+
+    const bolus =
+      xEnd == null
+        ? rawBolus
+        : rawBolus.filter(
+            (p) => Number.isFinite(p.time) && Number(p.time) <= xEnd
+          );
+
+    const infusion =
+      xEnd == null
+        ? rawInfusion
+        : rawInfusion
+            .filter(
+              (seg) =>
+                Number.isFinite(seg.start) &&
+                Number.isFinite(seg.end) &&
+                Number(seg.start) <= xEnd
+            )
+            .map((seg) => ({
+              ...seg,
+              end: Math.min(Number(seg.end), xEnd),
+            }));
+
+    return {
+      name,
+      bolus,
+      infusion,
+    };
+  });
+
+  const nonEmptyRows = rows.filter(
+    (row) => row.bolus.length > 0 || row.infusion.length > 0
+  );
+
+  return nonEmptyRows.map((row, idx) => ({
+    ...row,
+    rowIndex: idx,
+  }));
+}
+
+function buildBolusScatter(rows: MedRow[], hiddenNames: string[]): ScatterPoint[] {
+  return rows.flatMap((row) => {
+    if (hiddenNames.includes(row.name)) return [];
+
+    return row.bolus.map((p) => ({
+      x: p.time,
+      y: row.rowIndex,
+      medName: row.name,
+      label: p.label ?? `${p.dose} ${p.unit ?? ""}`.trim(),
+      marker: "bolus-box" as const,
+      color: inferColor(row.name),
+    }));
+  });
+}
+
+function getMaxTime(rows: MedRow[]) {
+  const times: number[] = [];
+
+  rows.forEach((row) => {
+    row.bolus.forEach((p) => {
+      if (Number.isFinite(p.time)) times.push(Number(p.time));
+    });
+
+    row.infusion.forEach((seg) => {
+      if (Number.isFinite(seg.start)) times.push(Number(seg.start));
+      if (Number.isFinite(seg.end)) times.push(Number(seg.end));
+    });
+  });
+
+  if (!times.length) return 15;
+  return Math.max(...times);
+}
+
+function formatMedNumber(v: number) {
+  if (!Number.isFinite(v)) return "";
+  if (Math.abs(v) >= 100) return String(Math.round(v));
+  if (Math.abs(v) >= 10) return String(Math.round(v * 10) / 10);
+  return String(Math.round(v * 100) / 100);
+}
+
+function getMedicationTotalLabel(row: MedRow) {
+  if (row.bolus.length > 0) {
+    const first = row.bolus[0];
+    const totalDose =
+      first.totalDose ??
+      row.bolus.reduce((sum, p) => sum + (Number.isFinite(p.dose) ? p.dose : 0), 0);
+
+    const unit = first.unit ?? "";
+    const totalText = formatMedNumber(Number(totalDose));
+    return unit ? `${totalText} ${unit}` : totalText;
+  }
+
+  if (row.infusion.length > 0) {
+    const first = row.infusion[0];
+    const rate = Number(first.rate);
+    const unit = first.unit ?? "";
+    const rateText = formatMedNumber(rate);
+    return unit ? `${rateText} ${unit}` : rateText;
+  }
+
+  return "";
+}
+
+function MedicationTooltip({
+  active,
+  payload,
+  labelFormatter,
 }: {
-  title: string;
-  children: React.ReactNode;
-  noBorder?: boolean;
+  active?: boolean;
+  payload?: any[];
+  labelFormatter?: (v: number) => string;
 }) {
+  if (!active || !payload?.length) return null;
+
+  const p = payload[0]?.payload;
+  if (!p) return null;
+
   return (
-    <div className={`${noBorder ? "" : "border-b"} px-4 py-4`}>
-      <div className="mb-3 text-sm font-semibold text-gray-900">{title}</div>
-      {children}
+    <div className="rounded border bg-white px-3 py-2 text-xs shadow">
+      <div className="font-semibold">{p.medName}</div>
+      <div>Time: {labelFormatter ? labelFormatter(p.x) : `${p.x} min`}</div>
+      <div>{p.label}</div>
     </div>
   );
 }
 
-function normalizeMedicationName(item: any) {
+function LegendSwatch({
+  color,
+  stripe,
+}: {
+  color: string;
+  stripe?: "red" | null;
+}) {
+  const background =
+    stripe === "red"
+      ? `repeating-linear-gradient(
+          -45deg,
+          #ffffff 0px,
+          #ffffff 4px,
+          #e85a47 4px,
+          #e85a47 8px
+        )`
+      : color;
+
   return (
-    item?.medication ??
-    item?.med_concept_desc ??
-    item?.name ??
-    item?.label ??
-    "Unknown medication"
+    <span
+      className="inline-block h-4 w-4 border"
+      style={{
+        background,
+        borderColor: stripe === "red" ? "#d1d5db" : color,
+      }}
+    />
   );
 }
 
-function formatDose(item: any) {
-  const dose = item?.dose;
-  const unit = item?.unit ?? "";
+function formatClockTime(offsetMin: number, timeZero?: string | null) {
+  if (!timeZero) return String(offsetMin);
 
-  if (dose === undefined || dose === null || String(dose).trim() === "") {
-    return "";
-  }
+  const base = new Date(timeZero);
+  if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  return `${dose}${unit ? ` ${unit}` : ""}`;
-}
-
-function formatAbsoluteTime(rawTime: any) {
-  if (!rawTime) return "";
-
-  const dt = new Date(rawTime);
-  if (Number.isNaN(dt.getTime())) return "";
-
+  const dt = new Date(base.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
-  const ss = String(dt.getSeconds()).padStart(2, "0");
-
-  return `${hh}:${mm}:${ss}`;
+  return `${hh}:${mm}`;
 }
 
-function extractTreatmentsFromWindow(
-  medBolusRows: any[] = [],
-  medInfusionRows: any[] = [],
-  startMin: number,
-  endMin: number
-): string[] {
-  const windowStart = Number(startMin);
-  const windowEnd = Number(endMin) + 10;
-
-  if (!Number.isFinite(windowStart) || !Number.isFinite(windowEnd)) {
-    return [];
-  }
-
-  const results: string[] = [];
-  const seen = new Set<string>();
-
-  function pushLabel(label: string) {
-    if (!seen.has(label)) {
-      seen.add(label);
-      results.push(label);
-    }
-  }
-
-  const matchedBolus: any[] = [];
-
-  for (const item of medBolusRows ?? []) {
-    const t = Number(item?.relative_anesthesia_time);
-    if (!Number.isFinite(t)) continue;
-    if (t < windowStart || t > windowEnd) continue;
-
-    matchedBolus.push(item);
-
-    const name = normalizeMedicationName(item);
-    const doseText = formatDose(item);
-    const absTime = formatAbsoluteTime(item?.observation_time);
-
-    const label = absTime
-      ? doseText
-        ? `${name} @ ${absTime} (${doseText})`
-        : `${name} @ ${absTime}`
-      : doseText
-      ? `${name} @ ${Math.round(t)} min (${doseText})`
-      : `${name} @ ${Math.round(t)} min`;
-
-    pushLabel(label);
-  }
-
-  const infusionGroups = new Map<string, any[]>();
-
-  for (const item of medInfusionRows ?? []) {
-    const s = Number(item?.relative_anesthesia_start);
-    const e = Number(item?.relative_anesthesia_end);
-
-    if (!Number.isFinite(s) || !Number.isFinite(e)) continue;
-
-    const overlaps = e >= windowStart && s <= windowEnd;
-    if (!overlaps) continue;
-
-    const name = normalizeMedicationName(item);
-
-    if (!infusionGroups.has(name)) {
-      infusionGroups.set(name, []);
-    }
-    infusionGroups.get(name)!.push(item);
-  }
-
-  const matchedInfusionSummary: any[] = [];
-
-  for (const [name, segments] of infusionGroups.entries()) {
-    const sorted = [...segments].sort(
-      (a, b) =>
-        Number(a?.relative_anesthesia_start ?? 0) -
-        Number(b?.relative_anesthesia_start ?? 0)
-    );
-
-    const firstSeg = sorted[0];
-    const lastSeg = sorted[sorted.length - 1];
-
-    const displayStart =
-      formatAbsoluteTime(firstSeg?.start_time) ||
-      `${Math.round(Number(firstSeg?.relative_anesthesia_start))} min`;
-
-    const displayEnd =
-      formatAbsoluteTime(lastSeg?.end_time) ||
-      `${Math.round(Number(lastSeg?.relative_anesthesia_end))} min`;
-
-    const segmentDescriptions = sorted.map((seg) => {
-      const segStart =
-        formatAbsoluteTime(seg?.start_time) ||
-        `${Math.round(Number(seg?.relative_anesthesia_start))} min`;
-
-      const segEnd =
-        formatAbsoluteTime(seg?.end_time) ||
-        `${Math.round(Number(seg?.relative_anesthesia_end))} min`;
-
-      const doseText = formatDose(seg);
-
-      return doseText
-        ? `${segStart}-${segEnd}: ${doseText}`
-        : `${segStart}-${segEnd}`;
-    });
-
-    const label = `${name} @ ${displayStart}-${displayEnd} [${segmentDescriptions.join(
-      "; "
-    )}]`;
-
-    matchedInfusionSummary.push({
-      name,
-      segments: sorted.map((seg) => ({
-        relStart: seg?.relative_anesthesia_start,
-        relEnd: seg?.relative_anesthesia_end,
-        start_time: seg?.start_time,
-        end_time: seg?.end_time,
-        dose: seg?.dose,
-        unit: seg?.unit,
-      })),
-    });
-
-    pushLabel(label);
-  }
-
-  console.log("[MedEval] window =", {
-    startMin: windowStart,
-    endMin,
-    windowEndWithBuffer: windowEnd,
-  });
-
-  console.log(
-    "[MedEval] matched bolus =",
-    matchedBolus.map((x) => ({
-      medication: x?.medication,
-      rel: x?.relative_anesthesia_time,
-      observation_time: x?.observation_time,
-      dose: x?.dose,
-      unit: x?.unit,
-    }))
-  );
-
-  console.log("[MedEval] matched infusion grouped =", matchedInfusionSummary);
-
-  return results;
-}
-
-function isTreatmentEvalComplete(evalItem?: TreatmentEval | null) {
-  if (!evalItem) return false;
-  return Boolean(
-    evalItem.timing &&
-      evalItem.choice &&
-      evalItem.dose &&
-      evalItem.overallJudgment &&
-      evalItem.rationale?.trim()
+function rectsOverlap(
+  a: { left: number; right: number; top: number; bottom: number },
+  b: { left: number; right: number; top: number; bottom: number }
+) {
+  return !(
+    a.right < b.left ||
+    a.left > b.right ||
+    a.bottom < b.top ||
+    a.top > b.bottom
   );
 }
 
-export default function MedEvalPanel({
-  eventId = "evt-1",
-  caseId = "unknown_case",
-  eventTitle = "MAP Drop",
-  episodeLabel = "Episode 1",
-  startMin = 84,
-  endMin = 102,
-  medBolusRows = [],
-  medInfusionRows = [],
-  annotatorName,
-  onSaveAndNextStep,
-}: MedEvalPanelProps) {
-  const candidateTreatments = React.useMemo(() => {
-    return extractTreatmentsFromWindow(
-      medBolusRows,
-      medInfusionRows,
-      startMin,
-      endMin
-    );
-  }, [medBolusRows, medInfusionRows, startMin, endMin]);
+function getInfusionLabelRects(
+  rows: MedRow[],
+  end: number
+) {
+  const rectsByRow = new Map<
+    number,
+    Array<{ left: number; right: number; top: number; bottom: number }>
+  >();
 
-  const noTreatmentCaptured = candidateTreatments.length === 0;
+  for (const row of rows) {
+    const rowRects: Array<{ left: number; right: number; top: number; bottom: number }> = [];
 
-  const [interventionNote, setInterventionNote] = React.useState("");
-  const [selectedTreatment, setSelectedTreatment] = React.useState("");
+    for (const seg of row.infusion) {
+      const x1 = (Number(seg.start) / end) * 100;
+      const x2 = (Math.max(Number(seg.end), Number(seg.start) + 0.1) / end) * 100;
 
-  const [timing, setTiming] = React.useState<TimingValue>("");
-  const [choice, setChoice] = React.useState<ChoiceValue>("");
-  const [dose, setDose] = React.useState<DoseValue>("");
-  const [overallJudgment, setOverallJudgment] =
-    React.useState<OverallJudgmentValue>("");
-  const [rationale, setRationale] = React.useState("");
+      const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
+      const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
 
-  const [treatmentEvalMap, setTreatmentEvalMap] = React.useState<
-    Record<string, TreatmentEval>
-  >({});
+      const widthPercent = x2 - x1;
+      const label =
+        seg.rate !== undefined && seg.rate !== null
+          ? `${formatMedNumber(Number(seg.rate))}`
+          : "";
 
-  const [recordingTarget, setRecordingTarget] = React.useState<
-    "intervention" | "rationale" | null
-  >(null);
-  const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
-  const [saveMessage, setSaveMessage] = React.useState("");
+      const labelWidth = Math.max(18, label.length * 6 + 10);
+      const labelHeight = 12;
 
-  const recognitionRef = React.useRef<any>(null);
-  const panelOpenedAtRef = React.useRef<number | null>(null);
+      if (widthPercent <= 0 || !label) continue;
 
-  React.useEffect(() => {
-    panelOpenedAtRef.current = Date.now();
-  }, [caseId, eventId]);
-
-  function buildCurrentTreatmentEval(): TreatmentEval {
-    return {
-      timing,
-      choice,
-      dose,
-      overallJudgment,
-      rationale,
-    };
-  }
-
-  function persistCurrentTreatmentToMap(targetTreatment?: string) {
-    const treatmentKey = targetTreatment ?? selectedTreatment;
-    if (!treatmentKey) return;
-
-    setTreatmentEvalMap((prev) => ({
-      ...prev,
-      [treatmentKey]: buildCurrentTreatmentEval(),
-    }));
-  }
-
-  function loadTreatmentFromMap(treatmentKey: string) {
-    const saved = treatmentEvalMap[treatmentKey];
-
-    setTiming(saved?.timing ?? "");
-    setChoice(saved?.choice ?? "");
-    setDose(saved?.dose ?? "");
-    setOverallJudgment(saved?.overallJudgment ?? "");
-    setRationale(saved?.rationale ?? "");
-  }
-
-  React.useEffect(() => {
-    if (candidateTreatments.length === 0) {
-      setSelectedTreatment("");
-      setTiming("");
-      setChoice("");
-      setDose("");
-      setOverallJudgment("");
-      setRationale("");
-      return;
-    }
-
-    setSelectedTreatment((prev) => {
-      const next =
-        prev && candidateTreatments.includes(prev)
-          ? prev
-          : candidateTreatments[0];
-
-      const saved = treatmentEvalMap[next];
-      setTiming(saved?.timing ?? "");
-      setChoice(saved?.choice ?? "");
-      setDose(saved?.dose ?? "");
-      setOverallJudgment(saved?.overallJudgment ?? "");
-      setRationale(saved?.rationale ?? "");
-
-      return next;
-    });
-  }, [candidateTreatments, treatmentEvalMap]);
-
-  const completedTreatmentCount = React.useMemo(() => {
-    return candidateTreatments.filter((t) =>
-      isTreatmentEvalComplete(treatmentEvalMap[t])
-    ).length;
-  }, [candidateTreatments, treatmentEvalMap]);
-
-  const currentTreatmentIndex = selectedTreatment
-    ? Math.max(
-        0,
-        candidateTreatments.findIndex((item) => item === selectedTreatment)
-      )
-    : -1;
-
-  const treatmentProgressLabel =
-    candidateTreatments.length > 0
-      ? `${completedTreatmentCount}/${candidateTreatments.length} completed`
-      : "Skipped (no treatment captured)";
-
-  function validateMedEval() {
-    if (!interventionNote || interventionNote.trim() === "") {
-      return "Task 1 incomplete: please describe whether intervention was needed and what was most important.";
-    }
-
-    if (noTreatmentCaptured) {
-      return null;
-    }
-
-    const mergedMap: Record<string, TreatmentEval> = {
-      ...treatmentEvalMap,
-    };
-
-    if (selectedTreatment) {
-      mergedMap[selectedTreatment] = buildCurrentTreatmentEval();
-    }
-
-    const unfinished = candidateTreatments.filter(
-      (treatment) => !isTreatmentEvalComplete(mergedMap[treatment])
-    );
-
-    if (unfinished.length > 0) {
-      return `You must complete all treatments before saving. Remaining: ${unfinished.length}.`;
-    }
-
-    return null;
-  }
-
-  async function startVoiceNote(target: "intervention" | "rationale") {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      setSaveStatus("error");
-      setSaveMessage(
-        "Speech recognition is not supported in this browser. Please use Chrome or Edge."
-      );
-      return;
-    }
-
-    try {
-      recognitionRef.current?.stop?.();
-
-      const recognition = new SpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = true;
-      recognition.continuous = true;
-
-      recognition.onresult = (e: any) => {
-        const transcript = Array.from(e.results)
-          .map((r: any) => r[0].transcript)
-          .join("");
-
-        if (target === "intervention") {
-          setInterventionNote(transcript);
-        } else {
-          setRationale(transcript);
-        }
-      };
-
-      recognition.onerror = () => {
-        setRecordingTarget(null);
-      };
-
-      recognition.onend = () => {
-        setRecordingTarget(null);
-      };
-
-      recognition.start();
-      recognitionRef.current = recognition;
-      setRecordingTarget(target);
-      setSaveStatus("idle");
-      setSaveMessage("");
-    } catch {
-      setRecordingTarget(null);
-      setSaveStatus("error");
-      setSaveMessage("Failed to start voice note.");
-    }
-  }
-
-  function stopVoiceNote() {
-    recognitionRef.current?.stop?.();
-    setRecordingTarget(null);
-  }
-
-  async function handleSaveMedEval() {
-    const mergedTreatmentEvalMap: Record<string, TreatmentEval> =
-      noTreatmentCaptured
-        ? {}
-        : {
-            ...treatmentEvalMap,
-            ...(selectedTreatment
-              ? {
-                  [selectedTreatment]: buildCurrentTreatmentEval(),
-                }
-              : {}),
-          };
-
-    if (!noTreatmentCaptured && selectedTreatment) {
-      setTreatmentEvalMap(mergedTreatmentEvalMap);
-    }
-
-    const validationError = validateMedEval();
-    if (validationError) {
-      setSaveStatus("error");
-      setSaveMessage(validationError);
-      return;
-    }
-
-    try {
-      setSaveStatus("saving");
-      setSaveMessage("");
-
-      await submitAnnotation({
-        annotator: annotatorName ? { name: annotatorName } : undefined,
-        caseId,
-        eventId,
-        panel: "med_eval_panel",
-        action: noTreatmentCaptured ? "skip" : "submit",
-        panelOpenedAt: panelOpenedAtRef.current,
-        answers: {
-          eventTitle,
-          episodeLabel,
-          startMin,
-          endMin,
-          treatmentCaptured: !noTreatmentCaptured,
-          treatmentSkipped: noTreatmentCaptured,
-          skipReason: noTreatmentCaptured
-            ? "No medication was captured within this event window and the following 10 minutes."
-            : "",
-          interventionNote: interventionNote.trim(),
-          selectedTreatment: noTreatmentCaptured ? "" : selectedTreatment,
-          candidateTreatments,
-          treatmentEvalMap: mergedTreatmentEvalMap,
-        },
+      rowRects.push({
+        left: x1,
+        right: x2,
+        top: yTop,
+        bottom: yBottom + labelHeight,
       });
-
-      setSaveStatus("success");
-      setSaveMessage(
-        noTreatmentCaptured
-          ? "No treatment was captured. Tasks 2–4 were skipped and the panel was saved successfully."
-          : "All treatments were completed and saved successfully."
-      );
-
-      onSaveAndNextStep?.();
-    } catch (error: any) {
-      setSaveStatus("error");
-      setSaveMessage(error?.message || "Failed to save med evaluation.");
     }
+
+    rectsByRow.set(row.rowIndex, rowRects);
   }
 
-  function handleReset() {
-    setInterventionNote("");
-    setSelectedTreatment(candidateTreatments[0] ?? "");
-    setTiming("");
-    setChoice("");
-    setDose("");
-    setOverallJudgment("");
-    setRationale("");
-    setTreatmentEvalMap({});
-    setRecordingTarget(null);
-    recognitionRef.current?.stop?.();
-    setSaveStatus("idle");
-    setSaveMessage("");
+  return rectsByRow;
+}
+
+function InfusionOverlay({
+  rows,
+  end,
+  contentPlotWidth,
+}: {
+  rows: MedRow[];
+  end: number;
+  contentPlotWidth: number;
+}) {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-20"
+      style={{ width: contentPlotWidth }}
+    >
+      <svg width={contentPlotWidth} height="100%" preserveAspectRatio="none">
+        {rows.flatMap((row) =>
+          row.infusion.map((seg, idx) => {
+            const x1 = (Number(seg.start) / end) * contentPlotWidth;
+            const x2 =
+              (Math.max(Number(seg.end), Number(seg.start) + 0.1) / end) *
+              contentPlotWidth;
+
+            const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
+            const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
+
+            const width = x2 - x1;
+            const color = inferColor(row.name);
+
+            const label =
+              seg.rate !== undefined && seg.rate !== null
+                ? `${formatMedNumber(Number(seg.rate))}`
+                : "";
+
+            const labelWidth = Math.max(18, label.length * 6 + 10);
+            const labelHeight = 12;
+
+            const preferredCenterX = x1 + width * 0.72;
+            const minCenterX = x1 + labelWidth / 2 + 2;
+            const maxCenterX = x2 - labelWidth / 2 - 2;
+            const labelCenterX = Math.max(minCenterX, Math.min(preferredCenterX, maxCenterX));
+
+            const labelY = yBottom - 1;
+            const showLabel = width >= labelWidth + 6 && !!label;
+
+            return (
+              <g key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}>
+                <line
+                  x1={x1}
+                  y1={yTop}
+                  x2={x1}
+                  y2={yBottom}
+                  stroke="#ffffff"
+                  strokeWidth={1.2}
+                  opacity={0.98}
+                />
+
+                <line
+                  x1={x2}
+                  y1={yTop}
+                  x2={x2}
+                  y2={yBottom}
+                  stroke="#ffffff"
+                  strokeWidth={1.2}
+                  opacity={0.98}
+                />
+
+                {showLabel && (
+                  <>
+                    <rect
+                      x={labelCenterX - labelWidth / 2}
+                      y={labelY - 9}
+                      width={labelWidth}
+                      height={labelHeight}
+                      rx={2}
+                      ry={2}
+                      fill="white"
+                      fillOpacity={0.92}
+                      stroke={color}
+                      strokeWidth={0.8}
+                    />
+                    <text
+                      x={labelCenterX}
+                      y={labelY}
+                      textAnchor="middle"
+                      fontSize={10}
+                      fill="#374151"
+                      fontWeight={500}
+                    >
+                      {label}
+                    </text>
+                  </>
+                )}
+              </g>
+            );
+          })
+        )}
+      </svg>
+    </div>
+  );
+}
+
+function BolusOverlay({
+  rows,
+  end,
+  contentPlotWidth,
+}: {
+  rows: MedRow[];
+  end: number;
+  contentPlotWidth: number;
+}) {
+  const infusionRectsByRow = getInfusionLabelRects(rows, end);
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-30"
+      style={{ width: contentPlotWidth }}
+    >
+      <svg width={contentPlotWidth} height="100%" preserveAspectRatio="none">
+        {rows.flatMap((row) =>
+          row.bolus.map((p, idx) => {
+            const cx = (Number(p.time) / end) * contentPlotWidth;
+            const cy = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.5;
+
+            const color = inferColor(row.name);
+            const text = String(p.label ?? `${p.dose} ${p.unit ?? ""}`.trim());
+
+            const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
+            const boxHeight = 16;
+
+            const arrowTipX = cx;
+            const arrowBaseX = cx + 6;
+
+            const defaultLeft = arrowBaseX;
+            const defaultTop = cy - boxHeight / 2;
+
+            const defaultRect = {
+              left: defaultLeft,
+              right: defaultLeft + boxWidth,
+              top: defaultTop,
+              bottom: defaultTop + boxHeight,
+            };
+
+            const rowInfusionRects = infusionRectsByRow.get(row.rowIndex) ?? [];
+            const hasOverlap = rowInfusionRects.some((r) => rectsOverlap(defaultRect, r));
+
+            const shiftedTop = cy + 6;
+            const finalLeft = defaultLeft;
+            const finalTop = hasOverlap ? shiftedTop : defaultTop;
+            const textY = finalTop + boxHeight / 2 + 4;
+
+            return (
+              <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
+                <line
+                  x1={arrowTipX}
+                  y1={cy - 9}
+                  x2={arrowTipX}
+                  y2={cy + 9}
+                  stroke={color}
+                  strokeWidth={1.2}
+                  opacity={0.9}
+                />
+
+                <polygon
+                  points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
+                  fill={color}
+                  stroke={color}
+                  strokeWidth={1}
+                />
+
+                {hasOverlap && (
+                  <line
+                    x1={arrowBaseX}
+                    y1={cy}
+                    x2={arrowBaseX}
+                    y2={finalTop + boxHeight / 2}
+                    stroke={color}
+                    strokeWidth={1}
+                    opacity={0.9}
+                  />
+                )}
+
+                <rect
+                  x={finalLeft}
+                  y={finalTop}
+                  width={boxWidth}
+                  height={boxHeight}
+                  rx={2}
+                  ry={2}
+                  fill="#dff7f3"
+                  stroke={color}
+                  strokeWidth={1.5}
+                />
+
+                <text
+                  x={finalLeft + boxWidth / 2}
+                  y={textY}
+                  textAnchor="middle"
+                  fontSize={10}
+                  fill="#1f2937"
+                >
+                  {text}
+                </text>
+              </g>
+            );
+          })
+        )}
+      </svg>
+    </div>
+  );
+}
+
+function FixedYAxisSpacer({ height }: { height: number }) {
+  return (
+    <div
+      className="border-r bg-white"
+      style={{ width: AXIS_COL_WIDTH, height }}
+    />
+  );
+}
+
+export default function MedicationChart({
+  title = "Medication Events",
+  medications,
+  height = 420,
+  xEnd,
+  xTicks,
+  showXAxis = true,
+  timeZero,
+  embedded = false,
+  highlightWindow = null,
+  sharedScrollLeft,
+  onSharedScrollLeftChange,
+}: MedicationChartProps) {
+  const rows = useMemo(() => buildRows(medications, xEnd), [medications, xEnd]);
+  const [hiddenNames, setHiddenNames] = useState<string[]>([]);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+    }
+  }, [sharedScrollLeft]);
+
+  const visibleRows = useMemo(
+    () => rows.filter((row) => !hiddenNames.includes(row.name)),
+    [rows, hiddenNames]
+  );
+
+  const visibleRowsReindexed = useMemo(
+    () => visibleRows.map((row, idx) => ({ ...row, rowIndex: idx })),
+    [visibleRows]
+  );
+
+  const bolusData = useMemo(
+    () => buildBolusScatter(visibleRowsReindexed, []),
+    [visibleRowsReindexed]
+  );
+
+  const maxTime = useMemo(() => getMaxTime(rows), [rows]);
+  const end = xEnd ?? Math.max(15, Math.ceil(maxTime / 15) * 15);
+
+  const ticks =
+    xTicks ??
+    Array.from({ length: Math.floor(end / 15) + 1 }, (_, i) => i * 15);
+
+  const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT;
+  const viewHeight = Math.min(height, Math.max(120, contentHeight));
+
+  const contentPlotWidth = useMemo(() => {
+    if (end <= 0) return 800;
+    return Math.max(800, Math.ceil(end * PX_PER_MIN));
+  }, [end]);
+
+  const contentWidth = contentPlotWidth + PLOT_RIGHT;
+
+  if (!rows.length) {
+    return embedded ? null : (
+      <div className="rounded-2xl border bg-white p-4 shadow-sm">
+        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+        <div className="text-sm text-gray-500">No medication data available.</div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-[640px] bg-white">
-      <div className="p-5">
-        <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 3B: Evaluate whether related medication treatment was appropriate
-          for the selected event.
-        </div>
+    <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+      {!embedded && title ? (
+        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+      ) : null}
 
-        <div className="overflow-hidden rounded-xl border">
-          <TaskBlock title="Task 1. What was the most important intervention and explain the reason?">
-            <div className="mb-1 text-sm text-gray-600">
-              For example medication, fluid, positioning, airway / ventilation
-              adjustment, or observation only and explain the reason.
-            </div>
+      <div
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
+        }}
+      >
+        <div className="border-r pr-0" style={{ height: viewHeight }}>
+          <div>
+            {rows.map((row) => {
+              const isHidden = hiddenNames.includes(row.name);
+              const color = inferColor(row.name);
+              const stripe = inferStripe(row.name);
+              const totalLabel = getMedicationTotalLabel(row);
+              const active = visibleRows.some((r) => r.name === row.name);
 
-            <textarea
-              value={interventionNote}
-              onChange={(e) => setInterventionNote(e.target.value)}
-              className="min-h-[80px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder="Fluid was more important than medication. Vasopressor was secondary because the hypotension was more consistent with reduced preload or relative hypovolemia, and restoring intravascular volume addressed the underlying cause more directly, while the vasopressor mainly provided temporary blood pressure support."
-            />
+              return (
+                <div
+                  key={row.name}
+                  className="relative grid items-center gap-1.5 px-2 text-sm"
+                  style={{
+                    height: ROW_HEIGHT,
+                    boxSizing: "border-box",
+                    gridTemplateColumns: "minmax(0,1fr) 68px 20px",
+                    backgroundColor: active ? "#efefef" : "#f7f7f7",
+                    opacity: isHidden ? 0.45 : 1,
+                    borderBottom: "1px solid #a3a3a3",
+                  }}
+                >
+                  <div className="min-w-0 truncate text-gray-900">{row.name}</div>
 
-            <div className="mt-3">
-              <button
-                type="button"
-                onClick={
-                  recordingTarget === "intervention"
-                    ? stopVoiceNote
-                    : () => startVoiceNote("intervention")
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  recordingTarget === "intervention"
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
-              >
-                {recordingTarget === "intervention"
-                  ? "Stop Recording"
-                  : "Start Recording"}
-              </button>
-            </div>
-          </TaskBlock>
+                  <div className="truncate text-right text-gray-700">{totalLabel}</div>
 
-          <TaskBlock title="Task 2. Select the treatment being evaluated">
-            <div className="mb-2 flex items-center gap-2 text-sm text-gray-600">
-              <span>Progress</span>
-              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-gray-600">
-                {treatmentProgressLabel}
-              </span>
-              {!noTreatmentCaptured && currentTreatmentIndex >= 0 && (
-                <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
-                  current {currentTreatmentIndex + 1}/{candidateTreatments.length}
-                </span>
-              )}
-            </div>
-
-            {noTreatmentCaptured ? (
-              <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
-                No medication was captured within this event window and the
-                following 10 minutes. Tasks 2–4 will be skipped automatically.
-              </div>
-            ) : (
-              <select
-                value={selectedTreatment}
-                onChange={(e) => {
-                  if (selectedTreatment) {
-                    persistCurrentTreatmentToMap(selectedTreatment);
-                  }
-
-                  const nextTreatment = e.target.value;
-                  setSelectedTreatment(nextTreatment);
-                  loadTreatmentFromMap(nextTreatment);
-                }}
-                className="w-full max-w-[720px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-              >
-                <option value="">Select treatment</option>
-                {candidateTreatments.map((item) => {
-                  const done = isTreatmentEvalComplete(treatmentEvalMap[item]);
-                  return (
-                    <option key={item} value={item}>
-                      {done ? "✓ " : ""}
-                      {item}
-                    </option>
-                  );
-                })}
-              </select>
-            )}
-          </TaskBlock>
-
-          <TaskBlock title="Task 3. Evaluate timing, treatment choice, dose, and overall judgment">
-            {noTreatmentCaptured ? (
-              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
-                Skipped because no treatment was captured for this event window.
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <div>
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                    Evaluate Timing
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <RadioPill
-                      label="Appropriate"
-                      selected={timing === "Appropriate"}
-                      selectedTone="green"
-                      onClick={() => setTiming("Appropriate")}
-                    />
-                    <RadioPill
-                      label="Delayed"
-                      selected={timing === "Delayed"}
-                      selectedTone="green"
-                      onClick={() => setTiming("Delayed")}
-                    />
-                    <RadioPill
-                      label="Too Early"
-                      selected={timing === "Too Early"}
-                      selectedTone="green"
-                      onClick={() => setTiming("Too Early")}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                    Choice
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <RadioPill
-                      label="Appropriate"
-                      selected={choice === "Appropriate"}
-                      selectedTone="orange"
-                      onClick={() => setChoice("Appropriate")}
-                    />
-                    <RadioPill
-                      label="Suboptimal"
-                      selected={choice === "Suboptimal"}
-                      selectedTone="orange"
-                      onClick={() => setChoice("Suboptimal")}
-                    />
-                    <RadioPill
-                      label="Inappropriate"
-                      selected={choice === "Inappropriate"}
-                      selectedTone="orange"
-                      onClick={() => setChoice("Inappropriate")}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                    Dose
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <RadioPill
-                      label="Too Low"
-                      selected={dose === "Too Low"}
-                      selectedTone="blue"
-                      onClick={() => setDose("Too Low")}
-                    />
-                    <RadioPill
-                      label="Reasonable"
-                      selected={dose === "Reasonable"}
-                      selectedTone="blue"
-                      onClick={() => setDose("Reasonable")}
-                    />
-                    <RadioPill
-                      label="Too High"
-                      selected={dose === "Too High"}
-                      selectedTone="blue"
-                      onClick={() => setDose("Too High")}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                    Overall Judgment
-                  </div>
-                  <select
-                    value={overallJudgment}
-                    onChange={(e) =>
-                      setOverallJudgment(e.target.value as OverallJudgmentValue)
-                    }
-                    className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-                  >
-                    <option value="">Select overall judgment</option>
-                    <option value="Appropriate">Appropriate</option>
-                    <option value="Mostly Appropriate">Mostly Appropriate</option>
-                    <option value="Mixed / Uncertain">Mixed / Uncertain</option>
-                    <option value="Suboptimal">Suboptimal</option>
-                    <option value="Inappropriate">Inappropriate</option>
-                  </select>
-                </div>
-              </div>
-            )}
-          </TaskBlock>
-
-          <TaskBlock title="Task 4. Please explain your treatment evaluation" noBorder>
-            {noTreatmentCaptured ? (
-              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
-                Skipped because no treatment was captured for this event window.
-              </div>
-            ) : (
-              <>
-                <div className="mb-3 text-sm text-gray-600">
-                  Please provide rationale using waveform trends, timing,
-                  medications, and perioperative context.
-                </div>
-
-                <textarea
-                  value={rationale}
-                  onChange={(e) => setRationale(e.target.value)}
-                  className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-                  placeholder="Describe the rationale for your medical treatment evaluation..."
-                />
-
-                <div className="mt-3">
                   <button
                     type="button"
-                    onClick={
-                      recordingTarget === "rationale"
-                        ? stopVoiceNote
-                        : () => startVoiceNote("rationale")
-                    }
-                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                      recordingTarget === "rationale"
-                        ? "bg-red-500 hover:bg-red-600"
-                        : "bg-orange-400 hover:bg-orange-500"
-                    }`}
+                    onClick={() => {
+                      setHiddenNames((prev) =>
+                        prev.includes(row.name)
+                          ? prev.filter((x) => x !== row.name)
+                          : [...prev, row.name]
+                      );
+                    }}
+                    className="shrink-0 cursor-pointer"
+                    title={isHidden ? `Show ${row.name}` : `Hide ${row.name}`}
                   >
-                    {recordingTarget === "rationale"
-                      ? "Stop Recording"
-                      : "Start Recording"}
+                    <LegendSwatch color={color} stripe={stripe} />
                   </button>
                 </div>
-              </>
-            )}
-          </TaskBlock>
+              );
+            })}
+          </div>
+        </div>
 
-          <div className="border-t px-4 py-4">
-            <div className="mb-3 text-sm text-gray-500">
-              {noTreatmentCaptured
-                ? "No treatment captured. Only Task 1 is required before saving."
-                : "All treatments must be completed before saving."}
+        <FixedYAxisSpacer height={viewHeight} />
+
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto overflow-y-hidden"
+          style={{ height: viewHeight }}
+          onScroll={(e) => {
+            onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+          }}
+        >
+          <div className="relative" style={{ width: contentWidth, height: contentHeight }}>
+            <div className="absolute inset-0 z-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart
+                  margin={{
+                    top: 0,
+                    right: PLOT_RIGHT,
+                    left: 0,
+                    bottom: showXAxis ? 24 : 0,
+                  }}
+                >
+                  <XAxis
+                    type="number"
+                    dataKey="x"
+                    domain={[0, end]}
+                    ticks={ticks}
+                    interval={0}
+                    allowDecimals={false}
+                    tick={false}
+                    axisLine={false}
+                    tickLine={false}
+                    height={0}
+                  />
+
+                  <YAxis
+                    type="number"
+                    dataKey="y"
+                    domain={[-0.5, Math.max(0, visibleRowsReindexed.length - 0.5)]}
+                    ticks={visibleRowsReindexed.map((row) => row.rowIndex)}
+                    tick={false}
+                    axisLine={false}
+                    tickLine={false}
+                    reversed
+                    width={0}
+                  />
+
+                  <ZAxis range={[30, 30]} />
+
+                  {highlightWindow ? (
+                    <ReferenceArea
+                      x1={highlightWindow.startMin}
+                      x2={highlightWindow.endMin}
+                      y1={-0.5}
+                      y2={Math.max(0, visibleRowsReindexed.length - 0.5)}
+                      fill="lightblue"
+                      fillOpacity={0.45}
+                      strokeOpacity={0}
+                    />
+                  ) : null}
+
+                  {visibleRowsReindexed.flatMap((row) =>
+                    row.infusion.map((seg, idx) => (
+                      <ReferenceArea
+                        key={`inf-${row.name}-${idx}-${seg.start}-${seg.end}`}
+                        x1={Number(seg.start)}
+                        x2={Math.max(Number(seg.end), Number(seg.start) + 0.1)}
+                        y1={row.rowIndex - 0.17}
+                        y2={row.rowIndex + 0.17}
+                        fill={inferColor(row.name)}
+                        fillOpacity={1}
+                        stroke={inferColor(row.name)}
+                        strokeWidth={1}
+                      />
+                    ))
+                  )}
+
+                  <Tooltip
+                    content={
+                      <MedicationTooltip
+                        labelFormatter={(v) => formatClockTime(v, timeZero)}
+                      />
+                    }
+                  />
+
+                  <Scatter
+                    data={bolusData}
+                    shape={(_props: any) => <g />}
+                  />
+                </ScatterChart>
+              </ResponsiveContainer>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={handleReset}
-                className="rounded-md border border-gray-700 bg-gray-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
-              >
-                Reset All
-              </button>
+            <div className="absolute inset-0 z-10 pointer-events-none">
+              <svg width={contentPlotWidth} height={contentHeight} preserveAspectRatio="none">
+                {ticks.map((tick) => {
+                  const x = tick * PX_PER_MIN;
+                  return (
+                    <line
+                      key={`grid-x-${tick}`}
+                      x1={x}
+                      y1={0}
+                      x2={x}
+                      y2={contentHeight}
+                      stroke="#d1d5db"
+                      strokeWidth={1}
+                    />
+                  );
+                })}
 
-              <button
-                type="button"
-                onClick={handleSaveMedEval}
-                disabled={saveStatus === "saving"}
-                className={`rounded-md px-4 py-2.5 text-sm font-medium text-white ${
-                  saveStatus === "saving"
-                    ? "cursor-wait bg-blue-300"
-                    : "bg-blue-600 hover:bg-blue-700"
-                }`}
-              >
-                {saveStatus === "saving"
-                  ? "Saving..."
-                  : noTreatmentCaptured
-                  ? "Skip Treatments & Next Step"
-                  : "Save All & Next Step"}
-              </button>
+                {Array.from({ length: visibleRowsReindexed.length + 1 }, (_, i) => i).map((i) => {
+                  const y = i * ROW_HEIGHT;
+                  return (
+                    <line
+                      key={`grid-y-${i}`}
+                      x1={0}
+                      y1={y}
+                      x2={contentPlotWidth}
+                      y2={y}
+                      stroke="#8f8f8f"
+                      strokeWidth={0.8}
+                    />
+                  );
+                })}
+
+                {showXAxis &&
+                  ticks.map((tick, idx) => {
+                    const x = tick * PX_PER_MIN;
+                    const isFirst = idx === 0;
+                    const isLast = idx === ticks.length - 1;
+
+                    return (
+                      <text
+                        key={`tick-label-${tick}`}
+                        x={x}
+                        y={contentHeight - 6}
+                        textAnchor={isFirst ? "start" : isLast ? "end" : "middle"}
+                        fontSize={10}
+                        fill="#6b7280"
+                      >
+                        {formatClockTime(Number(tick), timeZero)}
+                      </text>
+                    );
+                  })}
+              </svg>
             </div>
 
-            {saveMessage && (
-              <div
-                className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
-                  saveStatus === "success"
-                    ? "bg-green-50 text-green-700"
-                    : "bg-red-50 text-red-700"
-                }`}
-              >
-                {saveMessage}
-              </div>
-            )}
+            <InfusionOverlay
+              rows={visibleRowsReindexed}
+              end={end}
+              contentPlotWidth={contentPlotWidth}
+            />
+
+            <BolusOverlay
+              rows={visibleRowsReindexed}
+              end={end}
+              contentPlotWidth={contentPlotWidth}
+            />
+
+            <div className="absolute inset-0 z-40">
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart
+                  margin={{
+                    top: 0,
+                    right: PLOT_RIGHT,
+                    left: 0,
+                    bottom: showXAxis ? 24 : 0,
+                  }}
+                >
+                  <XAxis
+                    type="number"
+                    dataKey="x"
+                    domain={[0, end]}
+                    ticks={ticks}
+                    interval={0}
+                    allowDecimals={false}
+                    tick={false}
+                    axisLine={false}
+                    tickLine={false}
+                    height={0}
+                  />
+
+                  <YAxis
+                    type="number"
+                    dataKey="y"
+                    domain={[-0.5, Math.max(0, visibleRowsReindexed.length - 0.5)]}
+                    ticks={visibleRowsReindexed.map((row) => row.rowIndex)}
+                    tick={false}
+                    axisLine={false}
+                    tickLine={false}
+                    reversed
+                    width={0}
+                  />
+
+                  <ZAxis range={[30, 30]} />
+
+                  <Tooltip
+                    content={
+                      <MedicationTooltip
+                        labelFormatter={(v) => formatClockTime(v, timeZero)}
+                      />
+                    }
+                  />
+
+                  <Scatter
+                    data={bolusData}
+                    shape={(props: any) => {
+                      const { cx, cy, payload } = props;
+                      if (cx == null || cy == null || !payload) return <g />;
+
+                      return (
+                        <rect
+                          x={cx - 10}
+                          y={cy - 10}
+                          width={20}
+                          height={20}
+                          fill="transparent"
+                          stroke="transparent"
+                        />
+                      );
+                    }}
+                  />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
       </div>
+
+      {showXAxis && (
+        <div className="mt-1 text-xs text-gray-500">
+          Horizontal scroll enabled for long cases.
+        </div>
+      )}
     </div>
   );
 }

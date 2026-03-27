@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useRef, useState } from "react";
+
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   ResponsiveContainer,
@@ -8,7 +9,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
   ZAxis,
   ReferenceLine,
 } from "recharts";
@@ -46,6 +46,9 @@ type VitalChartProps = {
   selectedWindow?: SelectedWindow | null;
   onChangeSelectedWindow?: (window: SelectedWindow | null) => void;
   onCreateEventFromWindow?: (window: SelectedWindow) => void;
+
+  sharedScrollLeft?: number;
+  onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
 
 type MarkerType =
@@ -70,6 +73,14 @@ type DragMode =
   | "resize-bottom"
   | null;
 
+const LEGEND_COL_WIDTH = 220;
+const AXIS_COL_WIDTH = 42;
+const PLOT_RIGHT = 20;
+
+/** 每 15 分钟占多宽，决定整张图会不会更“展开” */
+const PX_PER_15_MIN = 64;
+const PX_PER_MIN = PX_PER_15_MIN / 15;
+
 function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] {
   return (series ?? [])
     .filter((p) => Number.isFinite(p.time) && Number.isFinite(p.value))
@@ -81,8 +92,9 @@ function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] 
 
 function getRowBackground(key: string) {
   if (key === "HR") return "#e4f3e4";
-  if (key === "ARTS" || key === "ARTD" || key === "ARTM" || key === "NIBP_MAP")
+  if (key === "ARTS" || key === "ARTD" || key === "ARTM" || key === "NIBP_MAP") {
     return "#ffdede";
+  }
   if (key === "SPO2 %") return "#e7e5ff";
   if (key === "RR") return "#e3f0ff";
   if (key === "CVP") return "#ece8ff";
@@ -275,43 +287,111 @@ function getSelectedSeriesKey(
   vital: DetectVital
 ): string | null {
   if (vital === "MAP") {
-    if (series["ARTM"]) return "ARTM";
-    if (series["NIBP_MAP"]) return "NIBP_MAP";
+    if ((series["NIBP_MAP"] ?? []).length) return "NIBP_MAP";
+    if ((series["ARTM"] ?? []).length) return "ARTM";
     return null;
   }
 
   if (vital === "HR") {
-    if (series["HR"]) return "HR";
+    if ((series["HR"] ?? []).length) return "HR";
     return null;
   }
 
   if (vital === "SPO2") {
-    if (series["SPO2 %"]) return "SPO2 %";
+    if ((series["SPO2 %"] ?? []).length) return "SPO2 %";
     return null;
   }
 
   if (vital === "RR") {
-    if (series["RR"]) return "RR";
+    if ((series["RR"] ?? []).length) return "RR";
     return null;
   }
 
   if (vital === "ETCO2") {
-    if (series["ETCO2"]) return "ETCO2";
-    if (series["ETCO2 (mmHg)"]) return "ETCO2 (mmHg)";
+    if ((series["ETCO2"] ?? []).length) return "ETCO2";
+    if ((series["ETCO2 (mmHg)"] ?? []).length) return "ETCO2 (mmHg)";
     return null;
   }
 
   if (vital === "TEMP") {
-    if (series["TEMP"]) return "TEMP";
-    if (series["TMP Bladder"]) return "TMP Bladder";
-    if (series["TMP Esophageal"]) return "TMP Esophageal";
-    if (series["TMP Blood"]) return "TMP Blood";
-    if (series["TMP Nasopharyngeal"]) return "TMP Nasopharyngeal";
-    if (series["TMP Rectal"]) return "TMP Rectal";
+    if ((series["TEMP"] ?? []).length) return "TEMP";
+    if ((series["TMP Bladder"] ?? []).length) return "TMP Bladder";
+    if ((series["TMP Esophageal"] ?? []).length) return "TMP Esophageal";
+    if ((series["TMP Blood"] ?? []).length) return "TMP Blood";
+    if ((series["TMP Nasopharyngeal"] ?? []).length) return "TMP Nasopharyngeal";
+    if ((series["TMP Rectal"] ?? []).length) return "TMP Rectal";
     return null;
   }
 
   return null;
+}
+
+function getExactValueAtTime(
+  series: Record<string, TimeValuePoint[] | undefined>,
+  key: string,
+  time: number
+): number | null {
+  const arr = series[key] ?? [];
+  if (!arr.length) return null;
+
+  let best: TimeValuePoint | null = null;
+  let bestDist = Infinity;
+
+  for (const p of arr) {
+    if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
+    const d = Math.abs(p.time - time);
+    if (d < bestDist) {
+      best = p;
+      bestDist = d;
+    }
+  }
+
+  return best ? best.value : null;
+}
+
+function getNearestPointTime(
+  series: Record<string, TimeValuePoint[] | undefined>,
+  vital: DetectVital,
+  targetTime: number
+): number | null {
+  if (vital === "MAP") {
+    const mapSeries = series["NIBP_MAP"] ?? series["ARTM"] ?? [];
+    if (!mapSeries.length) return null;
+
+    let best: TimeValuePoint | null = null;
+    let bestDist = Infinity;
+
+    for (const p of mapSeries) {
+      if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
+      const d = Math.abs(p.time - targetTime);
+      if (d < bestDist) {
+        best = p;
+        bestDist = d;
+      }
+    }
+
+    return best ? best.time : null;
+  }
+
+  const key = getSelectedSeriesKey(series, vital);
+  if (!key) return null;
+
+  const arr = series[key] ?? [];
+  if (!arr.length) return null;
+
+  let best: TimeValuePoint | null = null;
+  let bestDist = Infinity;
+
+  for (const p of arr) {
+    if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
+    const d = Math.abs(p.time - targetTime);
+    if (d < bestDist) {
+      best = p;
+      bestDist = d;
+    }
+  }
+
+  return best ? best.time : null;
 }
 
 function getWindowYBounds(
@@ -374,6 +454,46 @@ function getWindowYBounds(
   return { y1, y2 };
 }
 
+function FixedYAxis({
+  ticks,
+  height,
+  domainMin,
+  domainMax,
+  chartMarginTop,
+  chartMarginBottom,
+}: {
+  ticks: number[];
+  height: number;
+  domainMin: number;
+  domainMax: number;
+  chartMarginTop: number;
+  chartMarginBottom: number;
+}) {
+  const plotHeight = Math.max(1, height - chartMarginTop - chartMarginBottom);
+
+  return (
+    <div
+      className="relative border-r bg-white"
+      style={{ width: AXIS_COL_WIDTH, height }}
+    >
+      {ticks.map((tick) => {
+        const ratio = (domainMax - tick) / (domainMax - domainMin);
+        const top = chartMarginTop + ratio * plotHeight;
+
+        return (
+          <div
+            key={tick}
+            className="absolute right-1 -translate-y-1/2 text-[11px] text-gray-600"
+            style={{ top }}
+          >
+            {tick}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function VitalChart({
   title,
   series,
@@ -394,6 +514,8 @@ export default function VitalChart({
   selectedWindow = null,
   onChangeSelectedWindow,
   onCreateEventFromWindow,
+  sharedScrollLeft,
+  onSharedScrollLeftChange,
 }: VitalChartProps) {
   const keys = Object.keys(series).filter((key) =>
     (series[key] ?? []).some((x) => Number.isFinite(x.value))
@@ -403,6 +525,7 @@ export default function VitalChart({
   const [isDragging, setIsDragging] = useState(false);
   const [dragMode, setDragMode] = useState<DragMode>(null);
   const [hoverMode, setHoverMode] = useState<DragMode>(null);
+  const [hoverMinute, setHoverMinute] = useState<number | null>(null);
 
   const [dragStartMin, setDragStartMin] = useState<number | null>(null);
   const [dragCurrentMin, setDragCurrentMin] = useState<number | null>(null);
@@ -413,7 +536,17 @@ export default function VitalChart({
   const [moveOffsetY, setMoveOffsetY] = useState<number>(0);
   const [moveWindowHeightY, setMoveWindowHeightY] = useState<number>(0);
 
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const chartOverlayRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+    }
+  }, [sharedScrollLeft]);
 
   const visibleKeys = keys.filter((key) => !hiddenKeys.includes(key));
   const effectiveXEnd = xEnd ?? 0;
@@ -425,15 +558,21 @@ export default function VitalChart({
   const chartMarginBottom = showXAxis ? 15 : 10;
   const leftLegendTopSpacer = showTopTimeAxis ? 50 : 0;
 
-  function clampY(y: number) {
-    return Math.max(domainMin, Math.min(domainMax, y));
+  const contentPlotWidth = useMemo(() => {
+    if (effectiveXEnd <= 0) return 800;
+    return Math.max(800, Math.ceil(effectiveXEnd * PX_PER_MIN));
+  }, [effectiveXEnd]);
+
+  const contentWidth = contentPlotWidth + PLOT_RIGHT;
+  const plotWidth = contentWidth - PLOT_RIGHT;
+  
+  function minuteToPixel(minute: number) {
+    if (!effectiveXEnd || effectiveXEnd <= 0) return 0;
+    return (minute / effectiveXEnd) * plotWidth;
   }
 
-  function minuteToPixel(minute: number) {
-    const el = chartOverlayRef.current;
-    if (!el || effectiveXEnd <= 0) return 0;
-    const rect = el.getBoundingClientRect();
-    return (minute / effectiveXEnd) * rect.width;
+  function clampY(y: number) {
+    return Math.max(domainMin, Math.min(domainMax, y));
   }
 
   function valueToPixel(value: number) {
@@ -451,8 +590,10 @@ export default function VitalChart({
     if (!el || effectiveXEnd <= 0) return 0;
 
     const rect = el.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    return ratio * effectiveXEnd;
+    const xInPlot = clientX - rect.left;
+    const minute = xInPlot / PX_PER_MIN;
+
+    return Math.max(0, Math.min(effectiveXEnd, minute));
   }
 
   function clientYToValue(clientY: number) {
@@ -470,10 +611,7 @@ export default function VitalChart({
   }
 
   function pixelToMinute(px: number) {
-    const el = chartOverlayRef.current;
-    if (!el || effectiveXEnd <= 0) return 0;
-    const rect = el.getBoundingClientRect();
-    return (px / rect.width) * effectiveXEnd;
+    return px / PX_PER_MIN;
   }
 
   function pixelToValue(py: number) {
@@ -487,7 +625,7 @@ export default function VitalChart({
   function getHoverMode(minute: number, value: number): DragMode {
     if (!selectedWindow) return null;
 
-    const xEdgeThresholdMin = Math.max(pixelToMinute(16), 3);
+    const xEdgeThresholdMin = Math.max(pixelToMinute(16), 2);
     const yEdgeThresholdVal = Math.max(pixelToValue(16), 6);
 
     const { startMin, endMin, y1, y2 } = selectedWindow;
@@ -640,7 +778,7 @@ export default function VitalChart({
             ? autoCreateYBounds.y2
             : selectedWindow?.y2 ?? null;
 
-  const minCreateWidthMin = Math.max(pixelToMinute(6), 2);
+  const minCreateWidthMin = Math.max(pixelToMinute(10), 2);
 
   const displayWindow = useMemo(() => {
     if (
@@ -664,6 +802,7 @@ export default function VitalChart({
     }
 
     return {
+      vital: selectedDetectVital,
       startMin: activeStartMin,
       endMin: activeEndMin,
       y1: activeY1,
@@ -677,7 +816,121 @@ export default function VitalChart({
     isDragging,
     dragMode,
     minCreateWidthMin,
+    selectedDetectVital,
   ]);
+
+  const highlightWindowBox = useMemo(() => {
+    if (!selectedWindow) return null;
+
+    const left = minuteToPixel(selectedWindow.startMin);
+    const right = minuteToPixel(selectedWindow.endMin);
+
+    return {
+      left,
+      width: Math.max(2, right - left),
+    };
+  }, [selectedWindow]);
+
+  const statsWindow = useMemo(() => {
+    if (isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null) {
+      return {
+        vital: selectedDetectVital,
+        startMin: Math.min(dragStartMin, dragCurrentMin),
+        endMin: Math.max(dragStartMin, dragCurrentMin),
+      };
+    }
+
+    if (selectedWindow) {
+      return {
+        vital: selectedWindow.vital,
+        startMin: selectedWindow.startMin,
+        endMin: selectedWindow.endMin,
+      };
+    }
+
+    return null;
+  }, [
+    isDragging,
+    dragMode,
+    dragStartMin,
+    dragCurrentMin,
+    selectedDetectVital,
+    selectedWindow,
+  ]);
+
+  const windowStats = useMemo(() => {
+    if (!statsWindow) return null;
+
+    const selectedKey = getSelectedSeriesKey(series, statsWindow.vital);
+    if (!selectedKey) return null;
+
+    const data = (series[selectedKey] ?? []).filter(
+      (p) =>
+        Number.isFinite(p.time) &&
+        Number.isFinite(p.value) &&
+        p.time >= statsWindow.startMin &&
+        p.time <= statsWindow.endMin
+    );
+
+    if (!data.length) {
+      return {
+        startMin: Math.round(statsWindow.startMin),
+        endMin: Math.round(statsWindow.endMin),
+        duration: Math.round(statsWindow.endMin - statsWindow.startMin),
+        min: null,
+        max: null,
+      };
+    }
+
+    const values = data.map((p) => p.value);
+
+    return {
+      startMin: Math.round(statsWindow.startMin),
+      endMin: Math.round(statsWindow.endMin),
+      duration: Math.round(statsWindow.endMin - statsWindow.startMin),
+      min: Math.min(...values),
+      max: Math.max(...values),
+    };
+  }, [statsWindow, series]);
+
+  const hoverStats = useMemo(() => {
+    if (hoverMinute == null) return null;
+
+    const snappedTime = getNearestPointTime(series, selectedDetectVital, hoverMinute);
+    if (snappedTime == null) return null;
+
+    if (selectedDetectVital === "MAP") {
+      const sbp =
+        getExactValueAtTime(series, "NIBP_SBP", snappedTime) ??
+        getExactValueAtTime(series, "ARTS", snappedTime);
+
+      const dbp =
+        getExactValueAtTime(series, "NIBP_DBP", snappedTime) ??
+        getExactValueAtTime(series, "ARTD", snappedTime);
+
+      const map =
+        getExactValueAtTime(series, "NIBP_MAP", snappedTime) ??
+        getExactValueAtTime(series, "ARTM", snappedTime);
+
+      return {
+        time: snappedTime,
+        text:
+          sbp == null || dbp == null || map == null
+            ? "BP: -"
+            : `BP: ${Math.round(sbp)}/${Math.round(dbp)} (${Math.round(map)})`,
+      };
+    }
+
+    const key = getSelectedSeriesKey(series, selectedDetectVital);
+    if (!key) return null;
+
+    const value = getExactValueAtTime(series, key, snappedTime);
+
+    return {
+      time: snappedTime,
+      text: value == null ? "Value: -" : `Value: ${value.toFixed(1)}`,
+    };
+  }, [hoverMinute, series, selectedDetectVital]);
 
   const overlayBox = useMemo(() => {
     if (!displayWindow) return null;
@@ -709,19 +962,40 @@ export default function VitalChart({
     return "crosshair";
   }, [isDragging, dragMode, hoverMode]);
 
-  const topTimeSlots = useMemo(() => {
-    if (!showTopTimeAxis || !xTicks || xTicks.length < 2) return [];
+  const minorGridTicks = useMemo(() => {
+    if (!effectiveXEnd || effectiveXEnd <= 0) return [];
+    const ticks: number[] = [];
+    for (let t = 0; t <= effectiveXEnd; t += 5) {
+      ticks.push(t);
+    }
+    if (ticks[ticks.length - 1] !== effectiveXEnd) {
+      ticks.push(effectiveXEnd);
+    }
+    return ticks;
+  }, [effectiveXEnd]);
 
-    return xTicks.slice(0, -1).map((tick, idx) => {
-      const nextTick = xTicks[idx + 1];
-      const center = (tick + nextTick) / 2;
+  const majorGridTicks = useMemo(() => {
+    if (xTicks && xTicks.length > 0) return xTicks;
 
-      return {
-        center,
-        label: formatClockTime(tick, timeZero),
-      };
-    });
-  }, [showTopTimeAxis, xTicks, timeZero]);
+    if (!effectiveXEnd || effectiveXEnd <= 0) return [];
+    const ticks: number[] = [];
+    for (let t = 0; t <= effectiveXEnd; t += 15) {
+      ticks.push(t);
+    }
+    if (ticks[ticks.length - 1] !== effectiveXEnd) {
+      ticks.push(effectiveXEnd);
+    }
+    return ticks;
+  }, [xTicks, effectiveXEnd]);
+
+  const yTicks = useMemo(
+    () =>
+      Array.from(
+        { length: Math.floor((domainMax - domainMin) / 25) + 1 },
+        (_, i) => domainMin + i * 25
+      ),
+    [domainMin, domainMax]
+  );
 
   if (!keys.length) {
     return null;
@@ -729,11 +1003,12 @@ export default function VitalChart({
 
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
-      {!embedded && title ? (
-        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
-      ) : null}
+      {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
-      <div className="grid grid-cols-[220px_1fr] gap-0">
+      <div
+        className="grid gap-0"
+        style={{ gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)` }}
+      >
         <div className="border-r pr-0">
           <div style={{ height: leftLegendTopSpacer }} />
           <div className="space-y-1">
@@ -752,21 +1027,15 @@ export default function VitalChart({
                   }}
                 >
                   <div className="flex min-w-0 items-center gap-2">
-                    <span className="truncate text-gray-900">
-                      {lineLabels[key] ?? key}
-                    </span>
-                    {lineUnits[key] ? (
-                      <span className="text-xs text-gray-500">{lineUnits[key]}</span>
-                    ) : null}
+                    <span className="truncate text-gray-900">{lineLabels[key] ?? key}</span>
+                    {lineUnits[key] ? <span className="text-xs text-gray-500">{lineUnits[key]}</span> : null}
                   </div>
 
                   <button
                     type="button"
                     onClick={() => {
                       setHiddenKeys((prev) =>
-                        prev.includes(key)
-                          ? prev.filter((k) => k !== key)
-                          : [...prev, key]
+                        prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
                       );
                     }}
                     className="cursor-pointer transition hover:scale-105"
@@ -780,382 +1049,472 @@ export default function VitalChart({
           </div>
         </div>
 
-        <div className="relative" style={{ width: "100%", height }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <ScatterChart
-              margin={{
-                top: chartMarginTop,
-                right: 20,
-                left: 0,
-                bottom: chartMarginBottom,
-              }}
-            >
-              <CartesianGrid stroke="#cfcfcf" vertical={false} horizontal />
+        <FixedYAxis
+          ticks={yTicks}
+          height={height}
+          domainMin={domainMin}
+          domainMax={domainMax}
+          chartMarginTop={chartMarginTop}
+          chartMarginBottom={chartMarginBottom}
+        />
 
-              <XAxis
-                type="number"
-                dataKey="time"
-                name="time"
-                domain={[0, xEnd ?? "dataMax"]}
-                ticks={xTicks}
-                interval={0}
-                allowDecimals={false}
-                tick={false}
-                axisLine={false}
-                tickLine={false}
-                height={0}
-              />
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto overflow-y-hidden"
+          style={{ height }}
+          onScroll={(e) => {
+            onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+          }}
+        >
+          <div className="relative" style={{ width: contentWidth, height }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <ScatterChart
+                margin={{
+                  top: chartMarginTop,
+                  right: PLOT_RIGHT,
+                  left: 0,
+                  bottom: chartMarginBottom,
+                }}
+              >
+                <CartesianGrid stroke="transparent" vertical={false} horizontal={false} />
 
-              <YAxis
-                type="number"
-                dataKey="value"
-                domain={domain}
-                allowDataOverflow
-                ticks={Array.from(
-                  { length: Math.floor((domainMax - domainMin) / 25) + 1 },
-                  (_, i) => domainMin + i * 25
-                )}
-                width={35}
-              />
+                <XAxis
+                  type="number"
+                  dataKey="time"
+                  name="time"
+                  domain={[0, xEnd ?? "dataMax"]}
+                  ticks={majorGridTicks}
+                  interval={0}
+                  allowDecimals={false}
+                  tick={false}
+                  axisLine={false}
+                  tickLine={false}
+                  height={0}
+                />
 
-              <ZAxis range={[40, 40]} />
+                <YAxis hide type="number" dataKey="value" domain={domain} allowDataOverflow />
+                <ZAxis range={[40, 40]} />
 
-              {showTopTimeAxis &&
-                topTimeSlots.map((slot) => (
+                {minorGridTicks.map((tick) => (
                   <ReferenceLine
-                    key={`top-time-${slot.center}`}
-                    x={slot.center}
-                    strokeOpacity={0}
-                    label={{
-                      value: slot.label,
-                      position: "insideTop",
-                      offset: 10,
-                      fill: "#4b5563",
-                      fontSize: 16,
-                    }}
+                    key={`x-minor-${tick}`}
+                    x={tick}
+                    stroke="#d7dbe2"
+                    strokeWidth={0.9}
                   />
                 ))}
 
-              {(xTicks ?? []).map((tick) => (
-                <ReferenceLine
-                  key={`x-grid-${tick}`}
-                  x={tick}
-                  stroke="#b8b8b8"
-                  strokeWidth={1.1}
-                />
-              ))}
+                {majorGridTicks.map((tick) => (
+                  <ReferenceLine
+                    key={`x-major-${tick}`}
+                    x={tick}
+                    stroke="#9aa3b2"
+                    strokeWidth={1.4}
+                  />
+                ))}
 
-              <ReferenceLine y={domainMin} stroke="#4b5563" strokeWidth={2.2} />
+                {yTicks.map((tick) => (
+                  <ReferenceLine
+                    key={`y-grid-${tick}`}
+                    y={tick}
+                    stroke="#b0b7c3"
+                    strokeWidth={1.1}
+                  />
+                ))}
 
-              <Tooltip labelFormatter={(label) => `Time: ${label} min`} />
+                <ReferenceLine y={domainMin} stroke="#4b5563" strokeWidth={2.2} />
 
-              {visibleKeys.map((key) => (
-                <Scatter
-                  key={key}
-                  name={lineLabels[key] ?? key}
-                  data={buildScatterData(series[key])}
-                  fill={lineColors[key] ?? "#000000"}
-                  shape={(props: any) => (
-                    <EpicMarker
-                      cx={props.cx}
-                      cy={props.cy}
-                      fill={lineColors[key] ?? "#000000"}
-                      marker={(lineMarkers[key] as MarkerType) ?? "circle"}
-                      size={8}
-                    />
-                  )}
-                />
-              ))}
-            </ScatterChart>
-          </ResponsiveContainer>
+                {visibleKeys.map((key) => (
+                  <Scatter
+                    key={key}
+                    name={lineLabels[key] ?? key}
+                    data={buildScatterData(series[key])}
+                    fill={lineColors[key] ?? "#000000"}
+                    shape={(props: any) => (
+                      <EpicMarker
+                        cx={props.cx}
+                        cy={props.cy}
+                        fill={lineColors[key] ?? "#000000"}
+                        marker={(lineMarkers[key] as MarkerType) ?? "circle"}
+                        size={8}
+                      />
+                    )}
+                  />
+                ))}
+              </ScatterChart>
+            </ResponsiveContainer>
 
-          <div
-            ref={chartOverlayRef}
-            className="absolute inset-0 z-20"
-            style={{ cursor: interactionCursor }}
-            onMouseDown={(e) => {
-              if (effectiveXEnd <= 0) return;
+            {showTopTimeAxis && (
+              <div className="pointer-events-none absolute left-0 right-0 top-0 z-30 h-8">
+                {majorGridTicks.map((tick, idx) => {
+                  const left = minuteToPixel(tick);
+                  const isFirst = idx === 0;
+                  const isLast = idx === majorGridTicks.length - 1;
 
-              const minute = clientXToMinute(e.clientX);
-              const value = clientYToValue(e.clientY);
-              const hoveredMode = getHoverMode(minute, value);
-
-              if (selectedWindow && hoveredMode) {
-                const width = selectedWindow.endMin - selectedWindow.startMin;
-                const heightVal = selectedWindow.y2 - selectedWindow.y1;
-
-                if (hoveredMode === "resize-left") {
-                  setIsDragging(true);
-                  setDragMode("resize-left");
-                  setDragCurrentMin(minute);
-                  setDragCurrentY(null);
-                  return;
-                }
-
-                if (hoveredMode === "resize-right") {
-                  setIsDragging(true);
-                  setDragMode("resize-right");
-                  setDragCurrentMin(minute);
-                  setDragCurrentY(null);
-                  return;
-                }
-
-                if (hoveredMode === "resize-top") {
-                  setIsDragging(true);
-                  setDragMode("resize-top");
-                  setDragCurrentY(value);
-                  setDragCurrentMin(null);
-                  return;
-                }
-
-                if (hoveredMode === "resize-bottom") {
-                  setIsDragging(true);
-                  setDragMode("resize-bottom");
-                  setDragCurrentY(value);
-                  setDragCurrentMin(null);
-                  return;
-                }
-
-                if (hoveredMode === "move") {
-                  setIsDragging(true);
-                  setDragMode("move");
-                  setDragCurrentMin(minute);
-                  setDragCurrentY(value);
-                  setMoveOffsetMin(minute - selectedWindow.startMin);
-                  setMoveWindowWidthMin(width);
-                  setMoveOffsetY(value - selectedWindow.y1);
-                  setMoveWindowHeightY(heightVal);
-                  return;
-                }
-              }
-
-              setIsDragging(true);
-              setDragMode("create");
-              setDragStartMin(minute);
-              setDragCurrentMin(minute);
-              setDragCurrentY(null);
-            }}
-            onMouseMove={(e) => {
-              const minute = clientXToMinute(e.clientX);
-              const value = clientYToValue(e.clientY);
-
-              if (!isDragging) {
-                setHoverMode(getHoverMode(minute, value));
-                return;
-              }
-
-              setDragCurrentMin(minute);
-              setDragCurrentY(value);
-            }}
-            onMouseUp={(e) => {
-              if (!isDragging) return;
-
-              const minute = clientXToMinute(e.clientX);
-              const value = clientYToValue(e.clientY);
-
-              let nextWindow: SelectedWindow | null = null;
-
-              if (dragMode === "create") {
-                const start = dragStartMin ?? minute;
-                const s = Math.round(Math.min(start, minute));
-                const t = Math.round(Math.max(start, minute));
-
-                if (t > s) {
-                  const bounds = getWindowYBounds(series, selectedDetectVital, s, t, yDomain);
-                  if (bounds) {
-                    nextWindow = {
-                      vital: selectedDetectVital,
-                      startMin: s,
-                      endMin: t,
-                      y1: bounds.y1,
-                      y2: bounds.y2,
-                    };
-                  }
-                }
-              }
-
-              if (dragMode === "resize-left" && selectedWindow) {
-                const s = Math.round(Math.min(minute, selectedWindow.endMin - 1));
-                nextWindow = {
-                  ...selectedWindow,
-                  vital: selectedDetectVital,
-                  startMin: Math.max(0, s),
-                };
-              }
-
-              if (dragMode === "resize-right" && selectedWindow) {
-                const t = Math.round(Math.max(minute, selectedWindow.startMin + 1));
-                nextWindow = {
-                  ...selectedWindow,
-                  vital: selectedDetectVital,
-                  endMin: Math.min(effectiveXEnd, t),
-                };
-              }
-
-              if (dragMode === "resize-top" && selectedWindow) {
-                const newY2 = Math.max(value, selectedWindow.y1 + 1);
-                nextWindow = {
-                  ...selectedWindow,
-                  vital: selectedDetectVital,
-                  y2: clampY(newY2),
-                };
-              }
-
-              if (dragMode === "resize-bottom" && selectedWindow) {
-                const newY1 = Math.min(value, selectedWindow.y2 - 1);
-                nextWindow = {
-                  ...selectedWindow,
-                  vital: selectedDetectVital,
-                  y1: clampY(newY1),
-                };
-              }
-
-              if (dragMode === "move" && selectedWindow) {
-                const newStart = Math.max(
-                  0,
-                  Math.min(minute - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
-                );
-                const newY1 = Math.max(
-                  domainMin,
-                  Math.min(value - moveOffsetY, domainMax - moveWindowHeightY)
-                );
-
-                nextWindow = {
-                  ...selectedWindow,
-                  vital: selectedDetectVital,
-                  startMin: Math.round(newStart),
-                  endMin: Math.round(newStart + moveWindowWidthMin),
-                  y1: newY1,
-                  y2: newY1 + moveWindowHeightY,
-                };
-              }
-
-              if (nextWindow) {
-                onChangeSelectedWindow?.(nextWindow);
-                if (dragMode === "create") {
-                  onCreateEventFromWindow?.(nextWindow);
-                }
-              }
-
-              setIsDragging(false);
-              setDragMode(null);
-              setHoverMode(null);
-              setDragStartMin(null);
-              setDragCurrentMin(null);
-              setDragCurrentY(null);
-              setMoveOffsetMin(0);
-              setMoveWindowWidthMin(0);
-              setMoveOffsetY(0);
-              setMoveWindowHeightY(0);
-            }}
-            onMouseLeave={() => {
-              if (!isDragging) {
-                setHoverMode(null);
-              }
-            }}
-          >
-            {overlayBox && (
-              <div
-                className="pointer-events-none absolute"
-                style={{
-                  left: overlayBox.left,
-                  top: overlayBox.top,
-                  width: overlayBox.width,
-                  height: overlayBox.height,
-                  background: "rgba(250, 230, 40, 0.22)",
-                  border: "4px solid #e6d200",
-                  boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    left: -18,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    color: "#f97316",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    lineHeight: 1,
-                    textShadow: "0 0 3px white",
-                  }}
-                >
-                  ◀
-                </div>
-
-                <div
-                  style={{
-                    position: "absolute",
-                    right: -18,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    color: "#f97316",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    lineHeight: 1,
-                    textShadow: "0 0 3px white",
-                  }}
-                >
-                  ▶
-                </div>
-
-                <div
-                  style={{
-                    position: "absolute",
-                    left: -6,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    width: 12,
-                    height: 28,
-                    borderRadius: 6,
-                    background: "#f97316",
-                    border: "2px solid white",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    right: -6,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    width: 12,
-                    height: 28,
-                    borderRadius: 6,
-                    background: "#f97316",
-                    border: "2px solid white",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    left: "50%",
-                    top: -6,
-                    transform: "translateX(-50%)",
-                    width: 28,
-                    height: 12,
-                    borderRadius: 6,
-                    background: "#f97316",
-                    border: "2px solid white",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    left: "50%",
-                    bottom: -6,
-                    transform: "translateX(-50%)",
-                    width: 28,
-                    height: 12,
-                    borderRadius: 6,
-                    background: "#f97316",
-                    border: "2px solid white",
-                  }}
-                />
+                  return (
+                    <div
+                      key={`top-tick-${tick}`}
+                      className="absolute top-0 whitespace-nowrap text-xs text-gray-700"
+                      style={{
+                        left,
+                        transform: isFirst
+                          ? "translateX(0)"
+                          : isLast
+                          ? "translateX(-100%)"
+                          : "translateX(-50%)",
+                      }}
+                    >
+                      {formatClockTime(tick, timeZero)}
+                    </div>
+                  );
+                })}
               </div>
             )}
+
+            <div
+              ref={chartOverlayRef}
+              className="absolute inset-0 z-20"
+              style={{ cursor: interactionCursor }}
+              onMouseDown={(e) => {
+                if (effectiveXEnd <= 0) return;
+
+                const minute = clientXToMinute(e.clientX);
+                const value = clientYToValue(e.clientY);
+                const hoveredMode = getHoverMode(minute, value);
+
+                if (selectedWindow && hoveredMode) {
+                  const width = selectedWindow.endMin - selectedWindow.startMin;
+                  const heightVal = selectedWindow.y2 - selectedWindow.y1;
+
+                  if (hoveredMode === "resize-left") {
+                    setIsDragging(true);
+                    setDragMode("resize-left");
+                    setDragCurrentMin(minute);
+                    setDragCurrentY(null);
+                    return;
+                  }
+
+                  if (hoveredMode === "resize-right") {
+                    setIsDragging(true);
+                    setDragMode("resize-right");
+                    setDragCurrentMin(minute);
+                    setDragCurrentY(null);
+                    return;
+                  }
+
+                  if (hoveredMode === "resize-top") {
+                    setIsDragging(true);
+                    setDragMode("resize-top");
+                    setDragCurrentY(value);
+                    setDragCurrentMin(null);
+                    return;
+                  }
+
+                  if (hoveredMode === "resize-bottom") {
+                    setIsDragging(true);
+                    setDragMode("resize-bottom");
+                    setDragCurrentY(value);
+                    setDragCurrentMin(null);
+                    return;
+                  }
+
+                  if (hoveredMode === "move") {
+                    setIsDragging(true);
+                    setDragMode("move");
+                    setDragCurrentMin(minute);
+                    setDragCurrentY(value);
+                    setMoveOffsetMin(minute - selectedWindow.startMin);
+                    setMoveWindowWidthMin(width);
+                    setMoveOffsetY(value - selectedWindow.y1);
+                    setMoveWindowHeightY(heightVal);
+                    return;
+                  }
+                }
+
+                setIsDragging(true);
+                setDragMode("create");
+                setDragStartMin(minute);
+                setDragCurrentMin(minute);
+                setDragCurrentY(null);
+              }}
+              onMouseMove={(e) => {
+                const minute = clientXToMinute(e.clientX);
+                const value = clientYToValue(e.clientY);
+
+                if (!isDragging) {
+                  setHoverMode(getHoverMode(minute, value));
+                  setHoverMinute(minute);
+                  return;
+                }
+
+                setDragCurrentMin(minute);
+                setDragCurrentY(value);
+              }}
+              onMouseUp={(e) => {
+                if (!isDragging) return;
+
+                const minute = clientXToMinute(e.clientX);
+                const value = clientYToValue(e.clientY);
+
+                let nextWindow: SelectedWindow | null = null;
+
+                if (dragMode === "create") {
+                  const start = dragStartMin ?? minute;
+                  const s = Math.round(Math.min(start, minute));
+                  const t = Math.round(Math.max(start, minute));
+
+                  if (t > s) {
+                    const bounds = getWindowYBounds(series, selectedDetectVital, s, t, yDomain);
+                    if (bounds) {
+                      nextWindow = {
+                        vital: selectedDetectVital,
+                        startMin: s,
+                        endMin: t,
+                        y1: bounds.y1,
+                        y2: bounds.y2,
+                      };
+                    }
+                  }
+                }
+
+                if (dragMode === "resize-left" && selectedWindow) {
+                  const s = Math.round(Math.min(minute, selectedWindow.endMin - 1));
+                  nextWindow = {
+                    ...selectedWindow,
+                    vital: selectedWindow.vital,
+                    startMin: Math.max(0, s),
+                  };
+                }
+
+                if (dragMode === "resize-right" && selectedWindow) {
+                  const t = Math.round(Math.max(minute, selectedWindow.startMin + 1));
+                  nextWindow = {
+                    ...selectedWindow,
+                    vital: selectedWindow.vital,
+                    endMin: Math.min(effectiveXEnd, t),
+                  };
+                }
+
+                if (dragMode === "resize-top" && selectedWindow) {
+                  const newY2 = Math.max(value, selectedWindow.y1 + 1);
+                  nextWindow = {
+                    ...selectedWindow,
+                    vital: selectedWindow.vital,
+                    y2: clampY(newY2),
+                  };
+                }
+
+                if (dragMode === "resize-bottom" && selectedWindow) {
+                  const newY1 = Math.min(value, selectedWindow.y2 - 1);
+                  nextWindow = {
+                    ...selectedWindow,
+                    vital: selectedWindow.vital,
+                    y1: clampY(newY1),
+                  };
+                }
+
+                if (dragMode === "move" && selectedWindow) {
+                  const newStart = Math.max(
+                    0,
+                    Math.min(minute - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
+                  );
+                  const newY1 = Math.max(
+                    domainMin,
+                    Math.min(value - moveOffsetY, domainMax - moveWindowHeightY)
+                  );
+
+                  nextWindow = {
+                    ...selectedWindow,
+                    vital: selectedWindow.vital,
+                    startMin: Math.round(newStart),
+                    endMin: Math.round(newStart + moveWindowWidthMin),
+                    y1: newY1,
+                    y2: newY1 + moveWindowHeightY,
+                  };
+                }
+
+                if (nextWindow) {
+                  onChangeSelectedWindow?.(nextWindow);
+                  if (dragMode === "create") {
+                    onCreateEventFromWindow?.(nextWindow);
+                  }
+                }
+
+                setIsDragging(false);
+                setDragMode(null);
+                setHoverMode(null);
+                setDragStartMin(null);
+                setDragCurrentMin(null);
+                setDragCurrentY(null);
+                setMoveOffsetMin(0);
+                setMoveWindowWidthMin(0);
+                setMoveOffsetY(0);
+                setMoveWindowHeightY(0);
+              }}
+              onMouseLeave={() => {
+                if (!isDragging) {
+                  setHoverMode(null);
+                  setHoverMinute(null);
+                }
+              }}
+            >
+              {hoverStats && !isDragging && (
+                <div
+                  className="pointer-events-none absolute rounded-md border bg-white px-3 py-2 text-xs shadow"
+                  style={{
+                    left: Math.min(minuteToPixel(hoverStats.time) + 8, contentWidth - 220),
+                    top: chartMarginTop + 8,
+                    zIndex: 1000,
+                    color: "#111827",
+                    lineHeight: 1.35,
+                    maxWidth: 200,
+                  }}
+                >
+                  <div className="font-semibold">
+                    Time: {formatClockTime(hoverStats.time, timeZero)}
+                  </div>
+                  <div>{hoverStats.text}</div>
+                </div>
+              )}
+
+              {windowStats && (
+                <div
+                  className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
+                  style={{
+                    left: 8,
+                    top: 40,
+                    zIndex: 999,
+                    color: "#111827",
+                    lineHeight: 1.35,
+                  }}
+                >
+                  <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
+                  <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
+                  <div>Dur: {windowStats.duration} min</div>
+                  <div>Min: {windowStats.min == null ? "-" : windowStats.min.toFixed(1)}</div>
+                  <div>Max: {windowStats.max == null ? "-" : windowStats.max.toFixed(1)}</div>
+                </div>
+              )}
+
+              {highlightWindowBox && (
+                <div
+                  className="pointer-events-none absolute"
+                  style={{
+                    left: highlightWindowBox.left,
+                    top: chartMarginTop,
+                    width: highlightWindowBox.width,
+                    height: `calc(100% - ${chartMarginTop + chartMarginBottom}px)`,
+                    background: "lightblue",
+                    opacity: 0.45,
+                    border: "none",
+                  }}
+                />
+              )}
+
+              {overlayBox && (
+                <div
+                  className="pointer-events-none absolute"
+                  style={{
+                    left: overlayBox.left,
+                    top: overlayBox.top,
+                    width: overlayBox.width,
+                    height: overlayBox.height,
+                    background: "rgba(250, 230, 40, 0.22)",
+                    border: "4px solid #e6d200",
+                    boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: -18,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      color: "#f97316",
+                      fontSize: 18,
+                      fontWeight: 700,
+                      lineHeight: 1,
+                      textShadow: "0 0 3px white",
+                    }}
+                  >
+                    ◀
+                  </div>
+
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: -18,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      color: "#f97316",
+                      fontSize: 18,
+                      fontWeight: 700,
+                      lineHeight: 1,
+                      textShadow: "0 0 3px white",
+                    }}
+                  >
+                    ▶
+                  </div>
+
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: -6,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: 12,
+                      height: 28,
+                      borderRadius: 6,
+                      background: "#f97316",
+                      border: "2px solid white",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: -6,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: 12,
+                      height: 28,
+                      borderRadius: 6,
+                      background: "#f97316",
+                      border: "2px solid white",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      top: -6,
+                      transform: "translateX(-50%)",
+                      width: 28,
+                      height: 12,
+                      borderRadius: 6,
+                      background: "#f97316",
+                      border: "2px solid white",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      bottom: -6,
+                      transform: "translateX(-50%)",
+                      width: 28,
+                      height: 12,
+                      borderRadius: 6,
+                      background: "#f97316",
+                      border: "2px solid white",
+                    }}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   );
 }

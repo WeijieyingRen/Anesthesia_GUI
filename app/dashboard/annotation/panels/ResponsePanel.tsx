@@ -15,40 +15,6 @@ type ResponsePanelProps = {
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
-type ResponseValue = "Yes" | "No" | "Unknown" | "";
-
-function ResponsePill({
-  label,
-  selected,
-  onClick,
-  selectedTone = "green",
-}: {
-  label: string;
-  selected: boolean;
-  onClick: () => void;
-  selectedTone?: "green" | "orange" | "gray";
-}) {
-  const toneClass =
-    selectedTone === "green"
-      ? "border-green-500 bg-green-100 text-green-700"
-      : selectedTone === "orange"
-      ? "border-orange-400 bg-orange-100 text-orange-700"
-      : "border-slate-500 bg-slate-100 text-slate-700";
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
-        selected
-          ? toneClass
-          : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
 
 function TaskBlock({
   title,
@@ -77,8 +43,8 @@ export default function ResponsePanel({
   annotatorName,
   onSaveAndNextStep,
 }: ResponsePanelProps) {
-  const [response, setResponse] = React.useState<ResponseValue>("");
-  const [etiology, setEtiology] = React.useState("");
+  const [responseNarrative, setResponseNarrative] = React.useState("");
+
   const [recording, setRecording] = React.useState(false);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
@@ -90,17 +56,10 @@ export default function ResponsePanel({
     panelOpenedAtRef.current = Date.now();
   }, [caseId, eventId]);
 
-  const needEtiology = response === "No" || response === "Unknown";
-
   function validateResponse() {
-    if (!response) {
-      return "Task 1 incomplete: please evaluate patient response.";
+    if (!responseNarrative.trim()) {
+      return "Task incomplete: please briefly describe the episode, intervention(s), and physiologic response.";
     }
-
-    if (needEtiology && !etiology.trim()) {
-      return "Task 2 incomplete: please provide etiology when response is No or Unknown.";
-    }
-
     return null;
   }
 
@@ -127,7 +86,7 @@ export default function ResponsePanel({
         const transcript = Array.from(e.results)
           .map((r: any) => r[0].transcript)
           .join("");
-        setEtiology(transcript);
+        setResponseNarrative(transcript);
       };
 
       recognition.onerror = () => {
@@ -179,14 +138,12 @@ export default function ResponsePanel({
           episodeLabel,
           startMin,
           endMin,
-          response,
-          etiology: etiology.trim(),
+          responseNarrative: responseNarrative.trim(),
         },
       });
 
       setSaveStatus("success");
       setSaveMessage("Patient response evaluation saved successfully.");
-
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
@@ -195,8 +152,7 @@ export default function ResponsePanel({
   }
 
   function handleReset() {
-    setResponse("");
-    setEtiology("");
+    setResponseNarrative("");
     setRecording(false);
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
@@ -207,72 +163,29 @@ export default function ResponsePanel({
     <div className="min-h-[640px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 4: Evaluate whether the patient improved as expected after the intervention.
+          Panel 4: Describe the patient’s physiologic course during and after intervention.
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-          <TaskBlock title="Task 1. Evaluate patient response">
-            <div className="mb-3 text-sm text-gray-600">
-              Did the patient improve as expected after the intervention?
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <ResponsePill
-                label="Yes"
-                selected={response === "Yes"}
-                selectedTone="green"
-                onClick={() => setResponse("Yes")}
-              />
-              <ResponsePill
-                label="No"
-                selected={response === "No"}
-                selectedTone="orange"
-                onClick={() => setResponse("No")}
-              />
-              <ResponsePill
-                label="Unknown"
-                selected={response === "Unknown"}
-                selectedTone="gray"
-                onClick={() => setResponse("Unknown")}
-              />
-            </div>
-          </TaskBlock>
-
           <TaskBlock
-            title={`Task 2. ${
-              needEtiology
-                ? "Voice note / etiology explanation"
-                : "Provide possible causes or explanations for why the patient did not improve as expected. Unknown if not sure."
-            }`}
+            title="Task 1. Briefly describe the episode, which intervention(s) were used, and how the patient’s physiology changed in response over time."
             noBorder
           >
-            <div className="mb-3 text-sm text-gray-600">
-              {needEtiology
-                ? "Please provide possible causes or explanations for why the patient did not improve as expected."
-                : "Add optional notes if needed."}
-            </div>
+      
 
             <textarea
-              value={etiology}
-              onChange={(e) => setEtiology(e.target.value)}
-              disabled={!needEtiology && response === "Yes"}
-              className="min-h-[140px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
-              placeholder={
-                needEtiology
-                  ? "Provide possible causes or explanations..."
-                  : "Optional notes..."
-              }
+              value={responseNarrative}
+              onChange={(e) => setResponseNarrative(e.target.value)}
+              className="min-h-[120px] w-full max-w-[600px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+              placeholder="Example: MAP dropped first, phenylephrine was given, blood pressure improved transiently, and later became more stable after fluid administration."
             />
 
             <div className="mt-3">
               <button
                 type="button"
                 onClick={recording ? stopVoiceNote : startVoiceNote}
-                disabled={!needEtiology && response === "Yes"}
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  !needEtiology && response === "Yes"
-                    ? "cursor-not-allowed bg-gray-300"
-                    : recording
+                className={`rounded-md px-3 py-2 text-sm font-semibold text-white ${
+                  recording
                     ? "bg-red-500 hover:bg-red-600"
                     : "bg-orange-400 hover:bg-orange-500"
                 }`}
@@ -284,7 +197,7 @@ export default function ResponsePanel({
 
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">
-              All required tasks must be completed before saving.
+              Complete the required task before saving.
             </div>
 
             <div className="flex flex-wrap gap-3">

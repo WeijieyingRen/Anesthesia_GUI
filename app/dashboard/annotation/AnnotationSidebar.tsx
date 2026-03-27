@@ -13,9 +13,8 @@ type AnnotationSidebarProps = {
 
 const TASK_ORDER: AnnotationTaskKey[] = [
   "detect",
+  "prevention",
   "mechanism",
-  "gasEval",
-  "medEval",
   "fluidEval",
   "response",
 ];
@@ -50,7 +49,7 @@ export default function AnnotationSidebar({
                   onSelectEvent(event.id);
                 }
               }}
-              className={`w-full rounded-xl border px-2.5 py-1.5 text-left transition cursor-pointer ${
+              className={`w-full cursor-pointer rounded-xl border px-2.5 py-1.5 text-left transition ${
                 hasAnyCompleted
                   ? active
                     ? "border-gray-400 bg-gray-200"

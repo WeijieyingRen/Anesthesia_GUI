@@ -17,6 +17,12 @@ type MechanismPanelProps = {
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
+type VoiceTarget = "othersNote" | "rankingNote" | null;
+
+type MechanismAtom = {
+  displayId: string;
+  label: string;
+};
 
 const MECHANISM_OPTIONS: Partial<Record<EventType, string[]>> = {
   Hypotension: [
@@ -34,7 +40,7 @@ const MECHANISM_OPTIONS: Partial<Record<EventType, string[]>> = {
     "Inadequate anesthesia depth",
     "Hypervolemia",
     "Sympathetic surge",
-    "Medication withdrawal",
+    "Medication wearing off",
     "Measurement artifact",
     "Unknown",
   ],
@@ -108,12 +114,12 @@ const MECHANISM_OPTIONS: Partial<Record<EventType, string[]>> = {
 };
 
 function MechanismChip({
-  label,
+  atom,
   selected,
   disabled,
   onClick,
 }: {
-  label: string;
+  atom: MechanismAtom;
   selected: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -123,7 +129,7 @@ function MechanismChip({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`rounded-xl border px-3 py-2 text-left text-sm font-medium transition ${
+      className={`min-h-[44px] rounded-lg border px-3 py-2 text-left transition ${
         selected
           ? "border-green-500 bg-green-100 text-green-700"
           : disabled
@@ -131,24 +137,56 @@ function MechanismChip({
           : "border-gray-300 bg-white text-gray-700 hover:border-orange-300 hover:text-orange-500"
       }`}
     >
-      {label}
+      <div className="text-[12px] leading-5 font-medium">
+        <span className="text-gray-500">{atom.displayId}-</span>
+        <span>{atom.label}</span>
+      </div>
     </button>
   );
 }
 
 function TaskBlock({
   title,
+  titleRight,
   children,
   noBorder = false,
 }: {
-  title: string;
+  title: React.ReactNode;
+  titleRight?: React.ReactNode;
   children: React.ReactNode;
   noBorder?: boolean;
 }) {
   return (
     <div className={`${noBorder ? "" : "border-b"} px-4 py-4`}>
-      <div className="mb-3 text-sm font-semibold text-gray-900">{title}</div>
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="text-sm font-semibold text-gray-900">{title}</div>
+        {titleRight ? <div className="shrink-0">{titleRight}</div> : null}
+      </div>
       {children}
+    </div>
+  );
+}
+
+function InfoTooltip({ text }: { text: string }) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-sm font-semibold text-gray-500 hover:border-orange-300 hover:text-orange-500"
+      >
+        ?
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-9 z-50 w-80 rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
+          {text}
+        </div>
+      )}
     </div>
   );
 }
@@ -164,31 +202,56 @@ export default function MechanismPanel({
   annotatorName,
   onSaveAndNextStep,
 }: MechanismPanelProps) {
-  const options = MECHANISM_OPTIONS[eventType] ?? [];
-  const [selectedMechanisms, setSelectedMechanisms] = React.useState<string[]>([]);
-  const [note, setNote] = React.useState("");
-  const [recording, setRecording] = React.useState(false);
+  const mechanismAtoms = React.useMemo(() => {
+    const base = MECHANISM_OPTIONS[eventType] ?? [];
+    const labels = base.includes("Others") ? base : [...base, "Others"];
+
+    return labels.map((label, index) => ({
+      displayId: `M${index + 1}`,
+      label,
+    }));
+  }, [eventType]);
+
+  const [selectedMechanisms, setSelectedMechanisms] = React.useState<string[]>(
+    []
+  );
+  const [othersNote, setOthersNote] = React.useState("");
+  const [rankingNote, setRankingNote] = React.useState("");
+  const [recordingTarget, setRecordingTarget] =
+    React.useState<VoiceTarget>(null);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const recognitionRef = React.useRef<any>(null);
   const panelOpenedAtRef = React.useRef<number | null>(null);
 
+  const hasOthersSelected = selectedMechanisms.includes("Others");
+
   React.useEffect(() => {
     panelOpenedAtRef.current = Date.now();
   }, [caseId, eventId]);
 
-  function toggleMechanism(option: string) {
+  function toggleMechanism(label: string) {
     setSelectedMechanisms((prev) => {
-      if (prev.includes(option)) {
-        return prev.filter((item) => item !== option);
+      if (prev.includes(label)) {
+        return prev.filter((item) => item !== label);
       }
       if (prev.length >= 3) {
         return prev;
       }
-      return [...prev, option];
+      return [...prev, label];
     });
   }
+
+  React.useEffect(() => {
+    if (!hasOthersSelected) {
+      setOthersNote("");
+      if (recordingTarget === "othersNote") {
+        recognitionRef.current?.stop?.();
+        setRecordingTarget(null);
+      }
+    }
+  }, [hasOthersSelected, recordingTarget]);
 
   function validateMechanism() {
     if (!eventType) {
@@ -199,14 +262,18 @@ export default function MechanismPanel({
       return "Task 1 incomplete: please choose at least one mechanism label.";
     }
 
-    if (!note || note.trim() === "") {
-      return "Task 2 incomplete: please enter a free-text explanation before saving.";
+    if (hasOthersSelected && !othersNote.trim()) {
+      return "Task 2 incomplete: please explain what you mean by 'Others'.";
+    }
+
+    if (!rankingNote.trim()) {
+      return "Task 3 incomplete: please provide a confidence ranking note.";
     }
 
     return null;
   }
 
-  async function startVoiceNote() {
+  async function startVoiceNote(target: Exclude<VoiceTarget, null>) {
     const SpeechRecognition =
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
@@ -220,6 +287,8 @@ export default function MechanismPanel({
     }
 
     try {
+      recognitionRef.current?.stop?.();
+
       const recognition = new SpeechRecognition();
       recognition.lang = "en-US";
       recognition.interimResults = true;
@@ -229,24 +298,29 @@ export default function MechanismPanel({
         const transcript = Array.from(e.results)
           .map((r: any) => r[0].transcript)
           .join("");
-        setNote(transcript);
+
+        if (target === "othersNote") {
+          setOthersNote(transcript);
+        } else if (target === "rankingNote") {
+          setRankingNote(transcript);
+        }
       };
 
       recognition.onerror = () => {
-        setRecording(false);
+        setRecordingTarget(null);
       };
 
       recognition.onend = () => {
-        setRecording(false);
+        setRecordingTarget(null);
       };
 
       recognition.start();
       recognitionRef.current = recognition;
-      setRecording(true);
+      setRecordingTarget(target);
       setSaveStatus("idle");
       setSaveMessage("");
     } catch {
-      setRecording(false);
+      setRecordingTarget(null);
       setSaveStatus("error");
       setSaveMessage("Failed to start voice note.");
     }
@@ -254,7 +328,7 @@ export default function MechanismPanel({
 
   function stopVoiceNote() {
     recognitionRef.current?.stop?.();
-    setRecording(false);
+    setRecordingTarget(null);
   }
 
   async function handleSaveMechanism() {
@@ -268,6 +342,10 @@ export default function MechanismPanel({
     try {
       setSaveStatus("saving");
       setSaveMessage("");
+
+      const selectedMechanismAtoms = mechanismAtoms.filter((atom) =>
+        selectedMechanisms.includes(atom.label)
+      );
 
       await submitAnnotation({
         annotator: annotatorName ? { name: annotatorName } : undefined,
@@ -283,7 +361,9 @@ export default function MechanismPanel({
           startMin,
           endMin,
           selectedMechanisms,
-          note: note.trim(),
+          selectedMechanismAtoms,
+          othersNote: othersNote.trim(),
+          rankingNote: rankingNote.trim(),
         },
       });
 
@@ -298,8 +378,9 @@ export default function MechanismPanel({
 
   function handleReset() {
     setSelectedMechanisms([]);
-    setNote("");
-    setRecording(false);
+    setOthersNote("");
+    setRankingNote("");
+    setRecordingTarget(null);
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
     setSaveMessage("");
@@ -309,7 +390,8 @@ export default function MechanismPanel({
     <div className="min-h-[640px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 2: Identify the most likely mechanism for the selected abnormal event.
+          Panel 2: Identify the most likely mechanism for the selected abnormal
+          event.
         </div>
 
         <div className="overflow-hidden rounded-xl border">
@@ -321,23 +403,23 @@ export default function MechanismPanel({
               </span>
             </div>
 
-            {options.length === 0 ? (
+            {mechanismAtoms.length === 0 ? (
               <div className="text-sm text-gray-500">
                 No mechanism list configured for this event type yet.
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                {options.map((item) => {
-                  const selected = selectedMechanisms.includes(item);
+              <div className="grid grid-cols-2 gap-2">
+                {mechanismAtoms.map((atom) => {
+                  const selected = selectedMechanisms.includes(atom.label);
                   const disabled = !selected && selectedMechanisms.length >= 3;
 
                   return (
                     <MechanismChip
-                      key={item}
-                      label={item}
+                      key={atom.displayId}
+                      atom={atom}
                       selected={selected}
                       disabled={disabled}
-                      onClick={() => toggleMechanism(item)}
+                      onClick={() => toggleMechanism(atom.label)}
                     />
                   );
                 })}
@@ -345,37 +427,86 @@ export default function MechanismPanel({
             )}
           </TaskBlock>
 
-          <TaskBlock title="Task 2. Free-text explanation of the likely etiology" noBorder>
-            <div className="mb-3 text-sm text-gray-600">
-              Please explain the likely etiology based on waveform trends, medications,
-              timing, and perioperative context.
-            </div>
-
+          <TaskBlock
+            title="Task 2. If 'Others' is selected, explain it"
+            titleRight={
+              <InfoTooltip text="This field is only required when you select 'Others' in Task 1. Otherwise, it can be skipped." />
+            }
+          >
             <textarea
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              className="min-h-[140px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder="Describe the likely etiology, including supporting context from waveform trends, medications, and pre-op status if relevant."
+              value={othersNote}
+              onChange={(e) => setOthersNote(e.target.value)}
+              disabled={!hasOthersSelected}
+              className="min-h-[120px] w-full rounded-md border px-3 py-3 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
+              placeholder={
+                hasOthersSelected
+                  ? "Briefly explain what you mean by 'Others' and why the predefined mechanism labels do not fit well."
+                  : "This field is only required if 'Others' is selected."
+              }
             />
 
             <div className="mt-3">
               <button
                 type="button"
-                onClick={recording ? stopVoiceNote : startVoiceNote}
+                onClick={
+                  recordingTarget === "othersNote"
+                    ? stopVoiceNote
+                    : () => startVoiceNote("othersNote")
+                }
+                disabled={!hasOthersSelected}
                 className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  recording
+                  !hasOthersSelected
+                    ? "cursor-not-allowed bg-gray-300"
+                    : recordingTarget === "othersNote"
                     ? "bg-red-500 hover:bg-red-600"
                     : "bg-orange-400 hover:bg-orange-500"
                 }`}
               >
-                {recording ? "Stop Voice Note" : "Start Voice Note"}
+                {recordingTarget === "othersNote"
+                  ? "Stop Voice Note"
+                  : "Start Voice Note"}
+              </button>
+            </div>
+          </TaskBlock>
+
+          <TaskBlock
+            title="Task 3. Confidence Ranking"
+            titleRight={
+              <InfoTooltip text="Briefly rank the selected mechanisms by confidence using the displayed IDs, for example: M4 > M2 > M1." />
+            }
+            noBorder
+          >
+            <textarea
+              value={rankingNote}
+              onChange={(e) => setRankingNote(e.target.value)}
+              className="min-h-[100px] w-full rounded-md border px-3 py-3 text-sm text-gray-800 outline-none focus:border-orange-400"
+              placeholder="Example: M4 > M2 > M1"
+            />
+
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={
+                  recordingTarget === "rankingNote"
+                    ? stopVoiceNote
+                    : () => startVoiceNote("rankingNote")
+                }
+                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                  recordingTarget === "rankingNote"
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-orange-400 hover:bg-orange-500"
+                }`}
+              >
+                {recordingTarget === "rankingNote"
+                  ? "Stop Voice Note"
+                  : "Start Voice Note"}
               </button>
             </div>
           </TaskBlock>
 
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">
-              All tasks must be completed before saving.
+              Complete the required tasks before saving.
             </div>
 
             <div className="flex flex-wrap gap-3">

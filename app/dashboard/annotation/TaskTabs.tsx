@@ -9,10 +9,9 @@ type TaskTabsProps = {
 
 const TASKS: Array<{ key: AnnotationTaskKey; label: string }> = [
   { key: "detect", label: "Detect" },
+  { key: "prevention", label: "Prevention" },
   { key: "mechanism", label: "Mechanism" },
-  { key: "gasEval", label: "Gas Eval" },
-  { key: "medEval", label: "Med Eval" },
-  { key: "fluidEval", label: "Fluid Eval" },
+  { key: "fluidEval", label: "Intervention" },
   { key: "response", label: "Response" },
 ];
 

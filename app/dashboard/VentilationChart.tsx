@@ -1,16 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { TimeValuePoint } from "@/lib/types";
 
-const RECHARTS_LEFT_MARGIN = 8;
-const RECHARTS_RIGHT_MARGIN = 20;
-const RECHARTS_YAXIS_WIDTH = 35;
+const LEGEND_COL_WIDTH = 220;
+const AXIS_COL_WIDTH = 42;
+const PLOT_RIGHT = 20;
 
-const PLOT_LEFT = RECHARTS_LEFT_MARGIN + RECHARTS_YAXIS_WIDTH;
-const PLOT_RIGHT = RECHARTS_RIGHT_MARGIN;
-const SVG_WIDTH = 1000;
-const PLOT_WIDTH = SVG_WIDTH - PLOT_LEFT - PLOT_RIGHT;
+/** 和 Vital 保持一致 */
+const PX_PER_15_MIN = 64;
+const PX_PER_MIN = PX_PER_15_MIN / 15;
 
 type HighlightWindow = {
   startMin: number;
@@ -28,6 +27,9 @@ type VentilationChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+
+  sharedScrollLeft?: number;
+  onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
 
 type VentRow = {
@@ -130,11 +132,14 @@ function buildWindowSegments(rows: VentRow[], windowSize: number): VentWindowSeg
       const points = row.values.filter((p) => p.time >= start && p.time < stop);
       if (!points.length) continue;
 
+      const segStart = points[0].time;
+      const segEnd = points[points.length - 1].time;
+
       segments.push({
         rowName: row.name,
         rowIndex: row.rowIndex,
-        x0: start,
-        x1: stop,
+        x0: segStart,
+        x1: Math.max(segEnd, segStart + 0.5),
         points,
         firstValue: points[0].value,
       });
@@ -220,6 +225,19 @@ function estimateTextWidth(text: string, fontSize = 10) {
   return Math.max(10, text.length * (fontSize * 0.62));
 }
 
+function FixedYAxisSpacer({
+  height,
+}: {
+  height: number;
+}) {
+  return (
+    <div
+      className="relative border-r bg-white"
+      style={{ width: AXIS_COL_WIDTH, height }}
+    />
+  );
+}
+
 export default function VentilationChart({
   title = "Ventilation Trends",
   ventilation,
@@ -231,10 +249,22 @@ export default function VentilationChart({
   timeZero,
   embedded = false,
   highlightWindow = null,
+  sharedScrollLeft,
+  onSharedScrollLeftChange,
 }: VentilationChartProps) {
   const rows = useMemo(() => buildRows(ventilation), [ventilation]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+    }
+  }, [sharedScrollLeft]);
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
   const visibleRowsReindexed = visibleRows.map((row, idx) => ({ ...row, rowIndex: idx }));
@@ -251,8 +281,16 @@ export default function VentilationChart({
     [visibleRowsReindexed, windowSize]
   );
 
-  const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT;
+  const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
   const viewHeight = Math.min(height, Math.max(120, contentHeight));
+
+  const contentPlotWidth = useMemo(() => {
+    if (finalXEnd <= 0) return 800;
+    return Math.max(800, Math.ceil(finalXEnd * PX_PER_MIN));
+  }, [finalXEnd]);
+
+  const contentWidth = contentPlotWidth + PLOT_RIGHT;
+  const plotWidth = contentPlotWidth;
 
   const detailWidth = 760;
   const detailHeight = 220;
@@ -276,83 +314,91 @@ export default function VentilationChart({
       {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
-          className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-          style={{ height: viewHeight }}
-        >
-        <div className="grid grid-cols-[220px_1fr] gap-0">
-          <div className="border-r pr-0" style={{ height: contentHeight }}>
+        className="grid gap-0"
+        style={{ gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)` }}
+      >
+        <div className="border-r pr-0" style={{ height: contentHeight }}>
           <div>
-              {rows.map((row) => {
-                const hidden = hiddenNames.includes(row.name);
-                const active = visibleRowsReindexed.some((r) => r.name === row.name);
-                const color = inferVentColor(row.name);
+            {rows.map((row) => {
+              const hidden = hiddenNames.includes(row.name);
+              const active = visibleRowsReindexed.some((r) => r.name === row.name);
+              const color = inferVentColor(row.name);
 
-                return (
-                  <div
-                    key={row.name}
-                    className="flex items-center justify-between gap-2 px-2 text-sm"
-                    style={{
-                      height: ROW_HEIGHT,
-                      backgroundColor: active ? "#efefef" : "#f7f7f7",
-                      opacity: hidden ? 0.45 : 1,
-                      borderBottom: "1px solid #d1d5db",
-                    }}
-                  >
-                    <div className="min-w-0 flex-1 truncate text-gray-900">
-                      {getVentDisplayName(row.name)}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setHiddenNames((prev) =>
-                          prev.includes(row.name)
-                            ? prev.filter((x) => x !== row.name)
-                            : [...prev, row.name]
-                        );
-                      }}
-                      className="h-4 w-4 shrink-0 border"
-                      style={{ backgroundColor: color, borderColor: color }}
-                      title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
-                    />
+              return (
+                <div
+                  key={row.name}
+                  className="flex items-center justify-between gap-2 px-2 text-sm"
+                  style={{
+                    height: ROW_HEIGHT,
+                    backgroundColor: active ? "#efefef" : "#f7f7f7",
+                    opacity: hidden ? 0.45 : 1,
+                    borderBottom: "1px solid #d1d5db",
+                  }}
+                >
+                  <div className="min-w-0 flex-1 truncate text-gray-900">
+                    {getVentDisplayName(row.name)}
                   </div>
-                );
-              })}
-            </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHiddenNames((prev) =>
+                        prev.includes(row.name)
+                          ? prev.filter((x) => x !== row.name)
+                          : [...prev, row.name]
+                      );
+                    }}
+                    className="h-4 w-4 shrink-0 border"
+                    style={{ backgroundColor: color, borderColor: color }}
+                    title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
+                  />
+                </div>
+              );
+            })}
           </div>
+        </div>
 
+        <FixedYAxisSpacer height={contentHeight} />
+
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto overflow-y-hidden"
+          style={{ height: viewHeight }}
+          onScroll={(e) => {
+            onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+          }}
+        >
           <div
             style={{
-              width: "100%",
+              width: contentWidth,
               height: contentHeight,
-              marginLeft: "-1px",
             }}
           >
             <svg
-              width="100%"
+              width={contentWidth}
               height={contentHeight}
-              viewBox={`0 0 ${SVG_WIDTH} ${contentHeight}`}
+              viewBox={`0 0 ${contentWidth} ${contentHeight}`}
               preserveAspectRatio="none"
             >
               {visibleRowsReindexed.map((row, idx) => {
-                const yTop = idx * ROW_HEIGHT;
+                const yTop = TOP_PAD + idx * ROW_HEIGHT;
                 const yBottom = yTop + ROW_HEIGHT;
 
                 return (
                   <g key={`row-${row.name}`}>
-                    <line
-                      x1={0}
-                      y1={yBottom}
-                      x2={PLOT_LEFT}
-                      y2={yBottom}
+                    <rect
+                      x={0}
+                      y={yTop}
+                      width={plotWidth}
+                      height={ROW_HEIGHT}
+                      fill="none"
                       stroke="#d1d5db"
                       strokeWidth={1}
                     />
-                    <rect
-                      x={PLOT_LEFT}
-                      y={yTop}
-                      width={PLOT_WIDTH}
-                      height={ROW_HEIGHT}
-                      fill="none"
+                    <line
+                      x1={0}
+                      y1={yBottom}
+                      x2={plotWidth}
+                      y2={yBottom}
                       stroke="#d1d5db"
                       strokeWidth={1}
                     />
@@ -362,11 +408,11 @@ export default function VentilationChart({
 
               {highlightWindow && (
                 <rect
-                  x={PLOT_LEFT + (highlightWindow.startMin / finalXEnd) * PLOT_WIDTH}
+                  x={(highlightWindow.startMin / finalXEnd) * plotWidth}
                   y={0}
                   width={Math.max(
                     2,
-                    ((highlightWindow.endMin - highlightWindow.startMin) / finalXEnd) * PLOT_WIDTH
+                    ((highlightWindow.endMin - highlightWindow.startMin) / finalXEnd) * plotWidth
                   )}
                   height={contentHeight}
                   fill="lightblue"
@@ -376,7 +422,7 @@ export default function VentilationChart({
               )}
 
               {finalXTicks.map((tick) => {
-                const x = PLOT_LEFT + (tick / finalXEnd) * PLOT_WIDTH;
+                const x = (tick / finalXEnd) * plotWidth;
                 return (
                   <g key={`tick-${tick}`}>
                     <line
@@ -401,8 +447,8 @@ export default function VentilationChart({
                 const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
                 const centerY = rowTop + ROW_HEIGHT / 2;
 
-                const segLeft = PLOT_LEFT + (seg.x0 / finalXEnd) * PLOT_WIDTH;
-                const segRight = PLOT_LEFT + (seg.x1 / finalXEnd) * PLOT_WIDTH;
+                const segLeft = (seg.x0 / finalXEnd) * plotWidth;
+                const segRight = (seg.x1 / finalXEnd) * plotWidth;
 
                 const label = String(roundSmart(seg.firstValue));
                 const hideVisual = isZeroValue(seg.firstValue);
@@ -448,12 +494,7 @@ export default function VentilationChart({
 
                     {!hideVisual && (
                       <>
-                        <text
-                          x={textX}
-                          y={textY}
-                          fontSize={10}
-                          fill="#111827"
-                        >
+                        <text x={textX} y={textY} fontSize={10} fill="#111827">
                           {label}
                         </text>
 
@@ -484,7 +525,7 @@ export default function VentilationChart({
 
               {showXAxis && (
                 <text
-                  x={PLOT_LEFT + PLOT_WIDTH / 2}
+                  x={plotWidth / 2}
                   y={contentHeight - 4}
                   textAnchor="middle"
                   fontSize={12}

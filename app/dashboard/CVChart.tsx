@@ -25,6 +25,9 @@ type CVChartProps = {
     startMin: number;
     endMin: number;
   } | null;
+
+  sharedScrollLeft?: number;
+  onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
 
 type MarkerType =
@@ -46,16 +49,19 @@ type CVFeatureConfig = {
   rowBg: string;
 };
 
+const LEGEND_COL_WIDTH = 220;
+const AXIS_COL_WIDTH = 42;
+const PLOT_RIGHT = 20;
+
+/** 和 Vital / Medication / Timeline 保持一致 */
+const PX_PER_15_MIN = 64;
+const PX_PER_MIN = PX_PER_15_MIN / 15;
+
 const ROW_HEIGHT = 25;
 
 const RECHARTS_LEFT_MARGIN = 8;
 const RECHARTS_RIGHT_MARGIN = 20;
 const RECHARTS_YAXIS_WIDTH = 35;
-
-const PLOT_LEFT = RECHARTS_LEFT_MARGIN + RECHARTS_YAXIS_WIDTH;
-const PLOT_RIGHT = RECHARTS_RIGHT_MARGIN;
-const SVG_WIDTH = 1000;
-const PLOT_WIDTH = SVG_WIDTH - PLOT_LEFT - PLOT_RIGHT;
 
 const CV_FEATURES: CVFeatureConfig[] = [
   {
@@ -377,11 +383,45 @@ function CVLegend() {
   );
 }
 
+function FixedYAxis({
+  height,
+}: {
+  height: number;
+}) {
+  const ticks = [0, 25, 50, 75, 100, 125, 150, 175, 200];
+  const domainMin = 0;
+  const domainMax = 200;
+  const plotHeight = Math.max(1, height);
+
+  return (
+    <div
+      className="relative border-r bg-white"
+      style={{ width: AXIS_COL_WIDTH, height }}
+    >
+      {ticks.map((tick) => {
+        const ratio = (domainMax - tick) / (domainMax - domainMin);
+        const top = ratio * plotHeight;
+
+        return (
+          <div
+            key={tick}
+            className="absolute right-1 -translate-y-1/2 text-[11px] text-gray-600"
+            style={{ top }}
+          >
+            {tick}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function CVGridSvg({
   end,
   ticks,
   height,
   highlightWindow,
+  plotWidth,
 }: {
   end: number;
   ticks: number[];
@@ -390,20 +430,21 @@ function CVGridSvg({
     startMin: number;
     endMin: number;
   } | null;
+  plotWidth: number;
 }) {
   return (
     <svg
-      width="100%"
+      width={plotWidth}
       height={height}
-      viewBox={`0 0 ${SVG_WIDTH} ${height}`}
+      viewBox={`0 0 ${plotWidth} ${height}`}
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
       {highlightWindow && (
         <rect
-          x={PLOT_LEFT + (highlightWindow.startMin / end) * PLOT_WIDTH}
+          x={(highlightWindow.startMin / end) * plotWidth}
           y={0}
-          width={Math.max(2, ((highlightWindow.endMin - highlightWindow.startMin) / end) * PLOT_WIDTH)}
+          width={Math.max(2, ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth)}
           height={height}
           fill="lightblue"
           fillOpacity={0.75}
@@ -412,7 +453,7 @@ function CVGridSvg({
       )}
 
       {ticks.map((tick) => {
-        const x = PLOT_LEFT + (tick / end) * PLOT_WIDTH;
+        const x = (tick / end) * plotWidth;
         return (
           <line
             key={`grid-x-${tick}`}
@@ -433,7 +474,7 @@ function CVGridSvg({
             key={`grid-y-${i}`}
             x1={0}
             y1={y}
-            x2={PLOT_LEFT + PLOT_WIDTH}
+            x2={plotWidth}
             y2={y}
             stroke="#8f8f8f"
             strokeWidth={0.8}
@@ -454,10 +495,30 @@ export default function CVChart({
   timeZero = null,
   embedded = false,
   highlightWindow = null,
+  sharedScrollLeft,
+  onSharedScrollLeftChange,
 }: CVChartProps) {
   const data = React.useMemo(() => buildChartRows(cv, xTicks), [cv, xTicks]);
   const fullContentHeight = CV_FEATURES.length * ROW_HEIGHT;
   const viewHeight = Math.min(height, Math.max(120, fullContentHeight));
+  const scrollRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+    }
+  }, [sharedScrollLeft]);
+
+  const contentPlotWidth = React.useMemo(() => {
+    if (xEnd <= 0) return 800;
+    return Math.max(800, Math.ceil(xEnd * PX_PER_MIN));
+  }, [xEnd]);
+
+  const contentWidth = contentPlotWidth + PLOT_RIGHT;
+  const plotWidth = contentPlotWidth;
 
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
@@ -465,104 +526,121 @@ export default function CVChart({
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
 
-      <div className="overflow-y-auto overflow-x-hidden" style={{ height: viewHeight }}>
-        <div className="grid grid-cols-[220px_1fr] gap-0">
-          <div className="border-r pr-0" style={{ height: fullContentHeight }}>
-            <CVLegend />
-          </div>
+      <div
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
+        }}
+      >
+        <div className="border-r pr-0" style={{ height: fullContentHeight }}>
+          <CVLegend />
+        </div>
 
+        <FixedYAxis height={fullContentHeight} />
+
+        <div className="overflow-y-auto overflow-x-hidden" style={{ height: viewHeight }}>
           <div
-            className="relative"
-            style={{
-              width: "100%",
-              height: fullContentHeight,
-              marginLeft: "-1px",
+            ref={scrollRef}
+            className="overflow-x-auto overflow-y-hidden"
+            onScroll={(e) => {
+              onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
             }}
           >
-            <CVGridSvg
-              end={xEnd}
-              ticks={xTicks}
-              height={fullContentHeight}
-              highlightWindow={highlightWindow}
-            />
+            <div
+              className="relative"
+              style={{
+                width: contentWidth,
+                height: fullContentHeight,
+              }}
+            >
+              <CVGridSvg
+                end={xEnd}
+                ticks={xTicks}
+                height={fullContentHeight}
+                highlightWindow={highlightWindow}
+                plotWidth={plotWidth}
+              />
 
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={data}
-                margin={{
-                  top: 0,
-                  right: RECHARTS_RIGHT_MARGIN,
-                  left: RECHARTS_LEFT_MARGIN,
-                  bottom: 0,
-                }}
-              >
-                <XAxis
-                  type="number"
-                  dataKey="time"
-                  domain={[0, xEnd]}
-                  ticks={xTicks}
-                  interval={0}
-                  allowDecimals={false}
-                  tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
-                  tick={showXAxis ? undefined : false}
-                  axisLine={showXAxis}
-                  tickLine={showXAxis}
-                  height={showXAxis ? 30 : 0}
-                />
-
-                <YAxis
-                  domain={[0, 200]}
-                  ticks={[0, 25, 50, 75, 100, 125, 150, 175, 200]}
-                  width={RECHARTS_YAXIS_WIDTH}
-                  tick={{ fontSize: 12 }}
-                  stroke="#6b7280"
-                />
-
-                <Tooltip
-                  formatter={(value: any, name: any) => {
-                    const feature = CV_FEATURES.find((f) => f.key === name);
-                    return [
-                      value != null ? Number(value).toFixed(2) : "NA",
-                      feature ? feature.label : String(name),
-                    ];
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={data}
+                  margin={{
+                    top: 0,
+                    right: RECHARTS_RIGHT_MARGIN,
+                    left: 0,
+                    bottom: 0,
                   }}
-                  labelFormatter={(label: any) =>
-                    `Time: ${formatClockTime(Number(label), timeZero)}`
-                  }
-                />
-
-                {highlightWindow ? (
-                  <ReferenceArea
-                    x1={highlightWindow.startMin}
-                    x2={highlightWindow.endMin}
-                    fill="lightblue"
-                    fillOpacity={0.75}
-                    strokeOpacity={0}
+                >
+                  <XAxis
+                    type="number"
+                    dataKey="time"
+                    domain={[0, xEnd]}
+                    ticks={xTicks}
+                    interval={0}
+                    allowDecimals={false}
+                    tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
+                    tick={showXAxis ? undefined : false}
+                    axisLine={showXAxis}
+                    tickLine={showXAxis}
+                    height={showXAxis ? 30 : 0}
                   />
-                ) : null}
 
-                {CV_FEATURES.map((feature) => {
-                  const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
-                  const hasData = aliases.some((name) => (cv[name] ?? []).length > 0);
+                  <YAxis
+                    domain={[0, 200]}
+                    ticks={[0, 25, 50, 75, 100, 125, 150, 175, 200]}
+                    interval={0}
+                    width={RECHARTS_YAXIS_WIDTH}
+                    tick={false}
+                    axisLine={false}
+                    tickLine={false}
+                  />
 
-                  if (!hasData) return null;
+                  <Tooltip
+                    formatter={(value: any, name: any) => {
+                      const feature = CV_FEATURES.find((f) => f.key === name);
+                      return [
+                        value != null ? Number(value).toFixed(2) : "NA",
+                        feature ? feature.label : String(name),
+                      ];
+                    }}
+                    labelFormatter={(label: any) =>
+                      `Time: ${formatClockTime(Number(label), timeZero)}`
+                    }
+                  />
 
-                  return (
-                    <Line
-                      key={feature.key}
-                      type="linear"
-                      dataKey={feature.key}
-                      stroke={feature.color}
-                      strokeWidth={1.8}
-                      connectNulls={false}
-                      dot={<CustomDot />}
-                      activeDot={<CustomActiveDot />}
-                      isAnimationActive={false}
+                  {highlightWindow ? (
+                    <ReferenceArea
+                      x1={highlightWindow.startMin}
+                      x2={highlightWindow.endMin}
+                      fill="lightblue"
+                      fillOpacity={0.75}
+                      strokeOpacity={0}
                     />
-                  );
-                })}
-              </LineChart>
-            </ResponsiveContainer>
+                  ) : null}
+
+                  {CV_FEATURES.map((feature) => {
+                    const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
+                    const hasData = aliases.some((name) => (cv[name] ?? []).length > 0);
+
+                    if (!hasData) return null;
+
+                    return (
+                      <Line
+                        key={feature.key}
+                        type="linear"
+                        dataKey={feature.key}
+                        stroke={feature.color}
+                        strokeWidth={1.8}
+                        connectNulls={false}
+                        dot={<CustomDot />}
+                        activeDot={<CustomActiveDot />}
+                        isAnimationActive={false}
+                      />
+                    );
+                  })}
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
       </div>

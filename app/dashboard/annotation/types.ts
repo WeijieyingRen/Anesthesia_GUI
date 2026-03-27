@@ -1,12 +1,11 @@
 export type AnnotationTaskKey =
   | "detect"
+  | "prevention"
   | "mechanism"
-  | "gasEval"
-  | "medEval"
   | "fluidEval"
   | "response";
 
-export type PatientTaskKey = "summary";
+export type PatientTaskKey = "summary" | "contextualEvent";
 
 export type WorkspaceTaskKey = AnnotationTaskKey | PatientTaskKey;
 
@@ -35,16 +34,46 @@ export type EventType =
   | "Hypothermia"
   | "Hyperthermia";
 
+export type DetectEventType = EventType | "Others";
+
+export type EpisodeEvolution =
+  | "Sudden onset"
+  | "Gradual change"
+  | "Persistent abnormality"
+  | "Fluctuating pattern"
+  | "Recovering / resolving"
+  | "Worsening"
+  | "Mixed or unclear";
+
+export type OverallCharacterization =
+  | "Expected physiologic change"
+  | "Expected treatment response"
+  | "Transient fluctuation / likely not clinically important"
+  | "Clinically significant abnormality"
+  | "Recovery / correction phase"
+  | "Mixed or unclear pattern"
+  | "Others";
+
 export type SeverityLevel = "Mild" | "Moderate" | "Severe";
 
 export type DetectAnnotation = {
   vital: DetectVital;
   startMin: number;
   endMin: number;
-  eventType: EventType | "";
+
+  note: string;
+
+  eventType: DetectEventType | "";
+  eventTypeOther: string;
+
+  episodeEvolution: EpisodeEvolution | "";
+  episodeEvolutionNote: string;
+
+  overallCharacterization: OverallCharacterization | "";
+  overallInterpretationNote: string;
+
   severity: SeverityLevel | "";
   confidence: number | null;
-  note: string;
 };
 
 export type UserActionLogItem = {

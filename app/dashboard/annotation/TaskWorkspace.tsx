@@ -10,9 +10,9 @@ import type {
 import type { TimeValuePoint } from "@/lib/types";
 import DetectPanel from "./panels/DetectPanel";
 import MechanismPanel from "./panels/MechanismPanel";
-import MedEvalPanel from "./panels/MedEvalPanel";
-import GasEvalPanel from "./panels/GasEvalPanel";
 import FluidEvalPanel from "./panels/FluidEvalPanel";
+import PreventionPanel from "./panels/PreventionPanel";
+
 type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
 
 type SelectedWindow = {
@@ -66,10 +66,11 @@ export default function TaskWorkspace({
     }
 
     const vital = selectedWindow?.vital ?? selectedDetectVital;
-    const startMin = selectedWindow?.startMin ?? selectedEvent!.startMin;
-    const endMin = selectedWindow?.endMin ?? selectedEvent!.endMin;
+    const startMin = selectedWindow?.startMin ?? selectedEvent?.startMin ?? 0;
+    const endMin = selectedWindow?.endMin ?? selectedEvent?.endMin ?? 0;
 
     setDetectAnnotation((prev) => ({
+      ...(prev ?? {}),
       vital,
       startMin,
       endMin,
@@ -77,7 +78,12 @@ export default function TaskWorkspace({
       severity: prev?.severity ?? "",
       confidence: prev?.confidence ?? null,
       note: prev?.note ?? "",
-    }));
+      episodeEvolution: (prev as any)?.episodeEvolution ?? "",
+      episodeEvolutionNote: (prev as any)?.episodeEvolutionNote ?? "",
+      overallCharacterization: (prev as any)?.overallCharacterization ?? "",
+      overallInterpretationNote: (prev as any)?.overallInterpretationNote ?? "",
+      eventTypeOther: prev?.eventTypeOther ?? "",
+    }) as DetectAnnotation);
   }, [selectedEvent, selectedWindow, selectedDetectVital]);
 
   if (!selectedEvent && !selectedWindow) {
@@ -116,21 +122,43 @@ export default function TaskWorkspace({
         annotation={detectAnnotation}
         onChangeAnnotation={(value) => {
           setDetectAnnotation((prev) => {
-            const fallback: DetectAnnotation = prev ?? {
+            const fallback: DetectAnnotation = {
+              ...(prev ?? {}),
               vital: selectedWindow?.vital ?? selectedDetectVital,
               startMin: selectedWindow?.startMin ?? selectedEvent?.startMin ?? 0,
               endMin: selectedWindow?.endMin ?? selectedEvent?.endMin ?? 0,
-              eventType: "",
-              severity: "",
-              confidence: null,
-              note: "",
-            };
-        
+              eventType: prev?.eventType ?? "",
+              eventTypeOther: prev?.eventTypeOther ?? "",
+              note: (prev as any)?.note ?? "",
+              episodeEvolution: (prev as any)?.episodeEvolution ?? "",
+              episodeEvolutionNote: (prev as any)?.episodeEvolutionNote ?? "",
+              overallCharacterization:
+                (prev as any)?.overallCharacterization ?? "",
+              overallInterpretationNote:
+                (prev as any)?.overallInterpretationNote ?? "",
+              severity: prev?.severity ?? "",
+              confidence: prev?.confidence ?? null,
+            } as DetectAnnotation;
+
             return typeof value === "function" ? value(fallback) : value;
           });
         }}
         anesthesiaStart={anesthesiaStart}
         onSaveAndNextStep={() => onSaveAndNextStep("detect")}
+      />
+    );
+  }
+
+  if (task === "prevention") {
+    return (
+      <PreventionPanel
+        eventId={effectiveEventId}
+        caseId={caseId}
+        eventTitle={effectiveEventTitle}
+        episodeLabel={effectiveEpisodeLabel}
+        startMin={detectAnnotation.startMin}
+        endMin={detectAnnotation.endMin}
+        onSaveAndNextStep={() => onSaveAndNextStep("prevention")}
       />
     );
   }
@@ -150,34 +178,21 @@ export default function TaskWorkspace({
     );
   }
 
-  if (task === "medEval") {
+  if (task === "fluidEval") {
     return (
-      <MedEvalPanel
+      <FluidEvalPanel
         eventId={effectiveEventId}
         caseId={caseId}
         eventTitle={effectiveEventTitle}
         episodeLabel={effectiveEpisodeLabel}
         startMin={detectAnnotation.startMin}
         endMin={detectAnnotation.endMin}
-        medications={medications}
         medBolusRows={medBolusRows}
         medInfusionRows={medInfusionRows}
-        onSaveAndNextStep={() => onSaveAndNextStep("medEval")}
-      />
-    );
-  }
-
-  if (task === "gasEval") {
-    return (
-      <GasEvalPanel
-        eventId={effectiveEventId}
-        caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
-        startMin={detectAnnotation.startMin}
-        endMin={detectAnnotation.endMin}
+        fluidInRows={fluidInRows}
+        fluidOutRows={fluidOutRows}
         gasData={gasData}
-        onSaveAndNextStep={() => onSaveAndNextStep("gasEval")}
+        onSaveAndNextStep={() => onSaveAndNextStep("fluidEval")}
       />
     );
   }
@@ -192,21 +207,6 @@ export default function TaskWorkspace({
         startMin={detectAnnotation.startMin}
         endMin={detectAnnotation.endMin}
         onSaveAndNextStep={() => onSaveAndNextStep("response")}
-      />
-    );
-  }
-  if (task === "fluidEval") {
-    return (
-      <FluidEvalPanel
-        eventId={effectiveEventId}
-        caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
-        startMin={detectAnnotation.startMin}
-        endMin={detectAnnotation.endMin}
-        fluidInRows={fluidInRows}
-        fluidOutRows={fluidOutRows}
-        onSaveAndNextStep={() => onSaveAndNextStep("fluidEval")}
       />
     );
   }

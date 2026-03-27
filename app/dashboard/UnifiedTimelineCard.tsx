@@ -6,11 +6,16 @@ import MedicationChart from "./MedicationChart";
 import GasChart from "./GasChart";
 import TmpChart from "./TmpChart";
 import CVChart from "./CVChart";
-import type { MedicationPanelData, VitalPanelData, FluidPanelData } from "@/lib/types";
+import type {
+  MedicationPanelData,
+  VitalPanelData,
+  FluidPanelData,
+} from "@/lib/types";
 import FluidChart from "./FluidChart";
 import VentilationChart from "./VentilationChart";
+
 type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
-const FEATURE_COL_WIDTH = 180;
+type TimeResolution = 15 | 5 | 1;
 
 type SelectedWindow = {
   vital: DetectVital;
@@ -30,15 +35,32 @@ type UnifiedTimelineCardProps = {
   timelineEnd: number;
   ticks: number[];
 
+  timeResolution: TimeResolution;
+  onChangeTimeResolution: (value: TimeResolution) => void;
+  viewStartMin: number;
+  onChangeViewStartMin: (value: number) => void;
+  viewWindowWidthMin: number;
+
   selectedDetectVital: DetectVital;
   onChangeSelectedDetectVital: (vital: DetectVital) => void;
 
   selectedWindow: SelectedWindow | null;
   onChangeSelectedWindow: (window: SelectedWindow | null) => void;
   onCreateEventFromWindow: (window: SelectedWindow) => void;
+
+  sharedScrollLeft?: number;
+  onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
 
-type SectionKey = "vitals" | "medications" | "fluids" | "gas" | "ventilation" | "tmp" | "cv";
+type SectionKey =
+  | "vitals"
+  | "medications"
+  | "fluids"
+  | "gas"
+  | "ventilation"
+  | "tmp"
+  | "cv";
+
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
   if (!timeZero) return String(offsetMin);
 
@@ -84,46 +106,76 @@ function SectionHeader({
   );
 }
 
-function SharedTopAxis({
-  ticks,
+function ViewportToolbar({
+  viewStartMin,
+  viewEndMin,
   timelineEnd,
   anesthesiaStart,
 }: {
-  ticks: number[];
+  timeResolution: TimeResolution;
+  onChangeTimeResolution: (value: TimeResolution) => void;
+  viewStartMin: number;
+  viewEndMin: number;
   timelineEnd: number;
   anesthesiaStart: string | null;
 }) {
   return (
-    <div className="border-b bg-white px-4 py-2">
-      <div className="mb-1 text-xs font-medium text-gray-500">
-        Column Interval: 15 minutes
+    <div className="flex items-center justify-between border-b bg-white px-4 py-2">
+      <div className="text-xs text-gray-600">
+        <span className="font-medium">View:</span>{" "}
+        {formatClockTime(viewStartMin, anesthesiaStart)} –{" "}
+        {formatClockTime(viewEndMin, anesthesiaStart)}
+        <span className="mx-2 text-gray-400">|</span>
+        <span className="font-medium">Total:</span>{" "}
+        {Math.round(timelineEnd)} min
+      </div>
+    </div>
+  );
+}
+
+function SharedViewportBar({
+  show,
+  timelineEnd,
+  viewStartMin,
+  viewWindowWidthMin,
+  onChangeViewStartMin,
+  anesthesiaStart,
+}: {
+  show: boolean;
+  timelineEnd: number;
+  viewStartMin: number;
+  viewWindowWidthMin: number;
+  onChangeViewStartMin: (value: number) => void;
+  anesthesiaStart: string | null;
+}) {
+  if (!show) return null;
+
+  const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
+  const viewEndMin = Math.min(timelineEnd, viewStartMin + viewWindowWidthMin);
+
+  return (
+    <div className="border-t bg-white px-4 py-3">
+      <div className="mb-2 flex items-center justify-between text-xs text-gray-600">
+        <span>
+          Window: {formatClockTime(viewStartMin, anesthesiaStart)} –{" "}
+          {formatClockTime(viewEndMin, anesthesiaStart)}
+        </span>
+        <span>Drag to pan across the case</span>
       </div>
 
-      <div
-        className="grid gap-0"
-        style={{ gridTemplateColumns: `${FEATURE_COL_WIDTH}px minmax(0, 1fr)` }}
-      >
-        <div />
-        <div className="relative h-8">
-          {ticks.map((tick, idx) => {
-            const left = timelineEnd > 0 ? `${(tick / timelineEnd) * 100}%` : "0%";
+      <input
+        type="range"
+        min={0}
+        max={maxStart}
+        step={1}
+        value={Math.min(viewStartMin, maxStart)}
+        onChange={(e) => onChangeViewStartMin(Number(e.target.value))}
+        className="h-2 w-full cursor-pointer accent-blue-600"
+      />
 
-            let className = "absolute top-0 whitespace-nowrap text-xs text-gray-700";
-            if (idx === 0) {
-              className += " translate-x-0";
-            } else if (idx === ticks.length - 1) {
-              className += " -translate-x-full";
-            } else {
-              className += " -translate-x-1/2";
-            }
-
-            return (
-              <div key={tick} className={className} style={{ left }}>
-                {formatClockTime(tick, anesthesiaStart)}
-              </div>
-            );
-          })}
-        </div>
+      <div className="mt-2 flex justify-between text-[11px] text-gray-500">
+        <span>{formatClockTime(0, anesthesiaStart)}</span>
+        <span>{formatClockTime(timelineEnd, anesthesiaStart)}</span>
       </div>
     </div>
   );
@@ -138,11 +190,18 @@ export default function UnifiedTimelineCard({
   anesthesiaStop,
   timelineEnd,
   ticks,
+  timeResolution,
+  onChangeTimeResolution,
+  viewStartMin,
+  onChangeViewStartMin,
+  viewWindowWidthMin,
   selectedDetectVital,
   onChangeSelectedDetectVital,
   selectedWindow,
   onChangeSelectedWindow,
   onCreateEventFromWindow,
+  sharedScrollLeft,
+  onSharedScrollLeftChange,
 }: UnifiedTimelineCardProps) {
   const [openSections, setOpenSections] = React.useState<Record<SectionKey, boolean>>({
     vitals: true,
@@ -154,10 +213,19 @@ export default function UnifiedTimelineCard({
     cv: true,
   });
 
-  const vitalTicks = React.useMemo(
-    () => Array.from({ length: Math.floor(timelineEnd / 5) + 1 }, (_, i) => i * 5),
-    [timelineEnd]
+  const viewEndMin = React.useMemo(
+    () => Math.min(timelineEnd, viewStartMin + viewWindowWidthMin),
+    [timelineEnd, viewStartMin, viewWindowWidthMin]
   );
+
+  const showViewportBar = timeResolution === 5 || timeResolution === 1;
+
+  React.useEffect(() => {
+    const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
+    if (viewStartMin > maxStart) {
+      onChangeViewStartMin(maxStart);
+    }
+  }, [timelineEnd, viewWindowWidthMin, viewStartMin, onChangeViewStartMin]);
 
   function toggleSection(section: SectionKey) {
     setOpenSections((prev) => ({
@@ -166,14 +234,75 @@ export default function UnifiedTimelineCard({
     }));
   }
 
+  const sharedHighlightWindow = selectedWindow
+    ? {
+        startMin: selectedWindow.startMin,
+        endMin: selectedWindow.endMin,
+      }
+    : null;
+
   return (
     <div className="overflow-visible border bg-white shadow-sm">
+      <ViewportToolbar
+        timeResolution={timeResolution}
+        onChangeTimeResolution={onChangeTimeResolution}
+        viewStartMin={viewStartMin}
+        viewEndMin={viewEndMin}
+        timelineEnd={timelineEnd}
+        anesthesiaStart={anesthesiaStart}
+      />
+
       <SectionHeader
-        title="Events"
+        title="Gas"
+        open={openSections.gas}
+        onToggle={() => toggleSection("gas")}
+      />
+      {openSections.gas && (
+        <div className="overflow-visible">
+          <GasChart
+            title=""
+            gas={gas}
+            height={220}
+            windowSize={15}
+            xEnd={timelineEnd}
+            xTicks={ticks}
+            showXAxis={false}
+            timeZero={anesthesiaStart}
+            embedded
+            highlightWindow={sharedHighlightWindow}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
+          />
+        </div>
+      )}
+
+      <SectionHeader
+        title="Medications"
+        open={openSections.medications}
+        onToggle={() => toggleSection("medications")}
+      />
+      {openSections.medications && (
+        <MedicationChart
+          title=""
+          medications={medications}
+          height={280}
+          xEnd={timelineEnd}
+          xTicks={ticks}
+          showXAxis={false}
+          timeZero={anesthesiaStart}
+          embedded
+          highlightWindow={sharedHighlightWindow}
+          sharedScrollLeft={sharedScrollLeft}
+          onSharedScrollLeftChange={onSharedScrollLeftChange}
+        />
+      )}
+
+      <SectionHeader
+        title="Vitals"
         open={openSections.vitals}
         onToggle={() => toggleSection("vitals")}
       >
-        {(["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const).map((item) => {
+        {(["MAP", "HR", "SPO2", "RR", "ETCO2"] as const).map((item) => {
           const active = selectedDetectVital === item;
 
           return (
@@ -184,14 +313,12 @@ export default function UnifiedTimelineCard({
                 e.stopPropagation();
                 onChangeSelectedDetectVital(item);
 
-                onChangeSelectedWindow(
-                  selectedWindow
-                    ? {
-                        ...selectedWindow,
-                        vital: item,
-                      }
-                    : null
-                );
+                if (selectedWindow) {
+                  onChangeSelectedWindow({
+                    ...selectedWindow,
+                    vital: item,
+                  });
+                }
               }}
               className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
                 active
@@ -220,6 +347,8 @@ export default function UnifiedTimelineCard({
             selectedWindow={selectedWindow}
             onChangeSelectedWindow={onChangeSelectedWindow}
             onCreateEventFromWindow={onCreateEventFromWindow}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
             series={{
               HR: vitals?.main?.["HR"] ?? [],
               NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
@@ -227,6 +356,7 @@ export default function UnifiedTimelineCard({
               NIBP_MAP: vitals?.main?.["NIBP_MAP"] ?? [],
               "SPO2 %": vitals?.main?.["SPO2 %"] ?? [],
               RR: vitals?.main?.["RR"] ?? [],
+              "ETCO2 (mmHg)": vitals?.main?.["ETCO2 (mmHg)"] ?? [],
               ARTS: vitals?.main?.["ARTS"] ?? [],
               ARTD: vitals?.main?.["ARTD"] ?? [],
               ARTM: vitals?.main?.["ARTM"] ?? [],
@@ -240,6 +370,7 @@ export default function UnifiedTimelineCard({
               NIBP_MAP: "NIBP_MAP",
               "SPO2 %": "SPO2 %",
               RR: "RR",
+              "ETCO2 (mmHg)": "ETCO2",
               ARTS: "ARTS",
               ARTD: "ARTD",
               ARTM: "ARTM",
@@ -253,6 +384,7 @@ export default function UnifiedTimelineCard({
               NIBP_MAP: "mmHg",
               "SPO2 %": "%",
               RR: "bpm",
+              "ETCO2 (mmHg)": "mmHg",
               ARTS: "mmHg",
               ARTD: "mmHg",
               ARTM: "mmHg",
@@ -266,6 +398,7 @@ export default function UnifiedTimelineCard({
               NIBP_MAP: "#000000",
               "SPO2 %": "#1f2fff",
               RR: "#4a90ff",
+              "ETCO2 (mmHg)": "#f59e0b",
               ARTS: "#ff2b2b",
               ARTD: "#ff2b2b",
               ARTM: "#ff2b2b",
@@ -279,6 +412,7 @@ export default function UnifiedTimelineCard({
               NIBP_MAP: "x",
               "SPO2 %": "square",
               RR: "circle",
+              "ETCO2 (mmHg)": "diamond",
               ARTS: "triangle",
               ARTD: "triangle-down",
               ARTM: "x",
@@ -291,182 +425,141 @@ export default function UnifiedTimelineCard({
       )}
 
       <SectionHeader
-        title="Medications"
-        open={openSections.medications}
-        onToggle={() => toggleSection("medications")}
+        title="Fluid Events"
+        open={openSections.fluids}
+        onToggle={() => toggleSection("fluids")}
       />
-      {openSections.medications && (
-        <MedicationChart
-          title=""
-          medications={medications}
-          height={280}
-          xEnd={timelineEnd}
-          xTicks={ticks}
-          showXAxis={false}
-          timeZero={anesthesiaStart}
-          embedded
-          highlightWindow={
-            selectedWindow
-              ? {
-                  startMin: selectedWindow.startMin,
-                  endMin: selectedWindow.endMin,
-                }
-              : null
-          }
-        />
-      )}
-      <SectionHeader
-  title="Fluid Events"
-  open={openSections.fluids}
-  onToggle={() => toggleSection("fluids")}
-/>
-{openSections.fluids && (
-  <div className="overflow-visible">
-    <FluidChart
-      title=""
-      fluids={fluids}
-      height={190}
-      xEnd={timelineEnd}
-      xTicks={ticks}
-      showXAxis={false}
-      timeZero={anesthesiaStart}
-      embedded
-      highlightWindow={
-        selectedWindow
-          ? {
-              startMin: selectedWindow.startMin,
-              endMin: selectedWindow.endMin,
-            }
-          : null
-      }
-    />
-  </div>
-)}
-<SectionHeader
-  title="CV"
-  open={openSections.cv}
-  onToggle={() => toggleSection("cv")}
-/>
-{openSections.cv && (
-  <div className="overflow-visible">
-    <CVChart
-      title=""
-      cv={vitals?.cv ?? {}}
-      xEnd={timelineEnd}
-      xTicks={ticks}
-      showXAxis={false}
-      timeZero={anesthesiaStart}
-      embedded
-      highlightWindow={
-        selectedWindow
-          ? {
-              startMin: selectedWindow.startMin,
-              endMin: selectedWindow.endMin,
-            }
-          : null
-      }
-    />
-  </div>
-)}
-      <SectionHeader
-        title="Gas"
-        open={openSections.gas}
-        onToggle={() => toggleSection("gas")}
-      />
-      {openSections.gas && (
+      {openSections.fluids && (
         <div className="overflow-visible">
-          <GasChart
+          <FluidChart
             title=""
-            gas={gas}
-            height={220}
-            windowSize={15}
+            fluids={fluids}
+            height={190}
             xEnd={timelineEnd}
             xTicks={ticks}
             showXAxis={false}
             timeZero={anesthesiaStart}
             embedded
-            highlightWindow={
-              selectedWindow
-                ? {
-                    startMin: selectedWindow.startMin,
-                    endMin: selectedWindow.endMin,
-                  }
-                : null
-            }
+            highlightWindow={sharedHighlightWindow}
           />
         </div>
       )}
 
-<SectionHeader
-  title="TMP"
-  open={openSections.tmp}
-  onToggle={() => toggleSection("tmp")}
-/>
-{openSections.tmp && (
-  <div className="overflow-visible">
-    <TmpChart
-      title=""
-      tmp={{
-        "TMP Bladder": vitals?.tmp?.["TMP Bladder"] ?? [],
-        "TMP Blood": vitals?.tmp?.["TMP Blood"] ?? [],
-        "TMP Esophageal": vitals?.tmp?.["TMP Esophageal"] ?? [],
-        "TMP Nasopharyngeal": vitals?.tmp?.["TMP Nasopharyngeal"] ?? [],
-        "TMP Rectal": vitals?.tmp?.["TMP Rectal"] ?? [],
-      }}
-      height={220}
-      xEnd={timelineEnd}
-      xTicks={ticks}
-      showXAxis={false}
-      timeZero={anesthesiaStart}
-      embedded
-      highlightWindow={
-        selectedWindow
-          ? {
-              startMin: selectedWindow.startMin,
-              endMin: selectedWindow.endMin,
-            }
-          : null
-      }
-    />
-  </div>
-)}
+      <SectionHeader
+        title="CV"
+        open={openSections.cv}
+        onToggle={() => toggleSection("cv")}
+      />
+      {openSections.cv && (
+        <div className="overflow-visible">
+          <CVChart
+            title=""
+            cv={vitals?.cv ?? {}}
+            xEnd={timelineEnd}
+            xTicks={ticks}
+            showXAxis={false}
+            timeZero={anesthesiaStart}
+            embedded
+            highlightWindow={sharedHighlightWindow}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
+          />
+        </div>
+      )}
 
-<SectionHeader
-  title="Ventilation"
-  open={openSections.ventilation}
-  onToggle={() => toggleSection("ventilation")}
-/>
-{openSections.ventilation && (
-  <div className="overflow-visible">
-    <VentilationChart
-      title=""
-      ventilation={{
-        RR: vitals?.ventilation?.["RR"] ?? [],
-        TV: vitals?.ventilation?.["TV"] ?? [],
-        MV: vitals?.ventilation?.["MV"] ?? [],
-        "PEEP (cm H2O)": vitals?.ventilation?.["PEEP (cm H2O)"] ?? [],
-        PIP: vitals?.ventilation?.["PIP"] ?? [],
-        "Mean PIP": vitals?.ventilation?.["Mean PIP"] ?? [],
-        "Plateau PIP": vitals?.ventilation?.["Plateau PIP"] ?? [],
-      }}
-      height={190}
-      xEnd={timelineEnd}
-      xTicks={ticks}
-      showXAxis={false}
-      timeZero={anesthesiaStart}
-      embedded
-      highlightWindow={
-        selectedWindow
-          ? {
-              startMin: selectedWindow.startMin,
-              endMin: selectedWindow.endMin,
+      <SectionHeader
+        title="TMP"
+        open={openSections.tmp}
+        onToggle={() => toggleSection("tmp")}
+      >
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onChangeSelectedDetectVital("TEMP");
+
+            if (selectedWindow) {
+              onChangeSelectedWindow({
+                ...selectedWindow,
+                vital: "TEMP",
+              });
             }
-          : null
-      }
-    />
-  </div>
-)}
-      
+          }}
+          className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
+            selectedDetectVital === "TEMP"
+              ? "border-blue-600 bg-blue-600 text-white"
+              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+          }`}
+        >
+          TEMP
+        </button>
+      </SectionHeader>
+
+      {openSections.tmp && (
+        <div className="overflow-visible">
+          <TmpChart
+            title=""
+            tmp={{
+              "TMP Bladder": vitals?.tmp?.["TMP Bladder"] ?? [],
+              "TMP Blood": vitals?.tmp?.["TMP Blood"] ?? [],
+              "TMP Esophageal": vitals?.tmp?.["TMP Esophageal"] ?? [],
+              "TMP Nasopharyngeal": vitals?.tmp?.["TMP Nasopharyngeal"] ?? [],
+              "TMP Rectal": vitals?.tmp?.["TMP Rectal"] ?? [],
+            }}
+            height={220}
+            xEnd={timelineEnd}
+            xTicks={ticks}
+            showXAxis={false}
+            timeZero={anesthesiaStart}
+            embedded
+            selectedWindow={selectedWindow}
+            onChangeSelectedWindow={onChangeSelectedWindow}
+            onCreateEventFromWindow={onCreateEventFromWindow}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
+          />
+        </div>
+      )}
+
+      <SectionHeader
+        title="Ventilation"
+        open={openSections.ventilation}
+        onToggle={() => toggleSection("ventilation")}
+      />
+      {openSections.ventilation && (
+        <div className="overflow-visible">
+          <VentilationChart
+            title=""
+            ventilation={{
+              RR: vitals?.ventilation?.["RR"] ?? [],
+              TV: vitals?.ventilation?.["TV"] ?? [],
+              MV: vitals?.ventilation?.["MV"] ?? [],
+              "PEEP (cm H2O)": vitals?.ventilation?.["PEEP (cm H2O)"] ?? [],
+              PIP: vitals?.ventilation?.["PIP"] ?? [],
+              "Mean PIP": vitals?.ventilation?.["Mean PIP"] ?? [],
+              "Plateau PIP": vitals?.ventilation?.["Plateau PIP"] ?? [],
+            }}
+            height={190}
+            xEnd={timelineEnd}
+            xTicks={ticks}
+            showXAxis={false}
+            timeZero={anesthesiaStart}
+            embedded
+            highlightWindow={sharedHighlightWindow}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
+          />
+        </div>
+      )}
+
+      <SharedViewportBar
+        show={showViewportBar}
+        timelineEnd={timelineEnd}
+        viewStartMin={viewStartMin}
+        viewWindowWidthMin={viewWindowWidthMin}
+        onChangeViewStartMin={onChangeViewStartMin}
+        anesthesiaStart={anesthesiaStart}
+      />
     </div>
   );
 }
