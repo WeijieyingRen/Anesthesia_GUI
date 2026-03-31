@@ -23,7 +23,6 @@ const EVENT_OPTIONS = [
   { value: "intubation", label: "Intubation" },
   { value: "procedure_start", label: "Procedure Start" },
   { value: "positioning", label: "Positioning" },
-  { value: "intervention", label: "Intervention" },
   { value: "extubation", label: "Extubation" },
   { value: "emergence", label: "Emergence" },
   { value: "procedure_end", label: "Procedure End" },

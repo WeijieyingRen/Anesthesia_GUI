@@ -14,7 +14,7 @@ import type {
 import FluidChart from "./FluidChart";
 import VentilationChart from "./VentilationChart";
 
-type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
+import type { DetectVital } from "./annotation/types";
 type TimeResolution = 15 | 5 | 1;
 
 type SelectedWindow = {
@@ -23,6 +23,11 @@ type SelectedWindow = {
   endMin: number;
   y1: number;
   y2: number;
+};
+
+type HighlightWindow = {
+  startMin: number;
+  endMin: number;
 };
 
 type UnifiedTimelineCardProps = {
@@ -58,7 +63,6 @@ type SectionKey =
   | "fluids"
   | "gas"
   | "ventilation"
-  | "tmp"
   | "cv";
 
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
@@ -209,7 +213,6 @@ export default function UnifiedTimelineCard({
     fluids: true,
     gas: true,
     ventilation: true,
-    tmp: true,
     cv: true,
   });
 
@@ -234,7 +237,15 @@ export default function UnifiedTimelineCard({
     }));
   }
 
-  const sharedHighlightWindow = selectedWindow
+  // 黄色可编辑框：vital 和 tmp 分开
+  const vitalSelectedWindow =
+    selectedWindow?.vital === "TEMP" ? null : selectedWindow;
+
+  const tmpSelectedWindow =
+    selectedWindow?.vital === "TEMP" ? selectedWindow : null;
+
+  // 蓝色联动阴影：始终全局同步
+  const sharedHighlightWindow: HighlightWindow | null = selectedWindow
     ? {
         startMin: selectedWindow.startMin,
         endMin: selectedWindow.endMin,
@@ -302,7 +313,7 @@ export default function UnifiedTimelineCard({
         open={openSections.vitals}
         onToggle={() => toggleSection("vitals")}
       >
-        {(["MAP", "HR", "SPO2", "RR", "ETCO2"] as const).map((item) => {
+        {(["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const).map((item) => {
           const active = selectedDetectVital === item;
 
           return (
@@ -333,94 +344,122 @@ export default function UnifiedTimelineCard({
       </SectionHeader>
 
       {openSections.vitals && (
-        <div className="max-h-[380px] overflow-y-scroll [scrollbar-gutter:stable]">
-          <VitalChart
-            title=""
-            yDomain={[0, 220]}
-            xEnd={timelineEnd}
-            xTicks={ticks}
-            showTopTimeAxis
-            timeZero={anesthesiaStart}
-            embedded
-            selectedDetectVital={selectedDetectVital}
-            onChangeSelectedDetectVital={onChangeSelectedDetectVital}
-            selectedWindow={selectedWindow}
-            onChangeSelectedWindow={onChangeSelectedWindow}
-            onCreateEventFromWindow={onCreateEventFromWindow}
-            sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
-            series={{
-              HR: vitals?.main?.["HR"] ?? [],
-              NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
-              NIBP_DBP: vitals?.main?.["NIBP_DBP"] ?? [],
-              NIBP_MAP: vitals?.main?.["NIBP_MAP"] ?? [],
-              "SPO2 %": vitals?.main?.["SPO2 %"] ?? [],
-              RR: vitals?.main?.["RR"] ?? [],
-              "ETCO2 (mmHg)": vitals?.main?.["ETCO2 (mmHg)"] ?? [],
-              ARTS: vitals?.main?.["ARTS"] ?? [],
-              ARTD: vitals?.main?.["ARTD"] ?? [],
-              ARTM: vitals?.main?.["ARTM"] ?? [],
-              CVP: vitals?.hemodynamics?.["CVP"] ?? [],
-              "PSI/BIS/Entropy": vitals?.depth?.["PSI/BIS/Entropy"] ?? [],
-            }}
-            lineLabels={{
-              HR: "HR",
-              NIBP_SBP: "NIBP_SBP",
-              NIBP_DBP: "NIBP_DBP",
-              NIBP_MAP: "NIBP_MAP",
-              "SPO2 %": "SPO2 %",
-              RR: "RR",
-              "ETCO2 (mmHg)": "ETCO2",
-              ARTS: "ARTS",
-              ARTD: "ARTD",
-              ARTM: "ARTM",
-              CVP: "CVP",
-              "PSI/BIS/Entropy": "PSI/BIS/Entropy",
-            }}
-            lineUnits={{
-              HR: "bpm",
-              NIBP_SBP: "mmHg",
-              NIBP_DBP: "mmHg",
-              NIBP_MAP: "mmHg",
-              "SPO2 %": "%",
-              RR: "bpm",
-              "ETCO2 (mmHg)": "mmHg",
-              ARTS: "mmHg",
-              ARTD: "mmHg",
-              ARTM: "mmHg",
-              CVP: "mmHg",
-              "PSI/BIS/Entropy": "",
-            }}
-            lineColors={{
-              HR: "#2f8f2f",
-              NIBP_SBP: "#000000",
-              NIBP_DBP: "#000000",
-              NIBP_MAP: "#000000",
-              "SPO2 %": "#1f2fff",
-              RR: "#4a90ff",
-              "ETCO2 (mmHg)": "#f59e0b",
-              ARTS: "#ff2b2b",
-              ARTD: "#ff2b2b",
-              ARTM: "#ff2b2b",
-              CVP: "#7a5cff",
-              "PSI/BIS/Entropy": "#ff31c8",
-            }}
-            lineMarkers={{
-              HR: "circle",
-              NIBP_SBP: "triangle",
-              NIBP_DBP: "triangle-down",
-              NIBP_MAP: "x",
-              "SPO2 %": "square",
-              RR: "circle",
-              "ETCO2 (mmHg)": "diamond",
-              ARTS: "triangle",
-              ARTD: "triangle-down",
-              ARTM: "x",
-              CVP: "square",
-              "PSI/BIS/Entropy": "diamond",
-            }}
-            height={370}
-          />
+        <div className="space-y-0">
+          <div className="max-h-[380px] overflow-y-scroll [scrollbar-gutter:stable]">
+            <VitalChart
+              title=""
+              yDomain={[0, 220]}
+              xEnd={timelineEnd}
+              xTicks={ticks}
+              showTopTimeAxis
+              timeZero={anesthesiaStart}
+              embedded
+              selectedDetectVital={selectedDetectVital}
+              onChangeSelectedDetectVital={onChangeSelectedDetectVital}
+              selectedWindow={vitalSelectedWindow}
+              highlightWindow={sharedHighlightWindow}
+              onChangeSelectedWindow={onChangeSelectedWindow}
+              onCreateEventFromWindow={onCreateEventFromWindow}
+              sharedScrollLeft={sharedScrollLeft}
+              onSharedScrollLeftChange={onSharedScrollLeftChange}
+              series={{
+                HR: vitals?.main?.["HR"] ?? [],
+                NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
+                NIBP_DBP: vitals?.main?.["NIBP_DBP"] ?? [],
+                NIBP_MAP: vitals?.main?.["NIBP_MAP"] ?? [],
+                "SPO2 %": vitals?.main?.["SPO2 %"] ?? [],
+                RR: vitals?.main?.["RR"] ?? [],
+                "ETCO2 (mmHg)": vitals?.main?.["ETCO2 (mmHg)"] ?? [],
+                ARTS: vitals?.main?.["ARTS"] ?? [],
+                ARTD: vitals?.main?.["ARTD"] ?? [],
+                ARTM: vitals?.main?.["ARTM"] ?? [],
+                CVP: vitals?.hemodynamics?.["CVP"] ?? [],
+                "PSI/BIS/Entropy": vitals?.depth?.["PSI/BIS/Entropy"] ?? [],
+              }}
+              lineLabels={{
+                HR: "HR",
+                NIBP_SBP: "NIBP_SBP",
+                NIBP_DBP: "NIBP_DBP",
+                NIBP_MAP: "NIBP_MAP",
+                "SPO2 %": "SPO2 %",
+                RR: "RR",
+                "ETCO2 (mmHg)": "ETCO2",
+                ARTS: "ARTS",
+                ARTD: "ARTD",
+                ARTM: "ARTM",
+                CVP: "CVP",
+                "PSI/BIS/Entropy": "PSI/BIS/Entropy",
+              }}
+              lineUnits={{
+                HR: "bpm",
+                NIBP_SBP: "mmHg",
+                NIBP_DBP: "mmHg",
+                NIBP_MAP: "mmHg",
+                "SPO2 %": "%",
+                RR: "bpm",
+                "ETCO2 (mmHg)": "mmHg",
+                ARTS: "mmHg",
+                ARTD: "mmHg",
+                ARTM: "mmHg",
+                CVP: "mmHg",
+                "PSI/BIS/Entropy": "",
+              }}
+              lineColors={{
+                HR: "#2f8f2f",
+                NIBP_SBP: "#000000",
+                NIBP_DBP: "#000000",
+                NIBP_MAP: "#000000",
+                "SPO2 %": "#1f2fff",
+                RR: "#4a90ff",
+                "ETCO2 (mmHg)": "#f59e0b",
+                ARTS: "#ff2b2b",
+                ARTD: "#ff2b2b",
+                ARTM: "#ff2b2b",
+                CVP: "#7a5cff",
+                "PSI/BIS/Entropy": "#ff31c8",
+              }}
+              lineMarkers={{
+                HR: "circle",
+                NIBP_SBP: "triangle",
+                NIBP_DBP: "triangle-down",
+                NIBP_MAP: "x",
+                "SPO2 %": "square",
+                RR: "circle",
+                "ETCO2 (mmHg)": "diamond",
+                ARTS: "triangle",
+                ARTD: "triangle-down",
+                ARTM: "x",
+                CVP: "square",
+                "PSI/BIS/Entropy": "diamond",
+              }}
+              height={370}
+            />
+          </div>
+
+          <div className="overflow-visible border-t">
+            <TmpChart
+              title=""
+              tmp={{
+                "TMP Bladder": vitals?.tmp?.["TMP Bladder"] ?? [],
+                "TMP Blood": vitals?.tmp?.["TMP Blood"] ?? [],
+                "TMP Esophageal": vitals?.tmp?.["TMP Esophageal"] ?? [],
+                "TMP Nasopharyngeal": vitals?.tmp?.["TMP Nasopharyngeal"] ?? [],
+                "TMP Rectal": vitals?.tmp?.["TMP Rectal"] ?? [],
+              }}
+              height={220}
+              xEnd={timelineEnd}
+              xTicks={ticks}
+              showXAxis={false}
+              timeZero={anesthesiaStart}
+              embedded
+              selectedWindow={tmpSelectedWindow}
+              highlightWindow={sharedHighlightWindow}
+              onChangeSelectedWindow={onChangeSelectedWindow}
+              onCreateEventFromWindow={onCreateEventFromWindow}
+              sharedScrollLeft={sharedScrollLeft}
+              onSharedScrollLeftChange={onSharedScrollLeftChange}
+            />
+          </div>
         </div>
       )}
 
@@ -431,7 +470,7 @@ export default function UnifiedTimelineCard({
       />
       {openSections.fluids && (
         <div className="overflow-visible">
-         <FluidChart
+          <FluidChart
             title=""
             fluids={fluids}
             height={190}
@@ -463,60 +502,6 @@ export default function UnifiedTimelineCard({
             timeZero={anesthesiaStart}
             embedded
             highlightWindow={sharedHighlightWindow}
-            sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
-          />
-        </div>
-      )}
-
-      <SectionHeader
-        title="TMP"
-        open={openSections.tmp}
-        onToggle={() => toggleSection("tmp")}
-      >
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onChangeSelectedDetectVital("TEMP");
-
-            if (selectedWindow) {
-              onChangeSelectedWindow({
-                ...selectedWindow,
-                vital: "TEMP",
-              });
-            }
-          }}
-          className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
-            selectedDetectVital === "TEMP"
-              ? "border-blue-600 bg-blue-600 text-white"
-              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-          }`}
-        >
-          TEMP
-        </button>
-      </SectionHeader>
-
-      {openSections.tmp && (
-        <div className="overflow-visible">
-          <TmpChart
-            title=""
-            tmp={{
-              "TMP Bladder": vitals?.tmp?.["TMP Bladder"] ?? [],
-              "TMP Blood": vitals?.tmp?.["TMP Blood"] ?? [],
-              "TMP Esophageal": vitals?.tmp?.["TMP Esophageal"] ?? [],
-              "TMP Nasopharyngeal": vitals?.tmp?.["TMP Nasopharyngeal"] ?? [],
-              "TMP Rectal": vitals?.tmp?.["TMP Rectal"] ?? [],
-            }}
-            height={220}
-            xEnd={timelineEnd}
-            xTicks={ticks}
-            showXAxis={false}
-            timeZero={anesthesiaStart}
-            embedded
-            selectedWindow={selectedWindow}
-            onChangeSelectedWindow={onChangeSelectedWindow}
-            onCreateEventFromWindow={onCreateEventFromWindow}
             sharedScrollLeft={sharedScrollLeft}
             onSharedScrollLeftChange={onSharedScrollLeftChange}
           />

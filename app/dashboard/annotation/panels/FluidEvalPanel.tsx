@@ -32,8 +32,10 @@ type OverallJudgmentValue =
 
 type VoiceTarget =
   | "overall"
-  | "replaceable"
+  | "relevance"
+  | "response"
   | "purpose"
+  | "replaceable"
   | null;
 
 type TreatmentCandidate = {
@@ -627,6 +629,8 @@ export default function InterventionEvalPanel({
   const [overallNote, setOverallNote] = React.useState("");
 
   const [relevantIds, setRelevantIds] = React.useState<string[]>([]);
+  const [relevanceNote, setRelevanceNote] = React.useState("");
+  const [responseCourseNote, setResponseCourseNote] = React.useState("");
 
   const [replaceableChoice, setReplaceableChoice] =
     React.useState<ReplaceableChoice>("");
@@ -655,6 +659,8 @@ export default function InterventionEvalPanel({
     () => candidateTreatments.filter((x) => !relevantIds.includes(x.id)),
     [candidateTreatments, relevantIds]
   );
+
+  const hasAnyRelevantSelection = relevantTreatments.length > 0;
 
   function getGroupItems(groupKey: "medication" | "fluid" | "gas") {
     if (groupKey === "medication") return groupedCandidates.Medication;
@@ -720,10 +726,7 @@ export default function InterventionEvalPanel({
       return "Task 1 incomplete: please select an overall treatment strategy judgment.";
     }
 
-    if (
-      overallJudgment !== "Appropriate overall" &&
-      !overallNote.trim()
-    ) {
+    if (overallJudgment !== "Appropriate overall" && !overallNote.trim()) {
       return "Task 1 incomplete: please explain why the interventions were only partially appropriate or uncertain.";
     }
 
@@ -739,20 +742,24 @@ export default function InterventionEvalPanel({
       }
     }
 
-    if (
-      !noTreatmentCaptured &&
-      nonRelevantTreatments.length > 0 &&
-      !purposeNote.trim()
-    ) {
-      return "Task 4 incomplete: please describe the likely purpose of the treatments not selected as relevant.";
+    if (hasAnyRelevantSelection && !relevanceNote.trim()) {
+      return "Task 3 incomplete: please explain why the selected interventions are clinically relevant to this episode.";
+    }
+
+    if (hasAnyRelevantSelection && !responseCourseNote.trim()) {
+      return "Task 4 incomplete: please describe the patient's physiologic response and any subsequent intervention adjustment.";
+    }
+
+    if (!noTreatmentCaptured && nonRelevantTreatments.length > 0 && !purposeNote.trim()) {
+      return "Task 5 incomplete: please describe the likely purpose of the treatments not selected as relevant.";
     }
 
     if (replaceableChoice === "") {
-      return "Task 5 incomplete: please choose Yes or No.";
+      return "Task 6 incomplete: please choose Yes or No.";
     }
 
     if (replaceableChoice === "Yes" && !replaceableNote.trim()) {
-      return "Task 5 incomplete: please describe what could be replaced and with what alternative.";
+      return "Task 6 incomplete: please describe what could be replaced and with what alternative.";
     }
 
     return null;
@@ -785,6 +792,8 @@ export default function InterventionEvalPanel({
           .join("");
 
         if (target === "overall") setOverallNote(transcript);
+        if (target === "relevance") setRelevanceNote(transcript);
+        if (target === "response") setResponseCourseNote(transcript);
         if (target === "replaceable") setReplaceableNote(transcript);
         if (target === "purpose") setPurposeNote(transcript);
       };
@@ -843,6 +852,8 @@ export default function InterventionEvalPanel({
           overallNote: overallNote.trim(),
           relevantIds,
           relevantTreatments,
+          relevanceNote: relevanceNote.trim(),
+          responseCourseNote: responseCourseNote.trim(),
           noRelevantByGroup,
           nonRelevantTreatments,
           purposeNote: purposeNote.trim(),
@@ -875,6 +886,8 @@ export default function InterventionEvalPanel({
     setOverallJudgment("");
     setOverallNote("");
     setRelevantIds([]);
+    setRelevanceNote("");
+    setResponseCourseNote("");
     setReplaceableChoice("");
     setReplaceableNote("");
     setPurposeNote("");
@@ -952,13 +965,14 @@ export default function InterventionEvalPanel({
     );
   }
 
-  const explanationRequired = overallJudgment !== "" && overallJudgment !== "Appropriate overall";
+  const explanationRequired =
+    overallJudgment !== "" && overallJudgment !== "Appropriate overall";
 
   return (
-    <div className="min-h-[760px] bg-white">
+    <div className="min-h-[900px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 3: Evaluate intervention relevance, effect on the patient, and possible alternatives.
+          Panel 3: Evaluate intervention relevance, rationale, response, and possible alternatives.
         </div>
 
         <div className="overflow-hidden rounded-xl border">
@@ -1013,34 +1027,132 @@ export default function InterventionEvalPanel({
             </div>
           </TaskBlock>
 
-          <TaskBlock title="Task 2. Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode.">
-            {noTreatmentCaptured ? (
-              <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
-                No medication, fluid, or gas / ventilation feature was captured in the selected time window.
+          <TaskBlock title="Task 2. Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode, and briefly explain why they are relevant.">
+  {noTreatmentCaptured ? (
+    <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
+      No medication, fluid, or gas / ventilation feature was captured in the selected time window.
+    </div>
+  ) : (
+    <div className="space-y-4">
+      {renderExpandableGroup(
+        "Medications",
+        groupedCandidates.Medication,
+        "medication",
+        "No medications are relevant"
+      )}
+      {renderExpandableGroup(
+        "Fluids",
+        groupedCandidates.Fluid,
+        "fluid",
+        "No fluids are relevant"
+      )}
+      {renderExpandableGroup(
+        "Gas / Ventilation",
+        groupedCandidates["Gas / Ventilation"],
+        "gas",
+        "No gas / ventilation items are relevant"
+      )}
+
+      <div className="border-t pt-4">
+        <div className="mb-2 text-sm font-semibold text-gray-900">
+        Briefly explain the clinical evidence or reasoning that makes the selected interventions relevant to this episode.
+        </div>
+   
+
+        {hasAnyRelevantSelection ? (
+          <>
+            <textarea
+              value={relevanceNote}
+              onChange={(e) => setRelevanceNote(e.target.value)}
+              className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+              placeholder="Briefly explain why the selected interventions are relevant to this episode..."
+            />
+
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={
+                  recordingTarget === "relevance"
+                    ? stopVoiceNote
+                    : () => startVoiceNote("relevance")
+                }
+                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                  recordingTarget === "relevance"
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-orange-400 hover:bg-orange-500"
+                }`}
+              >
+                {recordingTarget === "relevance"
+                  ? "Stop Recording"
+                  : "Start Recording"}
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+            Select at least one relevant intervention to explain why it is relevant.
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+</TaskBlock>
+
+<TaskBlock
+             title="Task 3. Describe how the patient's physiology changed after the relevant interventions and whether/why any further adjustment was needed"
+
+            tooltip={
+              <>
+                <div className="font-semibold text-gray-800">What to include</div>
+                <div className="mt-1">
+                  Briefly explain what these non-relevant treatments were most likely used for.
+                </div>
+                <div className="mt-1">
+                  Examples include routine maintenance, anesthesia depth management, prophylaxis, or other background perioperative care.
+                </div>
+                <div className="mt-1">
+                  You can summarize them together rather than explaining each one separately.
+                </div>
+              </>
+            }
+          >
+            {nonRelevantTreatments.length === 0 ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                There are no non-relevant treatments remaining to annotate.
               </div>
             ) : (
-              <div className="space-y-4">
-                {renderExpandableGroup(
-                  "Medications",
-                  groupedCandidates.Medication,
-                  "medication",
-                  "No medications are relevant"
-                )}
-                {renderExpandableGroup(
-                  "Fluids",
-                  groupedCandidates.Fluid,
-                  "fluid",
-                  "No fluids are relevant"
-                )}
-                {renderExpandableGroup(
-                  "Gas / Ventilation",
-                  groupedCandidates["Gas / Ventilation"],
-                  "gas",
-                  "No gas / ventilation items are relevant"
-                )}
-              </div>
+              <>
+                <textarea
+                  value={purposeNote}
+                  onChange={(e) => setPurposeNote(e.target.value)}
+                  className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="Describe the likely clinical purpose of the treatments not selected as relevant..."
+                />
+
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "purpose"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("purpose")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "purpose"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "purpose"
+                      ? "Stop Recording"
+                      : "Start Recording"}
+                  </button>
+                </div>
+              </>
             )}
           </TaskBlock>
+
+
 
           <TaskBlock
             title="Task 4. Briefly describe the likely clinical purpose of the treatments not selected as relevant."

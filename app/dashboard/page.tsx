@@ -330,7 +330,9 @@ export default function DashboardPage() {
   const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("detect");
 
   const episodeSelectedTask: AnnotationTaskKey =
-    selectedTask === "summary" || selectedTask === "contextualEvent"
+    selectedTask === "summary" ||
+    selectedTask === "preventedEpisode" ||
+    selectedTask === "contextualEvent"
       ? "detect"
       : selectedTask;
 
@@ -338,7 +340,7 @@ export default function DashboardPage() {
 
   const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
   const [selectedWindow, setSelectedWindow] = useState<SelectedWindow | null>(null);
-  
+
   const [timeResolution, setTimeResolution] = useState<15 | 5 | 1>(15);
   const [viewStartMin, setViewStartMin] = useState(0);
   const [sharedScrollLeft, setSharedScrollLeft] = useState(0);
@@ -376,10 +378,8 @@ export default function DashboardPage() {
     const incompleteEvents = sidebarEvents.filter(
       (event) =>
         !event.completed.detect ||
-        !event.completed.prevention ||
         !event.completed.mechanism ||
-        !event.completed.fluidEval ||
-        !event.completed.response
+        !event.completed.fluidEval
     );
 
     if (incompleteEvents.length > 0) {
@@ -426,10 +426,8 @@ export default function DashboardPage() {
       y2: window.y2,
       completed: {
         detect: false,
-        prevention: false,
         mechanism: false,
         fluidEval: false,
-        response: false,
       },
     };
 
@@ -450,13 +448,30 @@ export default function DashboardPage() {
     });
   }
 
-  const TASK_ORDER: AnnotationTaskKey[] = [
-    "detect",
-    "prevention",
-    "mechanism",
-    "fluidEval",
-    "response",
-  ];
+  function handleTimelineWindowCreate(window: SelectedWindow) {
+    if (annotationLevel === "patient" && selectedTask === "preventedEpisode") {
+      setSelectedDetectVital(window.vital);
+      setSelectedWindow(window);
+  
+      logAction("patient_prevented_window_select", {
+        vital: window.vital,
+        startMin: window.startMin,
+        endMin: window.endMin,
+        y1: window.y1,
+        y2: window.y2,
+      });
+      return;
+    }
+  
+    if (annotationLevel === "episode") {
+      handleCreateEventFromWindow(window);
+      return;
+    }
+  
+    // Other patient-level tasks: do not create events
+    setSelectedWindow(window);
+  }
+  const TASK_ORDER: AnnotationTaskKey[] = ["detect", "mechanism", "fluidEval"];
 
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
     if (!selectedEventId) return;
@@ -477,7 +492,7 @@ export default function DashboardPage() {
 
     const currentIndex = TASK_ORDER.indexOf(task);
     if (currentIndex >= 0 && currentIndex < TASK_ORDER.length - 1) {
-      setSelectedTask(TASK_ORDER[currentIndex + 1]);
+      setSelectedTask(TASK_ORDER[currentIndex + 1] as WorkspaceTaskKey);
     }
   }
 
@@ -683,7 +698,7 @@ export default function DashboardPage() {
       setViewStartMin(maxStart);
     }
   }, [sharedTimelineEnd, viewWindowWidthMin, viewStartMin]);
-  
+
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
 
@@ -1000,17 +1015,13 @@ export default function DashboardPage() {
 
                         {annotationLevel === "episode" ? (
                           <>
-                            {(
-                              ["detect", "prevention", "mechanism", "fluidEval", "response"] as const
-                            ).map((task) => {
+                            {(["detect", "mechanism", "fluidEval"] as const).map((task) => {
                               const active = selectedTask === task;
 
                               const labelMap = {
-                                detect: "Detection",
-                                prevention: "Prevention",
+                                detect: "Abnormality Detection",
                                 mechanism: "Mechanism",
                                 fluidEval: "Intervention",
-                                response: "Response",
                               };
 
                               return (
@@ -1058,6 +1069,24 @@ export default function DashboardPage() {
                             <button
                               type="button"
                               onClick={() => {
+                                setSelectedTask("preventedEpisode");
+                                logAction("task_tab_click", {
+                                  task: "preventedEpisode",
+                                  selectedEventId: null,
+                                });
+                              }}
+                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                selectedTask === "preventedEpisode"
+                                  ? "border-blue-600 bg-blue-600 text-white"
+                                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                              }`}
+                            >
+                              Prevented Episode
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => {
                                 setSelectedTask("contextualEvent");
                                 logAction("task_tab_click", {
                                   task: "contextualEvent",
@@ -1080,73 +1109,79 @@ export default function DashboardPage() {
                     {annotationLevel === "episode" ? (
                       <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
                         <div className="border-r">
-                          <AnnotationSidebar
-                            selectedTask={episodeSelectedTask}
-                            onChangeTask={setSelectedTask}
-                            events={sidebarEvents}
-                            selectedEventId={selectedEventId}
-                            onSelectEvent={(eventId) => {
-                              const event = sidebarEvents.find((e) => e.id === eventId);
-                              if (!event) return;
+                        <AnnotationSidebar
+  events={sidebarEvents}
+  selectedEventId={selectedEventId}
+  onSelectEvent={(eventId) => {
+    const event = sidebarEvents.find((e) => e.id === eventId);
+    if (!event) return;
 
-                              setSelectedEventId(eventId);
-                              setSelectedDetectVital(event.vital as DetectVital);
-                              setSelectedWindow({
-                                vital: event.vital as DetectVital,
-                                startMin: event.startMin,
-                                endMin: event.endMin,
-                                y1: event.y1,
-                                y2: event.y2,
-                              });
+    setSelectedEventId(eventId);
+    setSelectedDetectVital(event.vital as DetectVital);
+    setSelectedWindow({
+      vital: event.vital as DetectVital,
+      startMin: event.startMin,
+      endMin: event.endMin,
+      y1: event.y1,
+      y2: event.y2,
+    });
 
-                              logAction("sidebar_event_select", {
-                                eventId,
-                                title: event.title,
-                                vital: event.vital,
-                                startMin: event.startMin,
-                                endMin: event.endMin,
-                              });
-                            }}
-                            onDeleteEvent={(eventId) => {
-                              const remaining = sidebarEvents.filter((e) => e.id !== eventId);
-                              setSidebarEvents(remaining);
+    logAction("sidebar_event_select", {
+      eventId,
+      title: event.title,
+      vital: event.vital,
+      startMin: event.startMin,
+      endMin: event.endMin,
+    });
+  }}
+  onDeleteEvent={(eventId) => {
+    const remaining = sidebarEvents.filter((e) => e.id !== eventId);
+    setSidebarEvents(remaining);
 
-                              if (selectedEventId === eventId) {
-                                if (remaining.length > 0) {
-                                  const nextEvent = remaining[0];
-                                  setSelectedEventId(nextEvent.id);
-                                  setSelectedDetectVital(nextEvent.vital as DetectVital);
-                                  setSelectedWindow({
-                                    vital: nextEvent.vital as DetectVital,
-                                    startMin: nextEvent.startMin,
-                                    endMin: nextEvent.endMin,
-                                    y1: nextEvent.y1,
-                                    y2: nextEvent.y2,
-                                  });
-                                } else {
-                                  setSelectedEventId(null);
-                                  setSelectedWindow(null);
-                                }
-                              }
+    if (selectedEventId === eventId) {
+      if (remaining.length > 0) {
+        const nextEvent = remaining[0];
+        setSelectedEventId(nextEvent.id);
+        setSelectedDetectVital(nextEvent.vital as DetectVital);
+        setSelectedWindow({
+          vital: nextEvent.vital as DetectVital,
+          startMin: nextEvent.startMin,
+          endMin: nextEvent.endMin,
+          y1: nextEvent.y1,
+          y2: nextEvent.y2,
+        });
+      } else {
+        setSelectedEventId(null);
+        setSelectedWindow(null);
+      }
+    }
 
-                              logAction("sidebar_event_delete", { eventId });
-                            }}
-                          />
+    logAction("sidebar_event_delete", { eventId });
+  }}
+/>
                         </div>
 
                         <div className="min-w-0">
                           <TaskWorkspace
-                            task={episodeSelectedTask}
+                            task={selectedTask}
                             onChangeTask={setSelectedTask}
                             onSaveAndNextStep={(finishedTask) => {
-                              handleSaveAndNextStep(finishedTask);
+                              if (
+                                finishedTask === "detect" ||
+                                finishedTask === "mechanism" ||
+                                finishedTask === "fluidEval"
+                              ) {
+                                handleSaveAndNextStep(finishedTask);
+                              } else {
+                                setSelectedTask(finishedTask);
+                              }
                             }}
                             selectedEvent={selectedEvent}
                             caseId={caseId}
                             selectedDetectVital={selectedDetectVital}
+                            onChangeSelectedDetectVital={setSelectedDetectVital}
                             selectedWindow={selectedWindow}
                             anesthesiaStart={anesthesiaStart}
-                            medications={medications}
                             gasData={{
                               FiO2: vitals.gas["FiO2"],
                               "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
@@ -1188,7 +1223,36 @@ export default function DashboardPage() {
                             startMin={0}
                             endMin={sharedTimelineEnd}
                           />
-                        ) : null}
+                        ) : (
+                          <TaskWorkspace
+                            task={selectedTask}
+                            onChangeTask={setSelectedTask}
+                            onSaveAndNextStep={(finishedTask) => {
+                              setSelectedTask(finishedTask);
+                            }}
+                            selectedEvent={null}
+                            caseId={caseId}
+                            selectedDetectVital={selectedDetectVital}
+                            onChangeSelectedDetectVital={setSelectedDetectVital}
+                            selectedWindow={selectedWindow}
+                            anesthesiaStart={anesthesiaStart}
+                            gasData={{
+                              FiO2: vitals.gas["FiO2"],
+                              "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+                              "Air (L/min)": vitals.gas["Air (L/min)"],
+                              "N2O (L/min)": vitals.gas["N2O (L/min)"],
+                              "inO2 %": vitals.gas["inO2 %"],
+                              "inN2O %": vitals.gas["inN2O %"],
+                              "inSevoflurane %": vitals.gas["inSevoflurane %"],
+                              inIsoflurane: vitals.gas["inIsoflurane"],
+                              "etMAC exhaled": vitals.gas["etMAC exhaled"],
+                            }}
+                            medBolusRows={medBolusRowsState}
+                            medInfusionRows={medInfusionRowsState}
+                            fluidInRows={fluidInRowsState}
+                            fluidOutRows={fluidOutRowsState}
+                          />
+                        )}
                       </div>
                     )}
                   </div>
@@ -1212,38 +1276,38 @@ export default function DashboardPage() {
                     onSharedScrollLeftChange={setSharedScrollLeft}
                   />
 
-                <UnifiedTimelineCard
-                  vitals={vitals}
-                  medications={medications}
-                  fluids={fluids}
-                  anesthesiaStart={anesthesiaStart}
-                  anesthesiaStop={anesthesiaStop}
-                  timelineEnd={sharedTimelineEnd}
-                  ticks={sharedXTicks}
-                  timeResolution={timeResolution}
-                  onChangeTimeResolution={setTimeResolution}
-                  viewStartMin={viewStartMin}
-                  onChangeViewStartMin={setViewStartMin}
-                  viewWindowWidthMin={viewWindowWidthMin}
-                  selectedDetectVital={selectedDetectVital}
-                  onChangeSelectedDetectVital={setSelectedDetectVital}
-                  selectedWindow={selectedWindow}
-                  onChangeSelectedWindow={setSelectedWindow}
-                  onCreateEventFromWindow={handleCreateEventFromWindow}
-                  sharedScrollLeft={sharedScrollLeft}
-                  onSharedScrollLeftChange={setSharedScrollLeft}
-                  gas={{
-                    FiO2: vitals.gas["FiO2"],
-                    "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-                    "Air (L/min)": vitals.gas["Air (L/min)"],
-                    "N2O (L/min)": vitals.gas["N2O (L/min)"],
-                    "inO2 %": vitals.gas["inO2 %"],
-                    "inN2O %": vitals.gas["inN2O %"],
-                    "inSevoflurane %": vitals.gas["inSevoflurane %"],
-                    inIsoflurane: vitals.gas["inIsoflurane"],
-                    "etMAC exhaled": vitals.gas["etMAC exhaled"],
-                  }}
-                />
+                  <UnifiedTimelineCard
+                    vitals={vitals}
+                    medications={medications}
+                    fluids={fluids}
+                    anesthesiaStart={anesthesiaStart}
+                    anesthesiaStop={anesthesiaStop}
+                    timelineEnd={sharedTimelineEnd}
+                    ticks={sharedXTicks}
+                    timeResolution={timeResolution}
+                    onChangeTimeResolution={setTimeResolution}
+                    viewStartMin={viewStartMin}
+                    onChangeViewStartMin={setViewStartMin}
+                    viewWindowWidthMin={viewWindowWidthMin}
+                    selectedDetectVital={selectedDetectVital}
+                    onChangeSelectedDetectVital={setSelectedDetectVital}
+                    selectedWindow={selectedWindow}
+                    onChangeSelectedWindow={setSelectedWindow}
+                    onCreateEventFromWindow={handleTimelineWindowCreate}
+                    sharedScrollLeft={sharedScrollLeft}
+                    onSharedScrollLeftChange={setSharedScrollLeft}
+                    gas={{
+                      FiO2: vitals.gas["FiO2"],
+                      "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+                      "Air (L/min)": vitals.gas["Air (L/min)"],
+                      "N2O (L/min)": vitals.gas["N2O (L/min)"],
+                      "inO2 %": vitals.gas["inO2 %"],
+                      "inN2O %": vitals.gas["inN2O %"],
+                      "inSevoflurane %": vitals.gas["inSevoflurane %"],
+                      inIsoflurane: vitals.gas["inIsoflurane"],
+                      "etMAC exhaled": vitals.gas["etMAC exhaled"],
+                    }}
+                  />
                 </div>
               </div>
             )}

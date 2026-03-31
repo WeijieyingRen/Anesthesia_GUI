@@ -14,14 +14,18 @@ import {
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
 
-type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
-
+import type { DetectVital } from "./annotation/types";
 type SelectedWindow = {
   vital: DetectVital;
   startMin: number;
   endMin: number;
   y1: number;
   y2: number;
+};
+
+type HighlightWindow = {
+  startMin: number;
+  endMin: number;
 };
 
 type VitalChartProps = {
@@ -44,6 +48,7 @@ type VitalChartProps = {
   onChangeSelectedDetectVital?: (vital: DetectVital) => void;
 
   selectedWindow?: SelectedWindow | null;
+  highlightWindow?: HighlightWindow | null;
   onChangeSelectedWindow?: (window: SelectedWindow | null) => void;
   onCreateEventFromWindow?: (window: SelectedWindow) => void;
 
@@ -76,8 +81,6 @@ type DragMode =
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
-
-/** 每 15 分钟占多宽，决定整张图会不会更“展开” */
 const PX_PER_15_MIN = 64;
 const PX_PER_MIN = PX_PER_15_MIN / 15;
 
@@ -236,32 +239,27 @@ function LegendMarker({
         {marker === "circle" && (
           <circle cx="6" cy="6" r="2.5" fill="#ffffff" stroke="#ffffff" />
         )}
-
         {marker === "square" && (
           <rect x="3.5" y="3.5" width="5" height="5" fill="#ffffff" stroke="#ffffff" />
         )}
-
         {marker === "triangle" && (
           <>
             <line x1="2" y1="7" x2="6" y2="2" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" />
             <line x1="6" y1="2" x2="10" y2="7" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" />
           </>
         )}
-
         {marker === "triangle-down" && (
           <>
             <line x1="2" y1="5" x2="6" y2="10" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" />
             <line x1="6" y1="10" x2="10" y2="5" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" />
           </>
         )}
-
         {marker === "x" && (
           <>
             <line x1="3.5" y1="3.5" x2="8.5" y2="8.5" stroke="#ffffff" strokeWidth="1.8" />
             <line x1="3.5" y1="8.5" x2="8.5" y2="3.5" stroke="#ffffff" strokeWidth="1.8" />
           </>
         )}
-
         {marker === "diamond" && (
           <polygon points="6,2.5 3,6 6,9.5 9,6" fill="#ffffff" stroke="#ffffff" />
         )}
@@ -291,28 +289,14 @@ function getSelectedSeriesKey(
     if ((series["ARTM"] ?? []).length) return "ARTM";
     return null;
   }
-
-  if (vital === "HR") {
-    if ((series["HR"] ?? []).length) return "HR";
-    return null;
-  }
-
-  if (vital === "SPO2") {
-    if ((series["SPO2 %"] ?? []).length) return "SPO2 %";
-    return null;
-  }
-
-  if (vital === "RR") {
-    if ((series["RR"] ?? []).length) return "RR";
-    return null;
-  }
-
+  if (vital === "HR") return (series["HR"] ?? []).length ? "HR" : null;
+  if (vital === "SPO2") return (series["SPO2 %"] ?? []).length ? "SPO2 %" : null;
+  if (vital === "RR") return (series["RR"] ?? []).length ? "RR" : null;
   if (vital === "ETCO2") {
     if ((series["ETCO2"] ?? []).length) return "ETCO2";
     if ((series["ETCO2 (mmHg)"] ?? []).length) return "ETCO2 (mmHg)";
     return null;
   }
-
   if (vital === "TEMP") {
     if ((series["TEMP"] ?? []).length) return "TEMP";
     if ((series["TMP Bladder"] ?? []).length) return "TMP Bladder";
@@ -322,7 +306,6 @@ function getSelectedSeriesKey(
     if ((series["TMP Rectal"] ?? []).length) return "TMP Rectal";
     return null;
   }
-
   return null;
 }
 
@@ -512,6 +495,7 @@ export default function VitalChart({
   selectedDetectVital = "MAP",
   onChangeSelectedDetectVital,
   selectedWindow = null,
+  highlightWindow = null,
   onChangeSelectedWindow,
   onCreateEventFromWindow,
   sharedScrollLeft,
@@ -565,7 +549,7 @@ export default function VitalChart({
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentWidth - PLOT_RIGHT;
-  
+
   function minuteToPixel(minute: number) {
     if (!effectiveXEnd || effectiveXEnd <= 0) return 0;
     return (minute / effectiveXEnd) * plotWidth;
@@ -820,16 +804,16 @@ export default function VitalChart({
   ]);
 
   const highlightWindowBox = useMemo(() => {
-    if (!selectedWindow) return null;
+    if (!highlightWindow) return null;
 
-    const left = minuteToPixel(selectedWindow.startMin);
-    const right = minuteToPixel(selectedWindow.endMin);
+    const left = minuteToPixel(highlightWindow.startMin);
+    const right = minuteToPixel(highlightWindow.endMin);
 
     return {
       left,
       width: Math.max(2, right - left),
     };
-  }, [selectedWindow]);
+  }, [highlightWindow]);
 
   const statsWindow = useMemo(() => {
     if (isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null) {
@@ -1514,7 +1498,6 @@ export default function VitalChart({
           </div>
         </div>
       </div>
-
     </div>
   );
 }

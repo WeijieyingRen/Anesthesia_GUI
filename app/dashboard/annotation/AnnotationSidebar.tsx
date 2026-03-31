@@ -3,8 +3,6 @@
 import type { AnnotationTaskKey, SidebarEventItem } from "./types";
 
 type AnnotationSidebarProps = {
-  selectedTask: AnnotationTaskKey;
-  onChangeTask: (task: AnnotationTaskKey) => void;
   events: SidebarEventItem[];
   selectedEventId: string | null;
   onSelectEvent: (eventId: string) => void;
@@ -13,10 +11,8 @@ type AnnotationSidebarProps = {
 
 const TASK_ORDER: AnnotationTaskKey[] = [
   "detect",
-  "prevention",
   "mechanism",
   "fluidEval",
-  "response",
 ];
 
 export default function AnnotationSidebar({

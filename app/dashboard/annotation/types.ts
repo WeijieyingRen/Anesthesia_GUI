@@ -1,15 +1,24 @@
 export type AnnotationTaskKey =
   | "detect"
-  | "prevention"
   | "mechanism"
-  | "fluidEval"
-  | "response";
+  | "fluidEval";
 
-export type PatientTaskKey = "summary" | "contextualEvent";
+export type PatientTaskKey =
+  | "summary"
+  | "preventedEpisode"
+  | "contextualEvent";
 
 export type WorkspaceTaskKey = AnnotationTaskKey | PatientTaskKey;
 
-export type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
+export type DetectVital =
+  | "MAP"
+  | "SBP"
+  | "DBP"
+  | "HR"
+  | "SPO2"
+  | "RR"
+  | "ETCO2"
+  | "TEMP";
 
 export type SidebarEventItem = {
   id: string;
@@ -26,6 +35,8 @@ export type SidebarEventItem = {
 export type EventType =
   | "Hypotension"
   | "Hypertension"
+  | "Bradycardia"
+  | "Tachycardia"
   | "Hypoxia"
   | "Hypercapnia"
   | "Hypocapnia"
@@ -58,6 +69,8 @@ export type SeverityLevel = "Mild" | "Moderate" | "Severe";
 
 export type DetectAnnotation = {
   vital: DetectVital;
+  primaryVitals?: DetectVital[];
+
   startMin: number;
   endMin: number;
 

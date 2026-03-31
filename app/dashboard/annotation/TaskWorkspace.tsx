@@ -1,19 +1,18 @@
 "use client";
 
 import * as React from "react";
-import ResponsePanel from "./panels/ResponsePanel";
 import type {
-  AnnotationTaskKey,
-  SidebarEventItem,
   DetectAnnotation,
+  DetectVital,
+  SidebarEventItem,
+  WorkspaceTaskKey,
+  EventType,
 } from "./types";
 import type { TimeValuePoint } from "@/lib/types";
 import DetectPanel from "./panels/DetectPanel";
 import MechanismPanel from "./panels/MechanismPanel";
 import FluidEvalPanel from "./panels/FluidEvalPanel";
-import PreventionPanel from "./panels/PreventionPanel";
-
-type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
+import PreventedEpisodePanel from "./panels/PreventedEpisodePanel";
 
 type SelectedWindow = {
   vital: DetectVital;
@@ -24,21 +23,60 @@ type SelectedWindow = {
 };
 
 type TaskWorkspaceProps = {
-  task: AnnotationTaskKey;
-  onChangeTask: (task: AnnotationTaskKey) => void;
-  onSaveAndNextStep: (task: AnnotationTaskKey) => void;
+  task: WorkspaceTaskKey;
+  onChangeTask: (task: WorkspaceTaskKey) => void;
+  onSaveAndNextStep: (task: WorkspaceTaskKey) => void;
   selectedEvent: SidebarEventItem | null;
   caseId?: string;
   selectedDetectVital: DetectVital;
+  onChangeSelectedDetectVital: (vital: DetectVital) => void;
   selectedWindow: SelectedWindow | null;
   anesthesiaStart?: string | null;
-  medications?: any;
   gasData?: Record<string, TimeValuePoint[] | undefined>;
   medBolusRows?: any[];
   medInfusionRows?: any[];
   fluidInRows?: any[];
   fluidOutRows?: any[];
 };
+
+function buildDefaultDetectAnnotation(params: {
+  selectedWindow: SelectedWindow | null;
+  selectedEvent: SidebarEventItem | null;
+  selectedDetectVital: DetectVital;
+  prev?: DetectAnnotation | null;
+}): DetectAnnotation {
+  const { selectedWindow, selectedEvent, selectedDetectVital, prev } = params;
+
+  const resolvedVital =
+    selectedWindow?.vital ?? prev?.vital ?? selectedDetectVital;
+
+  return {
+    vital: resolvedVital,
+    primaryVitals:
+      prev?.primaryVitals && prev.primaryVitals.length > 0
+        ? prev.primaryVitals
+        : [resolvedVital],
+
+    startMin:
+      selectedWindow?.startMin ?? selectedEvent?.startMin ?? prev?.startMin ?? 0,
+    endMin:
+      selectedWindow?.endMin ?? selectedEvent?.endMin ?? prev?.endMin ?? 0,
+
+    note: prev?.note ?? "",
+
+    eventType: prev?.eventType ?? "",
+    eventTypeOther: prev?.eventTypeOther ?? "",
+
+    episodeEvolution: prev?.episodeEvolution ?? "",
+    episodeEvolutionNote: prev?.episodeEvolutionNote ?? "",
+
+    overallCharacterization: prev?.overallCharacterization ?? "",
+    overallInterpretationNote: prev?.overallInterpretationNote ?? "",
+
+    severity: prev?.severity ?? "",
+    confidence: prev?.confidence ?? null,
+  };
+}
 
 export default function TaskWorkspace({
   task,
@@ -47,9 +85,9 @@ export default function TaskWorkspace({
   selectedEvent,
   caseId = "unknown_case",
   selectedDetectVital,
+  onChangeSelectedDetectVital,
   selectedWindow,
   anesthesiaStart,
-  medications,
   gasData = {},
   medBolusRows = [],
   medInfusionRows = [],
@@ -60,85 +98,88 @@ export default function TaskWorkspace({
     React.useState<DetectAnnotation | null>(null);
 
   React.useEffect(() => {
-    if (!selectedEvent && !selectedWindow) {
+    if (!selectedEvent && !selectedWindow && task !== "preventedEpisode") {
       setDetectAnnotation(null);
       return;
     }
 
-    const vital = selectedWindow?.vital ?? selectedDetectVital;
-    const startMin = selectedWindow?.startMin ?? selectedEvent?.startMin ?? 0;
-    const endMin = selectedWindow?.endMin ?? selectedEvent?.endMin ?? 0;
+    if (task === "preventedEpisode") {
+      return;
+    }
 
-    setDetectAnnotation((prev) => ({
-      ...(prev ?? {}),
-      vital,
-      startMin,
-      endMin,
-      eventType: prev?.eventType ?? "",
-      severity: prev?.severity ?? "",
-      confidence: prev?.confidence ?? null,
-      note: prev?.note ?? "",
-      episodeEvolution: (prev as any)?.episodeEvolution ?? "",
-      episodeEvolutionNote: (prev as any)?.episodeEvolutionNote ?? "",
-      overallCharacterization: (prev as any)?.overallCharacterization ?? "",
-      overallInterpretationNote: (prev as any)?.overallInterpretationNote ?? "",
-      eventTypeOther: prev?.eventTypeOther ?? "",
-    }) as DetectAnnotation);
-  }, [selectedEvent, selectedWindow, selectedDetectVital]);
+    setDetectAnnotation((prev) =>
+      buildDefaultDetectAnnotation({
+        selectedWindow,
+        selectedEvent,
+        selectedDetectVital,
+        prev,
+      })
+    );
+  }, [selectedEvent, selectedWindow, selectedDetectVital, task]);
 
-  if (!selectedEvent && !selectedWindow) {
+  const eventContext = React.useMemo(() => {
+    if (!selectedEvent && !selectedWindow) return null;
+    if (!detectAnnotation) return null;
+
+    const eventId = selectedEvent?.id ?? "timeline-selection";
+
+    const eventTitle = selectedWindow
+      ? `${detectAnnotation.vital} Window`
+      : selectedEvent?.title ?? `${detectAnnotation.vital} Window`;
+
+    const episodeLabel = selectedWindow
+      ? `Selected ${detectAnnotation.vital} ${detectAnnotation.startMin}-${detectAnnotation.endMin} min`
+      : selectedEvent?.episodeLabel ?? "Selected Window";
+
+    return {
+      eventId,
+      eventTitle,
+      episodeLabel,
+      startMin: detectAnnotation.startMin,
+      endMin: detectAnnotation.endMin,
+    };
+  }, [selectedEvent, selectedWindow, detectAnnotation]);
+
+  if (task === "preventedEpisode") {
+    return (
+      <PreventedEpisodePanel
+        caseId={caseId}
+        eventId="patient-prevented-episode"
+        eventTitle="Prevented Episode"
+        episodeLabel="Patient-level prevented episode"
+        anesthesiaStart={anesthesiaStart}
+        selectedVital={selectedDetectVital}
+        onChangeSelectedVital={onChangeSelectedDetectVital}
+        selectedWindow={selectedWindow}
+        onSaveAndNextStep={() => onSaveAndNextStep("preventedEpisode")}
+      />
+    );
+  }
+
+  if (!eventContext || !detectAnnotation) {
     return (
       <div className="flex min-h-[560px] items-center justify-center p-6 text-sm text-gray-500">
         Please select an event.
       </div>
     );
   }
-
-  if (!detectAnnotation) {
-    return (
-      <div className="flex min-h-[560px] items-center justify-center p-6 text-sm text-gray-500">
-        Please select an event.
-      </div>
-    );
-  }
-
-  const effectiveEventId = selectedEvent?.id ?? "timeline-selection";
-
-  const effectiveEventTitle = selectedWindow
-    ? `${detectAnnotation.vital} Window`
-    : selectedEvent?.title ?? `${detectAnnotation.vital} Window`;
-
-  const effectiveEpisodeLabel = selectedWindow
-    ? `Selected ${detectAnnotation.vital} ${detectAnnotation.startMin}-${detectAnnotation.endMin} min`
-    : selectedEvent?.episodeLabel ?? "Selected Window";
 
   if (task === "detect") {
     return (
       <DetectPanel
-        eventId={effectiveEventId}
+        eventId={eventContext.eventId}
         caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
+        eventTitle={eventContext.eventTitle}
+        episodeLabel={eventContext.episodeLabel}
         annotation={detectAnnotation}
         onChangeAnnotation={(value) => {
           setDetectAnnotation((prev) => {
-            const fallback: DetectAnnotation = {
-              ...(prev ?? {}),
-              vital: selectedWindow?.vital ?? selectedDetectVital,
-              startMin: selectedWindow?.startMin ?? selectedEvent?.startMin ?? 0,
-              endMin: selectedWindow?.endMin ?? selectedEvent?.endMin ?? 0,
-              eventType: prev?.eventType ?? "",
-              eventTypeOther: prev?.eventTypeOther ?? "",
-              note: (prev as any)?.note ?? "",
-              episodeEvolution: (prev as any)?.episodeEvolution ?? "",
-              episodeEvolutionNote: (prev as any)?.episodeEvolutionNote ?? "",
-              overallCharacterization:
-                (prev as any)?.overallCharacterization ?? "",
-              overallInterpretationNote:
-                (prev as any)?.overallInterpretationNote ?? "",
-              severity: prev?.severity ?? "",
-              confidence: prev?.confidence ?? null,
-            } as DetectAnnotation;
+            const fallback = buildDefaultDetectAnnotation({
+              selectedWindow,
+              selectedEvent,
+              selectedDetectVital,
+              prev,
+            });
 
             return typeof value === "function" ? value(fallback) : value;
           });
@@ -149,30 +190,22 @@ export default function TaskWorkspace({
     );
   }
 
-  if (task === "prevention") {
-    return (
-      <PreventionPanel
-        eventId={effectiveEventId}
-        caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
-        startMin={detectAnnotation.startMin}
-        endMin={detectAnnotation.endMin}
-        onSaveAndNextStep={() => onSaveAndNextStep("prevention")}
-      />
-    );
-  }
-
   if (task === "mechanism") {
     return (
       <MechanismPanel
-        eventId={effectiveEventId}
+        eventId={eventContext.eventId}
         caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
-        startMin={detectAnnotation.startMin}
-        endMin={detectAnnotation.endMin}
-        eventType={detectAnnotation.eventType as any}
+        eventTitle={eventContext.eventTitle}
+        episodeLabel={eventContext.episodeLabel}
+        startMin={eventContext.startMin}
+        endMin={eventContext.endMin}
+        eventType={
+          detectAnnotation.eventType &&
+          detectAnnotation.eventType !== "Others"
+            ? (detectAnnotation.eventType as EventType)
+            : undefined
+        }
+        annotatorName={undefined}
         onSaveAndNextStep={() => onSaveAndNextStep("mechanism")}
       />
     );
@@ -181,12 +214,12 @@ export default function TaskWorkspace({
   if (task === "fluidEval") {
     return (
       <FluidEvalPanel
-        eventId={effectiveEventId}
+        eventId={eventContext.eventId}
         caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
-        startMin={detectAnnotation.startMin}
-        endMin={detectAnnotation.endMin}
+        eventTitle={eventContext.eventTitle}
+        episodeLabel={eventContext.episodeLabel}
+        startMin={eventContext.startMin}
+        endMin={eventContext.endMin}
         medBolusRows={medBolusRows}
         medInfusionRows={medInfusionRows}
         fluidInRows={fluidInRows}
@@ -197,23 +230,9 @@ export default function TaskWorkspace({
     );
   }
 
-  if (task === "response") {
-    return (
-      <ResponsePanel
-        eventId={effectiveEventId}
-        caseId={caseId}
-        eventTitle={effectiveEventTitle}
-        episodeLabel={effectiveEpisodeLabel}
-        startMin={detectAnnotation.startMin}
-        endMin={detectAnnotation.endMin}
-        onSaveAndNextStep={() => onSaveAndNextStep("response")}
-      />
-    );
-  }
-
   return (
     <div className="flex min-h-[560px] items-center justify-center p-6 text-sm text-gray-500">
-      Unsupported task.
+      Unsupported task: {String(task)}
     </div>
   );
 }

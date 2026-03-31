@@ -12,14 +12,18 @@ import {
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
 
-type DetectVital = "MAP" | "HR" | "SPO2" | "RR" | "ETCO2" | "TEMP";
-
+import type { DetectVital } from "./annotation/types";
 type SelectedWindow = {
   vital: DetectVital;
   startMin: number;
   endMin: number;
   y1: number;
   y2: number;
+};
+
+type HighlightWindow = {
+  startMin: number;
+  endMin: number;
 };
 
 type TmpChartProps = {
@@ -33,10 +37,10 @@ type TmpChartProps = {
   embedded?: boolean;
 
   selectedWindow?: SelectedWindow | null;
+  highlightWindow?: HighlightWindow | null;
   onChangeSelectedWindow?: (window: SelectedWindow | null) => void;
   onCreateEventFromWindow?: (window: SelectedWindow) => void;
 
-  /** 用来和 Vital 做 scroll 同步，可选 */
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -71,8 +75,6 @@ type DragMode =
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
-
-/** 必须和 VitalChart 保持一致 */
 const PX_PER_15_MIN = 64;
 const PX_PER_MIN = PX_PER_15_MIN / 15;
 
@@ -501,6 +503,7 @@ export default function TmpChart({
   timeZero = null,
   embedded = false,
   selectedWindow = null,
+  highlightWindow = null,
   onChangeSelectedWindow,
   onCreateEventFromWindow,
   sharedScrollLeft,
@@ -534,6 +537,7 @@ export default function TmpChart({
   }, [effectiveXEnd]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
+  const plotWidth = contentWidth - PLOT_RIGHT;
 
   const majorGridTicks = React.useMemo(() => {
     if (xTicks && xTicks.length > 0) return xTicks;
@@ -594,7 +598,8 @@ export default function TmpChart({
   }
 
   function minuteToPixel(minute: number) {
-    return minute * PX_PER_MIN;
+    if (!effectiveXEnd || effectiveXEnd <= 0) return 0;
+    return (minute / effectiveXEnd) * plotWidth;
   }
 
   function valueToPixel(value: number) {
@@ -845,16 +850,16 @@ export default function TmpChart({
   }, [displayWindow]);
 
   const highlightWindowBox = React.useMemo(() => {
-    if (!tmpWindow) return null;
+    if (!highlightWindow) return null;
 
-    const left = minuteToPixel(tmpWindow.startMin);
-    const right = minuteToPixel(tmpWindow.endMin);
+    const left = minuteToPixel(highlightWindow.startMin);
+    const right = minuteToPixel(highlightWindow.endMin);
 
     return {
       left,
       width: Math.max(2, right - left),
     };
-  }, [tmpWindow]);
+  }, [highlightWindow]);
 
   const hoverStats = React.useMemo(() => {
     if (hoverMinute == null || activeSeries.length === 0 || !activeFeature) return null;

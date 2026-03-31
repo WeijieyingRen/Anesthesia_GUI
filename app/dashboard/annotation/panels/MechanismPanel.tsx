@@ -11,7 +11,7 @@ type MechanismPanelProps = {
   episodeLabel?: string;
   startMin?: number;
   endMin?: number;
-  eventType: EventType;
+  eventType?: EventType;
   annotatorName?: string;
   onSaveAndNextStep?: () => void;
 };
@@ -41,6 +41,28 @@ const MECHANISM_OPTIONS: Partial<Record<EventType, string[]>> = {
     "Hypervolemia",
     "Sympathetic surge",
     "Medication wearing off",
+    "Measurement artifact",
+    "Unknown",
+  ],
+
+  Bradycardia: [
+    "Excess anesthetic depth",
+    "Opioid effect",
+    "Vagal stimulation",
+    "Conduction abnormality",
+    "Beta-blocker / calcium channel blocker effect",
+    "Electrolyte disturbance",
+    "Measurement artifact",
+    "Unknown",
+  ],
+
+  Tachycardia: [
+    "Pain / inadequate anesthesia",
+    "Hypovolemia",
+    "Sympathetic surge",
+    "Fever / hypermetabolic state",
+    "Medication effect",
+    "Arrhythmia",
     "Measurement artifact",
     "Unknown",
   ],
@@ -203,7 +225,7 @@ export default function MechanismPanel({
   onSaveAndNextStep,
 }: MechanismPanelProps) {
   const mechanismAtoms = React.useMemo(() => {
-    const base = MECHANISM_OPTIONS[eventType] ?? [];
+    const base = eventType ? MECHANISM_OPTIONS[eventType] ?? [] : [];
     const labels = base.includes("Others") ? base : [...base, "Others"];
 
     return labels.map((label, index) => ({
@@ -231,6 +253,16 @@ export default function MechanismPanel({
     panelOpenedAtRef.current = Date.now();
   }, [caseId, eventId]);
 
+  React.useEffect(() => {
+    setSelectedMechanisms([]);
+    setOthersNote("");
+    setRankingNote("");
+    setRecordingTarget(null);
+    recognitionRef.current?.stop?.();
+    setSaveStatus("idle");
+    setSaveMessage("");
+  }, [eventType]);
+
   function toggleMechanism(label: string) {
     setSelectedMechanisms((prev) => {
       if (prev.includes(label)) {
@@ -255,7 +287,7 @@ export default function MechanismPanel({
 
   function validateMechanism() {
     if (!eventType) {
-      return "Selected event type is missing.";
+      return "Selected event type is missing. Please complete the detection step first.";
     }
 
     if (selectedMechanisms.length === 0) {
@@ -399,11 +431,15 @@ export default function MechanismPanel({
             <div className="mb-3 text-sm text-gray-600">
               Selected event type:{" "}
               <span className="rounded-md bg-blue-50 px-2 py-1 font-medium text-blue-700">
-                {eventType}
+                {eventType ?? "Not selected"}
               </span>
             </div>
 
-            {mechanismAtoms.length === 0 ? (
+            {!eventType ? (
+              <div className="text-sm text-red-500">
+                Event type is missing. Please go back to the detection panel and select an abnormal event type first.
+              </div>
+            ) : mechanismAtoms.length === 0 ? (
               <div className="text-sm text-gray-500">
                 No mechanism list configured for this event type yet.
               </div>
