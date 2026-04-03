@@ -341,7 +341,7 @@ export default function DashboardPage() {
   const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
   const [selectedWindow, setSelectedWindow] = useState<SelectedWindow | null>(null);
 
-  const [timeResolution, setTimeResolution] = useState<15 | 5 | 1>(15);
+  const [timeResolution, setTimeResolution] = useState<15 | 5>(15);
   const [viewStartMin, setViewStartMin] = useState(0);
   const [sharedScrollLeft, setSharedScrollLeft] = useState(0);
 
@@ -683,8 +683,7 @@ export default function DashboardPage() {
 
   const viewWindowWidthMin = useMemo(() => {
     if (timeResolution === 15) return sharedTimelineEnd;
-    if (timeResolution === 5) return 120;
-    return 45;
+    return 120;
   }, [timeResolution, sharedTimelineEnd]);
 
   const sharedXTicks = Array.from(
@@ -701,15 +700,15 @@ export default function DashboardPage() {
 
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
-
+  
     return prepareTimelineContextData(
       caseStaticRowState,
       caseDynamicRowsState,
       selectedWindow?.startMin,
       selectedWindow?.endMin,
-      15
+      timeResolution
     );
-  }, [caseStaticRowState, caseDynamicRowsState, selectedWindow]);
+  }, [caseStaticRowState, caseDynamicRowsState, selectedWindow, timeResolution]);
 
   if (loading) {
     return (
@@ -1259,23 +1258,23 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="min-w-0 space-y-4">
-                  <TimelineContextPanel
-                    context={timelineContext}
-                    xEnd={sharedTimelineEnd}
-                    xTicks={sharedXTicks}
-                    timeZero={anesthesiaStart}
-                    episodeWindow={
-                      selectedWindow
-                        ? {
-                            startMin: selectedWindow.startMin,
-                            endMin: selectedWindow.endMin,
-                          }
-                        : null
-                    }
-                    sharedScrollLeft={sharedScrollLeft}
-                    onSharedScrollLeftChange={setSharedScrollLeft}
-                  />
-
+                <TimelineContextPanel
+  context={timelineContext}
+  xEnd={sharedTimelineEnd}
+  xTicks={sharedXTicks}
+  timeZero={anesthesiaStart}
+  timeResolution={timeResolution}
+  episodeWindow={
+    selectedWindow
+      ? {
+          startMin: selectedWindow.startMin,
+          endMin: selectedWindow.endMin,
+        }
+      : null
+  }
+  sharedScrollLeft={sharedScrollLeft}
+  onSharedScrollLeftChange={setSharedScrollLeft}
+/>
                   <UnifiedTimelineCard
                     vitals={vitals}
                     medications={medications}

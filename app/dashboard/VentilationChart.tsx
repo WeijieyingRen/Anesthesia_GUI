@@ -9,7 +9,6 @@ const PLOT_RIGHT = 20;
 
 /** 和 Vital 保持一致 */
 const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
 
 type HighlightWindow = {
   startMin: number;
@@ -27,6 +26,7 @@ type VentilationChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+  timeResolution?: 15 | 5;
 
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
@@ -67,6 +67,30 @@ const DEFAULT_VENT_ORDER = [
 const ROW_HEIGHT = 20;
 const TOP_PAD = 0;
 const BOTTOM_PAD = 0;
+
+function getPxPerMinute(timeResolution: 15 | 5) {
+  return timeResolution === 15 ? PX_PER_15_MIN / 15 : PX_PER_15_MIN / 5;
+}
+
+function getMajorStep(timeResolution: 15 | 5) {
+  return timeResolution === 15 ? 15 : 5;
+}
+
+function getMinorStep(timeResolution: 15 | 5) {
+  return timeResolution === 15 ? 5 : 1;
+}
+
+function buildGridTicks(end: number, step: number) {
+  if (!Number.isFinite(end) || end <= 0) return [];
+  const ticks: number[] = [];
+  for (let t = 0; t <= end; t += step) {
+    ticks.push(t);
+  }
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
+    ticks.push(end);
+  }
+  return ticks;
+}
 
 function sortVentNames(names: string[]) {
   return [...names].sort((a, b) => {
@@ -238,6 +262,112 @@ function FixedYAxisSpacer({
   );
 }
 
+function VentilationGridSvg({
+  end,
+  majorTicks,
+  minorTicks,
+  rows,
+  height,
+  highlightWindow,
+  plotWidth,
+}: {
+  end: number;
+  majorTicks: number[];
+  minorTicks: number[];
+  rows: VentRow[];
+  height: number;
+  highlightWindow?: HighlightWindow | null;
+  plotWidth: number;
+}) {
+  if (!Number.isFinite(end) || end <= 0) return null;
+
+  return (
+    <svg
+      width={plotWidth}
+      height={height}
+      viewBox={`0 0 ${plotWidth} ${height}`}
+      preserveAspectRatio="none"
+      className="absolute inset-0 pointer-events-none"
+    >
+      {visibleRowsReindexedSafe(rows).map((row, idx) => {
+        const yTop = TOP_PAD + idx * ROW_HEIGHT;
+        const yBottom = yTop + ROW_HEIGHT;
+
+        return (
+          <g key={`row-${row.name}`}>
+            <rect
+              x={0}
+              y={yTop}
+              width={plotWidth}
+              height={ROW_HEIGHT}
+              fill="none"
+              stroke="#d1d5db"
+              strokeWidth={1}
+            />
+            <line
+              x1={0}
+              y1={yBottom}
+              x2={plotWidth}
+              y2={yBottom}
+              stroke="#d1d5db"
+              strokeWidth={1}
+            />
+          </g>
+        );
+      })}
+
+      {highlightWindow && (
+        <rect
+          x={(highlightWindow.startMin / end) * plotWidth}
+          y={0}
+          width={Math.max(
+            2,
+            ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth
+          )}
+          height={height}
+          fill="lightblue"
+          fillOpacity={0.75}
+          stroke="none"
+        />
+      )}
+
+      {minorTicks.map((tick) => {
+        const x = (tick / end) * plotWidth;
+        return (
+          <line
+            key={`grid-x-minor-${tick}`}
+            x1={x}
+            y1={0}
+            x2={x}
+            y2={height}
+            stroke="#d7dbe2"
+            strokeWidth={0.9}
+          />
+        );
+      })}
+
+      {majorTicks.map((tick) => {
+        const x = (tick / end) * plotWidth;
+        return (
+          <line
+            key={`grid-x-major-${tick}`}
+            x1={x}
+            y1={0}
+            x2={x}
+            y2={height}
+            stroke="#9aa3b2"
+            strokeWidth={1.4}
+          />
+        );
+      })}
+    </svg>
+  );
+}
+
+function visibleRowsReindexedSafe(rows: VentRow[]) {
+  return rows.map((row, idx) => ({ ...row, rowIndex: idx }));
+}
+
 export default function VentilationChart({
   title = "Ventilation Trends",
   ventilation,
@@ -249,6 +379,7 @@ export default function VentilationChart({
   timeZero,
   embedded = false,
   highlightWindow = null,
+  timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: VentilationChartProps) {
@@ -256,6 +387,10 @@ export default function VentilationChart({
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
+  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
 
   useEffect(() => {
     if (scrollRef.current == null) return;
@@ -270,15 +405,25 @@ export default function VentilationChart({
   const visibleRowsReindexed = visibleRows.map((row, idx) => ({ ...row, rowIndex: idx }));
 
   const allMaxTime = maxTimeOfRows(visibleRowsReindexed);
-  const computedXEnd = Math.max(windowSize, Math.ceil(allMaxTime / windowSize) * windowSize);
+  const effectiveWindowSize = timeResolution === 15 ? windowSize : 5;
+  const computedXEnd = Math.max(
+    majorStep,
+    Math.ceil(allMaxTime / majorStep) * majorStep
+  );
   const finalXEnd = xEnd ?? computedXEnd;
-  const finalXTicks =
-    xTicks ??
-    Array.from({ length: Math.floor(finalXEnd / windowSize) + 1 }, (_, i) => i * windowSize);
+
+  const majorTicks = useMemo(() => {
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
+    return buildGridTicks(finalXEnd, majorStep);
+  }, [timeResolution, xTicks, finalXEnd, majorStep]);
+
+  const minorTicks = useMemo(() => {
+    return buildGridTicks(finalXEnd, minorStep);
+  }, [finalXEnd, minorStep]);
 
   const segments = useMemo(
-    () => buildWindowSegments(visibleRowsReindexed, windowSize),
-    [visibleRowsReindexed, windowSize]
+    () => buildWindowSegments(visibleRowsReindexed, effectiveWindowSize),
+    [visibleRowsReindexed, effectiveWindowSize]
   );
 
   const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
@@ -286,8 +431,8 @@ export default function VentilationChart({
 
   const contentPlotWidth = useMemo(() => {
     if (finalXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(finalXEnd * PX_PER_MIN));
-  }, [finalXEnd]);
+    return Math.max(800, Math.ceil(finalXEnd * pxPerMin));
+  }, [finalXEnd, pxPerMin]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentPlotWidth;
@@ -368,80 +513,29 @@ export default function VentilationChart({
           }}
         >
           <div
+            className="relative"
             style={{
               width: contentWidth,
               height: contentHeight,
             }}
           >
+            <VentilationGridSvg
+              end={finalXEnd}
+              majorTicks={majorTicks}
+              minorTicks={minorTicks}
+              rows={visibleRowsReindexed}
+              height={contentHeight}
+              highlightWindow={highlightWindow}
+              plotWidth={plotWidth}
+            />
+
             <svg
               width={contentWidth}
               height={contentHeight}
               viewBox={`0 0 ${contentWidth} ${contentHeight}`}
               preserveAspectRatio="none"
+              className="absolute inset-0"
             >
-              {visibleRowsReindexed.map((row, idx) => {
-                const yTop = TOP_PAD + idx * ROW_HEIGHT;
-                const yBottom = yTop + ROW_HEIGHT;
-
-                return (
-                  <g key={`row-${row.name}`}>
-                    <rect
-                      x={0}
-                      y={yTop}
-                      width={plotWidth}
-                      height={ROW_HEIGHT}
-                      fill="none"
-                      stroke="#d1d5db"
-                      strokeWidth={1}
-                    />
-                    <line
-                      x1={0}
-                      y1={yBottom}
-                      x2={plotWidth}
-                      y2={yBottom}
-                      stroke="#d1d5db"
-                      strokeWidth={1}
-                    />
-                  </g>
-                );
-              })}
-
-              {highlightWindow && (
-                <rect
-                  x={(highlightWindow.startMin / finalXEnd) * plotWidth}
-                  y={0}
-                  width={Math.max(
-                    2,
-                    ((highlightWindow.endMin - highlightWindow.startMin) / finalXEnd) * plotWidth
-                  )}
-                  height={contentHeight}
-                  fill="lightblue"
-                  fillOpacity={0.75}
-                  stroke="none"
-                />
-              )}
-
-              {finalXTicks.map((tick) => {
-                const x = (tick / finalXEnd) * plotWidth;
-                return (
-                  <g key={`tick-${tick}`}>
-                    <line
-                      x1={x}
-                      y1={0}
-                      x2={x}
-                      y2={contentHeight}
-                      stroke="#d1d5db"
-                      strokeWidth={1}
-                    />
-                    {showXAxis && (
-                      <text x={x + 2} y={TOP_PAD - 6} fontSize={10} fill="#6b7280">
-                        {formatClockTime(tick, timeZero)}
-                      </text>
-                    )}
-                  </g>
-                );
-              })}
-
               {segments.map((seg, idx) => {
                 const color = inferVentColor(seg.rowName);
                 const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
@@ -522,6 +616,22 @@ export default function VentilationChart({
                   </g>
                 );
               })}
+
+              {showXAxis &&
+                majorTicks.map((tick) => {
+                  const x = (tick / finalXEnd) * plotWidth;
+                  return (
+                    <text
+                      key={`tick-label-${tick}`}
+                      x={x + 2}
+                      y={TOP_PAD + 12}
+                      fontSize={10}
+                      fill="#6b7280"
+                    >
+                      {formatClockTime(tick, timeZero)}
+                    </text>
+                  );
+                })}
 
               {showXAxis && (
                 <text

@@ -47,46 +47,49 @@ export type EventType =
 
 export type DetectEventType = EventType | "Others";
 
-export type EpisodeEvolution =
-  | "Sudden onset"
-  | "Gradual change"
-  | "Persistent abnormality"
-  | "Fluctuating pattern"
-  | "Recovering / resolving"
-  | "Worsening"
-  | "Mixed or unclear";
+export type AssociatedChangeChoice = "Yes" | "No" | "Unclear";
 
-export type OverallCharacterization =
-  | "Expected physiologic change"
-  | "Expected treatment response"
-  | "Transient fluctuation / likely not clinically important"
-  | "Clinically significant abnormality"
-  | "Recovery / correction phase"
-  | "Mixed or unclear pattern"
-  | "Others";
+export type ContinueAnnotationChoice =
+  | "Yes, continue annotation"
+  | "No, likely artifact / too minor / not useful"
+  | "Unclear";
+
+export type OnsetPattern =
+  | "Sudden onset"
+  | "Gradual onset"
+  | "Unclear onset";
+
+export type EpisodeCourse =
+  | "Persistent / stable abnormality"
+  | "Fluctuating / labile pattern"
+  | "Improving / recovering"
+  | "Worsening"
+  | "Mixed / unclear";
 
 export type SeverityLevel = "Mild" | "Moderate" | "Severe";
 
+export type ConfidenceLevel = 1 | 2 | 3 | 4 | 5;
+
 export type DetectAnnotation = {
   vital: DetectVital;
-  primaryVitals?: DetectVital[];
+  primaryVitals: DetectVital[];
 
   startMin: number;
   endMin: number;
 
-  note: string;
+  shouldContinueAnnotation: ContinueAnnotationChoice | "";
 
   eventType: DetectEventType | "";
   eventTypeOther: string;
 
-  episodeEvolution: EpisodeEvolution | "";
-  episodeEvolutionNote: string;
+  associatedChanges: AssociatedChangeChoice | "";
+  note: string;
 
-  overallCharacterization: OverallCharacterization | "";
-  overallInterpretationNote: string;
+  onsetPattern: OnsetPattern | "";
+  episodeCourse: EpisodeCourse | "";
 
   severity: SeverityLevel | "";
-  confidence: number | null;
+  confidence: ConfidenceLevel | null;
 };
 
 export type UserActionLogItem = {

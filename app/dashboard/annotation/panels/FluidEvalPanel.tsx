@@ -23,6 +23,7 @@ type InterventionEvalPanelProps = {
 };
 
 type ReplaceableChoice = "Yes" | "No" | "";
+type PreventionChoice = "Yes" | "No" | "Unclear" | "";
 type SaveStatus = "idle" | "saving" | "success" | "error";
 type OverallJudgmentValue =
   | "Appropriate overall"
@@ -30,9 +31,19 @@ type OverallJudgmentValue =
   | "Uncertain"
   | "";
 
+type ResponseCourseChoice =
+  | "Improved after intervention"
+  | "No clear change"
+  | "Worsened despite intervention"
+  | "Fluctuating / mixed"
+  | "No relevant intervention"
+  | "Unclear"
+  | "";
+
 type VoiceTarget =
   | "overall"
   | "relevance"
+  | "preventionHypothesis"
   | "response"
   | "purpose"
   | "replaceable"
@@ -48,6 +59,15 @@ const OVERALL_JUDGMENT_OPTIONS: OverallJudgmentValue[] = [
   "Appropriate overall",
   "Partially appropriate",
   "Uncertain",
+];
+
+const RESPONSE_COURSE_OPTIONS: Exclude<ResponseCourseChoice, "">[] = [
+  "Improved after intervention",
+  "No clear change",
+  "Worsened despite intervention",
+  "Fluctuating / mixed",
+  "No relevant intervention",
+  "Unclear",
 ];
 
 function InfoTooltip({ content }: { content: React.ReactNode }) {
@@ -630,13 +650,20 @@ export default function InterventionEvalPanel({
 
   const [relevantIds, setRelevantIds] = React.useState<string[]>([]);
   const [relevanceNote, setRelevanceNote] = React.useState("");
+
+  const [preventionChoice, setPreventionChoice] =
+    React.useState<PreventionChoice>("");
+  const [preventionHypothesis, setPreventionHypothesis] = React.useState("");
+
+  const [responseCourseChoice, setResponseCourseChoice] =
+    React.useState<ResponseCourseChoice>("");
   const [responseCourseNote, setResponseCourseNote] = React.useState("");
+
+  const [purposeNote, setPurposeNote] = React.useState("");
 
   const [replaceableChoice, setReplaceableChoice] =
     React.useState<ReplaceableChoice>("");
   const [replaceableNote, setReplaceableNote] = React.useState("");
-
-  const [purposeNote, setPurposeNote] = React.useState("");
 
   const [recordingTarget, setRecordingTarget] =
     React.useState<VoiceTarget>(null);
@@ -649,6 +676,36 @@ export default function InterventionEvalPanel({
   React.useEffect(() => {
     panelOpenedAtRef.current = Date.now();
   }, [caseId, eventId]);
+
+  React.useEffect(() => {
+    if (preventionChoice !== "Yes") {
+      setPreventionHypothesis("");
+      if (recordingTarget === "preventionHypothesis") {
+        recognitionRef.current?.stop?.();
+        setRecordingTarget(null);
+      }
+    }
+  }, [preventionChoice, recordingTarget]);
+
+  React.useEffect(() => {
+    if (overallJudgment === "Appropriate overall") {
+      setOverallNote("");
+      if (recordingTarget === "overall") {
+        recognitionRef.current?.stop?.();
+        setRecordingTarget(null);
+      }
+    }
+  }, [overallJudgment, recordingTarget]);
+
+  React.useEffect(() => {
+    if (replaceableChoice !== "Yes") {
+      setReplaceableNote("");
+      if (recordingTarget === "replaceable") {
+        recognitionRef.current?.stop?.();
+        setRecordingTarget(null);
+      }
+    }
+  }, [replaceableChoice, recordingTarget]);
 
   const relevantTreatments = React.useMemo(
     () => candidateTreatments.filter((x) => relevantIds.includes(x.id)),
@@ -727,7 +784,7 @@ export default function InterventionEvalPanel({
     }
 
     if (overallJudgment !== "Appropriate overall" && !overallNote.trim()) {
-      return "Task 1 incomplete: please explain why the interventions were only partially appropriate or uncertain.";
+      return "Task 1 incomplete: please briefly explain your judgment and any key uncertainty.";
     }
 
     if (!noTreatmentCaptured) {
@@ -743,23 +800,42 @@ export default function InterventionEvalPanel({
     }
 
     if (hasAnyRelevantSelection && !relevanceNote.trim()) {
-      return "Task 3 incomplete: please explain why the selected interventions are clinically relevant to this episode.";
+      return "Task 2 incomplete: please explain why the selected interventions are clinically relevant to this episode.";
     }
 
-    if (hasAnyRelevantSelection && !responseCourseNote.trim()) {
-      return "Task 4 incomplete: please describe the patient's physiologic response and any subsequent intervention adjustment.";
+    if (preventionChoice === "") {
+      return "Task 3 incomplete: please choose Yes, No, or Unclear.";
     }
 
-    if (!noTreatmentCaptured && nonRelevantTreatments.length > 0 && !purposeNote.trim()) {
-      return "Task 5 incomplete: please describe the likely purpose of the treatments not selected as relevant.";
+    if (preventionChoice === "Yes" && !preventionHypothesis.trim()) {
+      return "Task 3 incomplete: please provide your hypothesis for why the patient still developed the abnormal event despite the earlier intervention.";
+    }
+
+    if (responseCourseChoice === "") {
+      return "Task 4 incomplete: please select the overall short-term physiologic response.";
+    }
+
+    if (
+      responseCourseChoice !== "No relevant intervention" &&
+      !responseCourseNote.trim()
+    ) {
+      return "Task 5 incomplete: please provide brief supporting details for your response judgment.";
+    }
+
+    if (
+      !noTreatmentCaptured &&
+      nonRelevantTreatments.length > 0 &&
+      !purposeNote.trim()
+    ) {
+      return "Task 6 incomplete: please describe the likely purpose of the treatments not selected as relevant.";
     }
 
     if (replaceableChoice === "") {
-      return "Task 6 incomplete: please choose Yes or No.";
+      return "Task 7 incomplete: please choose Yes or No.";
     }
 
     if (replaceableChoice === "Yes" && !replaceableNote.trim()) {
-      return "Task 6 incomplete: please describe what could be replaced and with what alternative.";
+      return "Task 7 incomplete: please describe what could be replaced and with what alternative.";
     }
 
     return null;
@@ -793,9 +869,10 @@ export default function InterventionEvalPanel({
 
         if (target === "overall") setOverallNote(transcript);
         if (target === "relevance") setRelevanceNote(transcript);
+        if (target === "preventionHypothesis") setPreventionHypothesis(transcript);
         if (target === "response") setResponseCourseNote(transcript);
-        if (target === "replaceable") setReplaceableNote(transcript);
         if (target === "purpose") setPurposeNote(transcript);
+        if (target === "replaceable") setReplaceableNote(transcript);
       };
 
       recognition.onerror = () => {
@@ -853,6 +930,9 @@ export default function InterventionEvalPanel({
           relevantIds,
           relevantTreatments,
           relevanceNote: relevanceNote.trim(),
+          preventionChoice,
+          preventionHypothesis: preventionHypothesis.trim(),
+          responseCourseChoice,
           responseCourseNote: responseCourseNote.trim(),
           noRelevantByGroup,
           nonRelevantTreatments,
@@ -887,10 +967,13 @@ export default function InterventionEvalPanel({
     setOverallNote("");
     setRelevantIds([]);
     setRelevanceNote("");
+    setPreventionChoice("");
+    setPreventionHypothesis("");
+    setResponseCourseChoice("");
     setResponseCourseNote("");
+    setPurposeNote("");
     setReplaceableChoice("");
     setReplaceableNote("");
-    setPurposeNote("");
     setRecordingTarget(null);
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
@@ -917,7 +1000,9 @@ export default function InterventionEvalPanel({
             <div className="text-sm font-semibold text-gray-900">{title}</div>
             <div className="text-xs text-gray-500">{items.length} captured</div>
           </div>
-          <div className="text-sm text-gray-500">{expanded ? "Hide" : "Show"}</div>
+          <div className="text-sm text-gray-500">
+            {expanded ? "Hide" : "Show"}
+          </div>
         </button>
 
         {expanded && (
@@ -965,314 +1050,443 @@ export default function InterventionEvalPanel({
     );
   }
 
-  const explanationRequired =
-    overallJudgment !== "" && overallJudgment !== "Appropriate overall";
-
   return (
     <div className="min-h-[900px] bg-white">
       <div className="p-5">
         <div className="mb-4 text-sm font-semibold text-gray-900">
-          Panel 3: Evaluate intervention relevance, rationale, response, and possible alternatives.
+          Panel 3: Evaluate intervention relevance, rationale, response, and
+          possible alternatives.
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-          <TaskBlock title="Task 1. Within this time window, were the interventions overall appropriate?">
-            <div className="mb-4 flex flex-wrap gap-2">
-              {OVERALL_JUDGMENT_OPTIONS.map((option) => (
-                <SelectionPill
-                  key={option}
-                  label={option}
-                  selected={overallJudgment === option}
-                  onClick={() => setOverallJudgment(option)}
-                  selectedTone="orange"
-                />
-              ))}
-            </div>
+        <TaskBlock title="Task 1. Within this time window, were the interventions overall appropriate?">
+  <select
+    value={overallJudgment}
+    onChange={(e) =>
+      setOverallJudgment(e.target.value as OverallJudgmentValue)
+    }
+    className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+  >
+    <option value="">Select overall judgment</option>
+    {OVERALL_JUDGMENT_OPTIONS.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
 
-            <div className="mb-3 text-sm text-gray-600">
-              Please explain in the box if you select Partially appropriate or Uncertain.
-            </div>
+  {(overallJudgment === "Partially appropriate" ||
+    overallJudgment === "Uncertain") && (
+    <div className="mt-4">
+      <div className="mb-2 text-sm font-semibold text-gray-900">
+      Explain why the interventions were only partially appropriate or uncertain.
+      </div>
 
-            <textarea
-              value={overallNote}
-              onChange={(e) => setOverallNote(e.target.value)}
-              disabled={!explanationRequired}
-              className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
-              placeholder={
-                explanationRequired
-                  ? "Explain why the interventions were only partially appropriate or uncertain."
-                  : "No explanation required if 'Appropriate overall' is selected."
-              }
-            />
+      <textarea
+        value={overallNote}
+        onChange={(e) => setOverallNote(e.target.value)}
+        className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+        placeholder="Explain why the interventions were only partially appropriate or uncertain."
+      />
 
-            <div className="mt-3">
-              <button
-                type="button"
-                disabled={!explanationRequired}
-                onClick={
-                  recordingTarget === "overall"
-                    ? stopVoiceNote
-                    : () => startVoiceNote("overall")
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  !explanationRequired
-                    ? "cursor-not-allowed bg-gray-300"
-                    : recordingTarget === "overall"
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
-              >
-                {recordingTarget === "overall" ? "Stop Recording" : "Start Recording"}
-              </button>
-            </div>
-          </TaskBlock>
-
-          <TaskBlock title="Task 2. Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode, and briefly explain why they are relevant.">
-  {noTreatmentCaptured ? (
-    <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
-      No medication, fluid, or gas / ventilation feature was captured in the selected time window.
-    </div>
-  ) : (
-    <div className="space-y-4">
-      {renderExpandableGroup(
-        "Medications",
-        groupedCandidates.Medication,
-        "medication",
-        "No medications are relevant"
-      )}
-      {renderExpandableGroup(
-        "Fluids",
-        groupedCandidates.Fluid,
-        "fluid",
-        "No fluids are relevant"
-      )}
-      {renderExpandableGroup(
-        "Gas / Ventilation",
-        groupedCandidates["Gas / Ventilation"],
-        "gas",
-        "No gas / ventilation items are relevant"
-      )}
-
-      <div className="border-t pt-4">
-        <div className="mb-2 text-sm font-semibold text-gray-900">
-        Briefly explain the clinical evidence or reasoning that makes the selected interventions relevant to this episode.
-        </div>
-   
-
-        {hasAnyRelevantSelection ? (
-          <>
-            <textarea
-              value={relevanceNote}
-              onChange={(e) => setRelevanceNote(e.target.value)}
-              className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder="Briefly explain why the selected interventions are relevant to this episode..."
-            />
-
-            <div className="mt-3">
-              <button
-                type="button"
-                onClick={
-                  recordingTarget === "relevance"
-                    ? stopVoiceNote
-                    : () => startVoiceNote("relevance")
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  recordingTarget === "relevance"
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
-              >
-                {recordingTarget === "relevance"
-                  ? "Stop Recording"
-                  : "Start Recording"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
-            Select at least one relevant intervention to explain why it is relevant.
-          </div>
-        )}
+      <div className="mt-3">
+        <button
+          type="button"
+          onClick={
+            recordingTarget === "overall"
+              ? stopVoiceNote
+              : () => startVoiceNote("overall")
+          }
+          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+            recordingTarget === "overall"
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-orange-400 hover:bg-orange-500"
+          }`}
+        >
+          {recordingTarget === "overall"
+            ? "Stop Recording"
+            : "Start Recording"}
+        </button>
       </div>
     </div>
   )}
 </TaskBlock>
 
-<TaskBlock
-             title="Task 3. Describe how the patient's physiology changed after the relevant interventions and whether/why any further adjustment was needed"
-
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">What to include</div>
-                <div className="mt-1">
-                  Briefly explain what these non-relevant treatments were most likely used for.
-                </div>
-                <div className="mt-1">
-                  Examples include routine maintenance, anesthesia depth management, prophylaxis, or other background perioperative care.
-                </div>
-                <div className="mt-1">
-                  You can summarize them together rather than explaining each one separately.
-                </div>
-              </>
-            }
-          >
-            {nonRelevantTreatments.length === 0 ? (
-              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
-                There are no non-relevant treatments remaining to annotate.
+          <TaskBlock title="Task 2. Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode, and briefly explain why they are relevant.">
+            {noTreatmentCaptured ? (
+              <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
+                No medication, fluid, or gas / ventilation feature was captured
+                in the selected time window.
               </div>
             ) : (
-              <>
-                <textarea
-                  value={purposeNote}
-                  onChange={(e) => setPurposeNote(e.target.value)}
-                  className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-                  placeholder="Describe the likely clinical purpose of the treatments not selected as relevant..."
-                />
+              <div className="space-y-4">
+                {renderExpandableGroup(
+                  "Medications",
+                  groupedCandidates.Medication,
+                  "medication",
+                  "No medications are relevant"
+                )}
+                {renderExpandableGroup(
+                  "Fluids",
+                  groupedCandidates.Fluid,
+                  "fluid",
+                  "No fluids are relevant"
+                )}
+                {renderExpandableGroup(
+                  "Gas / Ventilation",
+                  groupedCandidates["Gas / Ventilation"],
+                  "gas",
+                  "No gas / ventilation items are relevant"
+                )}
 
-                <div className="mt-3">
-                  <button
-                    type="button"
-                    onClick={
-                      recordingTarget === "purpose"
-                        ? stopVoiceNote
-                        : () => startVoiceNote("purpose")
-                    }
-                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                      recordingTarget === "purpose"
-                        ? "bg-red-500 hover:bg-red-600"
-                        : "bg-orange-400 hover:bg-orange-500"
-                    }`}
-                  >
-                    {recordingTarget === "purpose"
-                      ? "Stop Recording"
-                      : "Start Recording"}
-                  </button>
-                </div>
-              </>
-            )}
-          </TaskBlock>
+                <div className="border-t pt-4">
+                  <div className="mb-2 text-sm font-semibold text-gray-900">
+                    Briefly explain the clinical evidence or reasoning that makes
+                    the selected interventions relevant to this episode.
+                  </div>
 
+                  {hasAnyRelevantSelection ? (
+                    <>
+                      <textarea
+                        value={relevanceNote}
+                        onChange={(e) => setRelevanceNote(e.target.value)}
+                        className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                        placeholder="Briefly explain why the selected interventions are relevant to this episode..."
+                      />
 
-
-          <TaskBlock
-            title="Task 4. Briefly describe the likely clinical purpose of the treatments not selected as relevant."
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">What to include</div>
-                <div className="mt-1">
-                  Briefly explain what these non-relevant treatments were most likely used for.
+                      <div className="mt-3">
+                        <button
+                          type="button"
+                          onClick={
+                            recordingTarget === "relevance"
+                              ? stopVoiceNote
+                              : () => startVoiceNote("relevance")
+                          }
+                          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                            recordingTarget === "relevance"
+                              ? "bg-red-500 hover:bg-red-600"
+                              : "bg-orange-400 hover:bg-orange-500"
+                          }`}
+                        >
+                          {recordingTarget === "relevance"
+                            ? "Stop Recording"
+                            : "Start Recording"}
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                      Select at least one relevant intervention to explain why
+                      it is relevant.
+                    </div>
+                  )}
                 </div>
-                <div className="mt-1">
-                  Examples include routine maintenance, anesthesia depth management, prophylaxis, or other background perioperative care.
-                </div>
-                <div className="mt-1">
-                  You can summarize them together rather than explaining each one separately.
-                </div>
-              </>
-            }
-          >
-            {nonRelevantTreatments.length === 0 ? (
-              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
-                There are no non-relevant treatments remaining to annotate.
               </div>
-            ) : (
-              <>
-                <textarea
-                  value={purposeNote}
-                  onChange={(e) => setPurposeNote(e.target.value)}
-                  className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-                  placeholder="Describe the likely clinical purpose of the treatments not selected as relevant..."
-                />
-
-                <div className="mt-3">
-                  <button
-                    type="button"
-                    onClick={
-                      recordingTarget === "purpose"
-                        ? stopVoiceNote
-                        : () => startVoiceNote("purpose")
-                    }
-                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                      recordingTarget === "purpose"
-                        ? "bg-red-500 hover:bg-red-600"
-                        : "bg-orange-400 hover:bg-orange-500"
-                    }`}
-                  >
-                    {recordingTarget === "purpose"
-                      ? "Stop Recording"
-                      : "Start Recording"}
-                  </button>
-                </div>
-              </>
             )}
           </TaskBlock>
 
           <TaskBlock
-            title="Task 5. In your usual clinical practice, could any intervention here reasonably be replaced without materially changing the patient's physiologic course?"
-            noBorder
+            title="Task 3. Before the abnormal episode developed, was there any apparent preventive intervention attempt?"
             tooltip={
               <>
-                <div className="font-semibold text-gray-800">What to include</div>
-                <div className="mt-1">First choose Yes or No.</div>
+                <div className="font-semibold text-gray-800">How to answer</div>
                 <div className="mt-1">
-                  If Yes, briefly state what you would replace and what you would use instead.
+                  Judge whether there appears to have been an intervention
+                  attempt intended to reduce the chance of deterioration before
+                  the abnormal episode fully developed.
                 </div>
                 <div className="mt-1">
-                  Mention timing or dose only if it matters for that substitution.
+                  If yes, briefly explain your hypothesis for why the patient
+                  still developed the abnormal event despite the earlier
+                  intervention.
+                </div>
+                <div className="mt-1">
+                  Choose <span className="font-semibold">Unclear</span> if the
+                  intent or timing cannot be determined confidently.
                 </div>
               </>
             }
           >
-            <div className="mb-4 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               <SelectionPill
                 label="Yes"
-                selected={replaceableChoice === "Yes"}
-                onClick={() => setReplaceableChoice("Yes")}
-                selectedTone="blue"
+                selected={preventionChoice === "Yes"}
+                onClick={() => setPreventionChoice("Yes")}
+                selectedTone="green"
               />
               <SelectionPill
                 label="No"
-                selected={replaceableChoice === "No"}
-                onClick={() => setReplaceableChoice("No")}
-                selectedTone="blue"
+                selected={preventionChoice === "No"}
+                onClick={() => setPreventionChoice("No")}
+                selectedTone="green"
+              />
+              <SelectionPill
+                label="Unclear"
+                selected={preventionChoice === "Unclear"}
+                onClick={() => setPreventionChoice("Unclear")}
+                selectedTone="green"
               />
             </div>
 
-            <textarea
-              value={replaceableNote}
-              onChange={(e) => setReplaceableNote(e.target.value)}
-              disabled={replaceableChoice !== "Yes"}
-              className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
-              placeholder={
-                replaceableChoice === "Yes"
-                  ? "For example: I might use ephedrine instead of phenylephrine here."
-                  : "Only required if Yes is selected."
-              }
-            />
+            {preventionChoice === "Yes" && (
+              <div className="mt-4">
+                <div className="mb-2 text-sm font-semibold text-gray-900">
+                  What is your hypothesis for why the patient still developed
+                  the abnormal event?
+                </div>
 
-            <div className="mt-3">
-              <button
-                type="button"
-                disabled={replaceableChoice !== "Yes"}
-                onClick={
-                  recordingTarget === "replaceable"
-                    ? stopVoiceNote
-                    : () => startVoiceNote("replaceable")
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  replaceableChoice !== "Yes"
-                    ? "cursor-not-allowed bg-gray-300"
-                    : recordingTarget === "replaceable"
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
-              >
-                {recordingTarget === "replaceable"
-                  ? "Stop Recording"
-                  : "Start Voice Note"}
-              </button>
-            </div>
+                <textarea
+                  value={preventionHypothesis}
+                  onChange={(e) => setPreventionHypothesis(e.target.value)}
+                  className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="For example: A preventive vasopressor was given, but the effect was insufficient or transient relative to the ongoing physiologic deterioration."
+                />
+
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "preventionHypothesis"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("preventionHypothesis")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "preventionHypothesis"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "preventionHypothesis"
+                      ? "Stop Recording"
+                      : "Start Recording"}
+                  </button>
+                </div>
+              </div>
+            )}
           </TaskBlock>
+
+          <TaskBlock
+            title="Task 4. What was the overall short-term physiologic response after the relevant intervention(s)?"
+            tooltip={
+              <>
+                <div className="font-semibold text-gray-800">How to answer</div>
+                <div className="mt-1">
+                  Select the best overall summary of the patient's short-term
+                  physiologic response after the relevant intervention(s).
+                </div>
+                <div className="mt-1">
+                  If no treatment selected in Task 2 was clinically relevant to
+                  this episode, choose{" "}
+                  <span className="font-semibold">
+                    No relevant intervention
+                  </span>
+                  .
+                </div>
+              </>
+            }
+          >
+            <select
+              value={responseCourseChoice}
+              onChange={(e) =>
+                setResponseCourseChoice(e.target.value as ResponseCourseChoice)
+              }
+              className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+            >
+              <option value="">Select overall short-term response</option>
+              {RESPONSE_COURSE_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </TaskBlock>
+
+          <TaskBlock
+            title="Task 5. Provide brief details supporting your response judgment, including which physiologic changes were observed and why any further adjustment was or was not needed."
+            tooltip={
+              <>
+                <div className="font-semibold text-gray-800">What to include</div>
+                <div className="mt-1">
+                  Briefly describe the specific physiologic changes that support
+                  your Task 4 judgment.
+                </div>
+                <div className="mt-1">
+                  Mention whether the response was transient or sustained, which
+                  signals improved or worsened, and why any further adjustment
+                  was or was not needed.
+                </div>
+              </>
+            }
+          >
+            {responseCourseChoice === "No relevant intervention" ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                No detailed response explanation is required if you selected “No
+                relevant intervention” in Task 4.
+              </div>
+            ) : (
+              <>
+                <textarea
+                  value={responseCourseNote}
+                  onChange={(e) => setResponseCourseNote(e.target.value)}
+                  className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="For example: MAP increased briefly after phenylephrine, but the effect was transient and a repeat bolus was needed because hypotension recurred."
+                />
+
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "response"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("response")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "response"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "response"
+                      ? "Stop Recording"
+                      : "Start Recording"}
+                  </button>
+                </div>
+              </>
+            )}
+          </TaskBlock>
+
+          <TaskBlock
+            title="Task 6. Briefly describe the likely clinical purpose of the treatments not selected as relevant."
+            tooltip={
+              <>
+                <div className="font-semibold text-gray-800">What to include</div>
+                <div className="mt-1">
+                  Briefly explain what these non-relevant treatments were most
+                  likely used for.
+                </div>
+                <div className="mt-1">
+                  Examples include routine maintenance, anesthesia depth
+                  management, prophylaxis, or other background perioperative
+                  care.
+                </div>
+                <div className="mt-1">
+                  You can summarize them together rather than explaining each one
+                  separately.
+                </div>
+              </>
+            }
+          >
+            {nonRelevantTreatments.length === 0 ? (
+              <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
+                There are no non-relevant treatments remaining to annotate.
+              </div>
+            ) : (
+              <>
+                <textarea
+                  value={purposeNote}
+                  onChange={(e) => setPurposeNote(e.target.value)}
+                  className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="Describe the likely clinical purpose of the treatments not selected as relevant..."
+                />
+
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "purpose"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("purpose")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "purpose"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "purpose"
+                      ? "Stop Recording"
+                      : "Start Recording"}
+                  </button>
+                </div>
+              </>
+            )}
+          </TaskBlock>
+
+          <TaskBlock
+  title="Task 7. In your usual clinical practice, is there ONE reasonable alternative intervention (medication, fluid, or gas adjustment) that could have been used here without materially changing the patient's physiologic course?"
+  noBorder
+  tooltip={
+    <>
+      <div className="font-semibold text-gray-800">What to include</div>
+      <div className="mt-1">Choose Yes or No first.</div>
+      <div className="mt-1">
+        If Yes, describe only ONE reasonable alternative.
+      </div>
+      <div className="mt-1">
+        For a medication, give the name and dose.
+      </div>
+      <div className="mt-1">
+        For a fluid, give the fluid type and volume or rate.
+      </div>
+      <div className="mt-1">
+        For a gas-related change, describe the adjustment as specifically as possible.
+      </div>
+    </>
+  }
+>
+  <div className="flex flex-wrap gap-2">
+    <SelectionPill
+      label="Yes"
+      selected={replaceableChoice === "Yes"}
+      onClick={() => setReplaceableChoice("Yes")}
+      selectedTone="blue"
+    />
+    <SelectionPill
+      label="No"
+      selected={replaceableChoice === "No"}
+      onClick={() => setReplaceableChoice("No")}
+      selectedTone="blue"
+    />
+  </div>
+
+  {replaceableChoice === "Yes" && (
+    <div className="mt-4">
+      <div className="mb-2 text-sm font-semibold text-gray-900">
+        Describe ONE reasonable alternative intervention.
+      </div>
+      <div className="mb-2 text-sm text-gray-600">
+        If you choose a medication, give the medication name and dose. If you choose a fluid, give the fluid type and volume or rate. If you choose a gas-related change, describe the adjustment as specifically as possible.
+      </div>
+
+      <textarea
+        value={replaceableNote}
+        onChange={(e) => setReplaceableNote(e.target.value)}
+        className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+        placeholder="For example: I would use ephedrine 10 mg instead of phenylephrine 100 mcg. Or: I would give 250 mL crystalloid bolus. Or: I would increase FiO2 as the alternative gas adjustment."
+      />
+
+      <div className="mt-3">
+        <button
+          type="button"
+          onClick={
+            recordingTarget === "replaceable"
+              ? stopVoiceNote
+              : () => startVoiceNote("replaceable")
+          }
+          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+            recordingTarget === "replaceable"
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-orange-400 hover:bg-orange-500"
+          }`}
+        >
+          {recordingTarget === "replaceable"
+            ? "Stop Recording"
+            : "Start Voice Note"}
+        </button>
+      </div>
+    </div>
+  )}
+</TaskBlock>
 
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">

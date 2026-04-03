@@ -13,6 +13,9 @@ import {
 import type { TimeValuePoint } from "@/lib/types";
 
 import type { DetectVital } from "./annotation/types";
+
+type TimeResolution = 15 | 5;
+
 type SelectedWindow = {
   vital: DetectVital;
   startMin: number;
@@ -31,10 +34,12 @@ type TmpChartProps = {
   tmp: Record<string, TimeValuePoint[]>;
   height?: number;
   xEnd: number;
-  xTicks: number[];
+  xTicks?: number[];
   showXAxis?: boolean;
   timeZero?: string | null;
   embedded?: boolean;
+
+  timeResolution?: TimeResolution;
 
   selectedWindow?: SelectedWindow | null;
   highlightWindow?: HighlightWindow | null;
@@ -75,8 +80,7 @@ type DragMode =
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
-const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
+const BASE_PX_PER_15_MIN = 64;
 
 const TMP_FEATURES: TmpFeatureConfig[] = [
   {
@@ -170,19 +174,17 @@ function getHighestPriorityFeature(
 
 function buildChartRowsForActiveFeature(
   tmp: Record<string, TimeValuePoint[]>,
-  xTicks: number[],
   activeFeatureKey: string
 ): Array<Record<string, number | null>> {
-  const allTimes = new Set<number>(xTicks);
-
   const arr = getFeatureSeries(tmp, activeFeatureKey);
-  arr.forEach((p) => {
-    if (Number.isFinite(p.time)) allTimes.add(p.time);
-  });
 
-  const sortedTimes = Array.from(allTimes)
-    .filter((t) => Number.isFinite(t))
-    .sort((a, b) => a - b);
+  const sortedTimes = Array.from(
+    new Set(
+      arr
+        .map((p) => p.time)
+        .filter((t) => Number.isFinite(t))
+    )
+  ).sort((a, b) => a - b);
 
   return sortedTimes.map((time) => {
     const row: Record<string, number | null> = { time };
@@ -364,24 +366,6 @@ function TmpLegend({
   );
 }
 
-function getNearestPointTime(arr: TimeValuePoint[], targetTime: number): number | null {
-  if (!arr.length) return null;
-
-  let best: TimeValuePoint | null = null;
-  let bestDist = Infinity;
-
-  for (const p of arr) {
-    if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
-    const d = Math.abs(p.time - targetTime);
-    if (d < bestDist) {
-      best = p;
-      bestDist = d;
-    }
-  }
-
-  return best ? best.time : null;
-}
-
 function getExactValueAtTime(arr: TimeValuePoint[], time: number): number | null {
   if (!arr.length) return null;
 
@@ -502,6 +486,7 @@ export default function TmpChart({
   showXAxis = false,
   timeZero = null,
   embedded = false,
+  timeResolution = 15,
   selectedWindow = null,
   highlightWindow = null,
   onChangeSelectedWindow,
@@ -519,8 +504,24 @@ export default function TmpChart({
 
   const data = React.useMemo(() => {
     if (!activeFeatureKey) return [];
-    return buildChartRowsForActiveFeature(tmp, xTicks, activeFeatureKey);
-  }, [tmp, xTicks, activeFeatureKey]);
+    return buildChartRowsForActiveFeature(tmp, activeFeatureKey);
+  }, [tmp, activeFeatureKey]);
+
+  const viewConfig = React.useMemo(() => {
+    if (timeResolution === 5) {
+      return {
+        majorStep: 5,
+        minorStep: 1,
+        pxPerMin: BASE_PX_PER_15_MIN / 5,
+      };
+    }
+
+    return {
+      majorStep: 15,
+      minorStep: 5,
+      pxPerMin: BASE_PX_PER_15_MIN / 15,
+    };
+  }, [timeResolution]);
 
   const chartMarginTop = 10;
   const chartMarginBottom = showXAxis ? 24 : 10;
@@ -533,37 +534,40 @@ export default function TmpChart({
 
   const contentPlotWidth = React.useMemo(() => {
     if (effectiveXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(effectiveXEnd * PX_PER_MIN));
-  }, [effectiveXEnd]);
+    return Math.max(800, Math.ceil(effectiveXEnd * viewConfig.pxPerMin));
+  }, [effectiveXEnd, viewConfig.pxPerMin]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentWidth - PLOT_RIGHT;
 
   const majorGridTicks = React.useMemo(() => {
-    if (xTicks && xTicks.length > 0) return xTicks;
-
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
+
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) {
+      return xTicks;
+    }
+
     const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += 15) {
+    for (let t = 0; t <= effectiveXEnd; t += viewConfig.majorStep) {
       ticks.push(t);
     }
     if (ticks[ticks.length - 1] !== effectiveXEnd) {
       ticks.push(effectiveXEnd);
     }
     return ticks;
-  }, [xTicks, effectiveXEnd]);
+  }, [timeResolution, xTicks, effectiveXEnd, viewConfig.majorStep]);
 
   const minorGridTicks = React.useMemo(() => {
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
     const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += 5) {
+    for (let t = 0; t <= effectiveXEnd; t += viewConfig.minorStep) {
       ticks.push(t);
     }
     if (ticks[ticks.length - 1] !== effectiveXEnd) {
       ticks.push(effectiveXEnd);
     }
     return ticks;
-  }, [effectiveXEnd]);
+  }, [effectiveXEnd, viewConfig.minorStep]);
 
   const tmpWindow = selectedWindow?.vital === "TEMP" ? selectedWindow : null;
 
@@ -618,7 +622,7 @@ export default function TmpChart({
 
     const rect = el.getBoundingClientRect();
     const xInPlot = clientX - rect.left;
-    const minute = xInPlot / PX_PER_MIN;
+    const minute = xInPlot / viewConfig.pxPerMin;
 
     return Math.max(0, Math.min(effectiveXEnd, minute));
   }
@@ -638,7 +642,7 @@ export default function TmpChart({
   }
 
   function pixelToMinute(px: number) {
-    return px / PX_PER_MIN;
+    return px / viewConfig.pxPerMin;
   }
 
   function pixelToValue(py: number) {
@@ -864,13 +868,10 @@ export default function TmpChart({
   const hoverStats = React.useMemo(() => {
     if (hoverMinute == null || activeSeries.length === 0 || !activeFeature) return null;
 
-    const snappedTime = getNearestPointTime(activeSeries, hoverMinute);
-    if (snappedTime == null) return null;
-
-    const value = getExactValueAtTime(activeSeries, snappedTime);
+    const value = getExactValueAtTime(activeSeries, hoverMinute);
 
     return {
-      time: snappedTime,
+      time: hoverMinute,
       text: value == null ? "Value: -" : `${activeFeature.label}: ${value.toFixed(2)} °C`,
     };
   }, [hoverMinute, activeSeries, activeFeature]);

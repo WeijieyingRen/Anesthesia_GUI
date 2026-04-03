@@ -3,6 +3,8 @@
 import * as React from "react";
 import type { TimelineContextData, TimelineContextEvent } from "@/lib/types";
 
+type TimeResolution = 15 | 5;
+
 type TimelineContextPanelProps = {
   title?: string;
   context: TimelineContextData | null;
@@ -13,8 +15,7 @@ type TimelineContextPanelProps = {
     startMin: number;
     endMin: number;
   } | null;
-
-  /** 和 Vital / Tmp / Gas / Medication / CV / Ventilation 共享横向滚动 */
+  timeResolution?: TimeResolution;
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -29,9 +30,7 @@ const LEGEND_WIDTH = 220;
 const YAXIS_WIDTH = 35;
 const CHART_RIGHT_MARGIN = 20;
 
-/** 必须和 VitalChart / TmpChart / 其它 panel 保持一致 */
 const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
 
 const TOP_PAD = 4;
 const BOTTOM_PAD = 4;
@@ -87,22 +86,6 @@ function shouldShowIconLabel(event: TimelineContextEvent) {
   );
 }
 
-function getEventLegendLabel(event: TimelineContextEvent) {
-  if (event.event_type === "emergence") return "Emergence";
-
-  const valueText = getEventValueText(event);
-
-  if (event.label?.includes("Head-of-bed Positioning")) {
-    return valueText ? `HOB: ${valueText}` : "Head-of-bed position";
-  }
-
-  if (event.label?.includes("Bed Position:")) {
-    return valueText ? `Bed: ${valueText}` : "Bed position";
-  }
-
-  return "";
-}
-
 function getEventValueText(event: TimelineContextEvent) {
   const raw = (event.label ?? "").trim();
   if (!raw) return "";
@@ -123,6 +106,22 @@ function getEventValueText(event: TimelineContextEvent) {
   }
 
   return value;
+}
+
+function getEventLegendLabel(event: TimelineContextEvent) {
+  if (event.event_type === "emergence") return "Emergence";
+
+  const valueText = getEventValueText(event);
+
+  if (event.label?.includes("Head-of-bed Positioning")) {
+    return valueText ? `HOB: ${valueText}` : "Head-of-bed position";
+  }
+
+  if (event.label?.includes("Bed Position:")) {
+    return valueText ? `Bed: ${valueText}` : "Bed position";
+  }
+
+  return "";
 }
 
 function getEventLegendKey(event: TimelineContextEvent) {
@@ -408,12 +407,34 @@ function AxisSpacer({ height }: { height: number }) {
   );
 }
 
+function getPxPerMinute(timeResolution: TimeResolution) {
+  return timeResolution === 5 ? PX_PER_15_MIN / 5 : PX_PER_15_MIN / 15;
+}
+
+function getMajorStep(timeResolution: TimeResolution) {
+  return timeResolution === 5 ? 5 : 15;
+}
+
+function buildTicks(end: number, step: number) {
+  if (!Number.isFinite(end) || end <= 0) return [];
+  const ticks: number[] = [];
+  for (let t = 0; t <= end; t += step) {
+    ticks.push(t);
+  }
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
+    ticks.push(end);
+  }
+  return ticks;
+}
+
 export default function TimelineContextPanel({
+  title = "Timeline and Events",
   context,
   xEnd,
   xTicks,
   timeZero,
   episodeWindow = null,
+  timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: TimelineContextPanelProps) {
@@ -434,40 +455,39 @@ export default function TimelineContextPanel({
     });
   }, [packedEvents]);
 
-  const labelTicks = React.useMemo(() => {
-    if (!Number.isFinite(xEnd) || xEnd <= 0) return [];
+  const majorStep = React.useMemo(() => getMajorStep(timeResolution), [timeResolution]);
+  const pxPerMin = React.useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
 
-    const ticks: number[] = [];
-    for (let t = 0; t <= xEnd; t += 15) {
-      ticks.push(t);
-    }
-    if (ticks[ticks.length - 1] !== xEnd) {
-      ticks.push(xEnd);
-    }
-    return ticks;
-  }, [xEnd]);
+  const majorTicks = React.useMemo(() => {
+    if (!Number.isFinite(xEnd) || xEnd <= 0) return [];
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
+    return buildTicks(xEnd, majorStep);
+  }, [xEnd, xTicks, timeResolution, majorStep]);
 
   const topTimeSlots = React.useMemo(() => {
-    if (!timeZero || labelTicks.length === 0) return [];
+    if (majorTicks.length === 0) return [];
 
-    return labelTicks.map((tick) => ({
+    return majorTicks.map((tick) => ({
       minute: tick,
       label: formatClockTime(tick, timeZero),
     }));
-  }, [labelTicks, timeZero]);
+  }, [majorTicks, timeZero]);
 
   const contentPlotWidth = React.useMemo(() => {
     if (!xEnd || xEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(xEnd * PX_PER_MIN));
-  }, [xEnd]);
+    return Math.max(800, Math.ceil(xEnd * pxPerMin));
+  }, [xEnd, pxPerMin]);
 
   const contentWidth = contentPlotWidth + CHART_RIGHT_MARGIN;
   const plotWidth = contentPlotWidth;
 
-  function minuteToX(minute: number) {
-    if (!Number.isFinite(xEnd) || xEnd <= 0) return 0;
-    return (minute / xEnd) * plotWidth;
-  }
+  const minuteToX = React.useCallback(
+    (minute: number) => {
+      if (!Number.isFinite(xEnd) || xEnd <= 0) return 0;
+      return (minute / xEnd) * plotWidth;
+    },
+    [xEnd, plotWidth]
+  );
 
   React.useEffect(() => {
     if (scrollRef.current == null) return;
@@ -495,7 +515,7 @@ export default function TimelineContextPanel({
           >
             ▶
           </span>
-          <span>Timeline and Events</span>
+          <span>{title}</span>
         </button>
 
         {legendEvents.length > 0 && (
@@ -534,7 +554,7 @@ export default function TimelineContextPanel({
                 viewBox={`0 0 ${contentWidth} ${SVG_HEIGHT}`}
                 preserveAspectRatio="none"
               >
-                {xTicks.map((tick) => {
+                {majorTicks.map((tick) => {
                   const x = minuteToX(tick);
                   return (
                     <line
@@ -606,12 +626,12 @@ export default function TimelineContextPanel({
                     event.event_type === "anesthesia_start"
                       ? 0
                       : event.event_type === "anesthesia_stop"
-                      ? xEnd
-                      : tRaw;
+                        ? xEnd
+                        : tRaw;
 
                   const x = minuteToX(t);
                   const c = eventColor(event.group);
-                  const label = shortenLabel(event.label);
+                  const label = shortenLabel(event.label ?? "");
                   const showTextLabel = shouldShowTextLabel(event);
                   const showIconLabel = shouldShowIconLabel(event);
                   const isPositioning = event.group === "positioning";
@@ -633,13 +653,13 @@ export default function TimelineContextPanel({
                     event.side === "top"
                       ? TOP_LABEL_Y
                       : isPositioning
-                      ? BOTTOM_LABEL_Y
-                      : BOTTOM_LABEL_Y - 10;
+                        ? BOTTOM_LABEL_Y
+                        : BOTTOM_LABEL_Y - 10;
 
                   const iconY = event.side === "top" ? AXIS_Y - 12 : AXIS_Y + 12;
 
                   return (
-                    <g key={`${event.event_type}-${idx}`}>
+                    <g key={`${event.event_type}-${idx}-${event.relative_min}`}>
                       <circle cx={x} cy={AXIS_Y} r={3} fill={c.fill} />
 
                       {showTextLabel && (

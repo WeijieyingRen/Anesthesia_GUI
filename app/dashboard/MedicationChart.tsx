@@ -10,6 +10,7 @@ import {
   Tooltip,
   ZAxis,
   ReferenceArea,
+  ReferenceLine,
 } from "recharts";
 
 import type {
@@ -28,6 +29,7 @@ type MedicationChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+  timeResolution?: 15 | 5;
 
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
@@ -128,10 +130,33 @@ const PLOT_TOP_PAD = 0;
 const PLOT_BOTTOM_PAD = 0;
 
 const RECHARTS_RIGHT_MARGIN = 20;
+const BASE_PX_PER_15_MIN = 64;
 
-/** 和 Vital / Timeline 保持一致 */
-const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
+function getPxPerMinute(timeResolution: 15 | 5) {
+  return timeResolution === 15
+    ? BASE_PX_PER_15_MIN / 15
+    : BASE_PX_PER_15_MIN / 5;
+}
+
+function getMajorStep(timeResolution: 15 | 5) {
+  return timeResolution === 15 ? 15 : 5;
+}
+
+function getMinorStep(timeResolution: 15 | 5) {
+  return timeResolution === 15 ? 5 : 1;
+}
+
+function buildGridTicks(end: number, step: number) {
+  if (!Number.isFinite(end) || end <= 0) return [];
+  const ticks: number[] = [];
+  for (let t = 0; t <= end; t += step) {
+    ticks.push(t);
+  }
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
+    ticks.push(end);
+  }
+  return ticks;
+}
 
 function normalizeName(name: string) {
   return String(name ?? "").trim().toLowerCase();
@@ -394,9 +419,11 @@ function getMedicationTotalLabel(row: MedRow) {
 function MedicationTooltip({
   active,
   payload,
+  timeZero,
 }: {
   active?: boolean;
   payload?: any[];
+  timeZero?: string | null;
 }) {
   if (!active || !payload?.length) return null;
 
@@ -406,7 +433,7 @@ function MedicationTooltip({
   return (
     <div className="rounded border bg-white px-3 py-2 text-xs shadow">
       <div className="font-semibold">{p.medName}</div>
-      <div>Time: {p.x} min</div>
+      <div>Time: {formatClockTime(Number(p.x), timeZero)}</div>
       <div>{p.label}</div>
     </div>
   );
@@ -751,19 +778,23 @@ function FixedAxisSpacer({ height }: { height: number }) {
 
 function MedicationGridSvg({
   end,
-  ticks,
+  majorTicks,
+  minorTicks,
   rows,
   height,
   highlightWindow,
   plotWidth,
 }: {
   end: number;
-  ticks: number[];
+  majorTicks: number[];
+  minorTicks: number[];
   rows: MedRow[];
   height: number;
   highlightWindow?: HighlightWindow | null;
   plotWidth: number;
 }) {
+  if (!Number.isFinite(end) || end <= 0) return null;
+
   return (
     <svg
       width={plotWidth}
@@ -787,17 +818,32 @@ function MedicationGridSvg({
         />
       )}
 
-      {ticks.map((tick) => {
+      {minorTicks.map((tick) => {
         const x = (tick / end) * plotWidth;
         return (
           <line
-            key={`grid-x-${tick}`}
+            key={`grid-x-minor-${tick}`}
             x1={x}
             y1={0}
             x2={x}
             y2={height}
-            stroke="#d1d5db"
-            strokeWidth={1}
+            stroke="#d7dbe2"
+            strokeWidth={0.9}
+          />
+        );
+      })}
+
+      {majorTicks.map((tick) => {
+        const x = (tick / end) * plotWidth;
+        return (
+          <line
+            key={`grid-x-major-${tick}`}
+            x1={x}
+            y1={0}
+            x2={x}
+            y2={height}
+            stroke="#9aa3b2"
+            strokeWidth={1.4}
           />
         );
       })}
@@ -830,12 +876,17 @@ export default function MedicationChart({
   timeZero,
   embedded = false,
   highlightWindow = null,
+  timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: MedicationChartProps) {
   const rows = useMemo(() => buildRows(medications, xEnd), [medications, xEnd]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
+  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
 
   useEffect(() => {
     if (scrollRef.current == null) return;
@@ -857,20 +908,25 @@ export default function MedicationChart({
   );
 
   const maxTime = useMemo(() => getMaxTime(rows), [rows]);
-  const computedEnd = Math.max(15, Math.ceil(maxTime / 15) * 15);
+  const computedEnd = Math.max(majorStep, Math.ceil(maxTime / majorStep) * majorStep);
   const end = xEnd ?? computedEnd;
 
-  const ticks =
-    xTicks ??
-    Array.from({ length: Math.floor(end / 15) + 1 }, (_, i) => i * 15);
+  const majorTicks = useMemo(() => {
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
+    return buildGridTicks(end, majorStep);
+  }, [timeResolution, xTicks, end, majorStep]);
+
+  const minorTicks = useMemo(() => {
+    return buildGridTicks(end, minorStep);
+  }, [end, minorStep]);
 
   const fullContentHeight =
     rows.length * ROW_HEIGHT + PLOT_TOP_PAD + PLOT_BOTTOM_PAD;
 
   const contentPlotWidth = useMemo(() => {
     if (end <= 0) return 800;
-    return Math.max(800, Math.ceil(end * PX_PER_MIN));
-  }, [end]);
+    return Math.max(800, Math.ceil(end * pxPerMin));
+  }, [end, pxPerMin]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentPlotWidth;
@@ -981,136 +1037,145 @@ export default function MedicationChart({
               <div className="absolute inset-0 z-0">
                 <MedicationGridSvg
                   end={end}
-                  ticks={ticks}
+                  majorTicks={majorTicks}
+                  minorTicks={minorTicks}
                   rows={rows}
                   height={fullContentHeight}
                   highlightWindow={highlightWindow}
                   plotWidth={plotWidth}
                 />
               </div>
+
               <div className="absolute inset-0 z-10">
-  <ResponsiveContainer width="100%" height="100%">
-    <ScatterChart
-      margin={{
-        top: 0,
-        right: RECHARTS_RIGHT_MARGIN,
-        left: 0,
-        bottom: 0,
-      }}
-    >
-      <XAxis
-        type="number"
-        dataKey="x"
-        domain={[0, end]}
-        ticks={ticks}
-        interval={0}
-        allowDecimals={false}
-        tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
-        tick={showXAxis ? undefined : false}
-        axisLine={showXAxis}
-        tickLine={showXAxis}
-        height={showXAxis ? 30 : 0}
-        label={
-          showXAxis
-            ? { value: "Time", position: "insideBottom", offset: -4 }
-            : undefined
-        }
-      />
+                <ResponsiveContainer width="100%" height="100%">
+                  <ScatterChart
+                    margin={{
+                      top: 0,
+                      right: RECHARTS_RIGHT_MARGIN,
+                      left: 0,
+                      bottom: 0,
+                    }}
+                  >
+                    <XAxis
+                      type="number"
+                      dataKey="x"
+                      domain={[0, end]}
+                      ticks={majorTicks}
+                      interval={0}
+                      allowDecimals={false}
+                      tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
+                      tick={showXAxis ? undefined : false}
+                      axisLine={showXAxis}
+                      tickLine={showXAxis}
+                      height={showXAxis ? 30 : 0}
+                      label={
+                        showXAxis
+                          ? { value: "Time", position: "insideBottom", offset: -4 }
+                          : undefined
+                      }
+                    />
 
-      <YAxis
-        type="number"
-        dataKey="y"
-        domain={[-0.5, rows.length - 0.5]}
-        ticks={rows.map((row) => row.rowIndex)}
-        tick={false}
-        axisLine={false}
-        tickLine={false}
-        reversed
-        width={0}
-      />
+                    <YAxis
+                      type="number"
+                      dataKey="y"
+                      domain={[-0.5, rows.length - 0.5]}
+                      ticks={rows.map((row) => row.rowIndex)}
+                      tick={false}
+                      axisLine={false}
+                      tickLine={false}
+                      reversed
+                      width={0}
+                    />
 
-      <ZAxis range={[30, 30]} />
-      <Tooltip content={<MedicationTooltip />} />
+                    <ZAxis range={[30, 30]} />
+                    <Tooltip content={<MedicationTooltip timeZero={timeZero} />} />
 
-      {rows.flatMap((row) => {
-        if (hiddenNames.includes(row.name)) return [];
+                    {minorTicks.map((tick) => (
+                      <ReferenceLine
+                        key={`minor-line-${tick}`}
+                        x={tick}
+                        stroke="transparent"
+                      />
+                    ))}
 
-        return row.infusion.map((seg, idx) => (
-          <ReferenceArea
-            key={`inf-${row.name}-${idx}-${seg.start}-${seg.end}`}
-            x1={seg.start}
-            x2={Math.max(seg.end, seg.start + 0.1)}
-            y1={row.rowIndex - 0.17}
-            y2={row.rowIndex + 0.17}
-            fill={inferColor(row.name)}
-            fillOpacity={1}
-            stroke={inferColor(row.name)}
-            strokeWidth={1}
-          />
-        ));
-      })}
+                    {rows.flatMap((row) => {
+                      if (hiddenNames.includes(row.name)) return [];
 
-      <Scatter
-        data={bolusData}
-        shape={(props: any): React.JSX.Element => {
-          const { cx, cy, payload } = props;
-          if (cx == null || cy == null || !payload) return <g />;
+                      return row.infusion.map((seg, idx) => (
+                        <ReferenceArea
+                          key={`inf-${row.name}-${idx}-${seg.start}-${seg.end}`}
+                          x1={seg.start}
+                          x2={Math.max(seg.end, seg.start + 0.1)}
+                          y1={row.rowIndex - 0.17}
+                          y2={row.rowIndex + 0.17}
+                          fill={inferColor(row.name)}
+                          fillOpacity={1}
+                          stroke={inferColor(row.name)}
+                          strokeWidth={1}
+                        />
+                      ));
+                    })}
 
-          const color = payload.color ?? "#6bcfc5";
-          const text = String(payload.label ?? "");
-          const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
-          const boxHeight = 16;
+                    <Scatter
+                      data={bolusData}
+                      shape={(props: any): React.JSX.Element => {
+                        const { cx, cy, payload } = props;
+                        if (cx == null || cy == null || !payload) return <g />;
 
-          const arrowTipX = cx;
-          const arrowBaseX = cx + 6;
-          const left = arrowBaseX;
-          const top = cy - boxHeight / 2;
+                        const color = payload.color ?? "#6bcfc5";
+                        const text = String(payload.label ?? "");
+                        const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
+                        const boxHeight = 16;
 
-          return (
-            <g>
-              <line
-                x1={arrowTipX}
-                y1={cy - 9}
-                x2={arrowTipX}
-                y2={cy + 9}
-                stroke={color}
-                strokeWidth={1.2}
-                opacity={0.9}
-              />
-              <polygon
-                points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
-                fill={color}
-                stroke={color}
-                strokeWidth={1}
-              />
-              <rect
-                x={left}
-                y={top}
-                width={boxWidth}
-                height={boxHeight}
-                rx={2}
-                ry={2}
-                fill="#dff7f3"
-                stroke={color}
-                strokeWidth={1.5}
-              />
-              <text
-                x={left + boxWidth / 2}
-                y={cy + 4}
-                textAnchor="middle"
-                fontSize={10}
-                fill="#1f2937"
-              >
-                {text}
-              </text>
-            </g>
-          );
-        }}
-      />
-    </ScatterChart>
-  </ResponsiveContainer>
-</div>
-              
+                        const arrowTipX = cx;
+                        const arrowBaseX = cx + 6;
+                        const left = arrowBaseX;
+                        const top = cy - boxHeight / 2;
+
+                        return (
+                          <g>
+                            <line
+                              x1={arrowTipX}
+                              y1={cy - 9}
+                              x2={arrowTipX}
+                              y2={cy + 9}
+                              stroke={color}
+                              strokeWidth={1.2}
+                              opacity={0.9}
+                            />
+                            <polygon
+                              points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
+                              fill={color}
+                              stroke={color}
+                              strokeWidth={1}
+                            />
+                            <rect
+                              x={left}
+                              y={top}
+                              width={boxWidth}
+                              height={boxHeight}
+                              rx={2}
+                              ry={2}
+                              fill="#dff7f3"
+                              stroke={color}
+                              strokeWidth={1.5}
+                            />
+                            <text
+                              x={left + boxWidth / 2}
+                              y={cy + 4}
+                              textAnchor="middle"
+                              fontSize={10}
+                              fill="#1f2937"
+                            >
+                              {text}
+                            </text>
+                          </g>
+                        );
+                      }}
+                    />
+                  </ScatterChart>
+                </ResponsiveContainer>
+              </div>
 
               <div className="absolute inset-0 z-20 pointer-events-none">
                 <InfusionOverlaySvg

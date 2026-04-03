@@ -1,2 +1,2 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-ACE35535-EFAC-F011-9219-005056BFF837,9C7B0308-2E91-EF11-920D-005056BFF837,10457,1,2024-10-18 14:12:00+00:00,2024-10-18 16:29:00+00:00,normosol,250.0,mL,Intravenous,normosol,fluid_input,2024-10-18 14:13:00+00:00,-1.0,136.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+9C7B0308-2E91-EF11-920D-005056BFF837,10457,1,2024-10-18 14:12:00+00:00,2024-10-18 16:29:00+00:00,normosol,250.0,mL,Intravenous,normosol,fluid_input,2024-10-18 14:13:00+00:00,-1.0,136.0

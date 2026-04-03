@@ -14,7 +14,8 @@ const PLOT_RIGHT = 20;
 
 /** 和 VitalChart 保持一致 */
 const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
+
+type TimeResolution = 15 | 5;
 
 type HighlightWindow = {
   startMin: number;
@@ -31,6 +32,7 @@ type FluidChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+  timeResolution?: TimeResolution;
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -254,6 +256,30 @@ function FixedYAxisSpacer({ height }: { height: number }) {
   );
 }
 
+function getPxPerMinute(timeResolution: TimeResolution) {
+  return timeResolution === 5 ? PX_PER_15_MIN / 5 : PX_PER_15_MIN / 15;
+}
+
+function getMajorStep(timeResolution: TimeResolution) {
+  return timeResolution === 5 ? 5 : 15;
+}
+
+function getMinorStep(timeResolution: TimeResolution) {
+  return timeResolution === 5 ? 1 : 5;
+}
+
+function buildGridTicks(end: number, step: number) {
+  if (!Number.isFinite(end) || end <= 0) return [];
+  const ticks: number[] = [];
+  for (let t = 0; t <= end; t += step) {
+    ticks.push(t);
+  }
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
+    ticks.push(end);
+  }
+  return ticks;
+}
+
 export default function FluidChart({
   title = "Fluid Events",
   fluids,
@@ -264,6 +290,7 @@ export default function FluidChart({
   timeZero,
   embedded = false,
   highlightWindow = null,
+  timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: FluidChartProps) {
@@ -282,19 +309,33 @@ export default function FluidChart({
   );
 
   const allMaxTime = useMemo(() => getMaxTime(rows), [rows]);
-  const finalXEnd = xEnd ?? Math.max(15, Math.ceil(allMaxTime / 15) * 15);
+  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
+  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
 
-  const finalXTicks =
-    xTicks ??
-    Array.from({ length: Math.floor(finalXEnd / 15) + 1 }, (_, i) => i * 15);
+  const finalXEnd = useMemo(() => {
+    const computed = Math.max(majorStep, Math.ceil(allMaxTime / majorStep) * majorStep);
+    return xEnd ?? computed;
+  }, [xEnd, allMaxTime, majorStep]);
 
-  const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT;
-  const viewHeight = height;
+  const majorTicks = useMemo(() => {
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
+    return buildGridTicks(finalXEnd, majorStep);
+  }, [timeResolution, xTicks, finalXEnd, majorStep]);
+
+  const minorTicks = useMemo(() => {
+    return buildGridTicks(finalXEnd, minorStep);
+  }, [finalXEnd, minorStep]);
+
+  const contentHeight = Math.max(visibleRowsReindexed.length * ROW_HEIGHT, ROW_HEIGHT);
+
+  const dynamicHeight = contentHeight + (showXAxis ? 22 : 0);
+  const viewHeight = Math.min(height, dynamicHeight);
 
   const contentPlotWidth = useMemo(() => {
     if (finalXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(finalXEnd * PX_PER_MIN));
-  }, [finalXEnd]);
+    return Math.max(800, Math.ceil(finalXEnd * pxPerMin));
+  }, [finalXEnd, pxPerMin]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentWidth - PLOT_RIGHT;
@@ -422,11 +463,26 @@ export default function FluidChart({
                 />
               )}
 
-              {finalXTicks.map((tick) => {
+              {minorTicks.map((tick) => {
                 const x = minuteToPixel(tick);
                 return (
                   <line
-                    key={`grid-x-${tick}`}
+                    key={`grid-x-minor-${tick}`}
+                    x1={x}
+                    y1={0}
+                    x2={x}
+                    y2={contentHeight}
+                    stroke="#d7dbe2"
+                    strokeWidth={0.9}
+                  />
+                );
+              })}
+
+              {majorTicks.map((tick) => {
+                const x = minuteToPixel(tick);
+                return (
+                  <line
+                    key={`grid-x-major-${tick}`}
                     x1={x}
                     y1={0}
                     x2={x}
@@ -671,10 +727,10 @@ export default function FluidChart({
               })}
 
               {showXAxis &&
-                finalXTicks.map((tick, idx) => {
+                majorTicks.map((tick, idx) => {
                   const x = minuteToPixel(tick);
                   const isFirst = idx === 0;
-                  const isLast = idx === finalXTicks.length - 1;
+                  const isLast = idx === majorTicks.length - 1;
 
                   return (
                     <text

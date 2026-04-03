@@ -1,3 +1,1 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-3E485BD7-1ADC-F011-921A-005056BFF837,862DB8E7-9AC7-F011-921A-005056BFF837,10454,1,2025-11-17 17:56:00+00:00,2025-11-17 17:56:00+00:00,NS for irrigation,24000.0,mL,Irrigation,saline 0.9%,fluid_input,2025-11-17 16:10:00+00:00,106.0,106.0
-3F485BD7-1ADC-F011-921A-005056BFF837,862DB8E7-9AC7-F011-921A-005056BFF837,10454,1,2025-11-17 18:26:00+00:00,2025-11-17 18:26:00+00:00,NS for irrigation,12000.0,mL,Irrigation,saline 0.9%,fluid_input,2025-11-17 16:10:00+00:00,136.0,136.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end

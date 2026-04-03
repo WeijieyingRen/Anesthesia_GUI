@@ -1,5 +1,5 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-43C2B213-C751-F011-9216-005056BFF837,2ED3495F-1F0E-F011-9211-005056BFF837,10018,1,2025-03-26 23:13:00+00:00,2025-03-26 23:26:00+00:00,albumin 5%,250.0,mL,Intravenous,albumin 5%,fluid_input,2025-03-26 21:15:00+00:00,118.0,131.0
-44C2B213-C751-F011-9216-005056BFF837,2ED3495F-1F0E-F011-9211-005056BFF837,10018,1,2025-03-26 23:21:00+00:00,2025-03-26 23:21:00+00:00,albumin 5%,250.0,mL,Intravenous,albumin 5%,fluid_input,2025-03-26 21:15:00+00:00,126.0,126.0
-C1C2B213-C751-F011-9216-005056BFF837,2ED3495F-1F0E-F011-9211-005056BFF837,10457,1,2025-03-26 23:36:00+00:00,2025-03-26 23:36:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2025-03-26 21:15:00+00:00,141.0,141.0
-1BC2B213-C751-F011-9216-005056BFF837,2ED3495F-1F0E-F011-9211-005056BFF837,10466,1,2025-03-27 01:56:00+00:00,2025-03-28 11:11:00+00:00,D5-1/2 NS IV infusion,100.0,mL/hr,Intravenous,dextrose / saline 5% / 0.45%,fluid_input,2025-03-26 21:15:00+00:00,281.0,2276.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+2ED3495F-1F0E-F011-9211-005056BFF837,10018,1,2025-03-26 23:13:00+00:00,2025-03-26 23:26:00+00:00,albumin 5%,250.0,mL,Intravenous,albumin 5%,fluid_input,2025-03-26 21:15:00+00:00,118.0,131.0
+2ED3495F-1F0E-F011-9211-005056BFF837,10018,1,2025-03-26 23:21:00+00:00,2025-03-26 23:21:00+00:00,albumin 5%,250.0,mL,Intravenous,albumin 5%,fluid_input,2025-03-26 21:15:00+00:00,126.0,126.0
+2ED3495F-1F0E-F011-9211-005056BFF837,10457,1,2025-03-26 23:36:00+00:00,2025-03-26 23:36:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2025-03-26 21:15:00+00:00,141.0,141.0
+2ED3495F-1F0E-F011-9211-005056BFF837,10466,1,2025-03-27 01:56:00+00:00,2025-03-28 11:11:00+00:00,D5-1/2 NS IV infusion,100.0,mL/hr,Intravenous,dextrose / saline 5% / 0.45%,fluid_input,2025-03-26 21:15:00+00:00,281.0,2276.0

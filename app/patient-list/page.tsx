@@ -29,7 +29,7 @@ type GameData = {
 
 // ------------ Config ------------
 const CSV_BASE = "/data";
-const CASE_COUNT = 10;
+const CASE_COUNT = 100;
 
 export default function PatientList() {
   const router = useRouter();
@@ -199,14 +199,36 @@ export default function PatientList() {
             <p>
               The annotation work is divided into two major tasks.
             </p>
+            <div>
+  <p>
+    <span className="font-semibold text-gray-900">Task 1:</span>{" "}
+    episode-level intraoperative event understanding, including abnormal
+    event detection, mechanism (etiology) classification and generation,
+    intervention evaluation (medication, gas, fluid), and patient
+    physiology response evaluation.
+  </p>
 
-            <p>
-              <span className="font-semibold text-gray-900">Task 1:</span>{" "}
-              episode-level intraoperative event understanding, including abnormal
-              event detection, mechanism (etiology) classification and generation,
-              intervention evaluation (medication, gas, fluid), and patient
-              physiology response evaluation.
-            </p>
+  <div className="mt-2 text-sm leading-7 text-gray-700">
+    <p className="font-semibold text-gray-900">Annotate:</p>
+    <ul className="ml-10 list-disc space-y-1">
+      <li>Likely true physiologic abnormal episodes.</li>
+      <li>Episodes that are moderate or severe.</li>
+      <li>Episodes that are prolonged or clearly sustained.</li>
+      <li>Episodes with associated changes in other vital signs.</li>
+      <li>Episodes temporally related to interventions, medications, fluids, or ventilation changes.</li>
+      <li>Episodes that are important to the overall intraoperative clinical course.</li>
+    </ul>
+
+    <p className="pt-2 font-semibold text-gray-900">Do not annotate:</p>
+    <ul className="ml-10 list-disc space-y-1">
+      <li>Obvious monitoring artifacts or measurement errors.</li>
+      <li>Very brief isolated fluctuations with no clear clinical relevance.</li>
+      <li>Minor waveform blips that do not support downstream interpretation.</li>
+      <li>Events that are too trivial to inform mechanism, intervention, or response analysis.</li>
+      <li>Do not try to annotate every small abnormality in the record; focus on the key episodes only.</li>
+    </ul>
+  </div>
+</div>
 
             <p>
               <span className="font-semibold text-gray-900">Task 2:</span>{" "}

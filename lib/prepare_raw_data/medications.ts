@@ -16,6 +16,50 @@ function cleanName(v: any): string {
   return String(v ?? "").trim();
 }
 
+function lower(v: any): string {
+  return cleanName(v).toLowerCase();
+}
+
+function roundTo(value: number, digits = 2): number {
+  const factor = 10 ** digits;
+  return Math.round(value * factor) / factor;
+}
+
+function isPropofol(name: string): boolean {
+  return lower(name).includes("propofol");
+}
+
+function convertPropofolBolusToMg(
+  dose: number | undefined,
+  unitRaw: any
+): { dose: number | undefined; unit: string | undefined } {
+  if (!Number.isFinite(dose)) {
+    return {
+      dose,
+      unit: cleanName(unitRaw) || undefined,
+    };
+  }
+
+  const unit = lower(unitRaw);
+
+  if (unit === "mg") {
+    return { dose: roundTo(dose as number, 2), unit: "mg" };
+  }
+
+  if (unit === "mcg" || unit === "ug") {
+    return { dose: roundTo((dose as number) / 1000, 3), unit: "mg" };
+  }
+
+  if (unit === "g") {
+    return { dose: roundTo((dose as number) * 1000, 2), unit: "mg" };
+  }
+
+  return {
+    dose: roundTo(dose as number, 2),
+    unit: cleanName(unitRaw) || undefined,
+  };
+}
+
 export function prepareMedicationData(
   medBolusRows: CsvRow[],
   medInfusionRows: CsvRow[]
@@ -30,20 +74,35 @@ export function prepareMedicationData(
 
   for (const row of medBolusRows) {
     const name = cleanName(row["med_concept_desc"]);
-    const dose = toNum(row["dose"]);
+    let dose = toNum(row["dose"]);
+    const unit = row["unit"] ? String(row["unit"]).trim() : undefined;
 
     if (!name || !Number.isFinite(dose)) continue;
 
+    if (isPropofol(name)) {
+      const converted = convertPropofolBolusToMg(dose, unit);
+      dose = converted.dose;
+    }
+
+    if (!Number.isFinite(dose)) continue;
     bolusTotalMap[name] = (bolusTotalMap[name] ?? 0) + (dose as number);
   }
 
   for (const row of medBolusRows) {
     const name = cleanName(row["med_concept_desc"]);
     const time = toNum(row["relative_anesthesia_time"]);
-    const dose = toNum(row["dose"]);
-    const unit = row["unit"] ? String(row["unit"]).trim() : undefined;
+    let dose = toNum(row["dose"]);
+    let unit = row["unit"] ? String(row["unit"]).trim() : undefined;
 
     if (!name || !Number.isFinite(time) || !Number.isFinite(dose)) continue;
+
+    if (isPropofol(name)) {
+      const converted = convertPropofolBolusToMg(dose, unit);
+      dose = converted.dose;
+      unit = converted.unit;
+    }
+
+    if (!Number.isFinite(dose)) continue;
 
     if (!result.bolus[name]) result.bolus[name] = [];
     result.bolus[name].push({
@@ -71,7 +130,7 @@ export function prepareMedicationData(
       rate: rate as number,
       unit,
       label: `${rate} ${unit ?? ""}`.trim(),
-    });
+    } as MedicationInfusionSegment);
   }
 
   Object.values(result.bolus).forEach((arr) => arr.sort((a, b) => a.time - b.time));

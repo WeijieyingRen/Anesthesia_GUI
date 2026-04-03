@@ -15,6 +15,9 @@ import {
 import type { TimeValuePoint } from "@/lib/types";
 
 import type { DetectVital } from "./annotation/types";
+
+type TimeResolution = 15 | 5;
+
 type SelectedWindow = {
   vital: DetectVital;
   startMin: number;
@@ -43,6 +46,8 @@ type VitalChartProps = {
   showTopTimeAxis?: boolean;
   timeZero?: string | null;
   embedded?: boolean;
+
+  timeResolution?: TimeResolution;
 
   selectedDetectVital?: DetectVital;
   onChangeSelectedDetectVital?: (vital: DetectVital) => void;
@@ -78,11 +83,20 @@ type DragMode =
   | "resize-bottom"
   | null;
 
+type HoverStats = {
+  time: number;
+  bpText: string;
+  hr: number | null;
+  spo2: number | null;
+  rr: number | null;
+  etco2: number | null;
+  temp: number | null;
+};
+
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
-const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
+const BASE_PX_PER_15_MIN = 64;
 
 function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] {
   return (series ?? [])
@@ -280,6 +294,11 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   return `${hh}:${mm}`;
 }
 
+function formatHoverValue(value: number | null, digits = 0) {
+  if (value == null || !Number.isFinite(value)) return "-";
+  return value.toFixed(digits);
+}
+
 function getSelectedSeriesKey(
   series: Record<string, TimeValuePoint[] | undefined>,
   vital: DetectVital
@@ -330,51 +349,6 @@ function getExactValueAtTime(
   }
 
   return best ? best.value : null;
-}
-
-function getNearestPointTime(
-  series: Record<string, TimeValuePoint[] | undefined>,
-  vital: DetectVital,
-  targetTime: number
-): number | null {
-  if (vital === "MAP") {
-    const mapSeries = series["NIBP_MAP"] ?? series["ARTM"] ?? [];
-    if (!mapSeries.length) return null;
-
-    let best: TimeValuePoint | null = null;
-    let bestDist = Infinity;
-
-    for (const p of mapSeries) {
-      if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
-      const d = Math.abs(p.time - targetTime);
-      if (d < bestDist) {
-        best = p;
-        bestDist = d;
-      }
-    }
-
-    return best ? best.time : null;
-  }
-
-  const key = getSelectedSeriesKey(series, vital);
-  if (!key) return null;
-
-  const arr = series[key] ?? [];
-  if (!arr.length) return null;
-
-  let best: TimeValuePoint | null = null;
-  let bestDist = Infinity;
-
-  for (const p of arr) {
-    if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
-    const d = Math.abs(p.time - targetTime);
-    if (d < bestDist) {
-      best = p;
-      bestDist = d;
-    }
-  }
-
-  return best ? best.time : null;
 }
 
 function getWindowYBounds(
@@ -492,6 +466,7 @@ export default function VitalChart({
   showTopTimeAxis = false,
   timeZero,
   embedded = false,
+  timeResolution = 15,
   selectedDetectVital = "MAP",
   onChangeSelectedDetectVital,
   selectedWindow = null,
@@ -523,6 +498,22 @@ export default function VitalChart({
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const chartOverlayRef = useRef<HTMLDivElement | null>(null);
 
+  const viewConfig = useMemo(() => {
+    if (timeResolution === 5) {
+      return {
+        majorStep: 5,
+        minorStep: 1,
+        pxPerMin: BASE_PX_PER_15_MIN / 5,
+      };
+    }
+
+    return {
+      majorStep: 15,
+      minorStep: 5,
+      pxPerMin: BASE_PX_PER_15_MIN / 15,
+    };
+  }, [timeResolution]);
+
   useEffect(() => {
     if (scrollRef.current == null) return;
     if (sharedScrollLeft == null) return;
@@ -544,8 +535,8 @@ export default function VitalChart({
 
   const contentPlotWidth = useMemo(() => {
     if (effectiveXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(effectiveXEnd * PX_PER_MIN));
-  }, [effectiveXEnd]);
+    return Math.max(800, Math.ceil(effectiveXEnd * viewConfig.pxPerMin));
+  }, [effectiveXEnd, viewConfig.pxPerMin]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentWidth - PLOT_RIGHT;
@@ -575,7 +566,7 @@ export default function VitalChart({
 
     const rect = el.getBoundingClientRect();
     const xInPlot = clientX - rect.left;
-    const minute = xInPlot / PX_PER_MIN;
+    const minute = xInPlot / viewConfig.pxPerMin;
 
     return Math.max(0, Math.min(effectiveXEnd, minute));
   }
@@ -595,7 +586,7 @@ export default function VitalChart({
   }
 
   function pixelToMinute(px: number) {
-    return px / PX_PER_MIN;
+    return px / viewConfig.pxPerMin;
   }
 
   function pixelToValue(py: number) {
@@ -877,44 +868,58 @@ export default function VitalChart({
     };
   }, [statsWindow, series]);
 
-  const hoverStats = useMemo(() => {
+  const hoverStats = useMemo<HoverStats | null>(() => {
     if (hoverMinute == null) return null;
 
-    const snappedTime = getNearestPointTime(series, selectedDetectVital, hoverMinute);
-    if (snappedTime == null) return null;
+    const queryTime = hoverMinute;
 
-    if (selectedDetectVital === "MAP") {
-      const sbp =
-        getExactValueAtTime(series, "NIBP_SBP", snappedTime) ??
-        getExactValueAtTime(series, "ARTS", snappedTime);
+    const sbp =
+      getExactValueAtTime(series, "NIBP_SBP", queryTime) ??
+      getExactValueAtTime(series, "ARTS", queryTime);
 
-      const dbp =
-        getExactValueAtTime(series, "NIBP_DBP", snappedTime) ??
-        getExactValueAtTime(series, "ARTD", snappedTime);
+    const dbp =
+      getExactValueAtTime(series, "NIBP_DBP", queryTime) ??
+      getExactValueAtTime(series, "ARTD", queryTime);
 
-      const map =
-        getExactValueAtTime(series, "NIBP_MAP", snappedTime) ??
-        getExactValueAtTime(series, "ARTM", snappedTime);
+    const map =
+      getExactValueAtTime(series, "NIBP_MAP", queryTime) ??
+      getExactValueAtTime(series, "ARTM", queryTime);
 
-      return {
-        time: snappedTime,
-        text:
-          sbp == null || dbp == null || map == null
-            ? "BP: -"
-            : `BP: ${Math.round(sbp)}/${Math.round(dbp)} (${Math.round(map)})`,
-      };
-    }
+    const hr = getExactValueAtTime(series, "HR", queryTime);
 
-    const key = getSelectedSeriesKey(series, selectedDetectVital);
-    if (!key) return null;
+    const spo2 =
+      getExactValueAtTime(series, "SPO2 %", queryTime) ??
+      getExactValueAtTime(series, "SPO2", queryTime);
 
-    const value = getExactValueAtTime(series, key, snappedTime);
+    const rr = getExactValueAtTime(series, "RR", queryTime);
+
+    const etco2 =
+      getExactValueAtTime(series, "ETCO2", queryTime) ??
+      getExactValueAtTime(series, "ETCO2 (mmHg)", queryTime);
+
+    const temp =
+      getExactValueAtTime(series, "TEMP", queryTime) ??
+      getExactValueAtTime(series, "TMP Bladder", queryTime) ??
+      getExactValueAtTime(series, "TMP Esophageal", queryTime) ??
+      getExactValueAtTime(series, "TMP Blood", queryTime) ??
+      getExactValueAtTime(series, "TMP Nasopharyngeal", queryTime) ??
+      getExactValueAtTime(series, "TMP Rectal", queryTime);
+
+    const bpText =
+      sbp == null || dbp == null || map == null
+        ? "-"
+        : `${Math.round(sbp)}/${Math.round(dbp)} (${Math.round(map)})`;
 
     return {
-      time: snappedTime,
-      text: value == null ? "Value: -" : `Value: ${value.toFixed(1)}`,
+      time: queryTime,
+      bpText,
+      hr,
+      spo2,
+      rr,
+      etco2,
+      temp,
     };
-  }, [hoverMinute, series, selectedDetectVital]);
+  }, [hoverMinute, series]);
 
   const overlayBox = useMemo(() => {
     if (!displayWindow) return null;
@@ -949,28 +954,31 @@ export default function VitalChart({
   const minorGridTicks = useMemo(() => {
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
     const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += 5) {
+    for (let t = 0; t <= effectiveXEnd; t += viewConfig.minorStep) {
       ticks.push(t);
     }
     if (ticks[ticks.length - 1] !== effectiveXEnd) {
       ticks.push(effectiveXEnd);
     }
     return ticks;
-  }, [effectiveXEnd]);
+  }, [effectiveXEnd, viewConfig.minorStep]);
 
   const majorGridTicks = useMemo(() => {
-    if (xTicks && xTicks.length > 0) return xTicks;
-
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
+
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) {
+      return xTicks;
+    }
+
     const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += 15) {
+    for (let t = 0; t <= effectiveXEnd; t += viewConfig.majorStep) {
       ticks.push(t);
     }
     if (ticks[ticks.length - 1] !== effectiveXEnd) {
       ticks.push(effectiveXEnd);
     }
     return ticks;
-  }, [xTicks, effectiveXEnd]);
+  }, [timeResolution, xTicks, effectiveXEnd, viewConfig.majorStep]);
 
   const yTicks = useMemo(
     () =>
@@ -1144,8 +1152,8 @@ export default function VitalChart({
                         transform: isFirst
                           ? "translateX(0)"
                           : isLast
-                          ? "translateX(-100%)"
-                          : "translateX(-50%)",
+                            ? "translateX(-100%)"
+                            : "translateX(-50%)",
                       }}
                     >
                       {formatClockTime(tick, timeZero)}
@@ -1346,18 +1354,24 @@ export default function VitalChart({
                 <div
                   className="pointer-events-none absolute rounded-md border bg-white px-3 py-2 text-xs shadow"
                   style={{
-                    left: Math.min(minuteToPixel(hoverStats.time) + 8, contentWidth - 220),
+                    left: Math.min(minuteToPixel(hoverStats.time) + 8, contentWidth - 260),
                     top: chartMarginTop + 8,
                     zIndex: 1000,
                     color: "#111827",
-                    lineHeight: 1.35,
-                    maxWidth: 200,
+                    lineHeight: 1.45,
+                    minWidth: 180,
+                    maxWidth: 240,
                   }}
                 >
-                  <div className="font-semibold">
+                  <div className="mb-1 font-semibold">
                     Time: {formatClockTime(hoverStats.time, timeZero)}
                   </div>
-                  <div>{hoverStats.text}</div>
+                  <div>BP: {hoverStats.bpText}</div>
+                  <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
+                  <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
+                  <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
+                  <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
+                  <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
                 </div>
               )}
 

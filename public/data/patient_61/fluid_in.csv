@@ -1,5 +1,5 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-E69193EB-8F05-F011-9211-005056BFF837,DA78915E-C6EC-ED11-91FB-005056BFF837,10457,1,2023-05-02 14:22:00+00:00,2023-05-02 19:08:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-05-02 14:09:00+00:00,13.0,299.0
-E79193EB-8F05-F011-9211-005056BFF837,DA78915E-C6EC-ED11-91FB-005056BFF837,10457,1,2023-05-02 16:12:00+00:00,2023-05-02 16:12:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-05-02 14:09:00+00:00,123.0,123.0
-E89193EB-8F05-F011-9211-005056BFF837,DA78915E-C6EC-ED11-91FB-005056BFF837,10457,1,2023-05-02 19:06:00+00:00,2023-05-02 19:06:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-05-02 14:09:00+00:00,297.0,297.0
-519193EB-8F05-F011-9211-005056BFF837,DA78915E-C6EC-ED11-91FB-005056BFF837,10466,1,2023-05-02 19:50:00+00:00,2023-05-03 14:03:00+00:00,D5-1/2 NS IV infusion,100.0,mL/hr,Intravenous,dextrose / saline 5% / 0.45%,fluid_input,2023-05-02 14:09:00+00:00,341.0,1434.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+DA78915E-C6EC-ED11-91FB-005056BFF837,10457,1,2023-05-02 14:22:00+00:00,2023-05-02 19:08:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-05-02 14:09:00+00:00,13.0,299.0
+DA78915E-C6EC-ED11-91FB-005056BFF837,10457,1,2023-05-02 16:12:00+00:00,2023-05-02 16:12:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-05-02 14:09:00+00:00,123.0,123.0
+DA78915E-C6EC-ED11-91FB-005056BFF837,10457,1,2023-05-02 19:06:00+00:00,2023-05-02 19:06:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-05-02 14:09:00+00:00,297.0,297.0
+DA78915E-C6EC-ED11-91FB-005056BFF837,10466,1,2023-05-02 19:50:00+00:00,2023-05-03 14:03:00+00:00,D5-1/2 NS IV infusion,100.0,mL/hr,Intravenous,dextrose / saline 5% / 0.45%,fluid_input,2023-05-02 14:09:00+00:00,341.0,1434.0

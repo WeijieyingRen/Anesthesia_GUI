@@ -62,16 +62,16 @@ function buildDefaultDetectAnnotation(params: {
     endMin:
       selectedWindow?.endMin ?? selectedEvent?.endMin ?? prev?.endMin ?? 0,
 
-    note: prev?.note ?? "",
+    shouldContinueAnnotation: prev?.shouldContinueAnnotation ?? "",
 
     eventType: prev?.eventType ?? "",
     eventTypeOther: prev?.eventTypeOther ?? "",
 
-    episodeEvolution: prev?.episodeEvolution ?? "",
-    episodeEvolutionNote: prev?.episodeEvolutionNote ?? "",
+    associatedChanges: prev?.associatedChanges ?? "",
+    note: prev?.note ?? "",
 
-    overallCharacterization: prev?.overallCharacterization ?? "",
-    overallInterpretationNote: prev?.overallInterpretationNote ?? "",
+    onsetPattern: prev?.onsetPattern ?? "",
+    episodeCourse: prev?.episodeCourse ?? "",
 
     severity: prev?.severity ?? "",
     confidence: prev?.confidence ?? null,

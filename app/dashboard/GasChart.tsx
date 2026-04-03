@@ -7,9 +7,7 @@ const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
 
-/** 和 Vital / Medication / CV / Timeline 保持一致 */
-const PX_PER_15_MIN = 64;
-const PX_PER_MIN = PX_PER_15_MIN / 15;
+type TimeResolution = 15 | 5;
 
 type HighlightWindow = {
   startMin: number;
@@ -18,7 +16,7 @@ type HighlightWindow = {
 
 type GasChartProps = {
   title?: string;
-  gas: Record<string, TimeValuePoint[] | undefined>;
+  gas?: Record<string, TimeValuePoint[] | undefined> | null;
   height?: number;
   windowSize?: number;
   xEnd?: number;
@@ -27,6 +25,7 @@ type GasChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+  timeResolution?: TimeResolution;
 
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
@@ -76,6 +75,30 @@ const ROW_HEIGHT = 20;
 const TOP_PAD = 6;
 const BOTTOM_PAD = 4;
 
+function getPxPerMinute(timeResolution: TimeResolution) {
+  return timeResolution === 15 ? 64 / 15 : 64 / 5;
+}
+
+function getMajorStep(timeResolution: TimeResolution) {
+  return timeResolution === 15 ? 15 : 5;
+}
+
+function getMinorStep(timeResolution: TimeResolution) {
+  return timeResolution === 15 ? 5 : 1;
+}
+
+function buildGridTicks(end: number, step: number) {
+  if (!Number.isFinite(end) || end <= 0) return [];
+  const ticks: number[] = [];
+  for (let t = 0; t <= end; t += step) {
+    ticks.push(t);
+  }
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
+    ticks.push(end);
+  }
+  return ticks;
+}
+
 function sortGasNames(names: string[]) {
   return [...names].sort((a, b) => {
     const ia = DEFAULT_GAS_ORDER.indexOf(a);
@@ -106,14 +129,24 @@ function inferGasColor(name: string) {
   return "#14b8a6";
 }
 
-function buildRows(gas: Record<string, TimeValuePoint[] | undefined>): GasRow[] {
-  const names = sortGasNames(Object.keys(gas));
+function buildRows(
+  gas?: Record<string, TimeValuePoint[] | undefined> | null
+): GasRow[] {
+  const safeGas = gas ?? {};
+  const names = sortGasNames(Object.keys(safeGas));
 
-  return names.map((name, idx) => ({
+  const rows = names.map((name) => ({
     name,
-    values: [...(gas[name] ?? [])]
+    values: [...(safeGas[name] ?? [])]
       .filter((p) => Number.isFinite(p.time) && Number.isFinite(p.value))
       .sort((a, b) => a.time - b.time),
+    rowIndex: 0,
+  }));
+
+  const nonEmptyRows = rows.filter((row) => row.values.length > 0);
+
+  return nonEmptyRows.map((row, idx) => ({
+    ...row,
     rowIndex: idx,
   }));
 }
@@ -127,7 +160,10 @@ function buildWindowSegments(rows: GasRow[], windowSize: number): GasWindowSegme
   const segments: GasWindowSegment[] = [];
 
   rows.forEach((row) => {
-    const rowMaxTime = row.values.length ? Math.max(...row.values.map((p) => p.time)) : 0;
+    const rowMaxTime = row.values.length
+      ? Math.max(...row.values.map((p) => p.time))
+      : 0;
+
     const end = Math.ceil(rowMaxTime / windowSize) * windowSize;
 
     for (let start = 0; start < end; start += windowSize) {
@@ -235,19 +271,23 @@ function FixedAxisSpacer({ height }: { height: number }) {
 
 function GasGridSvg({
   end,
-  ticks,
+  majorTicks,
+  minorTicks,
   rows,
   height,
   highlightWindow,
   plotWidth,
 }: {
   end: number;
-  ticks: number[];
+  majorTicks: number[];
+  minorTicks: number[];
   rows: GasRow[];
   height: number;
   highlightWindow?: HighlightWindow | null;
   plotWidth: number;
 }) {
+  if (!Number.isFinite(end) || end <= 0) return null;
+
   return (
     <svg
       width={plotWidth}
@@ -271,17 +311,32 @@ function GasGridSvg({
         />
       )}
 
-      {ticks.map((tick) => {
+      {minorTicks.map((tick) => {
         const x = (tick / end) * plotWidth;
         return (
           <line
-            key={`grid-x-${tick}`}
+            key={`grid-x-minor-${tick}`}
             x1={x}
             y1={TOP_PAD}
             x2={x}
             y2={TOP_PAD + rows.length * ROW_HEIGHT}
-            stroke="#d1d5db"
-            strokeWidth={1}
+            stroke="#d7dbe2"
+            strokeWidth={0.9}
+          />
+        );
+      })}
+
+      {majorTicks.map((tick) => {
+        const x = (tick / end) * plotWidth;
+        return (
+          <line
+            key={`grid-x-major-${tick}`}
+            x1={x}
+            y1={TOP_PAD}
+            x2={x}
+            y2={TOP_PAD + rows.length * ROW_HEIGHT}
+            stroke="#9aa3b2"
+            strokeWidth={1.4}
           />
         );
       })}
@@ -322,22 +377,29 @@ function GasGridSvg({
 
 export default function GasChart({
   title = "Gas / Vent Trends",
-  gas,
+  gas = {},
   height = 320,
-  windowSize = 15,
+  windowSize,
   xEnd,
   xTicks,
   showXAxis = true,
   timeZero,
   embedded = false,
   highlightWindow = null,
+  timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: GasChartProps) {
-  const rows = useMemo(() => buildRows(gas), [gas]);
+  const safeGas = gas ?? {};
+  const rows = useMemo(() => buildRows(safeGas), [safeGas]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
+  const effectiveWindowSize = windowSize ?? majorStep;
+  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
 
   useEffect(() => {
     if (scrollRef.current == null) return;
@@ -349,27 +411,42 @@ export default function GasChart({
   }, [sharedScrollLeft]);
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
-  const visibleRowsReindexed = visibleRows.map((row, idx) => ({ ...row, rowIndex: idx }));
+  const visibleRowsReindexed = visibleRows.map((row, idx) => ({
+    ...row,
+    rowIndex: idx,
+  }));
 
   const allMaxTime = maxTimeOfRows(visibleRowsReindexed);
-  const computedXEnd = Math.max(windowSize, Math.ceil(allMaxTime / windowSize) * windowSize);
+  const computedXEnd = Math.max(
+    effectiveWindowSize,
+    Math.ceil(allMaxTime / effectiveWindowSize) * effectiveWindowSize
+  );
   const finalXEnd = xEnd ?? computedXEnd;
-  const finalXTicks =
-    xTicks ??
-    Array.from({ length: Math.floor(finalXEnd / windowSize) + 1 }, (_, i) => i * windowSize);
+
+  const majorTicks = useMemo(() => {
+    if (xTicks && xTicks.length > 0 && timeResolution === 15) {
+      return xTicks;
+    }
+    return buildGridTicks(finalXEnd, majorStep);
+  }, [xTicks, finalXEnd, majorStep, timeResolution]);
+
+  const minorTicks = useMemo(() => {
+    return buildGridTicks(finalXEnd, minorStep);
+  }, [finalXEnd, minorStep]);
 
   const segments = useMemo(
-    () => buildWindowSegments(visibleRowsReindexed, windowSize),
-    [visibleRowsReindexed, windowSize]
+    () => buildWindowSegments(visibleRowsReindexed, effectiveWindowSize),
+    [visibleRowsReindexed, effectiveWindowSize]
   );
 
-  const fullContentHeight = visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
+  const fullContentHeight =
+    visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
   const viewHeight = Math.min(height, Math.max(120, fullContentHeight));
 
   const contentPlotWidth = useMemo(() => {
     if (finalXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(finalXEnd * PX_PER_MIN));
-  }, [finalXEnd]);
+    return Math.max(800, Math.ceil(finalXEnd * pxPerMin));
+  }, [finalXEnd, pxPerMin]);
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentPlotWidth;
@@ -382,7 +459,7 @@ export default function GasChart({
     return buildDetailPolyline(zoomTarget.points, detailWidth, detailHeight);
   }, [zoomTarget]);
 
-  if (!Object.keys(gas ?? {}).length) {
+  if (!Object.keys(safeGas).length || rows.length === 0) {
     return embedded ? null : (
       <div className="rounded-2xl border bg-white p-4 shadow-sm">
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
@@ -456,7 +533,8 @@ export default function GasChart({
               <div className="relative" style={{ width: contentWidth, height: fullContentHeight }}>
                 <GasGridSvg
                   end={finalXEnd}
-                  ticks={finalXTicks}
+                  majorTicks={majorTicks}
+                  minorTicks={minorTicks}
                   rows={visibleRowsReindexed}
                   height={fullContentHeight}
                   highlightWindow={highlightWindow}
@@ -470,7 +548,7 @@ export default function GasChart({
                   preserveAspectRatio="none"
                   className="absolute inset-0"
                 >
-                  <g transform={`translate(0,0)`}>
+                  <g transform="translate(0,0)">
                     {segments.map((seg, idx) => {
                       const color = inferGasColor(seg.rowName);
                       const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
@@ -558,7 +636,7 @@ export default function GasChart({
                     })}
 
                     {showXAxis &&
-                      finalXTicks.map((tick) => {
+                      majorTicks.map((tick) => {
                         const x = (tick / finalXEnd) * plotWidth;
                         return (
                           <text

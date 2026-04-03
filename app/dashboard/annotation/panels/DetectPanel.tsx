@@ -6,8 +6,6 @@ import type {
   EventType,
   SeverityLevel,
   DetectVital,
-  EpisodeEvolution,
-  OverallCharacterization,
 } from "../types";
 import { submitAnnotation } from "@/lib/submit";
 
@@ -25,23 +23,7 @@ type DetectPanelProps = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
-type PreventionChoice = "Yes" | "No" | "Unclear" | "";
-type PreventionFailureReason =
-  | "Too late"
-  | "Insufficient"
-  | "Wrong target"
-  | "Transient effect only"
-  | "Ongoing deterioration despite treatment"
-  | "Mixed / unclear"
-  | "";
-
-type VoiceTarget =
-  | "note"
-  | "eventTypeOther"
-  | "overallInterpretationNote"
-  | "failureNote"
-  | "unclearNote"
-  | null;
+type VoiceTarget = "note" | "eventTypeOther" | null;
 
 const ALL_EVENT_TYPE_OPTIONS: (EventType | "Others")[] = [
   "Hypotension",
@@ -69,27 +51,27 @@ const VITAL_OPTIONS: DetectVital[] = [
   "TEMP",
 ];
 
-const SEVERITY_OPTIONS: SeverityLevel[] = ["Mild", "Moderate", "Severe"];
+const CONTINUE_ANNOTATION_OPTIONS = [
+  "Yes, continue annotation",
+  "No, likely artifact / too minor / not useful",
+  "Unclear",
+] as const;
 
-const EPISODE_EVOLUTION_OPTIONS: EpisodeEvolution[] = [
+const ONSET_PATTERN_OPTIONS = [
   "Sudden onset",
-  "Gradual change",
-  "Persistent abnormality",
-  "Fluctuating pattern",
-  "Recovering / resolving",
-  "Worsening",
-  "Mixed or unclear",
-];
+  "Gradual onset",
+  "Unclear onset",
+] as const;
 
-const OVERALL_CHARACTERIZATION_OPTIONS: OverallCharacterization[] = [
-  "Expected physiologic change",
-  "Expected treatment response",
-  "Transient fluctuation / likely not clinically important",
-  "Clinically significant abnormality",
-  "Recovery / correction phase",
-  "Mixed or unclear pattern",
-  "Others",
-];
+const EPISODE_COURSE_OPTIONS = [
+  "Persistent / stable abnormality",
+  "Fluctuating / labile pattern",
+  "Improving / recovering",
+  "Worsening",
+  "Mixed / unclear",
+] as const;
+
+const SEVERITY_OPTIONS: SeverityLevel[] = ["Mild", "Moderate", "Severe"];
 
 const EVENT_TYPES_BY_VITAL: Record<DetectVital, EventType[]> = {
   MAP: ["Hypotension", "Hypertension"],
@@ -190,30 +172,30 @@ function InfoTooltip({ content }: { content: React.ReactNode }) {
 
 function getTask3Placeholder(primaryVital: DetectVital | null) {
   if (primaryVital === "MAP") {
-    return "e.g. MAP decreased below baseline during this window, with mild compensatory tachycardia and no major change in SpO2.";
+    return "e.g. HR increased mildly during the MAP drop, while SpO2 remained stable.";
   }
   if (primaryVital === "SBP") {
-    return "e.g. SBP decreased during this window, while DBP and HR showed partial compensation.";
+    return "e.g. DBP and MAP also decreased, with mild compensatory tachycardia.";
   }
   if (primaryVital === "DBP") {
-    return "e.g. DBP decreased during this window, with associated change in MAP and relatively stable oxygenation.";
+    return "e.g. MAP decreased in parallel, while HR remained relatively stable.";
   }
   if (primaryVital === "HR") {
-    return "e.g. HR increased above baseline during this window, while MAP remained relatively stable and oxygenation was preserved.";
+    return "e.g. MAP decreased slightly during tachycardia, without major SpO2 change.";
   }
   if (primaryVital === "SPO2") {
-    return "e.g. SpO2 decreased during this window, without major concurrent change in MAP or HR.";
+    return "e.g. ETCO2 increased and RR decreased during the desaturation episode.";
   }
   if (primaryVital === "RR") {
-    return "e.g. RR decreased during this window, with a subsequent rise in ETCO2.";
+    return "e.g. ETCO2 increased as RR decreased, while hemodynamics remained stable.";
   }
   if (primaryVital === "ETCO2") {
-    return "e.g. ETCO2 increased progressively during this window, while MAP and HR remained relatively stable.";
+    return "e.g. RR decreased and SpO2 remained stable during the ETCO2 rise.";
   }
   if (primaryVital === "TEMP") {
-    return "e.g. Temperature gradually decreased during this window without major hemodynamic instability.";
+    return "e.g. No major hemodynamic change, but temperature declined gradually throughout the window.";
   }
-  return "Describe the main abnormal change during this window.";
+  return "Briefly describe any clinically relevant associated changes in other vital signs.";
 }
 
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
@@ -343,13 +325,6 @@ export default function DetectPanel({
   const [recordingTarget, setRecordingTarget] =
     React.useState<VoiceTarget>(null);
 
-  const [preventionChoice, setPreventionChoice] =
-    React.useState<PreventionChoice>("");
-  const [failureReason, setFailureReason] =
-    React.useState<PreventionFailureReason>("");
-  const [failureNote, setFailureNote] = React.useState("");
-  const [unclearNote, setUnclearNote] = React.useState("");
-
   const recognitionRef = React.useRef<any>(null);
   const recognitionTargetRef = React.useRef<VoiceTarget>(null);
   const panelOpenedAtRef = React.useRef<number | null>(null);
@@ -359,23 +334,25 @@ export default function DetectPanel({
   }, [caseId, eventId]);
 
   React.useEffect(() => {
-    if (preventionChoice !== "Yes") {
-      setFailureReason("");
-      setFailureNote("");
-      if (recordingTarget === "failureNote") {
-        recognitionRef.current?.stop?.();
-        setRecordingTarget(null);
+    if (annotation.associatedChanges !== "Yes") {
+      if (annotation.note) {
+        onChangeAnnotation((prev) => ({
+          ...prev,
+          note: "",
+        }));
       }
-    }
 
-    if (preventionChoice !== "Unclear") {
-      setUnclearNote("");
-      if (recordingTarget === "unclearNote") {
+      if (recordingTarget === "note") {
         recognitionRef.current?.stop?.();
         setRecordingTarget(null);
       }
     }
-  }, [preventionChoice, recordingTarget]);
+  }, [
+    annotation.associatedChanges,
+    annotation.note,
+    onChangeAnnotation,
+    recordingTarget,
+  ]);
 
   const selectedPrimaryVitals: DetectVital[] =
     annotation.primaryVitals && annotation.primaryVitals.length > 0
@@ -385,6 +362,10 @@ export default function DetectPanel({
       : [];
 
   const firstPrimaryVital = selectedPrimaryVitals[0] ?? null;
+
+  const shouldContinue =
+    annotation.shouldContinueAnnotation !==
+    "No, likely artifact / too minor / not useful";
 
   const filteredEventTypeOptions: (EventType | "Others")[] = React.useMemo(() => {
     if (selectedPrimaryVitals.length === 0) {
@@ -400,8 +381,6 @@ export default function DetectPanel({
   }, [selectedPrimaryVitals]);
 
   const isOtherEventType = annotation.eventType === "Others";
-  const isOtherClinicalMeaning =
-    annotation.overallCharacterization === "Others";
 
   function updateField<K extends keyof DetectAnnotation>(
     key: K,
@@ -447,53 +426,49 @@ export default function DetectPanel({
       return "Task 1 incomplete: please confirm at least one primary vital.";
     }
 
+    if (annotation.shouldContinueAnnotation === "") {
+      return "Task 2 incomplete: please decide whether this episode should proceed to full annotation.";
+    }
+
+    if (!shouldContinue) {
+      if (annotation.confidence === null || annotation.confidence === undefined || Number.isNaN(annotation.confidence)) {
+        return "Confidence incomplete: please select confidence from 1 to 5.";
+      }
+      return null;
+    }
+
     if (annotation.eventType === "") {
-      return "Task 2 incomplete: please select the primary event type.";
+      return "Task 3 incomplete: please select the primary event type.";
     }
 
     if (
       annotation.eventType !== "Others" &&
       !filteredEventTypeOptions.includes(annotation.eventType)
     ) {
-      return "Task 2 incomplete: please select an event type consistent with the selected primary vital(s).";
+      return "Task 3 incomplete: please select an event type consistent with the selected primary vital(s).";
     }
 
     if (
       annotation.eventType === "Others" &&
       !(annotation.eventTypeOther ?? "").trim()
     ) {
-      return "Task 2 incomplete: please explain why 'Others' was selected.";
+      return "Task 3 incomplete: please explain why 'Others' was selected.";
     }
 
-    if (!annotation.note.trim()) {
-      return "Task 3 incomplete: please describe the abnormal episode.";
+    if (annotation.associatedChanges === "") {
+      return "Task 4 incomplete: please indicate whether there were associated changes in other vital signs.";
     }
 
-    if (annotation.episodeEvolution === "") {
-      return "Task 4 incomplete: please select how the episode evolved.";
+    if (annotation.associatedChanges === "Yes" && !annotation.note.trim()) {
+      return "Task 4 incomplete: please describe the associated changes in other vital signs.";
     }
 
-    if (preventionChoice === "") {
-      return "Task 5 incomplete: please choose Yes, No, or Unclear.";
+    if (annotation.onsetPattern === "") {
+      return "Task 5 incomplete: please select the onset pattern.";
     }
 
-    if (preventionChoice === "Yes" && failureReason === "") {
-      return "Task 5 incomplete: please select why the patient still progressed despite the preventive action.";
-    }
-
-    if (preventionChoice === "Unclear" && !unclearNote.trim()) {
-      return "Task 5 incomplete: please describe what information is missing or unclear.";
-    }
-
-    if (annotation.overallCharacterization === "") {
-      return "Task 6 incomplete: please describe the clinical meaning of this episode.";
-    }
-
-    if (
-      annotation.overallCharacterization === "Others" &&
-      !(annotation.overallInterpretationNote ?? "").trim()
-    ) {
-      return "Task 6 incomplete: please explain why 'Others' was selected for clinical meaning.";
+    if (annotation.episodeCourse === "") {
+      return "Task 6 incomplete: please select the course within this window.";
     }
 
     if (annotation.severity === "") {
@@ -541,18 +516,13 @@ export default function DetectPanel({
           primaryVitals: selectedPrimaryVitals,
           startMin: annotation.startMin,
           endMin: annotation.endMin,
+          shouldContinueAnnotation: annotation.shouldContinueAnnotation,
           eventType: annotation.eventType,
           eventTypeOther: (annotation.eventTypeOther ?? "").trim(),
+          associatedChanges: annotation.associatedChanges,
           note: annotation.note.trim(),
-          episodeEvolution: annotation.episodeEvolution,
-          preventionChoice,
-          failureReason,
-          failureNote: failureNote.trim(),
-          unclearNote: unclearNote.trim(),
-          overallCharacterization: annotation.overallCharacterization,
-          overallInterpretationNote: (
-            annotation.overallInterpretationNote ?? ""
-          ).trim(),
+          onsetPattern: annotation.onsetPattern,
+          episodeCourse: annotation.episodeCourse,
           severity: annotation.severity,
           confidence: annotation.confidence,
         },
@@ -598,16 +568,6 @@ export default function DetectPanel({
         const currentTarget = recognitionTargetRef.current;
         if (!currentTarget) return;
 
-        if (currentTarget === "failureNote") {
-          setFailureNote(transcript);
-          return;
-        }
-
-        if (currentTarget === "unclearNote") {
-          setUnclearNote(transcript);
-          return;
-        }
-
         updateField(currentTarget as keyof DetectAnnotation, transcript as any);
       };
 
@@ -641,19 +601,16 @@ export default function DetectPanel({
       ...prev,
       vital: prev.vital ?? "MAP",
       primaryVitals: [],
+      shouldContinueAnnotation: "",
       eventType: "",
       eventTypeOther: "",
+      associatedChanges: "",
       note: "",
-      episodeEvolution: "",
-      overallCharacterization: "",
-      overallInterpretationNote: "",
+      onsetPattern: "",
+      episodeCourse: "",
       severity: "",
       confidence: null,
     }));
-    setPreventionChoice("");
-    setFailureReason("");
-    setFailureNote("");
-    setUnclearNote("");
     setRecordingTarget(null);
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
@@ -669,7 +626,7 @@ export default function DetectPanel({
 
         <div className="overflow-hidden rounded-xl border">
           <TaskBlock title="Task 1. Confirm bounding box window and primary vital(s) (select on the right chart).">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-[120px_110px_110px]">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-[120px_110px_110px]">
               <div>
                 <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                   Primary vital(s)
@@ -707,422 +664,279 @@ export default function DetectPanel({
           </TaskBlock>
 
           <TaskBlock
-            title="Task 2. Select the primary event type"
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">
-                  How to choose the label
-                </div>
-                <div className="mt-1">
-                  The available event types are filtered by the selected primary vital(s).
-                </div>
-                <div className="mt-1">
-                  For example, HR will show Bradycardia / Tachycardia, while MAP/SBP/DBP will show Hypotension / Hypertension.
-                </div>
-                <div className="mt-1">
-                  If none of the predefined labels fits well, select{" "}
-                  <span className="font-semibold">Others</span> and briefly
-                  explain why.
-                </div>
-              </>
-            }
-          >
-            <select
-              value={annotation.eventType}
-              onChange={(e) =>
-                updateField(
-                  "eventType",
-                  e.target.value as EventType | "Others" | ""
-                )
-              }
-              className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-            >
-              <option value="">Select event type</option>
-              {filteredEventTypeOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+  title="Task 2. Should this episode proceed to full annotation?"
+  tooltip={
+    <>
+      <div className="font-semibold text-gray-800">
+        How to decide
+      </div>
+      <div className="mt-1">
+        Continue annotation only if this is likely a true and worthwhile episode for further labeling.
+      </div>
+      <div className="mt-1">
+        Choose “No” for likely artifacts, trivial fluctuations, or episodes too minor to support downstream interpretation.
+      </div>
+    </>
+  }
+>
+  <select
+    value={annotation.shouldContinueAnnotation}
+    onChange={(e) =>
+      updateField(
+        "shouldContinueAnnotation",
+        e.target.value as DetectAnnotation["shouldContinueAnnotation"]
+      )
+    }
+    className="w-full max-w-[420px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+  >
+    <option value="">Select annotation decision</option>
+    {CONTINUE_ANNOTATION_OPTIONS.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+</TaskBlock>
 
-            <div className="mt-4">
-              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                If “Others”, please explain; or skip
-              </div>
-
-              <textarea
-                value={annotation.eventTypeOther ?? ""}
-                onChange={(e) =>
-                  updateField("eventTypeOther", e.target.value as any)
+          {shouldContinue && annotation.shouldContinueAnnotation !== "" && (
+            <>
+              <TaskBlock
+                title="Task 3. Select the primary event type"
+                tooltip={
+                  <>
+                    <div className="font-semibold text-gray-800">
+                      How to choose the label
+                    </div>
+                    <div className="mt-1">
+                      The available event types are filtered by the selected primary vital(s).
+                    </div>
+                    <div className="mt-1">
+                      For example, HR will show Bradycardia / Tachycardia, while MAP/SBP/DBP will show Hypotension / Hypertension.
+                    </div>
+                    <div className="mt-1">
+                      If none of the predefined labels fits well, select{" "}
+                      <span className="font-semibold">Others</span> and briefly explain why.
+                    </div>
+                  </>
                 }
-                disabled={!isOtherEventType}
-                className="min-h-[90px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
-                placeholder={
-                  isOtherEventType
-                    ? "Briefly explain why none of the predefined event types fits this episode..."
-                    : "This field is only required if 'Others' is selected."
-                }
-              />
-
-              <div className="mt-3">
-                <button
-                  type="button"
-                  onClick={
-                    recordingTarget === "eventTypeOther"
-                      ? stopVoiceNote
-                      : () => startVoiceNote("eventTypeOther")
-                  }
-                  disabled={!isOtherEventType}
-                  className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                    !isOtherEventType
-                      ? "cursor-not-allowed bg-gray-300"
-                      : recordingTarget === "eventTypeOther"
-                      ? "bg-red-500 hover:bg-red-600"
-                      : "bg-orange-400 hover:bg-orange-500"
-                  }`}
-                >
-                  {recordingTarget === "eventTypeOther"
-                    ? "Stop Recording"
-                    : "Start Recording"}
-                </button>
-              </div>
-            </div>
-          </TaskBlock>
-
-          <TaskBlock
-            title="Task 3. Briefly describe the primary abnormality and any associated changes in other vital signs during this episode."
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">
-                  What to include
-                </div>
-                <div className="mt-1">
-                  Describe the main abnormal change in the selected primary vital(s).
-                </div>
-                <div className="mt-1">
-                  Include associated changes in other vital signs only if they
-                  help explain the episode.
-                </div>
-                <div className="mt-1">
-                  Focus on what was observed in this window, not the likely
-                  mechanism.
-                </div>
-              </>
-            }
-          >
-            <textarea
-              value={annotation.note}
-              onChange={(e) => updateField("note", e.target.value)}
-              className="min-h-[120px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-              placeholder={getTask3Placeholder(firstPrimaryVital)}
-            />
-
-            <div className="mt-3">
-              <button
-                type="button"
-                onClick={
-                  recordingTarget === "note"
-                    ? stopVoiceNote
-                    : () => startVoiceNote("note")
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                  recordingTarget === "note"
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
               >
-                {recordingTarget === "note"
-                  ? "Stop Recording"
-                  : "Start Recording"}
-              </button>
-            </div>
-          </TaskBlock>
-
-          <TaskBlock
-            title="Task 4. How did this episode evolve over time?"
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">
-                  How to choose the trajectory
-                </div>
-                <div className="mt-1">
-                  Select the option that best describes how the abnormality
-                  unfolded within this window.
-                </div>
-              </>
-            }
-          >
-            <select
-              value={annotation.episodeEvolution}
-              onChange={(e) =>
-                updateField(
-                  "episodeEvolution",
-                  e.target.value as EpisodeEvolution | ""
-                )
-              }
-              className="w-full max-w-[420px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-            >
-              <option value="">Select episode evolution</option>
-              {EPISODE_EVOLUTION_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </TaskBlock>
-
-          <TaskBlock
-            title="Task 5. Before this abnormal event, was there any apparent preventive action intended to avoid or mitigate deterioration?"
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">How to answer</div>
-                <div className="mt-1">
-                  Answer based on the visible charted actions and surrounding
-                  clinical context.
-                </div>
-                <div className="mt-1">
-                  Choose <span className="font-semibold">Yes</span> if there
-                  appears to have been an action aimed at preventing or
-                  mitigating deterioration before the event fully developed.
-                </div>
-                <div className="mt-1">
-                  Choose <span className="font-semibold">No</span> if no such
-                  preventive action is apparent.
-                </div>
-                <div className="mt-1">
-                  Choose <span className="font-semibold">Unclear</span> if the
-                  intent or timing cannot be determined confidently.
-                </div>
-              </>
-            }
-          >
-            <div className="flex flex-wrap gap-2">
-              <OptionChip
-                label="Yes"
-                selected={preventionChoice === "Yes"}
-                onClick={() => setPreventionChoice("Yes")}
-              />
-              <OptionChip
-                label="No"
-                selected={preventionChoice === "No"}
-                onClick={() => setPreventionChoice("No")}
-              />
-              <OptionChip
-                label="Unclear"
-                selected={preventionChoice === "Unclear"}
-                onClick={() => setPreventionChoice("Unclear")}
-              />
-            </div>
-          </TaskBlock>
-
-          {preventionChoice === "Yes" && (
-            <TaskBlock
-              title="If yes, why do you think the patient still progressed despite the preventive action?"
-              tooltip={
-                <>
-                  <div className="font-semibold text-gray-800">
-                    What this asks
-                  </div>
-                  <div className="mt-1">
-                    This is not asking whether the action existed, but why it
-                    may not have prevented deterioration.
-                  </div>
-                </>
-              }
-            >
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Too late",
-                  "Insufficient",
-                  "Wrong target",
-                  "Transient effect only",
-                  "Ongoing deterioration despite treatment",
-                  "Mixed / unclear",
-                ].map((reason) => (
-                  <OptionChip
-                    key={reason}
-                    label={reason}
-                    selected={failureReason === reason}
-                    onClick={() =>
-                      setFailureReason(reason as PreventionFailureReason)
-                    }
-                    tone="blue"
-                  />
-                ))}
-              </div>
-
-              <div className="mt-4">
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Optional note
-                </div>
-                <textarea
-                  value={failureNote}
-                  onChange={(e) => setFailureNote(e.target.value)}
-                  className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-                  placeholder="Briefly explain if needed."
-                />
-
-                <div className="mt-3">
-                  <button
-                    type="button"
-                    onClick={
-                      recordingTarget === "failureNote"
-                        ? stopVoiceNote
-                        : () => startVoiceNote("failureNote")
-                    }
-                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                      recordingTarget === "failureNote"
-                        ? "bg-red-500 hover:bg-red-600"
-                        : "bg-orange-400 hover:bg-orange-500"
-                    }`}
-                  >
-                    {recordingTarget === "failureNote"
-                      ? "Stop Recording"
-                      : "Start Recording"}
-                  </button>
-                </div>
-              </div>
-            </TaskBlock>
-          )}
-
-          {preventionChoice === "Unclear" && (
-            <TaskBlock
-              title="If unclear, what information is missing or unclear?"
-              tooltip={
-                <>
-                  <div className="font-semibold text-gray-800">Examples</div>
-                  <div className="mt-1">
-                    Missing timing, dose, undocumented clinical intent, missing
-                    physiologic signals, or incomplete charting.
-                  </div>
-                </>
-              }
-            >
-              <textarea
-                value={unclearNote}
-                onChange={(e) => setUnclearNote(e.target.value)}
-                className="min-h-[120px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-                placeholder="Describe what information is missing or unclear."
-              />
-
-              <div className="mt-3">
-                <button
-                  type="button"
-                  onClick={
-                    recordingTarget === "unclearNote"
-                      ? stopVoiceNote
-                      : () => startVoiceNote("unclearNote")
+                <select
+                  value={annotation.eventType}
+                  onChange={(e) =>
+                    updateField(
+                      "eventType",
+                      e.target.value as EventType | "Others" | ""
+                    )
                   }
-                  className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                    recordingTarget === "unclearNote"
-                      ? "bg-red-500 hover:bg-red-600"
-                      : "bg-orange-400 hover:bg-orange-500"
-                  }`}
+                  className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
                 >
-                  {recordingTarget === "unclearNote"
-                    ? "Stop Recording"
-                    : "Start Recording"}
-                </button>
-              </div>
-            </TaskBlock>
-          )}
+                  <option value="">Select event type</option>
+                  {filteredEventTypeOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
 
-          <TaskBlock
-            title="Task 6. What is the overall clinical meaning of this episode?"
-            tooltip={
-              <>
-                <div className="font-semibold text-gray-800">
-                  How to interpret this episode
-                </div>
-                <div className="mt-1">
-                  Choose the option that best summarizes the clinical meaning of
-                  the selected window as a whole.
-                </div>
-              </>
-            }
-          >
-            <select
-              value={annotation.overallCharacterization}
-              onChange={(e) =>
-                updateField(
-                  "overallCharacterization",
-                  e.target.value as OverallCharacterization | ""
-                )
-              }
-              className="w-full max-w-[520px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-            >
-              <option value="">Select overall characterization</option>
-              {OVERALL_CHARACTERIZATION_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+                <div className="mt-4">
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                    If “Others”, please explain; or skip
+                  </div>
 
-            <div className="mt-4">
-              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                If “Others”, please explain; or skip
-              </div>
-
-              <textarea
-                value={annotation.overallInterpretationNote ?? ""}
-                onChange={(e) =>
-                  updateField(
-                    "overallInterpretationNote",
-                    e.target.value as any
-                  )
-                }
-                disabled={!isOtherClinicalMeaning}
-                className="min-h-[90px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
-                placeholder={
-                  isOtherClinicalMeaning
-                    ? "Briefly explain why none of the predefined interpretations fits this episode..."
-                    : "This field is only required if 'Others' is selected."
-                }
-              />
-
-              <div className="mt-3">
-                <button
-                  type="button"
-                  onClick={
-                    recordingTarget === "overallInterpretationNote"
-                      ? stopVoiceNote
-                      : () => startVoiceNote("overallInterpretationNote")
-                  }
-                  disabled={!isOtherClinicalMeaning}
-                  className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                    !isOtherClinicalMeaning
-                      ? "cursor-not-allowed bg-gray-300"
-                      : recordingTarget === "overallInterpretationNote"
-                      ? "bg-red-500 hover:bg-red-600"
-                      : "bg-orange-400 hover:bg-orange-500"
-                  }`}
-                >
-                  {recordingTarget === "overallInterpretationNote"
-                    ? "Stop Recording"
-                    : "Start Recording"}
-                </button>
-              </div>
-            </div>
-          </TaskBlock>
-
-          <TaskBlock title="Task 7. Choose event severity based on your knowledge">
-            <div>
-              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                Severity
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                {SEVERITY_OPTIONS.map((level) => (
-                  <OptionChip
-                    key={level}
-                    label={level}
-                    selected={annotation.severity === level}
-                    onClick={() => updateField("severity", level)}
+                  <textarea
+                    value={annotation.eventTypeOther ?? ""}
+                    onChange={(e) =>
+                      updateField("eventTypeOther", e.target.value as any)
+                    }
+                    disabled={!isOtherEventType}
+                    className="min-h-[90px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
+                    placeholder={
+                      isOtherEventType
+                        ? "Briefly explain why none of the predefined event types fits this episode..."
+                        : "This field is only required if 'Others' is selected."
+                    }
                   />
-                ))}
-              </div>
-            </div>
-          </TaskBlock>
+
+                  <div className="mt-3">
+                    <button
+                      type="button"
+                      onClick={
+                        recordingTarget === "eventTypeOther"
+                          ? stopVoiceNote
+                          : () => startVoiceNote("eventTypeOther")
+                      }
+                      disabled={!isOtherEventType}
+                      className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                        !isOtherEventType
+                          ? "cursor-not-allowed bg-gray-300"
+                          : recordingTarget === "eventTypeOther"
+                          ? "bg-red-500 hover:bg-red-600"
+                          : "bg-orange-400 hover:bg-orange-500"
+                      }`}
+                    >
+                      {recordingTarget === "eventTypeOther"
+                        ? "Stop Recording"
+                        : "Start Recording"}
+                    </button>
+                  </div>
+                </div>
+              </TaskBlock>
+
+              <TaskBlock
+                title="Task 4. Were there associated changes in other vital signs during this episode?"
+                tooltip={
+                  <>
+                    <div className="font-semibold text-gray-800">
+                      What to include
+                    </div>
+                    <div className="mt-1">
+                      Indicate whether other vital signs changed in a clinically relevant way during this episode.
+                    </div>
+                    <div className="mt-1">
+                      If yes, briefly describe only the associated changes.
+                    </div>
+                    <div className="mt-1">
+                      Focus on what was observed in this window, not the likely mechanism.
+                    </div>
+                  </>
+                }
+              >
+                <div className="flex flex-wrap gap-2">
+                  <OptionChip
+                    label="Yes"
+                    selected={annotation.associatedChanges === "Yes"}
+                    onClick={() => updateField("associatedChanges", "Yes")}
+                  />
+                  <OptionChip
+                    label="No"
+                    selected={annotation.associatedChanges === "No"}
+                    onClick={() => updateField("associatedChanges", "No")}
+                  />
+                  <OptionChip
+                    label="Unclear"
+                    selected={annotation.associatedChanges === "Unclear"}
+                    onClick={() => updateField("associatedChanges", "Unclear")}
+                  />
+                </div>
+
+                {annotation.associatedChanges === "Yes" && (
+                  <div className="mt-4">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                      Briefly describe the associated changes
+                    </div>
+
+                    <textarea
+                      value={annotation.note}
+                      onChange={(e) => updateField("note", e.target.value)}
+                      className="min-h-[120px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                      placeholder={getTask3Placeholder(firstPrimaryVital)}
+                    />
+
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        onClick={
+                          recordingTarget === "note"
+                            ? stopVoiceNote
+                            : () => startVoiceNote("note")
+                        }
+                        className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                          recordingTarget === "note"
+                            ? "bg-red-500 hover:bg-red-600"
+                            : "bg-orange-400 hover:bg-orange-500"
+                        }`}
+                      >
+                        {recordingTarget === "note"
+                          ? "Stop Recording"
+                          : "Start Recording"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </TaskBlock>
+
+              <TaskBlock
+  title="Task 5. What was the onset pattern?"
+  tooltip={
+    <>
+      <div className="font-semibold text-gray-800">
+        How to choose onset
+      </div>
+      <div className="mt-1">
+        Use this to describe how the episode began.
+      </div>
+    </>
+  }
+>
+  <select
+    value={annotation.onsetPattern}
+    onChange={(e) =>
+      updateField(
+        "onsetPattern",
+        e.target.value as DetectAnnotation["onsetPattern"]
+      )
+    }
+    className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+  >
+    <option value="">Select onset pattern</option>
+    {ONSET_PATTERN_OPTIONS.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+</TaskBlock>
+
+<TaskBlock
+  title="Task 6. How did the episode evolve within this window?"
+  tooltip={
+    <>
+      <div className="font-semibold text-gray-800">
+        How to choose the course
+      </div>
+      <div className="mt-1">
+        Use this to describe the temporal course after onset within the selected window.
+      </div>
+    </>
+  }
+>
+  <select
+    value={annotation.episodeCourse}
+    onChange={(e) =>
+      updateField(
+        "episodeCourse",
+        e.target.value as DetectAnnotation["episodeCourse"]
+      )
+    }
+    className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+  >
+    <option value="">Select episode course</option>
+    {EPISODE_COURSE_OPTIONS.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+</TaskBlock>
+
+<TaskBlock title="Task 7. How severe was this event?">
+  <select
+    value={annotation.severity}
+    onChange={(e) =>
+      updateField("severity", e.target.value as DetectAnnotation["severity"])
+    }
+    className="w-full max-w-[260px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+  >
+    <option value="">Select severity</option>
+    {SEVERITY_OPTIONS.map((level) => (
+      <option key={level} value={level}>
+        {level}
+      </option>
+    ))}
+  </select>
+</TaskBlock>
+            </>
+          )}
 
           <TaskBlock title="Task 8. Confidence in assessment" noBorder>
             <div className="mb-3 text-sm text-gray-600">

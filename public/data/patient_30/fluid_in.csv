@@ -1,3 +1,3 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-8AAE4C2A-7D05-F011-9211-005056BFF837,601B2C55-A2FF-ED11-91FC-005056BFF837,10456,1,2023-05-26 11:30:07+00:00,2023-05-26 12:36:00+00:00,LR IV infusion,75.0,mL/hr,Intravenous,lactated ringers,fluid_input,2023-05-26 14:06:00+00:00,-155.88333333333333,-90.0
-8EAE4C2A-7D05-F011-9211-005056BFF837,601B2C55-A2FF-ED11-91FC-005056BFF837,10457,1,2023-05-26 13:33:00+00:00,2023-05-26 18:25:00+00:00,electrolyte-R (Normosol-R) IV infusion,25.0,mL/hr,Intravenous,normosol,fluid_input,2023-05-26 14:06:00+00:00,-33.0,259.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
+601B2C55-A2FF-ED11-91FC-005056BFF837,10456,1,2023-05-26 11:30:07+00:00,2023-05-26 12:36:00+00:00,LR IV infusion,75.0,mL/hr,Intravenous,lactated ringers,fluid_input,2023-05-26 14:06:00+00:00,-155.88333333333333,-90.0
+601B2C55-A2FF-ED11-91FC-005056BFF837,10457,1,2023-05-26 13:33:00+00:00,2023-05-26 18:25:00+00:00,electrolyte-R (Normosol-R) IV infusion,25.0,mL/hr,Intravenous,normosol,fluid_input,2023-05-26 14:06:00+00:00,-33.0,259.0
