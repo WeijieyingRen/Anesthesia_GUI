@@ -327,10 +327,15 @@ export default function FluidChart({
     return buildGridTicks(finalXEnd, minorStep);
   }, [finalXEnd, minorStep]);
 
+  const axisHeight = showXAxis ? 22 : 0;
   const contentHeight = Math.max(visibleRowsReindexed.length * ROW_HEIGHT, ROW_HEIGHT);
+  
+  // 给 panel 额外加一点上下留白，不改变每行高度
+  const panelPadding = 28;
+  
+  const dynamicHeight = contentHeight + axisHeight + panelPadding;
+  const viewHeight = Math.min(dynamicHeight, 220);
 
-  const dynamicHeight = contentHeight + (showXAxis ? 22 : 0);
-  const viewHeight = Math.min(height, dynamicHeight);
 
   const contentPlotWidth = useMemo(() => {
     if (finalXEnd <= 0) return 800;

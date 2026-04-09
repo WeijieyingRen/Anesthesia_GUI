@@ -13,6 +13,7 @@ import type {
 } from "@/lib/types";
 import FluidChart from "./FluidChart";
 import VentilationChart from "./VentilationChart";
+import TimelineContextPanel from "./TimelineContextPanel";
 
 import type { DetectVital } from "./annotation/types";
 
@@ -56,6 +57,8 @@ type UnifiedTimelineCardProps = {
 
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
+
+  timelineContext: any;
 };
 
 type SectionKey =
@@ -76,6 +79,55 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
+}
+
+function hasAnyFinitePoints(group: Record<string, any> | null | undefined) {
+  if (!group) return false;
+
+  return Object.values(group).some(
+    (arr) =>
+      Array.isArray(arr) &&
+      arr.some((p: any) => Number.isFinite(p?.value))
+  );
+}
+
+function hasAnyMedicationData(medications: MedicationPanelData | null) {
+  if (!medications) return false;
+
+  const hasBolus = Object.values(medications.bolus ?? {}).some(
+    (arr) => Array.isArray(arr) && arr.length > 0
+  );
+  const hasInfusion = Object.values(medications.infusion ?? {}).some(
+    (arr) => Array.isArray(arr) && arr.length > 0
+  );
+
+  return hasBolus || hasInfusion;
+}
+
+function hasAnyFluidData(fluids: FluidPanelData | null) {
+  if (!fluids) return false;
+
+  const hasBolus = Object.values(fluids.bolus ?? {}).some(
+    (arr) => Array.isArray(arr) && arr.length > 0
+  );
+  const hasInfusion = Object.values(fluids.infusion ?? {}).some(
+    (arr) => Array.isArray(arr) && arr.length > 0
+  );
+  const hasOutput = Object.values(fluids.output ?? {}).some(
+    (arr) => Array.isArray(arr) && arr.length > 0
+  );
+
+  return hasBolus || hasInfusion || hasOutput;
+}
+
+function hasAnyGasData(gas: Record<string, any> | null | undefined) {
+  if (!gas) return false;
+
+  return Object.values(gas).some(
+    (arr) =>
+      Array.isArray(arr) &&
+      arr.some((p: any) => Number.isFinite(p?.value))
+  );
 }
 
 function SectionHeader({
@@ -160,61 +212,12 @@ function ViewportToolbar({
   );
 }
 
-function SharedViewportBar({
-  show,
-  timelineEnd,
-  viewStartMin,
-  viewWindowWidthMin,
-  onChangeViewStartMin,
-  anesthesiaStart,
-}: {
-  show: boolean;
-  timelineEnd: number;
-  viewStartMin: number;
-  viewWindowWidthMin: number;
-  onChangeViewStartMin: (value: number) => void;
-  anesthesiaStart: string | null;
-}) {
-  if (!show) return null;
-
-  const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
-  const viewEndMin = Math.min(timelineEnd, viewStartMin + viewWindowWidthMin);
-
-  return (
-    <div className="border-t bg-white px-4 py-3">
-      <div className="mb-2 flex items-center justify-between text-xs text-gray-600">
-        <span>
-          Window: {formatClockTime(viewStartMin, anesthesiaStart)} –{" "}
-          {formatClockTime(viewEndMin, anesthesiaStart)}
-        </span>
-        <span>Drag to pan across the case</span>
-      </div>
-
-      <input
-        type="range"
-        min={0}
-        max={maxStart}
-        step={1}
-        value={Math.min(viewStartMin, maxStart)}
-        onChange={(e) => onChangeViewStartMin(Number(e.target.value))}
-        className="h-2 w-full cursor-pointer accent-blue-600"
-      />
-
-      <div className="mt-2 flex justify-between text-[11px] text-gray-500">
-        <span>{formatClockTime(0, anesthesiaStart)}</span>
-        <span>{formatClockTime(timelineEnd, anesthesiaStart)}</span>
-      </div>
-    </div>
-  );
-}
-
 export default function UnifiedTimelineCard({
   vitals,
   medications,
   fluids,
   gas,
   anesthesiaStart,
-  anesthesiaStop,
   timelineEnd,
   ticks,
   timeResolution,
@@ -229,22 +232,51 @@ export default function UnifiedTimelineCard({
   onCreateEventFromWindow,
   sharedScrollLeft,
   onSharedScrollLeftChange,
+  timelineContext,
 }: UnifiedTimelineCardProps) {
+  const hasVitalsData =
+    hasAnyFinitePoints(vitals?.main) ||
+    hasAnyFinitePoints(vitals?.tmp) ||
+    hasAnyFinitePoints(vitals?.hemodynamics) ||
+    hasAnyFinitePoints(vitals?.depth);
+
+  const hasMedicationsData = hasAnyMedicationData(medications);
+  const hasFluidsData = hasAnyFluidData(fluids);
+  const hasGasData = hasAnyGasData(gas);
+  const hasVentilationData = hasAnyFinitePoints(vitals?.ventilation);
+  const hasCVData = hasAnyFinitePoints(vitals?.cv);
+
   const [openSections, setOpenSections] = React.useState<Record<SectionKey, boolean>>({
-    vitals: true,
-    medications: true,
-    fluids: true,
-    gas: true,
-    ventilation: true,
-    cv: true,
+    vitals: hasVitalsData,
+    medications: hasMedicationsData,
+    fluids: hasFluidsData,
+    gas: hasGasData,
+    ventilation: hasVentilationData,
+    cv: hasCVData,
   });
+
+  React.useEffect(() => {
+    setOpenSections({
+      vitals: hasVitalsData,
+      medications: hasMedicationsData,
+      fluids: hasFluidsData,
+      gas: hasGasData,
+      ventilation: hasVentilationData,
+      cv: hasCVData,
+    });
+  }, [
+    hasVitalsData,
+    hasMedicationsData,
+    hasFluidsData,
+    hasGasData,
+    hasVentilationData,
+    hasCVData,
+  ]);
 
   const viewEndMin = React.useMemo(
     () => Math.min(timelineEnd, viewStartMin + viewWindowWidthMin),
     [timelineEnd, viewStartMin, viewWindowWidthMin]
   );
-
-  const showViewportBar = timeResolution === 5;
 
   React.useEffect(() => {
     const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
@@ -315,20 +347,22 @@ export default function UnifiedTimelineCard({
         onToggle={() => toggleSection("medications")}
       />
       {openSections.medications && (
-        <MedicationChart
-          title=""
-          medications={medications}
-          height={280}
-          xEnd={timelineEnd}
-          xTicks={ticks}
-          showXAxis={false}
-          timeZero={anesthesiaStart}
-          embedded
-          highlightWindow={sharedHighlightWindow}
-          timeResolution={timeResolution}
-          sharedScrollLeft={sharedScrollLeft}
-          onSharedScrollLeftChange={onSharedScrollLeftChange}
-        />
+        <div className="overflow-visible">
+          <MedicationChart
+            title=""
+            medications={medications}
+            height={200}
+            xEnd={timelineEnd}
+            xTicks={ticks}
+            showXAxis={false}
+            timeZero={anesthesiaStart}
+            embedded
+            highlightWindow={sharedHighlightWindow}
+            timeResolution={timeResolution}
+            sharedScrollLeft={sharedScrollLeft}
+            onSharedScrollLeftChange={onSharedScrollLeftChange}
+          />
+        </div>
       )}
 
       <SectionHeader
@@ -338,6 +372,7 @@ export default function UnifiedTimelineCard({
       >
         {(["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const).map((item) => {
           const active = selectedDetectVital === item;
+          const label = item === "MAP" ? "BP" : item;
 
           return (
             <button
@@ -360,7 +395,7 @@ export default function UnifiedTimelineCard({
                   : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
               }`}
             >
-              {item}
+              {label}
             </button>
           );
         })}
@@ -369,95 +404,95 @@ export default function UnifiedTimelineCard({
       {openSections.vitals && (
         <div className="space-y-0">
           <div className="max-h-[380px] overflow-y-scroll [scrollbar-gutter:stable]">
-          <VitalChart
-  title=""
-  yDomain={[0, 220]}
-  xEnd={timelineEnd}
-  xTicks={ticks}
-  timeResolution={timeResolution}
-  showTopTimeAxis
-  timeZero={anesthesiaStart}
-  embedded
-  selectedDetectVital={selectedDetectVital}
-  onChangeSelectedDetectVital={onChangeSelectedDetectVital}
-  selectedWindow={vitalSelectedWindow}
-  highlightWindow={sharedHighlightWindow}
-  onChangeSelectedWindow={onChangeSelectedWindow}
-  onCreateEventFromWindow={onCreateEventFromWindow}
-  sharedScrollLeft={sharedScrollLeft}
-  onSharedScrollLeftChange={onSharedScrollLeftChange}
-  series={{
-    HR: vitals?.main?.["HR"] ?? [],
-    NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
-    NIBP_DBP: vitals?.main?.["NIBP_DBP"] ?? [],
-    NIBP_MAP: vitals?.main?.["NIBP_MAP"] ?? [],
-    "SPO2 %": vitals?.main?.["SPO2 %"] ?? [],
-    RR: vitals?.main?.["RR"] ?? [],
-    "ETCO2 (mmHg)": vitals?.main?.["ETCO2 (mmHg)"] ?? [],
-    ARTS: vitals?.main?.["ARTS"] ?? [],
-    ARTD: vitals?.main?.["ARTD"] ?? [],
-    ARTM: vitals?.main?.["ARTM"] ?? [],
-    CVP: vitals?.hemodynamics?.["CVP"] ?? [],
-    "PSI/BIS/Entropy": vitals?.depth?.["PSI/BIS/Entropy"] ?? [],
-  }}
-  lineLabels={{
-    HR: "HR",
-    NIBP_SBP: "NIBP_SBP",
-    NIBP_DBP: "NIBP_DBP",
-    NIBP_MAP: "NIBP_MAP",
-    "SPO2 %": "SPO2 %",
-    RR: "RR",
-    "ETCO2 (mmHg)": "ETCO2",
-    ARTS: "ARTS",
-    ARTD: "ARTD",
-    ARTM: "ARTM",
-    CVP: "CVP",
-    "PSI/BIS/Entropy": "PSI/BIS/Entropy",
-  }}
-  lineUnits={{
-    HR: "bpm",
-    NIBP_SBP: "mmHg",
-    NIBP_DBP: "mmHg",
-    NIBP_MAP: "mmHg",
-    "SPO2 %": "%",
-    RR: "bpm",
-    "ETCO2 (mmHg)": "mmHg",
-    ARTS: "mmHg",
-    ARTD: "mmHg",
-    ARTM: "mmHg",
-    CVP: "mmHg",
-    "PSI/BIS/Entropy": "",
-  }}
-  lineColors={{
-    HR: "#2f8f2f",
-    NIBP_SBP: "#000000",
-    NIBP_DBP: "#000000",
-    NIBP_MAP: "#000000",
-    "SPO2 %": "#1f2fff",
-    RR: "#4a90ff",
-    "ETCO2 (mmHg)": "#f59e0b",
-    ARTS: "#ff2b2b",
-    ARTD: "#ff2b2b",
-    ARTM: "#ff2b2b",
-    CVP: "#7a5cff",
-    "PSI/BIS/Entropy": "#ff31c8",
-  }}
-  lineMarkers={{
-    HR: "circle",
-    NIBP_SBP: "triangle",
-    NIBP_DBP: "triangle-down",
-    NIBP_MAP: "x",
-    "SPO2 %": "square",
-    RR: "circle",
-    "ETCO2 (mmHg)": "diamond",
-    ARTS: "triangle",
-    ARTD: "triangle-down",
-    ARTM: "x",
-    CVP: "square",
-    "PSI/BIS/Entropy": "diamond",
-  }}
-  height={370}
-/>
+            <VitalChart
+              title=""
+              yDomain={[0, 220]}
+              xEnd={timelineEnd}
+              xTicks={ticks}
+              timeResolution={timeResolution}
+              showTopTimeAxis
+              timeZero={anesthesiaStart}
+              embedded
+              selectedDetectVital={selectedDetectVital}
+              onChangeSelectedDetectVital={onChangeSelectedDetectVital}
+              selectedWindow={vitalSelectedWindow}
+              highlightWindow={sharedHighlightWindow}
+              onChangeSelectedWindow={onChangeSelectedWindow}
+              onCreateEventFromWindow={onCreateEventFromWindow}
+              sharedScrollLeft={sharedScrollLeft}
+              onSharedScrollLeftChange={onSharedScrollLeftChange}
+              series={{
+                HR: vitals?.main?.["HR"] ?? [],
+                NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
+                NIBP_DBP: vitals?.main?.["NIBP_DBP"] ?? [],
+                NIBP_MAP: vitals?.main?.["NIBP_MAP"] ?? [],
+                "SPO2 %": vitals?.main?.["SPO2 %"] ?? [],
+                RR: vitals?.main?.["RR"] ?? [],
+                "ETCO2 (mmHg)": vitals?.main?.["ETCO2 (mmHg)"] ?? [],
+                ARTS: vitals?.main?.["ARTS"] ?? [],
+                ARTD: vitals?.main?.["ARTD"] ?? [],
+                ARTM: vitals?.main?.["ARTM"] ?? [],
+                CVP: vitals?.hemodynamics?.["CVP"] ?? [],
+                "PSI/BIS/Entropy": vitals?.depth?.["PSI/BIS/Entropy"] ?? [],
+              }}
+              lineLabels={{
+                HR: "HR",
+                NIBP_SBP: "NIBP_SBP",
+                NIBP_DBP: "NIBP_DBP",
+                NIBP_MAP: "NIBP_MAP",
+                "SPO2 %": "SPO2 %",
+                RR: "RR",
+                "ETCO2 (mmHg)": "ETCO2",
+                ARTS: "ARTS",
+                ARTD: "ARTD",
+                ARTM: "ARTM",
+                CVP: "CVP",
+                "PSI/BIS/Entropy": "PSI/BIS/Entropy",
+              }}
+              lineUnits={{
+                HR: "bpm",
+                NIBP_SBP: "mmHg",
+                NIBP_DBP: "mmHg",
+                NIBP_MAP: "mmHg",
+                "SPO2 %": "%",
+                RR: "bpm",
+                "ETCO2 (mmHg)": "mmHg",
+                ARTS: "mmHg",
+                ARTD: "mmHg",
+                ARTM: "mmHg",
+                CVP: "mmHg",
+                "PSI/BIS/Entropy": "",
+              }}
+              lineColors={{
+                HR: "#2f8f2f",
+                NIBP_SBP: "#000000",
+                NIBP_DBP: "#000000",
+                NIBP_MAP: "#000000",
+                "SPO2 %": "#1f2fff",
+                RR: "#4a90ff",
+                "ETCO2 (mmHg)": "#f59e0b",
+                ARTS: "#ff2b2b",
+                ARTD: "#ff2b2b",
+                ARTM: "#ff2b2b",
+                CVP: "#7a5cff",
+                "PSI/BIS/Entropy": "#ff31c8",
+              }}
+              lineMarkers={{
+                HR: "circle",
+                NIBP_SBP: "triangle-down",
+                NIBP_DBP: "triangle",
+                NIBP_MAP: "x",
+                "SPO2 %": "square",
+                RR: "circle",
+                "ETCO2 (mmHg)": "diamond",
+                ARTS: "triangle-down",
+                ARTD: "triangle",
+                ARTM: "x",
+                CVP: "square",
+                "PSI/BIS/Entropy": "diamond",
+              }}
+              height={370}
+            />
           </div>
 
           <div className="overflow-visible border-t">
@@ -488,6 +523,26 @@ export default function UnifiedTimelineCard({
         </div>
       )}
 
+      <div className="border-t">
+        <TimelineContextPanel
+          context={timelineContext}
+          xEnd={timelineEnd}
+          xTicks={ticks}
+          timeZero={anesthesiaStart}
+          timeResolution={timeResolution}
+          episodeWindow={
+            selectedWindow
+              ? {
+                  startMin: selectedWindow.startMin,
+                  endMin: selectedWindow.endMin,
+                }
+              : null
+          }
+          sharedScrollLeft={sharedScrollLeft}
+          onSharedScrollLeftChange={onSharedScrollLeftChange}
+        />
+      </div>
+
       <SectionHeader
         title="Fluid Events"
         open={openSections.fluids}
@@ -498,7 +553,7 @@ export default function UnifiedTimelineCard({
           <FluidChart
             title=""
             fluids={fluids}
-            height={190}
+            height={220}
             xEnd={timelineEnd}
             xTicks={ticks}
             showXAxis={false}
@@ -566,8 +621,6 @@ export default function UnifiedTimelineCard({
           />
         </div>
       )}
-
-
     </div>
   );
 }

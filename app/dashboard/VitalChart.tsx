@@ -299,33 +299,49 @@ function formatHoverValue(value: number | null, digits = 0) {
   return value.toFixed(digits);
 }
 
-function getSelectedSeriesKey(
+function getSelectedSeriesKeys(
   series: Record<string, TimeValuePoint[] | undefined>,
   vital: DetectVital
-): string | null {
+): string[] {
   if (vital === "MAP") {
-    if ((series["NIBP_MAP"] ?? []).length) return "NIBP_MAP";
-    if ((series["ARTM"] ?? []).length) return "ARTM";
-    return null;
+    return [
+      "NIBP_SBP",
+      "NIBP_DBP",
+      "NIBP_MAP",
+      "ARTS",
+      "ARTD",
+      "ARTM",
+    ].filter((key) => (series[key] ?? []).length > 0);
   }
-  if (vital === "HR") return (series["HR"] ?? []).length ? "HR" : null;
-  if (vital === "SPO2") return (series["SPO2 %"] ?? []).length ? "SPO2 %" : null;
-  if (vital === "RR") return (series["RR"] ?? []).length ? "RR" : null;
+
+  if (vital === "HR") {
+    return (series["HR"] ?? []).length ? ["HR"] : [];
+  }
+
+  if (vital === "SPO2") {
+    return (series["SPO2 %"] ?? []).length ? ["SPO2 %"] : [];
+  }
+
+  if (vital === "RR") {
+    return (series["RR"] ?? []).length ? ["RR"] : [];
+  }
+
   if (vital === "ETCO2") {
-    if ((series["ETCO2"] ?? []).length) return "ETCO2";
-    if ((series["ETCO2 (mmHg)"] ?? []).length) return "ETCO2 (mmHg)";
-    return null;
+    return ["ETCO2", "ETCO2 (mmHg)"].filter((key) => (series[key] ?? []).length > 0);
   }
+
   if (vital === "TEMP") {
-    if ((series["TEMP"] ?? []).length) return "TEMP";
-    if ((series["TMP Bladder"] ?? []).length) return "TMP Bladder";
-    if ((series["TMP Esophageal"] ?? []).length) return "TMP Esophageal";
-    if ((series["TMP Blood"] ?? []).length) return "TMP Blood";
-    if ((series["TMP Nasopharyngeal"] ?? []).length) return "TMP Nasopharyngeal";
-    if ((series["TMP Rectal"] ?? []).length) return "TMP Rectal";
-    return null;
+    return [
+      "TEMP",
+      "TMP Bladder",
+      "TMP Esophageal",
+      "TMP Blood",
+      "TMP Nasopharyngeal",
+      "TMP Rectal",
+    ].filter((key) => (series[key] ?? []).length > 0);
   }
-  return null;
+
+  return [];
 }
 
 function getExactValueAtTime(
@@ -350,7 +366,6 @@ function getExactValueAtTime(
 
   return best ? best.value : null;
 }
-
 function getWindowYBounds(
   series: Record<string, TimeValuePoint[] | undefined>,
   selectedVital: DetectVital,
@@ -358,15 +373,17 @@ function getWindowYBounds(
   endMin: number,
   yDomain?: [number, number]
 ): { y1: number; y2: number } | null {
-  const key = getSelectedSeriesKey(series, selectedVital);
-  if (!key) return null;
+  const keys = getSelectedSeriesKeys(series, selectedVital);
+  if (!keys.length) return null;
 
-  const data = (series[key] ?? []).filter(
-    (p) =>
-      Number.isFinite(p.time) &&
-      Number.isFinite(p.value) &&
-      p.time >= startMin &&
-      p.time <= endMin
+  const data = keys.flatMap((key) =>
+    (series[key] ?? []).filter(
+      (p) =>
+        Number.isFinite(p.time) &&
+        Number.isFinite(p.value) &&
+        p.time >= startMin &&
+        p.time <= endMin
+    )
   );
 
   const domainMin = yDomain?.[0] ?? 0;
@@ -835,34 +852,93 @@ export default function VitalChart({
 
   const windowStats = useMemo(() => {
     if (!statsWindow) return null;
-
-    const selectedKey = getSelectedSeriesKey(series, statsWindow.vital);
-    if (!selectedKey) return null;
-
-    const data = (series[selectedKey] ?? []).filter(
-      (p) =>
-        Number.isFinite(p.time) &&
-        Number.isFinite(p.value) &&
-        p.time >= statsWindow.startMin &&
-        p.time <= statsWindow.endMin
-    );
-
-    if (!data.length) {
+  
+    const startMin = Math.round(statsWindow.startMin);
+    const endMin = Math.round(statsWindow.endMin);
+    const duration = Math.round(statsWindow.endMin - statsWindow.startMin);
+  
+    const getRangeForKey = (key: string) => {
+      const data = (series[key] ?? []).filter(
+        (p) =>
+          Number.isFinite(p.time) &&
+          Number.isFinite(p.value) &&
+          p.time >= statsWindow.startMin &&
+          p.time <= statsWindow.endMin
+      );
+  
+      if (!data.length) return null;
+  
+      const values = data.map((p) => p.value);
       return {
-        startMin: Math.round(statsWindow.startMin),
-        endMin: Math.round(statsWindow.endMin),
-        duration: Math.round(statsWindow.endMin - statsWindow.startMin),
+        min: Math.min(...values),
+        max: Math.max(...values),
+      };
+    };
+  
+    if (statsWindow.vital === "MAP") {
+      const sbp =
+        getRangeForKey("ARTS") ??
+        getRangeForKey("NIBP_SBP");
+  
+      const dbp =
+        getRangeForKey("ARTD") ??
+        getRangeForKey("NIBP_DBP");
+  
+      const map =
+        getRangeForKey("ARTM") ??
+        getRangeForKey("NIBP_MAP");
+  
+      return {
+        vital: "MAP" as const,
+        startMin,
+        endMin,
+        duration,
+        sbp,
+        dbp,
+        map,
+      };
+    }
+  
+    const selectedKeys = getSelectedSeriesKeys(series, statsWindow.vital);
+    if (!selectedKeys.length) {
+      return {
+        vital: statsWindow.vital,
+        startMin,
+        endMin,
+        duration,
         min: null,
         max: null,
       };
     }
-
+  
+    const data = selectedKeys.flatMap((key) =>
+      (series[key] ?? []).filter(
+        (p) =>
+          Number.isFinite(p.time) &&
+          Number.isFinite(p.value) &&
+          p.time >= statsWindow.startMin &&
+          p.time <= statsWindow.endMin
+      )
+    );
+  
+    if (!data.length) {
+      return {
+        vital: statsWindow.vital,
+        startMin,
+        endMin,
+        duration,
+        min: null,
+        max: null,
+      };
+    }
+  
     const values = data.map((p) => p.value);
-
+  
     return {
-      startMin: Math.round(statsWindow.startMin),
-      endMin: Math.round(statsWindow.endMin),
-      duration: Math.round(statsWindow.endMin - statsWindow.startMin),
+      vital: statsWindow.vital,
+      startMin,
+      endMin,
+      duration,
       min: Math.min(...values),
       max: Math.max(...values),
     };
@@ -1374,25 +1450,52 @@ export default function VitalChart({
                   <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
                 </div>
               )}
+{windowStats && (
+  <div
+    className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
+    style={{
+      left: 8,
+      top: 40,
+      zIndex: 999,
+      color: "#111827",
+      lineHeight: 1.35,
+    }}
+  >
+    <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
+    <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
+    <div>Dur: {windowStats.duration} min</div>
 
-              {windowStats && (
-                <div
-                  className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
-                  style={{
-                    left: 8,
-                    top: 40,
-                    zIndex: 999,
-                    color: "#111827",
-                    lineHeight: 1.35,
-                  }}
-                >
-                  <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
-                  <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
-                  <div>Dur: {windowStats.duration} min</div>
-                  <div>Min: {windowStats.min == null ? "-" : windowStats.min.toFixed(1)}</div>
-                  <div>Max: {windowStats.max == null ? "-" : windowStats.max.toFixed(1)}</div>
-                </div>
-              )}
+    {windowStats.vital === "MAP" ? (
+      <>
+        <div>
+          SBP:{" "}
+          {windowStats.sbp
+            ? `${windowStats.sbp.min.toFixed(1)} ~ ${windowStats.sbp.max.toFixed(1)}`
+            : "-"}
+        </div>
+        <div>
+          DBP:{" "}
+          {windowStats.dbp
+            ? `${windowStats.dbp.min.toFixed(1)} ~ ${windowStats.dbp.max.toFixed(1)}`
+            : "-"}
+        </div>
+        <div>
+          MAP:{" "}
+          {windowStats.map
+            ? `${windowStats.map.min.toFixed(1)} ~ ${windowStats.map.max.toFixed(1)}`
+            : "-"}
+        </div>
+      </>
+    ) : (
+      <div>
+        {windowStats.vital}:{" "}
+        {windowStats.min == null || windowStats.max == null
+          ? "-"
+          : `${windowStats.min.toFixed(1)} ~ ${windowStats.max.toFixed(1)}`}
+      </div>
+    )}
+  </div>
+)}
 
               {highlightWindowBox && (
                 <div

@@ -77,6 +77,13 @@ type DragMode =
   | "resize-bottom"
   | null;
 
+type TmpProbeRange = {
+  key: string;
+  label: string;
+  min: number | null;
+  max: number | null;
+};
+
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
@@ -435,6 +442,41 @@ function getWindowYBoundsForTmp(
   y2 = Math.min(domainMax, y2);
 
   return { y1, y2 };
+}
+
+function getProbeRangesInWindow(
+  tmp: Record<string, TimeValuePoint[]>,
+  startMin: number,
+  endMin: number
+): TmpProbeRange[] {
+  return TMP_FEATURES.map((feature) => {
+    const arr = getFeatureSeries(tmp, feature.key);
+    const values = arr
+      .filter(
+        (p) =>
+          Number.isFinite(p.time) &&
+          Number.isFinite(p.value) &&
+          p.time >= startMin &&
+          p.time <= endMin
+      )
+      .map((p) => p.value);
+
+    if (!values.length) {
+      return {
+        key: feature.key,
+        label: feature.label,
+        min: null,
+        max: null,
+      };
+    }
+
+    return {
+      key: feature.key,
+      label: feature.label,
+      min: Math.min(...values),
+      max: Math.max(...values),
+    };
+  });
 }
 
 function FixedYAxis({
@@ -890,36 +932,15 @@ export default function TmpChart({
           }
         : null;
 
-    if (!target || activeSeries.length === 0) return null;
-
-    const dataInWindow = activeSeries.filter(
-      (p) =>
-        Number.isFinite(p.time) &&
-        Number.isFinite(p.value) &&
-        p.time >= target.startMin &&
-        p.time <= target.endMin
-    );
-
-    if (!dataInWindow.length) {
-      return {
-        startMin: Math.round(target.startMin),
-        endMin: Math.round(target.endMin),
-        duration: Math.round(target.endMin - target.startMin),
-        min: null,
-        max: null,
-      };
-    }
-
-    const vals = dataInWindow.map((p) => p.value);
+    if (!target) return null;
 
     return {
       startMin: Math.round(target.startMin),
       endMin: Math.round(target.endMin),
       duration: Math.round(target.endMin - target.startMin),
-      min: Math.min(...vals),
-      max: Math.max(...vals),
+      probeRanges: getProbeRangesInWindow(tmp, target.startMin, target.endMin),
     };
-  }, [isDragging, dragMode, dragStartMin, dragCurrentMin, tmpWindow, activeSeries]);
+  }, [isDragging, dragMode, dragStartMin, dragCurrentMin, tmpWindow, tmp]);
 
   const interactionCursor = React.useMemo(() => {
     if (isDragging) {
@@ -1253,7 +1274,7 @@ export default function TmpChart({
                     zIndex: 1000,
                     color: "#111827",
                     lineHeight: 1.35,
-                    maxWidth: 200,
+                    maxWidth: 220,
                   }}
                 >
                   <div className="font-semibold">
@@ -1272,13 +1293,21 @@ export default function TmpChart({
                     zIndex: 999,
                     color: "#111827",
                     lineHeight: 1.35,
+                    maxWidth: 240,
                   }}
                 >
                   <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
                   <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
                   <div>Dur: {windowStats.duration} min</div>
-                  <div>Min: {windowStats.min == null ? "-" : windowStats.min.toFixed(2)}</div>
-                  <div>Max: {windowStats.max == null ? "-" : windowStats.max.toFixed(2)}</div>
+
+                  {windowStats.probeRanges.map((item) => (
+                    <div key={item.key}>
+                      {item.label}:{" "}
+                      {item.min == null || item.max == null
+                        ? "-"
+                        : `${item.min.toFixed(2)} ~ ${item.max.toFixed(2)}`}
+                    </div>
+                  ))}
                 </div>
               )}
 

@@ -885,7 +885,7 @@ function MedicationGridSvg({
 export default function MedicationChart({
   title = "Medication Events",
   medications,
-  height = 420,
+  height = 300,
   xEnd,
   xTicks,
   showXAxis = true,

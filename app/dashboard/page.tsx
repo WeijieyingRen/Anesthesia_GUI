@@ -31,7 +31,6 @@ import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
 import AdditionalEventContextPanel from "./annotation/panels/AdditionalEventContextPanel";
-import TimelineContextPanel from "./TimelineContextPanel";
 
 type CsvRow = Record<string, any>;
 
@@ -55,6 +54,8 @@ type GameData = {
 type StoredSelected = {
   folder: string;
 };
+
+type AnnotationLevel = "summary" | "episode" | "otherEvents";
 
 function SectionCard({
   title,
@@ -144,7 +145,7 @@ function formatBmi(heightInInches: unknown, weightInOunces: unknown): string | u
     return undefined;
   }
 
-  const heightM = inches * 2.54 / 100;
+  const heightM = (inches * 2.54) / 100;
   const weightKg = ounces * 0.028349523125;
 
   if (heightM <= 0) return undefined;
@@ -327,16 +328,8 @@ export default function DashboardPage() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
 
-  const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("detect");
-
-  const episodeSelectedTask: AnnotationTaskKey =
-    selectedTask === "summary" ||
-    selectedTask === "preventedEpisode" ||
-    selectedTask === "contextualEvent"
-      ? "detect"
-      : selectedTask;
-
-  const [annotationLevel, setAnnotationLevel] = useState<"episode" | "patient">("episode");
+  const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("summary");
+  const [annotationLevel, setAnnotationLevel] = useState<AnnotationLevel>("summary");
 
   const [selectedDetectVital, setSelectedDetectVital] = useState<DetectVital>("MAP");
   const [selectedWindow, setSelectedWindow] = useState<SelectedWindow | null>(null);
@@ -348,6 +341,7 @@ export default function DashboardPage() {
   const [sidebarEvents, setSidebarEvents] = useState<SidebarEventItem[]>([]);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const voiceNote = useVoiceNote();
+
   const selectedEvent =
     sidebarEvents.find((item) => item.id === selectedEventId) ?? null;
 
@@ -436,6 +430,7 @@ export default function DashboardPage() {
     setSelectedDetectVital(newEvent.vital);
     setSelectedWindow(window);
     setSelectedTask("detect");
+    setAnnotationLevel("episode");
 
     logAction("window_create_event", {
       eventId: newEvent.id,
@@ -449,10 +444,10 @@ export default function DashboardPage() {
   }
 
   function handleTimelineWindowCreate(window: SelectedWindow) {
-    if (annotationLevel === "patient" && selectedTask === "preventedEpisode") {
+    if (annotationLevel === "otherEvents" && selectedTask === "preventedEpisode") {
       setSelectedDetectVital(window.vital);
       setSelectedWindow(window);
-  
+
       logAction("patient_prevented_window_select", {
         vital: window.vital,
         startMin: window.startMin,
@@ -462,15 +457,15 @@ export default function DashboardPage() {
       });
       return;
     }
-  
+
     if (annotationLevel === "episode") {
       handleCreateEventFromWindow(window);
       return;
     }
-  
-    // Other patient-level tasks: do not create events
+
     setSelectedWindow(window);
   }
+
   const TASK_ORDER: AnnotationTaskKey[] = ["detect", "mechanism", "fluidEval"];
 
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
@@ -527,12 +522,12 @@ export default function DashboardPage() {
       setLoadError(null);
       setLoading(true);
 
-      setSelectedTask("detect");
+      setSelectedTask("summary");
       setSelectedDetectVital("MAP");
       setSelectedWindow(null);
       setSidebarEvents([]);
       setSelectedEventId(null);
-      setAnnotationLevel("episode");
+      setAnnotationLevel("summary");
       setTimeResolution(15);
       setViewStartMin(0);
 
@@ -609,6 +604,7 @@ export default function DashboardPage() {
         durationMs: performance.now() - sessionStartRef.current,
       },
       annotationState: {
+        annotationLevel,
         selectedTask,
         selectedEventId,
         selectedDetectVital,
@@ -700,7 +696,7 @@ export default function DashboardPage() {
 
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
-  
+
     return prepareTimelineContextData(
       caseStaticRowState,
       caseDynamicRowsState,
@@ -978,23 +974,30 @@ export default function DashboardPage() {
                         <button
                           type="button"
                           onClick={() => {
-                            setAnnotationLevel("patient");
+                            setAnnotationLevel("summary");
                             setSelectedTask("summary");
-                            logAction("annotation_level_click", { level: "patient" });
+                            logAction("annotation_level_click", { level: "summary" });
                           }}
                           className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                            annotationLevel === "patient"
+                            annotationLevel === "summary"
                               ? "border-blue-600 bg-blue-600 text-white"
                               : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                           }`}
                         >
-                          Patient Level
+                          Summary
                         </button>
 
                         <button
                           type="button"
                           onClick={() => {
                             setAnnotationLevel("episode");
+                            if (
+                              selectedTask !== "detect" &&
+                              selectedTask !== "mechanism" &&
+                              selectedTask !== "fluidEval"
+                            ) {
+                              setSelectedTask("detect");
+                            }
                             logAction("annotation_level_click", { level: "episode" });
                           }}
                           className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
@@ -1006,162 +1009,165 @@ export default function DashboardPage() {
                           Episode Level
                         </button>
 
-                  
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAnnotationLevel("otherEvents");
+                            if (
+                              selectedTask !== "preventedEpisode" &&
+                              selectedTask !== "contextualEvent"
+                            ) {
+                              setSelectedTask("preventedEpisode");
+                            }
+                            logAction("annotation_level_click", { level: "otherEvents" });
+                          }}
+                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                            annotationLevel === "otherEvents"
+                              ? "border-blue-600 bg-blue-600 text-white"
+                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          Other Events
+                        </button>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                          {annotationLevel === "episode" ? "SubTasks" : "Patient Task"}
-                        </span>
+                      {annotationLevel === "episode" && (
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                            SubTasks
+                          </span>
 
-                        {annotationLevel === "episode" ? (
-                          <>
-                            {(["detect", "mechanism", "fluidEval"] as const).map((task) => {
-                              const active = selectedTask === task;
+                          {(["detect", "mechanism", "fluidEval"] as const).map((task) => {
+                            const active = selectedTask === task;
 
-                              const labelMap = {
-                                detect: "Abnormality Detection",
-                                mechanism: "Mechanism",
-                                fluidEval: "Intervention",
-                              };
+                            const labelMap = {
+                              detect: "Abnormality Detection",
+                              mechanism: "Mechanism",
+                              fluidEval: "Intervention",
+                            };
 
-                              return (
-                                <button
-                                  key={task}
-                                  type="button"
-                                  onClick={() => {
-                                    setSelectedTask(task);
-                                    logAction("task_tab_click", {
-                                      task,
-                                      selectedEventId,
-                                    });
-                                  }}
-                                  className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                                    active
-                                      ? "border-blue-600 bg-blue-600 text-white"
-                                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                                  }`}
-                                >
-                                  {labelMap[task]}
-                                </button>
-                              );
-                            })}
-                          </>
-                        ) : (
-                          <>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setSelectedTask("summary");
-                                logAction("task_tab_click", {
-                                  task: "summary",
-                                  selectedEventId: null,
-                                });
-                              }}
-                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                                selectedTask === "summary"
-                                  ? "border-blue-600 bg-blue-600 text-white"
-                                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                              }`}
-                            >
-                              Summary
-                            </button>
+                            return (
+                              <button
+                                key={task}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedTask(task);
+                                  logAction("task_tab_click", {
+                                    task,
+                                    selectedEventId,
+                                  });
+                                }}
+                                className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                  active
+                                    ? "border-blue-600 bg-blue-600 text-white"
+                                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                                }`}
+                              >
+                                {labelMap[task]}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
 
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setSelectedTask("preventedEpisode");
-                                logAction("task_tab_click", {
-                                  task: "preventedEpisode",
-                                  selectedEventId: null,
-                                });
-                              }}
-                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                                selectedTask === "preventedEpisode"
-                                  ? "border-blue-600 bg-blue-600 text-white"
-                                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                              }`}
-                            >
-                              Prevented Episode
-                            </button>
+                      {annotationLevel === "otherEvents" && (
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                            Other Event Task
+                          </span>
 
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setSelectedTask("contextualEvent");
-                                logAction("task_tab_click", {
-                                  task: "contextualEvent",
-                                  selectedEventId: null,
-                                });
-                              }}
-                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                                selectedTask === "contextualEvent"
-                                  ? "border-blue-600 bg-blue-600 text-white"
-                                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                              }`}
-                            >
-                              Contextual Event
-                            </button>
-                          </>
-                        )}
-                      </div>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedTask("preventedEpisode");
+                              logAction("task_tab_click", {
+                                task: "preventedEpisode",
+                                selectedEventId: null,
+                              });
+                            }}
+                            className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                              selectedTask === "preventedEpisode"
+                                ? "border-blue-600 bg-blue-600 text-white"
+                                : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                            }`}
+                          >
+                            Prevented Episode
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedTask("contextualEvent");
+                              logAction("task_tab_click", {
+                                task: "contextualEvent",
+                                selectedEventId: null,
+                              });
+                            }}
+                            className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                              selectedTask === "contextualEvent"
+                                ? "border-blue-600 bg-blue-600 text-white"
+                                : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                            }`}
+                          >
+                            Contextual Event
+                          </button>
+                        </div>
+                      )}
                     </div>
 
-                    
-
-                    {annotationLevel === "episode" ? (
+                    {annotationLevel === "episode" && (
                       <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
                         <div className="border-r">
-                        <AnnotationSidebar
-  events={sidebarEvents}
-  selectedEventId={selectedEventId}
-  onSelectEvent={(eventId) => {
-    const event = sidebarEvents.find((e) => e.id === eventId);
-    if (!event) return;
+                          <AnnotationSidebar
+                            events={sidebarEvents}
+                            selectedEventId={selectedEventId}
+                            onSelectEvent={(eventId) => {
+                              const event = sidebarEvents.find((e) => e.id === eventId);
+                              if (!event) return;
 
-    setSelectedEventId(eventId);
-    setSelectedDetectVital(event.vital as DetectVital);
-    setSelectedWindow({
-      vital: event.vital as DetectVital,
-      startMin: event.startMin,
-      endMin: event.endMin,
-      y1: event.y1,
-      y2: event.y2,
-    });
+                              setSelectedEventId(eventId);
+                              setSelectedDetectVital(event.vital as DetectVital);
+                              setSelectedWindow({
+                                vital: event.vital as DetectVital,
+                                startMin: event.startMin,
+                                endMin: event.endMin,
+                                y1: event.y1,
+                                y2: event.y2,
+                              });
 
-    logAction("sidebar_event_select", {
-      eventId,
-      title: event.title,
-      vital: event.vital,
-      startMin: event.startMin,
-      endMin: event.endMin,
-    });
-  }}
-  onDeleteEvent={(eventId) => {
-    const remaining = sidebarEvents.filter((e) => e.id !== eventId);
-    setSidebarEvents(remaining);
+                              logAction("sidebar_event_select", {
+                                eventId,
+                                title: event.title,
+                                vital: event.vital,
+                                startMin: event.startMin,
+                                endMin: event.endMin,
+                              });
+                            }}
+                            onDeleteEvent={(eventId) => {
+                              const remaining = sidebarEvents.filter((e) => e.id !== eventId);
+                              setSidebarEvents(remaining);
 
-    if (selectedEventId === eventId) {
-      if (remaining.length > 0) {
-        const nextEvent = remaining[0];
-        setSelectedEventId(nextEvent.id);
-        setSelectedDetectVital(nextEvent.vital as DetectVital);
-        setSelectedWindow({
-          vital: nextEvent.vital as DetectVital,
-          startMin: nextEvent.startMin,
-          endMin: nextEvent.endMin,
-          y1: nextEvent.y1,
-          y2: nextEvent.y2,
-        });
-      } else {
-        setSelectedEventId(null);
-        setSelectedWindow(null);
-      }
-    }
+                              if (selectedEventId === eventId) {
+                                if (remaining.length > 0) {
+                                  const nextEvent = remaining[0];
+                                  setSelectedEventId(nextEvent.id);
+                                  setSelectedDetectVital(nextEvent.vital as DetectVital);
+                                  setSelectedWindow({
+                                    vital: nextEvent.vital as DetectVital,
+                                    startMin: nextEvent.startMin,
+                                    endMin: nextEvent.endMin,
+                                    y1: nextEvent.y1,
+                                    y2: nextEvent.y2,
+                                  });
+                                } else {
+                                  setSelectedEventId(null);
+                                  setSelectedWindow(null);
+                                }
+                              }
 
-    logAction("sidebar_event_delete", { eventId });
-  }}
-/>
+                              logAction("sidebar_event_delete", { eventId });
+                            }}
+                          />
                         </div>
 
                         <div className="min-w-0">
@@ -1203,21 +1209,27 @@ export default function DashboardPage() {
                           />
                         </div>
                       </div>
-                    ) : (
+                    )}
+
+                    {annotationLevel === "summary" && (
                       <div className="bg-white">
-                        {selectedTask === "summary" ? (
-                          <SummaryPanel
-                            caseId={caseId}
-                            eventId="patient-summary"
-                            eventTitle="Patient-level Summary"
-                            episodeLabel={`Patient ${currentPatientIndex + 1}`}
-                            startMin={0}
-                            endMin={sharedTimelineEnd}
-                            onSaveAndNextStep={() => {
-                              setPatientSummaryCompleted(true);
-                            }}
-                          />
-                        ) : selectedTask === "contextualEvent" ? (
+                        <SummaryPanel
+                          caseId={caseId}
+                          eventId="patient-summary"
+                          eventTitle="Patient-level Summary"
+                          episodeLabel={`Patient ${currentPatientIndex + 1}`}
+                          startMin={0}
+                          endMin={sharedTimelineEnd}
+                          onSaveAndNextStep={() => {
+                            setPatientSummaryCompleted(true);
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {annotationLevel === "otherEvents" && (
+                      <div className="bg-white">
+                        {selectedTask === "contextualEvent" ? (
                           <AdditionalEventContextPanel
                             caseId={caseId}
                             eventId="patient-contextual-event"
@@ -1228,7 +1240,7 @@ export default function DashboardPage() {
                           />
                         ) : (
                           <TaskWorkspace
-                            task={selectedTask}
+                            task="preventedEpisode"
                             onChangeTask={setSelectedTask}
                             onSaveAndNextStep={(finishedTask) => {
                               setSelectedTask(finishedTask);
@@ -1262,23 +1274,6 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="min-w-0 space-y-4">
-                <TimelineContextPanel
-  context={timelineContext}
-  xEnd={sharedTimelineEnd}
-  xTicks={sharedXTicks}
-  timeZero={anesthesiaStart}
-  timeResolution={timeResolution}
-  episodeWindow={
-    selectedWindow
-      ? {
-          startMin: selectedWindow.startMin,
-          endMin: selectedWindow.endMin,
-        }
-      : null
-  }
-  sharedScrollLeft={sharedScrollLeft}
-  onSharedScrollLeftChange={setSharedScrollLeft}
-/>
                   <UnifiedTimelineCard
                     vitals={vitals}
                     medications={medications}
@@ -1299,6 +1294,7 @@ export default function DashboardPage() {
                     onCreateEventFromWindow={handleTimelineWindowCreate}
                     sharedScrollLeft={sharedScrollLeft}
                     onSharedScrollLeftChange={setSharedScrollLeft}
+                    timelineContext={timelineContext}
                     gas={{
                       FiO2: vitals.gas["FiO2"],
                       "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
