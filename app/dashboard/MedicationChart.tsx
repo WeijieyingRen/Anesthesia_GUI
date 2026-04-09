@@ -30,7 +30,6 @@ type MedicationChartProps = {
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
   timeResolution?: 15 | 5;
-
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -148,13 +147,16 @@ function getMinorStep(timeResolution: 15 | 5) {
 
 function buildGridTicks(end: number, step: number) {
   if (!Number.isFinite(end) || end <= 0) return [];
+
   const ticks: number[] = [];
   for (let t = 0; t <= end; t += step) {
     ticks.push(t);
   }
+
   if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
     ticks.push(end);
   }
+
   return ticks;
 }
 
@@ -357,6 +359,7 @@ function buildRows(
 function buildBolusScatter(rows: MedRow[], hiddenNames: string[]): ScatterPoint[] {
   return rows.flatMap((row) => {
     if (hiddenNames.includes(row.name)) return [];
+
     return row.bolus.map((p) => ({
       x: p.time,
       y: row.rowIndex,
@@ -398,7 +401,10 @@ function getMedicationTotalLabel(row: MedRow) {
     const first = row.bolus[0];
     const totalDose =
       first.totalDose ??
-      row.bolus.reduce((sum, p) => sum + (Number.isFinite(p.dose) ? p.dose : 0), 0);
+      row.bolus.reduce(
+        (sum, p) => sum + (Number.isFinite(p.dose) ? p.dose : 0),
+        0
+      );
 
     const unit = first.unit ?? "";
     const totalText = formatMedNumber(totalDose);
@@ -414,6 +420,18 @@ function getMedicationTotalLabel(row: MedRow) {
   }
 
   return "";
+}
+
+function formatClockTime(offsetMin: number, timeZero?: string | null) {
+  if (!timeZero) return String(offsetMin);
+
+  const base = new Date(timeZero);
+  if (Number.isNaN(base.getTime())) return String(offsetMin);
+
+  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const hh = String(dt.getHours()).padStart(2, "0");
+  const mm = String(dt.getMinutes()).padStart(2, "0");
+  return `${hh}:${mm}`;
 }
 
 function MedicationTooltip({
@@ -468,18 +486,6 @@ function LegendSwatch({
   );
 }
 
-function formatClockTime(offsetMin: number, timeZero?: string | null) {
-  if (!timeZero) return String(offsetMin);
-
-  const base = new Date(timeZero);
-  if (Number.isNaN(base.getTime())) return String(offsetMin);
-
-  const dt = new Date(base.getTime() + offsetMin * 60000);
-  const hh = String(dt.getHours()).padStart(2, "0");
-  const mm = String(dt.getMinutes()).padStart(2, "0");
-  return `${hh}:${mm}`;
-}
-
 function rectsOverlap(
   a: { left: number; right: number; top: number; bottom: number },
   b: { left: number; right: number; top: number; bottom: number }
@@ -492,18 +498,19 @@ function rectsOverlap(
   );
 }
 
-function getInfusionLabelRects(
-  rows: MedRow[],
-  end: number,
-  plotWidth: number
-) {
+function getInfusionLabelRects(rows: MedRow[], end: number, plotWidth: number) {
   const rectsByRow = new Map<
     number,
     Array<{ left: number; right: number; top: number; bottom: number }>
   >();
 
   for (const row of rows) {
-    const rowRects: Array<{ left: number; right: number; top: number; bottom: number }> = [];
+    const rowRects: Array<{
+      left: number;
+      right: number;
+      top: number;
+      bottom: number;
+    }> = [];
 
     for (const seg of row.infusion) {
       const x1 = (seg.start / end) * plotWidth;
@@ -524,7 +531,10 @@ function getInfusionLabelRects(
       const preferredCenterX = x1 + width * 0.72;
       const minCenterX = x1 + labelWidth / 2 + 2;
       const maxCenterX = x2 - labelWidth / 2 - 2;
-      const labelCenterX = Math.max(minCenterX, Math.min(preferredCenterX, maxCenterX));
+      const labelCenterX = Math.max(
+        minCenterX,
+        Math.min(preferredCenterX, maxCenterX)
+      );
 
       const labelY = yBottom - 1;
       const showLabel = width >= labelWidth + 6 && !!label;
@@ -593,7 +603,9 @@ function BolusOverlaySvg({
           };
 
           const rowInfusionRects = infusionRectsByRow.get(row.rowIndex) ?? [];
-          const hasOverlap = rowInfusionRects.some((r) => rectsOverlap(defaultRect, r));
+          const hasOverlap = rowInfusionRects.some((r) =>
+            rectsOverlap(defaultRect, r)
+          );
 
           const shiftedTop = cy + 6;
 
@@ -705,7 +717,10 @@ function InfusionOverlaySvg({
           const preferredCenterX = x1 + width * 0.72;
           const minCenterX = x1 + labelWidth / 2 + 2;
           const maxCenterX = x2 - labelWidth / 2 - 2;
-          const labelCenterX = Math.max(minCenterX, Math.min(preferredCenterX, maxCenterX));
+          const labelCenterX = Math.max(
+            minCenterX,
+            Math.min(preferredCenterX, maxCenterX)
+          );
 
           const labelY = yBottom - 1;
           const showLabel = width >= labelWidth + 6 && !!label;
@@ -809,7 +824,8 @@ function MedicationGridSvg({
           y={0}
           width={Math.max(
             2,
-            ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth
+            ((highlightWindow.endMin - highlightWindow.startMin) / end) *
+              plotWidth
           )}
           height={height}
           fill="lightblue"
@@ -908,7 +924,10 @@ export default function MedicationChart({
   );
 
   const maxTime = useMemo(() => getMaxTime(rows), [rows]);
-  const computedEnd = Math.max(majorStep, Math.ceil(maxTime / majorStep) * majorStep);
+  const computedEnd = Math.max(
+    majorStep,
+    Math.ceil(maxTime / majorStep) * majorStep
+  );
   const end = xEnd ?? computedEnd;
 
   const majorTicks = useMemo(() => {
@@ -1070,7 +1089,11 @@ export default function MedicationChart({
                       height={showXAxis ? 30 : 0}
                       label={
                         showXAxis
-                          ? { value: "Time", position: "insideBottom", offset: -4 }
+                          ? {
+                              value: "Time",
+                              position: "insideBottom",
+                              offset: -4,
+                            }
                           : undefined
                       }
                     />
@@ -1124,7 +1147,10 @@ export default function MedicationChart({
 
                         const color = payload.color ?? "#6bcfc5";
                         const text = String(payload.label ?? "");
-                        const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
+                        const boxWidth = Math.max(
+                          28,
+                          Math.min(88, text.length * 6 + 14)
+                        );
                         const boxHeight = 16;
 
                         const arrowTipX = cx;

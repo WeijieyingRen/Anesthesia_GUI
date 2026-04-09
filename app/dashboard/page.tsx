@@ -978,21 +978,6 @@ export default function DashboardPage() {
                         <button
                           type="button"
                           onClick={() => {
-                            setAnnotationLevel("episode");
-                            logAction("annotation_level_click", { level: "episode" });
-                          }}
-                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                            annotationLevel === "episode"
-                              ? "border-blue-600 bg-blue-600 text-white"
-                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                          }`}
-                        >
-                          Episode Level
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
                             setAnnotationLevel("patient");
                             setSelectedTask("summary");
                             logAction("annotation_level_click", { level: "patient" });
@@ -1005,6 +990,23 @@ export default function DashboardPage() {
                         >
                           Patient Level
                         </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAnnotationLevel("episode");
+                            logAction("annotation_level_click", { level: "episode" });
+                          }}
+                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                            annotationLevel === "episode"
+                              ? "border-blue-600 bg-blue-600 text-white"
+                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                          }`}
+                        >
+                          Episode Level
+                        </button>
+
+                  
                       </div>
 
                       <div className="flex flex-wrap items-center gap-2">
@@ -1104,6 +1106,8 @@ export default function DashboardPage() {
                         )}
                       </div>
                     </div>
+
+                    
 
                     {annotationLevel === "episode" ? (
                       <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">

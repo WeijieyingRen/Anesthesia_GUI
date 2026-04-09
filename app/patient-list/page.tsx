@@ -180,100 +180,133 @@ export default function PatientList() {
   return (
     <main className="min-h-screen bg-gray-50 p-8">
       <div className="mx-auto max-w-7xl">
-        <h1 className="mb-6 text-4xl font-bold text-gray-900">Annotation Goals and Case List</h1>
+        <h1 className="mb-6 text-4xl font-bold text-gray-900">
+          Annotation Overview and Case List
+        </h1>
 
-        {/* Annotation Goals */}
+        {/* Annotation Structure */}
         <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
           <h2 className="mb-3 text-2xl font-bold text-gray-900">
-            Annotation Goals
+            Annotation Structure
           </h2>
+
           <div className="space-y-3 text-sm leading-7 text-gray-700">
             <p>
-              This project aims to build a large anesthesia foundation model that
-              can understand what happened during anesthesia, why it happened,
-              what interventions clinicians performed (for example medication,
-              fluid, and gas-related interventions), how effective these
-              interventions were, and how the patient physiologically responded.
+              This annotation project contains{" "}
+              <span className="font-semibold text-gray-900">
+                two major task categories
+              </span>
+              .
             </p>
 
-            <p>
-              The annotation work is divided into two major tasks.
-            </p>
             <div>
-  <p>
-    <span className="font-semibold text-gray-900">Task 1:</span>{" "}
-    episode-level intraoperative event understanding, including abnormal
-    event detection, mechanism (etiology) classification and generation,
-    intervention evaluation (medication, gas, fluid), and patient
-    physiology response evaluation.
-  </p>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  1. Patient-level tasks:
+                </span>{" "}
+                annotation of the overall intraoperative case, including{" "}
+                <span className="font-semibold">Summary</span>,{" "}
+                <span className="font-semibold">Prevented Episode</span>, and{" "}
+                <span className="font-semibold">Contextual Event</span>.
+              </p>
+            </div>
 
-  <div className="mt-2 text-sm leading-7 text-gray-700">
-    <p className="font-semibold text-gray-900">Annotate:</p>
-    <ul className="ml-10 list-disc space-y-1">
-      <li>Likely true physiologic abnormal episodes.</li>
-      <li>Episodes that are moderate or severe.</li>
-      <li>Episodes that are prolonged or clearly sustained.</li>
-      <li>Episodes with associated changes in other vital signs.</li>
-      <li>Episodes temporally related to interventions, medications, fluids, or ventilation changes.</li>
-      <li>Episodes that are important to the overall intraoperative clinical course.</li>
-    </ul>
-
-    <p className="pt-2 font-semibold text-gray-900">Do not annotate:</p>
-    <ul className="ml-10 list-disc space-y-1">
-      <li>Obvious monitoring artifacts or measurement errors.</li>
-      <li>Very brief isolated fluctuations with no clear clinical relevance.</li>
-      <li>Minor waveform blips that do not support downstream interpretation.</li>
-      <li>Events that are too trivial to inform mechanism, intervention, or response analysis.</li>
-      <li>Do not try to annotate every small abnormality in the record; focus on the key episodes only.</li>
-    </ul>
-  </div>
-</div>
-
-            <p>
-              <span className="font-semibold text-gray-900">Task 2:</span>{" "}
-              patient-level generation of an intraoperative record that summarizes
-              the overall clinical course across the full surgery.
-            </p>
+            <div>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  2. Episode-level tasks:
+                </span>{" "}
+                detailed annotation of selected abnormal intraoperative episodes,
+                including{" "}
+                <span className="font-semibold">Abnormality Detection</span>,{" "}
+                <span className="font-semibold">Mechanism</span>, and{" "}
+                <span className="font-semibold">Intervention</span>.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Guidance */}
-        <div className="mb-8 rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-2xl font-bold text-gray-900">Guidance</h2>
+        {/* Workflow */}
+        <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900">Workflow</h2>
+
           <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p>
-              You may either start a single case directly or add multiple cases
-              into a selected queue and review them sequentially.
-            </p>
+            <p>Please follow the annotation workflow below:</p>
 
-            <p>
-              For each case, please first identify important intraoperative
-              abnormal episodes from the timeline, then annotate the episode-level
-              subtasks, and finally complete one patient-level summary for the
-              whole case.
-            </p>
+            <ol className="ml-6 list-decimal space-y-1">
+              <li>
+                Start with the{" "}
+                <span className="font-semibold text-gray-900">
+                  patient-level review
+                </span>
+                .
+              </li>
+              <li>
+                Identify{" "}
+                <span className="font-semibold text-gray-900">
+                  1 to 3 clinically meaningful abnormal episodes
+                </span>{" "}
+                for detailed review.
+              </li>
+              <li>
+                For each selected episode, complete the{" "}
+                <span className="font-semibold text-gray-900">
+                  episode-level subtasks
+                </span>
+                .
+              </li>
+              <li>
+                After episode-level annotation, complete the patient-level
+                wrap-up as needed.
+              </li>
+            </ol>
+          </div>
+        </div>
 
-            <p>
-              Please focus on clinically meaningful abnormalities and clinically
-              relevant mechanisms and interventions, rather than annotating every
-              small fluctuation in the waveform.
-            </p>
+        {/* Episode Selection Guideline */}
+        <div className="mb-8 rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900">
+            Episode Selection Guideline
+          </h2>
 
-            <p>
-              When evaluating intervention and response, prioritize clinical
-              reasoning: whether the intervention matched the suspected mechanism,
-              whether its timing was appropriate, and whether the subsequent
-              patient response supported that judgment.
-            </p>
+          <div className="space-y-3 text-sm leading-7 text-gray-700">
+            <p className="font-semibold text-gray-900">Annotate:</p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Likely true physiologic abnormal episodes.</li>
+              <li>Episodes that are moderate or severe.</li>
+              <li>Episodes that are prolonged or clearly sustained.</li>
+              <li>Episodes with associated changes in other vital signs.</li>
+              <li>
+                Episodes temporally related to interventions, medications,
+                fluids, gas, or ventilation changes.
+              </li>
+              <li>
+                Episodes that are important to the overall intraoperative
+                clinical course.
+              </li>
+            </ul>
 
-            <p>
-              After selecting cases, click{" "}
-              <span className="font-semibold text-gray-900">
-                Start Selected Cases
-              </span>{" "}
-              to begin annotation.
+            <p className="pt-2 font-semibold text-gray-900">
+              Do not annotate:
             </p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Obvious monitoring artifacts or measurement errors.</li>
+              <li>
+                Very brief isolated fluctuations with no clear clinical
+                relevance.
+              </li>
+              <li>
+                Minor waveform blips that do not support downstream
+                interpretation.
+              </li>
+              <li>
+                Events that are too trivial to inform mechanism, intervention,
+                or response analysis.
+              </li>
+              <li>
+                Do not try to annotate every small abnormality in the record.
+              </li>
+            </ul>
           </div>
         </div>
 
