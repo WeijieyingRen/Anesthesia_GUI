@@ -1,18 +1,6 @@
 "use client"
 
 // app/page.tsx
-// Main landing page ("/") of the VitalLens Project.
-// This page serves as both:
-// 1) A welcome / branding page (title + logos)
-// 2) The participant onboarding form (name + salutation + department)
-//
-// After submission:
-// - Participant info is saved to localStorage under "participantInfo"
-// - The user is redirected to "/patient-list" to start the game
-//
-// Styling: Tailwind CSS
-// Framework: Next.js App Router + React
-
 import type React from "react"
 
 import { useEffect, useState } from "react"
@@ -29,6 +17,7 @@ export default function Home() {
 
   // Participant fields
   const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
   const [salutation, setSalutation] = useState("MD")
   const [department, setDepartment] = useState("OB/GYN")
 
@@ -40,6 +29,7 @@ export default function Home() {
       const saved = JSON.parse(raw)
 
       if (saved?.name) setName(saved.name)
+      if (saved?.email) setEmail(saved.email)
       if (saved?.salutation) setSalutation(saved.salutation)
       if (saved?.department) setDepartment(saved.department)
     } catch {
@@ -55,6 +45,7 @@ export default function Home() {
       "participantInfo",
       JSON.stringify({
         name: name.trim(),
+        email: email.trim(),
         salutation,
         department,
         timestamp: new Date().toISOString(),
@@ -62,19 +53,17 @@ export default function Home() {
     )
 
     // Navigate to the patient list page to start the game
-    router.push("/patient-list")
+    router.push("/consent")
   }
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
       <div className="max-w-3xl w-full bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
-        {/* Welcome header */}
         <h1 className="text-3xl font-bold text-center mb-2">Welcome to the VitalLens Project</h1>
         <p className="text-gray-600 text-center mb-8">
           Interpret intraoperative vital signs, annotate abnormalities, and provide clinical reasoning.
         </p>
 
-        {/* Participant form */}
         <div className="w-full max-w-md">
           <h2 className="text-xl font-semibold text-center mb-4">Participant Information</h2>
 
@@ -86,6 +75,18 @@ export default function Home() {
                 placeholder="Enter your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -127,7 +128,6 @@ export default function Home() {
           </form>
         </div>
 
-        {/* Logos */}
         <div className="flex justify-between w-full mt-12">
           <div className="relative w-36 h-24">
             <Image src="/images/university-logo.png" alt="University Logo" fill className="object-contain" />

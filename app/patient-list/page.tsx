@@ -58,8 +58,26 @@ export default function PatientList() {
 
   useEffect(() => {
     const participantInfo = localStorage.getItem("participantInfo");
+    const consentInfo = localStorage.getItem("consentInfo");
+
     if (!participantInfo) {
-      router.push("/participant-info");
+      router.replace("/");
+      return;
+    }
+
+    if (!consentInfo) {
+      router.replace("/consent");
+      return;
+    }
+
+    try {
+      const parsedConsent = JSON.parse(consentInfo);
+      if (!parsedConsent?.agreed) {
+        router.replace("/consent");
+        return;
+      }
+    } catch {
+      router.replace("/consent");
       return;
     }
 
