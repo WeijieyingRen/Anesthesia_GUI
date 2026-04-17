@@ -147,49 +147,107 @@ function normalizeCategoryAndPanel(panel: unknown) {
   };
 }
 
-async function uploadSubmissionToGCS(data: Record<string, unknown>) {
+/**
+ * 演示模式友好：
+ * - 若没配 GCS_BUCKET，直接跳过，不抛错
+ * - 返回 skipped 状态
+ */
+async function uploadSubmissionToGCS(
+  data: Record<string, unknown>
+): Promise<
+  | {
+      attempted: true;
+      saved: true;
+      skipped: false;
+      objectName: string;
+      warning: null;
+    }
+  | {
+      attempted: false;
+      saved: false;
+      skipped: true;
+      objectName: null;
+      warning: string;
+    }
+  | {
+      attempted: true;
+      saved: false;
+      skipped: false;
+      objectName: null;
+      warning: string;
+    }
+> {
   const bucketName = process.env.GCS_BUCKET;
   const rootPrefix = process.env.GCS_PREFIX || "anesthesialens";
 
   if (!bucketName) {
-    throw new Error("Missing GCS_BUCKET environment variable.");
+    return {
+      attempted: false,
+      saved: false,
+      skipped: true,
+      objectName: null,
+      warning: "GCS_BUCKET not configured, skipped GCS upload.",
+    };
   }
 
-  const storage = new Storage();
-  const bucket = storage.bucket(bucketName);
+  try {
+    const storage = new Storage();
+    const bucket = storage.bucket(bucketName);
 
-  const annotatorEmail = sanitizePathPart(data.annotator_email);
-  const caseId = sanitizePathPart(data.case_id);
-  const eventId = sanitizePathPart(data.event_id);
+    const annotatorEmail = sanitizePathPart(data.annotator_email);
+    const caseId = sanitizePathPart(data.case_id);
+    const eventId = sanitizePathPart(data.event_id);
 
-  const { category, leaf, filePrefix } = normalizeCategoryAndPanel(data.panel);
-  const timestamp = getTimestampForFilename();
+    const { category, leaf, filePrefix } = normalizeCategoryAndPanel(data.panel);
+    const timestamp = getTimestampForFilename();
 
-  const fileName =
-    category === "summary"
-      ? `${filePrefix}_${timestamp}.json`
-      : `${filePrefix}_${eventId}_${timestamp}.json`;
+    const fileName =
+      category === "summary"
+        ? `${filePrefix}_${timestamp}.json`
+        : `${filePrefix}_${eventId}_${timestamp}.json`;
 
-  const objectName =
-    `${rootPrefix}/${annotatorEmail}/${caseId}/` +
-    `${category}/${leaf}/${fileName}`;
+    const objectName =
+      `${rootPrefix}/${annotatorEmail}/${caseId}/` +
+      `${category}/${leaf}/${fileName}`;
 
-  await bucket.file(objectName).save(JSON.stringify(data, null, 2), {
-    contentType: "application/json",
-    resumable: false,
-    metadata: {
-      cacheControl: "no-store",
-    },
-  });
+    await bucket.file(objectName).save(JSON.stringify(data, null, 2), {
+      contentType: "application/json",
+      resumable: false,
+      metadata: {
+        cacheControl: "no-store",
+      },
+    });
 
-  return objectName;
+    return {
+      attempted: true,
+      saved: true,
+      skipped: false,
+      objectName,
+      warning: null,
+    };
+  } catch (error) {
+    console.error("GCS upload error:", error);
+    return {
+      attempted: true,
+      saved: false,
+      skipped: false,
+      objectName: null,
+      warning:
+        error instanceof Error ? error.message : "Unknown GCS upload error.",
+    };
+  }
 }
 
 export async function POST(req: Request) {
   try {
     console.log(">>> NEW SUBMIT ROUTE HIT");
-    console.log("GCS_BUCKET =", process.env.GCS_BUCKET);
-    console.log("GCS_PREFIX =", process.env.GCS_PREFIX);
+    console.log("SUPABASE_URL =", process.env.SUPABASE_URL ? "configured" : "missing");
+    console.log(
+      "SUPABASE_SERVICE_ROLE_KEY =",
+      process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "missing"
+    );
+    console.log("GCS_BUCKET =", process.env.GCS_BUCKET || "missing");
+    console.log("GCS_PREFIX =", process.env.GCS_PREFIX || "missing");
 
     const body = (await req.json()) as SubmitBody;
 
@@ -259,14 +317,20 @@ export async function POST(req: Request) {
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (supabaseUrl && supabaseKey) {
-      const supabase = createClient(supabaseUrl, supabaseKey);
-      const { error } = await supabase.from("submissions").insert(insertRow);
+      try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        const { error } = await supabase.from("submissions").insert(insertRow);
 
-      if (error) {
-        console.error("Supabase insert error:", error);
-        supabaseWarning = error.message;
-      } else {
-        supabaseSaved = true;
+        if (error) {
+          console.error("Supabase insert error:", error);
+          supabaseWarning = error.message;
+        } else {
+          supabaseSaved = true;
+        }
+      } catch (error) {
+        console.error("Supabase unexpected error:", error);
+        supabaseWarning =
+          error instanceof Error ? error.message : "Unknown Supabase error.";
       }
     } else {
       console.warn("Supabase env vars missing, skip Supabase save.");
@@ -290,8 +354,13 @@ export async function POST(req: Request) {
       supabase_warning: supabaseWarning,
     };
 
-    const objectName = await uploadSubmissionToGCS(gcsRecord);
+    const gcsResult = await uploadSubmissionToGCS(gcsRecord);
 
+    /**
+     * 关键改动：
+     * demo 模式下，只要主流程跑通，就返回 ok: true
+     * 即便 Supabase / GCS 都没配，也不报 500
+     */
     return NextResponse.json({
       ok: true,
       saved: {
@@ -306,10 +375,18 @@ export async function POST(req: Request) {
         warning: supabaseWarning,
       },
       gcs: {
-        bucket: process.env.GCS_BUCKET,
-        objectName,
+        attempted: gcsResult.attempted,
+        saved: gcsResult.saved,
+        skipped: gcsResult.skipped,
+        bucket: process.env.GCS_BUCKET ?? null,
+        objectName: gcsResult.objectName,
+        warning: gcsResult.warning,
       },
-      debug_version: "gcs-hierarchical-v1",
+      demo_mode:
+        !process.env.SUPABASE_URL ||
+        !process.env.SUPABASE_SERVICE_ROLE_KEY ||
+        !process.env.GCS_BUCKET,
+      debug_version: "gcs-optional-demo-friendly-v2",
     });
   } catch (error) {
     console.error("Submit route error:", error);
