@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Storage } from "@google-cloud/storage";
 
 type SubmitBody = {
-  annotator?: { name?: string };
-  participant?: { name?: string };
-  participantInfo?: { name?: string };
+  annotator?: { name?: string; email?: string };
+  participant?: { name?: string; email?: string };
+  participantInfo?: { name?: string; email?: string };
 
   caseId?: string | number | null;
   eventId?: string | number | null;
@@ -19,7 +20,6 @@ type SubmitBody = {
 
   answers?: Record<string, unknown> | null;
 
-  // 兼容旧数据结构，避免前端还没完全改好时直接丢失用户输入
   summary?: unknown;
   result?: unknown;
   response?: unknown;
@@ -32,13 +32,11 @@ type SubmitBody = {
 function toIsoTime(value: unknown): string | null {
   if (value === null || value === undefined) return null;
 
-  // 前端常见情况：Date.now() 传 number
   if (typeof value === "number" && Number.isFinite(value)) {
     const d = new Date(value);
     return Number.isNaN(d.getTime()) ? null : d.toISOString();
   }
 
-  // 也兼容传 ISO string
   if (typeof value === "string" && value.trim() !== "") {
     const d = new Date(value);
     return Number.isNaN(d.getTime()) ? null : d.toISOString();
@@ -63,7 +61,6 @@ function toTimestampMs(value: unknown): number | null {
 }
 
 function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
-  // 优先使用前端显式传来的 answers
   if (
     body.answers &&
     typeof body.answers === "object" &&
@@ -72,7 +69,6 @@ function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
     return body.answers;
   }
 
-  // 兼容旧版提交格式：只提取少量可能属于“用户结果”的字段
   const fallbackAnswers: Record<string, unknown> = {};
 
   if (body.summary !== undefined) fallbackAnswers.summary = body.summary;
@@ -84,21 +80,118 @@ function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
   return Object.keys(fallbackAnswers).length > 0 ? fallbackAnswers : null;
 }
 
+function sanitizePathPart(value: unknown): string {
+  if (value === null || value === undefined) return "unknown";
+  return String(value).trim().replace(/[^\w.-]/g, "_") || "unknown";
+}
+
+function getTimestampForFilename(date = new Date()): string {
+  return date.toISOString().replace(/[:.]/g, "-");
+}
+
+function normalizeCategoryAndPanel(panel: unknown) {
+  const p = sanitizePathPart(panel).toLowerCase();
+
+  if (p.includes("summary")) {
+    return {
+      category: "summary",
+      leaf: "summary_panel",
+      filePrefix: "summary",
+    };
+  }
+
+  if (p.includes("abnormality") || p.includes("detect")) {
+    return {
+      category: "episode_level",
+      leaf: "abnormality_detection",
+      filePrefix: "episode",
+    };
+  }
+
+  if (p.includes("mechanism")) {
+    return {
+      category: "episode_level",
+      leaf: "mechanism",
+      filePrefix: "episode",
+    };
+  }
+
+  if (p.includes("intervention")) {
+    return {
+      category: "episode_level",
+      leaf: "intervention",
+      filePrefix: "episode",
+    };
+  }
+
+  if (p.includes("prevented")) {
+    return {
+      category: "other_events",
+      leaf: "prevented_episode",
+      filePrefix: "event",
+    };
+  }
+
+  if (p.includes("context")) {
+    return {
+      category: "other_events",
+      leaf: "contextual_event",
+      filePrefix: "event",
+    };
+  }
+
+  return {
+    category: "misc",
+    leaf: p || "unknown_panel",
+    filePrefix: "record",
+  };
+}
+
+async function uploadSubmissionToGCS(data: Record<string, unknown>) {
+  const bucketName = process.env.GCS_BUCKET;
+  const rootPrefix = process.env.GCS_PREFIX || "anesthesialens";
+
+  if (!bucketName) {
+    throw new Error("Missing GCS_BUCKET environment variable.");
+  }
+
+  const storage = new Storage();
+  const bucket = storage.bucket(bucketName);
+
+  const annotatorEmail = sanitizePathPart(data.annotator_email);
+  const caseId = sanitizePathPart(data.case_id);
+  const eventId = sanitizePathPart(data.event_id);
+
+  const { category, leaf, filePrefix } = normalizeCategoryAndPanel(data.panel);
+  const timestamp = getTimestampForFilename();
+
+  const fileName =
+    category === "summary"
+      ? `${filePrefix}_${timestamp}.json`
+      : `${filePrefix}_${eventId}_${timestamp}.json`;
+
+  const objectName =
+    `${rootPrefix}/${annotatorEmail}/${caseId}/` +
+    `${category}/${leaf}/${fileName}`;
+
+  await bucket.file(objectName).save(JSON.stringify(data, null, 2), {
+    contentType: "application/json",
+    resumable: false,
+    metadata: {
+      cacheControl: "no-store",
+    },
+  });
+
+  return objectName;
+}
+
 export async function POST(req: Request) {
   try {
+    console.log(">>> NEW SUBMIT ROUTE HIT");
+    console.log("GCS_BUCKET =", process.env.GCS_BUCKET);
+    console.log("GCS_PREFIX =", process.env.GCS_PREFIX);
+
     const body = (await req.json()) as SubmitBody;
-
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!supabaseUrl || !supabaseKey) {
-      return NextResponse.json(
-        { error: "Missing Supabase environment variables." },
-        { status: 500 }
-      );
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const annotatorName =
       body?.annotator?.name ??
@@ -106,10 +199,15 @@ export async function POST(req: Request) {
       body?.participantInfo?.name ??
       null;
 
+    const annotatorEmail =
+      body?.annotator?.email ??
+      body?.participant?.email ??
+      body?.participantInfo?.email ??
+      "unknown_user";
+
     const caseId = body?.caseId ?? null;
     const eventId = body?.eventId ?? body?.selectedEventId ?? null;
 
-    // action 优先，其次 task；兼容旧逻辑
     const action = body?.action ?? body?.task ?? "session";
     const panel = body?.panel ?? null;
 
@@ -126,9 +224,9 @@ export async function POST(req: Request) {
 
     const answers = buildAnswers(body);
 
-    // 只存精简 payload，不再存整个原始 body
     const compactPayload = {
       annotator_name: annotatorName,
+      annotator_email: annotatorEmail,
       case_id: caseId,
       event_id: eventId,
       panel,
@@ -145,27 +243,54 @@ export async function POST(req: Request) {
       annotator_name: annotatorName,
       case_id: caseId,
       event_id: eventId,
-
-      // 保留原来的 task 列，避免你表结构里没有 action 时直接报错
       task: action,
-
-      // 下面这些列需要你在 submissions 表中存在
       panel,
       action,
       panel_opened_at: panelOpenedAtIso,
       clicked_at: clickedAtIso,
       response_time_ms: responseTimeMs,
-
-      // 精简后的 payload
       payload: compactPayload,
     };
 
-    const { error } = await supabase.from("submissions").insert(insertRow);
+    let supabaseSaved = false;
+    let supabaseWarning: string | null = null;
 
-    if (error) {
-      console.error("Supabase insert error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (supabaseUrl && supabaseKey) {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { error } = await supabase.from("submissions").insert(insertRow);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        supabaseWarning = error.message;
+      } else {
+        supabaseSaved = true;
+      }
+    } else {
+      console.warn("Supabase env vars missing, skip Supabase save.");
+      supabaseWarning = "Supabase env vars missing, skipped Supabase save.";
     }
+
+    const gcsRecord = {
+      annotator_name: annotatorName,
+      annotator_email: annotatorEmail,
+      case_id: caseId,
+      event_id: eventId,
+      panel,
+      action,
+
+      saved_at: new Date().toISOString(),
+      source: "nextjs-submit-route",
+      compact_payload: compactPayload,
+      insert_row: insertRow,
+      raw_body: body,
+      supabase_saved: supabaseSaved,
+      supabase_warning: supabaseWarning,
+    };
+
+    const objectName = await uploadSubmissionToGCS(gcsRecord);
 
     return NextResponse.json({
       ok: true,
@@ -176,11 +301,26 @@ export async function POST(req: Request) {
         action,
         responseTimeMs,
       },
+      supabase: {
+        saved: supabaseSaved,
+        warning: supabaseWarning,
+      },
+      gcs: {
+        bucket: process.env.GCS_BUCKET,
+        objectName,
+      },
+      debug_version: "gcs-hierarchical-v1",
     });
   } catch (error) {
     console.error("Submit route error:", error);
     return NextResponse.json(
-      { error: "Failed to save submission." },
+      {
+        ok: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to save submission.",
+      },
       { status: 500 }
     );
   }

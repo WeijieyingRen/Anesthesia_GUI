@@ -11,6 +11,7 @@ type SummaryPanelProps = {
   startMin?: number;
   endMin?: number;
   annotatorName?: string;
+  annotatorEmail?: string;
   onSaveAndNextStep?: () => void;
 };
 
@@ -41,6 +42,7 @@ export default function SummaryPanel({
   startMin = 0,
   endMin = 0,
   annotatorName,
+  annotatorEmail,
   onSaveAndNextStep,
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState("");
@@ -118,12 +120,16 @@ export default function SummaryPanel({
       setSaveMessage("");
 
       await submitAnnotation({
-        annotator: annotatorName ? { name: annotatorName } : undefined,
+        annotator:
+          annotatorName || annotatorEmail
+            ? { name: annotatorName, email: annotatorEmail }
+            : undefined,
         caseId,
         eventId,
         panel: "summary_panel",
         action: "submit",
         panelOpenedAt: panelOpenedAtRef.current,
+        clickedAt: Date.now(),
         answers: {
           eventTitle,
           episodeLabel,

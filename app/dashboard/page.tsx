@@ -3,12 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
-import AnnotationSidebar from "./annotation/AnnotationSidebar";
 import type {
   AnnotationTaskKey,
   DetectVital,
   WorkspaceTaskKey,
   SidebarEventItem,
+  EpisodeAnnotationState,
+  DetectedEpisodeItem,
 } from "./annotation/types";
 import type {
   PatientDemographic,
@@ -56,6 +57,17 @@ type StoredSelected = {
 };
 
 type AnnotationLevel = "summary" | "episode" | "otherEvents";
+
+type EpisodeTaskCompletionMap = Record<
+  string,
+  Record<AnnotationTaskKey, boolean>
+>;
+
+const EPISODE_TASK_ORDER: AnnotationTaskKey[] = [
+  "detect",
+  "mechanism",
+  "fluidEval",
+];
 
 function SectionCard({
   title,
@@ -137,7 +149,10 @@ function formatWeightKg(weightInOunces: unknown): string | undefined {
   return `${kg.toFixed(1)} kg`;
 }
 
-function formatBmi(heightInInches: unknown, weightInOunces: unknown): string | undefined {
+function formatBmi(
+  heightInInches: unknown,
+  weightInOunces: unknown
+): string | undefined {
   const inches = toFiniteNumber(heightInInches);
   const ounces = toFiniteNumber(weightInOunces);
 
@@ -170,7 +185,9 @@ function FieldGrid({
       {visibleItems.map((item) => (
         <div key={item.label} className="min-w-0 break-words leading-6">
           <span className="font-semibold text-gray-600">{item.label}:</span>{" "}
-          <span className="break-words whitespace-normal text-gray-900">{item.value}</span>
+          <span className="break-words whitespace-normal text-gray-900">
+            {item.value}
+          </span>
         </div>
       ))}
     </div>
@@ -295,6 +312,45 @@ function hasAnyVitalData(vitals: VitalPanelData | null) {
   );
 }
 
+function buildEmptyEpisodeState(): EpisodeAnnotationState {
+  return {
+    stage: "select_all",
+    annotateStep: "detect",
+    detectedEpisodes: [],
+    prioritizedEpisodeIds: [],
+    activeEpisodeId: null,
+  };
+}
+
+function getEpisodeVitalDisplayName(vital: DetectVital): string {
+  if (vital === "MAP") return "BP";
+  return vital;
+}
+
+function buildEpisodeTitle(
+  episodes: DetectedEpisodeItem[],
+  vital: DetectVital
+): string {
+  const sameVitalCount = episodes.filter((e) => e.vital === vital).length;
+  return `${getEpisodeVitalDisplayName(vital)}-${sameVitalCount + 1}`;
+}
+
+function renumberDetectedEpisodes(
+  episodes: DetectedEpisodeItem[]
+): DetectedEpisodeItem[] {
+  const counter: Record<string, number> = {};
+
+  return episodes.map((episode) => {
+    const key = episode.vital;
+    counter[key] = (counter[key] ?? 0) + 1;
+
+    return {
+      ...episode,
+      label: `${getEpisodeVitalDisplayName(episode.vital)}-${counter[key]}`,
+    };
+  });
+}
+
 export default function DashboardPage() {
   const router = useRouter();
 
@@ -338,12 +394,13 @@ export default function DashboardPage() {
   const [viewStartMin, setViewStartMin] = useState(0);
   const [sharedScrollLeft, setSharedScrollLeft] = useState(0);
 
-  const [sidebarEvents, setSidebarEvents] = useState<SidebarEventItem[]>([]);
-  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const voiceNote = useVoiceNote();
+  const [episodeState, setEpisodeState] = useState<EpisodeAnnotationState>(
+    buildEmptyEpisodeState()
+  );
+  const [episodeTaskCompletion, setEpisodeTaskCompletion] =
+    useState<EpisodeTaskCompletionMap>({});
 
-  const selectedEvent =
-    sidebarEvents.find((item) => item.id === selectedEventId) ?? null;
+  const voiceNote = useVoiceNote();
 
   const sessionStartRef = useRef<number>(performance.now());
   const actionLogRef = useRef<
@@ -364,20 +421,78 @@ export default function DashboardPage() {
     console.log("[ACTION]", { type, ts, payload });
   }
 
+  const prioritizedEpisodes = useMemo(() => {
+    return episodeState.detectedEpisodes.filter((e) =>
+      episodeState.prioritizedEpisodeIds.includes(e.id)
+    );
+  }, [episodeState]);
+
+  const activeEpisode = useMemo(() => {
+    if (!episodeState.activeEpisodeId) return null;
+    return (
+      episodeState.detectedEpisodes.find(
+        (e) => e.id === episodeState.activeEpisodeId
+      ) ?? null
+    );
+  }, [episodeState]);
+
+  const selectedEvent: SidebarEventItem | null = useMemo(() => {
+    if (!activeEpisode) return null;
+
+    return {
+      id: activeEpisode.id,
+      vital: activeEpisode.vital,
+      title: activeEpisode.label,
+      episodeLabel: activeEpisode.label,
+      startMin: activeEpisode.startMin,
+      endMin: activeEpisode.endMin,
+      y1: activeEpisode.y1,
+      y2: activeEpisode.y2,
+      completed:
+        episodeTaskCompletion[activeEpisode.id] ?? {
+          detect: false,
+          mechanism: false,
+          fluidEval: false,
+        },
+    };
+  }, [activeEpisode, episodeTaskCompletion]);
+
+  useEffect(() => {
+    if (!activeEpisode) return;
+
+    setSelectedDetectVital(activeEpisode.vital);
+    setSelectedWindow({
+      vital: activeEpisode.vital,
+      startMin: activeEpisode.startMin,
+      endMin: activeEpisode.endMin,
+      y1: activeEpisode.y1,
+      y2: activeEpisode.y2,
+    });
+  }, [activeEpisode]);
+
   function validateBeforeFinalSubmit(): string | null {
-    if (sidebarEvents.length === 0) {
-      return "Please create and complete at least one episode event before submitting.";
+    if (annotationLevel === "episode") {
+      if (episodeState.prioritizedEpisodeIds.length === 0) {
+        return "Please select up to 3 episodes for detailed annotation before submitting.";
+      }
     }
 
-    const incompleteEvents = sidebarEvents.filter(
-      (event) =>
-        !event.completed.detect ||
-        !event.completed.mechanism ||
-        !event.completed.fluidEval
-    );
+    if (prioritizedEpisodes.length === 0) {
+      return "Please select and annotate at least one episode before submitting.";
+    }
 
-    if (incompleteEvents.length > 0) {
-      return `There are ${incompleteEvents.length} episode event(s) with incomplete subtasks.`;
+    const incompleteEpisodes = prioritizedEpisodes.filter((episode) => {
+      const completed = episodeTaskCompletion[episode.id];
+      return (
+        !completed ||
+        !completed.detect ||
+        !completed.mechanism ||
+        !completed.fluidEval
+      );
+    });
+
+    if (incompleteEpisodes.length > 0) {
+      return `There are ${incompleteEpisodes.length} selected episode(s) with incomplete subtasks.`;
     }
 
     if (!patientSummaryCompleted) {
@@ -387,60 +502,167 @@ export default function DashboardPage() {
     return null;
   }
 
-  function handleCreateEventFromWindow(window: SelectedWindow) {
-    const duplicate = sidebarEvents.some(
-      (e) =>
-        e.vital === window.vital &&
-        e.startMin === window.startMin &&
-        e.endMin === window.endMin
-    );
+  function resetEpisodeWorkflow() {
+    setEpisodeState(buildEmptyEpisodeState());
+    setEpisodeTaskCompletion({});
+    setSelectedWindow(null);
+  }
 
-    if (duplicate) {
-      logAction("window_create_duplicate_ignored", {
+  function handleCreateEpisodeFromWindow(window: SelectedWindow) {
+    setEpisodeState((prev) => {
+      const duplicate = prev.detectedEpisodes.some(
+        (e) =>
+          e.vital === window.vital &&
+          e.startMin === window.startMin &&
+          e.endMin === window.endMin
+      );
+
+      if (duplicate) {
+        logAction("episode_duplicate_ignored", {
+          vital: window.vital,
+          startMin: window.startMin,
+          endMin: window.endMin,
+        });
+        return prev;
+      }
+
+      const newEpisode: DetectedEpisodeItem = {
+        id: `evt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        label: buildEpisodeTitle(prev.detectedEpisodes, window.vital),
         vital: window.vital,
         startMin: window.startMin,
         endMin: window.endMin,
         y1: window.y1,
         y2: window.y2,
+        selectedForAnnotation: false,
+      };
+
+      setEpisodeTaskCompletion((prevCompletion) => ({
+        ...prevCompletion,
+        [newEpisode.id]: {
+          detect: false,
+          mechanism: false,
+          fluidEval: false,
+        },
+      }));
+
+      logAction("episode_detected_add", {
+        id: newEpisode.id,
+        label: newEpisode.label,
+        vital: newEpisode.vital,
+        startMin: newEpisode.startMin,
+        endMin: newEpisode.endMin,
       });
+
+      return {
+        ...prev,
+        detectedEpisodes: [...prev.detectedEpisodes, newEpisode],
+      };
+    });
+  }
+
+  function handleDeleteDetectedEpisode(episodeId: string) {
+    setEpisodeState((prev) => {
+      const filteredDetected = prev.detectedEpisodes.filter((e) => e.id !== episodeId);
+      const renumberedDetected = renumberDetectedEpisodes(filteredDetected);
+
+      const nextPrioritized = prev.prioritizedEpisodeIds.filter((id) => id !== episodeId);
+
+      let nextActive = prev.activeEpisodeId;
+      if (nextActive === episodeId) {
+        nextActive = nextPrioritized[0] ?? null;
+      }
+
+      return {
+        ...prev,
+        detectedEpisodes: renumberedDetected,
+        prioritizedEpisodeIds: nextPrioritized,
+        activeEpisodeId: nextActive,
+      };
+    });
+
+    setEpisodeTaskCompletion((prev) => {
+      const next = { ...prev };
+      delete next[episodeId];
+      return next;
+    });
+
+    logAction("episode_detected_delete", { episodeId });
+  }
+
+  function handleTogglePrioritizedEpisode(episodeId: string) {
+    setEpisodeState((prev) => {
+      const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
+
+      if (!isSelected && prev.prioritizedEpisodeIds.length >= 3) {
+        alert("You can select up to 3 episodes.");
+        return prev;
+      }
+
+      const nextPrioritized = isSelected
+        ? prev.prioritizedEpisodeIds.filter((id) => id !== episodeId)
+        : [...prev.prioritizedEpisodeIds, episodeId];
+
+      const nextDetected = prev.detectedEpisodes.map((episode) =>
+        episode.id === episodeId
+          ? { ...episode, selectedForAnnotation: !isSelected }
+          : {
+              ...episode,
+              selectedForAnnotation: nextPrioritized.includes(episode.id),
+            }
+      );
+
+      let nextActive = prev.activeEpisodeId;
+      if (!nextActive || !nextPrioritized.includes(nextActive)) {
+        nextActive = nextPrioritized[0] ?? null;
+      }
+
+      logAction("episode_prioritized_toggle", {
+        episodeId,
+        selected: !isSelected,
+        prioritizedCount: nextPrioritized.length,
+      });
+
+      return {
+        ...prev,
+        detectedEpisodes: nextDetected,
+        prioritizedEpisodeIds: nextPrioritized,
+        activeEpisodeId: nextActive,
+      };
+    });
+  }
+
+  function handleAdvanceEpisodeStage() {
+    if (episodeState.stage === "select_all") {
+      if (episodeState.detectedEpisodes.length === 0) {
+        setSubmitError("Please detect at least one sustained abnormal physiology event.");
+        return;
+      }
+
+      setSubmitError(null);
+      setEpisodeState((prev) => ({
+        ...prev,
+        stage: "pick_top3",
+      }));
+      logAction("episode_stage_advance", { from: "select_all", to: "pick_top3" });
       return;
     }
 
-    const sameVitalCount = sidebarEvents.filter((e) => e.vital === window.vital).length;
-    const nextIndex = sameVitalCount + 1;
+    if (episodeState.stage === "pick_top3") {
+      if (episodeState.prioritizedEpisodeIds.length === 0) {
+        setSubmitError("Please choose at least one episode for detailed annotation.");
+        return;
+      }
 
-    const newEvent: SidebarEventItem = {
-      id: `evt-${Date.now()}`,
-      vital: window.vital,
-      title: `${window.vital}-${nextIndex}`,
-      episodeLabel: `${window.startMin}–${window.endMin} min`,
-      startMin: window.startMin,
-      endMin: window.endMin,
-      y1: window.y1,
-      y2: window.y2,
-      completed: {
-        detect: false,
-        mechanism: false,
-        fluidEval: false,
-      },
-    };
-
-    setSidebarEvents((prev) => [...prev, newEvent]);
-    setSelectedEventId(newEvent.id);
-    setSelectedDetectVital(newEvent.vital);
-    setSelectedWindow(window);
-    setSelectedTask("detect");
-    setAnnotationLevel("episode");
-
-    logAction("window_create_event", {
-      eventId: newEvent.id,
-      title: newEvent.title,
-      vital: newEvent.vital,
-      startMin: newEvent.startMin,
-      endMin: newEvent.endMin,
-      y1: newEvent.y1,
-      y2: newEvent.y2,
-    });
+      setSubmitError(null);
+      setSelectedTask("detect");
+      setEpisodeState((prev) => ({
+        ...prev,
+        stage: "annotate",
+        activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
+      }));
+      logAction("episode_stage_advance", { from: "pick_top3", to: "annotate" });
+    }
   }
 
   function handleTimelineWindowCreate(window: SelectedWindow) {
@@ -459,35 +681,53 @@ export default function DashboardPage() {
     }
 
     if (annotationLevel === "episode") {
-      handleCreateEventFromWindow(window);
+      if (episodeState.stage === "annotate") {
+        return;
+      }
+
+      handleCreateEpisodeFromWindow(window);
+      setSelectedWindow(window);
       return;
     }
 
     setSelectedWindow(window);
   }
 
-  const TASK_ORDER: AnnotationTaskKey[] = ["detect", "mechanism", "fluidEval"];
-
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
-    if (!selectedEventId) return;
+    if (!activeEpisode) return;
 
-    setSidebarEvents((prev) =>
-      prev.map((event) =>
-        event.id === selectedEventId
-          ? {
-              ...event,
-              completed: {
-                ...event.completed,
-                [task]: true,
-              },
-            }
-          : event
-      )
+    setEpisodeTaskCompletion((prev) => ({
+      ...prev,
+      [activeEpisode.id]: {
+        ...(prev[activeEpisode.id] ?? {
+          detect: false,
+          mechanism: false,
+          fluidEval: false,
+        }),
+        [task]: true,
+      },
+    }));
+
+    const currentIndex = EPISODE_TASK_ORDER.indexOf(task);
+    if (currentIndex >= 0 && currentIndex < EPISODE_TASK_ORDER.length - 1) {
+      setSelectedTask(EPISODE_TASK_ORDER[currentIndex + 1] as WorkspaceTaskKey);
+      return;
+    }
+
+    const currentEpisodeIndex = prioritizedEpisodes.findIndex(
+      (episode) => episode.id === activeEpisode.id
     );
 
-    const currentIndex = TASK_ORDER.indexOf(task);
-    if (currentIndex >= 0 && currentIndex < TASK_ORDER.length - 1) {
-      setSelectedTask(TASK_ORDER[currentIndex + 1] as WorkspaceTaskKey);
+    if (
+      currentEpisodeIndex >= 0 &&
+      currentEpisodeIndex < prioritizedEpisodes.length - 1
+    ) {
+      const nextEpisode = prioritizedEpisodes[currentEpisodeIndex + 1];
+      setEpisodeState((prev) => ({
+        ...prev,
+        activeEpisodeId: nextEpisode.id,
+      }));
+      setSelectedTask("detect");
     }
   }
 
@@ -525,11 +765,10 @@ export default function DashboardPage() {
       setSelectedTask("summary");
       setSelectedDetectVital("MAP");
       setSelectedWindow(null);
-      setSidebarEvents([]);
-      setSelectedEventId(null);
       setAnnotationLevel("summary");
       setTimeResolution(15);
       setViewStartMin(0);
+      resetEpisodeWorkflow();
 
       const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
       setCaseId(caseIdFromFile);
@@ -606,11 +845,11 @@ export default function DashboardPage() {
       annotationState: {
         annotationLevel,
         selectedTask,
-        selectedEventId,
         selectedDetectVital,
         selectedWindow,
-        sidebarEvents,
         patientSummaryCompleted,
+        episodeWorkflow: episodeState,
+        episodeTaskCompletion,
       },
       data: {
         demographic,
@@ -742,7 +981,9 @@ export default function DashboardPage() {
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
           <h1 className="flex items-center gap-4 text-2xl font-bold">
             <span>Patient {currentPatientIndex + 1}</span>
-            <span className="text-base font-normal text-gray-500">Case ID: {caseId}</span>
+            <span className="text-base font-normal text-gray-500">
+              Case ID: {caseId}
+            </span>
           </h1>
 
           <div className="flex items-center gap-3">
@@ -788,8 +1029,8 @@ export default function DashboardPage() {
                 hasSubmitted
                   ? "cursor-not-allowed bg-green-200 text-green-800"
                   : submitting
-                  ? "cursor-wait bg-blue-300 text-white"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
+                    ? "cursor-wait bg-blue-300 text-white"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             >
               {hasSubmitted ? "Submitted" : submitting ? "Submitting..." : "Submit"}
@@ -899,8 +1140,8 @@ export default function DashboardPage() {
                           surgeryContext.emergent === 1
                             ? "Yes"
                             : surgeryContext.emergent === 0
-                            ? "No"
-                            : undefined,
+                              ? "No"
+                              : undefined,
                       },
                     ]}
                   />
@@ -909,7 +1150,9 @@ export default function DashboardPage() {
 
               {preop && (
                 <div>
-                  <h4 className="mb-1 text-sm font-bold text-gray-800">Preoperative Assessment</h4>
+                  <h4 className="mb-1 text-sm font-bold text-gray-800">
+                    Preoperative Assessment
+                  </h4>
                   <FieldGrid
                     items={[
                       { label: "ASA Status", value: preop.asa_status },
@@ -962,90 +1205,93 @@ export default function DashboardPage() {
             {!vitals || !hasAnyVitalData(vitals) ? (
               <div className="text-sm text-gray-500">No intraoperative data available.</div>
             ) : (
-              <div className="grid grid-cols-[minmax(420px,1fr)_minmax(0,2fr)] gap-4 items-start">
-                <div className="min-w-0 max-w-[640px]">
+              <div className="grid grid-cols-[minmax(520px,1.15fr)_minmax(0,1.85fr)] items-start gap-4">
+                <div className="min-w-0 max-w-[680px]">
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <div className="space-y-3 border-b bg-white px-4 py-3">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                          Task Categories
-                        </span>
+                    <div className="space-y-2">
+  <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+    Categories
+  </div>
 
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setAnnotationLevel("summary");
-                            setSelectedTask("summary");
-                            logAction("annotation_level_click", { level: "summary" });
-                          }}
-                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                            annotationLevel === "summary"
-                              ? "border-blue-600 bg-blue-600 text-white"
-                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                          }`}
-                        >
-                          Summary
-                        </button>
+  <div className="pl-6 flex flex-wrap items-center gap-2">
+    <button
+      type="button"
+      onClick={() => {
+        setAnnotationLevel("summary");
+        setSelectedTask("summary");
+        logAction("annotation_level_click", { level: "summary" });
+      }}
+      className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+        annotationLevel === "summary"
+          ? "border-blue-600 bg-blue-600 text-white"
+          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      }`}
+    >
+      Summary
+    </button>
 
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setAnnotationLevel("episode");
-                            if (
-                              selectedTask !== "detect" &&
-                              selectedTask !== "mechanism" &&
-                              selectedTask !== "fluidEval"
-                            ) {
-                              setSelectedTask("detect");
-                            }
-                            logAction("annotation_level_click", { level: "episode" });
-                          }}
-                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                            annotationLevel === "episode"
-                              ? "border-blue-600 bg-blue-600 text-white"
-                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                          }`}
-                        >
-                          Episode Level
-                        </button>
+    <button
+      type="button"
+      onClick={() => {
+        setAnnotationLevel("episode");
+        if (
+          selectedTask !== "detect" &&
+          selectedTask !== "mechanism" &&
+          selectedTask !== "fluidEval"
+        ) {
+          setSelectedTask("detect");
+        }
+        logAction("annotation_level_click", { level: "episode" });
+      }}
+      className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+        annotationLevel === "episode"
+          ? "border-blue-600 bg-blue-600 text-white"
+          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      }`}
+    >
+      Sustained Abnormality Reasoning
+    </button>
 
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setAnnotationLevel("otherEvents");
-                            if (
-                              selectedTask !== "preventedEpisode" &&
-                              selectedTask !== "contextualEvent"
-                            ) {
-                              setSelectedTask("preventedEpisode");
-                            }
-                            logAction("annotation_level_click", { level: "otherEvents" });
-                          }}
-                          className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                            annotationLevel === "otherEvents"
-                              ? "border-blue-600 bg-blue-600 text-white"
-                              : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                          }`}
-                        >
-                          Other Events
-                        </button>
-                      </div>
+    <button
+      type="button"
+      onClick={() => {
+        setAnnotationLevel("otherEvents");
+        if (
+          selectedTask !== "preventedEpisode" &&
+          selectedTask !== "contextualEvent"
+        ) {
+          setSelectedTask("preventedEpisode");
+        }
+        logAction("annotation_level_click", { level: "otherEvents" });
+      }}
+      className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+        annotationLevel === "otherEvents"
+          ? "border-blue-600 bg-blue-600 text-white"
+          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      }`}
+    >
+      Management Reasoning
+    </button>
+  </div>
+</div>
 
-                      {annotationLevel === "episode" && (
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                            SubTasks
-                          </span>
-
+                      {annotationLevel === "episode" && episodeState.stage === "annotate" && (
+                        <div className="space-y-2">
+                        <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                          SubTasks
+                        </div>
+                      
+                        <div className="pl-20 flex flex-wrap items-center gap-2">
                           {(["detect", "mechanism", "fluidEval"] as const).map((task) => {
                             const active = selectedTask === task;
-
+                      
                             const labelMap = {
                               detect: "Abnormality Detection",
                               mechanism: "Mechanism",
                               fluidEval: "Intervention",
                             };
-
+                      
                             return (
                               <button
                                 key={task}
@@ -1054,7 +1300,7 @@ export default function DashboardPage() {
                                   setSelectedTask(task);
                                   logAction("task_tab_click", {
                                     task,
-                                    selectedEventId,
+                                    activeEpisodeId: episodeState.activeEpisodeId,
                                   });
                                 }}
                                 className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
@@ -1068,148 +1314,53 @@ export default function DashboardPage() {
                             );
                           })}
                         </div>
-                      )}
-
-                      {annotationLevel === "otherEvents" && (
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                            Other Event Task
-                          </span>
-
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setSelectedTask("preventedEpisode");
-                              logAction("task_tab_click", {
-                                task: "preventedEpisode",
-                                selectedEventId: null,
-                              });
-                            }}
-                            className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                              selectedTask === "preventedEpisode"
-                                ? "border-blue-600 bg-blue-600 text-white"
-                                : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                            }`}
-                          >
-                            Prevented Episode
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setSelectedTask("contextualEvent");
-                              logAction("task_tab_click", {
-                                task: "contextualEvent",
-                                selectedEventId: null,
-                              });
-                            }}
-                            className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                              selectedTask === "contextualEvent"
-                                ? "border-blue-600 bg-blue-600 text-white"
-                                : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                            }`}
-                          >
-                            Contextual Event
-                          </button>
-                        </div>
-                      )}
-                    </div>
-
-                    {annotationLevel === "episode" && (
-                      <div className="grid grid-cols-[150px_minmax(0,1fr)] items-start bg-white">
-                        <div className="border-r">
-                          <AnnotationSidebar
-                            events={sidebarEvents}
-                            selectedEventId={selectedEventId}
-                            onSelectEvent={(eventId) => {
-                              const event = sidebarEvents.find((e) => e.id === eventId);
-                              if (!event) return;
-
-                              setSelectedEventId(eventId);
-                              setSelectedDetectVital(event.vital as DetectVital);
-                              setSelectedWindow({
-                                vital: event.vital as DetectVital,
-                                startMin: event.startMin,
-                                endMin: event.endMin,
-                                y1: event.y1,
-                                y2: event.y2,
-                              });
-
-                              logAction("sidebar_event_select", {
-                                eventId,
-                                title: event.title,
-                                vital: event.vital,
-                                startMin: event.startMin,
-                                endMin: event.endMin,
-                              });
-                            }}
-                            onDeleteEvent={(eventId) => {
-                              const remaining = sidebarEvents.filter((e) => e.id !== eventId);
-                              setSidebarEvents(remaining);
-
-                              if (selectedEventId === eventId) {
-                                if (remaining.length > 0) {
-                                  const nextEvent = remaining[0];
-                                  setSelectedEventId(nextEvent.id);
-                                  setSelectedDetectVital(nextEvent.vital as DetectVital);
-                                  setSelectedWindow({
-                                    vital: nextEvent.vital as DetectVital,
-                                    startMin: nextEvent.startMin,
-                                    endMin: nextEvent.endMin,
-                                    y1: nextEvent.y1,
-                                    y2: nextEvent.y2,
-                                  });
-                                } else {
-                                  setSelectedEventId(null);
-                                  setSelectedWindow(null);
-                                }
-                              }
-
-                              logAction("sidebar_event_delete", { eventId });
-                            }}
-                          />
-                        </div>
-
-                        <div className="min-w-0">
-                          <TaskWorkspace
-                            task={selectedTask}
-                            onChangeTask={setSelectedTask}
-                            onSaveAndNextStep={(finishedTask) => {
-                              if (
-                                finishedTask === "detect" ||
-                                finishedTask === "mechanism" ||
-                                finishedTask === "fluidEval"
-                              ) {
-                                handleSaveAndNextStep(finishedTask);
-                              } else {
-                                setSelectedTask(finishedTask);
-                              }
-                            }}
-                            selectedEvent={selectedEvent}
-                            caseId={caseId}
-                            selectedDetectVital={selectedDetectVital}
-                            onChangeSelectedDetectVital={setSelectedDetectVital}
-                            selectedWindow={selectedWindow}
-                            anesthesiaStart={anesthesiaStart}
-                            gasData={{
-                              FiO2: vitals.gas["FiO2"],
-                              "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-                              "Air (L/min)": vitals.gas["Air (L/min)"],
-                              "N2O (L/min)": vitals.gas["N2O (L/min)"],
-                              "inO2 %": vitals.gas["inO2 %"],
-                              "inN2O %": vitals.gas["inN2O %"],
-                              "inSevoflurane %": vitals.gas["inSevoflurane %"],
-                              inIsoflurane: vitals.gas["inIsoflurane"],
-                              "etMAC exhaled": vitals.gas["etMAC exhaled"],
-                            }}
-                            medBolusRows={medBolusRowsState}
-                            medInfusionRows={medInfusionRowsState}
-                            fluidInRows={fluidInRowsState}
-                            fluidOutRows={fluidOutRowsState}
-                          />
-                        </div>
                       </div>
-                    )}
+                      )}
+
+{annotationLevel === "otherEvents" && (
+  <div className="space-y-2">
+    <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+      Subtasks
+    </div>
+
+    <div className="pl-20  flex flex-wrap items-center gap-2">
+      <button
+        type="button"
+        onClick={() => {
+          setSelectedTask("preventedEpisode");
+          logAction("task_tab_click", {
+            task: "preventedEpisode",
+          });
+        }}
+        className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+          selectedTask === "preventedEpisode"
+            ? "border-blue-600 bg-blue-600 text-white"
+            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+        }`}
+      >
+        Prevented Episode
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          setSelectedTask("contextualEvent");
+          logAction("task_tab_click", {
+            task: "contextualEvent",
+          });
+        }}
+        className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+          selectedTask === "contextualEvent"
+            ? "border-blue-600 bg-blue-600 text-white"
+            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+        }`}
+      >
+        Contextual Event
+      </button>
+    </div>
+  </div>
+)}
+                    </div>
 
                     {annotationLevel === "summary" && (
                       <div className="bg-white">
@@ -1268,6 +1419,450 @@ export default function DashboardPage() {
                             fluidOutRows={fluidOutRowsState}
                           />
                         )}
+                      </div>
+                    )}
+
+                    {annotationLevel === "episode" && (
+                      <div className="grid grid-cols-[220px_minmax(0,1fr)] items-start bg-white">
+                        <div className="border-r p-4">
+                          <h3 className="mb-4 text-base font-bold text-gray-800">
+                            Checklist
+                          </h3>
+
+                          {episodeState.stage === "select_all" && (
+                            <div className="space-y-2">
+                              {episodeState.detectedEpisodes.map((episode) => {
+                                const isPreviewing =
+                                  selectedWindow?.vital === episode.vital &&
+                                  selectedWindow?.startMin === episode.startMin &&
+                                  selectedWindow?.endMin === episode.endMin &&
+                                  selectedWindow?.y1 === episode.y1 &&
+                                  selectedWindow?.y2 === episode.y2;
+
+                                return (
+                                  <div
+                                    key={episode.id}
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => {
+                                      setSelectedDetectVital(episode.vital);
+                                      setSelectedWindow({
+                                        vital: episode.vital,
+                                        startMin: episode.startMin,
+                                        endMin: episode.endMin,
+                                        y1: episode.y1,
+                                        y2: episode.y2,
+                                      });
+
+                                      logAction("episode_checklist_preview", {
+                                        stage: "select_all",
+                                        episodeId: episode.id,
+                                        vital: episode.vital,
+                                        startMin: episode.startMin,
+                                        endMin: episode.endMin,
+                                      });
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        setSelectedDetectVital(episode.vital);
+                                        setSelectedWindow({
+                                          vital: episode.vital,
+                                          startMin: episode.startMin,
+                                          endMin: episode.endMin,
+                                          y1: episode.y1,
+                                          y2: episode.y2,
+                                        });
+                                      }
+                                    }}
+                                    className={`w-full cursor-pointer rounded-xl border px-3 py-2 text-left transition ${
+                                      isPreviewing
+                                        ? "border-blue-700 bg-blue-300 shadow-sm"
+                                        : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                                    }`}
+                                  >
+                                    <div className="flex items-start justify-between gap-2">
+                                      <div className="min-w-0">
+                                        <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                                          {episode.label}
+                                        </div>
+                                      </div>
+
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleDeleteDetectedEpisode(episode.id);
+                                        }}
+                                        className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-gray-400 hover:bg-red-50 hover:text-red-600"
+                                        title="Delete event"
+                                      >
+                                        ×
+                                      </button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+
+                              {episodeState.detectedEpisodes.length === 0 && (
+                                <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+                                  No events yet.
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {episodeState.stage === "pick_top3" && (
+                            <div className="space-y-2">
+                              <div className="mb-2 text-xs font-medium text-gray-500">
+                                Selected {episodeState.prioritizedEpisodeIds.length}/3
+                              </div>
+
+                              {episodeState.detectedEpisodes.map((episode) => {
+                                const checked =
+                                  episodeState.prioritizedEpisodeIds.includes(episode.id);
+
+                                const isPreviewing =
+                                  selectedWindow?.vital === episode.vital &&
+                                  selectedWindow?.startMin === episode.startMin &&
+                                  selectedWindow?.endMin === episode.endMin &&
+                                  selectedWindow?.y1 === episode.y1 &&
+                                  selectedWindow?.y2 === episode.y2;
+
+                                return (
+                                  <div
+                                    key={episode.id}
+                                    className={`w-full rounded-xl border px-3 py-2 transition ${
+                                      isPreviewing
+                                        ? "border-blue-700 bg-blue-300 shadow-sm"
+                                        : checked
+                                          ? "border-blue-400 bg-blue-100"
+                                          : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                                    }`}
+                                  >
+                                    <div className="flex items-start justify-between gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          setSelectedDetectVital(episode.vital);
+                                          setSelectedWindow({
+                                            vital: episode.vital,
+                                            startMin: episode.startMin,
+                                            endMin: episode.endMin,
+                                            y1: episode.y1,
+                                            y2: episode.y2,
+                                          });
+
+                                          logAction("episode_checklist_preview", {
+                                            stage: "pick_top3",
+                                            episodeId: episode.id,
+                                            vital: episode.vital,
+                                            startMin: episode.startMin,
+                                            endMin: episode.endMin,
+                                          });
+                                        }}
+                                        className="min-w-0 flex-1 text-left focus:outline-none"
+                                      >
+                                        <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                                          {episode.label}
+                                        </div>
+                                      </button>
+
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleTogglePrioritizedEpisode(episode.id);
+
+                                          logAction("episode_pick_top3_toggle", {
+                                            episodeId: episode.id,
+                                            nextSelected: !checked,
+                                          });
+                                        }}
+                                        className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
+                                          checked
+                                            ? "border-blue-600 bg-blue-600 text-white"
+                                            : "border-gray-300 bg-white text-transparent"
+                                        }`}
+                                        title={checked ? "Unselect episode" : "Select episode"}
+                                      >
+                                        ✓
+                                      </button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+
+                              {episodeState.detectedEpisodes.length === 0 && (
+                                <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+                                  No events yet.
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {episodeState.stage === "annotate" && (
+                            <div className="space-y-2">
+                              {prioritizedEpisodes.map((episode) => {
+                                const active =
+                                  episode.id === episodeState.activeEpisodeId;
+                                const completion = episodeTaskCompletion[episode.id] ?? {
+                                  detect: false,
+                                  mechanism: false,
+                                  fluidEval: false,
+                                };
+                                const doneCount = EPISODE_TASK_ORDER.filter(
+                                  (task) => completion[task]
+                                ).length;
+
+                                return (
+                                  <button
+                                    key={episode.id}
+                                    type="button"
+                                    onClick={() => {
+                                      setEpisodeState((prev) => ({
+                                        ...prev,
+                                        activeEpisodeId: episode.id,
+                                      }));
+                                      setSelectedTask("detect");
+                                      setSelectedDetectVital(episode.vital);
+                                      setSelectedWindow({
+                                        vital: episode.vital,
+                                        startMin: episode.startMin,
+                                        endMin: episode.endMin,
+                                        y1: episode.y1,
+                                        y2: episode.y2,
+                                      });
+
+                                      logAction("annotate_episode_switch", {
+                                        episodeId: episode.id,
+                                        vital: episode.vital,
+                                        startMin: episode.startMin,
+                                        endMin: episode.endMin,
+                                      });
+                                    }}
+                                    className={`w-full rounded-xl border px-3 py-2 text-left transition ${
+                                      active
+                                        ? "border-blue-700 bg-blue-300 shadow-sm"
+                                        : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                                    }`}
+                                  >
+                                    <div className="flex items-start justify-between gap-2">
+                                      <div className="min-w-0">
+                                        <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                                          {episode.label}
+                                        </div>
+                                        <div className="mt-1 text-xs text-gray-500">
+                                          {doneCount}/3
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="mt-2 flex items-center gap-1">
+                                      {EPISODE_TASK_ORDER.map((taskKey) => {
+                                        const completed = completion[taskKey];
+                                        return (
+                                          <div
+                                            key={taskKey}
+                                            className={`flex h-4 w-4 items-center justify-center rounded-[3px] border text-[10px] font-bold ${
+                                              completed
+                                                ? "border-green-500 bg-green-500 text-white"
+                                                : "border-gray-300 bg-white text-transparent"
+                                            }`}
+                                          >
+                                            ✓
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </button>
+                                );
+                              })}
+
+                              {prioritizedEpisodes.length === 0 && (
+                                <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+                                  No selected episodes.
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="min-w-0 p-4">
+                          {episodeState.stage === "select_all" && (
+                            <div className="rounded-2xl border bg-white p-6">
+                              <h4 className="mb-3 text-xl font-bold text-gray-900">
+                                Task 1. Select all sustained abnormal physiology events
+                              </h4>
+                              <p className="mb-6 text-sm text-gray-600">
+                                Please use the chart on the right to draw and confirm all
+                                sustained abnormal physiology windows you consider relevant.
+                                Newly created episodes will appear in the checklist on the left.
+                              </p>
+
+                              <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
+                                Detected episodes:{" "}
+                                <span className="font-semibold text-gray-900">
+                                  {episodeState.detectedEpisodes.length}
+                                </span>
+                              </div>
+
+                              <div className="mt-6 flex items-center justify-end gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    resetEpisodeWorkflow();
+                                    logAction("episode_select_all_reset");
+                                  }}
+                                  className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+                                >
+                                  Reset All
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={handleAdvanceEpisodeStage}
+                                  disabled={episodeState.detectedEpisodes.length === 0}
+                                  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                                    episodeState.detectedEpisodes.length === 0
+                                      ? "cursor-not-allowed bg-blue-300 text-white"
+                                      : "bg-blue-600 text-white hover:bg-blue-700"
+                                  }`}
+                                >
+                                  Save & Next Step
+                                </button>
+                              </div>
+                            </div>
+                          )}
+
+                          {episodeState.stage === "pick_top3" && (
+                            <div className="rounded-2xl border bg-white p-6">
+                              <h4 className="mb-3 text-xl font-bold text-gray-900">
+                                Task 2. Select up to 3 episodes for detailed annotation
+                              </h4>
+                              <p className="mb-6 text-sm text-gray-600">
+                                From the detected episodes on the left, choose the most
+                                important ones you want to annotate in detail.
+                              </p>
+
+                              <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
+                                Selected for detailed annotation:{" "}
+                                <span className="font-semibold text-gray-900">
+                                  {episodeState.prioritizedEpisodeIds.length}
+                                </span>
+                                {" / 3"}
+                              </div>
+
+                              <div className="mt-6 flex items-center justify-between gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setEpisodeState((prev) => ({
+                                      ...prev,
+                                      stage: "select_all",
+                                    }));
+                                    logAction("episode_stage_back", {
+                                      from: "pick_top3",
+                                      to: "select_all",
+                                    });
+                                  }}
+                                  className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+                                >
+                                  Back
+                                </button>
+
+                                <button
+                                  type="button"
+                                  onClick={handleAdvanceEpisodeStage}
+                                  disabled={episodeState.prioritizedEpisodeIds.length === 0}
+                                  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                                    episodeState.prioritizedEpisodeIds.length === 0
+                                      ? "cursor-not-allowed bg-blue-300 text-white"
+                                      : "bg-blue-600 text-white hover:bg-blue-700"
+                                  }`}
+                                >
+                                  Save & Next Step
+                                </button>
+                              </div>
+                            </div>
+                          )}
+
+{episodeState.stage === "annotate" && (
+  <div className="space-y-4">
+   <div className="flex items-center justify-between rounded-xl border border-orange-300 bg-orange-100 px-4 py-3">
+      <div>
+        <div className="text-sm font-semibold text-gray-900">
+          Detailed episode annotation
+        </div>
+        <div className="text-xs text-gray-500">
+          You can go back and revise the selected episodes if needed.
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          setEpisodeState((prev) => ({
+            ...prev,
+            stage: "pick_top3",
+            activeEpisodeId: null,
+          }));
+          setSelectedTask("detect");
+          logAction("episode_stage_back", {
+            from: "annotate",
+            to: "pick_top3",
+          });
+        }}
+        className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+      >
+        Back to episode selection
+      </button>
+    </div>
+
+    {selectedEvent ? (
+      <TaskWorkspace
+        task={selectedTask}
+        onChangeTask={setSelectedTask}
+        onSaveAndNextStep={(finishedTask) => {
+          if (
+            finishedTask === "detect" ||
+            finishedTask === "mechanism" ||
+            finishedTask === "fluidEval"
+          ) {
+            handleSaveAndNextStep(finishedTask);
+          } else {
+            setSelectedTask(finishedTask);
+          }
+        }}
+        selectedEvent={selectedEvent}
+        caseId={caseId}
+        selectedDetectVital={selectedDetectVital}
+        onChangeSelectedDetectVital={setSelectedDetectVital}
+        selectedWindow={selectedWindow}
+        anesthesiaStart={anesthesiaStart}
+        gasData={{
+          FiO2: vitals.gas["FiO2"],
+          "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+          "Air (L/min)": vitals.gas["Air (L/min)"],
+          "N2O (L/min)": vitals.gas["N2O (L/min)"],
+          "inO2 %": vitals.gas["inO2 %"],
+          "inN2O %": vitals.gas["inN2O %"],
+          "inSevoflurane %": vitals.gas["inSevoflurane %"],
+          inIsoflurane: vitals.gas["inIsoflurane"],
+          "etMAC exhaled": vitals.gas["etMAC exhaled"],
+        }}
+        medBolusRows={medBolusRowsState}
+        medInfusionRows={medInfusionRowsState}
+        fluidInRows={fluidInRowsState}
+        fluidOutRows={fluidOutRowsState}
+      />
+    ) : (
+      <div className="flex min-h-[560px] items-center justify-center rounded-xl border bg-white p-6 text-sm text-gray-500">
+        Please select one prioritized episode.
+      </div>
+    )}
+  </div>
+)}
+                        </div>
                       </div>
                     )}
                   </div>

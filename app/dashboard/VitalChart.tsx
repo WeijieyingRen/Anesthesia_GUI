@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-
 import {
   ResponsiveContainer,
   ScatterChart,
@@ -13,7 +12,6 @@ import {
   ReferenceLine,
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
-
 import type { DetectVital } from "./annotation/types";
 
 type TimeResolution = 15 | 5;
@@ -46,17 +44,13 @@ type VitalChartProps = {
   showTopTimeAxis?: boolean;
   timeZero?: string | null;
   embedded?: boolean;
-
   timeResolution?: TimeResolution;
-
   selectedDetectVital?: DetectVital;
   onChangeSelectedDetectVital?: (vital: DetectVital) => void;
-
   selectedWindow?: SelectedWindow | null;
   highlightWindow?: HighlightWindow | null;
   onChangeSelectedWindow?: (window: SelectedWindow | null) => void;
   onCreateEventFromWindow?: (window: SelectedWindow) => void;
-
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -92,11 +86,13 @@ type HoverStats = {
   etco2: number | null;
   temp: number | null;
 };
-
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
 const BASE_PX_PER_15_MIN = 64;
+const EDGE_HANDLE_PX = 16;
+const HANDLE_BORDER_PX = 4;
+const MIN_PREVIEW_BOX_PX = 18;
 
 function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] {
   return (series ?? [])
@@ -299,19 +295,37 @@ function formatHoverValue(value: number | null, digits = 0) {
   return value.toFixed(digits);
 }
 
+function getExactValueAtTime(
+  series: Record<string, TimeValuePoint[] | undefined>,
+  key: string,
+  time: number
+): number | null {
+  const arr = series[key] ?? [];
+  if (!arr.length) return null;
+
+  let best: TimeValuePoint | null = null;
+  let bestDist = Infinity;
+
+  for (const p of arr) {
+    if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
+    const d = Math.abs(p.time - time);
+    if (d < bestDist) {
+      best = p;
+      bestDist = d;
+    }
+  }
+
+  return best ? best.value : null;
+}
+
 function getSelectedSeriesKeys(
   series: Record<string, TimeValuePoint[] | undefined>,
   vital: DetectVital
 ): string[] {
   if (vital === "MAP") {
-    return [
-      "NIBP_SBP",
-      "NIBP_DBP",
-      "NIBP_MAP",
-      "ARTS",
-      "ARTD",
-      "ARTM",
-    ].filter((key) => (series[key] ?? []).length > 0);
+    return ["NIBP_SBP", "NIBP_DBP", "NIBP_MAP", "ARTS", "ARTD", "ARTM"].filter(
+      (key) => (series[key] ?? []).length > 0
+    );
   }
 
   if (vital === "HR") {
@@ -344,90 +358,6 @@ function getSelectedSeriesKeys(
   return [];
 }
 
-function getExactValueAtTime(
-  series: Record<string, TimeValuePoint[] | undefined>,
-  key: string,
-  time: number
-): number | null {
-  const arr = series[key] ?? [];
-  if (!arr.length) return null;
-
-  let best: TimeValuePoint | null = null;
-  let bestDist = Infinity;
-
-  for (const p of arr) {
-    if (!Number.isFinite(p.time) || !Number.isFinite(p.value)) continue;
-    const d = Math.abs(p.time - time);
-    if (d < bestDist) {
-      best = p;
-      bestDist = d;
-    }
-  }
-
-  return best ? best.value : null;
-}
-function getWindowYBounds(
-  series: Record<string, TimeValuePoint[] | undefined>,
-  selectedVital: DetectVital,
-  startMin: number,
-  endMin: number,
-  yDomain?: [number, number]
-): { y1: number; y2: number } | null {
-  const keys = getSelectedSeriesKeys(series, selectedVital);
-  if (!keys.length) return null;
-
-  const data = keys.flatMap((key) =>
-    (series[key] ?? []).filter(
-      (p) =>
-        Number.isFinite(p.time) &&
-        Number.isFinite(p.value) &&
-        p.time >= startMin &&
-        p.time <= endMin
-    )
-  );
-
-  const domainMin = yDomain?.[0] ?? 0;
-  const domainMax = yDomain?.[1] ?? 200;
-  const domainRange = domainMax - domainMin;
-
-  if (!data.length) {
-    const center = (domainMin + domainMax) / 2;
-    const half = Math.max(domainRange * 0.08, 12);
-    return {
-      y1: Math.max(domainMin, center - half),
-      y2: Math.min(domainMax, center + half),
-    };
-  }
-
-  const values = data.map((p) => p.value);
-  const minV = Math.min(...values);
-  const maxV = Math.max(...values);
-
-  const center = (minV + maxV) / 2;
-  const rawHeight = Math.max(maxV - minV, 1);
-
-  const minBoxHeight = Math.max(domainRange * 0.14, 18);
-  const finalHeight = Math.max(rawHeight * 1.5, minBoxHeight);
-
-  let y1 = center - finalHeight / 2;
-  let y2 = center + finalHeight / 2;
-
-  if (y1 < domainMin) {
-    y2 += domainMin - y1;
-    y1 = domainMin;
-  }
-
-  if (y2 > domainMax) {
-    y1 -= y2 - domainMax;
-    y2 = domainMax;
-  }
-
-  y1 = Math.max(domainMin, y1);
-  y2 = Math.min(domainMax, y2);
-
-  return { y1, y2 };
-}
-
 function FixedYAxis({
   ticks,
   height,
@@ -446,10 +376,7 @@ function FixedYAxis({
   const plotHeight = Math.max(1, height - chartMarginTop - chartMarginBottom);
 
   return (
-    <div
-      className="relative border-r bg-white"
-      style={{ width: AXIS_COL_WIDTH, height }}
-    >
+    <div className="relative border-r bg-white" style={{ width: AXIS_COL_WIDTH, height }}>
       {ticks.map((tick) => {
         const ratio = (domainMax - tick) / (domainMax - domainMin);
         const top = chartMarginTop + ratio * plotHeight;
@@ -504,6 +431,7 @@ export default function VitalChart({
   const [hoverMinute, setHoverMinute] = useState<number | null>(null);
 
   const [dragStartMin, setDragStartMin] = useState<number | null>(null);
+  const [dragStartY, setDragStartY] = useState<number | null>(null);
   const [dragCurrentMin, setDragCurrentMin] = useState<number | null>(null);
   const [dragCurrentY, setDragCurrentY] = useState<number | null>(null);
 
@@ -559,7 +487,7 @@ export default function VitalChart({
   const plotWidth = contentWidth - PLOT_RIGHT;
 
   function minuteToPixel(minute: number) {
-    if (!effectiveXEnd || effectiveXEnd <= 0) return 0;
+    if (!effectiveXEnd || effectiveXEnd <= 0 || plotWidth <= 0) return 0;
     return (minute / effectiveXEnd) * plotWidth;
   }
 
@@ -579,13 +507,12 @@ export default function VitalChart({
 
   function clientXToMinute(clientX: number) {
     const el = chartOverlayRef.current;
-    if (!el || effectiveXEnd <= 0) return 0;
+    if (!el || effectiveXEnd <= 0 || plotWidth <= 0) return 0;
 
     const rect = el.getBoundingClientRect();
-    const xInPlot = clientX - rect.left;
-    const minute = xInPlot / viewConfig.pxPerMin;
-
-    return Math.max(0, Math.min(effectiveXEnd, minute));
+    const rawX = clientX - rect.left;
+    const xInPlot = Math.max(0, Math.min(rawX, plotWidth));
+    return (xInPlot / plotWidth) * effectiveXEnd;
   }
 
   function clientYToValue(clientY: number) {
@@ -603,7 +530,8 @@ export default function VitalChart({
   }
 
   function pixelToMinute(px: number) {
-    return px / viewConfig.pxPerMin;
+    if (effectiveXEnd <= 0 || plotWidth <= 0) return 0;
+    return (px / plotWidth) * effectiveXEnd;
   }
 
   function pixelToValue(py: number) {
@@ -617,8 +545,8 @@ export default function VitalChart({
   function getHoverMode(minute: number, value: number): DragMode {
     if (!selectedWindow) return null;
 
-    const xEdgeThresholdMin = Math.max(pixelToMinute(16), 2);
-    const yEdgeThresholdVal = Math.max(pixelToValue(16), 6);
+    const xEdgeThresholdMin = Math.max(pixelToMinute(EDGE_HANDLE_PX), 2);
+    const yEdgeThresholdVal = Math.max(pixelToValue(EDGE_HANDLE_PX), 6);
 
     const { startMin, endMin, y1, y2 } = selectedWindow;
 
@@ -654,69 +582,154 @@ export default function VitalChart({
     return null;
   }
 
-  const activeStartMin =
-    isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null
-      ? Math.min(dragStartMin, dragCurrentMin)
-      : isDragging &&
-          dragMode === "resize-left" &&
-          selectedWindow &&
-          dragCurrentMin != null
-        ? Math.min(dragCurrentMin, selectedWindow.endMin - 1)
-        : isDragging &&
-            dragMode === "resize-right" &&
-            selectedWindow &&
-            dragCurrentMin != null
-          ? Math.max(dragCurrentMin, selectedWindow.startMin + 1)
-          : isDragging &&
-              dragMode === "move" &&
-              selectedWindow &&
-              dragCurrentMin != null
-            ? Math.max(
-                0,
-                Math.min(dragCurrentMin - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
-              )
-            : selectedWindow?.startMin ?? null;
+  function resetDragState() {
+    setIsDragging(false);
+    setDragMode(null);
+    setHoverMode(null);
+    setDragStartMin(null);
+    setDragStartY(null);
+    setDragCurrentMin(null);
+    setDragCurrentY(null);
+    setMoveOffsetMin(0);
+    setMoveWindowWidthMin(0);
+    setMoveOffsetY(0);
+    setMoveWindowHeightY(0);
+  }
 
-  const activeEndMin =
-    isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null
-      ? Math.max(dragStartMin, dragCurrentMin)
-      : isDragging &&
-          dragMode === "resize-left" &&
-          selectedWindow
-        ? selectedWindow.endMin
-        : isDragging &&
-            dragMode === "resize-right" &&
-            selectedWindow &&
-            dragCurrentMin != null
-          ? Math.max(dragCurrentMin, selectedWindow.startMin + 1)
-          : isDragging &&
-              dragMode === "move" &&
-              selectedWindow &&
-              dragCurrentMin != null
-            ? Math.max(
-                0,
-                Math.min(dragCurrentMin - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
-              ) + moveWindowWidthMin
-            : selectedWindow?.endMin ?? null;
+  function finishDrag(clientX: number, clientY: number) {
+    const minute = clientXToMinute(clientX);
+    const value = clientYToValue(clientY);
 
-  const autoCreateYBounds = useMemo(() => {
-    if (
-      !isDragging ||
-      dragMode !== "create" ||
-      activeStartMin == null ||
-      activeEndMin == null
-    ) {
-      return null;
+    let nextWindow: SelectedWindow | null = null;
+
+    if (dragMode === "create") {
+      const start = dragStartMin ?? minute;
+      const startY = dragStartY ?? value;
+
+      const s = Math.min(start, minute);
+      const t = Math.max(start, minute);
+
+      const y1 = clampY(Math.min(startY, value));
+      const y2 = clampY(Math.max(startY, value));
+
+      if (t > s && y2 > y1) {
+        nextWindow = {
+          vital: selectedDetectVital,
+          startMin: s,
+          endMin: t,
+          y1,
+          y2,
+        };
+      }
     }
 
-    return getWindowYBounds(
-      series,
-      selectedDetectVital,
-      activeStartMin,
-      activeEndMin,
-      yDomain
-    );
-  }, [isDragging, dragMode, activeStartMin, activeEndMin, series, selectedDetectVital, yDomain]);
+    if (dragMode === "resize-left" && selectedWindow) {
+      const s = Math.min(minute, selectedWindow.endMin - 1);
+      nextWindow = {
+        ...selectedWindow,
+        startMin: Math.max(0, s),
+      };
+    }
+
+    if (dragMode === "resize-right" && selectedWindow) {
+      const t = Math.max(minute, selectedWindow.startMin + 1);
+      nextWindow = {
+        ...selectedWindow,
+        endMin: Math.min(effectiveXEnd, t),
+      };
+    }
+
+    if (dragMode === "resize-top" && selectedWindow) {
+      const newY2 = Math.max(value, selectedWindow.y1 + 1);
+      nextWindow = {
+        ...selectedWindow,
+        y2: clampY(newY2),
+      };
+    }
+
+    if (dragMode === "resize-bottom" && selectedWindow) {
+      const newY1 = Math.min(value, selectedWindow.y2 - 1);
+      nextWindow = {
+        ...selectedWindow,
+        y1: clampY(newY1),
+      };
+    }
+
+    if (dragMode === "move" && selectedWindow) {
+      const newStart = Math.max(
+        0,
+        Math.min(minute - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
+      );
+      const newY1 = Math.max(
+        domainMin,
+        Math.min(value - moveOffsetY, domainMax - moveWindowHeightY)
+      );
+
+      nextWindow = {
+        ...selectedWindow,
+        startMin: newStart,
+        endMin: newStart + moveWindowWidthMin,
+        y1: newY1,
+        y2: newY1 + moveWindowHeightY,
+      };
+    }
+
+    if (nextWindow) {
+      onChangeSelectedWindow?.(nextWindow);
+      if (dragMode === "create") {
+        onCreateEventFromWindow?.(nextWindow);
+      }
+    }
+
+    resetDragState();
+  }
+
+  const activeStartMin =
+  isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null
+    ? Math.min(dragStartMin, dragCurrentMin)
+    : isDragging &&
+        dragMode === "resize-left" &&
+        selectedWindow &&
+        dragCurrentMin != null
+      ? Math.min(dragCurrentMin, selectedWindow.endMin - 1)
+      : isDragging &&
+          dragMode === "resize-right" &&
+          selectedWindow
+        ? selectedWindow.startMin
+        : isDragging &&
+            dragMode === "move" &&
+            selectedWindow &&
+            dragCurrentMin != null
+          ? Math.max(
+              0,
+              Math.min(dragCurrentMin - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
+            )
+          : selectedWindow?.startMin ?? null;
+
+          const minPreviewWidthMin = Math.max(pixelToMinute(MIN_PREVIEW_BOX_PX), 1);
+
+const activeEndMin =
+  isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null
+    ? Math.max(dragStartMin, dragCurrentMin)
+    : isDragging &&
+        dragMode === "resize-left" &&
+        selectedWindow
+      ? selectedWindow.endMin
+      : isDragging &&
+          dragMode === "resize-right" &&
+          selectedWindow &&
+          dragCurrentMin != null
+        ? Math.max(dragCurrentMin, selectedWindow.startMin + minPreviewWidthMin)
+        : isDragging &&
+            dragMode === "move" &&
+            selectedWindow &&
+            dragCurrentMin != null
+          ? Math.max(
+              0,
+              Math.min(dragCurrentMin - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
+            ) + moveWindowWidthMin
+          : selectedWindow?.endMin ?? null;
+
 
   const activeY1 =
     isDragging &&
@@ -740,8 +753,9 @@ export default function VitalChart({
           ? selectedWindow.y1
           : isDragging &&
               dragMode === "create" &&
-              autoCreateYBounds
-            ? autoCreateYBounds.y1
+              dragStartY != null &&
+              dragCurrentY != null
+            ? Math.min(dragStartY, dragCurrentY)
             : selectedWindow?.y1 ?? null;
 
   const activeY2 =
@@ -766,8 +780,9 @@ export default function VitalChart({
           ? selectedWindow.y2
           : isDragging &&
               dragMode === "create" &&
-              autoCreateYBounds
-            ? autoCreateYBounds.y2
+              dragStartY != null &&
+              dragCurrentY != null
+            ? Math.max(dragStartY, dragCurrentY)
             : selectedWindow?.y2 ?? null;
 
   const minCreateWidthMin = Math.max(pixelToMinute(10), 2);
@@ -841,22 +856,15 @@ export default function VitalChart({
     }
 
     return null;
-  }, [
-    isDragging,
-    dragMode,
-    dragStartMin,
-    dragCurrentMin,
-    selectedDetectVital,
-    selectedWindow,
-  ]);
+  }, [isDragging, dragMode, dragStartMin, dragCurrentMin, selectedDetectVital, selectedWindow]);
 
   const windowStats = useMemo(() => {
     if (!statsWindow) return null;
-  
+
     const startMin = Math.round(statsWindow.startMin);
     const endMin = Math.round(statsWindow.endMin);
     const duration = Math.round(statsWindow.endMin - statsWindow.startMin);
-  
+
     const getRangeForKey = (key: string) => {
       const data = (series[key] ?? []).filter(
         (p) =>
@@ -865,29 +873,21 @@ export default function VitalChart({
           p.time >= statsWindow.startMin &&
           p.time <= statsWindow.endMin
       );
-  
+
       if (!data.length) return null;
-  
+
       const values = data.map((p) => p.value);
       return {
         min: Math.min(...values),
         max: Math.max(...values),
       };
     };
-  
+
     if (statsWindow.vital === "MAP") {
-      const sbp =
-        getRangeForKey("ARTS") ??
-        getRangeForKey("NIBP_SBP");
-  
-      const dbp =
-        getRangeForKey("ARTD") ??
-        getRangeForKey("NIBP_DBP");
-  
-      const map =
-        getRangeForKey("ARTM") ??
-        getRangeForKey("NIBP_MAP");
-  
+      const sbp = getRangeForKey("ARTS") ?? getRangeForKey("NIBP_SBP");
+      const dbp = getRangeForKey("ARTD") ?? getRangeForKey("NIBP_DBP");
+      const map = getRangeForKey("ARTM") ?? getRangeForKey("NIBP_MAP");
+
       return {
         vital: "MAP" as const,
         startMin,
@@ -898,7 +898,7 @@ export default function VitalChart({
         map,
       };
     }
-  
+
     const selectedKeys = getSelectedSeriesKeys(series, statsWindow.vital);
     if (!selectedKeys.length) {
       return {
@@ -910,7 +910,7 @@ export default function VitalChart({
         max: null,
       };
     }
-  
+
     const data = selectedKeys.flatMap((key) =>
       (series[key] ?? []).filter(
         (p) =>
@@ -920,7 +920,7 @@ export default function VitalChart({
           p.time <= statsWindow.endMin
       )
     );
-  
+
     if (!data.length) {
       return {
         vital: statsWindow.vital,
@@ -931,9 +931,9 @@ export default function VitalChart({
         max: null,
       };
     }
-  
+
     const values = data.map((p) => p.value);
-  
+
     return {
       vital: statsWindow.vital,
       startMin,
@@ -1000,16 +1000,16 @@ export default function VitalChart({
   const overlayBox = useMemo(() => {
     if (!displayWindow) return null;
 
-    const left = minuteToPixel(displayWindow.startMin);
-    const right = minuteToPixel(displayWindow.endMin);
-    const top = valueToPixel(displayWindow.y2);
-    const bottom = valueToPixel(displayWindow.y1);
+    const left = Math.round(minuteToPixel(displayWindow.startMin));
+    const right = Math.round(minuteToPixel(displayWindow.endMin));
+    const top = Math.round(valueToPixel(displayWindow.y2));
+    const bottom = Math.round(valueToPixel(displayWindow.y1));
 
     return {
       left,
       top,
-      width: Math.max(2, right - left),
-      height: Math.max(2, bottom - top),
+      width: Math.max(1, right - left),
+      height: Math.max(1, bottom - top),
     };
   }, [displayWindow]);
 
@@ -1027,15 +1027,58 @@ export default function VitalChart({
     return "crosshair";
   }, [isDragging, dragMode, hoverMode]);
 
+  useEffect(() => {
+    function handleWindowMouseMove(e: MouseEvent) {
+      if (!chartOverlayRef.current) return;
+
+      const minute = clientXToMinute(e.clientX);
+      const value = clientYToValue(e.clientY);
+
+      if (!isDragging) {
+        setHoverMode(getHoverMode(minute, value));
+        setHoverMinute(minute);
+        return;
+      }
+
+      setDragCurrentMin(minute);
+      setDragCurrentY(value);
+    }
+
+    function handleWindowMouseUp(e: MouseEvent) {
+      if (!isDragging) return;
+      finishDrag(e.clientX, e.clientY);
+    }
+
+    window.addEventListener("mousemove", handleWindowMouseMove);
+    window.addEventListener("mouseup", handleWindowMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+      window.removeEventListener("mouseup", handleWindowMouseUp);
+    };
+  }, [
+    isDragging,
+    dragMode,
+    dragStartMin,
+    dragStartY,
+    moveOffsetMin,
+    moveWindowWidthMin,
+    moveOffsetY,
+    moveWindowHeightY,
+    selectedWindow,
+    selectedDetectVital,
+    effectiveXEnd,
+    domainMin,
+    domainMax,
+    onChangeSelectedWindow,
+    onCreateEventFromWindow,
+  ]);
+
   const minorGridTicks = useMemo(() => {
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
     const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += viewConfig.minorStep) {
-      ticks.push(t);
-    }
-    if (ticks[ticks.length - 1] !== effectiveXEnd) {
-      ticks.push(effectiveXEnd);
-    }
+    for (let t = 0; t <= effectiveXEnd; t += viewConfig.minorStep) ticks.push(t);
+    if (ticks[ticks.length - 1] !== effectiveXEnd) ticks.push(effectiveXEnd);
     return ticks;
   }, [effectiveXEnd, viewConfig.minorStep]);
 
@@ -1047,12 +1090,8 @@ export default function VitalChart({
     }
 
     const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += viewConfig.majorStep) {
-      ticks.push(t);
-    }
-    if (ticks[ticks.length - 1] !== effectiveXEnd) {
-      ticks.push(effectiveXEnd);
-    }
+    for (let t = 0; t <= effectiveXEnd; t += viewConfig.majorStep) ticks.push(t);
+    if (ticks[ticks.length - 1] !== effectiveXEnd) ticks.push(effectiveXEnd);
     return ticks;
   }, [timeResolution, xTicks, effectiveXEnd, viewConfig.majorStep]);
 
@@ -1065,9 +1104,7 @@ export default function VitalChart({
     [domainMin, domainMax]
   );
 
-  if (!keys.length) {
-    return null;
-  }
+  if (!keys.length) return null;
 
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
@@ -1075,7 +1112,9 @@ export default function VitalChart({
 
       <div
         className="grid gap-0"
-        style={{ gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)` }}
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
+        }}
       >
         <div className="border-r pr-0">
           <div style={{ height: leftLegendTopSpacer }} />
@@ -1164,30 +1203,15 @@ export default function VitalChart({
                 <ZAxis range={[40, 40]} />
 
                 {minorGridTicks.map((tick) => (
-                  <ReferenceLine
-                    key={`x-minor-${tick}`}
-                    x={tick}
-                    stroke="#d7dbe2"
-                    strokeWidth={0.9}
-                  />
+                  <ReferenceLine key={`x-minor-${tick}`} x={tick} stroke="#d7dbe2" strokeWidth={0.9} />
                 ))}
 
                 {majorGridTicks.map((tick) => (
-                  <ReferenceLine
-                    key={`x-major-${tick}`}
-                    x={tick}
-                    stroke="#9aa3b2"
-                    strokeWidth={1.4}
-                  />
+                  <ReferenceLine key={`x-major-${tick}`} x={tick} stroke="#9aa3b2" strokeWidth={1.4} />
                 ))}
 
                 {yTicks.map((tick) => (
-                  <ReferenceLine
-                    key={`y-grid-${tick}`}
-                    y={tick}
-                    stroke="#b0b7c3"
-                    strokeWidth={1.1}
-                  />
+                  <ReferenceLine key={`y-grid-${tick}`} y={tick} stroke="#b0b7c3" strokeWidth={1.1} />
                 ))}
 
                 <ReferenceLine y={domainMin} stroke="#4b5563" strokeWidth={2.2} />
@@ -1241,8 +1265,15 @@ export default function VitalChart({
 
             <div
               ref={chartOverlayRef}
-              className="absolute inset-0 z-20"
-              style={{ cursor: interactionCursor }}
+              className="absolute z-20"
+              style={{
+                left: 0,
+                top: 0,
+                width: contentWidth,
+                height,
+                cursor: interactionCursor,
+                overflow: "visible",
+              }}
               onMouseDown={(e) => {
                 if (effectiveXEnd <= 0) return;
 
@@ -1302,122 +1333,9 @@ export default function VitalChart({
                 setIsDragging(true);
                 setDragMode("create");
                 setDragStartMin(minute);
-                setDragCurrentMin(minute);
-                setDragCurrentY(null);
-              }}
-              onMouseMove={(e) => {
-                const minute = clientXToMinute(e.clientX);
-                const value = clientYToValue(e.clientY);
-
-                if (!isDragging) {
-                  setHoverMode(getHoverMode(minute, value));
-                  setHoverMinute(minute);
-                  return;
-                }
-
+                setDragStartY(value);
                 setDragCurrentMin(minute);
                 setDragCurrentY(value);
-              }}
-              onMouseUp={(e) => {
-                if (!isDragging) return;
-
-                const minute = clientXToMinute(e.clientX);
-                const value = clientYToValue(e.clientY);
-
-                let nextWindow: SelectedWindow | null = null;
-
-                if (dragMode === "create") {
-                  const start = dragStartMin ?? minute;
-                  const s = Math.round(Math.min(start, minute));
-                  const t = Math.round(Math.max(start, minute));
-
-                  if (t > s) {
-                    const bounds = getWindowYBounds(series, selectedDetectVital, s, t, yDomain);
-                    if (bounds) {
-                      nextWindow = {
-                        vital: selectedDetectVital,
-                        startMin: s,
-                        endMin: t,
-                        y1: bounds.y1,
-                        y2: bounds.y2,
-                      };
-                    }
-                  }
-                }
-
-                if (dragMode === "resize-left" && selectedWindow) {
-                  const s = Math.round(Math.min(minute, selectedWindow.endMin - 1));
-                  nextWindow = {
-                    ...selectedWindow,
-                    vital: selectedWindow.vital,
-                    startMin: Math.max(0, s),
-                  };
-                }
-
-                if (dragMode === "resize-right" && selectedWindow) {
-                  const t = Math.round(Math.max(minute, selectedWindow.startMin + 1));
-                  nextWindow = {
-                    ...selectedWindow,
-                    vital: selectedWindow.vital,
-                    endMin: Math.min(effectiveXEnd, t),
-                  };
-                }
-
-                if (dragMode === "resize-top" && selectedWindow) {
-                  const newY2 = Math.max(value, selectedWindow.y1 + 1);
-                  nextWindow = {
-                    ...selectedWindow,
-                    vital: selectedWindow.vital,
-                    y2: clampY(newY2),
-                  };
-                }
-
-                if (dragMode === "resize-bottom" && selectedWindow) {
-                  const newY1 = Math.min(value, selectedWindow.y2 - 1);
-                  nextWindow = {
-                    ...selectedWindow,
-                    vital: selectedWindow.vital,
-                    y1: clampY(newY1),
-                  };
-                }
-
-                if (dragMode === "move" && selectedWindow) {
-                  const newStart = Math.max(
-                    0,
-                    Math.min(minute - moveOffsetMin, effectiveXEnd - moveWindowWidthMin)
-                  );
-                  const newY1 = Math.max(
-                    domainMin,
-                    Math.min(value - moveOffsetY, domainMax - moveWindowHeightY)
-                  );
-
-                  nextWindow = {
-                    ...selectedWindow,
-                    vital: selectedWindow.vital,
-                    startMin: Math.round(newStart),
-                    endMin: Math.round(newStart + moveWindowWidthMin),
-                    y1: newY1,
-                    y2: newY1 + moveWindowHeightY,
-                  };
-                }
-
-                if (nextWindow) {
-                  onChangeSelectedWindow?.(nextWindow);
-                  if (dragMode === "create") {
-                    onCreateEventFromWindow?.(nextWindow);
-                  }
-                }
-
-                setIsDragging(false);
-                setDragMode(null);
-                setHoverMode(null);
-                setDragStartMin(null);
-                setDragCurrentMin(null);
-                setDragCurrentY(null);
-                setMoveOffsetMin(0);
-                setMoveWindowWidthMin(0);
-                setMoveOffsetY(0);
-                setMoveWindowHeightY(0);
               }}
               onMouseLeave={() => {
                 if (!isDragging) {
@@ -1430,7 +1348,7 @@ export default function VitalChart({
                 <div
                   className="pointer-events-none absolute rounded-md border bg-white px-3 py-2 text-xs shadow"
                   style={{
-                    left: Math.min(minuteToPixel(hoverStats.time) + 8, contentWidth - 260),
+                    left: Math.min(minuteToPixel(hoverStats.time) + 8, plotWidth - 260),
                     top: chartMarginTop + 8,
                     zIndex: 1000,
                     color: "#111827",
@@ -1450,52 +1368,53 @@ export default function VitalChart({
                   <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
                 </div>
               )}
-{windowStats && (
-  <div
-    className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
-    style={{
-      left: 8,
-      top: 40,
-      zIndex: 999,
-      color: "#111827",
-      lineHeight: 1.35,
-    }}
-  >
-    <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
-    <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
-    <div>Dur: {windowStats.duration} min</div>
 
-    {windowStats.vital === "MAP" ? (
-      <>
-        <div>
-          SBP:{" "}
-          {windowStats.sbp
-            ? `${windowStats.sbp.min.toFixed(1)} ~ ${windowStats.sbp.max.toFixed(1)}`
-            : "-"}
-        </div>
-        <div>
-          DBP:{" "}
-          {windowStats.dbp
-            ? `${windowStats.dbp.min.toFixed(1)} ~ ${windowStats.dbp.max.toFixed(1)}`
-            : "-"}
-        </div>
-        <div>
-          MAP:{" "}
-          {windowStats.map
-            ? `${windowStats.map.min.toFixed(1)} ~ ${windowStats.map.max.toFixed(1)}`
-            : "-"}
-        </div>
-      </>
-    ) : (
-      <div>
-        {windowStats.vital}:{" "}
-        {windowStats.min == null || windowStats.max == null
-          ? "-"
-          : `${windowStats.min.toFixed(1)} ~ ${windowStats.max.toFixed(1)}`}
-      </div>
-    )}
-  </div>
-)}
+              {windowStats && (
+                <div
+                  className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
+                  style={{
+                    left: 8,
+                    top: 40,
+                    zIndex: 999,
+                    color: "#111827",
+                    lineHeight: 1.35,
+                  }}
+                >
+                  <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
+                  <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
+                  <div>Dur: {windowStats.duration} min</div>
+
+                  {windowStats.vital === "MAP" ? (
+                    <>
+                      <div>
+                        SBP:{" "}
+                        {windowStats.sbp
+                          ? `${windowStats.sbp.min.toFixed(1)} ~ ${windowStats.sbp.max.toFixed(1)}`
+                          : "-"}
+                      </div>
+                      <div>
+                        DBP:{" "}
+                        {windowStats.dbp
+                          ? `${windowStats.dbp.min.toFixed(1)} ~ ${windowStats.dbp.max.toFixed(1)}`
+                          : "-"}
+                      </div>
+                      <div>
+                        MAP:{" "}
+                        {windowStats.map
+                          ? `${windowStats.map.min.toFixed(1)} ~ ${windowStats.map.max.toFixed(1)}`
+                          : "-"}
+                      </div>
+                    </>
+                  ) : (
+                    <div>
+                      {windowStats.vital}:{" "}
+                      {windowStats.min == null || windowStats.max == null
+                        ? "-"
+                        : `${windowStats.min.toFixed(1)} ~ ${windowStats.max.toFixed(1)}`}
+                    </div>
+                  )}
+                </div>
+              )}
 
               {highlightWindowBox && (
                 <div
@@ -1520,11 +1439,23 @@ export default function VitalChart({
                     top: overlayBox.top,
                     width: overlayBox.width,
                     height: overlayBox.height,
-                    background: "rgba(250, 230, 40, 0.22)",
-                    border: "4px solid #e6d200",
-                    boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
+                    overflow: "visible",
+                    zIndex: 40,
                   }}
                 >
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      boxSizing: "border-box",
+                      background: "rgba(250, 230, 40, 0.22)",
+                      border: `${HANDLE_BORDER_PX}px solid #e6d200`,
+                      boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
+                      willChange: "left, top, width, height",
+                      transform: "translateZ(0)",
+                    }}
+                  />
+
                   <div
                     style={{
                       position: "absolute",

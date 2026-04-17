@@ -405,7 +405,7 @@ export default function PreventedEpisodePanel({
 
           {requiresWindow && (
             <TaskBlock
-              title="Task 2. Briefly describe what happened."
+              title="Task 2. Describe which intervention(s) were taken to correct or prevent the episode."
               tooltip={
                 <>
                   <div className="font-semibold text-gray-800">What to include</div>

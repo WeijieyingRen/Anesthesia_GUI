@@ -10,6 +10,16 @@ export type PatientTaskKey =
 
 export type WorkspaceTaskKey = AnnotationTaskKey | PatientTaskKey;
 
+export type EpisodeWorkflowStage =
+  | "select_all"
+  | "pick_top3"
+  | "annotate";
+
+export type EpisodeAnnotateStep =
+  | "detect"
+  | "mechanism"
+  | "fluidEval";
+
 export type DetectVital =
   | "MAP"
   | "SBP"
@@ -19,6 +29,25 @@ export type DetectVital =
   | "RR"
   | "ETCO2"
   | "TEMP";
+
+  export type DetectedEpisodeItem = {
+    id: string;
+    label: string;
+    vital: DetectVital;
+    startMin: number;
+    endMin: number;
+    y1: number;
+    y2: number;
+    selectedForAnnotation: boolean;
+  };
+
+export type EpisodeAnnotationState = {
+  stage: EpisodeWorkflowStage;
+  annotateStep: EpisodeAnnotateStep;
+  detectedEpisodes: DetectedEpisodeItem[];
+  prioritizedEpisodeIds: string[];
+  activeEpisodeId: string | null;
+};
 
 export type SidebarEventItem = {
   id: string;
@@ -91,6 +120,7 @@ export type DetectAnnotation = {
   severity: SeverityLevel | "";
   confidence: ConfidenceLevel | null;
 };
+
 
 export type UserActionLogItem = {
   type: string;
