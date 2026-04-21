@@ -1,5 +1,5 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-6EB97613-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-22 23:23:00+00:00,,Urine,250.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,-147.0,
-6FB97613-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-23 06:48:00+00:00,,Urine,500.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,298.0,
-04E76F18-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-23 07:43:00+00:00,,Urine,200.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,353.0,
-05E76F18-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-23 10:03:00+00:00,,Urine,500.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,493.0,
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+6EB97613-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-22 23:23:00+00:00,,Urine,250.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,2024-08-23 04:45:00+00:00,-147.0,,-147.0,
+6FB97613-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-23 06:48:00+00:00,,Urine,500.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,2024-08-23 04:45:00+00:00,298.0,,298.0,
+04E76F18-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-23 07:43:00+00:00,,Urine,200.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,2024-08-23 04:45:00+00:00,353.0,,353.0,
+05E76F18-2480-F011-9217-005056BFF837,B9157091-6364-EF11-920C-005056BFF837,10497,2,2024-08-23 10:03:00+00:00,,Urine,500.0,ML,Unknown Route,urine output,fluid_output,2024-08-23 01:50:00+00:00,2024-08-23 04:45:00+00:00,493.0,,493.0,

@@ -11,6 +11,7 @@ import type {
   VitalPanelData,
   FluidPanelData,
 } from "@/lib/types";
+import type { ManagementEvent } from "@/lib/types_management";
 import FluidChart from "./FluidChart";
 import VentilationChart from "./VentilationChart";
 import TimelineContextPanel from "./TimelineContextPanel";
@@ -59,6 +60,8 @@ type UnifiedTimelineCardProps = {
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 
   timelineContext: any;
+
+  managementEvent?: ManagementEvent | null;
 };
 
 type SectionKey =
@@ -233,6 +236,7 @@ export default function UnifiedTimelineCard({
   sharedScrollLeft,
   onSharedScrollLeftChange,
   timelineContext,
+  managementEvent = null,
 }: UnifiedTimelineCardProps) {
   const hasVitalsData =
     hasAnyFinitePoints(vitals?.main) ||
@@ -273,6 +277,26 @@ export default function UnifiedTimelineCard({
     hasCVData,
   ]);
 
+  React.useEffect(() => {
+    if (!managementEvent) return;
+
+    const chartType = String(managementEvent.chart_type ?? "").toLowerCase();
+
+    if (chartType === "medication") {
+      setOpenSections((prev) => ({
+        ...prev,
+        medications: true,
+      }));
+    }
+
+    if (chartType === "gas") {
+      setOpenSections((prev) => ({
+        ...prev,
+        gas: true,
+      }));
+    }
+  }, [managementEvent]);
+
   const viewEndMin = React.useMemo(
     () => Math.min(timelineEnd, viewStartMin + viewWindowWidthMin),
     [timelineEnd, viewStartMin, viewWindowWidthMin]
@@ -284,6 +308,21 @@ export default function UnifiedTimelineCard({
       onChangeViewStartMin(maxStart);
     }
   }, [timelineEnd, viewWindowWidthMin, viewStartMin, onChangeViewStartMin]);
+
+  React.useEffect(() => {
+    if (!managementEvent) return;
+    if (!Number.isFinite(Number(managementEvent.time_min))) return;
+
+    const start = Number(managementEvent.time_min);
+    const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
+
+    const targetStart = Math.max(
+      0,
+      Math.min(maxStart, start - Math.floor(viewWindowWidthMin * 0.25))
+    );
+
+    onChangeViewStartMin(targetStart);
+  }, [managementEvent, timelineEnd, viewWindowWidthMin, onChangeViewStartMin]);
 
   function toggleSection(section: SectionKey) {
     setOpenSections((prev) => ({
@@ -298,12 +337,25 @@ export default function UnifiedTimelineCard({
   const tmpSelectedWindow =
     selectedWindow?.vital === "TEMP" ? selectedWindow : null;
 
-  const sharedHighlightWindow: HighlightWindow | null = selectedWindow
-    ? {
-        startMin: selectedWindow.startMin,
-        endMin: selectedWindow.endMin,
-      }
-    : null;
+  const managementHighlightWindow: HighlightWindow | null =
+    managementEvent && Number.isFinite(Number(managementEvent.time_min))
+      ? {
+          startMin: Math.max(0, Number(managementEvent.time_min) - 10),
+          endMin: Math.min(
+            timelineEnd,
+            Number(managementEvent.end_time_min ?? managementEvent.time_min) + 10
+          ),
+        }
+      : null;
+
+  const sharedHighlightWindow: HighlightWindow | null = managementHighlightWindow
+    ? managementHighlightWindow
+    : selectedWindow
+      ? {
+          startMin: selectedWindow.startMin,
+          endMin: selectedWindow.endMin,
+        }
+      : null;
 
   return (
     <div className="overflow-visible border bg-white shadow-sm">
@@ -315,6 +367,26 @@ export default function UnifiedTimelineCard({
         timelineEnd={timelineEnd}
         anesthesiaStart={anesthesiaStart}
       />
+
+      <div className="border-t">
+        <TimelineContextPanel
+          context={timelineContext}
+          xEnd={timelineEnd}
+          xTicks={ticks}
+          timeZero={anesthesiaStart}
+          timeResolution={timeResolution}
+          episodeWindow={
+            selectedWindow
+              ? {
+                  startMin: selectedWindow.startMin,
+                  endMin: selectedWindow.endMin,
+                }
+              : managementHighlightWindow
+          }
+          sharedScrollLeft={sharedScrollLeft}
+          onSharedScrollLeftChange={onSharedScrollLeftChange}
+        />
+      </div>
 
       <SectionHeader
         title="Gas"
@@ -334,6 +406,7 @@ export default function UnifiedTimelineCard({
             timeZero={anesthesiaStart}
             embedded
             highlightWindow={sharedHighlightWindow}
+           
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
             onSharedScrollLeftChange={onSharedScrollLeftChange}
@@ -351,13 +424,14 @@ export default function UnifiedTimelineCard({
           <MedicationChart
             title=""
             medications={medications}
-            height={200}
+            height={300}
             xEnd={timelineEnd}
             xTicks={ticks}
             showXAxis={false}
             timeZero={anesthesiaStart}
             embedded
             highlightWindow={sharedHighlightWindow}
+            managementEvent={managementEvent}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
             onSharedScrollLeftChange={onSharedScrollLeftChange}
@@ -522,26 +596,6 @@ export default function UnifiedTimelineCard({
           </div>
         </div>
       )}
-
-      <div className="border-t">
-        <TimelineContextPanel
-          context={timelineContext}
-          xEnd={timelineEnd}
-          xTicks={ticks}
-          timeZero={anesthesiaStart}
-          timeResolution={timeResolution}
-          episodeWindow={
-            selectedWindow
-              ? {
-                  startMin: selectedWindow.startMin,
-                  endMin: selectedWindow.endMin,
-                }
-              : null
-          }
-          sharedScrollLeft={sharedScrollLeft}
-          onSharedScrollLeftChange={onSharedScrollLeftChange}
-        />
-      </div>
 
       <SectionHeader
         title="Fluid Events"

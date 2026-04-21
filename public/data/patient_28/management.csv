@@ -1,0 +1,2 @@
+chart_type,row_name,event_type,highlight_mode,time_min,end_time_min,start_time,end_time,dose,unit,route
+medication,sugammadex,bolus,point,232.0,232.0,2023-03-31 00:00:00+00:00,2023-03-31 00:00:00+00:00,200.0,mg,Intravenous

@@ -1,4 +1,4 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-C9E55277-5FB7-ED11-91FA-005056BFF837,10457,1,2023-02-23 17:20:00+00:00,2023-02-23 18:59:00+00:00,Normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-02-23 17:20:00+00:00,0.0,99.0
-C9E55277-5FB7-ED11-91FA-005056BFF837,10454,1,2023-02-23 18:59:00+00:00,2023-02-23 20:09:00+00:00,normal saline,250.0,mL,Intravenous,saline 0.9%,fluid_input,2023-02-23 17:20:00+00:00,99.0,169.0
-C9E55277-5FB7-ED11-91FA-005056BFF837,10457,1,2023-02-23 20:30:00+00:00,2023-02-23 20:30:00+00:00,Normosol,50.0,mL,Intravenous,normosol,fluid_input,2023-02-23 17:20:00+00:00,190.0,190.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+C9E55277-5FB7-ED11-91FA-005056BFF837,10457,1,2023-02-23 17:20:00+00:00,2023-02-23 18:59:00+00:00,Normosol,1000.0,mL,Intravenous,normosol,fluid_input,2023-02-23 17:20:00+00:00,2023-02-23 20:30:00+00:00,0.0,99.0,0.0,91.0
+C9E55277-5FB7-ED11-91FA-005056BFF837,10454,1,2023-02-23 18:59:00+00:00,2023-02-23 20:09:00+00:00,normal saline,250.0,mL,Intravenous,saline 0.9%,fluid_input,2023-02-23 17:20:00+00:00,2023-02-23 20:30:00+00:00,99.0,169.0,99.0,21.0
+C9E55277-5FB7-ED11-91FA-005056BFF837,10457,1,2023-02-23 20:30:00+00:00,2023-02-23 20:30:00+00:00,Normosol,50.0,mL,Intravenous,normosol,fluid_input,2023-02-23 17:20:00+00:00,2023-02-23 20:30:00+00:00,190.0,190.0,190.0,0.0

@@ -1,105 +1,465 @@
-// This file is part of the "Participant Info" page in a Next.js application.
-// It is located at app/participant-info/page.tsx.
-// The purpose of this page is to collect participant information before starting the game.
-// The page includes a form where the participant can enter their name, select a salutation, and choose a department.
-// The form data is stored in local storage, and upon submission, the user is redirected to the patient list page.
-// The page is styled using Tailwind CSS and includes a header, form fields, and a submit button.
-// Import necessary modules and components
-// This file is part of the "Participant Info" page in a Next.js application.
-// It is located at app/participant-info/page.tsx.
-// The purpose of this page is to collect participant information before starting the game.
-// The page includes a form where the participant can enter their name, select a salutation, and choose a department.
-// The form data is stored in local storage, and upon submission, the user is redirected to the patient list page.
+"use client";
 
-"use client"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Papa from "papaparse";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-import type React from "react"
+// ------------ Types ------------
+type CsvRow = Record<string, any>;
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+interface CaseMeta {
+  id: string;
+  folder: string;
+  age: number | null;
+}
 
-export default function ParticipantInfo() {
-  const router = useRouter()
-  const [name, setName] = useState("")
-  const [salutation, setSalutation] = useState("MD")
-  const [department, setDepartment] = useState("OB/GYN")
+type GameData = {
+  currentPatientIndex: number;
+  selectedPatients: Array<{ id: string; folder: string }>;
+  diagnoses: Array<string | null>;
+  startTime: string;
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+// ------------ Config ------------
+const CSV_BASE = "/data";
 
-    // Store participant info in localStorage
-    localStorage.setItem(
-      "participantInfo",
-      JSON.stringify({
-        name,
-        salutation,
-        department,
-        timestamp: new Date().toISOString(),
-      }),
-    )
+export default function PatientList() {
+  const router = useRouter();
+  const [cases, setCases] = useState<CaseMeta[]>([]);
+  const [selectedCaseIds, setSelectedCaseIds] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    // Navigate to the patient list
-    router.push("/patient-list")
+  const loadDoctorIdFromAccessCode = async (accessCode: string): Promise<string> => {
+    const res = await fetch(`${CSV_BASE}/access_code.csv`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(`access_code.csv ${res.status} ${res.statusText}`);
+    }
+
+    const text = await res.text();
+    const rows = Papa.parse<CsvRow>(text, {
+      header: true,
+      dynamicTyping: false,
+      skipEmptyLines: true,
+    }).data;
+
+    const matched = rows.find(
+      (row) => String(row["access_code"] ?? "").trim() === accessCode.trim()
+    );
+
+    if (!matched) {
+      throw new Error("Invalid access code. No matching doctor was found.");
+    }
+
+    const doctorId = String(matched["doctor_id"] ?? "").trim();
+    if (!doctorId) {
+      throw new Error("Matched doctor_id is empty in access_code.csv.");
+    }
+
+    return doctorId;
+  };
+
+  const loadAssignedPatientFolders = async (doctorId: string): Promise<string[]> => {
+    const res = await fetch(`${CSV_BASE}/assignments_by_doctor/${doctorId}.csv`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(
+        `assignments_by_doctor/${doctorId}.csv ${res.status} ${res.statusText}`
+      );
+    }
+
+    const text = await res.text();
+    const rows = Papa.parse<CsvRow>(text, {
+      header: true,
+      dynamicTyping: false,
+      skipEmptyLines: true,
+    }).data;
+
+    const folders = rows
+      .map((row) => String(row["patient_folder"] ?? "").trim())
+      .filter(Boolean);
+
+    if (!folders.length) {
+      throw new Error(`No patient_folder found for doctor_id=${doctorId}`);
+    }
+
+    return folders;
+  };
+
+  useEffect(() => {
+    const participantInfo = localStorage.getItem("participantInfo");
+    const consentInfo = localStorage.getItem("consentInfo");
+
+    if (!participantInfo) {
+      router.replace("/");
+      return;
+    }
+
+    if (!consentInfo) {
+      router.replace("/consent");
+      return;
+    }
+
+    let parsedParticipantInfo: any = null;
+
+    try {
+      parsedParticipantInfo = JSON.parse(participantInfo);
+    } catch {
+      router.replace("/");
+      return;
+    }
+
+    try {
+      const parsedConsent = JSON.parse(consentInfo);
+      if (!parsedConsent?.agreed) {
+        router.replace("/consent");
+        return;
+      }
+    } catch {
+      router.replace("/consent");
+      return;
+    }
+
+    (async () => {
+      try {
+        const accessCode =
+          String(parsedParticipantInfo?.accessCode ?? "").trim() ||
+          String(localStorage.getItem("doctorAccessCode") ?? "").trim();
+
+        if (!accessCode) {
+          throw new Error("No access code found. Please go back to the home page and enter your access code.");
+        }
+
+        const doctorId = await loadDoctorIdFromAccessCode(accessCode);
+        const folders = await loadAssignedPatientFolders(doctorId);
+
+        if (!folders.length) {
+          throw new Error("No assigned patient folders found.");
+        }
+
+        const metas: CaseMeta[] = [];
+        for (const folder of folders) {
+          try {
+            const res = await fetch(`${CSV_BASE}/${folder}/case_info.csv`, {
+              cache: "no-store",
+            });
+            if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+
+            const text = await res.text();
+            const rows = Papa.parse<CsvRow>(text, {
+              header: true,
+              dynamicTyping: true,
+              skipEmptyLines: true,
+            }).data;
+
+            const first = rows[0] ?? {};
+
+            metas.push({
+              id: folder,
+              folder,
+              age: Number.isFinite(Number(first["aims_patient_age_years"]))
+                ? Number(first["aims_patient_age_years"])
+                : null,
+            });
+          } catch (e) {
+            console.warn(`Could not read ${folder}:`, e);
+            metas.push({
+              id: folder,
+              folder,
+              age: null,
+            });
+          }
+        }
+
+        setCases(metas);
+      } catch (e: any) {
+        console.error("Error building case list:", e);
+        setError(e?.message ?? "Failed to load assigned cases");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [router]);
+
+  const buildGameData = (selectedCases: CaseMeta[]): GameData => {
+    return {
+      currentPatientIndex: 0,
+      selectedPatients: selectedCases.map((c) => ({
+        id: c.id,
+        folder: c.folder,
+      })),
+      diagnoses: Array(selectedCases.length).fill(null),
+      startTime: new Date().toISOString(),
+    };
+  };
+
+  const handleStartSingleCase = (caseItem: CaseMeta) => {
+    const gameData = buildGameData([caseItem]);
+    localStorage.setItem("gameData", JSON.stringify(gameData));
+    router.push("/dashboard");
+  };
+
+  const handleToggleCase = (caseId: string) => {
+    setSelectedCaseIds((prev) =>
+      prev.includes(caseId)
+        ? prev.filter((id) => id !== caseId)
+        : [...prev, caseId]
+    );
+  };
+
+  const handleStartSelectedCases = () => {
+    const selectedCases = cases.filter((c) => selectedCaseIds.includes(c.id));
+
+    if (selectedCases.length === 0) {
+      alert("Please select at least one case.");
+      return;
+    }
+
+    const gameData = buildGameData(selectedCases);
+    localStorage.setItem("gameData", JSON.stringify(gameData));
+    router.push("/dashboard");
+  };
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-700" />
+          <p className="text-lg">Loading cases…</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="max-w-md rounded-2xl border bg-white p-6 text-center shadow-sm">
+          <div className="mb-4 text-5xl text-red-500">⚠️</div>
+          <h2 className="mb-2 text-2xl font-bold">Error Loading Cases</h2>
+          <p className="mb-4 text-gray-600">{error}</p>
+          <div className="flex justify-center gap-3">
+            <Button variant="outline" onClick={() => router.push("/")}>
+              Back to Home
+            </Button>
+            <Button onClick={() => window.location.reload()}>Try Again</Button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold text-center mb-6">Participant Information</h1>
+    <main className="min-h-screen bg-gray-50 p-8">
+      <div className="mx-auto max-w-7xl">
+        <h1 className="mb-6 text-4xl font-bold text-gray-900">
+          Annotation Overview and Case List
+        </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+        <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900">
+            Annotation Structure
+          </h2>
+
+          <div className="space-y-3 text-sm leading-7 text-gray-700">
+            <p>
+              This annotation project contains{" "}
+              <span className="font-semibold text-gray-900">
+                two major task categories
+              </span>
+              .
+            </p>
+
+            <div>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  1. Patient-level tasks:
+                </span>{" "}
+                annotation of the overall intraoperative case, including{" "}
+                <span className="font-semibold">Summary</span>,{" "}
+                <span className="font-semibold">Prevented Episode</span>, and{" "}
+                <span className="font-semibold">Contextual Event</span>.
+              </p>
+            </div>
+
+            <div>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  2. Episode-level tasks:
+                </span>{" "}
+                detailed annotation of selected abnormal intraoperative episodes,
+                including{" "}
+                <span className="font-semibold">Abnormality Detection</span>,{" "}
+                <span className="font-semibold">Mechanism</span>, and{" "}
+                <span className="font-semibold">Intervention</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900">Workflow</h2>
+
+          <div className="space-y-3 text-sm leading-7 text-gray-700">
+            <p>Please follow the annotation workflow below:</p>
+
+            <ol className="ml-6 list-decimal space-y-1">
+              <li>
+                Start with the{" "}
+                <span className="font-semibold text-gray-900">
+                  patient-level review
+                </span>
+                .
+              </li>
+              <li>
+                Identify{" "}
+                <span className="font-semibold text-gray-900">
+                  1 to 3 clinically meaningful abnormal episodes
+                </span>{" "}
+                for detailed review.
+              </li>
+              <li>
+                For each selected episode, complete the{" "}
+                <span className="font-semibold text-gray-900">
+                  episode-level subtasks
+                </span>
+                .
+              </li>
+              <li>
+                After episode-level annotation, complete the patient-level
+                wrap-up as needed.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div className="mb-8 rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900">
+            Episode Selection Guideline
+          </h2>
+
+          <div className="space-y-3 text-sm leading-7 text-gray-700">
+            <p className="font-semibold text-gray-900">Annotate:</p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Likely true physiologic abnormal episodes.</li>
+              <li>Episodes that are moderate or severe.</li>
+              <li>Episodes that are prolonged or clearly sustained.</li>
+              <li>Episodes with associated changes in other vital signs.</li>
+              <li>
+                Episodes temporally related to interventions, medications,
+                fluids, gas, or ventilation changes.
+              </li>
+              <li>
+                Episodes that are important to the overall intraoperative
+                clinical course.
+              </li>
+            </ul>
+
+            <p className="pt-2 font-semibold text-gray-900">
+              Do not annotate:
+            </p>
+            <ul className="ml-6 list-disc space-y-1">
+              <li>Obvious monitoring artifacts or measurement errors.</li>
+              <li>
+                Very brief isolated fluctuations with no clear clinical
+                relevance.
+              </li>
+              <li>
+                Minor waveform blips that do not support downstream
+                interpretation.
+              </li>
+              <li>
+                Events that are too trivial to inform mechanism, intervention,
+                or response analysis.
+              </li>
+              <li>
+                Do not try to annotate every small abnormality in the record.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p className="mb-6 text-lg text-gray-700">
+          You have {cases.length} case{cases.length !== 1 ? "s" : ""} available
+          for review.
+        </p>
+
+        <div className="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {cases.map((c, i) => {
+            const selected = selectedCaseIds.includes(c.id);
+
+            return (
+              <Card key={c.id} className="overflow-hidden rounded-2xl shadow-sm">
+                <CardHeader className="bg-slate-50">
+                  <div className="flex items-start justify-between gap-3">
+                    <CardTitle className="text-3xl font-bold">
+                      Case {i + 1}
+                    </CardTitle>
+
+                    <div
+                      className={`rounded-full px-4 py-1.5 text-sm font-semibold ${
+                        selected
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-gray-100 text-gray-500"
+                      }`}
+                    >
+                      {selected ? "Selected" : "Not selected"}
+                    </div>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="pt-6">
+                  <div className="mb-8 space-y-4 text-lg text-gray-900">
+                    <div className="flex justify-between">
+                      <span className="font-semibold">Age:</span>
+                      <span>{c.age ?? "—"}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    <Button
+                      onClick={() => handleStartSingleCase(c)}
+                      className="px-6 py-2 text-base"
+                    >
+                      Start This Case
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      onClick={() => handleToggleCase(c.id)}
+                      className="px-6 py-2 text-base"
+                    >
+                      {selected ? "Remove" : "Add"}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="text-sm text-gray-600">
+            Selected: {selectedCaseIds.length} / {cases.length}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="salutation">Salutation</Label>
-            <Select value={salutation} onValueChange={setSalutation}>
-              <SelectTrigger id="salutation">
-                <SelectValue placeholder="Select salutation" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="MD">MD</SelectItem>
-                <SelectItem value="PhD">PhD</SelectItem>
-                <SelectItem value="MD PhD">MD PhD</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="department">Department</Label>
-            <Select value={department} onValueChange={setDepartment}>
-              <SelectTrigger id="department">
-                <SelectValue placeholder="Select department" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="OB/GYN">OB/GYN</SelectItem>
-                <SelectItem value="Anesthesiology">Anesthesiology</SelectItem>
-                <SelectItem value="Pediatrics">Pediatrics</SelectItem>
-                <SelectItem value="Neonatology">Neonatology</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <Button type="submit" className="w-full">
-            Start Game
+          <Button size="lg" onClick={handleStartSelectedCases}>
+            Start Selected Cases
           </Button>
-        </form>
+        </div>
       </div>
     </main>
-  )
+  );
 }
-

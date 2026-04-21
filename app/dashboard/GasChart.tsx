@@ -26,7 +26,6 @@ type GasChartProps = {
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
   timeResolution?: TimeResolution;
-
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -441,6 +440,7 @@ export default function GasChart({
 
   const fullContentHeight =
     visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
+
   const viewHeight = Math.min(height, Math.max(120, fullContentHeight));
 
   const contentPlotWidth = useMemo(() => {
@@ -473,197 +473,227 @@ export default function GasChart({
       {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
-        className="grid gap-0"
-        style={{
-          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
-        }}
+        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
+        style={{ height: viewHeight }}
       >
-        <div className="border-r pr-0" style={{ height: fullContentHeight }}>
-          <div>
-            {rows.map((row) => {
-              const hidden = hiddenNames.includes(row.name);
-              const active = visibleRowsReindexed.some((r) => r.name === row.name);
-              const color = inferGasColor(row.name);
-
-              return (
-                <div
-                  key={row.name}
-                  className="flex items-center justify-between gap-2 px-2 text-sm"
-                  style={{
-                    height: ROW_HEIGHT,
-                    backgroundColor: active ? "#efefef" : "#f7f7f7",
-                    opacity: hidden ? 0.45 : 1,
-                    borderBottom: "1px solid #d1d5db",
-                  }}
-                >
-                  <div className="min-w-0 flex-1 truncate text-gray-900">{row.name}</div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHiddenNames((prev) =>
-                        prev.includes(row.name)
-                          ? prev.filter((x) => x !== row.name)
-                          : [...prev, row.name]
-                      );
-                    }}
-                    className="h-4 w-4 shrink-0 border"
-                    style={{ backgroundColor: color, borderColor: color }}
-                    title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <FixedAxisSpacer height={fullContentHeight} />
-
         <div
-          className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-          style={{ height: viewHeight }}
+          className="grid gap-0"
+          style={{
+            gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
+            minHeight: fullContentHeight,
+          }}
         >
+          <div className="border-r pr-0" style={{ height: fullContentHeight }}>
+            <div>
+              {rows.map((row) => {
+                const hidden = hiddenNames.includes(row.name);
+                const active = visibleRowsReindexed.some((r) => r.name === row.name);
+                const color = inferGasColor(row.name);
+
+                return (
+                  <div
+                    key={row.name}
+                    className="flex items-center justify-between gap-2 px-2 text-sm"
+                    style={{
+                      height: ROW_HEIGHT,
+                      backgroundColor: active ? "#efefef" : "#f7f7f7",
+                      opacity: hidden ? 0.45 : 1,
+                      borderBottom: "1px solid #d1d5db",
+                    }}
+                  >
+                    <div className="min-w-0 flex-1 truncate text-gray-900">{row.name}</div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHiddenNames((prev) =>
+                          prev.includes(row.name)
+                            ? prev.filter((x) => x !== row.name)
+                            : [...prev, row.name]
+                        );
+                      }}
+                      className="h-4 w-4 shrink-0 border"
+                      style={{ backgroundColor: color, borderColor: color }}
+                      title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <FixedAxisSpacer height={fullContentHeight} />
+
+          <div className="overflow-x-hidden overflow-y-hidden">
           <div
-            ref={scrollRef}
-            className="overflow-x-auto overflow-y-hidden"
-            onScroll={(e) => {
-              onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-            }}
-          >
-            <div style={{ width: contentWidth, height: fullContentHeight }}>
-              <div className="relative" style={{ width: contentWidth, height: fullContentHeight }}>
-                <GasGridSvg
-                  end={finalXEnd}
-                  majorTicks={majorTicks}
-                  minorTicks={minorTicks}
-                  rows={visibleRowsReindexed}
-                  height={fullContentHeight}
-                  highlightWindow={highlightWindow}
-                  plotWidth={plotWidth}
-                />
+  ref={scrollRef}
+  className="overflow-x-auto overflow-y-hidden"
+  style={{ overscrollBehaviorX: "none" }}
+  onWheel={(e) => {
+    const el = e.currentTarget;
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
 
-                <svg
-                  width={contentWidth}
-                  height={fullContentHeight}
-                  viewBox={`0 0 ${contentWidth} ${fullContentHeight}`}
-                  preserveAspectRatio="none"
-                  className="absolute inset-0"
-                >
-                  <g transform="translate(0,0)">
-                    {segments.map((seg, idx) => {
-                      const color = inferGasColor(seg.rowName);
-                      const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
-                      const centerY = rowTop + ROW_HEIGHT / 2;
+    // 只处理“明显以横向为主”的触摸板/滚轮手势
+    if (absX <= absY || absX < 1) return;
 
-                      const segLeft = (seg.x0 / finalXEnd) * plotWidth;
-                      const segRight = (seg.x1 / finalXEnd) * plotWidth;
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    const nextLeft = el.scrollLeft + e.deltaX;
 
-                      const label = String(roundSmart(seg.firstValue));
-                      const hideVisual = isZeroValue(seg.firstValue);
-                      const textWidth = estimateTextWidth(label, 10);
+    const atLeftEdge = el.scrollLeft <= 0;
+    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
 
-                      const textX = segLeft + 6;
-                      const textY = centerY + 3;
+    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
 
-                      const lineStartX = textX + textWidth + 6;
-                      const lineEndX = segRight - 6;
-                      const canDrawLine = !hideVisual && lineEndX > lineStartX + 2;
+    if (tryingGoPastLeft || tryingGoPastRight) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
 
-                      const isSelected =
-                        zoomTarget &&
-                        zoomTarget.rowName === seg.rowName &&
-                        zoomTarget.x0 === seg.x0 &&
-                        zoomTarget.x1 === seg.x1;
+    e.preventDefault();
+    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+  }}
+  onScroll={(e) => {
+    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+  }}
+>
+              <div style={{ width: contentWidth, height: fullContentHeight }}>
+                <div className="relative" style={{ width: contentWidth, height: fullContentHeight }}>
+                  <GasGridSvg
+                    end={finalXEnd}
+                    majorTicks={majorTicks}
+                    minorTicks={minorTicks}
+                    rows={visibleRowsReindexed}
+                    height={fullContentHeight}
+                    highlightWindow={highlightWindow}
+                    plotWidth={plotWidth}
+                  />
 
-                      return (
-                        <g
-                          key={`${seg.rowName}-${seg.x0}-${idx}`}
-                          style={{ cursor: "zoom-in" }}
-                          onMouseDown={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setZoomTarget({
-                              rowName: seg.rowName,
-                              x0: seg.x0,
-                              x1: seg.x1,
-                              points: seg.points,
-                            });
-                          }}
-                        >
-                          <rect
-                            x={segLeft}
-                            y={rowTop}
-                            width={Math.max(2, segRight - segLeft)}
-                            height={ROW_HEIGHT}
-                            fill={isSelected ? "#FFF7ED" : "transparent"}
-                            stroke={isSelected ? "#FB923C" : "transparent"}
-                            strokeWidth={isSelected ? 1.5 : 0}
-                          />
+                  <svg
+                    width={contentWidth}
+                    height={fullContentHeight}
+                    viewBox={`0 0 ${contentWidth} ${fullContentHeight}`}
+                    preserveAspectRatio="none"
+                    className="absolute inset-0"
+                  >
+                    <g transform="translate(0,0)">
+                      {segments.map((seg, idx) => {
+                        const color = inferGasColor(seg.rowName);
+                        const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
+                        const centerY = rowTop + ROW_HEIGHT / 2;
 
-                          {!hideVisual && (
-                            <>
-                              <text
-                                x={textX}
-                                y={textY}
-                                fontSize={10}
-                                fill="#111827"
-                              >
-                                {label}
-                              </text>
+                        const segLeft = (seg.x0 / finalXEnd) * plotWidth;
+                        const segRight = (seg.x1 / finalXEnd) * plotWidth;
 
-                              {canDrawLine && (
-                                <line
-                                  x1={lineStartX}
-                                  y1={centerY}
-                                  x2={lineEndX}
-                                  y2={centerY}
-                                  stroke={color}
-                                  strokeWidth={5}
-                                  strokeLinecap="butt"
-                                />
-                              )}
-                            </>
-                          )}
+                        const label = String(roundSmart(seg.firstValue));
+                        const hideVisual = isZeroValue(seg.firstValue);
+                        const textWidth = estimateTextWidth(label, 10);
 
-                          <rect
-                            x={segLeft}
-                            y={rowTop}
-                            width={Math.max(2, segRight - segLeft)}
-                            height={ROW_HEIGHT}
-                            fill="transparent"
-                          />
-                        </g>
-                      );
-                    })}
+                        const textX = segLeft + 6;
+                        const textY = centerY + 3;
 
-                    {showXAxis &&
-                      majorTicks.map((tick) => {
-                        const x = (tick / finalXEnd) * plotWidth;
+                        const lineStartX = textX + textWidth + 6;
+                        const lineEndX = segRight - 6;
+                        const canDrawLine = !hideVisual && lineEndX > lineStartX + 2;
+
+                        const isSelected =
+                          zoomTarget &&
+                          zoomTarget.rowName === seg.rowName &&
+                          zoomTarget.x0 === seg.x0 &&
+                          zoomTarget.x1 === seg.x1;
+
                         return (
-                          <text
-                            key={`tick-label-${tick}`}
-                            x={x + 2}
-                            y={TOP_PAD - 2}
-                            fontSize={10}
-                            fill="#6b7280"
+                          <g
+                            key={`${seg.rowName}-${seg.x0}-${idx}`}
+                            style={{ cursor: "zoom-in" }}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setZoomTarget({
+                                rowName: seg.rowName,
+                                x0: seg.x0,
+                                x1: seg.x1,
+                                points: seg.points,
+                              });
+                            }}
                           >
-                            {formatClockTime(tick, timeZero)}
-                          </text>
+                            <rect
+                              x={segLeft}
+                              y={rowTop}
+                              width={Math.max(2, segRight - segLeft)}
+                              height={ROW_HEIGHT}
+                              fill={isSelected ? "#FFF7ED" : "transparent"}
+                              stroke={isSelected ? "#FB923C" : "transparent"}
+                              strokeWidth={isSelected ? 1.5 : 0}
+                            />
+
+                            {!hideVisual && (
+                              <>
+                                <text
+                                  x={textX}
+                                  y={textY}
+                                  fontSize={10}
+                                  fill="#111827"
+                                >
+                                  {label}
+                                </text>
+
+                                {canDrawLine && (
+                                  <line
+                                    x1={lineStartX}
+                                    y1={centerY}
+                                    x2={lineEndX}
+                                    y2={centerY}
+                                    stroke={color}
+                                    strokeWidth={5}
+                                    strokeLinecap="butt"
+                                  />
+                                )}
+                              </>
+                            )}
+
+                            <rect
+                              x={segLeft}
+                              y={rowTop}
+                              width={Math.max(2, segRight - segLeft)}
+                              height={ROW_HEIGHT}
+                              fill="transparent"
+                            />
+                          </g>
                         );
                       })}
 
-                    {showXAxis && (
-                      <text
-                        x={plotWidth / 2}
-                        y={fullContentHeight - 6}
-                        textAnchor="middle"
-                        fontSize={12}
-                        fill="#6b7280"
-                      >
-                        Time
-                      </text>
-                    )}
-                  </g>
-                </svg>
+                      {showXAxis &&
+                        majorTicks.map((tick) => {
+                          const x = (tick / finalXEnd) * plotWidth;
+                          return (
+                            <text
+                              key={`tick-label-${tick}`}
+                              x={x + 2}
+                              y={TOP_PAD - 2}
+                              fontSize={10}
+                              fill="#6b7280"
+                            >
+                              {formatClockTime(tick, timeZero)}
+                            </text>
+                          );
+                        })}
+
+                      {showXAxis && (
+                        <text
+                          x={plotWidth / 2}
+                          y={fullContentHeight - 6}
+                          textAnchor="middle"
+                          fontSize={12}
+                          fill="#6b7280"
+                        >
+                          Time
+                        </text>
+                      )}
+                    </g>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-1C5129A6-38DE-EF11-920F-005056BFF837,10457,1,2025-01-24 22:07:00+00:00,2025-01-25 02:55:00+00:00,normosol,500.0,mL,Intravenous,normosol,fluid_input,2025-01-24 21:56:00+00:00,11.0,299.0
-1C5129A6-38DE-EF11-920F-005056BFF837,10454,1,2025-01-24 22:26:00+00:00,2025-01-25 02:55:00+00:00,normal saline,75.0,mL/hr,Intravenous,saline 0.9%,fluid_input,2025-01-24 21:56:00+00:00,30.0,299.0
-1C5129A6-38DE-EF11-920F-005056BFF837,10454,1,2025-01-25 02:55:00+00:00,2025-01-25 02:55:00+00:00,normal saline,336.25,mL,Intravenous,saline 0.9%,fluid_input,2025-01-24 21:56:00+00:00,299.0,299.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+1C5129A6-38DE-EF11-920F-005056BFF837,10457,1,2025-01-24 22:07:00+00:00,2025-01-25 02:55:00+00:00,normosol,500.0,mL,Intravenous,normosol,fluid_input,2025-01-24 21:56:00+00:00,2025-01-25 03:11:00+00:00,11.0,299.0,11.0,16.0
+1C5129A6-38DE-EF11-920F-005056BFF837,10454,1,2025-01-24 22:26:00+00:00,2025-01-25 02:55:00+00:00,normal saline,75.0,mL/hr,Intravenous,saline 0.9%,fluid_input,2025-01-24 21:56:00+00:00,2025-01-25 03:11:00+00:00,30.0,299.0,30.0,16.0
+1C5129A6-38DE-EF11-920F-005056BFF837,10454,1,2025-01-25 02:55:00+00:00,2025-01-25 02:55:00+00:00,normal saline,336.25,mL,Intravenous,saline 0.9%,fluid_input,2025-01-24 21:56:00+00:00,2025-01-25 03:11:00+00:00,299.0,299.0,299.0,16.0

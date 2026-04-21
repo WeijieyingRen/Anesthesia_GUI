@@ -1,0 +1,2 @@
+chart_type,row_name,event_type,highlight_mode,time_min,end_time_min,start_time,end_time,dose,unit,route
+medication,remifentanil,infusion_adjustment,interval,54.0,152.0,2023-06-14 15:32:00+00:00,2023-06-14 17:10:00+00:00,0.125,mcg/kg/min,

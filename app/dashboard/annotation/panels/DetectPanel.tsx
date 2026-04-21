@@ -12,6 +12,9 @@ import { submitAnnotation } from "@/lib/submit";
 type DetectPanelProps = {
   eventId?: string;
   caseId?: string;
+  patientId?: string;
+  patientFolder?: string;
+  episodeNumber?: number;
   eventTitle?: string;
   episodeLabel?: string;
   annotation: DetectAnnotation;
@@ -22,8 +25,25 @@ type DetectPanelProps = {
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
-
 type VoiceTarget = "note" | "eventTypeOther" | null;
+
+type DetectTaskKey =
+  | "task1_primary_vitals"
+  | "task2_artifact"
+  | "task3_event_type"
+  | "task4_associated_changes"
+  | "task5_onset_pattern"
+  | "task6_episode_course"
+  | "task7_severity"
+  | "task8_confidence";
+
+type TaskTiming = {
+  startedAt: number | null;
+  firstInteractionAt: number | null;
+  firstTypingAt: number | null;
+  firstVoiceStartAt: number | null;
+  selectedAt: number | null;
+};
 
 const ALL_EVENT_TYPE_OPTIONS: (EventType | "Others")[] = [
   "Hypotension",
@@ -52,8 +72,8 @@ const VITAL_OPTIONS: DetectVital[] = [
 ];
 
 const CONTINUE_ANNOTATION_OPTIONS = [
-  "Yes, continue annotation",
-  "No, likely artifact / too minor / not useful",
+  "Yes, likely artifact",
+  "No",
   "Unclear",
 ] as const;
 
@@ -64,9 +84,9 @@ const ONSET_PATTERN_OPTIONS = [
 ] as const;
 
 const EPISODE_COURSE_OPTIONS = [
-  "Persistent / stable abnormality",
-  "Fluctuating / labile pattern",
-  "Improving / recovering",
+  "Persistent and stable abnormality",
+  "Fluctuating pattern",
+  "Improving or recovering",
   "Worsening",
   "Mixed / unclear",
 ] as const;
@@ -83,6 +103,34 @@ const EVENT_TYPES_BY_VITAL: Record<DetectVital, EventType[]> = {
   ETCO2: ["Hypocapnia", "Hypercapnia"],
   TEMP: ["Hypothermia", "Hyperthermia"],
 };
+
+function buildEmptyTaskTiming(): TaskTiming {
+  return {
+    startedAt: null,
+    firstInteractionAt: null,
+    firstTypingAt: null,
+    firstVoiceStartAt: null,
+    selectedAt: null,
+  };
+}
+
+function buildEmptyTaskTimingMap(): Record<DetectTaskKey, TaskTiming> {
+  return {
+    task1_primary_vitals: buildEmptyTaskTiming(),
+    task2_artifact: buildEmptyTaskTiming(),
+    task3_event_type: buildEmptyTaskTiming(),
+    task4_associated_changes: buildEmptyTaskTiming(),
+    task5_onset_pattern: buildEmptyTaskTiming(),
+    task6_episode_course: buildEmptyTaskTiming(),
+    task7_severity: buildEmptyTaskTiming(),
+    task8_confidence: buildEmptyTaskTiming(),
+  };
+}
+
+function toIsoOrNull(value: number | null) {
+  if (value == null) return null;
+  return new Date(value).toISOString();
+}
 
 function OptionChip({
   label,
@@ -312,6 +360,9 @@ function PrimaryVitalDropdown({
 export default function DetectPanel({
   eventId = "evt-1",
   caseId = "unknown_case",
+  patientId,
+  patientFolder,
+  episodeNumber,
   eventTitle = "MAP Drop",
   episodeLabel = "Episode 1",
   annotation,
@@ -327,11 +378,63 @@ export default function DetectPanel({
 
   const recognitionRef = React.useRef<any>(null);
   const recognitionTargetRef = React.useRef<VoiceTarget>(null);
-  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  const pageOpenedAtRef = React.useRef<number | null>(null);
+  const firstInteractionAtRef = React.useRef<number | null>(null);
+  const firstTypingAtRef = React.useRef<number | null>(null);
+  const firstVoiceStartAtRef = React.useRef<number | null>(null);
+
+  const taskTimingRef = React.useRef<Record<DetectTaskKey, TaskTiming>>(
+    buildEmptyTaskTimingMap()
+  );
 
   React.useEffect(() => {
-    panelOpenedAtRef.current = Date.now();
+    pageOpenedAtRef.current = Date.now();
+    firstInteractionAtRef.current = null;
+    firstTypingAtRef.current = null;
+    firstVoiceStartAtRef.current = null;
+    taskTimingRef.current = buildEmptyTaskTimingMap();
   }, [caseId, eventId]);
+
+  function markPageInteraction() {
+    if (firstInteractionAtRef.current == null) {
+      firstInteractionAtRef.current = Date.now();
+    }
+  }
+
+  function markTaskInteraction(
+    taskKey: DetectTaskKey,
+    mode: "select" | "typing" | "voice" | "interaction" = "interaction"
+  ) {
+    const now = Date.now();
+    const task = taskTimingRef.current[taskKey];
+
+    if (task.startedAt == null) {
+      task.startedAt = now;
+    }
+    if (task.firstInteractionAt == null) {
+      task.firstInteractionAt = now;
+    }
+
+    if (mode === "select") {
+      task.selectedAt = now;
+    }
+    if (mode === "typing" && task.firstTypingAt == null) {
+      task.firstTypingAt = now;
+    }
+    if (mode === "voice" && task.firstVoiceStartAt == null) {
+      task.firstVoiceStartAt = now;
+    }
+
+    markPageInteraction();
+
+    if (mode === "typing" && firstTypingAtRef.current == null) {
+      firstTypingAtRef.current = now;
+    }
+    if (mode === "voice" && firstVoiceStartAtRef.current == null) {
+      firstVoiceStartAtRef.current = now;
+    }
+  }
 
   React.useEffect(() => {
     if (annotation.associatedChanges !== "Yes") {
@@ -358,14 +461,17 @@ export default function DetectPanel({
     annotation.primaryVitals && annotation.primaryVitals.length > 0
       ? annotation.primaryVitals
       : annotation.vital
-      ? [annotation.vital]
-      : [];
+        ? [annotation.vital]
+        : [];
 
   const firstPrimaryVital = selectedPrimaryVitals[0] ?? null;
 
+  const isArtifact =
+    annotation.shouldContinueAnnotation === "Yes, likely artifact";
+
   const shouldContinue =
-    annotation.shouldContinueAnnotation !==
-    "No, likely artifact / too minor / not useful";
+    annotation.shouldContinueAnnotation === "No" ||
+    annotation.shouldContinueAnnotation === "Unclear";
 
   const filteredEventTypeOptions: (EventType | "Others")[] = React.useMemo(() => {
     if (selectedPrimaryVitals.length === 0) {
@@ -390,6 +496,8 @@ export default function DetectPanel({
   }
 
   function togglePrimaryVital(vital: DetectVital) {
+    markTaskInteraction("task1_primary_vitals", "select");
+
     const current = selectedPrimaryVitals;
     const exists = current.includes(vital);
 
@@ -430,8 +538,23 @@ export default function DetectPanel({
       return "Task 2 incomplete: please decide whether this episode should proceed to full annotation.";
     }
 
-    if (!shouldContinue) {
-      if (annotation.confidence === null || annotation.confidence === undefined || Number.isNaN(annotation.confidence)) {
+    if (isArtifact) {
+      if (
+        annotation.confidence === null ||
+        annotation.confidence === undefined ||
+        Number.isNaN(annotation.confidence)
+      ) {
+        return "Confidence incomplete: please select confidence from 1 to 5.";
+      }
+      return null;
+    }
+
+    if (annotation.shouldContinueAnnotation === "Unclear") {
+      if (
+        annotation.confidence === null ||
+        annotation.confidence === undefined ||
+        Number.isNaN(annotation.confidence)
+      ) {
         return "Confidence incomplete: please select confidence from 1 to 5.";
       }
       return null;
@@ -502,13 +625,54 @@ export default function DetectPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
+      let participantInfo: any = {};
+      try {
+        const raw = localStorage.getItem("participantInfo");
+        participantInfo = raw ? JSON.parse(raw) : {};
+      } catch {
+        participantInfo = {};
+      }
+
+      const doctorId =
+        String(
+          participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
+        ).trim() || null;
+
+      const accessCode =
+        String(
+          participantInfo?.accessCode ??
+            localStorage.getItem("doctorAccessCode") ??
+            ""
+        ).trim() || null;
+
+      const submittedAt = new Date().toISOString();
+
       await submitAnnotation({
         annotator: annotatorName ? { name: annotatorName } : undefined,
+
+        doctorId,
+        accessCode,
+
         caseId,
+        patientId,
+        patientFolder,
+
         eventId,
+        episodeId: episodeNumber ? `episode_${episodeNumber}` : eventId,
+
         panel: "detect_panel",
         action: "submit",
-        panelOpenedAt: panelOpenedAtRef.current,
+        task: "detection",
+
+        pageOpenedAt: pageOpenedAtRef.current,
+        firstInteractionAt: firstInteractionAtRef.current,
+        firstTypingAt: firstTypingAtRef.current,
+        firstVoiceStartAt: firstVoiceStartAtRef.current,
+        submittedAt,
+
+        panelOpenedAt: pageOpenedAtRef.current,
+        clickedAt: submittedAt,
+
         answers: {
           eventTitle,
           episodeLabel,
@@ -516,15 +680,117 @@ export default function DetectPanel({
           primaryVitals: selectedPrimaryVitals,
           startMin: annotation.startMin,
           endMin: annotation.endMin,
-          shouldContinueAnnotation: annotation.shouldContinueAnnotation,
-          eventType: annotation.eventType,
-          eventTypeOther: (annotation.eventTypeOther ?? "").trim(),
-          associatedChanges: annotation.associatedChanges,
-          note: annotation.note.trim(),
-          onsetPattern: annotation.onsetPattern,
-          episodeCourse: annotation.episodeCourse,
-          severity: annotation.severity,
-          confidence: annotation.confidence,
+          tasks: {
+            task1_primary_vitals: {
+              question:
+                "Confirm bounding box window and primary vital(s) (select on the right chart).",
+              answer: {
+                vital: annotation.vital,
+                primaryVitals: selectedPrimaryVitals,
+                startMin: annotation.startMin,
+                endMin: annotation.endMin,
+              },
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task1_primary_vitals.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task1_primary_vitals.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task1_primary_vitals.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task1_primary_vitals.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task1_primary_vitals.selectedAt),
+                submittedAt,
+              },
+            },
+            task2_artifact: {
+              question: "Is this episode likely an artifact?",
+              answer: annotation.shouldContinueAnnotation,
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task2_artifact.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task2_artifact.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task2_artifact.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task2_artifact.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task2_artifact.selectedAt),
+                submittedAt,
+              },
+            },
+            task3_event_type: {
+              question: "Select the primary event type",
+              answer: {
+                eventType: annotation.eventType,
+                eventTypeOther: (annotation.eventTypeOther ?? "").trim(),
+              },
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task3_event_type.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task3_event_type.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task3_event_type.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task3_event_type.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task3_event_type.selectedAt),
+                submittedAt,
+              },
+            },
+            task4_associated_changes: {
+              question:
+                "Were there associated changes in other vital signs during this episode?",
+              answer: {
+                associatedChanges: annotation.associatedChanges,
+                note: annotation.note.trim(),
+              },
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task4_associated_changes.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task4_associated_changes.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task4_associated_changes.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task4_associated_changes.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task4_associated_changes.selectedAt),
+                submittedAt,
+              },
+            },
+            task5_onset_pattern: {
+              question: "What was the onset pattern?",
+              answer: annotation.onsetPattern,
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task5_onset_pattern.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task5_onset_pattern.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task5_onset_pattern.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task5_onset_pattern.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task5_onset_pattern.selectedAt),
+                submittedAt,
+              },
+            },
+            task6_episode_course: {
+              question: "How did the episode evolve within this window?",
+              answer: annotation.episodeCourse,
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task6_episode_course.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task6_episode_course.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task6_episode_course.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task6_episode_course.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task6_episode_course.selectedAt),
+                submittedAt,
+              },
+            },
+            task7_severity: {
+              question: "How severe was this event?",
+              answer: annotation.severity,
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task7_severity.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task7_severity.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task7_severity.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task7_severity.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task7_severity.selectedAt),
+                submittedAt,
+              },
+            },
+            task8_confidence: {
+              question: "Confidence in assessment",
+              answer: annotation.confidence,
+              timing: {
+                startedAt: toIsoOrNull(taskTimingRef.current.task8_confidence.startedAt),
+                firstInteractionAt: toIsoOrNull(taskTimingRef.current.task8_confidence.firstInteractionAt),
+                firstTypingAt: toIsoOrNull(taskTimingRef.current.task8_confidence.firstTypingAt),
+                firstVoiceStartAt: toIsoOrNull(taskTimingRef.current.task8_confidence.firstVoiceStartAt),
+                selectedAt: toIsoOrNull(taskTimingRef.current.task8_confidence.selectedAt),
+                submittedAt,
+              },
+            },
+          },
         },
       });
 
@@ -559,6 +825,13 @@ export default function DetectPanel({
       recognition.continuous = true;
 
       recognitionTargetRef.current = target;
+
+      const taskKey: DetectTaskKey =
+        target === "eventTypeOther"
+          ? "task3_event_type"
+          : "task4_associated_changes";
+
+      markTaskInteraction(taskKey, "voice");
 
       recognition.onresult = (e: any) => {
         const transcript = Array.from(e.results)
@@ -615,6 +888,10 @@ export default function DetectPanel({
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
     setSaveMessage("");
+    taskTimingRef.current = buildEmptyTaskTimingMap();
+    firstInteractionAtRef.current = null;
+    firstTypingAtRef.current = null;
+    firstVoiceStartAtRef.current = null;
   }
 
   return (
@@ -664,39 +941,40 @@ export default function DetectPanel({
           </TaskBlock>
 
           <TaskBlock
-  title="Task 2. Should this episode proceed to full annotation?"
-  tooltip={
-    <>
-      <div className="font-semibold text-gray-800">
-        How to decide
-      </div>
-      <div className="mt-1">
-        Continue annotation only if this is likely a true and worthwhile episode for further labeling.
-      </div>
-      <div className="mt-1">
-        Choose “No” for likely artifacts, trivial fluctuations, or episodes too minor to support downstream interpretation.
-      </div>
-    </>
-  }
->
-  <select
-    value={annotation.shouldContinueAnnotation}
-    onChange={(e) =>
-      updateField(
-        "shouldContinueAnnotation",
-        e.target.value as DetectAnnotation["shouldContinueAnnotation"]
-      )
-    }
-    className="w-full max-w-[420px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-  >
-    <option value="">Select annotation decision</option>
-    {CONTINUE_ANNOTATION_OPTIONS.map((option) => (
-      <option key={option} value={option}>
-        {option}
-      </option>
-    ))}
-  </select>
-</TaskBlock>
+            title="Task 2. Is this episode likely an artifact?"
+            tooltip={
+              <>
+                <div className="font-semibold text-gray-800">
+                  How to decide
+                </div>
+                <div className="mt-1">
+                  Choose <span className="font-semibold">Yes</span> if this episode is likely artifact, noise, or not clinically meaningful.
+                </div>
+                <div className="mt-1">
+                  Choose <span className="font-semibold">No</span> if this is a real abnormal event and should continue to full annotation.
+                </div>
+              </>
+            }
+          >
+            <select
+              value={annotation.shouldContinueAnnotation}
+              onChange={(e) => {
+                markTaskInteraction("task2_artifact", "select");
+                updateField(
+                  "shouldContinueAnnotation",
+                  e.target.value as DetectAnnotation["shouldContinueAnnotation"]
+                );
+              }}
+              className="w-full max-w-[420px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+            >
+              <option value="">Select artifact decision</option>
+              {CONTINUE_ANNOTATION_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </TaskBlock>
 
           {shouldContinue && annotation.shouldContinueAnnotation !== "" && (
             <>
@@ -711,7 +989,10 @@ export default function DetectPanel({
                       The available event types are filtered by the selected primary vital(s).
                     </div>
                     <div className="mt-1">
-                      For example, HR will show Bradycardia / Tachycardia, while MAP/SBP/DBP will show Hypotension / Hypertension.
+                      For example, HR shows bradycardia or tachycardia, while MAP/SBP/DBP show hypotension or hypertension.
+                    </div>
+                    <div className="mt-1">
+                      You may also choose Normal physiologic dynamic if the selected window reflects a clinically meaningful but expected physiologic change rather than a harmful abnormality.
                     </div>
                     <div className="mt-1">
                       If none of the predefined labels fits well, select{" "}
@@ -722,12 +1003,13 @@ export default function DetectPanel({
               >
                 <select
                   value={annotation.eventType}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    markTaskInteraction("task3_event_type", "select");
                     updateField(
                       "eventType",
                       e.target.value as EventType | "Others" | ""
-                    )
-                  }
+                    );
+                  }}
                   className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
                 >
                   <option value="">Select event type</option>
@@ -738,48 +1020,43 @@ export default function DetectPanel({
                   ))}
                 </select>
 
-                <div className="mt-4">
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                    If “Others”, please explain; or skip
-                  </div>
+                {isOtherEventType && (
+                  <div className="mt-4 max-w-[420px]">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+                      If “Others”, please explain
+                    </div>
 
-                  <textarea
-                    value={annotation.eventTypeOther ?? ""}
-                    onChange={(e) =>
-                      updateField("eventTypeOther", e.target.value as any)
-                    }
-                    disabled={!isOtherEventType}
-                    className="min-h-[90px] w-full max-w-[520px] rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:bg-slate-50 disabled:text-gray-400"
-                    placeholder={
-                      isOtherEventType
-                        ? "Briefly explain why none of the predefined event types fits this episode..."
-                        : "This field is only required if 'Others' is selected."
-                    }
-                  />
+                    <textarea
+                      value={annotation.eventTypeOther ?? ""}
+                      onChange={(e) => {
+                        markTaskInteraction("task3_event_type", "typing");
+                        updateField("eventTypeOther", e.target.value as any);
+                      }}
+                      className="min-h-[64px] w-full rounded-md border px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400"
+                      placeholder="Briefly explain..."
+                    />
 
-                  <div className="mt-3">
-                    <button
-                      type="button"
-                      onClick={
-                        recordingTarget === "eventTypeOther"
-                          ? stopVoiceNote
-                          : () => startVoiceNote("eventTypeOther")
-                      }
-                      disabled={!isOtherEventType}
-                      className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                        !isOtherEventType
-                          ? "cursor-not-allowed bg-gray-300"
-                          : recordingTarget === "eventTypeOther"
-                          ? "bg-red-500 hover:bg-red-600"
-                          : "bg-orange-400 hover:bg-orange-500"
-                      }`}
-                    >
-                      {recordingTarget === "eventTypeOther"
-                        ? "Stop Recording"
-                        : "Start Recording"}
-                    </button>
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        onClick={
+                          recordingTarget === "eventTypeOther"
+                            ? stopVoiceNote
+                            : () => startVoiceNote("eventTypeOther")
+                        }
+                        className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                          recordingTarget === "eventTypeOther"
+                            ? "bg-red-500 hover:bg-red-600"
+                            : "bg-orange-400 hover:bg-orange-500"
+                        }`}
+                      >
+                        {recordingTarget === "eventTypeOther"
+                          ? "Stop Recording"
+                          : "Start Recording"}
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
               </TaskBlock>
 
               <TaskBlock
@@ -805,17 +1082,26 @@ export default function DetectPanel({
                   <OptionChip
                     label="Yes"
                     selected={annotation.associatedChanges === "Yes"}
-                    onClick={() => updateField("associatedChanges", "Yes")}
+                    onClick={() => {
+                      markTaskInteraction("task4_associated_changes", "select");
+                      updateField("associatedChanges", "Yes");
+                    }}
                   />
                   <OptionChip
                     label="No"
                     selected={annotation.associatedChanges === "No"}
-                    onClick={() => updateField("associatedChanges", "No")}
+                    onClick={() => {
+                      markTaskInteraction("task4_associated_changes", "select");
+                      updateField("associatedChanges", "No");
+                    }}
                   />
                   <OptionChip
                     label="Unclear"
                     selected={annotation.associatedChanges === "Unclear"}
-                    onClick={() => updateField("associatedChanges", "Unclear")}
+                    onClick={() => {
+                      markTaskInteraction("task4_associated_changes", "select");
+                      updateField("associatedChanges", "Unclear");
+                    }}
                   />
                 </div>
 
@@ -827,7 +1113,10 @@ export default function DetectPanel({
 
                     <textarea
                       value={annotation.note}
-                      onChange={(e) => updateField("note", e.target.value)}
+                      onChange={(e) => {
+                        markTaskInteraction("task4_associated_changes", "typing");
+                        updateField("note", e.target.value);
+                      }}
                       className="min-h-[120px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
                       placeholder={getTask3Placeholder(firstPrimaryVital)}
                     />
@@ -856,85 +1145,88 @@ export default function DetectPanel({
               </TaskBlock>
 
               <TaskBlock
-  title="Task 5. What was the onset pattern?"
-  tooltip={
-    <>
-      <div className="font-semibold text-gray-800">
-        How to choose onset
-      </div>
-      <div className="mt-1">
-        Use this to describe how the episode began.
-      </div>
-    </>
-  }
->
-  <select
-    value={annotation.onsetPattern}
-    onChange={(e) =>
-      updateField(
-        "onsetPattern",
-        e.target.value as DetectAnnotation["onsetPattern"]
-      )
-    }
-    className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-  >
-    <option value="">Select onset pattern</option>
-    {ONSET_PATTERN_OPTIONS.map((option) => (
-      <option key={option} value={option}>
-        {option}
-      </option>
-    ))}
-  </select>
-</TaskBlock>
+                title="Task 5. What was the onset pattern?"
+                tooltip={
+                  <>
+                    <div className="font-semibold text-gray-800">
+                      How to choose onset
+                    </div>
+                    <div className="mt-1">
+                      Use this to describe how the episode began.
+                    </div>
+                  </>
+                }
+              >
+                <select
+                  value={annotation.onsetPattern}
+                  onChange={(e) => {
+                    markTaskInteraction("task5_onset_pattern", "select");
+                    updateField(
+                      "onsetPattern",
+                      e.target.value as DetectAnnotation["onsetPattern"]
+                    );
+                  }}
+                  className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+                >
+                  <option value="">Select onset pattern</option>
+                  {ONSET_PATTERN_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </TaskBlock>
 
-<TaskBlock
-  title="Task 6. How did the episode evolve within this window?"
-  tooltip={
-    <>
-      <div className="font-semibold text-gray-800">
-        How to choose the course
-      </div>
-      <div className="mt-1">
-        Use this to describe the temporal course after onset within the selected window.
-      </div>
-    </>
-  }
->
-  <select
-    value={annotation.episodeCourse}
-    onChange={(e) =>
-      updateField(
-        "episodeCourse",
-        e.target.value as DetectAnnotation["episodeCourse"]
-      )
-    }
-    className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-  >
-    <option value="">Select episode course</option>
-    {EPISODE_COURSE_OPTIONS.map((option) => (
-      <option key={option} value={option}>
-        {option}
-      </option>
-    ))}
-  </select>
-</TaskBlock>
+              <TaskBlock
+                title="Task 6. How did the episode evolve within this window?"
+                tooltip={
+                  <>
+                    <div className="font-semibold text-gray-800">
+                      How to choose the course
+                    </div>
+                    <div className="mt-1">
+                      Use this to describe the temporal course after onset within the selected window.
+                    </div>
+                  </>
+                }
+              >
+                <select
+                  value={annotation.episodeCourse}
+                  onChange={(e) => {
+                    markTaskInteraction("task6_episode_course", "select");
+                    updateField(
+                      "episodeCourse",
+                      e.target.value as DetectAnnotation["episodeCourse"]
+                    );
+                  }}
+                  className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+                >
+                  <option value="">Select episode course</option>
+                  {EPISODE_COURSE_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </TaskBlock>
 
-<TaskBlock title="Task 7. How severe was this event?">
-  <select
-    value={annotation.severity}
-    onChange={(e) =>
-      updateField("severity", e.target.value as DetectAnnotation["severity"])
-    }
-    className="w-full max-w-[260px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-  >
-    <option value="">Select severity</option>
-    {SEVERITY_OPTIONS.map((level) => (
-      <option key={level} value={level}>
-        {level}
-      </option>
-    ))}
-  </select>
-</TaskBlock>
+              <TaskBlock title="Task 7. How severe was this event?">
+                <select
+                  value={annotation.severity}
+                  onChange={(e) => {
+                    markTaskInteraction("task7_severity", "select");
+                    updateField("severity", e.target.value as DetectAnnotation["severity"]);
+                  }}
+                  className="w-full max-w-[260px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+                >
+                  <option value="">Select severity</option>
+                  {SEVERITY_OPTIONS.map((level) => (
+                    <option key={level} value={level}>
+                      {level}
+                    </option>
+                  ))}
+                </select>
+              </TaskBlock>
             </>
           )}
 
@@ -949,9 +1241,10 @@ export default function DetectPanel({
                   key={score}
                   value={score as 1 | 2 | 3 | 4 | 5}
                   selected={annotation.confidence === score}
-                  onClick={() =>
-                    updateField("confidence", score as 1 | 2 | 3 | 4 | 5)
-                  }
+                  onClick={() => {
+                    markTaskInteraction("task8_confidence", "select");
+                    updateField("confidence", score as 1 | 2 | 3 | 4 | 5);
+                  }}
                 />
               ))}
             </div>
@@ -962,8 +1255,14 @@ export default function DetectPanel({
           </TaskBlock>
 
           <div className="border-t px-4 py-4">
-            <div className="mb-3 text-sm text-gray-500">
-              Complete all required tasks before saving.
+            <div
+              className={`mb-3 text-sm ${
+                isArtifact ? "text-red-700 font-semibold" : "text-gray-500"
+              }`}
+            >
+              {isArtifact
+                ? "Artifact selected: no further annotation is required for this episode."
+                : "Complete all required tasks before saving."}
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -985,7 +1284,11 @@ export default function DetectPanel({
                     : "bg-blue-600 hover:bg-blue-700"
                 }`}
               >
-                {saveStatus === "saving" ? "Saving..." : "Save & Next Step"}
+                {saveStatus === "saving"
+                  ? "Saving..."
+                  : isArtifact
+                    ? "Save & Next Episode"
+                    : "Save & Next Step"}
               </button>
             </div>
 

@@ -1,2 +1,2 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-36317D24-4AAF-F011-9219-005056BFF837,0C393719-A26B-F011-9217-005056BFF837,10497,2,2025-07-23 23:14:00+00:00,,Urine,200.0,ML,Unknown Route,urine output,fluid_output,2025-07-23 21:11:00+00:00,123.0,
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+36317D24-4AAF-F011-9219-005056BFF837,0C393719-A26B-F011-9217-005056BFF837,10497,2,2025-07-23 23:14:00+00:00,,Urine,200.0,ML,Unknown Route,urine output,fluid_output,2025-07-23 21:11:00+00:00,2025-07-24 00:00:00+00:00,123.0,,123.0,

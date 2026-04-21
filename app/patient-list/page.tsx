@@ -1,23 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
-// ------------ Types ------------
 type CsvRow = Record<string, any>;
+
+type CaseStatus = "not_started" | "in_progress" | "completed";
 
 interface CaseMeta {
   id: string;
   folder: string;
-  age: number | null;
+  status: CaseStatus;
 }
 
 type GameData = {
@@ -27,32 +23,137 @@ type GameData = {
   startTime: string;
 };
 
-// ------------ Config ------------
+type CaseStatusIndexEntry = {
+  completed?: boolean;
+  inProgress?: boolean;
+  case_id?: string | number | null;
+  updated_at?: string;
+};
+
 const CSV_BASE = "/data";
-const CASE_COUNT = 100;
+
+function getStatusLabel(status: CaseStatus): string {
+  if (status === "completed") return "Completed";
+  if (status === "in_progress") return "In Progress";
+  return "Not Started";
+}
+
+function getStatusBadgeClass(status: CaseStatus): string {
+  if (status === "completed") {
+    return "bg-green-100 text-green-700";
+  }
+  if (status === "in_progress") {
+    return "bg-amber-100 text-amber-700";
+  }
+  return "bg-gray-100 text-gray-600";
+}
+
+function getButtonLabel(status: CaseStatus): string {
+  if (status === "completed") return "Review";
+  if (status === "in_progress") return "Continue";
+  return "Start";
+}
 
 export default function PatientList() {
   const router = useRouter();
   const [cases, setCases] = useState<CaseMeta[]>([]);
-  const [selectedCaseIds, setSelectedCaseIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadPatientFolders = async (): Promise<string[]> => {
-    try {
-      const res = await fetch(`${CSV_BASE}/manifest.json`, {
+  const loadDoctorIdFromAccessCode = async (
+    accessCode: string
+  ): Promise<string> => {
+    const res = await fetch(`${CSV_BASE}/access_code.csv`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(`access_code.csv ${res.status} ${res.statusText}`);
+    }
+
+    const text = await res.text();
+    const rows = Papa.parse<CsvRow>(text, {
+      header: true,
+      dynamicTyping: false,
+      skipEmptyLines: true,
+    }).data;
+
+    const matched = rows.find(
+      (row) => String(row["access_code"] ?? "").trim() === accessCode.trim()
+    );
+
+    if (!matched) {
+      throw new Error("Invalid access code. No matching doctor was found.");
+    }
+
+    const doctorId = String(matched["doctor_id"] ?? "").trim();
+    if (!doctorId) {
+      throw new Error("Matched doctor_id is empty in access_code.csv.");
+    }
+
+    return doctorId;
+  };
+
+  const loadAssignedPatientFolders = async (
+    doctorId: string
+  ): Promise<string[]> => {
+    const res = await fetch(
+      `${CSV_BASE}/assignments_by_doctor/${doctorId}.csv`,
+      {
         cache: "no-store",
-      });
-      if (!res.ok) throw new Error(`manifest ${res.status} ${res.statusText}`);
+      }
+    );
 
-      const m = (await res.json()) as { patients: string[] };
-      const folders = Array.isArray(m.patients) ? m.patients : [];
+    if (!res.ok) {
+      throw new Error(
+        `assignments_by_doctor/${doctorId}.csv ${res.status} ${res.statusText}`
+      );
+    }
 
-      if (!folders.length) throw new Error("manifest has no patients");
-      return folders;
-    } catch (e) {
-      console.error("loadPatientFolders failed:", e);
-      return Array.from({ length: CASE_COUNT }, (_, i) => `patient_${i + 1}`);
+    const text = await res.text();
+    const rows = Papa.parse<CsvRow>(text, {
+      header: true,
+      dynamicTyping: false,
+      skipEmptyLines: true,
+    }).data;
+
+    const folders = rows
+      .map((row) => String(row["patient_folder"] ?? "").trim())
+      .filter(Boolean);
+
+    if (!folders.length) {
+      throw new Error(`No patient_folder found for doctor_id=${doctorId}`);
+    }
+
+    return folders;
+  };
+
+  const loadAllCaseStatuses = async (
+    accessCode: string
+  ): Promise<Record<string, CaseStatusIndexEntry>> => {
+    try {
+      const res = await fetch(
+        `/api/case_status?accessCode=${encodeURIComponent(accessCode)}`,
+        { cache: "no-store" }
+      );
+
+      if (!res.ok) {
+        console.warn(`case_status failed: ${res.status}`);
+        return {};
+      }
+
+      const data = await res.json();
+
+      if (!data?.ok) {
+        return {};
+      }
+
+      return data?.patients && typeof data.patients === "object"
+        ? data.patients
+        : {};
+    } catch (error) {
+      console.error("Failed to load case status index:", error);
+      return {};
     }
   };
 
@@ -70,6 +171,15 @@ export default function PatientList() {
       return;
     }
 
+    let parsedParticipantInfo: any = null;
+
+    try {
+      parsedParticipantInfo = JSON.parse(participantInfo);
+    } catch {
+      router.replace("/");
+      return;
+    }
+
     try {
       const parsedConsent = JSON.parse(consentInfo);
       if (!parsedConsent?.agreed) {
@@ -83,54 +193,64 @@ export default function PatientList() {
 
     (async () => {
       try {
-        const folders = await loadPatientFolders();
-        if (!folders.length) throw new Error("No patient folders found");
+        const accessCode =
+          String(parsedParticipantInfo?.accessCode ?? "").trim() ||
+          String(localStorage.getItem("doctorAccessCode") ?? "").trim();
 
-        const chosen = folders.slice(0, Math.min(CASE_COUNT, folders.length));
-
-        const metas: CaseMeta[] = [];
-        for (const folder of chosen) {
-          try {
-            const res = await fetch(`${CSV_BASE}/${folder}/case_info.csv`, {
-              cache: "no-store",
-            });
-            if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-
-            const text = await res.text();
-            const rows = Papa.parse<CsvRow>(text, {
-              header: true,
-              dynamicTyping: true,
-              skipEmptyLines: true,
-            }).data;
-
-            const first = rows[0] ?? {};
-
-            metas.push({
-              id: folder,
-              folder,
-              age: Number.isFinite(Number(first["aims_patient_age_years"]))
-                ? Number(first["aims_patient_age_years"])
-                : null,
-            });
-          } catch (e) {
-            console.warn(`Could not read ${folder}:`, e);
-            metas.push({
-              id: folder,
-              folder,
-              age: null,
-            });
-          }
+        if (!accessCode) {
+          throw new Error(
+            "No access code found. Please go back to the home page and enter your access code."
+          );
         }
+
+        const doctorId = await loadDoctorIdFromAccessCode(accessCode);
+        const [folders, statusMap] = await Promise.all([
+          loadAssignedPatientFolders(doctorId),
+          loadAllCaseStatuses(accessCode),
+        ]);
+
+        const metas: CaseMeta[] = folders.map((folder) => {
+          const item = statusMap[folder];
+          let status: CaseStatus = "not_started";
+
+          if (item?.completed === true) {
+            status = "completed";
+          } else if (item?.inProgress === true) {
+            status = "in_progress";
+          }
+
+          return {
+            id: folder,
+            folder,
+            status,
+          };
+        });
 
         setCases(metas);
       } catch (e: any) {
         console.error("Error building case list:", e);
-        setError(e?.message ?? "Failed to load cases");
+        setError(e?.message ?? "Failed to load assigned cases");
       } finally {
         setLoading(false);
       }
     })();
   }, [router]);
+
+  const progress = useMemo(() => {
+    const total = cases.length;
+    const completed = cases.filter((c) => c.status === "completed").length;
+    const inProgress = cases.filter((c) => c.status === "in_progress").length;
+    const remaining = total - completed;
+    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+    return {
+      total,
+      completed,
+      inProgress,
+      remaining,
+      percent,
+    };
+  }, [cases]);
 
   const buildGameData = (selectedCases: CaseMeta[]): GameData => {
     return {
@@ -145,28 +265,18 @@ export default function PatientList() {
   };
 
   const handleStartSingleCase = (caseItem: CaseMeta) => {
-    const gameData = buildGameData([caseItem]);
-    localStorage.setItem("gameData", JSON.stringify(gameData));
-    router.push("/dashboard");
-  };
-
-  const handleToggleCase = (caseId: string) => {
-    setSelectedCaseIds((prev) =>
-      prev.includes(caseId)
-        ? prev.filter((id) => id !== caseId)
-        : [...prev, caseId]
-    );
-  };
-
-  const handleStartSelectedCases = () => {
-    const selectedCases = cases.filter((c) => selectedCaseIds.includes(c.id));
-
-    if (selectedCases.length === 0) {
-      alert("Please select at least one case.");
-      return;
-    }
-
-    const gameData = buildGameData(selectedCases);
+    const startIndex = cases.findIndex((c) => c.folder === caseItem.folder);
+  
+    const gameData: GameData = {
+      currentPatientIndex: startIndex >= 0 ? startIndex : 0,
+      selectedPatients: cases.map((c) => ({
+        id: c.id,
+        folder: c.folder,
+      })),
+      diagnoses: Array(cases.length).fill(null),
+      startTime: new Date().toISOString(),
+    };
+  
     localStorage.setItem("gameData", JSON.stringify(gameData));
     router.push("/dashboard");
   };
@@ -189,7 +299,12 @@ export default function PatientList() {
           <div className="mb-4 text-5xl text-red-500">⚠️</div>
           <h2 className="mb-2 text-2xl font-bold">Error Loading Cases</h2>
           <p className="mb-4 text-gray-600">{error}</p>
-          <Button onClick={() => window.location.reload()}>Try Again</Button>
+          <div className="flex justify-center gap-3">
+            <Button variant="outline" onClick={() => router.push("/")}>
+              Back to Home
+            </Button>
+            <Button onClick={() => window.location.reload()}>Try Again</Button>
+          </div>
         </div>
       </div>
     );
@@ -198,203 +313,111 @@ export default function PatientList() {
   return (
     <main className="min-h-screen bg-gray-50 p-8">
       <div className="mx-auto max-w-7xl">
-        <h1 className="mb-6 text-4xl font-bold text-gray-900">
-          Annotation Overview and Case List
-        </h1>
-
-        {/* Annotation Structure */}
-        <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-2xl font-bold text-gray-900">
-            Annotation Structure
-          </h2>
-
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p>
-              This annotation project contains{" "}
-              <span className="font-semibold text-gray-900">
-                two major task categories
-              </span>
-              .
+        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900">
+              Annotation Overview & Case List
+            </h1>
+            <p className="mt-2 text-lg text-gray-600">
+              Here are your assigned cases for review.
             </p>
+          </div>
+        </div>
 
+        <div className="mb-8 rounded-3xl border bg-white p-6 shadow-sm">
+          <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
             <div>
-              <p>
-                <span className="font-semibold text-gray-900">
-                  1. Patient-level tasks:
-                </span>{" "}
-                annotation of the overall intraoperative case, including{" "}
-                <span className="font-semibold">Summary</span>,{" "}
-                <span className="font-semibold">Prevented Episode</span>, and{" "}
-                <span className="font-semibold">Contextual Event</span>.
+              <p className="mb-2 text-lg font-semibold text-blue-700">
+                Your Progress
               </p>
+
+              <div className="mb-3 flex items-end gap-3">
+                <span className="text-5xl font-bold text-gray-900">
+                  {progress.completed}
+                </span>
+                <span className="mb-1 text-3xl font-semibold text-gray-400">
+                  / {progress.total}
+                </span>
+              </div>
+
+              <p className="mb-4 text-gray-600">cases completed</p>
+
+              <div className="mb-2 h-4 w-full overflow-hidden rounded-full bg-gray-200">
+                <div
+                  className="h-full rounded-full bg-blue-600 transition-all"
+                  style={{ width: `${progress.percent}%` }}
+                />
+              </div>
+
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <span>{progress.percent}% completed</span>
+                <span>{progress.remaining} cases remaining</span>
+              </div>
             </div>
 
-            <div>
-              <p>
-                <span className="font-semibold text-gray-900">
-                  2. Episode-level tasks:
-                </span>{" "}
-                detailed annotation of selected abnormal intraoperative episodes,
-                including{" "}
-                <span className="font-semibold">Abnormality Detection</span>,{" "}
-                <span className="font-semibold">Mechanism</span>, and{" "}
-                <span className="font-semibold">Intervention</span>.
-              </p>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="rounded-2xl bg-gray-50 p-4 text-center">
+                <p className="text-sm text-gray-500">Total</p>
+                <p className="mt-1 text-3xl font-bold text-gray-900">
+                  {progress.total}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-green-50 p-4 text-center">
+                <p className="text-sm text-green-700">Completed</p>
+                <p className="mt-1 text-3xl font-bold text-green-700">
+                  {progress.completed}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-amber-50 p-4 text-center">
+                <p className="text-sm text-amber-700">In Progress</p>
+                <p className="mt-1 text-3xl font-bold text-amber-700">
+                  {progress.inProgress}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Workflow */}
-        <div className="mb-6 rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-2xl font-bold text-gray-900">Workflow</h2>
-
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p>Please follow the annotation workflow below:</p>
-
-            <ol className="ml-6 list-decimal space-y-1">
-              <li>
-                Start with the{" "}
-                <span className="font-semibold text-gray-900">
-                  patient-level review
-                </span>
-                .
-              </li>
-              <li>
-                Identify{" "}
-                <span className="font-semibold text-gray-900">
-                  1 to 3 clinically meaningful abnormal episodes
-                </span>{" "}
-                for detailed review.
-              </li>
-              <li>
-                For each selected episode, complete the{" "}
-                <span className="font-semibold text-gray-900">
-                  episode-level subtasks
-                </span>
-                .
-              </li>
-              <li>
-                After episode-level annotation, complete the patient-level
-                wrap-up as needed.
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        {/* Episode Selection Guideline */}
-        <div className="mb-8 rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-2xl font-bold text-gray-900">
-            Episode Selection Guideline
-          </h2>
-
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p className="font-semibold text-gray-900">Annotate:</p>
-            <ul className="ml-6 list-disc space-y-1">
-              <li>Likely true physiologic abnormal episodes.</li>
-              <li>Episodes that are moderate or severe.</li>
-              <li>Episodes that are prolonged or clearly sustained.</li>
-              <li>Episodes with associated changes in other vital signs.</li>
-              <li>
-                Episodes temporally related to interventions, medications,
-                fluids, gas, or ventilation changes.
-              </li>
-              <li>
-                Episodes that are important to the overall intraoperative
-                clinical course.
-              </li>
-            </ul>
-
-            <p className="pt-2 font-semibold text-gray-900">
-              Do not annotate:
-            </p>
-            <ul className="ml-6 list-disc space-y-1">
-              <li>Obvious monitoring artifacts or measurement errors.</li>
-              <li>
-                Very brief isolated fluctuations with no clear clinical
-                relevance.
-              </li>
-              <li>
-                Minor waveform blips that do not support downstream
-                interpretation.
-              </li>
-              <li>
-                Events that are too trivial to inform mechanism, intervention,
-                or response analysis.
-              </li>
-              <li>
-                Do not try to annotate every small abnormality in the record.
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <p className="mb-6 text-lg text-gray-700">
+        <div className="mb-4 text-lg text-gray-700">
           You have {cases.length} case{cases.length !== 1 ? "s" : ""} available
           for review.
-        </p>
-
-        <div className="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {cases.map((c, i) => {
-            const selected = selectedCaseIds.includes(c.id);
-
-            return (
-              <Card key={c.id} className="overflow-hidden rounded-2xl shadow-sm">
-                <CardHeader className="bg-slate-50">
-                  <div className="flex items-start justify-between gap-3">
-                    <CardTitle className="text-3xl font-bold">
-                      Case {i + 1}
-                    </CardTitle>
-
-                    <div
-                      className={`rounded-full px-4 py-1.5 text-sm font-semibold ${
-                        selected
-                          ? "bg-blue-100 text-blue-700"
-                          : "bg-gray-100 text-gray-500"
-                      }`}
-                    >
-                      {selected ? "Selected" : "Not selected"}
-                    </div>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="pt-6">
-                  <div className="mb-8 space-y-4 text-lg text-gray-900">
-                    <div className="flex justify-between">
-                      <span className="font-semibold">Age:</span>
-                      <span>{c.age ?? "—"}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    <Button
-                      onClick={() => handleStartSingleCase(c)}
-                      className="px-6 py-2 text-base"
-                    >
-                      Start This Case
-                    </Button>
-
-                    <Button
-                      variant="outline"
-                      onClick={() => handleToggleCase(c.id)}
-                      className="px-6 py-2 text-base"
-                    >
-                      {selected ? "Remove" : "Add"}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <div className="text-sm text-gray-600">
-            Selected: {selectedCaseIds.length} / {cases.length}
-          </div>
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {cases.map((c, i) => (
+            <Card
+              key={c.id}
+              className="rounded-2xl border bg-white shadow-sm transition-shadow hover:shadow-md"
+            >
+              <CardContent className="p-5">
+                <div className="mb-4 flex items-start justify-between gap-3">
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      Case {i + 1}
+                    </h2>
+                  </div>
 
-          <Button size="lg" onClick={handleStartSelectedCases}>
-            Start Selected Cases
-          </Button>
+                  <div
+                    className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusBadgeClass(
+                      c.status
+                    )}`}
+                  >
+                    {getStatusLabel(c.status)}
+                  </div>
+                </div>
+
+                <Button
+                  onClick={() => handleStartSingleCase(c)}
+                  className="w-full rounded-xl text-base"
+                  variant={c.status === "completed" ? "outline" : "default"}
+                >
+                  {getButtonLabel(c.status)}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </main>

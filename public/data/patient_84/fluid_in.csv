@@ -1,2 +1,2 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,relative_anesthesia_start,relative_anesthesia_end
-E61DC058-CA65-EE11-9202-005056BFF837,10457,1,2023-10-03 13:10:00+00:00,2023-10-03 23:09:00+00:00,electrolyte-R (Normosol-R) IV infusion,25.0,mL/hr,Intravenous,normosol,fluid_input,2023-10-03 13:58:00+00:00,-48.0,551.0
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+E61DC058-CA65-EE11-9202-005056BFF837,10457,1,2023-10-03 13:10:00+00:00,2023-10-03 23:09:00+00:00,electrolyte-R (Normosol-R) IV infusion,25.0,mL/hr,Intravenous,normosol,fluid_input,2023-10-03 13:58:00+00:00,2023-10-03 17:09:00+00:00,-48.0,551.0,-48.0,-360.0

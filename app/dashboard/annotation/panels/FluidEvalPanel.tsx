@@ -7,6 +7,9 @@ import { submitAnnotation } from "@/lib/submit";
 type InterventionEvalPanelProps = {
   eventId?: string;
   caseId?: string;
+  patientId?: string;
+  patientFolder?: string;
+  episodeNumber?: number;
   eventTitle?: string;
   episodeLabel?: string;
   startMin?: number;
@@ -42,7 +45,6 @@ type ResponseCourseChoice =
 
 type VoiceTarget =
   | "overall"
-  | "relevance"
   | "preventionHypothesis"
   | "response"
   | "purpose"
@@ -53,6 +55,23 @@ type TreatmentCandidate = {
   id: string;
   label: string;
   modality: "Medication" | "Fluid" | "Gas / Ventilation";
+};
+
+type InterventionTaskKey =
+  | "task1_overall_appropriateness"
+  | "task2_relevant_treatments"
+  | "task3_preventive_attempt"
+  | "task4_response_course"
+  | "task5_response_summary"
+  | "task6_nonrelevant_purpose"
+  | "task7_reasonable_alternative";
+
+type TaskTiming = {
+  startedAt: number | null;
+  firstInteractionAt: number | null;
+  firstTypingAt: number | null;
+  firstVoiceStartAt: number | null;
+  selectedAt: number | null;
 };
 
 const OVERALL_JUDGMENT_OPTIONS: OverallJudgmentValue[] = [
@@ -69,6 +88,64 @@ const RESPONSE_COURSE_OPTIONS: Exclude<ResponseCourseChoice, "">[] = [
   "No relevant intervention",
   "Unclear",
 ];
+
+function buildEmptyTaskTimingMap(): Record<InterventionTaskKey, TaskTiming> {
+  return {
+    task1_overall_appropriateness: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+    task2_relevant_treatments: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+    task3_preventive_attempt: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+    task4_response_course: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+    task5_response_summary: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+    task6_nonrelevant_purpose: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+    task7_reasonable_alternative: {
+      startedAt: null,
+      firstInteractionAt: null,
+      firstTypingAt: null,
+      firstVoiceStartAt: null,
+      selectedAt: null,
+    },
+  };
+}
+
+function toIsoOrNull(value: number | null) {
+  return value != null ? new Date(value).toISOString() : null;
+}
 
 function InfoTooltip({ content }: { content: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
@@ -135,8 +212,8 @@ function SelectionPill({
     selectedTone === "green"
       ? "border-green-500 bg-green-100 text-green-700"
       : selectedTone === "blue"
-      ? "border-sky-500 bg-sky-100 text-sky-700"
-      : "border-orange-400 bg-orange-100 text-orange-700";
+        ? "border-sky-500 bg-sky-100 text-sky-700"
+        : "border-orange-400 bg-orange-100 text-orange-700";
 
   return (
     <button
@@ -147,8 +224,8 @@ function SelectionPill({
         selected
           ? toneClass
           : disabled
-          ? "cursor-not-allowed border-gray-200 bg-gray-50 text-gray-400"
-          : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
+            ? "cursor-not-allowed border-gray-200 bg-gray-50 text-gray-400"
+            : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:text-gray-900"
       }`}
     >
       {label}
@@ -413,8 +490,8 @@ function buildFluidCandidateLabel(item: any) {
       relStart !== null && relEnd !== null
         ? `${Math.round(relStart)}-${Math.round(relEnd)} min`
         : relStart !== null
-        ? `${Math.round(relStart)} min`
-        : "";
+          ? `${Math.round(relStart)} min`
+          : "";
 
     const absRange =
       cleanText(item?.start_time) && cleanText(item?.end_time)
@@ -580,6 +657,9 @@ function extractGasCandidates(
 export default function InterventionEvalPanel({
   eventId = "evt-1",
   caseId = "unknown_case",
+  patientId,
+  patientFolder,
+  episodeNumber,
   eventTitle = "MAP Drop",
   episodeLabel = "Episode 1",
   startMin = 84,
@@ -649,7 +729,6 @@ export default function InterventionEvalPanel({
   const [overallNote, setOverallNote] = React.useState("");
 
   const [relevantIds, setRelevantIds] = React.useState<string[]>([]);
-  const [relevanceNote, setRelevanceNote] = React.useState("");
 
   const [preventionChoice, setPreventionChoice] =
     React.useState<PreventionChoice>("");
@@ -671,10 +750,21 @@ export default function InterventionEvalPanel({
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const recognitionRef = React.useRef<any>(null);
-  const panelOpenedAtRef = React.useRef<number | null>(null);
+
+  const pageOpenedAtRef = React.useRef<number | null>(null);
+  const firstInteractionAtRef = React.useRef<number | null>(null);
+  const firstTypingAtRef = React.useRef<number | null>(null);
+  const firstVoiceStartAtRef = React.useRef<number | null>(null);
+  const taskTimingRef = React.useRef<Record<InterventionTaskKey, TaskTiming>>(
+    buildEmptyTaskTimingMap()
+  );
 
   React.useEffect(() => {
-    panelOpenedAtRef.current = Date.now();
+    pageOpenedAtRef.current = Date.now();
+    firstInteractionAtRef.current = null;
+    firstTypingAtRef.current = null;
+    firstVoiceStartAtRef.current = null;
+    taskTimingRef.current = buildEmptyTaskTimingMap();
   }, [caseId, eventId]);
 
   React.useEffect(() => {
@@ -717,7 +807,51 @@ export default function InterventionEvalPanel({
     [candidateTreatments, relevantIds]
   );
 
-  const hasAnyRelevantSelection = relevantTreatments.length > 0;
+  function markPageInteraction(mode: "typing" | "voice" | "select") {
+    const now = Date.now();
+
+    if (firstInteractionAtRef.current == null) {
+      firstInteractionAtRef.current = now;
+    }
+
+    if (mode === "typing" && firstTypingAtRef.current == null) {
+      firstTypingAtRef.current = now;
+    }
+
+    if (mode === "voice" && firstVoiceStartAtRef.current == null) {
+      firstVoiceStartAtRef.current = now;
+    }
+  }
+
+  function markTaskInteraction(
+    taskKey: InterventionTaskKey,
+    mode: "typing" | "voice" | "select"
+  ) {
+    const now = Date.now();
+    const taskTiming = taskTimingRef.current[taskKey];
+
+    if (taskTiming.startedAt == null) {
+      taskTiming.startedAt = now;
+    }
+
+    if (taskTiming.firstInteractionAt == null) {
+      taskTiming.firstInteractionAt = now;
+    }
+
+    if (mode === "typing" && taskTiming.firstTypingAt == null) {
+      taskTiming.firstTypingAt = now;
+    }
+
+    if (mode === "voice" && taskTiming.firstVoiceStartAt == null) {
+      taskTiming.firstVoiceStartAt = now;
+    }
+
+    if (mode === "select" && taskTiming.selectedAt == null) {
+      taskTiming.selectedAt = now;
+    }
+
+    markPageInteraction(mode);
+  }
 
   function getGroupItems(groupKey: "medication" | "fluid" | "gas") {
     if (groupKey === "medication") return groupedCandidates.Medication;
@@ -729,12 +863,14 @@ export default function InterventionEvalPanel({
     const item = candidateTreatments.find((x) => x.id === id);
     if (!item) return;
 
+    markTaskInteraction("task2_relevant_treatments", "select");
+
     const groupKey =
       item.modality === "Medication"
         ? "medication"
         : item.modality === "Fluid"
-        ? "fluid"
-        : "gas";
+          ? "fluid"
+          : "gas";
 
     setNoRelevantByGroup((prev) => ({
       ...prev,
@@ -747,6 +883,8 @@ export default function InterventionEvalPanel({
   }
 
   function toggleNoRelevant(groupKey: "medication" | "fluid" | "gas") {
+    markTaskInteraction("task2_relevant_treatments", "select");
+
     const groupItems = getGroupItems(groupKey);
     const groupIds = new Set(groupItems.map((x) => x.id));
 
@@ -797,10 +935,6 @@ export default function InterventionEvalPanel({
       if (!groupSatisfied("gas")) {
         return "Task 2 incomplete: for Gas / Ventilation, select one or more relevant items or choose 'No gas / ventilation items are relevant'.";
       }
-    }
-
-    if (hasAnyRelevantSelection && !relevanceNote.trim()) {
-      return "Task 2 incomplete: please explain why the selected interventions are clinically relevant to this episode.";
     }
 
     if (preventionChoice === "") {
@@ -862,13 +996,23 @@ export default function InterventionEvalPanel({
       recognition.interimResults = true;
       recognition.continuous = true;
 
+      let taskKey: InterventionTaskKey | null = null;
+      if (target === "overall") taskKey = "task1_overall_appropriateness";
+      if (target === "preventionHypothesis") taskKey = "task3_preventive_attempt";
+      if (target === "response") taskKey = "task5_response_summary";
+      if (target === "purpose") taskKey = "task6_nonrelevant_purpose";
+      if (target === "replaceable") taskKey = "task7_reasonable_alternative";
+
+      if (taskKey) {
+        markTaskInteraction(taskKey, "voice");
+      }
+
       recognition.onresult = (e: any) => {
         const transcript = Array.from(e.results)
           .map((r: any) => r[0].transcript)
           .join("");
 
         if (target === "overall") setOverallNote(transcript);
-        if (target === "relevance") setRelevanceNote(transcript);
         if (target === "preventionHypothesis") setPreventionHypothesis(transcript);
         if (target === "response") setResponseCourseNote(transcript);
         if (target === "purpose") setPurposeNote(transcript);
@@ -912,34 +1056,239 @@ export default function InterventionEvalPanel({
       setSaveStatus("saving");
       setSaveMessage("");
 
+      let participantInfo: any = {};
+      try {
+        const raw = localStorage.getItem("participantInfo");
+        participantInfo = raw ? JSON.parse(raw) : {};
+      } catch {
+        participantInfo = {};
+      }
+
+      const doctorId =
+        String(
+          participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
+        ).trim() || null;
+
+      const accessCode =
+        String(
+          participantInfo?.accessCode ??
+            localStorage.getItem("doctorAccessCode") ??
+            ""
+        ).trim() || null;
+
+      const submittedAt = new Date().toISOString();
+
       await submitAnnotation({
         annotator: annotatorName ? { name: annotatorName } : undefined,
+
+        doctorId,
+        accessCode,
+
         caseId,
+        patientId,
+        patientFolder,
+
         eventId,
+        episodeId: episodeNumber ? `episode_${episodeNumber}` : eventId,
         panel: "intervention_eval_panel",
         action: "submit",
-        panelOpenedAt: panelOpenedAtRef.current,
+        task: "intervention",
+
+        pageOpenedAt: pageOpenedAtRef.current,
+        firstInteractionAt: firstInteractionAtRef.current,
+        firstTypingAt: firstTypingAtRef.current,
+        firstVoiceStartAt: firstVoiceStartAtRef.current,
+        submittedAt,
+
+        panelOpenedAt: pageOpenedAtRef.current,
+        clickedAt: submittedAt,
+
         answers: {
           eventTitle,
           episodeLabel,
           startMin,
           endMin,
           candidateTreatments,
-          overallJudgment,
-          overallNote: overallNote.trim(),
-          relevantIds,
-          relevantTreatments,
-          relevanceNote: relevanceNote.trim(),
-          preventionChoice,
-          preventionHypothesis: preventionHypothesis.trim(),
-          responseCourseChoice,
-          responseCourseNote: responseCourseNote.trim(),
-          noRelevantByGroup,
-          nonRelevantTreatments,
-          purposeNote: purposeNote.trim(),
-          replaceableChoice,
-          replaceableContextTreatments: relevantTreatments,
-          replaceableNote: replaceableNote.trim(),
+          tasks: {
+            task1_overall_appropriateness: {
+              question:
+                "Within this time window, were the interventions overall appropriate?",
+              answer: {
+                overallJudgment,
+                overallNote: overallNote.trim(),
+              },
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task1_overall_appropriateness.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task1_overall_appropriateness.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task1_overall_appropriateness.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task1_overall_appropriateness.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task1_overall_appropriateness.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+            task2_relevant_treatments: {
+              question:
+                "Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode.",
+              answer: {
+                candidateTreatments,
+                relevantIds,
+                relevantTreatments,
+                noRelevantByGroup,
+              },
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task2_relevant_treatments.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task2_relevant_treatments.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task2_relevant_treatments.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task2_relevant_treatments.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task2_relevant_treatments.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+            task3_preventive_attempt: {
+              question:
+                "Before the abnormal episode developed, was there any apparent preventive intervention attempt?",
+              answer: {
+                preventionChoice,
+                preventionHypothesis: preventionHypothesis.trim(),
+              },
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task3_preventive_attempt.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task3_preventive_attempt.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task3_preventive_attempt.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task3_preventive_attempt.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task3_preventive_attempt.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+            task4_response_course: {
+              question:
+                "What was the overall short-term physiologic response after the relevant intervention(s)?",
+              answer: responseCourseChoice,
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task4_response_course.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task4_response_course.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task4_response_course.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task4_response_course.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task4_response_course.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+            task5_response_summary: {
+              question:
+                "In 1–3 sentences, summarize the relevant management during this period, including the intended purpose of each intervention, how the patient responded, and whether the desired effect was achieved.",
+              answer: responseCourseNote.trim(),
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task5_response_summary.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task5_response_summary.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task5_response_summary.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task5_response_summary.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task5_response_summary.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+            task6_nonrelevant_purpose: {
+              question:
+                "Briefly describe the likely purpose of the treatments not selected as relevant.",
+              answer: {
+                nonRelevantTreatments,
+                purposeNote: purposeNote.trim(),
+              },
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task6_nonrelevant_purpose.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task6_nonrelevant_purpose.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task6_nonrelevant_purpose.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task6_nonrelevant_purpose.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task6_nonrelevant_purpose.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+            task7_reasonable_alternative: {
+              question:
+                "In your usual clinical practice, is there ONE reasonable alternative intervention (medication, fluid, or gas adjustment) that could have been used here without materially changing the patient's physiologic course?",
+              answer: {
+                replaceableChoice,
+                replaceableNote: replaceableNote.trim(),
+              },
+              timing: {
+                startedAt: toIsoOrNull(
+                  taskTimingRef.current.task7_reasonable_alternative.startedAt
+                ),
+                firstInteractionAt: toIsoOrNull(
+                  taskTimingRef.current.task7_reasonable_alternative.firstInteractionAt
+                ),
+                firstTypingAt: toIsoOrNull(
+                  taskTimingRef.current.task7_reasonable_alternative.firstTypingAt
+                ),
+                firstVoiceStartAt: toIsoOrNull(
+                  taskTimingRef.current.task7_reasonable_alternative.firstVoiceStartAt
+                ),
+                selectedAt: toIsoOrNull(
+                  taskTimingRef.current.task7_reasonable_alternative.selectedAt
+                ),
+                submittedAt,
+              },
+            },
+          },
         },
       });
 
@@ -966,7 +1315,6 @@ export default function InterventionEvalPanel({
     setOverallJudgment("");
     setOverallNote("");
     setRelevantIds([]);
-    setRelevanceNote("");
     setPreventionChoice("");
     setPreventionHypothesis("");
     setResponseCourseChoice("");
@@ -978,6 +1326,11 @@ export default function InterventionEvalPanel({
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
     setSaveMessage("");
+
+    firstInteractionAtRef.current = null;
+    firstTypingAtRef.current = null;
+    firstVoiceStartAtRef.current = null;
+    taskTimingRef.current = buildEmptyTaskTimingMap();
   }
 
   function renderExpandableGroup(
@@ -1059,60 +1412,64 @@ export default function InterventionEvalPanel({
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-        <TaskBlock title="Task 1. Within this time window, were the interventions overall appropriate?">
-  <select
-    value={overallJudgment}
-    onChange={(e) =>
-      setOverallJudgment(e.target.value as OverallJudgmentValue)
-    }
-    className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
-  >
-    <option value="">Select overall judgment</option>
-    {OVERALL_JUDGMENT_OPTIONS.map((option) => (
-      <option key={option} value={option}>
-        {option}
-      </option>
-    ))}
-  </select>
+          <TaskBlock title="Task 1. Within this time window, were the interventions overall appropriate?">
+            <select
+              value={overallJudgment}
+              onChange={(e) => {
+                markTaskInteraction("task1_overall_appropriateness", "select");
+                setOverallJudgment(e.target.value as OverallJudgmentValue);
+              }}
+              className="w-full max-w-[320px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
+            >
+              <option value="">Select overall judgment</option>
+              {OVERALL_JUDGMENT_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
 
-  {(overallJudgment === "Partially appropriate" ||
-    overallJudgment === "Uncertain") && (
-    <div className="mt-4">
-      <div className="mb-2 text-sm font-semibold text-gray-900">
-      Explain why the interventions were only partially appropriate or uncertain.
-      </div>
+            {(overallJudgment === "Partially appropriate" ||
+              overallJudgment === "Uncertain") && (
+              <div className="mt-4">
+                <div className="mb-2 text-sm font-semibold text-gray-900">
+                  Explain why the interventions were only partially appropriate or uncertain.
+                </div>
 
-      <textarea
-        value={overallNote}
-        onChange={(e) => setOverallNote(e.target.value)}
-        className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-        placeholder="Explain why the interventions were only partially appropriate or uncertain."
-      />
+                <textarea
+                  value={overallNote}
+                  onChange={(e) => {
+                    markTaskInteraction("task1_overall_appropriateness", "typing");
+                    setOverallNote(e.target.value);
+                  }}
+                  className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="Explain why the interventions were only partially appropriate or uncertain."
+                />
 
-      <div className="mt-3">
-        <button
-          type="button"
-          onClick={
-            recordingTarget === "overall"
-              ? stopVoiceNote
-              : () => startVoiceNote("overall")
-          }
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            recordingTarget === "overall"
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-orange-400 hover:bg-orange-500"
-          }`}
-        >
-          {recordingTarget === "overall"
-            ? "Stop Recording"
-            : "Start Recording"}
-        </button>
-      </div>
-    </div>
-  )}
-</TaskBlock>
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "overall"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("overall")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "overall"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "overall"
+                      ? "Stop Recording"
+                      : "Start Recording"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </TaskBlock>
 
-          <TaskBlock title="Task 2. Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode, and briefly explain why they are relevant.">
+          <TaskBlock title="Task 2. Select the treatments in the window (5 min before, within the box, and 5 min after) that are clinically relevant to this episode.">
             {noTreatmentCaptured ? (
               <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-700">
                 No medication, fluid, or gas / ventilation feature was captured
@@ -1138,49 +1495,6 @@ export default function InterventionEvalPanel({
                   "gas",
                   "No gas / ventilation items are relevant"
                 )}
-
-                <div className="border-t pt-4">
-                  <div className="mb-2 text-sm font-semibold text-gray-900">
-                    Briefly explain the clinical evidence or reasoning that makes
-                    the selected interventions relevant to this episode.
-                  </div>
-
-                  {hasAnyRelevantSelection ? (
-                    <>
-                      <textarea
-                        value={relevanceNote}
-                        onChange={(e) => setRelevanceNote(e.target.value)}
-                        className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-                        placeholder="Briefly explain why the selected interventions are relevant to this episode..."
-                      />
-
-                      <div className="mt-3">
-                        <button
-                          type="button"
-                          onClick={
-                            recordingTarget === "relevance"
-                              ? stopVoiceNote
-                              : () => startVoiceNote("relevance")
-                          }
-                          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                            recordingTarget === "relevance"
-                              ? "bg-red-500 hover:bg-red-600"
-                              : "bg-orange-400 hover:bg-orange-500"
-                          }`}
-                        >
-                          {recordingTarget === "relevance"
-                            ? "Stop Recording"
-                            : "Start Recording"}
-                        </button>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-600">
-                      Select at least one relevant intervention to explain why
-                      it is relevant.
-                    </div>
-                  )}
-                </div>
               </div>
             )}
           </TaskBlock>
@@ -1211,19 +1525,28 @@ export default function InterventionEvalPanel({
               <SelectionPill
                 label="Yes"
                 selected={preventionChoice === "Yes"}
-                onClick={() => setPreventionChoice("Yes")}
+                onClick={() => {
+                  markTaskInteraction("task3_preventive_attempt", "select");
+                  setPreventionChoice("Yes");
+                }}
                 selectedTone="green"
               />
               <SelectionPill
                 label="No"
                 selected={preventionChoice === "No"}
-                onClick={() => setPreventionChoice("No")}
+                onClick={() => {
+                  markTaskInteraction("task3_preventive_attempt", "select");
+                  setPreventionChoice("No");
+                }}
                 selectedTone="green"
               />
               <SelectionPill
                 label="Unclear"
                 selected={preventionChoice === "Unclear"}
-                onClick={() => setPreventionChoice("Unclear")}
+                onClick={() => {
+                  markTaskInteraction("task3_preventive_attempt", "select");
+                  setPreventionChoice("Unclear");
+                }}
                 selectedTone="green"
               />
             </div>
@@ -1237,7 +1560,10 @@ export default function InterventionEvalPanel({
 
                 <textarea
                   value={preventionHypothesis}
-                  onChange={(e) => setPreventionHypothesis(e.target.value)}
+                  onChange={(e) => {
+                    markTaskInteraction("task3_preventive_attempt", "typing");
+                    setPreventionHypothesis(e.target.value);
+                  }}
                   className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
                   placeholder="For example: A preventive vasopressor was given, but the effect was insufficient or transient relative to the ongoing physiologic deterioration."
                 />
@@ -1287,9 +1613,10 @@ export default function InterventionEvalPanel({
           >
             <select
               value={responseCourseChoice}
-              onChange={(e) =>
-                setResponseCourseChoice(e.target.value as ResponseCourseChoice)
-              }
+              onChange={(e) => {
+                markTaskInteraction("task4_response_course", "select");
+                setResponseCourseChoice(e.target.value as ResponseCourseChoice);
+              }}
               className="w-full max-w-[360px] rounded-md border px-3 py-2 text-base text-gray-800 outline-none focus:border-orange-400"
             >
               <option value="">Select overall short-term response</option>
@@ -1302,7 +1629,7 @@ export default function InterventionEvalPanel({
           </TaskBlock>
 
           <TaskBlock
-            title="Task 5. Provide brief details supporting your response judgment, including which physiologic changes were observed and why any further adjustment was or was not needed."
+            title={`Task 5. In 1–3 sentences, summarize the relevant management during this period, including the intended purpose of each intervention, how the patient responded, and whether the desired effect was achieved.`}
             tooltip={
               <>
                 <div className="font-semibold text-gray-800">What to include</div>
@@ -1327,7 +1654,10 @@ export default function InterventionEvalPanel({
               <>
                 <textarea
                   value={responseCourseNote}
-                  onChange={(e) => setResponseCourseNote(e.target.value)}
+                  onChange={(e) => {
+                    markTaskInteraction("task5_response_summary", "typing");
+                    setResponseCourseNote(e.target.value);
+                  }}
                   className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
                   placeholder="For example: MAP increased briefly after phenylephrine, but the effect was transient and a repeat bolus was needed because hypotension recurred."
                 />
@@ -1356,7 +1686,7 @@ export default function InterventionEvalPanel({
           </TaskBlock>
 
           <TaskBlock
-            title="Task 6. Briefly describe the likely clinical purpose of the treatments not selected as relevant."
+            title="Task 6. Briefly describe the likely purpose of the treatments not selected as relevant, whether related to patient physiology, procedural context, phase transition, anticipation of a clinical need, or another management consideration."
             tooltip={
               <>
                 <div className="font-semibold text-gray-800">What to include</div>
@@ -1384,7 +1714,10 @@ export default function InterventionEvalPanel({
               <>
                 <textarea
                   value={purposeNote}
-                  onChange={(e) => setPurposeNote(e.target.value)}
+                  onChange={(e) => {
+                    markTaskInteraction("task6_nonrelevant_purpose", "typing");
+                    setPurposeNote(e.target.value);
+                  }}
                   className="min-h-[100px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
                   placeholder="Describe the likely clinical purpose of the treatments not selected as relevant..."
                 />
@@ -1413,80 +1746,89 @@ export default function InterventionEvalPanel({
           </TaskBlock>
 
           <TaskBlock
-  title="Task 7. In your usual clinical practice, is there ONE reasonable alternative intervention (medication, fluid, or gas adjustment) that could have been used here without materially changing the patient's physiologic course?"
-  noBorder
-  tooltip={
-    <>
-      <div className="font-semibold text-gray-800">What to include</div>
-      <div className="mt-1">Choose Yes or No first.</div>
-      <div className="mt-1">
-        If Yes, describe only ONE reasonable alternative.
-      </div>
-      <div className="mt-1">
-        For a medication, give the name and dose.
-      </div>
-      <div className="mt-1">
-        For a fluid, give the fluid type and volume or rate.
-      </div>
-      <div className="mt-1">
-        For a gas-related change, describe the adjustment as specifically as possible.
-      </div>
-    </>
-  }
->
-  <div className="flex flex-wrap gap-2">
-    <SelectionPill
-      label="Yes"
-      selected={replaceableChoice === "Yes"}
-      onClick={() => setReplaceableChoice("Yes")}
-      selectedTone="blue"
-    />
-    <SelectionPill
-      label="No"
-      selected={replaceableChoice === "No"}
-      onClick={() => setReplaceableChoice("No")}
-      selectedTone="blue"
-    />
-  </div>
+            title="Task 7. In your usual clinical practice, is there ONE reasonable alternative intervention (medication, fluid, or gas adjustment) that could have been used here without materially changing the patient's physiologic course?"
+            noBorder
+            tooltip={
+              <>
+                <div className="font-semibold text-gray-800">What to include</div>
+                <div className="mt-1">Choose Yes or No first.</div>
+                <div className="mt-1">
+                  If Yes, describe only ONE reasonable alternative.
+                </div>
+                <div className="mt-1">
+                  For a medication, give the name and dose.
+                </div>
+                <div className="mt-1">
+                  For a fluid, give the fluid type and volume or rate.
+                </div>
+                <div className="mt-1">
+                  For a gas-related change, describe the adjustment as specifically as possible.
+                </div>
+              </>
+            }
+          >
+            <div className="flex flex-wrap gap-2">
+              <SelectionPill
+                label="Yes"
+                selected={replaceableChoice === "Yes"}
+                onClick={() => {
+                  markTaskInteraction("task7_reasonable_alternative", "select");
+                  setReplaceableChoice("Yes");
+                }}
+                selectedTone="blue"
+              />
+              <SelectionPill
+                label="No"
+                selected={replaceableChoice === "No"}
+                onClick={() => {
+                  markTaskInteraction("task7_reasonable_alternative", "select");
+                  setReplaceableChoice("No");
+                }}
+                selectedTone="blue"
+              />
+            </div>
 
-  {replaceableChoice === "Yes" && (
-    <div className="mt-4">
-      <div className="mb-2 text-sm font-semibold text-gray-900">
-        Describe ONE reasonable alternative intervention.
-      </div>
-      <div className="mb-2 text-sm text-gray-600">
-        If you choose a medication, give the medication name and dose. If you choose a fluid, give the fluid type and volume or rate. If you choose a gas-related change, describe the adjustment as specifically as possible.
-      </div>
+            {replaceableChoice === "Yes" && (
+              <div className="mt-4">
+                <div className="mb-2 text-sm font-semibold text-gray-900">
+                  Describe ONE reasonable alternative intervention.
+                </div>
+                <div className="mb-2 text-sm text-gray-600">
+                  If you choose a medication, give the medication name and dose. If you choose a fluid, give the fluid type and volume or rate. If you choose a gas-related change, describe the adjustment as specifically as possible.
+                </div>
 
-      <textarea
-        value={replaceableNote}
-        onChange={(e) => setReplaceableNote(e.target.value)}
-        className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
-        placeholder="For example: I would use ephedrine 10 mg instead of phenylephrine 100 mcg. Or: I would give 250 mL crystalloid bolus. Or: I would increase FiO2 as the alternative gas adjustment."
-      />
+                <textarea
+                  value={replaceableNote}
+                  onChange={(e) => {
+                    markTaskInteraction("task7_reasonable_alternative", "typing");
+                    setReplaceableNote(e.target.value);
+                  }}
+                  className="min-h-[110px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400"
+                  placeholder="For example: I would use ephedrine 10 mg instead of phenylephrine 100 mcg. Or: I would give 250 mL crystalloid bolus. Or: I would increase FiO2 as the alternative gas adjustment."
+                />
 
-      <div className="mt-3">
-        <button
-          type="button"
-          onClick={
-            recordingTarget === "replaceable"
-              ? stopVoiceNote
-              : () => startVoiceNote("replaceable")
-          }
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            recordingTarget === "replaceable"
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-orange-400 hover:bg-orange-500"
-          }`}
-        >
-          {recordingTarget === "replaceable"
-            ? "Stop Recording"
-            : "Start Voice Note"}
-        </button>
-      </div>
-    </div>
-  )}
-</TaskBlock>
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={
+                      recordingTarget === "replaceable"
+                        ? stopVoiceNote
+                        : () => startVoiceNote("replaceable")
+                    }
+                    className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      recordingTarget === "replaceable"
+                        ? "bg-red-500 hover:bg-red-600"
+                        : "bg-orange-400 hover:bg-orange-500"
+                    }`}
+                  >
+                    {recordingTarget === "replaceable"
+                      ? "Stop Recording"
+                      : "Start Voice Note"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </TaskBlock>
 
           <div className="border-t px-4 py-4">
             <div className="mb-3 text-sm text-gray-500">

@@ -195,7 +195,7 @@ export default function AnnotationSidebar({
 
   // 旧逻辑保留，兼容 patient-level 或旧页面
   return (
-    <div className="p-4">
+    <div className="w-full max-w-[200px] p-4">
       <div className="mb-4">
         <h3 className="text-base font-bold text-gray-800">Checklist</h3>
       </div>

@@ -1,8 +1,9 @@
 "use client";
-
+import ManagementReasoningPanel from "./annotation/panels/ManagementReasoningPanel";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
+import { submitAnnotation } from "@/lib/submit";
 import type {
   AnnotationTaskKey,
   DetectVital,
@@ -20,6 +21,8 @@ import type {
   MedicationPanelData,
   FluidPanelData,
 } from "@/lib/types";
+import type { ManagementEvent } from "@/lib/types_management";
+import { prepareManagementEvents } from "@/lib/prepare_management";
 import TaskWorkspace from "./annotation/TaskWorkspace";
 import { prepareDemographicData } from "@/lib/prepare_raw_data/demographic";
 import { prepareSurgeryContextData } from "@/lib/prepare_raw_data/surgery_context";
@@ -31,7 +34,6 @@ import { prepareMedicationData } from "@/lib/prepare_raw_data/medications";
 import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
-import AdditionalEventContextPanel from "./annotation/panels/AdditionalEventContextPanel";
 
 type CsvRow = Record<string, any>;
 
@@ -60,7 +62,7 @@ type AnnotationLevel = "summary" | "episode" | "otherEvents";
 
 type EpisodeTaskCompletionMap = Record<
   string,
-  Record<AnnotationTaskKey, boolean>
+  Partial<Record<AnnotationTaskKey, boolean>>
 >;
 
 const EPISODE_TASK_ORDER: AnnotationTaskKey[] = [
@@ -360,9 +362,8 @@ export default function DashboardPage() {
   const [currentPatientIndex, setCurrentPatientIndex] = useState(0);
   const [selectedPatients, setSelectedPatients] = useState<StoredSelected[]>([]);
   const currentPatient = selectedPatients[currentPatientIndex];
-
+  const currentCaseLabel = currentPatient?.folder ?? "unknown_patient";
   const [caseId, setCaseId] = useState("unknown_case");
-
   const [demographic, setDemographic] = useState<PatientDemographic | null>(null);
   const [surgeryContext, setSurgeryContext] = useState<SurgeryContext | null>(null);
   const [preop, setPreop] = useState<PreopAssessment | null>(null);
@@ -383,7 +384,7 @@ export default function DashboardPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
-
+  const [managementReasoningCompleted, setManagementReasoningCompleted] = useState(false);
   const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("summary");
   const [annotationLevel, setAnnotationLevel] = useState<AnnotationLevel>("summary");
 
@@ -393,7 +394,9 @@ export default function DashboardPage() {
   const [timeResolution, setTimeResolution] = useState<15 | 5>(15);
   const [viewStartMin, setViewStartMin] = useState(0);
   const [sharedScrollLeft, setSharedScrollLeft] = useState(0);
-
+  const [managementEvents, setManagementEvents] = useState<ManagementEvent[]>([]);
+  const [selectedManagementEvent, setSelectedManagementEvent] =
+    useState<ManagementEvent | null>(null);
   const [episodeState, setEpisodeState] = useState<EpisodeAnnotationState>(
     buildEmptyEpisodeState()
   );
@@ -436,9 +439,21 @@ export default function DashboardPage() {
     );
   }, [episodeState]);
 
-  const selectedEvent: SidebarEventItem | null = useMemo(() => {
+  const activeEpisodeNumber = useMemo(() => {
     if (!activeEpisode) return null;
 
+    const idx = prioritizedEpisodes.findIndex(
+      (episode) => episode.id === activeEpisode.id
+    );
+
+    return idx >= 0 ? idx + 1 : null;
+  }, [activeEpisode, prioritizedEpisodes]);
+
+  const selectedEvent: SidebarEventItem | null = useMemo(() => {
+    if (!activeEpisode) return null;
+  
+    const completed = episodeTaskCompletion[activeEpisode.id];
+  
     return {
       id: activeEpisode.id,
       vital: activeEpisode.vital,
@@ -448,12 +463,11 @@ export default function DashboardPage() {
       endMin: activeEpisode.endMin,
       y1: activeEpisode.y1,
       y2: activeEpisode.y2,
-      completed:
-        episodeTaskCompletion[activeEpisode.id] ?? {
-          detect: false,
-          mechanism: false,
-          fluidEval: false,
-        },
+      completed: {
+        detect: completed?.detect ?? false,
+        mechanism: completed?.mechanism ?? false,
+        fluidEval: completed?.fluidEval ?? false,
+      },
     };
   }, [activeEpisode, episodeTaskCompletion]);
 
@@ -470,17 +484,38 @@ export default function DashboardPage() {
     });
   }, [activeEpisode]);
 
-  function validateBeforeFinalSubmit(): string | null {
-    if (annotationLevel === "episode") {
-      if (episodeState.prioritizedEpisodeIds.length === 0) {
-        return "Please select up to 3 episodes for detailed annotation before submitting.";
-      }
-    }
+  function resetEpisodeWorkflow() {
+    setEpisodeState(buildEmptyEpisodeState());
+    setEpisodeTaskCompletion({});
+    setSelectedWindow(null);
+  }
 
-    if (prioritizedEpisodes.length === 0) {
+  const canSubmitFinal =
+  patientSummaryCompleted &&
+  managementReasoningCompleted &&
+  episodeState.prioritizedEpisodeIds.length > 0 &&
+  prioritizedEpisodes.every((episode) => {
+    const completed = episodeTaskCompletion[episode.id];
+    return (
+      completed?.detect &&
+      completed?.mechanism &&
+      completed?.fluidEval
+    );
+  });
+
+  function validateBeforeFinalSubmit(): string | null {
+    if (!patientSummaryCompleted) {
+      return "Please complete and save the patient-level summary before submitting.";
+    }
+  
+    if (!managementReasoningCompleted) {
+      return "Please complete and save the management reasoning before submitting.";
+    }
+  
+    if (episodeState.prioritizedEpisodeIds.length === 0) {
       return "Please select and annotate at least one episode before submitting.";
     }
-
+  
     const incompleteEpisodes = prioritizedEpisodes.filter((episode) => {
       const completed = episodeTaskCompletion[episode.id];
       return (
@@ -490,22 +525,12 @@ export default function DashboardPage() {
         !completed.fluidEval
       );
     });
-
+  
     if (incompleteEpisodes.length > 0) {
       return `There are ${incompleteEpisodes.length} selected episode(s) with incomplete subtasks.`;
     }
-
-    if (!patientSummaryCompleted) {
-      return "Please complete and save the patient-level summary before submitting.";
-    }
-
+  
     return null;
-  }
-
-  function resetEpisodeWorkflow() {
-    setEpisodeState(buildEmptyEpisodeState());
-    setEpisodeTaskCompletion({});
-    setSelectedWindow(null);
   }
 
   function handleCreateEpisodeFromWindow(window: SelectedWindow) {
@@ -595,7 +620,7 @@ export default function DashboardPage() {
       const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
 
       if (!isSelected && prev.prioritizedEpisodeIds.length >= 3) {
-        alert("You can select up to 3 episodes.");
+        alert("You must confirm exactly 3 episodes.");
         return prev;
       }
 
@@ -632,65 +657,141 @@ export default function DashboardPage() {
     });
   }
 
-  function handleAdvanceEpisodeStage() {
+  
+  async function handleAdvanceEpisodeStage() {
     if (episodeState.stage === "select_all") {
       if (episodeState.detectedEpisodes.length === 0) {
-        setSubmitError("Please detect at least one sustained abnormal physiology event.");
+        setSubmitError("Please detect at least one episode before continuing.");
         return;
       }
-
-      setSubmitError(null);
-      setEpisodeState((prev) => ({
-        ...prev,
-        stage: "pick_top3",
-      }));
-      logAction("episode_stage_advance", { from: "select_all", to: "pick_top3" });
+  
+      if (episodeState.prioritizedEpisodeIds.length === 0) {
+        setSubmitError("Please confirm at least one episode before continuing.");
+        return;
+      }
+  
+      try {
+        setSubmitting(true);
+        setSubmitError(null);
+  
+        await saveAbnormalitySelectionOverview("select_all");
+  
+        setSelectedTask("detect");
+        setEpisodeState((prev) => ({
+          ...prev,
+          stage: "annotate",
+          activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
+        }));
+        logAction("episode_stage_advance", {
+          from: "select_all",
+          to: "annotate",
+          selectionOverviewSaved: true,
+        });
+      } catch (e: any) {
+        console.error("Failed to save abnormality selection overview:", e);
+        setSubmitError(
+          e?.message ||
+            "Failed to save abnormality selection overview. Please click again."
+        );
+        return;
+      } finally {
+        setSubmitting(false);
+      }
+  
       return;
     }
-
+  
     if (episodeState.stage === "pick_top3") {
       if (episodeState.prioritizedEpisodeIds.length === 0) {
-        setSubmitError("Please choose at least one episode for detailed annotation.");
+        setSubmitError("Please confirm at least one episode before continuing.");
         return;
       }
-
-      setSubmitError(null);
-      setSelectedTask("detect");
-      setEpisodeState((prev) => ({
-        ...prev,
-        stage: "annotate",
-        activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
-      }));
-      logAction("episode_stage_advance", { from: "pick_top3", to: "annotate" });
+  
+      try {
+        setSubmitting(true);
+        setSubmitError(null);
+  
+        await saveAbnormalitySelectionOverview("pick_top3");
+  
+        setSelectedTask("detect");
+        setEpisodeState((prev) => ({
+          ...prev,
+          stage: "annotate",
+          activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
+        }));
+        logAction("episode_stage_advance", {
+          from: "pick_top3",
+          to: "annotate",
+          selectionOverviewSaved: true,
+        });
+      } catch (e: any) {
+        console.error("Failed to save abnormality selection overview:", e);
+        setSubmitError(
+          e?.message ||
+            "Failed to save abnormality selection overview. Please click again."
+        );
+        return;
+      } finally {
+        setSubmitting(false);
+      }
     }
   }
-
   function handleTimelineWindowCreate(window: SelectedWindow) {
-    if (annotationLevel === "otherEvents" && selectedTask === "preventedEpisode") {
-      setSelectedDetectVital(window.vital);
-      setSelectedWindow(window);
-
-      logAction("patient_prevented_window_select", {
-        vital: window.vital,
-        startMin: window.startMin,
-        endMin: window.endMin,
-        y1: window.y1,
-        y2: window.y2,
-      });
-      return;
-    }
-
     if (annotationLevel === "episode") {
       if (episodeState.stage === "annotate") {
         return;
       }
-
+  
       handleCreateEpisodeFromWindow(window);
       setSelectedWindow(window);
       return;
     }
-
+  
     setSelectedWindow(window);
+  }
+
+  function handleSelectedWindowChange(nextWindow: SelectedWindow | null) {
+    setSelectedWindow(nextWindow);
+  
+    if (!nextWindow) return;
+  
+    // 只有 episode 模式下才需要把框的变化同步回左侧 checklist
+    if (annotationLevel !== "episode") return;
+  
+    // 只有 annotate 阶段，才把拖动结果写回当前 active episode
+    if (episodeState.stage !== "annotate") return;
+  
+    const targetEpisodeId = episodeState.activeEpisodeId;
+    if (!targetEpisodeId) return;
+  
+    setEpisodeState((prev) => {
+      const updatedEpisodes = prev.detectedEpisodes.map((episode) => {
+        if (episode.id !== targetEpisodeId) return episode;
+  
+        return {
+          ...episode,
+          vital: nextWindow.vital,
+          startMin: nextWindow.startMin,
+          endMin: nextWindow.endMin,
+          y1: nextWindow.y1,
+          y2: nextWindow.y2,
+        };
+      });
+  
+      return {
+        ...prev,
+        detectedEpisodes: updatedEpisodes,
+      };
+    });
+  
+    logAction("episode_window_adjust", {
+      episodeId: targetEpisodeId,
+      vital: nextWindow.vital,
+      startMin: nextWindow.startMin,
+      endMin: nextWindow.endMin,
+      y1: nextWindow.y1,
+      y2: nextWindow.y2,
+    });
   }
 
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
@@ -758,6 +859,7 @@ export default function DashboardPage() {
       actionLogRef.current = [];
       setHasSubmitted(false);
       setPatientSummaryCompleted(false);
+      setManagementReasoningCompleted(false);
       setSubmitError(null);
       setLoadError(null);
       setLoading(true);
@@ -768,11 +870,14 @@ export default function DashboardPage() {
       setAnnotationLevel("summary");
       setTimeResolution(15);
       setViewStartMin(0);
+      setManagementEvents([]);
+      setSelectedManagementEvent(null);
       resetEpisodeWorkflow();
 
       const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
       setCaseId(caseIdFromFile);
 
+   
       const [
         caseInfoRows,
         patientAttrRows,
@@ -785,6 +890,7 @@ export default function DashboardPage() {
         medInfusionRows,
         fluidInRows,
         fluidOutRows,
+        managementRows,
       ] = await Promise.all([
         fetchCsvRows(folder, "case_info.csv"),
         fetchCsvRows(folder, "patients_attributes_case.csv"),
@@ -797,8 +903,8 @@ export default function DashboardPage() {
         fetchCsvRows(folder, "med_infusion.csv"),
         fetchCsvRows(folder, "fluid_in.csv"),
         fetchCsvRows(folder, "fluid_out.csv"),
+        fetchCsvRows(folder, "management.csv"),
       ]);
-
       const caseInfo = caseInfoRows[0] ?? {};
       const patientAttr = patientAttrRows[0] ?? {};
       const caseStatic = caseStaticRows[0] ?? {};
@@ -826,6 +932,10 @@ export default function DashboardPage() {
 
       setMedications(prepareMedicationData(medBolusRows, medInfusionRows));
       setFluids(prepareFluidData(fluidInRows, fluidOutRows));
+      const parsedManagementEvents = prepareManagementEvents(managementRows);
+setManagementEvents(parsedManagementEvents);
+setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
+      
     } catch (e: any) {
       console.error("Failed to load patient:", e);
       setLoadError(e?.message ?? "Failed to load patient.");
@@ -834,23 +944,173 @@ export default function DashboardPage() {
     }
   }
 
-  const collectSubmissionPayload = () => {
+  function buildAbnormalitySelectionOverviewAnswers(params: {
+    stage: "select_all" | "pick_top3";
+    submittedAt: string;
+  }) {
+    const { stage, submittedAt } = params;
+  
+    const allDetectedEpisodes = episodeState.detectedEpisodes.map((episode) => ({
+      id: episode.id,
+      label: episode.label,
+      vital: episode.vital,
+      startMin: episode.startMin,
+      endMin: episode.endMin,
+      y1: episode.y1,
+      y2: episode.y2,
+      selectedForAnnotation: episodeState.prioritizedEpisodeIds.includes(episode.id),
+    }));
+  
+    const selectedEpisodes = episodeState.detectedEpisodes
+      .filter((episode) => episodeState.prioritizedEpisodeIds.includes(episode.id))
+      .map((episode) => ({
+        id: episode.id,
+        label: episode.label,
+        vital: episode.vital,
+        startMin: episode.startMin,
+        endMin: episode.endMin,
+        y1: episode.y1,
+        y2: episode.y2,
+      }));
+  
     return {
+      selectionStage: stage,
+      submittedAt,
+      selectionSummary: {
+        detectedEpisodeCount: episodeState.detectedEpisodes.length,
+        selectedEpisodeCount: episodeState.prioritizedEpisodeIds.length,
+        prioritizedEpisodeIds: episodeState.prioritizedEpisodeIds,
+      },
+      allDetectedEpisodes,
+      selectedEpisodes,
+      tasks: {
+        task1_detect_events: {
+          question:
+            "Detect events associated with vital sign abnormalities and confirm which detected episodes should be carried forward.",
+          answer: {
+            detectedEpisodes: allDetectedEpisodes,
+            confirmedEpisodeIds: episodeState.prioritizedEpisodeIds,
+          },
+          submittedAt,
+        },
+        task2_select_up_to_3: {
+          question:
+            "Select up to 3 episodes for detailed annotation from the detected episodes checklist.",
+          answer: {
+            selectedEpisodes,
+            selectedCount: selectedEpisodes.length,
+          },
+          submittedAt,
+        },
+      },
+    };
+  }
+  
+  async function saveAbnormalitySelectionOverview(
+    stage: "select_all" | "pick_top3"
+  ) {
+    const submittedAt = new Date().toISOString();
+  
+    let participantInfo: any = {};
+    try {
+      const raw = localStorage.getItem("participantInfo");
+      participantInfo = raw ? JSON.parse(raw) : {};
+    } catch {
+      participantInfo = {};
+    }
+  
+    const doctorId =
+      String(
+        participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
+      ).trim() || null;
+  
+    const accessCode =
+      String(
+        participantInfo?.accessCode ??
+          localStorage.getItem("doctorAccessCode") ??
+          ""
+      ).trim() || null;
+  
+    const patientFolder = currentPatient?.folder ?? "unknown_patient";
+  
+    await submitAnnotation({
+      doctorId,
+      accessCode,
+      patientId: patientFolder,
+      patientFolder,
+  
       caseId,
-      folder: currentPatient?.folder ?? null,
+      eventId: "abnormality-selection-overview",
+      episodeId: "selection_overview",
+  
+      panel: "abnormality_reasoning_selection",
+      action: "submit",
+      task: "selection_overview",
+  
+      submittedAt,
+      clickedAt: submittedAt,
+  
+      answers: buildAbnormalitySelectionOverviewAnswers({
+        stage,
+        submittedAt,
+      }),
+    });
+  }
+
+  const collectSubmissionPayload = () => {
+    const participantInfoRaw = localStorage.getItem("participantInfo");
+    let participantInfo: any = {};
+  
+    try {
+      participantInfo = participantInfoRaw ? JSON.parse(participantInfoRaw) : {};
+    } catch {
+      participantInfo = {};
+    }
+  
+    const accessCode =
+      String(participantInfo?.accessCode ?? localStorage.getItem("doctorAccessCode") ?? "").trim() || null;
+  
+    // 如果前端暂时没有 doctorId，也没关系；后端会用 accessCode.csv 反查
+    const doctorId =
+      String(participantInfo?.doctorId ?? "").trim() || null;
+  
+    const patientFolder = currentPatient?.folder ?? null;
+  
+    return {
+      // 关键字段：给后端/GCS 路径用
+      doctorId,
+      accessCode,
+      patientId: patientFolder,
+      patientFolder,
+  
+      // 原有字段
+      caseId,
+      folder: patientFolder,
+  
+      participantInfo: {
+        name: participantInfo?.name ?? null,
+        email: participantInfo?.email ?? null,
+        accessCode,
+        doctorId,
+      },
+  
       session: {
         startedAtMs: sessionStartRef.current,
         durationMs: performance.now() - sessionStartRef.current,
       },
+  
       annotationState: {
         annotationLevel,
         selectedTask,
         selectedDetectVital,
         selectedWindow,
         patientSummaryCompleted,
+        managementReasoningCompleted,
         episodeWorkflow: episodeState,
         episodeTaskCompletion,
+        selectedManagementEvent,
       },
+  
       data: {
         demographic,
         surgeryContext,
@@ -859,11 +1119,14 @@ export default function DashboardPage() {
         vitals,
         medications,
         fluids,
+        managementEvents,
       },
+  
       voice: {
         text: voiceNote.text,
         hasAudio: Boolean(voiceNote.audioBlob),
       },
+  
       actionLog: actionLogRef.current,
     };
   };
@@ -933,18 +1196,45 @@ export default function DashboardPage() {
     }
   }, [sharedTimelineEnd, viewWindowWidthMin, viewStartMin]);
 
+  useEffect(() => {
+    if (annotationLevel !== "otherEvents") return;
+  
+    if (!selectedManagementEvent && managementEvents.length > 0) {
+      setSelectedManagementEvent(managementEvents[0]);
+    }
+  }, [annotationLevel, selectedManagementEvent, managementEvents]);
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
-
+  
+    const contextStart =
+      annotationLevel === "otherEvents" && selectedManagementEvent
+        ? Math.max(0, Number(selectedManagementEvent.time_min) - 10)
+        : selectedWindow?.startMin;
+  
+    const contextEnd =
+      annotationLevel === "otherEvents" && selectedManagementEvent
+        ? Number(selectedManagementEvent.end_time_min ?? selectedManagementEvent.time_min) + 10
+        : selectedWindow?.endMin;
+  
     return prepareTimelineContextData(
       caseStaticRowState,
       caseDynamicRowsState,
-      selectedWindow?.startMin,
-      selectedWindow?.endMin,
+      contextStart,
+      contextEnd,
       timeResolution
     );
-  }, [caseStaticRowState, caseDynamicRowsState, selectedWindow, timeResolution]);
-
+  }, [
+    caseStaticRowState,
+    caseDynamicRowsState,
+    selectedWindow,
+    timeResolution,
+    annotationLevel,
+    selectedManagementEvent,
+  ]);
+  const activeManagementEvent = useMemo(() => {
+    if (annotationLevel !== "otherEvents") return null;
+    return selectedManagementEvent;
+  }, [annotationLevel, selectedManagementEvent]);
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -979,12 +1269,9 @@ export default function DashboardPage() {
     <main className="min-h-screen bg-gray-50">
       <div className="mx-auto flex min-h-0 w-full max-w-[1800px] flex-col px-4 py-4 lg:px-6">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-          <h1 className="flex items-center gap-4 text-2xl font-bold">
-            <span>Patient {currentPatientIndex + 1}</span>
-            <span className="text-base font-normal text-gray-500">
-              Case ID: {caseId}
-            </span>
-          </h1>
+        <h1 className="flex items-center gap-4 text-2xl font-bold">
+        <span>{currentCaseLabel.replace("_", " ")}</span>
+</h1>
 
           <div className="flex items-center gap-3">
             <button
@@ -1014,7 +1301,7 @@ export default function DashboardPage() {
 
             <button
               type="button"
-              disabled={hasSubmitted || submitting}
+              disabled={hasSubmitted || submitting || !canSubmitFinal}
               onClick={async () => {
                 const validationError = validateBeforeFinalSubmit();
                 if (validationError) {
@@ -1030,7 +1317,9 @@ export default function DashboardPage() {
                   ? "cursor-not-allowed bg-green-200 text-green-800"
                   : submitting
                     ? "cursor-wait bg-blue-300 text-white"
-                    : "bg-blue-600 text-white hover:bg-blue-700"
+                    : !canSubmitFinal
+                      ? "cursor-not-allowed bg-blue-300 text-white"
+                      : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             >
               {hasSubmitted ? "Submitted" : submitting ? "Submitting..." : "Submit"}
@@ -1038,7 +1327,7 @@ export default function DashboardPage() {
 
             <button
               type="button"
-              disabled={submitting}
+              disabled={submitting || !canSubmitFinal}
               onClick={async () => {
                 if (!hasSubmitted) {
                   const validationError = validateBeforeFinalSubmit();
@@ -1072,7 +1361,7 @@ export default function DashboardPage() {
                 }
               }}
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                submitting
+                submitting || !canSubmitFinal
                   ? "cursor-not-allowed bg-blue-300 text-white"
                   : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
@@ -1250,21 +1539,16 @@ export default function DashboardPage() {
           : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
       }`}
     >
-      Sustained Abnormality Reasoning
+       Abnormality Reasoning
     </button>
 
     <button
-      type="button"
-      onClick={() => {
-        setAnnotationLevel("otherEvents");
-        if (
-          selectedTask !== "preventedEpisode" &&
-          selectedTask !== "contextualEvent"
-        ) {
-          setSelectedTask("preventedEpisode");
-        }
-        logAction("annotation_level_click", { level: "otherEvents" });
-      }}
+  type="button"
+  onClick={() => {
+    setAnnotationLevel("otherEvents");
+    setSelectedWindow(null);
+    logAction("annotation_level_click", { level: "otherEvents" });
+  }}
       className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
         annotationLevel === "otherEvents"
           ? "border-blue-600 bg-blue-600 text-white"
@@ -1276,585 +1560,462 @@ export default function DashboardPage() {
   </div>
 </div>
 
-                      {annotationLevel === "episode" && episodeState.stage === "annotate" && (
-                        <div className="space-y-2">
-                        <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                          SubTasks
-                        </div>
-                      
-                        <div className="pl-20 flex flex-wrap items-center gap-2">
-                          {(["detect", "mechanism", "fluidEval"] as const).map((task) => {
-                            const active = selectedTask === task;
-                      
-                            const labelMap = {
-                              detect: "Abnormality Detection",
-                              mechanism: "Mechanism",
-                              fluidEval: "Intervention",
-                            };
-                      
-                            return (
-                              <button
-                                key={task}
-                                type="button"
-                                onClick={() => {
-                                  setSelectedTask(task);
-                                  logAction("task_tab_click", {
-                                    task,
-                                    activeEpisodeId: episodeState.activeEpisodeId,
-                                  });
-                                }}
-                                className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-                                  active
-                                    ? "border-blue-600 bg-blue-600 text-white"
-                                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                                }`}
-                              >
-                                {labelMap[task]}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      )}
-
-{annotationLevel === "otherEvents" && (
-  <div className="space-y-2">
-    <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-      Subtasks
-    </div>
-
-    <div className="pl-20  flex flex-wrap items-center gap-2">
-      <button
-        type="button"
-        onClick={() => {
-          setSelectedTask("preventedEpisode");
-          logAction("task_tab_click", {
-            task: "preventedEpisode",
-          });
-        }}
-        className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-          selectedTask === "preventedEpisode"
-            ? "border-blue-600 bg-blue-600 text-white"
-            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        }`}
-      >
-        Prevented Episode
-      </button>
-
-      <button
-        type="button"
-        onClick={() => {
-          setSelectedTask("contextualEvent");
-          logAction("task_tab_click", {
-            task: "contextualEvent",
-          });
-        }}
-        className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
-          selectedTask === "contextualEvent"
-            ? "border-blue-600 bg-blue-600 text-white"
-            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        }`}
-      >
-        Contextual Event
-      </button>
-    </div>
-  </div>
-)}
+    
                     </div>
 
                     {annotationLevel === "summary" && (
                       <div className="bg-white">
-                        <SummaryPanel
-                          caseId={caseId}
-                          eventId="patient-summary"
-                          eventTitle="Patient-level Summary"
-                          episodeLabel={`Patient ${currentPatientIndex + 1}`}
-                          startMin={0}
-                          endMin={sharedTimelineEnd}
-                          onSaveAndNextStep={() => {
-                            setPatientSummaryCompleted(true);
-                          }}
-                        />
+                      <SummaryPanel
+  caseId={caseId}
+  patientId={currentPatient?.folder ?? "unknown_patient"}
+  eventId="patient-summary"
+  eventTitle="Patient-level Summary"
+  episodeLabel={currentCaseLabel}
+  startMin={0}
+  endMin={sharedTimelineEnd}
+  onSaveAndNextStep={() => {
+    setPatientSummaryCompleted(true);
+  }}
+/>
                       </div>
                     )}
 
-                    {annotationLevel === "otherEvents" && (
-                      <div className="bg-white">
-                        {selectedTask === "contextualEvent" ? (
-                          <AdditionalEventContextPanel
-                            caseId={caseId}
-                            eventId="patient-contextual-event"
-                            eventTitle="Additional Contextual Event"
-                            episodeLabel={`Patient ${currentPatientIndex + 1}`}
-                            startMin={0}
-                            endMin={sharedTimelineEnd}
-                          />
-                        ) : (
-                          <TaskWorkspace
-                            task="preventedEpisode"
-                            onChangeTask={setSelectedTask}
-                            onSaveAndNextStep={(finishedTask) => {
-                              setSelectedTask(finishedTask);
-                            }}
-                            selectedEvent={null}
-                            caseId={caseId}
-                            selectedDetectVital={selectedDetectVital}
-                            onChangeSelectedDetectVital={setSelectedDetectVital}
-                            selectedWindow={selectedWindow}
-                            anesthesiaStart={anesthesiaStart}
-                            gasData={{
-                              FiO2: vitals.gas["FiO2"],
-                              "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-                              "Air (L/min)": vitals.gas["Air (L/min)"],
-                              "N2O (L/min)": vitals.gas["N2O (L/min)"],
-                              "inO2 %": vitals.gas["inO2 %"],
-                              "inN2O %": vitals.gas["inN2O %"],
-                              "inSevoflurane %": vitals.gas["inSevoflurane %"],
-                              inIsoflurane: vitals.gas["inIsoflurane"],
-                              "etMAC exhaled": vitals.gas["etMAC exhaled"],
-                            }}
-                            medBolusRows={medBolusRowsState}
-                            medInfusionRows={medInfusionRowsState}
-                            fluidInRows={fluidInRowsState}
-                            fluidOutRows={fluidOutRowsState}
-                          />
-                        )}
-                      </div>
-                    )}
+                    
+{annotationLevel === "otherEvents" && (
+  <div className="bg-white">
+    <ManagementReasoningPanel
+      caseId={caseId}
+      managementEvent={selectedManagementEvent}
+      patientIndex={currentPatientIndex + 1}
+      patientId={currentPatient?.folder ?? undefined}
+      patientFolder={currentPatient?.folder ?? undefined}
+      anesthesiaStart={anesthesiaStart}
+      onSaveSuccess={() => {
+        setManagementReasoningCompleted(true);
+      }}
+    />
+  </div>
+)}
+{annotationLevel === "episode" && episodeState.stage !== "annotate" && (
+  <div className="grid grid-cols-[180px_minmax(0,1fr)] items-start bg-white">
+    <div className="border-r p-4">
+      <h3 className="mb-4 text-base font-bold text-gray-800">
+        Checklist
+      </h3>
 
-                    {annotationLevel === "episode" && (
-                      <div className="grid grid-cols-[220px_minmax(0,1fr)] items-start bg-white">
-                        <div className="border-r p-4">
-                          <h3 className="mb-4 text-base font-bold text-gray-800">
-                            Checklist
-                          </h3>
+      {episodeState.stage === "select_all" && (
+        <div className="space-y-2">
+          <div className="mb-2 text-xs font-medium text-gray-500">
+          Confirmed {episodeState.prioritizedEpisodeIds.length}
+          </div>
 
-                          {episodeState.stage === "select_all" && (
-                            <div className="space-y-2">
-                              {episodeState.detectedEpisodes.map((episode) => {
-                                const isPreviewing =
-                                  selectedWindow?.vital === episode.vital &&
-                                  selectedWindow?.startMin === episode.startMin &&
-                                  selectedWindow?.endMin === episode.endMin &&
-                                  selectedWindow?.y1 === episode.y1 &&
-                                  selectedWindow?.y2 === episode.y2;
+          {episodeState.detectedEpisodes.map((episode) => {
+            const checked = episodeState.prioritizedEpisodeIds.includes(episode.id);
 
-                                return (
-                                  <div
-                                    key={episode.id}
-                                    role="button"
-                                    tabIndex={0}
-                                    onClick={() => {
-                                      setSelectedDetectVital(episode.vital);
-                                      setSelectedWindow({
-                                        vital: episode.vital,
-                                        startMin: episode.startMin,
-                                        endMin: episode.endMin,
-                                        y1: episode.y1,
-                                        y2: episode.y2,
-                                      });
+            const isPreviewing =
+              selectedWindow?.vital === episode.vital &&
+              selectedWindow?.startMin === episode.startMin &&
+              selectedWindow?.endMin === episode.endMin &&
+              selectedWindow?.y1 === episode.y1 &&
+              selectedWindow?.y2 === episode.y2;
 
-                                      logAction("episode_checklist_preview", {
-                                        stage: "select_all",
-                                        episodeId: episode.id,
-                                        vital: episode.vital,
-                                        startMin: episode.startMin,
-                                        endMin: episode.endMin,
-                                      });
-                                    }}
-                                    onKeyDown={(e) => {
-                                      if (e.key === "Enter" || e.key === " ") {
-                                        e.preventDefault();
-                                        setSelectedDetectVital(episode.vital);
-                                        setSelectedWindow({
-                                          vital: episode.vital,
-                                          startMin: episode.startMin,
-                                          endMin: episode.endMin,
-                                          y1: episode.y1,
-                                          y2: episode.y2,
-                                        });
-                                      }
-                                    }}
-                                    className={`w-full cursor-pointer rounded-xl border px-3 py-2 text-left transition ${
-                                      isPreviewing
-                                        ? "border-blue-700 bg-blue-300 shadow-sm"
-                                        : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                                    }`}
-                                  >
-                                    <div className="flex items-start justify-between gap-2">
-                                      <div className="min-w-0">
-                                        <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
-                                          {episode.label}
-                                        </div>
-                                      </div>
+            return (
+              <div
+                key={episode.id}
+                className={`w-full rounded-xl border px-3 py-2 transition ${
+                  isPreviewing
+                    ? "border-blue-700 bg-blue-300 shadow-sm"
+                    : checked
+                      ? "border-blue-400 bg-blue-100"
+                      : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedDetectVital(episode.vital);
+                      setSelectedWindow({
+                        vital: episode.vital,
+                        startMin: episode.startMin,
+                        endMin: episode.endMin,
+                        y1: episode.y1,
+                        y2: episode.y2,
+                      });
 
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleDeleteDetectedEpisode(episode.id);
-                                        }}
-                                        className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-gray-400 hover:bg-red-50 hover:text-red-600"
-                                        title="Delete event"
-                                      >
-                                        ×
-                                      </button>
-                                    </div>
-                                  </div>
-                                );
-                              })}
+                      logAction("episode_checklist_preview", {
+                        stage: "select_all",
+                        episodeId: episode.id,
+                        vital: episode.vital,
+                        startMin: episode.startMin,
+                        endMin: episode.endMin,
+                      });
+                    }}
+                    className="min-w-0 flex-1 text-left focus:outline-none"
+                  >
+                    <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                      {episode.label}
+                    </div>
+                    <div className="mt-1 text-xs text-gray-500">
+                      {Math.round(episode.startMin)} – {Math.round(episode.endMin)} min
+                    </div>
+                  </button>
 
-                              {episodeState.detectedEpisodes.length === 0 && (
-                                <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
-                                  No events yet.
-                                </div>
-                              )}
-                            </div>
-                          )}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTogglePrioritizedEpisode(episode.id);
 
-                          {episodeState.stage === "pick_top3" && (
-                            <div className="space-y-2">
-                              <div className="mb-2 text-xs font-medium text-gray-500">
-                                Selected {episodeState.prioritizedEpisodeIds.length}/3
-                              </div>
+                        logAction("episode_select_all_toggle", {
+                          episodeId: episode.id,
+                          nextSelected: !checked,
+                        });
+                      }}
+                      className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded border text-[10px] font-bold ${
+                        checked
+                          ? "border-blue-600 bg-blue-600 text-white"
+                          : "border-gray-300 bg-white text-transparent"
+                      }`}
+                      title={checked ? "Unconfirm episode" : "Confirm episode"}
+                    >
+                      ✓
+                    </button>
 
-                              {episodeState.detectedEpisodes.map((episode) => {
-                                const checked =
-                                  episodeState.prioritizedEpisodeIds.includes(episode.id);
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteDetectedEpisode(episode.id);
+                      }}
+                      className="flex h-5 w-5 items-center justify-center rounded-md text-gray-400 hover:bg-red-50 hover:text-red-600"
+                      title="Delete event"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
 
-                                const isPreviewing =
-                                  selectedWindow?.vital === episode.vital &&
-                                  selectedWindow?.startMin === episode.startMin &&
-                                  selectedWindow?.endMin === episode.endMin &&
-                                  selectedWindow?.y1 === episode.y1 &&
-                                  selectedWindow?.y2 === episode.y2;
-
-                                return (
-                                  <div
-                                    key={episode.id}
-                                    className={`w-full rounded-xl border px-3 py-2 transition ${
-                                      isPreviewing
-                                        ? "border-blue-700 bg-blue-300 shadow-sm"
-                                        : checked
-                                          ? "border-blue-400 bg-blue-100"
-                                          : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                                    }`}
-                                  >
-                                    <div className="flex items-start justify-between gap-2">
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          setSelectedDetectVital(episode.vital);
-                                          setSelectedWindow({
-                                            vital: episode.vital,
-                                            startMin: episode.startMin,
-                                            endMin: episode.endMin,
-                                            y1: episode.y1,
-                                            y2: episode.y2,
-                                          });
-
-                                          logAction("episode_checklist_preview", {
-                                            stage: "pick_top3",
-                                            episodeId: episode.id,
-                                            vital: episode.vital,
-                                            startMin: episode.startMin,
-                                            endMin: episode.endMin,
-                                          });
-                                        }}
-                                        className="min-w-0 flex-1 text-left focus:outline-none"
-                                      >
-                                        <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
-                                          {episode.label}
-                                        </div>
-                                      </button>
-
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleTogglePrioritizedEpisode(episode.id);
-
-                                          logAction("episode_pick_top3_toggle", {
-                                            episodeId: episode.id,
-                                            nextSelected: !checked,
-                                          });
-                                        }}
-                                        className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
-                                          checked
-                                            ? "border-blue-600 bg-blue-600 text-white"
-                                            : "border-gray-300 bg-white text-transparent"
-                                        }`}
-                                        title={checked ? "Unselect episode" : "Select episode"}
-                                      >
-                                        ✓
-                                      </button>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-
-                              {episodeState.detectedEpisodes.length === 0 && (
-                                <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
-                                  No events yet.
-                                </div>
-                              )}
-                            </div>
-                          )}
-
-                          {episodeState.stage === "annotate" && (
-                            <div className="space-y-2">
-                              {prioritizedEpisodes.map((episode) => {
-                                const active =
-                                  episode.id === episodeState.activeEpisodeId;
-                                const completion = episodeTaskCompletion[episode.id] ?? {
-                                  detect: false,
-                                  mechanism: false,
-                                  fluidEval: false,
-                                };
-                                const doneCount = EPISODE_TASK_ORDER.filter(
-                                  (task) => completion[task]
-                                ).length;
-
-                                return (
-                                  <button
-                                    key={episode.id}
-                                    type="button"
-                                    onClick={() => {
-                                      setEpisodeState((prev) => ({
-                                        ...prev,
-                                        activeEpisodeId: episode.id,
-                                      }));
-                                      setSelectedTask("detect");
-                                      setSelectedDetectVital(episode.vital);
-                                      setSelectedWindow({
-                                        vital: episode.vital,
-                                        startMin: episode.startMin,
-                                        endMin: episode.endMin,
-                                        y1: episode.y1,
-                                        y2: episode.y2,
-                                      });
-
-                                      logAction("annotate_episode_switch", {
-                                        episodeId: episode.id,
-                                        vital: episode.vital,
-                                        startMin: episode.startMin,
-                                        endMin: episode.endMin,
-                                      });
-                                    }}
-                                    className={`w-full rounded-xl border px-3 py-2 text-left transition ${
-                                      active
-                                        ? "border-blue-700 bg-blue-300 shadow-sm"
-                                        : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                                    }`}
-                                  >
-                                    <div className="flex items-start justify-between gap-2">
-                                      <div className="min-w-0">
-                                        <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
-                                          {episode.label}
-                                        </div>
-                                        <div className="mt-1 text-xs text-gray-500">
-                                          {doneCount}/3
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div className="mt-2 flex items-center gap-1">
-                                      {EPISODE_TASK_ORDER.map((taskKey) => {
-                                        const completed = completion[taskKey];
-                                        return (
-                                          <div
-                                            key={taskKey}
-                                            className={`flex h-4 w-4 items-center justify-center rounded-[3px] border text-[10px] font-bold ${
-                                              completed
-                                                ? "border-green-500 bg-green-500 text-white"
-                                                : "border-gray-300 bg-white text-transparent"
-                                            }`}
-                                          >
-                                            ✓
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </button>
-                                );
-                              })}
-
-                              {prioritizedEpisodes.length === 0 && (
-                                <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
-                                  No selected episodes.
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="min-w-0 p-4">
-                          {episodeState.stage === "select_all" && (
-                            <div className="rounded-2xl border bg-white p-6">
-                              <h4 className="mb-3 text-xl font-bold text-gray-900">
-                                Task 1. Select all sustained abnormal physiology events
-                              </h4>
-                              <p className="mb-6 text-sm text-gray-600">
-                                Please use the chart on the right to draw and confirm all
-                                sustained abnormal physiology windows you consider relevant.
-                                Newly created episodes will appear in the checklist on the left.
-                              </p>
-
-                              <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
-                                Detected episodes:{" "}
-                                <span className="font-semibold text-gray-900">
-                                  {episodeState.detectedEpisodes.length}
-                                </span>
-                              </div>
-
-                              <div className="mt-6 flex items-center justify-end gap-3">
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    resetEpisodeWorkflow();
-                                    logAction("episode_select_all_reset");
-                                  }}
-                                  className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-                                >
-                                  Reset All
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={handleAdvanceEpisodeStage}
-                                  disabled={episodeState.detectedEpisodes.length === 0}
-                                  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                                    episodeState.detectedEpisodes.length === 0
-                                      ? "cursor-not-allowed bg-blue-300 text-white"
-                                      : "bg-blue-600 text-white hover:bg-blue-700"
-                                  }`}
-                                >
-                                  Save & Next Step
-                                </button>
-                              </div>
-                            </div>
-                          )}
-
-                          {episodeState.stage === "pick_top3" && (
-                            <div className="rounded-2xl border bg-white p-6">
-                              <h4 className="mb-3 text-xl font-bold text-gray-900">
-                                Task 2. Select up to 3 episodes for detailed annotation
-                              </h4>
-                              <p className="mb-6 text-sm text-gray-600">
-                                From the detected episodes on the left, choose the most
-                                important ones you want to annotate in detail.
-                              </p>
-
-                              <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
-                                Selected for detailed annotation:{" "}
-                                <span className="font-semibold text-gray-900">
-                                  {episodeState.prioritizedEpisodeIds.length}
-                                </span>
-                                {" / 3"}
-                              </div>
-
-                              <div className="mt-6 flex items-center justify-between gap-3">
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setEpisodeState((prev) => ({
-                                      ...prev,
-                                      stage: "select_all",
-                                    }));
-                                    logAction("episode_stage_back", {
-                                      from: "pick_top3",
-                                      to: "select_all",
-                                    });
-                                  }}
-                                  className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-                                >
-                                  Back
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={handleAdvanceEpisodeStage}
-                                  disabled={episodeState.prioritizedEpisodeIds.length === 0}
-                                  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                                    episodeState.prioritizedEpisodeIds.length === 0
-                                      ? "cursor-not-allowed bg-blue-300 text-white"
-                                      : "bg-blue-600 text-white hover:bg-blue-700"
-                                  }`}
-                                >
-                                  Save & Next Step
-                                </button>
-                              </div>
-                            </div>
-                          )}
-
-{episodeState.stage === "annotate" && (
-  <div className="space-y-4">
-   <div className="flex items-center justify-between rounded-xl border border-orange-300 bg-orange-100 px-4 py-3">
-      <div>
-        <div className="text-sm font-semibold text-gray-900">
-          Detailed episode annotation
+          {episodeState.detectedEpisodes.length === 0 && (
+            <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+              No events yet.
+            </div>
+          )}
         </div>
-        <div className="text-xs text-gray-500">
-          You can go back and revise the selected episodes if needed.
-        </div>
-      </div>
+      )}
 
-      <button
-        type="button"
-        onClick={() => {
-          setEpisodeState((prev) => ({
-            ...prev,
-            stage: "pick_top3",
-            activeEpisodeId: null,
-          }));
-          setSelectedTask("detect");
-          logAction("episode_stage_back", {
-            from: "annotate",
-            to: "pick_top3",
-          });
-        }}
-        className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-      >
-        Back to episode selection
-      </button>
+      {episodeState.stage === "pick_top3" && (
+        <div className="space-y-2">
+          <div className="mb-2 text-xs font-medium text-gray-500">
+          Selected {episodeState.prioritizedEpisodeIds.length} (up to 3)
+          </div>
+
+          {episodeState.detectedEpisodes.map((episode) => {
+            const checked =
+              episodeState.prioritizedEpisodeIds.includes(episode.id);
+
+            const isPreviewing =
+              selectedWindow?.vital === episode.vital &&
+              selectedWindow?.startMin === episode.startMin &&
+              selectedWindow?.endMin === episode.endMin &&
+              selectedWindow?.y1 === episode.y1 &&
+              selectedWindow?.y2 === episode.y2;
+
+            return (
+              <div
+                key={episode.id}
+                className={`w-full rounded-xl border px-3 py-2 transition ${
+                  isPreviewing
+                    ? "border-blue-700 bg-blue-300 shadow-sm"
+                    : checked
+                      ? "border-blue-400 bg-blue-100"
+                      : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedDetectVital(episode.vital);
+                      setSelectedWindow({
+                        vital: episode.vital,
+                        startMin: episode.startMin,
+                        endMin: episode.endMin,
+                        y1: episode.y1,
+                        y2: episode.y2,
+                      });
+
+                      logAction("episode_checklist_preview", {
+                        stage: "pick_top3",
+                        episodeId: episode.id,
+                        vital: episode.vital,
+                        startMin: episode.startMin,
+                        endMin: episode.endMin,
+                      });
+                    }}
+                    className="min-w-0 flex-1 text-left focus:outline-none"
+                  >
+                    <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                      {episode.label}
+                    </div>
+                    <div className="mt-1 text-xs text-gray-500">
+                      {Math.round(episode.startMin)} – {Math.round(episode.endMin)} min
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleTogglePrioritizedEpisode(episode.id);
+
+                      logAction("episode_pick_top3_toggle", {
+                        episodeId: episode.id,
+                        nextSelected: !checked,
+                      });
+                    }}
+                    className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
+                      checked
+                        ? "border-blue-600 bg-blue-600 text-white"
+                        : "border-gray-300 bg-white text-transparent"
+                    }`}
+                    title={checked ? "Unselect episode" : "Select episode"}
+                  >
+                    ✓
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+
+          {episodeState.detectedEpisodes.length === 0 && (
+            <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+              No events yet.
+            </div>
+          )}
+        </div>
+      )}
     </div>
 
+    <div className="min-w-0 p-4">
+      {episodeState.stage === "select_all" && (
+        <div className="rounded-2xl border bg-white p-6">
+          <h4 className="mb-3 text-xl font-bold text-gray-900">
+            Task 1. Detect events associated with vital sign abnormalities.
+          </h4>
+
+          <div className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="space-y-5 px-5 py-5">
+              <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    1
+                  </span>
+                  <h4 className="text-sm font-semibold text-blue-900">
+                    How to annotate
+                  </h4>
+                </div>
+                <ol className="list-decimal space-y-1 pl-5 text-sm leading-6 text-blue-900">
+              
+                  <li>On the right VitalChart panel, Choose one primary vital sign.</li>
+                  <li>Draw a bounding box around an abnormal episode.</li>
+                  <li>Repeat this process until all abnormal episodes are identified.</li>
+                  <li>
+                  Select the 3 most important episodes for next step annotation. If fewer than 3 abnormality are identified, select all of them.
+                  </li>
+                  <li>Save and continue.</li>
+                </ol>
+              </div>
+
+              <div className="rounded-xl border border-rose-100 bg-rose-50 p-4">
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-xs font-bold text-white">
+                    2
+                  </span>
+                  <h4 className="text-sm font-semibold text-rose-900">
+                    What to annotate?
+                  </h4>
+                </div>
+
+                <p className="mb-4 text-sm leading-7 text-rose-900">
+                  Abnormal events are described as below events with your practical knowledge.
+                </p>
+
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                  <div className="rounded-lg bg-white/50 p-3">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-rose-700">
+                      Hemodynamics
+                    </div>
+                    <ul className="space-y-1 text-sm text-rose-900">
+                      <li>Hypotension</li>
+                      <li>Hypertension</li>
+                      <li>Bradycardia</li>
+                      <li>Tachycardia</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-lg bg-white/50 p-3">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-rose-700">
+                      Oxygenation
+                    </div>
+                    <ul className="space-y-1 text-sm text-rose-900">
+                      <li>Hypoxia</li>
+                      <li>Hypercapnia</li>
+                      <li>Hypocapnia</li>
+                      <li>Tachypnea</li>
+                      <li>Bradypnea</li>
+                    </ul>
+                  </div>
+
+                  <div className="rounded-lg bg-white/50 p-3">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-rose-700">
+                      Temperature
+                    </div>
+                    <ul className="space-y-1 text-sm text-rose-900">
+                      <li>Hypothermia</li>
+                      <li>Hyperthermia</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
+              Detected episodes:{" "}
+              <span className="font-semibold text-gray-900">
+                {episodeState.detectedEpisodes.length}
+              </span>
+            </div>
+
+            <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
+            Confirmed for detailed annotation:{" "}
+<span className="font-semibold text-gray-900">
+  {episodeState.prioritizedEpisodeIds.length}
+</span>
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-end gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                resetEpisodeWorkflow();
+                logAction("episode_select_all_reset");
+              }}
+              className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+            >
+              Reset All
+            </button>
+
+            <button
+  type="button"
+  onClick={() => {
+    void handleAdvanceEpisodeStage();
+  }}
+  disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
+  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+    episodeState.prioritizedEpisodeIds.length === 0 || submitting
+      ? "cursor-not-allowed bg-blue-300 text-white"
+      : "bg-blue-600 text-white hover:bg-blue-700"
+  }`}
+            >
+             {submitting ? "Saving..." : "Confirm 3 & Next Step"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {episodeState.stage === "pick_top3" && (
+        <div className="rounded-2xl border bg-white p-6">
+          <h4 className="mb-3 text-xl font-bold text-gray-900">
+            Task 2. Select up to 3 episodes for detailed annotation
+          </h4>
+          <p className="mb-6 text-sm text-gray-600">
+            From the detected episodes on the left, choose the most important ones you want to annotate in detail.
+          </p>
+
+          <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
+          Selected for detailed annotation:{" "}
+<span className="font-semibold text-gray-900">
+  {episodeState.prioritizedEpisodeIds.length}
+</span>
+          </div>
+
+          <div className="mt-6 flex items-center justify-between gap-3">
+           
+
+          <button
+  type="button"
+  onClick={() => {
+    void handleAdvanceEpisodeStage();
+  }}
+  disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
+  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+    episodeState.prioritizedEpisodeIds.length === 0 || submitting
+      ? "cursor-not-allowed bg-blue-300 text-white"
+      : "bg-blue-600 text-white hover:bg-blue-700"
+  }`}
+            >
+            {submitting ? "Saving..." : "Save & Next Step"}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+)}
+
+{annotationLevel === "episode" && episodeState.stage === "annotate" && (
+  <div className="space-y-4 bg-white p-4">
     {selectedEvent ? (
       <TaskWorkspace
-        task={selectedTask}
-        onChangeTask={setSelectedTask}
-        onSaveAndNextStep={(finishedTask) => {
-          if (
-            finishedTask === "detect" ||
-            finishedTask === "mechanism" ||
-            finishedTask === "fluidEval"
-          ) {
-            handleSaveAndNextStep(finishedTask);
-          } else {
-            setSelectedTask(finishedTask);
-          }
-        }}
-        selectedEvent={selectedEvent}
-        caseId={caseId}
-        selectedDetectVital={selectedDetectVital}
-        onChangeSelectedDetectVital={setSelectedDetectVital}
-        selectedWindow={selectedWindow}
-        anesthesiaStart={anesthesiaStart}
-        gasData={{
-          FiO2: vitals.gas["FiO2"],
-          "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-          "Air (L/min)": vitals.gas["Air (L/min)"],
-          "N2O (L/min)": vitals.gas["N2O (L/min)"],
-          "inO2 %": vitals.gas["inO2 %"],
-          "inN2O %": vitals.gas["inN2O %"],
-          "inSevoflurane %": vitals.gas["inSevoflurane %"],
-          inIsoflurane: vitals.gas["inIsoflurane"],
-          "etMAC exhaled": vitals.gas["etMAC exhaled"],
-        }}
-        medBolusRows={medBolusRowsState}
-        medInfusionRows={medInfusionRowsState}
-        fluidInRows={fluidInRowsState}
-        fluidOutRows={fluidOutRowsState}
-      />
+  task={selectedTask}
+  onChangeTask={setSelectedTask}
+  onSaveAndNextStep={(finishedTask) => {
+    if (
+      finishedTask === "detect" ||
+      finishedTask === "mechanism" ||
+      finishedTask === "fluidEval"
+    ) {
+      handleSaveAndNextStep(finishedTask);
+    } else {
+      setSelectedTask(finishedTask);
+    }
+  }}
+  selectedEvent={selectedEvent}
+  caseId={caseId}
+  patientId={currentPatient?.folder ?? undefined}
+  patientFolder={currentPatient?.folder ?? undefined}
+  episodeNumber={activeEpisodeNumber ?? undefined}
+  selectedDetectVital={selectedDetectVital}
+  onChangeSelectedDetectVital={setSelectedDetectVital}
+  selectedWindow={selectedWindow}
+  anesthesiaStart={anesthesiaStart}
+  gasData={{
+    FiO2: vitals.gas["FiO2"],
+    "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+    "Air (L/min)": vitals.gas["Air (L/min)"],
+    "N2O (L/min)": vitals.gas["N2O (L/min)"],
+    "inO2 %": vitals.gas["inO2 %"],
+    "inN2O %": vitals.gas["inN2O %"],
+    "inSevoflurane %": vitals.gas["inSevoflurane %"],
+    inIsoflurane: vitals.gas["inIsoflurane"],
+    "etMAC exhaled": vitals.gas["etMAC exhaled"],
+  }}
+  medBolusRows={medBolusRowsState}
+  medInfusionRows={medInfusionRowsState}
+  fluidInRows={fluidInRowsState}
+  fluidOutRows={fluidOutRowsState}
+  episodeState={episodeState}
+  onChangeEpisodeState={setEpisodeState}
+  completedTaskMap={episodeTaskCompletion}
+  onChangeCompletedTaskMap={setEpisodeTaskCompletion}
+/>
     ) : (
       <div className="flex min-h-[560px] items-center justify-center rounded-xl border bg-white p-6 text-sm text-gray-500">
         Please select one prioritized episode.
@@ -1862,9 +2023,7 @@ export default function DashboardPage() {
     )}
   </div>
 )}
-                        </div>
-                      </div>
-                    )}
+               
                   </div>
                 </div>
 
@@ -1885,11 +2044,12 @@ export default function DashboardPage() {
                     selectedDetectVital={selectedDetectVital}
                     onChangeSelectedDetectVital={setSelectedDetectVital}
                     selectedWindow={selectedWindow}
-                    onChangeSelectedWindow={setSelectedWindow}
+                    onChangeSelectedWindow={handleSelectedWindowChange}
                     onCreateEventFromWindow={handleTimelineWindowCreate}
                     sharedScrollLeft={sharedScrollLeft}
                     onSharedScrollLeftChange={setSharedScrollLeft}
                     timelineContext={timelineContext}
+                    managementEvent={activeManagementEvent}
                     gas={{
                       FiO2: vitals.gas["FiO2"],
                       "O2 (L/Min)": vitals.gas["O2 (L/Min)"],

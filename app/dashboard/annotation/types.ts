@@ -30,16 +30,16 @@ export type DetectVital =
   | "ETCO2"
   | "TEMP";
 
-  export type DetectedEpisodeItem = {
-    id: string;
-    label: string;
-    vital: DetectVital;
-    startMin: number;
-    endMin: number;
-    y1: number;
-    y2: number;
-    selectedForAnnotation: boolean;
-  };
+export type DetectedEpisodeItem = {
+  id: string;
+  label: string;
+  vital: DetectVital;
+  startMin: number;
+  endMin: number;
+  y1: number;
+  y2: number;
+  selectedForAnnotation: boolean;
+};
 
 export type EpisodeAnnotationState = {
   stage: EpisodeWorkflowStage;
@@ -72,15 +72,15 @@ export type EventType =
   | "Tachypnea"
   | "Bradypnea"
   | "Hypothermia"
-  | "Hyperthermia";
+  | "Hyperthermia"
 
 export type DetectEventType = EventType | "Others";
 
 export type AssociatedChangeChoice = "Yes" | "No" | "Unclear";
 
 export type ContinueAnnotationChoice =
-  | "Yes, continue annotation"
-  | "No, likely artifact / too minor / not useful"
+  | "Yes, likely artifact"
+  | "No"
   | "Unclear";
 
 export type OnsetPattern =
@@ -120,7 +120,6 @@ export type DetectAnnotation = {
   severity: SeverityLevel | "";
   confidence: ConfidenceLevel | null;
 };
-
 
 export type UserActionLogItem = {
   type: string;

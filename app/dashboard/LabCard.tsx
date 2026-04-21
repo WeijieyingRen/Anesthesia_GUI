@@ -967,9 +967,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <h1 className="flex items-center gap-4 text-2xl font-bold">
               Patient {currentPatientIndex + 1}
-              <span className="text-base font-normal text-gray-500">
-                Case ID: {caseId}
-              </span>
+           
             </h1>
 
             <div className="flex items-center gap-3">

@@ -432,13 +432,39 @@ export default function FluidChart({
         <FixedYAxisSpacer height={viewHeight} />
 
         <div
-          ref={scrollRef}
-          className="overflow-x-auto overflow-y-auto"
-          style={{ height: viewHeight }}
-          onScroll={(e) => {
-            onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-          }}
-        >
+  ref={scrollRef}
+  className="overflow-x-auto overflow-y-hidden"
+  style={{ overscrollBehaviorX: "none" }}
+  onWheel={(e) => {
+    const el = e.currentTarget;
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
+
+    // 只处理“明显以横向为主”的触摸板/滚轮手势
+    if (absX <= absY || absX < 1) return;
+
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    const nextLeft = el.scrollLeft + e.deltaX;
+
+    const atLeftEdge = el.scrollLeft <= 0;
+    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+    if (tryingGoPastLeft || tryingGoPastRight) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    e.preventDefault();
+    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+  }}
+  onScroll={(e) => {
+    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+  }}
+>
           <div
             className="relative"
             style={{

@@ -28,9 +28,12 @@ type SelectedWindow = {
 type TaskWorkspaceProps = {
   task: WorkspaceTaskKey;
   onChangeTask: (task: WorkspaceTaskKey) => void;
-  onSaveAndNextStep: (task: WorkspaceTaskKey) => void;
+  onSaveAndNextStep: (task: AnnotationTaskKey | WorkspaceTaskKey) => void;
   selectedEvent: SidebarEventItem | null;
   caseId?: string;
+  patientId?: string;
+  patientFolder?: string;
+  episodeNumber?: number;
   selectedDetectVital: DetectVital;
   onChangeSelectedDetectVital: (vital: DetectVital) => void;
   selectedWindow: SelectedWindow | null;
@@ -40,10 +43,15 @@ type TaskWorkspaceProps = {
   medInfusionRows?: any[];
   fluidInRows?: any[];
   fluidOutRows?: any[];
-
-  // 新增：episode workflow 状态（可选，便于兼容旧逻辑）
   episodeState?: EpisodeAnnotationState | null;
   onChangeEpisodeState?: (next: EpisodeAnnotationState) => void;
+
+  completedTaskMap: Record<string, Partial<Record<AnnotationTaskKey, boolean>>>;
+  onChangeCompletedTaskMap: React.Dispatch<
+    React.SetStateAction<
+      Record<string, Partial<Record<AnnotationTaskKey, boolean>>>
+    >
+  >;
 };
 
 function buildDefaultDetectAnnotation(params: {
@@ -63,12 +71,10 @@ function buildDefaultDetectAnnotation(params: {
       prev?.primaryVitals && prev.primaryVitals.length > 0
         ? prev.primaryVitals
         : [resolvedVital],
-
     startMin:
       selectedWindow?.startMin ?? selectedEvent?.startMin ?? prev?.startMin ?? 0,
     endMin:
       selectedWindow?.endMin ?? selectedEvent?.endMin ?? prev?.endMin ?? 0,
-
     shouldContinueAnnotation: prev?.shouldContinueAnnotation ?? "",
     eventType: prev?.eventType ?? "",
     eventTypeOther: prev?.eventTypeOther ?? "",
@@ -84,6 +90,7 @@ function buildDefaultDetectAnnotation(params: {
 function isAnnotationTask(task: WorkspaceTaskKey): task is AnnotationTaskKey {
   return task === "detect" || task === "mechanism" || task === "fluidEval";
 }
+
 function buildDetectedEpisodeFromWindow(
   selectedWindow: SelectedWindow
 ): DetectedEpisodeItem {
@@ -118,12 +125,47 @@ function buildDetectedEpisodeFromEvent(
   };
 }
 
+function StepProgressBoxes({
+  progress,
+}: {
+  progress: Partial<Record<AnnotationTaskKey, boolean>>;
+}) {
+  const steps: AnnotationTaskKey[] = ["detect", "mechanism", "fluidEval"];
+  const doneCount = steps.filter((k) => progress[k]).length;
+
+  return (
+    <div className="mt-2 flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
+        {steps.map((step) => {
+          const done = !!progress[step];
+          return (
+            <div
+              key={step}
+              className={`flex h-5 w-5 items-center justify-center rounded border text-[11px] font-bold ${
+                done
+                  ? "border-green-600 bg-green-600 text-white"
+                  : "border-gray-300 bg-white text-transparent"
+              }`}
+            >
+              ✓
+            </div>
+          );
+        })}
+      </div>
+      <span className="text-xs text-gray-500">{doneCount}/3</span>
+    </div>
+  );
+}
+
 export default function TaskWorkspace({
   task,
   onChangeTask,
   onSaveAndNextStep,
   selectedEvent,
   caseId = "unknown_case",
+  patientId,
+  patientFolder,
+  episodeNumber,
   selectedDetectVital,
   onChangeSelectedDetectVital,
   selectedWindow,
@@ -135,13 +177,11 @@ export default function TaskWorkspace({
   fluidOutRows = [],
   episodeState,
   onChangeEpisodeState,
+  completedTaskMap,
+  onChangeCompletedTaskMap,
 }: TaskWorkspaceProps) {
   const [detectAnnotationMap, setDetectAnnotationMap] = React.useState<
     Record<string, DetectAnnotation>
-  >({});
-
-  const [completedTaskMap, setCompletedTaskMap] = React.useState<
-    Record<string, Partial<Record<AnnotationTaskKey, boolean>>>
   >({});
 
   const workflowEnabled =
@@ -167,8 +207,8 @@ export default function TaskWorkspace({
               vital: activeDetectedEpisode.vital,
               startMin: activeDetectedEpisode.startMin,
               endMin: activeDetectedEpisode.endMin,
-              y1: 0,
-              y2: 0,
+              y1: activeDetectedEpisode.y1,
+              y2: activeDetectedEpisode.y2,
             }
           : null,
         selectedEvent: null,
@@ -176,18 +216,12 @@ export default function TaskWorkspace({
         prev: null,
       })
     );
-  }, [activeDetectedEpisode, detectAnnotationMap]);
+  }, [activeDetectedEpisode, detectAnnotationMap, selectedDetectVital]);
 
   React.useEffect(() => {
     if (workflowEnabled) return;
-
-    if (!selectedEvent && !selectedWindow && task !== "preventedEpisode") {
-      return;
-    }
-
-    if (task === "preventedEpisode") {
-      return;
-    }
+    if (!selectedEvent && !selectedWindow && task !== "preventedEpisode") return;
+    if (task === "preventedEpisode") return;
 
     const defaultId =
       selectedEvent?.id ??
@@ -210,6 +244,34 @@ export default function TaskWorkspace({
       };
     });
   }, [workflowEnabled, selectedEvent, selectedWindow, selectedDetectVital, task]);
+
+  React.useEffect(() => {
+    if (!workflowEnabled) return;
+    if (!activeDetectedEpisode) return;
+    if (!selectedWindow) return;
+    if (selectedWindow.vital !== activeDetectedEpisode.vital) return;
+
+    setDetectAnnotationMap((prev) => {
+      const prevAnno =
+        prev[activeDetectedEpisode.id] ??
+        buildDefaultDetectAnnotation({
+          selectedWindow,
+          selectedEvent: null,
+          selectedDetectVital: activeDetectedEpisode.vital,
+          prev: null,
+        });
+
+      return {
+        ...prev,
+        [activeDetectedEpisode.id]: {
+          ...prevAnno,
+          vital: selectedWindow.vital,
+          startMin: selectedWindow.startMin,
+          endMin: selectedWindow.endMin,
+        },
+      };
+    });
+  }, [workflowEnabled, activeDetectedEpisode, selectedWindow, selectedDetectVital]);
 
   const legacyEventContext = React.useMemo(() => {
     if (!selectedEvent && !selectedWindow) return null;
@@ -337,14 +399,54 @@ export default function TaskWorkspace({
   const setActiveEpisode = React.useCallback(
     (episodeId: string) => {
       if (!workflowEnabled || !episodeState || !onChangeEpisodeState) return;
+
       onChangeEpisodeState({
         ...episodeState,
         activeEpisodeId: episodeId,
       });
-      onChangeTask("detect");
+
+      const progress = completedTaskMap[episodeId] ?? {};
+      if (!progress.detect) {
+        onChangeTask("detect");
+      } else if (!progress.mechanism) {
+        onChangeTask("mechanism");
+      } else if (!progress.fluidEval) {
+        onChangeTask("fluidEval");
+      } else {
+        onChangeTask("fluidEval");
+      }
     },
-    [workflowEnabled, episodeState, onChangeEpisodeState, onChangeTask]
+    [workflowEnabled, episodeState, onChangeEpisodeState, onChangeTask, completedTaskMap]
   );
+
+  const handleBackToPreviousSection = React.useCallback(() => {
+    if (!workflowEnabled || !episodeState || !onChangeEpisodeState) return;
+
+    if (task === "fluidEval") {
+      onChangeEpisodeState({
+        ...episodeState,
+        annotateStep: "mechanism",
+      });
+      onChangeTask("mechanism");
+      return;
+    }
+
+    if (task === "mechanism") {
+      onChangeEpisodeState({
+        ...episodeState,
+        annotateStep: "detect",
+      });
+      onChangeTask("detect");
+      return;
+    }
+
+    onChangeEpisodeState({
+      ...episodeState,
+      stage: "pick_top3",
+      activeEpisodeId: null,
+    });
+    onChangeTask("detect");
+  }, [workflowEnabled, episodeState, onChangeEpisodeState, task, onChangeTask]);
 
   const advanceAnnotateWorkflow = React.useCallback(
     (currentTask: AnnotationTaskKey) => {
@@ -355,7 +457,43 @@ export default function TaskWorkspace({
 
       const activeId = activeDetectedEpisode.id;
 
-      setCompletedTaskMap((prev) => ({
+      if (
+        currentTask === "detect" &&
+        currentDetectAnnotation?.shouldContinueAnnotation === "Yes, likely artifact"
+      ) {
+        onChangeCompletedTaskMap((prev) => ({
+          ...prev,
+          [activeId]: {
+            detect: true,
+            mechanism: true,
+            fluidEval: true,
+          },
+        }));
+
+        const currentIndex = episodeState.prioritizedEpisodeIds.findIndex(
+          (id) => id === activeId
+        );
+
+        const nextEpisodeId =
+          currentIndex >= 0
+            ? episodeState.prioritizedEpisodeIds[currentIndex + 1] ?? null
+            : null;
+
+        if (nextEpisodeId) {
+          onChangeEpisodeState({
+            ...episodeState,
+            annotateStep: "detect",
+            activeEpisodeId: nextEpisodeId,
+          });
+          onChangeTask("detect");
+          return;
+        }
+
+        onSaveAndNextStep("fluidEval");
+        return;
+      }
+
+      onChangeCompletedTaskMap((prev) => ({
         ...prev,
         [activeId]: {
           ...prev[activeId],
@@ -407,8 +545,10 @@ export default function TaskWorkspace({
       episodeState,
       onChangeEpisodeState,
       activeDetectedEpisode,
+      currentDetectAnnotation,
       onChangeTask,
       onSaveAndNextStep,
+      onChangeCompletedTaskMap,
     ]
   );
 
@@ -440,7 +580,7 @@ export default function TaskWorkspace({
         <div className="flex min-h-[560px] flex-col gap-4 p-4">
           <div className="rounded-xl border bg-white p-4">
             <div className="text-lg font-semibold text-gray-900">
-              Task 1. Select all sustained abnormal physiology events
+              Task 1. Select 3 most important dynamic physiology events
             </div>
             <div className="mt-2 text-sm text-gray-600">
               Use the right panel to inspect the timeline, then add each abnormal episode here.
@@ -600,75 +740,122 @@ export default function TaskWorkspace({
       };
 
       return (
-        <div className="flex min-h-[560px] flex-col">
-          <div className="border-b bg-white px-4 py-3">
-            <div className="text-sm font-semibold text-gray-900">
-              Task 3. Detailed annotation
+        <div className="flex min-h-[560px] flex-col bg-white">
+          <div className="bg-white px-4 py-4">
+            <button
+              type="button"
+              onClick={handleBackToPreviousSection}
+              className="
+                relative inline-flex items-center
+                rounded-r-md
+                bg-orange-200 text-orange-900
+                px-5 py-2.5 pl-6
+                text-sm font-medium
+                hover:bg-orange-300
+                before:absolute before:left-[-16px] before:top-0
+                before:h-0 before:w-0
+                before:border-y-[22px] before:border-y-transparent
+                before:border-r-[16px] before:border-r-orange-200
+                hover:before:border-r-orange-300
+              "
+            >
+              Back to Abnormality Selection Section
+            </button>
+
+            <div className="mt-4 space-y-4">
+              <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    1
+                  </span>
+                  <h4 className="text-sm font-semibold text-blue-900">
+                    Annotation Instruction
+                  </h4>
+                </div>
+
+                <ol className="list-decimal space-y-1 pl-5 text-sm leading-6 text-blue-900">
+                  <li>Annotate all selected abnormal episodes.</li>
+                  <li>For each episode, complete Detection, Mechanism, and Intervention.</li>
+                  <li>You can switch between episodes at any time if needed.</li>
+                  <li>Remember to save when you finish each episode annotation.</li>
+                </ol>
+              </div>
             </div>
-            <div className="mt-2 flex flex-wrap gap-2">
+
+            <div className="mt-3 flex flex-wrap gap-4">
               {episodeState.prioritizedEpisodeIds.map((id, index) => {
                 const ep = episodeState.detectedEpisodes.find((x) => x.id === id);
                 if (!ep) return null;
 
                 const isActive = id === episodeState.activeEpisodeId;
                 const progress = completedTaskMap[id] ?? {};
-                const doneCount = ["detect", "mechanism", "fluidEval"].filter(
-                  (k) => progress[k as AnnotationTaskKey]
-                ).length;
 
                 return (
                   <button
                     key={id}
                     type="button"
                     onClick={() => setActiveEpisode(id)}
-                    className={`rounded-lg border px-3 py-2 text-left text-sm ${
+                    className={`rounded-xl border px-3 py-2.5 text-left transition ${
                       isActive
                         ? "border-blue-600 bg-blue-50 text-blue-800"
-                        : "border-gray-300 bg-white text-gray-700"
+                        : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                     }`}
                   >
-                    <div className="font-medium">
+                    <div className="text-base font-semibold leading-none">
                       Episode {index + 1}
                     </div>
-                    <div className="text-xs">{ep.label}</div>
-                    <div className="mt-1 text-xs text-gray-500">
-                      {doneCount}/3 done
-                    </div>
+                    <div className="mt-1.5 text-sm leading-none">{ep.label}</div>
+                    <StepProgressBoxes progress={progress} />
                   </button>
                 );
               })}
             </div>
 
-            <div className="mt-3 flex gap-2 text-xs">
-              {(["detect", "mechanism", "fluidEval"] as AnnotationTaskKey[]).map((step) => {
-                const isCurrent = task === step;
-                return (
-                  <div
-                    key={step}
-                    className={`rounded-full px-3 py-1 ${
-                      isCurrent
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
-                  >
-                    {step}
-                  </div>
-                );
-              })}
+            <div className="mt-5 border-t border-gray-200 pt-4">
+              <div className="flex flex-wrap gap-3">
+                {(
+                  [
+                    { key: "detect", label: "Detection" },
+                    { key: "mechanism", label: "Mechanism" },
+                    { key: "fluidEval", label: "Intervention" },
+                  ] as const
+                ).map((step) => {
+                  const isCurrent = task === step.key;
+
+                  return (
+                    <button
+                      key={step.key}
+                      type="button"
+                      onClick={() => onChangeTask(step.key)}
+                      className={`rounded-full px-5 py-2 text-lg font-medium transition ${
+                        isCurrent
+                          ? "bg-blue-600 text-white"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      }`}
+                    >
+                      {step.label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
           <div className="flex-1">
             {task === "detect" && (
-              <DetectPanel
-                eventId={eventContext.eventId}
-                caseId={caseId}
-                eventTitle={eventContext.eventTitle}
-                episodeLabel={eventContext.episodeLabel}
+             <DetectPanel
+             eventId={eventContext.eventId}
+             caseId={caseId}
+             patientId={patientId}
+             patientFolder={patientFolder}
+             episodeNumber={episodeNumber}
+             eventTitle={eventContext.eventTitle}
+             episodeLabel={eventContext.episodeLabel}
                 annotation={currentDetectAnnotation}
                 onChangeAnnotation={(value) => {
                   setDetectAnnotationMap((prev) => {
-                    const fallback = prev[activeDetectedEpisode.id] ?? currentDetectAnnotation;
+                    const fallback =
+                      prev[activeDetectedEpisode.id] ?? currentDetectAnnotation;
                     const nextValue =
                       typeof value === "function" ? value(fallback) : value;
 
@@ -684,11 +871,14 @@ export default function TaskWorkspace({
             )}
 
             {task === "mechanism" && (
-              <MechanismPanel
-                eventId={eventContext.eventId}
-                caseId={caseId}
-                eventTitle={eventContext.eventTitle}
-                episodeLabel={eventContext.episodeLabel}
+            <MechanismPanel
+            eventId={eventContext.eventId}
+            caseId={caseId}
+            patientId={patientId}
+            patientFolder={patientFolder}
+            episodeNumber={episodeNumber}
+            eventTitle={eventContext.eventTitle}
+             episodeLabel={eventContext.episodeLabel}
                 startMin={eventContext.startMin}
                 endMin={eventContext.endMin}
                 eventType={
@@ -703,11 +893,14 @@ export default function TaskWorkspace({
             )}
 
             {task === "fluidEval" && (
-              <FluidEvalPanel
-                eventId={eventContext.eventId}
-                caseId={caseId}
-                eventTitle={eventContext.eventTitle}
-                episodeLabel={eventContext.episodeLabel}
+            <FluidEvalPanel
+            eventId={eventContext.eventId}
+            caseId={caseId}
+            patientId={patientId}
+            patientFolder={patientFolder}
+            episodeNumber={episodeNumber}
+            eventTitle={eventContext.eventTitle}
+             episodeLabel={eventContext.episodeLabel}
                 startMin={eventContext.startMin}
                 endMin={eventContext.endMin}
                 medBolusRows={medBolusRows}
@@ -744,16 +937,25 @@ export default function TaskWorkspace({
   if (task === "detect") {
     return (
       <DetectPanel
-        eventId={legacyEventContext.eventId}
-        caseId={caseId}
-        eventTitle={legacyEventContext.eventTitle}
-        episodeLabel={legacyEventContext.episodeLabel}
+
+      eventId={legacyEventContext.eventId}
+    
+      caseId={caseId}
+    
+      patientId={patientId}
+    
+      patientFolder={patientFolder}
+    
+      episodeNumber={episodeNumber}
+    
+      eventTitle={legacyEventContext.eventTitle}
+    
+      episodeLabel={legacyEventContext.episodeLabel}
         annotation={legacyDetectAnnotation}
         onChangeAnnotation={(value) => {
           setDetectAnnotationMap((prev) => {
             const fallback =
               prev[legacyEventContext.eventId] ?? legacyDetectAnnotation;
-
             const nextValue =
               typeof value === "function" ? value(fallback) : value;
 
@@ -772,10 +974,20 @@ export default function TaskWorkspace({
   if (task === "mechanism") {
     return (
       <MechanismPanel
-        eventId={legacyEventContext.eventId}
-        caseId={caseId}
-        eventTitle={legacyEventContext.eventTitle}
-        episodeLabel={legacyEventContext.episodeLabel}
+
+      eventId={legacyEventContext.eventId}
+    
+      caseId={caseId}
+    
+      patientId={patientId}
+    
+      patientFolder={patientFolder}
+    
+      episodeNumber={episodeNumber}
+    
+      eventTitle={legacyEventContext.eventTitle}
+    
+      episodeLabel={legacyEventContext.episodeLabel}
         startMin={legacyEventContext.startMin}
         endMin={legacyEventContext.endMin}
         eventType={
@@ -793,10 +1005,20 @@ export default function TaskWorkspace({
   if (task === "fluidEval") {
     return (
       <FluidEvalPanel
-        eventId={legacyEventContext.eventId}
-        caseId={caseId}
-        eventTitle={legacyEventContext.eventTitle}
-        episodeLabel={legacyEventContext.episodeLabel}
+
+      eventId={legacyEventContext.eventId}
+    
+      caseId={caseId}
+    
+      patientId={patientId}
+    
+      patientFolder={patientFolder}
+    
+      episodeNumber={episodeNumber}
+    
+      eventTitle={legacyEventContext.eventTitle}
+    
+      episodeLabel={legacyEventContext.episodeLabel}
         startMin={legacyEventContext.startMin}
         endMin={legacyEventContext.endMin}
         medBolusRows={medBolusRows}

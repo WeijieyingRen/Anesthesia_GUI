@@ -27,7 +27,6 @@ type VentilationChartProps = {
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
   timeResolution?: 15 | 5;
-
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -289,7 +288,7 @@ function VentilationGridSvg({
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
-      {visibleRowsReindexedSafe(rows).map((row, idx) => {
+      {rows.map((row, idx) => {
         const yTop = TOP_PAD + idx * ROW_HEIGHT;
         const yBottom = yTop + ROW_HEIGHT;
 
@@ -362,10 +361,6 @@ function VentilationGridSvg({
       })}
     </svg>
   );
-}
-
-function visibleRowsReindexedSafe(rows: VentRow[]) {
-  return rows.map((row, idx) => ({ ...row, rowIndex: idx }));
 }
 
 export default function VentilationChart({
@@ -459,192 +454,227 @@ export default function VentilationChart({
       {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
-        className="grid gap-0"
-        style={{ gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)` }}
+        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
+        style={{ height: viewHeight }}
       >
-        <div className="border-r pr-0" style={{ height: contentHeight }}>
-          <div>
-            {rows.map((row) => {
-              const hidden = hiddenNames.includes(row.name);
-              const active = visibleRowsReindexed.some((r) => r.name === row.name);
-              const color = inferVentColor(row.name);
-
-              return (
-                <div
-                  key={row.name}
-                  className="flex items-center justify-between gap-2 px-2 text-sm"
-                  style={{
-                    height: ROW_HEIGHT,
-                    backgroundColor: active ? "#efefef" : "#f7f7f7",
-                    opacity: hidden ? 0.45 : 1,
-                    borderBottom: "1px solid #d1d5db",
-                  }}
-                >
-                  <div className="min-w-0 flex-1 truncate text-gray-900">
-                    {getVentDisplayName(row.name)}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHiddenNames((prev) =>
-                        prev.includes(row.name)
-                          ? prev.filter((x) => x !== row.name)
-                          : [...prev, row.name]
-                      );
-                    }}
-                    className="h-4 w-4 shrink-0 border"
-                    style={{ backgroundColor: color, borderColor: color }}
-                    title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <FixedYAxisSpacer height={contentHeight} />
-
         <div
-          ref={scrollRef}
-          className="overflow-x-auto overflow-y-hidden"
-          style={{ height: viewHeight }}
-          onScroll={(e) => {
-            onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+          className="grid gap-0"
+          style={{
+            gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
+            minHeight: contentHeight,
           }}
         >
-          <div
-            className="relative"
-            style={{
-              width: contentWidth,
-              height: contentHeight,
-            }}
-          >
-            <VentilationGridSvg
-              end={finalXEnd}
-              majorTicks={majorTicks}
-              minorTicks={minorTicks}
-              rows={visibleRowsReindexed}
-              height={contentHeight}
-              highlightWindow={highlightWindow}
-              plotWidth={plotWidth}
-            />
-
-            <svg
-              width={contentWidth}
-              height={contentHeight}
-              viewBox={`0 0 ${contentWidth} ${contentHeight}`}
-              preserveAspectRatio="none"
-              className="absolute inset-0"
-            >
-              {segments.map((seg, idx) => {
-                const color = inferVentColor(seg.rowName);
-                const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
-                const centerY = rowTop + ROW_HEIGHT / 2;
-
-                const segLeft = (seg.x0 / finalXEnd) * plotWidth;
-                const segRight = (seg.x1 / finalXEnd) * plotWidth;
-
-                const label = String(roundSmart(seg.firstValue));
-                const hideVisual = isZeroValue(seg.firstValue);
-                const textWidth = estimateTextWidth(label, 10);
-
-                const textX = segLeft + 6;
-                const textY = centerY + 3;
-
-                const lineStartX = textX + textWidth + 6;
-                const lineEndX = segRight - 6;
-                const canDrawLine = !hideVisual && lineEndX > lineStartX + 2;
-
-                const isSelected =
-                  zoomTarget &&
-                  zoomTarget.rowName === seg.rowName &&
-                  zoomTarget.x0 === seg.x0 &&
-                  zoomTarget.x1 === seg.x1;
+          <div className="border-r pr-0" style={{ height: contentHeight }}>
+            <div>
+              {visibleRowsReindexed.map((row) => {
+                const hidden = hiddenNames.includes(row.name);
+                const color = inferVentColor(row.name);
 
                 return (
-                  <g
-                    key={`${seg.rowName}-${seg.x0}-${idx}`}
-                    style={{ cursor: "zoom-in" }}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setZoomTarget({
-                        rowName: seg.rowName,
-                        x0: seg.x0,
-                        x1: seg.x1,
-                        points: seg.points,
-                      });
+                  <div
+                    key={row.name}
+                    className="flex items-center justify-between gap-2 px-2 text-sm"
+                    style={{
+                      height: ROW_HEIGHT,
+                      backgroundColor: "#efefef",
+                      opacity: hidden ? 0.45 : 1,
+                      borderBottom: "1px solid #d1d5db",
                     }}
                   >
-                    <rect
-                      x={segLeft}
-                      y={rowTop}
-                      width={Math.max(2, segRight - segLeft)}
-                      height={ROW_HEIGHT}
-                      fill={isSelected ? "#FFF7ED" : "transparent"}
-                      stroke={isSelected ? "#FB923C" : "transparent"}
-                      strokeWidth={isSelected ? 1.5 : 0}
+                    <div className="min-w-0 flex-1 truncate text-gray-900">
+                      {getVentDisplayName(row.name)}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHiddenNames((prev) =>
+                          prev.includes(row.name)
+                            ? prev.filter((x) => x !== row.name)
+                            : [...prev, row.name]
+                        );
+                      }}
+                      className="h-4 w-4 shrink-0 border"
+                      style={{ backgroundColor: color, borderColor: color }}
+                      title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
                     />
-
-                    {!hideVisual && (
-                      <>
-                        <text x={textX} y={textY} fontSize={10} fill="#111827">
-                          {label}
-                        </text>
-
-                        {canDrawLine && (
-                          <line
-                            x1={lineStartX}
-                            y1={centerY}
-                            x2={lineEndX}
-                            y2={centerY}
-                            stroke={color}
-                            strokeWidth={5}
-                            strokeLinecap="butt"
-                          />
-                        )}
-                      </>
-                    )}
-
-                    <rect
-                      x={segLeft}
-                      y={rowTop}
-                      width={Math.max(2, segRight - segLeft)}
-                      height={ROW_HEIGHT}
-                      fill="transparent"
-                    />
-                  </g>
+                  </div>
                 );
               })}
+            </div>
+          </div>
 
-              {showXAxis &&
-                majorTicks.map((tick) => {
-                  const x = (tick / finalXEnd) * plotWidth;
-                  return (
+          <FixedYAxisSpacer height={contentHeight} />
+
+          <div className="overflow-x-hidden overflow-y-hidden">
+          <div
+  ref={scrollRef}
+  className="overflow-x-auto overflow-y-hidden"
+  style={{ overscrollBehaviorX: "none" }}
+  onWheel={(e) => {
+    const el = e.currentTarget;
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
+
+    // 只处理“明显以横向为主”的触摸板/滚轮手势
+    if (absX <= absY || absX < 1) return;
+
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    const nextLeft = el.scrollLeft + e.deltaX;
+
+    const atLeftEdge = el.scrollLeft <= 0;
+    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+    if (tryingGoPastLeft || tryingGoPastRight) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    e.preventDefault();
+    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+  }}
+  onScroll={(e) => {
+    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+  }}
+>
+              <div
+                className="relative"
+                style={{
+                  width: contentWidth,
+                  height: contentHeight,
+                }}
+              >
+                <VentilationGridSvg
+                  end={finalXEnd}
+                  majorTicks={majorTicks}
+                  minorTicks={minorTicks}
+                  rows={visibleRowsReindexed}
+                  height={contentHeight}
+                  highlightWindow={highlightWindow}
+                  plotWidth={plotWidth}
+                />
+
+                <svg
+                  width={contentWidth}
+                  height={contentHeight}
+                  viewBox={`0 0 ${contentWidth} ${contentHeight}`}
+                  preserveAspectRatio="none"
+                  className="absolute inset-0"
+                >
+                  {segments.map((seg, idx) => {
+                    const color = inferVentColor(seg.rowName);
+                    const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
+                    const centerY = rowTop + ROW_HEIGHT / 2;
+
+                    const segLeft = (seg.x0 / finalXEnd) * plotWidth;
+                    const segRight = (seg.x1 / finalXEnd) * plotWidth;
+
+                    const label = String(roundSmart(seg.firstValue));
+                    const hideVisual = isZeroValue(seg.firstValue);
+                    const textWidth = estimateTextWidth(label, 10);
+
+                    const textX = segLeft + 6;
+                    const textY = centerY + 3;
+
+                    const lineStartX = textX + textWidth + 6;
+                    const lineEndX = segRight - 6;
+                    const canDrawLine = !hideVisual && lineEndX > lineStartX + 2;
+
+                    const isSelected =
+                      zoomTarget &&
+                      zoomTarget.rowName === seg.rowName &&
+                      zoomTarget.x0 === seg.x0 &&
+                      zoomTarget.x1 === seg.x1;
+
+                    return (
+                      <g
+                        key={`${seg.rowName}-${seg.x0}-${idx}`}
+                        style={{ cursor: "zoom-in" }}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setZoomTarget({
+                            rowName: seg.rowName,
+                            x0: seg.x0,
+                            x1: seg.x1,
+                            points: seg.points,
+                          });
+                        }}
+                      >
+                        <rect
+                          x={segLeft}
+                          y={rowTop}
+                          width={Math.max(2, segRight - segLeft)}
+                          height={ROW_HEIGHT}
+                          fill={isSelected ? "#FFF7ED" : "transparent"}
+                          stroke={isSelected ? "#FB923C" : "transparent"}
+                          strokeWidth={isSelected ? 1.5 : 0}
+                        />
+
+                        {!hideVisual && (
+                          <>
+                            <text x={textX} y={textY} fontSize={10} fill="#111827">
+                              {label}
+                            </text>
+
+                            {canDrawLine && (
+                              <line
+                                x1={lineStartX}
+                                y1={centerY}
+                                x2={lineEndX}
+                                y2={centerY}
+                                stroke={color}
+                                strokeWidth={5}
+                                strokeLinecap="butt"
+                              />
+                            )}
+                          </>
+                        )}
+
+                        <rect
+                          x={segLeft}
+                          y={rowTop}
+                          width={Math.max(2, segRight - segLeft)}
+                          height={ROW_HEIGHT}
+                          fill="transparent"
+                        />
+                      </g>
+                    );
+                  })}
+
+                  {showXAxis &&
+                    majorTicks.map((tick) => {
+                      const x = (tick / finalXEnd) * plotWidth;
+                      return (
+                        <text
+                          key={`tick-label-${tick}`}
+                          x={x + 2}
+                          y={TOP_PAD + 12}
+                          fontSize={10}
+                          fill="#6b7280"
+                        >
+                          {formatClockTime(tick, timeZero)}
+                        </text>
+                      );
+                    })}
+
+                  {showXAxis && (
                     <text
-                      key={`tick-label-${tick}`}
-                      x={x + 2}
-                      y={TOP_PAD + 12}
-                      fontSize={10}
+                      x={plotWidth / 2}
+                      y={contentHeight - 4}
+                      textAnchor="middle"
+                      fontSize={12}
                       fill="#6b7280"
                     >
-                      {formatClockTime(tick, timeZero)}
+                      Time
                     </text>
-                  );
-                })}
-
-              {showXAxis && (
-                <text
-                  x={plotWidth / 2}
-                  y={contentHeight - 4}
-                  textAnchor="middle"
-                  fontSize={12}
-                  fill="#6b7280"
-                >
-                  Time
-                </text>
-              )}
-            </svg>
+                  )}
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -759,6 +789,32 @@ export default function VentilationChart({
           </svg>
         </div>
       )}
+
+      <style jsx>{`
+        .vent-scroll-x {
+          scrollbar-width: auto;
+          scrollbar-color: #a3a3a3 #e5e7eb;
+        }
+
+        .vent-scroll-x::-webkit-scrollbar {
+          height: 16px;
+        }
+
+        .vent-scroll-x::-webkit-scrollbar-track {
+          background: #e5e7eb;
+          border-radius: 9999px;
+        }
+
+        .vent-scroll-x::-webkit-scrollbar-thumb {
+          background: #a3a3a3;
+          border-radius: 9999px;
+          border: 2px solid #e5e7eb;
+        }
+
+        .vent-scroll-x::-webkit-scrollbar-thumb:hover {
+          background: #8b8b8b;
+        }
+      `}</style>
     </div>
   );
 }

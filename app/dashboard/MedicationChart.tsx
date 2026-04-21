@@ -9,7 +9,6 @@ import {
   YAxis,
   Tooltip,
   ZAxis,
-  ReferenceArea,
   ReferenceLine,
 } from "recharts";
 
@@ -18,6 +17,8 @@ import type {
   MedicationBolusPoint,
   MedicationInfusionSegment,
 } from "@/lib/types";
+
+import type { ManagementEvent } from "@/lib/types_management";
 
 type MedicationChartProps = {
   title?: string;
@@ -29,6 +30,7 @@ type MedicationChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+  managementEvent?: ManagementEvent | null;
   timeResolution?: 15 | 5;
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
@@ -187,19 +189,21 @@ function sortMedicationNames(names: string[]) {
 function inferColor(name: string) {
   const n = normalizeName(name);
 
+  // induction agents -> yellow
   if (
-    [
-      "propofol",
-      "propofol inject",
-      "etomidate",
-      "ketamine",
-      "midazolam",
-      "dexmedetomidine",
-    ].some((x) => n.includes(x))
+    ["propofol", "propofol inject", "etomidate", "ketamine"].some((x) =>
+      n.includes(x)
+    )
   ) {
-    return "#f2df4a";
+    return "#ffff00";
   }
 
+  // benzodiazepines -> orange
+  if (["midazolam", "diazepam", "lorazepam"].some((x) => n.includes(x))) {
+    return "#ff6600";
+  }
+
+  // opioids -> blue
   if (
     [
       "fentanyl",
@@ -212,20 +216,24 @@ function inferColor(name: string) {
       "oxycodone",
     ].some((x) => n.includes(x))
   ) {
-    return "#8fc7e8";
+    return "#85c7e3";
   }
 
+  // muscle relaxants / reversal family
   if (
     [
       "rocuronium",
       "vecuronium",
       "cisatracurium",
       "succinylcholine",
+      "sugammadex",
+      "neostigmine",
     ].some((x) => n.includes(x))
   ) {
-    return "#e85a47";
+    return "#f54029";
   }
 
+  // vasoactive
   if (
     [
       "phenylephrine",
@@ -236,18 +244,19 @@ function inferColor(name: string) {
       "dopamine",
       "dobutamine",
       "milrinone",
-      "nitroglycerin",
-      "nitroprusside",
-      "esmolol",
       "labetalol",
-      "hydralazine",
       "nicardipine",
       "clevidipine",
+      "esmolol",
+      "hydralazine",
+      "nitroglycerin",
+      "nitroprusside",
     ].some((x) => n.includes(x))
   ) {
-    return "#d7b7db";
+    return "#debfd9";
   }
 
+  // anti-emetics
   if (
     [
       "ondansetron",
@@ -255,34 +264,31 @@ function inferColor(name: string) {
       "metoclopramide",
       "promethazine",
       "prochlorperazine",
-      "dexamethasone",
       "aprepitant",
       "fosaprepitant",
     ].some((x) => n.includes(x))
   ) {
-    return "#e6c36a";
+    return "#edc282";
   }
 
+  // antagonist / anticholinergic family
   if (
-    [
-      "glycopyrrolate",
-      "neostigmine",
-      "naloxone",
-      "flumazenil",
-    ].some((x) => n.includes(x))
+    ["glycopyrrolate", "naloxone", "flumazenil"].some((x) => n.includes(x))
   ) {
-    return "#9fd36a";
+    return "#a3d963";
   }
 
+  // miscellaneous
   if (
     [
+      "dexamethasone",
       "cefazolin",
       "tranexamic acid",
       "aminocaproic acid",
+      "oxytocin",
       "calcium chloride",
       "calcium gluconate",
       "sodium bicarbonate",
-      "oxytocin",
       "amiodarone",
       "albuterol",
       "ipratropium",
@@ -290,16 +296,32 @@ function inferColor(name: string) {
       "nitric oxide",
     ].some((x) => n.includes(x))
   ) {
-    return "#d9d9d9";
+    return "#f3f4f6";
   }
 
-  return "#cfcfcf";
+  return "#e5e7eb";
 }
 
 function inferStripe(name: string) {
   const n = normalizeName(name);
-  if (n.includes("sugammadex")) return "red";
+
+  if (
+    ["sugammadex", "neostigmine", "naloxone", "flumazenil"].some((x) =>
+      n.includes(x)
+    )
+  ) {
+    return "red";
+  }
+
   return null;
+}
+
+function getEpicBaseFill() {
+  return "#dff3df";
+}
+
+function getEpicBaseStroke() {
+  return "#7fa487";
 }
 
 function buildRows(
@@ -356,7 +378,17 @@ function buildRows(
   }));
 }
 
-function buildBolusScatter(rows: MedRow[], hiddenNames: string[]): ScatterPoint[] {
+function formatMedNumber(v: number) {
+  if (!Number.isFinite(v)) return "";
+  if (Math.abs(v) >= 100) return String(Math.round(v));
+  if (Math.abs(v) >= 10) return String(Math.round(v * 10) / 10);
+  return String(Math.round(v * 100) / 100);
+}
+
+function buildBolusScatter(
+  rows: MedRow[],
+  hiddenNames: string[]
+): ScatterPoint[] {
   return rows.flatMap((row) => {
     if (hiddenNames.includes(row.name)) return [];
 
@@ -364,7 +396,7 @@ function buildBolusScatter(rows: MedRow[], hiddenNames: string[]): ScatterPoint[
       x: p.time,
       y: row.rowIndex,
       medName: row.name,
-      label: p.label ?? `${p.dose} ${p.unit ?? ""}`.trim(),
+      label: `${formatMedNumber(Number(p.dose))}`,
       marker: "bolus-box" as MarkerType,
       color: inferColor(row.name),
     }));
@@ -387,13 +419,6 @@ function getMaxTime(rows: MedRow[]) {
 
   if (!times.length) return 15;
   return Math.max(...times);
-}
-
-function formatMedNumber(v: number) {
-  if (!Number.isFinite(v)) return "";
-  if (Math.abs(v) >= 100) return String(Math.round(v));
-  if (Math.abs(v) >= 10) return String(Math.round(v * 10) / 10);
-  return String(Math.round(v * 100) / 100);
 }
 
 function getMedicationTotalLabel(row: MedRow) {
@@ -470,8 +495,8 @@ function LegendSwatch({
           -45deg,
           #ffffff 0px,
           #ffffff 4px,
-          #e85a47 4px,
-          #e85a47 8px
+          #f54029 4px,
+          #f54029 8px
         )`
       : color;
 
@@ -518,35 +543,41 @@ function getInfusionLabelRects(rows: MedRow[], end: number, plotWidth: number) {
 
       const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
       const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
+      const centerY = (yTop + yBottom) / 2;
 
-      const width = x2 - x1;
       const label =
         seg.rate !== undefined && seg.rate !== null
           ? `${formatMedNumber(seg.rate)}`
           : "";
 
-      const labelWidth = Math.max(18, label.length * 6 + 10);
-      const labelHeight = 12;
+      if (!label) continue;
 
-      const preferredCenterX = x1 + width * 0.72;
-      const minCenterX = x1 + labelWidth / 2 + 2;
-      const maxCenterX = x2 - labelWidth / 2 - 2;
-      const labelCenterX = Math.max(
-        minCenterX,
-        Math.min(preferredCenterX, maxCenterX)
-      );
+      const headWidth = Math.max(34, label.length * 7 + 22);
+      const labelWidth = Math.max(18, label.length * 6 + 14);
 
-      const labelY = yBottom - 1;
-      const showLabel = width >= labelWidth + 6 && !!label;
+      const labelLeft = x1 + 10;
+      const labelTop = centerY - 6;
 
-      if (showLabel) {
-        rowRects.push({
-          left: labelCenterX - labelWidth / 2,
-          right: labelCenterX + labelWidth / 2,
-          top: labelY - 9,
-          bottom: labelY - 9 + labelHeight,
-        });
-      }
+      rowRects.push({
+        left: labelLeft,
+        right: labelLeft + labelWidth,
+        top: labelTop,
+        bottom: labelTop + 12,
+      });
+
+      rowRects.push({
+        left: x1,
+        right: x1 + headWidth,
+        top: yTop,
+        bottom: yBottom,
+      });
+
+      rowRects.push({
+        left: x1 + headWidth - 2,
+        right: x2,
+        top: centerY - 4,
+        bottom: centerY + 4,
+      });
     }
 
     rectsByRow.set(row.rowIndex, rowRects);
@@ -555,18 +586,56 @@ function getInfusionLabelRects(rows: MedRow[], end: number, plotWidth: number) {
   return rectsByRow;
 }
 
+function StripeDefs() {
+  return (
+    <defs>
+      <pattern
+        id="med-stripe-red"
+        patternUnits="userSpaceOnUse"
+        width="6"
+        height="6"
+        patternTransform="rotate(45)"
+      >
+        <rect width="6" height="6" fill="#ffffff" />
+        <rect width="3" height="6" fill="#f54029" />
+      </pattern>
+    </defs>
+  );
+}
+
+function normalizeManagementRowName(name: string | null | undefined) {
+  return String(name ?? "").trim().toLowerCase();
+}
+
+function isMatchingMedicationRow(
+  rowName: string,
+  managementEvent?: ManagementEvent | null
+) {
+  if (!managementEvent) return false;
+  if (managementEvent.chart_type !== "medication") return false;
+
+  const target = normalizeManagementRowName(managementEvent.row_name);
+  const current = normalizeManagementRowName(rowName);
+
+  if (!target || !current) return false;
+
+  return current === target || current.includes(target) || target.includes(current);
+}
+
 function BolusOverlaySvg({
   end,
   rows,
   height,
   svgWidth,
   plotWidth,
+  managementEvent,
 }: {
   end: number;
   rows: MedRow[];
   height: number;
   svgWidth: number;
   plotWidth: number;
+  managementEvent?: ManagementEvent | null;
 }) {
   const infusionRectsByRow = getInfusionLabelRects(rows, end, plotWidth);
 
@@ -578,28 +647,34 @@ function BolusOverlaySvg({
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
+      <StripeDefs />
+
       {rows.flatMap((row) =>
         row.bolus.map((p, idx) => {
           const cx = (p.time / end) * plotWidth;
           const cy = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.5;
 
-          const color = inferColor(row.name);
-          const text = String(p.label ?? `${p.dose} ${p.unit ?? ""}`.trim());
+          const medColor = inferColor(row.name);
+          const stripe = inferStripe(row.name);
+          const stripeFill =
+            stripe === "red" ? "url(#med-stripe-red)" : medColor;
 
-          const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 14));
+          const baseFill = getEpicBaseFill();
+          const baseStroke = getEpicBaseStroke();
+          const text = `${formatMedNumber(Number(p.dose))}`;
+
+          const boxWidth = Math.max(28, Math.min(88, text.length * 6 + 18));
           const boxHeight = 16;
+          const radius = boxHeight / 2;
 
-          const arrowTipX = cx;
-          const arrowBaseX = cx + 6;
-
-          const defaultLeft = arrowBaseX;
-          const defaultTop = cy - boxHeight / 2;
+          const finalLeft = cx + 4;
+          const finalTop = cy - boxHeight / 2;
 
           const defaultRect = {
-            left: defaultLeft,
-            right: defaultLeft + boxWidth,
-            top: defaultTop,
-            bottom: defaultTop + boxHeight,
+            left: finalLeft,
+            right: finalLeft + boxWidth,
+            top: finalTop,
+            bottom: finalTop + boxHeight,
           };
 
           const rowInfusionRects = infusionRectsByRow.get(row.rowIndex) ?? [];
@@ -608,57 +683,74 @@ function BolusOverlaySvg({
           );
 
           const shiftedTop = cy + 6;
+          const actualTop = hasOverlap ? shiftedTop : finalTop;
+          const textY = actualTop + boxHeight / 2 + 3.5;
 
-          const finalLeft = defaultLeft;
-          const finalTop = hasOverlap ? shiftedTop : defaultTop;
+          const bodyLeft = finalLeft;
+          const bodyRight = finalLeft + boxWidth;
+          const shouldHighlight =
+  isMatchingMedicationRow(row.name, managementEvent) &&
+  managementEvent?.highlight_mode === "point" &&
+  Number.isFinite(managementEvent?.time_min) &&
+  Math.abs(Number(p.time) - Number(managementEvent.time_min)) <= 1;
 
-          const textY = finalTop + boxHeight / 2 + 4;
+          const pathD = [
+            `M ${bodyLeft} ${actualTop}`,
+            `L ${bodyRight - radius} ${actualTop}`,
+            `Q ${bodyRight} ${actualTop} ${bodyRight} ${actualTop + radius}`,
+            `Q ${bodyRight} ${actualTop + boxHeight} ${bodyRight - radius} ${
+              actualTop + boxHeight
+            }`,
+            `L ${bodyLeft} ${actualTop + boxHeight}`,
+            "Z",
+          ].join(" ");
 
           return (
             <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
-              <line
-                x1={arrowTipX}
-                y1={cy - 9}
-                x2={arrowTipX}
-                y2={cy + 9}
-                stroke={color}
-                strokeWidth={1.2}
-                opacity={0.9}
-              />
-
-              <polygon
-                points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
-                fill={color}
-                stroke={color}
-                strokeWidth={1}
-              />
-
+               {shouldHighlight && (
+      <rect
+        x={bodyLeft - 6}
+        y={actualTop - 4}
+        width={boxWidth + 12}
+        height={boxHeight + 8}
+        rx={8}
+        ry={8}
+        fill="none"
+        stroke="#ef4444"
+        strokeWidth={3}
+      />
+    )}
               {hasOverlap && (
                 <line
-                  x1={arrowBaseX}
+                  x1={cx}
                   y1={cy}
-                  x2={arrowBaseX}
-                  y2={finalTop + boxHeight / 2}
-                  stroke={color}
+                  x2={cx}
+                  y2={actualTop + boxHeight / 2}
+                  stroke={baseStroke}
                   strokeWidth={1}
                   opacity={0.9}
                 />
               )}
 
+              <path
+                d={pathD}
+                fill={baseFill}
+                stroke={baseStroke}
+                strokeWidth={1.2}
+              />
+
               <rect
-                x={finalLeft}
-                y={finalTop}
-                width={boxWidth}
+                x={bodyLeft}
+                y={actualTop}
+                width={6}
                 height={boxHeight}
-                rx={2}
-                ry={2}
-                fill="#dff7f3"
-                stroke={color}
-                strokeWidth={1.5}
+                fill={stripeFill}
+                stroke={medColor}
+                strokeWidth={0.8}
               />
 
               <text
-                x={finalLeft + boxWidth / 2}
+                x={bodyLeft + boxWidth / 2 + 1}
                 y={textY}
                 textAnchor="middle"
                 fontSize={10}
@@ -680,12 +772,14 @@ function InfusionOverlaySvg({
   height,
   svgWidth,
   plotWidth,
+  managementEvent,
 }: {
   end: number;
   rows: MedRow[];
   height: number;
   svgWidth: number;
   plotWidth: number;
+  managementEvent?: ManagementEvent | null;
 }) {
   return (
     <svg
@@ -695,6 +789,8 @@ function InfusionOverlaySvg({
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
+      <StripeDefs />
+
       {rows.flatMap((row) =>
         row.infusion.map((seg, idx) => {
           const x1 = (seg.start / end) * plotWidth;
@@ -702,77 +798,107 @@ function InfusionOverlaySvg({
 
           const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
           const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
+          const centerY = (yTop + yBottom) / 2;
 
-          const width = x2 - x1;
-          const color = inferColor(row.name);
+          const medColor = inferColor(row.name);
+          const stripe = inferStripe(row.name);
+          const stripeFill =
+            stripe === "red" ? "url(#med-stripe-red)" : medColor;
+
+          const baseFill = getEpicBaseFill();
+          const baseStroke = getEpicBaseStroke();
+          const textColor = "#2f4a35";
 
           const label =
             seg.rate !== undefined && seg.rate !== null
               ? `${formatMedNumber(seg.rate)}`
               : "";
 
-          const labelWidth = Math.max(18, label.length * 6 + 10);
-          const labelHeight = 12;
+          const headHeight = yBottom - yTop;
+          const headWidth = Math.max(34, label.length * 7 + 22);
+          const tipWidth = 12;
 
-          const preferredCenterX = x1 + width * 0.72;
-          const minCenterX = x1 + labelWidth / 2 + 2;
-          const maxCenterX = x2 - labelWidth / 2 - 2;
-          const labelCenterX = Math.max(
-            minCenterX,
-            Math.min(preferredCenterX, maxCenterX)
-          );
+          const headX = x1;
+          const bodyRectW = headWidth - tipWidth;
 
-          const labelY = yBottom - 1;
-          const showLabel = width >= labelWidth + 6 && !!label;
+          const lineStartX = x1 + headWidth - 2;
+          const lineEndX = x2;
+          const canDrawLine = lineEndX > lineStartX + 2;
+
+          const shouldHighlight =
+  isMatchingMedicationRow(row.name, managementEvent) &&
+  managementEvent?.highlight_mode === "interval" &&
+  Number.isFinite(managementEvent?.time_min) &&
+  Number.isFinite(managementEvent?.end_time_min) &&
+  Number(seg.start) <= Number(managementEvent.end_time_min) &&
+  Number(seg.end) >= Number(managementEvent.time_min);
+
+          const headPath = [
+            `M ${headX} ${yTop}`,
+            `L ${headX + bodyRectW} ${yTop}`,
+            `L ${headX + headWidth} ${centerY}`,
+            `L ${headX + bodyRectW} ${yBottom}`,
+            `L ${headX} ${yBottom}`,
+            "Z",
+          ].join(" ");
 
           return (
             <g key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}>
-              <line
-                x1={x1}
-                y1={yTop}
-                x2={x1}
-                y2={yBottom}
-                stroke="#ffffff"
-                strokeWidth={1.2}
-                opacity={0.98}
+              {shouldHighlight && (
+                <rect
+                  x={x1 - 6}
+                  y={yTop - 4}
+                  width={Math.max(24, x2 - x1 + 12)}
+                  height={yBottom - yTop + 8}
+                  rx={8}
+                  ry={8}
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth={3}
+                />
+              )}
+          
+              {canDrawLine && (
+                <line
+                  x1={lineStartX}
+                  y1={centerY}
+                  x2={lineEndX}
+                  y2={centerY}
+                  stroke={baseStroke}
+                  strokeWidth={8}
+                  opacity={0.95}
+                  strokeLinecap="round"
+                />
+              )}
+
+              <path
+                d={headPath}
+                fill={baseFill}
+                stroke={baseStroke}
+                strokeWidth={1.1}
               />
 
-              <line
-                x1={x2}
-                y1={yTop}
-                x2={x2}
-                y2={yBottom}
-                stroke="#ffffff"
-                strokeWidth={1.2}
-                opacity={0.98}
+              <rect
+                x={headX}
+                y={yTop}
+                width={6}
+                height={headHeight}
+                fill={stripeFill}
+                stroke={medColor}
+                strokeWidth={0.8}
               />
 
-              {showLabel && (
-                <>
-                  <rect
-                    x={labelCenterX - labelWidth / 2}
-                    y={labelY - 9}
-                    width={labelWidth}
-                    height={labelHeight}
-                    rx={2}
-                    ry={2}
-                    fill="white"
-                    fillOpacity={0.92}
-                    stroke={color}
-                    strokeWidth={0.8}
-                  />
-
-                  <text
-                    x={labelCenterX}
-                    y={labelY}
-                    textAnchor="middle"
-                    fontSize={10}
-                    fill="#374151"
-                    fontWeight={500}
-                  >
-                    {label}
-                  </text>
-                </>
+              {label && (
+                <text
+                  x={headX + bodyRectW / 2 + 1}
+                  y={centerY + 3.5}
+                  textAnchor="middle"
+                  fontSize={10}
+                  fill={textColor}
+                  fontWeight={500}
+                >
+                  {label}
+                </text>
               )}
             </g>
           );
@@ -799,6 +925,7 @@ function MedicationGridSvg({
   height,
   highlightWindow,
   plotWidth,
+  managementEvent,
 }: {
   end: number;
   majorTicks: number[];
@@ -807,6 +934,7 @@ function MedicationGridSvg({
   height: number;
   highlightWindow?: HighlightWindow | null;
   plotWidth: number;
+  managementEvent?: ManagementEvent | null;
 }) {
   if (!Number.isFinite(end) || end <= 0) return null;
 
@@ -885,13 +1013,14 @@ function MedicationGridSvg({
 export default function MedicationChart({
   title = "Medication Events",
   medications,
-  height = 300,
+  height = 420,
   xEnd,
   xTicks,
   showXAxis = true,
   timeZero,
   embedded = false,
   highlightWindow = null,
+  managementEvent = null,
   timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
@@ -970,257 +1099,213 @@ export default function MedicationChart({
       ) : null}
 
       <div
-        className="grid gap-0"
-        style={{
-          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
-        }}
+        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
+        style={{ height }}
       >
-        <div className="border-r pr-0" style={{ height: fullContentHeight }}>
-          <div>
-            {visibleRows.map((row) => {
-              const isHidden = hiddenNames.includes(row.name);
-              const color = inferColor(row.name);
-              const stripe = inferStripe(row.name);
-              const totalLabel = getMedicationTotalLabel(row);
-
-              return (
-                <div
-                  key={row.name}
-                  className="relative grid items-center gap-1.5 px-2 text-sm"
-                  style={{
-                    height: ROW_HEIGHT,
-                    boxSizing: "border-box",
-                    gridTemplateColumns: "minmax(0,1fr) 68px 20px",
-                    backgroundColor: "#efefef",
-                    borderBottom: "1px solid #a3a3a3",
-                    opacity: isHidden ? 0.45 : 1,
-                  }}
-                >
-                  <div className="min-w-0 truncate text-gray-900">
-                    {row.name}
-                  </div>
-
-                  <div className="truncate text-right text-gray-700">
-                    {totalLabel}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHiddenNames((prev) =>
-                        prev.includes(row.name)
-                          ? prev.filter((x) => x !== row.name)
-                          : [...prev, row.name]
-                      );
-                    }}
-                    className="shrink-0 cursor-pointer"
-                    title={isHidden ? `Show ${row.name}` : `Hide ${row.name}`}
-                  >
-                    <LegendSwatch color={color} stripe={stripe} />
-                  </button>
-
-                  <span
-                    className="absolute right-[-1px] bottom-[-1px] block"
-                    style={{
-                      width: "8px",
-                      height: "1px",
-                      backgroundColor: "#a3a3a3",
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <FixedAxisSpacer height={fullContentHeight} />
-
         <div
-          className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-          style={{ height }}
+          className="grid gap-0"
+          style={{
+            gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
+            minHeight: fullContentHeight,
+          }}
         >
-          <div
-            ref={scrollRef}
-            className="overflow-x-auto overflow-y-hidden"
-            onScroll={(e) => {
-              onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-            }}
-          >
-            <div
-              className="relative"
-              style={{
-                width: contentWidth,
-                height: fullContentHeight,
-              }}
-            >
-              <div className="absolute inset-0 z-0">
-                <MedicationGridSvg
-                  end={end}
-                  majorTicks={majorTicks}
-                  minorTicks={minorTicks}
-                  rows={rows}
-                  height={fullContentHeight}
-                  highlightWindow={highlightWindow}
-                  plotWidth={plotWidth}
-                />
-              </div>
+          <div className="border-r pr-0" style={{ height: fullContentHeight }}>
+            <div>
+              {rows.map((row) => {
+                const isHidden = hiddenNames.includes(row.name);
+                const color = inferColor(row.name);
+                const stripe = inferStripe(row.name);
+                const totalLabel = getMedicationTotalLabel(row);
 
-              <div className="absolute inset-0 z-10">
-                <ResponsiveContainer width="100%" height="100%">
-                  <ScatterChart
-                    margin={{
-                      top: 0,
-                      right: RECHARTS_RIGHT_MARGIN,
-                      left: 0,
-                      bottom: 0,
+                return (
+                  <div
+                    key={row.name}
+                    className="relative grid items-center gap-1.5 px-2 text-sm"
+                    style={{
+                      height: ROW_HEIGHT,
+                      boxSizing: "border-box",
+                      gridTemplateColumns: "minmax(0,1fr) 68px 20px",
+                      backgroundColor: "#efefef",
+                      borderBottom: "1px solid #a3a3a3",
+                      opacity: isHidden ? 0.45 : 1,
                     }}
                   >
-                    <XAxis
-                      type="number"
-                      dataKey="x"
-                      domain={[0, end]}
-                      ticks={majorTicks}
-                      interval={0}
-                      allowDecimals={false}
-                      tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
-                      tick={showXAxis ? undefined : false}
-                      axisLine={showXAxis}
-                      tickLine={showXAxis}
-                      height={showXAxis ? 30 : 0}
-                      label={
-                        showXAxis
-                          ? {
-                              value: "Time",
-                              position: "insideBottom",
-                              offset: -4,
-                            }
-                          : undefined
-                      }
-                    />
+                    <div className="min-w-0 truncate text-gray-900">
+                      {row.name}
+                    </div>
 
-                    <YAxis
-                      type="number"
-                      dataKey="y"
-                      domain={[-0.5, rows.length - 0.5]}
-                      ticks={rows.map((row) => row.rowIndex)}
-                      tick={false}
-                      axisLine={false}
-                      tickLine={false}
-                      reversed
-                      width={0}
-                    />
+                    <div className="truncate text-right text-gray-700">
+                      {totalLabel}
+                    </div>
 
-                    <ZAxis range={[30, 30]} />
-                    <Tooltip content={<MedicationTooltip timeZero={timeZero} />} />
-
-                    {minorTicks.map((tick) => (
-                      <ReferenceLine
-                        key={`minor-line-${tick}`}
-                        x={tick}
-                        stroke="transparent"
-                      />
-                    ))}
-
-                    {rows.flatMap((row) => {
-                      if (hiddenNames.includes(row.name)) return [];
-
-                      return row.infusion.map((seg, idx) => (
-                        <ReferenceArea
-                          key={`inf-${row.name}-${idx}-${seg.start}-${seg.end}`}
-                          x1={seg.start}
-                          x2={Math.max(seg.end, seg.start + 0.1)}
-                          y1={row.rowIndex - 0.17}
-                          y2={row.rowIndex + 0.17}
-                          fill={inferColor(row.name)}
-                          fillOpacity={1}
-                          stroke={inferColor(row.name)}
-                          strokeWidth={1}
-                        />
-                      ));
-                    })}
-
-                    <Scatter
-                      data={bolusData}
-                      shape={(props: any): React.JSX.Element => {
-                        const { cx, cy, payload } = props;
-                        if (cx == null || cy == null || !payload) return <g />;
-
-                        const color = payload.color ?? "#6bcfc5";
-                        const text = String(payload.label ?? "");
-                        const boxWidth = Math.max(
-                          28,
-                          Math.min(88, text.length * 6 + 14)
-                        );
-                        const boxHeight = 16;
-
-                        const arrowTipX = cx;
-                        const arrowBaseX = cx + 6;
-                        const left = arrowBaseX;
-                        const top = cy - boxHeight / 2;
-
-                        return (
-                          <g>
-                            <line
-                              x1={arrowTipX}
-                              y1={cy - 9}
-                              x2={arrowTipX}
-                              y2={cy + 9}
-                              stroke={color}
-                              strokeWidth={1.2}
-                              opacity={0.9}
-                            />
-                            <polygon
-                              points={`${arrowTipX},${cy} ${arrowBaseX},${cy - 5} ${arrowBaseX},${cy + 5}`}
-                              fill={color}
-                              stroke={color}
-                              strokeWidth={1}
-                            />
-                            <rect
-                              x={left}
-                              y={top}
-                              width={boxWidth}
-                              height={boxHeight}
-                              rx={2}
-                              ry={2}
-                              fill="#dff7f3"
-                              stroke={color}
-                              strokeWidth={1.5}
-                            />
-                            <text
-                              x={left + boxWidth / 2}
-                              y={cy + 4}
-                              textAnchor="middle"
-                              fontSize={10}
-                              fill="#1f2937"
-                            >
-                              {text}
-                            </text>
-                          </g>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHiddenNames((prev) =>
+                          prev.includes(row.name)
+                            ? prev.filter((x) => x !== row.name)
+                            : [...prev, row.name]
                         );
                       }}
+                      className="shrink-0 cursor-pointer"
+                      title={isHidden ? `Show ${row.name}` : `Hide ${row.name}`}
+                    >
+                      <LegendSwatch color={color} stripe={stripe} />
+                    </button>
+
+                    <span
+                      className="absolute right-[-1px] bottom-[-1px] block"
+                      style={{
+                        width: "8px",
+                        height: "1px",
+                        backgroundColor: "#a3a3a3",
+                      }}
                     />
-                  </ScatterChart>
-                </ResponsiveContainer>
-              </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-              <div className="absolute inset-0 z-20 pointer-events-none">
-                <InfusionOverlaySvg
-                  end={end}
-                  rows={visibleRows}
-                  height={fullContentHeight}
-                  svgWidth={contentWidth}
-                  plotWidth={plotWidth}
-                />
-              </div>
+          <FixedAxisSpacer height={fullContentHeight} />
 
-              <div className="absolute inset-0 z-30 pointer-events-none">
+          <div className="overflow-x-hidden overflow-y-hidden">
+          <div
+  ref={scrollRef}
+  className="overflow-x-auto overflow-y-hidden"
+  style={{ overscrollBehaviorX: "none" }}
+  onWheel={(e) => {
+    const el = e.currentTarget;
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
+
+    // 只处理“明显以横向为主”的触摸板/滚轮手势
+    if (absX <= absY || absX < 1) return;
+
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    const nextLeft = el.scrollLeft + e.deltaX;
+
+    const atLeftEdge = el.scrollLeft <= 0;
+    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+    if (tryingGoPastLeft || tryingGoPastRight) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    e.preventDefault();
+    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+  }}
+  onScroll={(e) => {
+    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+  }}
+>
+              <div
+                className="relative"
+                style={{
+                  width: contentWidth,
+                  height: fullContentHeight,
+                }}
+              >
+                <div className="absolute inset-0 z-0">
+                <MedicationGridSvg
+  end={end}
+  majorTicks={majorTicks}
+  minorTicks={minorTicks}
+  rows={rows}
+  height={fullContentHeight}
+  highlightWindow={highlightWindow}
+  plotWidth={plotWidth}
+  managementEvent={managementEvent}
+/>
+                </div>
+
+                <div className="absolute inset-0 z-10">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <ScatterChart
+                      margin={{
+                        top: 0,
+                        right: RECHARTS_RIGHT_MARGIN,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <XAxis
+                        type="number"
+                        dataKey="x"
+                        domain={[0, end]}
+                        ticks={majorTicks}
+                        interval={0}
+                        allowDecimals={false}
+                        tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
+                        tick={showXAxis ? undefined : false}
+                        axisLine={showXAxis}
+                        tickLine={showXAxis}
+                        height={showXAxis ? 30 : 0}
+                        label={
+                          showXAxis
+                            ? {
+                                value: "Time",
+                                position: "insideBottom",
+                                offset: -4,
+                              }
+                            : undefined
+                        }
+                      />
+
+                      <YAxis
+                        type="number"
+                        dataKey="y"
+                        domain={[-0.5, rows.length - 0.5]}
+                        ticks={rows.map((row) => row.rowIndex)}
+                        tick={false}
+                        axisLine={false}
+                        tickLine={false}
+                        width={0}
+                        reversed
+                      />
+
+                      <ZAxis range={[30, 30]} />
+                      <Tooltip content={<MedicationTooltip timeZero={timeZero} />} />
+
+                      {minorTicks.map((tick) => (
+                        <ReferenceLine
+                          key={`minor-line-${tick}`}
+                          x={tick}
+                          stroke="transparent"
+                        />
+                      ))}
+
+                      <Scatter data={bolusData} shape={() => <g />} />
+                    </ScatterChart>
+                  </ResponsiveContainer>
+                </div>
+
+                <div className="absolute inset-0 z-20 pointer-events-none">
+                 <InfusionOverlaySvg
+  end={end}
+  rows={visibleRows}
+  height={fullContentHeight}
+  svgWidth={contentWidth}
+  plotWidth={plotWidth}
+  managementEvent={managementEvent}
+/>
+                </div>
+
+                <div className="absolute inset-0 z-30 pointer-events-none">
                 <BolusOverlaySvg
-                  end={end}
-                  rows={visibleRows}
-                  height={fullContentHeight}
-                  svgWidth={contentWidth}
-                  plotWidth={plotWidth}
-                />
+  end={end}
+  rows={visibleRows}
+  height={fullContentHeight}
+  svgWidth={contentWidth}
+  plotWidth={plotWidth}
+  managementEvent={managementEvent}
+/>
+                </div>
               </div>
             </div>
           </div>
