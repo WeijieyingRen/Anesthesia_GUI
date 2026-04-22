@@ -402,7 +402,7 @@ export default function VitalChart({
   lineColors = {},
   lineMarkers = {},
   lineUnits = {},
-  height = 420,
+  height = 1000,
   yDomain,
   xEnd,
   xTicks,
@@ -442,7 +442,10 @@ export default function VitalChart({
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const chartOverlayRef = useRef<HTMLDivElement | null>(null);
-
+  const isSyncingFromSliderRef = useRef(false);
+  
+  const [sliderValue, setSliderValue] = useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0);
   const viewConfig = useMemo(() => {
     if (timeResolution === 5) {
       return {
@@ -462,9 +465,10 @@ export default function VitalChart({
   useEffect(() => {
     if (scrollRef.current == null) return;
     if (sharedScrollLeft == null) return;
-
+  
     if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
       scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
     }
   }, [sharedScrollLeft]);
 
@@ -485,6 +489,23 @@ export default function VitalChart({
 
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentWidth - PLOT_RIGHT;
+  useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+  
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+  
+    updateScrollMetrics();
+  
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, height, hiddenKeys.length, keys.length]);
 
   function minuteToPixel(minute: number) {
     if (!effectiveXEnd || effectiveXEnd <= 0 || plotWidth <= 0) return 0;
@@ -1105,10 +1126,76 @@ const activeEndMin =
   );
 
   if (!keys.length) return null;
-
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
-      {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
+      <style jsx>{`
+        .vital-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+  
+        .vital-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+  
+        .vital-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+  
+        .vital-slider:focus {
+          outline: none;
+        }
+  
+        .vital-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+  
+        .vital-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+  
+        .vital-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+  
+        .vital-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+  
+        .vital-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+  
+        .vital-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>     {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
         className="grid gap-0"
@@ -1165,413 +1252,454 @@ const activeEndMin =
           chartMarginBottom={chartMarginBottom}
         />
 
-<div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
+<div className="min-w-0">
+  <div
+    ref={scrollRef}
+    className="vital-scroll-hidden"
+    style={{ overscrollBehaviorX: "none" }}
+    onWheel={(e) => {
+      const el = e.currentTarget;
+      const absX = Math.abs(e.deltaX);
+      const absY = Math.abs(e.deltaY);
 
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
+      if (absX <= absY || absX < 1) return;
 
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const nextLeft = el.scrollLeft + e.deltaX;
 
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+      const atLeftEdge = el.scrollLeft <= 0;
+      const atRightEdge = el.scrollLeft >= maxScroll - 1;
 
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+      const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+      const tryingGoPastRight = atRightEdge && e.deltaX > 0;
 
-    if (tryingGoPastLeft || tryingGoPastRight) {
+      if (tryingGoPastLeft || tryingGoPastRight) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
       e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
+      const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+      el.scrollLeft = clamped;
+      setSliderValue(clamped);
+    }}
+    onScroll={(e) => {
+      const next = e.currentTarget.scrollLeft;
+      if (!isSyncingFromSliderRef.current) {
+        setSliderValue(next);
+      }
+      onSharedScrollLeftChange?.(next);
+    }}
+  >
+    <div className="relative" style={{ width: contentWidth, height }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <ScatterChart
+          margin={{
+            top: chartMarginTop,
+            right: PLOT_RIGHT,
+            left: 0,
+            bottom: chartMarginBottom,
+          }}
+        >
+          <CartesianGrid stroke="transparent" vertical={false} horizontal={false} />
 
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
-          <div className="relative" style={{ width: contentWidth, height }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart
-                margin={{
-                  top: chartMarginTop,
-                  right: PLOT_RIGHT,
-                  left: 0,
-                  bottom: chartMarginBottom,
+          <XAxis
+            type="number"
+            dataKey="time"
+            name="time"
+            domain={[0, xEnd ?? "dataMax"]}
+            ticks={majorGridTicks}
+            interval={0}
+            allowDecimals={false}
+            tick={false}
+            axisLine={false}
+            tickLine={false}
+            height={0}
+          />
+
+          <YAxis hide type="number" dataKey="value" domain={domain} allowDataOverflow />
+          <ZAxis range={[40, 40]} />
+
+          {minorGridTicks.map((tick) => (
+            <ReferenceLine key={`x-minor-${tick}`} x={tick} stroke="#d7dbe2" strokeWidth={0.9} />
+          ))}
+
+          {majorGridTicks.map((tick) => (
+            <ReferenceLine key={`x-major-${tick}`} x={tick} stroke="#9aa3b2" strokeWidth={1.4} />
+          ))}
+
+          {yTicks.map((tick) => (
+            <ReferenceLine key={`y-grid-${tick}`} y={tick} stroke="#b0b7c3" strokeWidth={1.1} />
+          ))}
+
+          <ReferenceLine y={domainMin} stroke="#4b5563" strokeWidth={2.2} />
+
+          {visibleKeys.map((key) => (
+            <Scatter
+              key={key}
+              name={lineLabels[key] ?? key}
+              data={buildScatterData(series[key])}
+              fill={lineColors[key] ?? "#000000"}
+              shape={(props: any) => (
+                <EpicMarker
+                  cx={props.cx}
+                  cy={props.cy}
+                  fill={lineColors[key] ?? "#000000"}
+                  marker={(lineMarkers[key] as MarkerType) ?? "circle"}
+                  size={8}
+                />
+              )}
+            />
+          ))}
+        </ScatterChart>
+      </ResponsiveContainer>
+
+      {showTopTimeAxis && (
+        <div className="pointer-events-none absolute left-0 right-0 top-0 z-30 h-8">
+          {majorGridTicks.map((tick, idx) => {
+            const left = minuteToPixel(tick);
+            const isFirst = idx === 0;
+            const isLast = idx === majorGridTicks.length - 1;
+
+            return (
+              <div
+                key={`top-tick-${tick}`}
+                className="absolute top-0 whitespace-nowrap text-xs text-gray-700"
+                style={{
+                  left,
+                  transform: isFirst
+                    ? "translateX(0)"
+                    : isLast
+                    ? "translateX(-100%)"
+                    : "translateX(-50%)",
                 }}
               >
-                <CartesianGrid stroke="transparent" vertical={false} horizontal={false} />
+                {formatClockTime(tick, timeZero)}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
-                <XAxis
-                  type="number"
-                  dataKey="time"
-                  name="time"
-                  domain={[0, xEnd ?? "dataMax"]}
-                  ticks={majorGridTicks}
-                  interval={0}
-                  allowDecimals={false}
-                  tick={false}
-                  axisLine={false}
-                  tickLine={false}
-                  height={0}
-                />
+      <div
+        ref={chartOverlayRef}
+        className="absolute z-20"
+        style={{
+          left: 0,
+          top: 0,
+          width: contentWidth,
+          height,
+          cursor: interactionCursor,
+          overflow: "visible",
+        }}
+        onMouseDown={(e) => {
+          if (effectiveXEnd <= 0) return;
 
-                <YAxis hide type="number" dataKey="value" domain={domain} allowDataOverflow />
-                <ZAxis range={[40, 40]} />
+          const minute = clientXToMinute(e.clientX);
+          const value = clientYToValue(e.clientY);
+          const hoveredMode = getHoverMode(minute, value);
 
-                {minorGridTicks.map((tick) => (
-                  <ReferenceLine key={`x-minor-${tick}`} x={tick} stroke="#d7dbe2" strokeWidth={0.9} />
-                ))}
+          if (selectedWindow && hoveredMode) {
+            const width = selectedWindow.endMin - selectedWindow.startMin;
+            const heightVal = selectedWindow.y2 - selectedWindow.y1;
 
-                {majorGridTicks.map((tick) => (
-                  <ReferenceLine key={`x-major-${tick}`} x={tick} stroke="#9aa3b2" strokeWidth={1.4} />
-                ))}
+            if (hoveredMode === "resize-left") {
+              setIsDragging(true);
+              setDragMode("resize-left");
+              setDragCurrentMin(minute);
+              setDragCurrentY(null);
+              return;
+            }
 
-                {yTicks.map((tick) => (
-                  <ReferenceLine key={`y-grid-${tick}`} y={tick} stroke="#b0b7c3" strokeWidth={1.1} />
-                ))}
+            if (hoveredMode === "resize-right") {
+              setIsDragging(true);
+              setDragMode("resize-right");
+              setDragCurrentMin(minute);
+              setDragCurrentY(null);
+              return;
+            }
 
-                <ReferenceLine y={domainMin} stroke="#4b5563" strokeWidth={2.2} />
+            if (hoveredMode === "resize-top") {
+              setIsDragging(true);
+              setDragMode("resize-top");
+              setDragCurrentY(value);
+              setDragCurrentMin(null);
+              return;
+            }
 
-                {visibleKeys.map((key) => (
-                  <Scatter
-                    key={key}
-                    name={lineLabels[key] ?? key}
-                    data={buildScatterData(series[key])}
-                    fill={lineColors[key] ?? "#000000"}
-                    shape={(props: any) => (
-                      <EpicMarker
-                        cx={props.cx}
-                        cy={props.cy}
-                        fill={lineColors[key] ?? "#000000"}
-                        marker={(lineMarkers[key] as MarkerType) ?? "circle"}
-                        size={8}
-                      />
-                    )}
-                  />
-                ))}
-              </ScatterChart>
-            </ResponsiveContainer>
+            if (hoveredMode === "resize-bottom") {
+              setIsDragging(true);
+              setDragMode("resize-bottom");
+              setDragCurrentY(value);
+              setDragCurrentMin(null);
+              return;
+            }
 
-            {showTopTimeAxis && (
-              <div className="pointer-events-none absolute left-0 right-0 top-0 z-30 h-8">
-                {majorGridTicks.map((tick, idx) => {
-                  const left = minuteToPixel(tick);
-                  const isFirst = idx === 0;
-                  const isLast = idx === majorGridTicks.length - 1;
+            if (hoveredMode === "move") {
+              setIsDragging(true);
+              setDragMode("move");
+              setDragCurrentMin(minute);
+              setDragCurrentY(value);
+              setMoveOffsetMin(minute - selectedWindow.startMin);
+              setMoveWindowWidthMin(width);
+              setMoveOffsetY(value - selectedWindow.y1);
+              setMoveWindowHeightY(heightVal);
+              return;
+            }
+          }
 
-                  return (
-                    <div
-                      key={`top-tick-${tick}`}
-                      className="absolute top-0 whitespace-nowrap text-xs text-gray-700"
-                      style={{
-                        left,
-                        transform: isFirst
-                          ? "translateX(0)"
-                          : isLast
-                            ? "translateX(-100%)"
-                            : "translateX(-50%)",
-                      }}
-                    >
-                      {formatClockTime(tick, timeZero)}
-                    </div>
-                  );
-                })}
+          setIsDragging(true);
+          setDragMode("create");
+          setDragStartMin(minute);
+          setDragStartY(value);
+          setDragCurrentMin(minute);
+          setDragCurrentY(value);
+        }}
+        onMouseLeave={() => {
+          if (!isDragging) {
+            setHoverMode(null);
+            setHoverMinute(null);
+          }
+        }}
+      >
+        {hoverStats && !isDragging && (
+          <div
+            className="pointer-events-none absolute rounded-md border bg-white px-3 py-2 text-xs shadow"
+            style={{
+              left: Math.min(minuteToPixel(hoverStats.time) + 8, plotWidth - 260),
+              top: chartMarginTop + 8,
+              zIndex: 1000,
+              color: "#111827",
+              lineHeight: 1.45,
+              minWidth: 180,
+              maxWidth: 240,
+            }}
+          >
+            <div className="mb-1 font-semibold">
+              Time: {formatClockTime(hoverStats.time, timeZero)}
+            </div>
+            <div>BP: {hoverStats.bpText}</div>
+            <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
+            <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
+            <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
+            <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
+            <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
+          </div>
+        )}
+
+        {windowStats && (
+          <div
+            className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
+            style={{
+              left: 8,
+              top: 40,
+              zIndex: 999,
+              color: "#111827",
+              lineHeight: 1.35,
+            }}
+          >
+            <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
+            <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
+            <div>Dur: {windowStats.duration} min</div>
+
+            {windowStats.vital === "MAP" ? (
+              <>
+                <div>
+                  SBP:{" "}
+                  {windowStats.sbp
+                    ? `${windowStats.sbp.min.toFixed(1)} ~ ${windowStats.sbp.max.toFixed(1)}`
+                    : "-"}
+                </div>
+                <div>
+                  DBP:{" "}
+                  {windowStats.dbp
+                    ? `${windowStats.dbp.min.toFixed(1)} ~ ${windowStats.dbp.max.toFixed(1)}`
+                    : "-"}
+                </div>
+                <div>
+                  MAP:{" "}
+                  {windowStats.map
+                    ? `${windowStats.map.min.toFixed(1)} ~ ${windowStats.map.max.toFixed(1)}`
+                    : "-"}
+                </div>
+              </>
+            ) : (
+              <div>
+                {windowStats.vital}:{" "}
+                {windowStats.min == null || windowStats.max == null
+                  ? "-"
+                  : `${windowStats.min.toFixed(1)} ~ ${windowStats.max.toFixed(1)}`}
               </div>
             )}
+          </div>
+        )}
+
+        {highlightWindowBox && (
+          <div
+            className="pointer-events-none absolute"
+            style={{
+              left: highlightWindowBox.left,
+              top: chartMarginTop,
+              width: highlightWindowBox.width,
+              height: `calc(100% - ${chartMarginTop + chartMarginBottom}px)`,
+              background: "lightblue",
+              opacity: 0.45,
+              border: "none",
+            }}
+          />
+        )}
+
+        {overlayBox && (
+          <div
+            className="pointer-events-none absolute"
+            style={{
+              left: overlayBox.left,
+              top: overlayBox.top,
+              width: overlayBox.width,
+              height: overlayBox.height,
+              overflow: "visible",
+              zIndex: 40,
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                boxSizing: "border-box",
+                background: "rgba(250, 230, 40, 0.22)",
+                border: `${HANDLE_BORDER_PX}px solid #e6d200`,
+                boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
+                willChange: "left, top, width, height",
+                transform: "translateZ(0)",
+              }}
+            />
 
             <div
-              ref={chartOverlayRef}
-              className="absolute z-20"
               style={{
-                left: 0,
-                top: 0,
-                width: contentWidth,
-                height,
-                cursor: interactionCursor,
-                overflow: "visible",
-              }}
-              onMouseDown={(e) => {
-                if (effectiveXEnd <= 0) return;
-
-                const minute = clientXToMinute(e.clientX);
-                const value = clientYToValue(e.clientY);
-                const hoveredMode = getHoverMode(minute, value);
-
-                if (selectedWindow && hoveredMode) {
-                  const width = selectedWindow.endMin - selectedWindow.startMin;
-                  const heightVal = selectedWindow.y2 - selectedWindow.y1;
-
-                  if (hoveredMode === "resize-left") {
-                    setIsDragging(true);
-                    setDragMode("resize-left");
-                    setDragCurrentMin(minute);
-                    setDragCurrentY(null);
-                    return;
-                  }
-
-                  if (hoveredMode === "resize-right") {
-                    setIsDragging(true);
-                    setDragMode("resize-right");
-                    setDragCurrentMin(minute);
-                    setDragCurrentY(null);
-                    return;
-                  }
-
-                  if (hoveredMode === "resize-top") {
-                    setIsDragging(true);
-                    setDragMode("resize-top");
-                    setDragCurrentY(value);
-                    setDragCurrentMin(null);
-                    return;
-                  }
-
-                  if (hoveredMode === "resize-bottom") {
-                    setIsDragging(true);
-                    setDragMode("resize-bottom");
-                    setDragCurrentY(value);
-                    setDragCurrentMin(null);
-                    return;
-                  }
-
-                  if (hoveredMode === "move") {
-                    setIsDragging(true);
-                    setDragMode("move");
-                    setDragCurrentMin(minute);
-                    setDragCurrentY(value);
-                    setMoveOffsetMin(minute - selectedWindow.startMin);
-                    setMoveWindowWidthMin(width);
-                    setMoveOffsetY(value - selectedWindow.y1);
-                    setMoveWindowHeightY(heightVal);
-                    return;
-                  }
-                }
-
-                setIsDragging(true);
-                setDragMode("create");
-                setDragStartMin(minute);
-                setDragStartY(value);
-                setDragCurrentMin(minute);
-                setDragCurrentY(value);
-              }}
-              onMouseLeave={() => {
-                if (!isDragging) {
-                  setHoverMode(null);
-                  setHoverMinute(null);
-                }
+                position: "absolute",
+                left: -18,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#f97316",
+                fontSize: 18,
+                fontWeight: 700,
+                lineHeight: 1,
+                textShadow: "0 0 3px white",
               }}
             >
-              {hoverStats && !isDragging && (
-                <div
-                  className="pointer-events-none absolute rounded-md border bg-white px-3 py-2 text-xs shadow"
-                  style={{
-                    left: Math.min(minuteToPixel(hoverStats.time) + 8, plotWidth - 260),
-                    top: chartMarginTop + 8,
-                    zIndex: 1000,
-                    color: "#111827",
-                    lineHeight: 1.45,
-                    minWidth: 180,
-                    maxWidth: 240,
-                  }}
-                >
-                  <div className="mb-1 font-semibold">
-                    Time: {formatClockTime(hoverStats.time, timeZero)}
-                  </div>
-                  <div>BP: {hoverStats.bpText}</div>
-                  <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
-                  <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
-                  <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
-                  <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
-                  <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
-                </div>
-              )}
-
-              {windowStats && (
-                <div
-                  className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
-                  style={{
-                    left: 8,
-                    top: 40,
-                    zIndex: 999,
-                    color: "#111827",
-                    lineHeight: 1.35,
-                  }}
-                >
-                  <div>Start: {formatClockTime(windowStats.startMin, timeZero)}</div>
-                  <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
-                  <div>Dur: {windowStats.duration} min</div>
-
-                  {windowStats.vital === "MAP" ? (
-                    <>
-                      <div>
-                        SBP:{" "}
-                        {windowStats.sbp
-                          ? `${windowStats.sbp.min.toFixed(1)} ~ ${windowStats.sbp.max.toFixed(1)}`
-                          : "-"}
-                      </div>
-                      <div>
-                        DBP:{" "}
-                        {windowStats.dbp
-                          ? `${windowStats.dbp.min.toFixed(1)} ~ ${windowStats.dbp.max.toFixed(1)}`
-                          : "-"}
-                      </div>
-                      <div>
-                        MAP:{" "}
-                        {windowStats.map
-                          ? `${windowStats.map.min.toFixed(1)} ~ ${windowStats.map.max.toFixed(1)}`
-                          : "-"}
-                      </div>
-                    </>
-                  ) : (
-                    <div>
-                      {windowStats.vital}:{" "}
-                      {windowStats.min == null || windowStats.max == null
-                        ? "-"
-                        : `${windowStats.min.toFixed(1)} ~ ${windowStats.max.toFixed(1)}`}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {highlightWindowBox && (
-                <div
-                  className="pointer-events-none absolute"
-                  style={{
-                    left: highlightWindowBox.left,
-                    top: chartMarginTop,
-                    width: highlightWindowBox.width,
-                    height: `calc(100% - ${chartMarginTop + chartMarginBottom}px)`,
-                    background: "lightblue",
-                    opacity: 0.45,
-                    border: "none",
-                  }}
-                />
-              )}
-
-              {overlayBox && (
-                <div
-                  className="pointer-events-none absolute"
-                  style={{
-                    left: overlayBox.left,
-                    top: overlayBox.top,
-                    width: overlayBox.width,
-                    height: overlayBox.height,
-                    overflow: "visible",
-                    zIndex: 40,
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      boxSizing: "border-box",
-                      background: "rgba(250, 230, 40, 0.22)",
-                      border: `${HANDLE_BORDER_PX}px solid #e6d200`,
-                      boxShadow: "0 0 0 1px rgba(255,255,255,0.95) inset",
-                      willChange: "left, top, width, height",
-                      transform: "translateZ(0)",
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: -18,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "#f97316",
-                      fontSize: 18,
-                      fontWeight: 700,
-                      lineHeight: 1,
-                      textShadow: "0 0 3px white",
-                    }}
-                  >
-                    ◀
-                  </div>
-
-                  <div
-                    style={{
-                      position: "absolute",
-                      right: -18,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "#f97316",
-                      fontSize: 18,
-                      fontWeight: 700,
-                      lineHeight: 1,
-                      textShadow: "0 0 3px white",
-                    }}
-                  >
-                    ▶
-                  </div>
-
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: -6,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      width: 12,
-                      height: 28,
-                      borderRadius: 6,
-                      background: "#f97316",
-                      border: "2px solid white",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      right: -6,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      width: 12,
-                      height: 28,
-                      borderRadius: 6,
-                      background: "#f97316",
-                      border: "2px solid white",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "50%",
-                      top: -6,
-                      transform: "translateX(-50%)",
-                      width: 28,
-                      height: 12,
-                      borderRadius: 6,
-                      background: "#f97316",
-                      border: "2px solid white",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "50%",
-                      bottom: -6,
-                      transform: "translateX(-50%)",
-                      width: 28,
-                      height: 12,
-                      borderRadius: 6,
-                      background: "#f97316",
-                      border: "2px solid white",
-                    }}
-                  />
-                </div>
-              )}
+              ◀
             </div>
+
+            <div
+              style={{
+                position: "absolute",
+                right: -18,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#f97316",
+                fontSize: 18,
+                fontWeight: 700,
+                lineHeight: 1,
+                textShadow: "0 0 3px white",
+              }}
+            >
+              ▶
+            </div>
+
+            <div
+              style={{
+                position: "absolute",
+                left: -6,
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: 12,
+                height: 28,
+                borderRadius: 6,
+                background: "#f97316",
+                border: "2px solid white",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                right: -6,
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: 12,
+                height: 28,
+                borderRadius: 6,
+                background: "#f97316",
+                border: "2px solid white",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: -6,
+                transform: "translateX(-50%)",
+                width: 28,
+                height: 12,
+                borderRadius: 6,
+                background: "#f97316",
+                border: "2px solid white",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: -6,
+                transform: "translateX(-50%)",
+                width: 28,
+                height: 12,
+                borderRadius: 6,
+                background: "#f97316",
+                border: "2px solid white",
+              }}
+            />
           </div>
-        </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div className="px-2 pt-2">
+    <input
+      type="range"
+      min={0}
+      max={Math.max(0, Math.round(maxScrollLeft))}
+      step={1}
+      value={Math.min(sliderValue, maxScrollLeft)}
+      onChange={(e) => {
+        const next = Number(e.target.value);
+        setSliderValue(next);
+
+        const el = scrollRef.current;
+        if (!el) return;
+
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = next;
+        onSharedScrollLeftChange?.(next);
+
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }}
+      className="vital-slider"
+      aria-label="Vital chart horizontal scroll"
+    />
+  </div>
+
+  <div className="px-2 py-1 text-[11px] text-gray-500">
+    Drag the bar to move left or right across the vital timeline.
+  </div>
+</div>
+
       </div>
     </div>
   );
 }
+
+   

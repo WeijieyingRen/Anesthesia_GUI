@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chorio webapp",
-  description: "A game where you can play against AI earn your Dx credentials",
+  title: "AnesthesiaGPT",
+  description: "Data annotation platform for AnesthesiaGPT",
 };
 
 export default function RootLayout({

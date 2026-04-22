@@ -1822,7 +1822,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 <ol className="list-decimal space-y-1 pl-5 text-sm leading-6 text-blue-900">
               
                   <li>On the right VitalChart panel, Choose one primary vital sign.</li>
-                  <li>Draw a bounding box around an abnormal episode.</li>
+                  <li><span className="text-red-600 font-bold">Repeat this process until all abnormal episodes are identified.</span></li>
                   <li>Repeat this process until all abnormal episodes are identified.</li>
                   <li>
                   Select the 3 most important episodes for next step annotation. If fewer than 3 abnormality are identified, select all of them.

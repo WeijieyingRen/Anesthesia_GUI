@@ -565,7 +565,7 @@ export default function UnifiedTimelineCard({
                 CVP: "square",
                 "PSI/BIS/Entropy": "diamond",
               }}
-              height={370}
+              height={350}
             />
           </div>
 

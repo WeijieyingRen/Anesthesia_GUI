@@ -3,7 +3,7 @@
 // app/page.tsx
 import type React from "react";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
@@ -23,13 +23,51 @@ type CsvRow = Record<string, any>;
 
 const CSV_BASE = "/data";
 
+const DEGREE_OPTIONS = [
+  "MD",
+  "DO",
+  "MBBS",
+  "PhD",
+  "MD/PhD",
+  "CRNA",
+  "RN",
+  "PA",
+  "Other",
+] as const;
+
+type DegreeOption = (typeof DEGREE_OPTIONS)[number];
+
+const PRACTICE_AREA_OPTIONS = [
+  "General anesthesiology",
+  "Pediatric anesthesiology",
+  "Cardiac anesthesiology",
+  "Obstetric anesthesiology",
+  "Regional anesthesia / pain",
+  "Critical care",
+  "Other",
+] as const;
+
+type PracticeAreaOption = (typeof PRACTICE_AREA_OPTIONS)[number];
+
 export default function Home() {
   const router = useRouter();
 
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [salutation, setSalutation] = useState("MD");
-  const [department, setDepartment] = useState("OB/GYN");
+  const [gender, setGender] = useState("");
+
+  const [degrees, setDegrees] = useState<DegreeOption[]>([]);
+  const [degreeDropdownOpen, setDegreeDropdownOpen] = useState(false);
+  const [degreeOther, setDegreeOther] = useState("");
+
+  const [trainingCountry, setTrainingCountry] = useState("");
+
+  const [clinicalRole, setClinicalRole] = useState("");
+  const [clinicalRoleOther, setClinicalRoleOther] = useState("");
+
+  const [practiceArea, setPracticeArea] = useState<PracticeAreaOption | "">("");
+  const [practiceAreaOther, setPracticeAreaOther] = useState("");
+
+  const [experienceYears, setExperienceYears] = useState("");
   const [accessCode, setAccessCode] = useState("");
 
   const [error, setError] = useState("");
@@ -43,9 +81,15 @@ export default function Home() {
       const saved = JSON.parse(raw);
 
       if (saved?.name) setName(saved.name);
-      if (saved?.email) setEmail(saved.email);
-      if (saved?.salutation) setSalutation(saved.salutation);
-      if (saved?.department) setDepartment(saved.department);
+      if (saved?.gender) setGender(saved.gender);
+      if (Array.isArray(saved?.degrees)) setDegrees(saved.degrees);
+      if (saved?.degreeOther) setDegreeOther(saved.degreeOther);
+      if (saved?.trainingCountry) setTrainingCountry(saved.trainingCountry);
+      if (saved?.clinicalRole) setClinicalRole(saved.clinicalRole);
+      if (saved?.clinicalRoleOther) setClinicalRoleOther(saved.clinicalRoleOther);
+      if (saved?.practiceArea) setPracticeArea(saved.practiceArea);
+      if (saved?.practiceAreaOther) setPracticeAreaOther(saved.practiceAreaOther);
+      if (saved?.experienceYears) setExperienceYears(saved.experienceYears);
       if (saved?.accessCode) setAccessCode(saved.accessCode);
     } catch {
       // ignore corrupted localStorage
@@ -60,7 +104,9 @@ export default function Home() {
     });
 
     if (!res.ok) {
-      throw new Error(`Failed to load access_code.csv: ${res.status} ${res.statusText}`);
+      throw new Error(
+        `Failed to load access_code.csv: ${res.status} ${res.statusText}`
+      );
     }
 
     const text = await res.text();
@@ -84,11 +130,72 @@ export default function Home() {
     return row?.[key] ?? "";
   }
 
+  function toggleDegree(value: DegreeOption) {
+    setDegrees((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
+    );
+  }
+
+  const hasOtherDegree = degrees.includes("Other");
+  const hasOtherClinicalRole = clinicalRole === "Other";
+  const hasOtherPracticeArea = practiceArea === "Other";
+
+  const degreeDisplay = useMemo(() => {
+    if (degrees.length === 0) return "Select degree(s)";
+    return degrees.join(", ");
+  }, [degrees]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
+    const trimmedName = name.trim();
+    const trimmedGender = gender.trim();
+    const trimmedDegreeOther = degreeOther.trim();
+    const trimmedTrainingCountry = trainingCountry.trim();
+    const trimmedClinicalRoleOther = clinicalRoleOther.trim();
+    const trimmedPracticeAreaOther = practiceAreaOther.trim();
+    const trimmedExperienceYears = experienceYears.trim();
     const trimmedAccessCode = accessCode.trim();
+
+    if (!trimmedName) {
+      setError("Please enter your full name.");
+      return;
+    }
+
+    if (!trimmedTrainingCountry) {
+      setError("Please enter the country of your primary clinical training.");
+      return;
+    }
+
+    if (!clinicalRole) {
+      setError("Please select your current clinical role.");
+      return;
+    }
+
+    if (hasOtherClinicalRole && !trimmedClinicalRoleOther) {
+      setError("Please specify your clinical role.");
+      return;
+    }
+
+    if (hasOtherDegree && !trimmedDegreeOther) {
+      setError("Please specify your professional degree(s).");
+      return;
+    }
+
+    if (hasOtherPracticeArea && !trimmedPracticeAreaOther) {
+      setError("Please specify your primary area of anesthesia practice.");
+      return;
+    }
+
+    if (!trimmedExperienceYears) {
+      setError(
+        "Please enter your approximate years of hands-on anesthesia-related clinical care."
+      );
+      return;
+    }
 
     if (!/^\d{4}$/.test(trimmedAccessCode)) {
       setError("Access Code must be a 4-digit number.");
@@ -106,10 +213,16 @@ export default function Home() {
       }
 
       const participantInfo = {
-        name: name.trim(),
-        email: email.trim(),
-        salutation,
-        department,
+        name: trimmedName,
+        gender: trimmedGender,
+        degrees,
+        degreeOther: trimmedDegreeOther,
+        trainingCountry: trimmedTrainingCountry,
+        clinicalRole,
+        clinicalRoleOther: trimmedClinicalRoleOther,
+        practiceArea,
+        practiceAreaOther: trimmedPracticeAreaOther,
+        experienceYears: trimmedExperienceYears,
         accessCode: trimmedAccessCode,
         doctorId,
         timestamp: new Date().toISOString(),
@@ -132,7 +245,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
       <div className="max-w-3xl w-full bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold text-center mb-2">
-          Welcome to the VitalLens Project
+          Welcome to the AnesthesiaGPT Project
         </h1>
         <p className="text-gray-600 text-center mb-8">
           Interpret intraoperative vital signs, annotate abnormalities, and
@@ -146,10 +259,10 @@ export default function Home() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Full Name</Label>
               <Input
                 id="name"
-                placeholder="Enter your name"
+                placeholder="Enter your full name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -157,46 +270,182 @@ export default function Home() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="gender">Gender (optional)</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="gender"
+                placeholder="Enter your gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <p className="text-xs text-gray-500">
+                This field will be used only for analysis of
+                annotation behavior across participants.
+              </p>
+            </div>
+
+            <div className="space-y-2 relative">
+              <Label>Professional Degree(s)</Label>
+
+              <button
+                type="button"
+                onClick={() => setDegreeDropdownOpen((prev) => !prev)}
+                className="flex w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+              >
+                <span className="truncate text-left">{degreeDisplay}</span>
+                <span className="ml-2 text-xs text-gray-500">▼</span>
+              </button>
+
+              {degreeDropdownOpen && (
+                <div className="absolute z-50 mt-1 w-full rounded-md border bg-white shadow-md p-2 space-y-2">
+                  {DEGREE_OPTIONS.map((degree) => (
+                    <label
+                      key={degree}
+                      className="flex items-center gap-2 rounded px-2 py-1 text-sm hover:bg-gray-50"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={degrees.includes(degree)}
+                        onChange={() => toggleDegree(degree)}
+                      />
+                      <span>{degree}</span>
+                    </label>
+                  ))}
+
+                  <div className="flex justify-end pt-1">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setDegreeDropdownOpen(false)}
+                    >
+                      Done
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {hasOtherDegree && (
+                <div className="space-y-2">
+                  <Label htmlFor="degreeOther">Please specify degree(s)</Label>
+                  <Input
+                    id="degreeOther"
+                    placeholder="Enter your degree(s)"
+                    value={degreeOther}
+                    onChange={(e) => setDegreeOther(e.target.value)}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="trainingCountry">
+                Country of Primary Clinical Training
+              </Label>
+              <Input
+                id="trainingCountry"
+                placeholder="e.g., United States, China, India"
+                value={trainingCountry}
+                onChange={(e) => setTrainingCountry(e.target.value)}
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="salutation">Salutation</Label>
-              <Select value={salutation} onValueChange={setSalutation}>
-                <SelectTrigger id="salutation">
-                  <SelectValue placeholder="Select salutation" />
+              <Label htmlFor="clinicalRole">Current Clinical Role</Label>
+              <Select
+                value={clinicalRole}
+                onValueChange={(value) => {
+                  setClinicalRole(value);
+                  if (value !== "Other") {
+                    setClinicalRoleOther("");
+                  }
+                }}
+              >
+                <SelectTrigger id="clinicalRole">
+                  <SelectValue placeholder="Select your current role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="MD">MD</SelectItem>
-                  <SelectItem value="PhD">PhD</SelectItem>
-                  <SelectItem value="MD PhD">MD PhD</SelectItem>
+                  <SelectItem value="Resident">Resident</SelectItem>
+                  <SelectItem value="Fellow">Fellow</SelectItem>
+                  <SelectItem value="Attending physician">
+                    Attending physician
+                  </SelectItem>
+                  <SelectItem value="CRNA / Nurse anesthetist">
+                    CRNA / Nurse anesthetist
+                  </SelectItem>
                   <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
+
+              {hasOtherClinicalRole && (
+                <div className="space-y-2">
+                  <Label htmlFor="clinicalRoleOther">
+                    Please specify your clinical role
+                  </Label>
+                  <Input
+                    id="clinicalRoleOther"
+                    placeholder="Enter your clinical role"
+                    value={clinicalRoleOther}
+                    onChange={(e) => setClinicalRoleOther(e.target.value)}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="department">Department</Label>
-              <Select value={department} onValueChange={setDepartment}>
-                <SelectTrigger id="department">
-                  <SelectValue placeholder="Select department" />
+              <Label htmlFor="practiceArea">
+                Primary Area of Anesthesia Practice (optional)
+              </Label>
+              <Select
+                value={practiceArea}
+                onValueChange={(value) => {
+                  setPracticeArea(value as PracticeAreaOption);
+                  if (value !== "Other") {
+                    setPracticeAreaOther("");
+                  }
+                }}
+              >
+                <SelectTrigger id="practiceArea">
+                  <SelectValue placeholder="Select your primary practice area" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="OB/GYN">OB/GYN</SelectItem>
-                  <SelectItem value="Anesthesiology">Anesthesiology</SelectItem>
-                  <SelectItem value="Pediatrics">Pediatrics</SelectItem>
-                  <SelectItem value="Neonatology">Neonatology</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
+                  {PRACTICE_AREA_OPTIONS.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
+
+              {hasOtherPracticeArea && (
+                <div className="space-y-2">
+                  <Label htmlFor="practiceAreaOther">
+                    Please specify your practice area
+                  </Label>
+                  <Input
+                    id="practiceAreaOther"
+                    placeholder="Enter your primary practice area"
+                    value={practiceAreaOther}
+                    onChange={(e) => setPracticeAreaOther(e.target.value)}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="experienceYears">
+                Approximate Years of Hands-on Anesthesia-Related Clinical Care
+              </Label>
+              <Input
+                id="experienceYears"
+                placeholder="e.g., 2, 5, 12"
+                value={experienceYears}
+                onChange={(e) => setExperienceYears(e.target.value)}
+                required
+              />
+              <p className="text-xs text-gray-500">
+                Please include both supervised training and independent practice.
+              </p>
             </div>
 
             <div className="space-y-2">

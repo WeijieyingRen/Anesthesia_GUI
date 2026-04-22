@@ -189,7 +189,6 @@ function sortMedicationNames(names: string[]) {
 function inferColor(name: string) {
   const n = normalizeName(name);
 
-  // induction agents -> yellow
   if (
     ["propofol", "propofol inject", "etomidate", "ketamine"].some((x) =>
       n.includes(x)
@@ -198,12 +197,10 @@ function inferColor(name: string) {
     return "#ffff00";
   }
 
-  // benzodiazepines -> orange
   if (["midazolam", "diazepam", "lorazepam"].some((x) => n.includes(x))) {
     return "#ff6600";
   }
 
-  // opioids -> blue
   if (
     [
       "fentanyl",
@@ -219,7 +216,6 @@ function inferColor(name: string) {
     return "#85c7e3";
   }
 
-  // muscle relaxants / reversal family
   if (
     [
       "rocuronium",
@@ -233,7 +229,6 @@ function inferColor(name: string) {
     return "#f54029";
   }
 
-  // vasoactive
   if (
     [
       "phenylephrine",
@@ -256,7 +251,6 @@ function inferColor(name: string) {
     return "#debfd9";
   }
 
-  // anti-emetics
   if (
     [
       "ondansetron",
@@ -271,14 +265,12 @@ function inferColor(name: string) {
     return "#edc282";
   }
 
-  // antagonist / anticholinergic family
   if (
     ["glycopyrrolate", "naloxone", "flumazenil"].some((x) => n.includes(x))
   ) {
     return "#a3d963";
   }
 
-  // miscellaneous
   if (
     [
       "dexamethasone",
@@ -689,10 +681,10 @@ function BolusOverlaySvg({
           const bodyLeft = finalLeft;
           const bodyRight = finalLeft + boxWidth;
           const shouldHighlight =
-  isMatchingMedicationRow(row.name, managementEvent) &&
-  managementEvent?.highlight_mode === "point" &&
-  Number.isFinite(managementEvent?.time_min) &&
-  Math.abs(Number(p.time) - Number(managementEvent.time_min)) <= 1;
+            isMatchingMedicationRow(row.name, managementEvent) &&
+            managementEvent?.highlight_mode === "point" &&
+            Number.isFinite(managementEvent?.time_min) &&
+            Math.abs(Number(p.time) - Number(managementEvent.time_min)) <= 1;
 
           const pathD = [
             `M ${bodyLeft} ${actualTop}`,
@@ -707,19 +699,19 @@ function BolusOverlaySvg({
 
           return (
             <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
-               {shouldHighlight && (
-      <rect
-        x={bodyLeft - 6}
-        y={actualTop - 4}
-        width={boxWidth + 12}
-        height={boxHeight + 8}
-        rx={8}
-        ry={8}
-        fill="none"
-        stroke="#ef4444"
-        strokeWidth={3}
-      />
-    )}
+              {shouldHighlight && (
+                <rect
+                  x={bodyLeft - 6}
+                  y={actualTop - 4}
+                  width={boxWidth + 12}
+                  height={boxHeight + 8}
+                  rx={8}
+                  ry={8}
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth={3}
+                />
+              )}
               {hasOverlap && (
                 <line
                   x1={cx}
@@ -826,12 +818,12 @@ function InfusionOverlaySvg({
           const canDrawLine = lineEndX > lineStartX + 2;
 
           const shouldHighlight =
-  isMatchingMedicationRow(row.name, managementEvent) &&
-  managementEvent?.highlight_mode === "interval" &&
-  Number.isFinite(managementEvent?.time_min) &&
-  Number.isFinite(managementEvent?.end_time_min) &&
-  Number(seg.start) <= Number(managementEvent.end_time_min) &&
-  Number(seg.end) >= Number(managementEvent.time_min);
+            isMatchingMedicationRow(row.name, managementEvent) &&
+            managementEvent?.highlight_mode === "interval" &&
+            Number.isFinite(managementEvent?.time_min) &&
+            Number.isFinite(managementEvent?.end_time_min) &&
+            Number(seg.start) <= Number(managementEvent.end_time_min) &&
+            Number(seg.end) >= Number(managementEvent.time_min);
 
           const headPath = [
             `M ${headX} ${yTop}`,
@@ -857,7 +849,7 @@ function InfusionOverlaySvg({
                   strokeWidth={3}
                 />
               )}
-          
+
               {canDrawLine && (
                 <line
                   x1={lineStartX}
@@ -925,7 +917,6 @@ function MedicationGridSvg({
   height,
   highlightWindow,
   plotWidth,
-  managementEvent,
 }: {
   end: number;
   majorTicks: number[];
@@ -934,7 +925,6 @@ function MedicationGridSvg({
   height: number;
   highlightWindow?: HighlightWindow | null;
   plotWidth: number;
-  managementEvent?: ManagementEvent | null;
 }) {
   if (!Number.isFinite(end) || end <= 0) return null;
 
@@ -1028,6 +1018,10 @@ export default function MedicationChart({
   const rows = useMemo(() => buildRows(medications, xEnd), [medications, xEnd]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = useRef(false);
+
+  const [sliderValue, setSliderValue] = useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
   const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
   const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
@@ -1039,6 +1033,7 @@ export default function MedicationChart({
 
     if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
       scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
     }
   }, [sharedScrollLeft]);
 
@@ -1079,6 +1074,24 @@ export default function MedicationChart({
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentPlotWidth;
 
+  useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, height, hiddenNames, rows.length]);
+
   if (!rows.length) {
     return (
       <div className="rounded-2xl border bg-white p-4 shadow-sm">
@@ -1094,6 +1107,75 @@ export default function MedicationChart({
         embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
       }
     >
+      <style jsx>{`
+        .med-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .med-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .med-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .med-slider:focus {
+          outline: none;
+        }
+
+        .med-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .med-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .med-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .med-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .med-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .med-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
+
       {!embedded && title ? (
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
@@ -1170,40 +1252,45 @@ export default function MedicationChart({
           <FixedAxisSpacer height={fullContentHeight} />
 
           <div className="overflow-x-hidden overflow-y-hidden">
-          <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
+            <div
+              ref={scrollRef}
+              className="med-scroll-hidden"
+              style={{ overscrollBehaviorX: "none" }}
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const absX = Math.abs(e.deltaX);
+                const absY = Math.abs(e.deltaY);
 
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
+                if (absX <= absY || absX < 1) return;
 
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
+                const maxScroll = el.scrollWidth - el.clientWidth;
+                const nextLeft = el.scrollLeft + e.deltaX;
 
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+                const atLeftEdge = el.scrollLeft <= 0;
+                const atRightEdge = el.scrollLeft >= maxScroll - 1;
 
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
 
-    if (tryingGoPastLeft || tryingGoPastRight) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
+                if (tryingGoPastLeft || tryingGoPastRight) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
 
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
+                e.preventDefault();
+                const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+                el.scrollLeft = clamped;
+                setSliderValue(clamped);
+              }}
+              onScroll={(e) => {
+                const next = e.currentTarget.scrollLeft;
+                if (!isSyncingFromSliderRef.current) {
+                  setSliderValue(next);
+                }
+                onSharedScrollLeftChange?.(next);
+              }}
+            >
               <div
                 className="relative"
                 style={{
@@ -1212,16 +1299,15 @@ export default function MedicationChart({
                 }}
               >
                 <div className="absolute inset-0 z-0">
-                <MedicationGridSvg
-  end={end}
-  majorTicks={majorTicks}
-  minorTicks={minorTicks}
-  rows={rows}
-  height={fullContentHeight}
-  highlightWindow={highlightWindow}
-  plotWidth={plotWidth}
-  managementEvent={managementEvent}
-/>
+                  <MedicationGridSvg
+                    end={end}
+                    majorTicks={majorTicks}
+                    minorTicks={minorTicks}
+                    rows={rows}
+                    height={fullContentHeight}
+                    highlightWindow={highlightWindow}
+                    plotWidth={plotWidth}
+                  />
                 </div>
 
                 <div className="absolute inset-0 z-10">
@@ -1286,27 +1372,58 @@ export default function MedicationChart({
                 </div>
 
                 <div className="absolute inset-0 z-20 pointer-events-none">
-                 <InfusionOverlaySvg
-  end={end}
-  rows={visibleRows}
-  height={fullContentHeight}
-  svgWidth={contentWidth}
-  plotWidth={plotWidth}
-  managementEvent={managementEvent}
-/>
+                  <InfusionOverlaySvg
+                    end={end}
+                    rows={visibleRows}
+                    height={fullContentHeight}
+                    svgWidth={contentWidth}
+                    plotWidth={plotWidth}
+                    managementEvent={managementEvent}
+                  />
                 </div>
 
                 <div className="absolute inset-0 z-30 pointer-events-none">
-                <BolusOverlaySvg
-  end={end}
-  rows={visibleRows}
-  height={fullContentHeight}
-  svgWidth={contentWidth}
-  plotWidth={plotWidth}
-  managementEvent={managementEvent}
-/>
+                  <BolusOverlaySvg
+                    end={end}
+                    rows={visibleRows}
+                    height={fullContentHeight}
+                    svgWidth={contentWidth}
+                    plotWidth={plotWidth}
+                    managementEvent={managementEvent}
+                  />
                 </div>
               </div>
+            </div>
+
+            <div className="px-2 pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(sliderValue, maxScrollLeft)}
+                onChange={(e) => {
+                  const next = Number(e.target.value);
+                  setSliderValue(next);
+
+                  const el = scrollRef.current;
+                  if (!el) return;
+
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
+
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="med-slider"
+                aria-label="Medication chart horizontal scroll"
+              />
+            </div>
+
+            <div className="px-2 py-1 text-[11px] text-gray-500">
+              Drag the bar to move left or right across the medication timeline.
             </div>
           </div>
         </div>

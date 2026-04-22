@@ -381,20 +381,16 @@ export default function VentilationChart({
   const rows = useMemo(() => buildRows(ventilation), [ventilation]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = useRef(false);
+
+  const [sliderValue, setSliderValue] = useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
   const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
   const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
   const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
-
-  useEffect(() => {
-    if (scrollRef.current == null) return;
-    if (sharedScrollLeft == null) return;
-
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-    }
-  }, [sharedScrollLeft]);
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
   const visibleRowsReindexed = visibleRows.map((row, idx) => ({ ...row, rowIndex: idx }));
@@ -440,6 +436,42 @@ export default function VentilationChart({
     return buildDetailPolyline(zoomTarget.points, detailWidth, detailHeight);
   }, [zoomTarget]);
 
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+    setMaxScrollLeft(nextMax);
+    setSliderValue(Math.min(el.scrollLeft, nextMax));
+  }, [contentWidth, contentHeight, hiddenNames.length, rows.length, viewHeight]);
+
+  useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, contentHeight, viewHeight]);
+
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
+    }
+  }, [sharedScrollLeft]);
+
   if (!rows.length) {
     return embedded ? null : (
       <div className="rounded-2xl border bg-white p-4 shadow-sm">
@@ -451,6 +483,75 @@ export default function VentilationChart({
 
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+      <style jsx>{`
+        .vent-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .vent-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .vent-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .vent-slider:focus {
+          outline: none;
+        }
+
+        .vent-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .vent-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .vent-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .vent-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .vent-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .vent-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
+
       {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
@@ -505,41 +606,46 @@ export default function VentilationChart({
 
           <FixedYAxisSpacer height={contentHeight} />
 
-          <div className="overflow-x-hidden overflow-y-hidden">
-          <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
+          <div className="min-w-0">
+            <div
+              ref={scrollRef}
+              className="vent-scroll-hidden"
+              style={{ overscrollBehaviorX: "none" }}
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const absX = Math.abs(e.deltaX);
+                const absY = Math.abs(e.deltaY);
 
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
+                if (absX <= absY || absX < 1) return;
 
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
+                const maxScroll = el.scrollWidth - el.clientWidth;
+                const nextLeft = el.scrollLeft + e.deltaX;
 
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+                const atLeftEdge = el.scrollLeft <= 0;
+                const atRightEdge = el.scrollLeft >= maxScroll - 1;
 
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
 
-    if (tryingGoPastLeft || tryingGoPastRight) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
+                if (tryingGoPastLeft || tryingGoPastRight) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
 
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
+                e.preventDefault();
+                const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+                el.scrollLeft = clamped;
+                setSliderValue(clamped);
+              }}
+              onScroll={(e) => {
+                const next = e.currentTarget.scrollLeft;
+                if (!isSyncingFromSliderRef.current) {
+                  setSliderValue(next);
+                }
+                onSharedScrollLeftChange?.(next);
+              }}
+            >
               <div
                 className="relative"
                 style={{
@@ -675,6 +781,37 @@ export default function VentilationChart({
                 </svg>
               </div>
             </div>
+
+            <div className="px-2 pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(sliderValue, maxScrollLeft)}
+                onChange={(e) => {
+                  const next = Number(e.target.value);
+                  setSliderValue(next);
+
+                  const el = scrollRef.current;
+                  if (!el) return;
+
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
+
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="vent-slider"
+                aria-label="Ventilation chart horizontal scroll"
+              />
+            </div>
+
+            <div className="px-2 py-1 text-[11px] text-gray-500">
+              Drag the bar to move left or right across the ventilation timeline.
+            </div>
           </div>
         </div>
       </div>
@@ -789,32 +926,6 @@ export default function VentilationChart({
           </svg>
         </div>
       )}
-
-      <style jsx>{`
-        .vent-scroll-x {
-          scrollbar-width: auto;
-          scrollbar-color: #a3a3a3 #e5e7eb;
-        }
-
-        .vent-scroll-x::-webkit-scrollbar {
-          height: 16px;
-        }
-
-        .vent-scroll-x::-webkit-scrollbar-track {
-          background: #e5e7eb;
-          border-radius: 9999px;
-        }
-
-        .vent-scroll-x::-webkit-scrollbar-thumb {
-          background: #a3a3a3;
-          border-radius: 9999px;
-          border: 2px solid #e5e7eb;
-        }
-
-        .vent-scroll-x::-webkit-scrollbar-thumb:hover {
-          background: #8b8b8b;
-        }
-      `}</style>
     </div>
   );
 }

@@ -155,7 +155,10 @@ function maxTimeOfRows(rows: GasRow[]) {
   return vals.length ? Math.max(...vals) : 0;
 }
 
-function buildWindowSegments(rows: GasRow[], windowSize: number): GasWindowSegment[] {
+function buildWindowSegments(
+  rows: GasRow[],
+  windowSize: number
+): GasWindowSegment[] {
   const segments: GasWindowSegment[] = [];
 
   rows.forEach((row) => {
@@ -394,20 +397,24 @@ export default function GasChart({
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = useRef(false);
 
-  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+
+  const majorStep = useMemo(
+    () => getMajorStep(timeResolution),
+    [timeResolution]
+  );
+  const minorStep = useMemo(
+    () => getMinorStep(timeResolution),
+    [timeResolution]
+  );
   const effectiveWindowSize = windowSize ?? majorStep;
-  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
-
-  useEffect(() => {
-    if (scrollRef.current == null) return;
-    if (sharedScrollLeft == null) return;
-
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-    }
-  }, [sharedScrollLeft]);
+  const pxPerMin = useMemo(
+    () => getPxPerMinute(timeResolution),
+    [timeResolution]
+  );
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
   const visibleRowsReindexed = visibleRows.map((row, idx) => ({
@@ -441,7 +448,10 @@ export default function GasChart({
   const fullContentHeight =
     visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
 
-  const viewHeight = Math.min(height, Math.max(120, fullContentHeight));
+  const viewHeight = Math.min(
+    height + 40,
+    Math.max(160, fullContentHeight + 40)
+  );
 
   const contentPlotWidth = useMemo(() => {
     if (finalXEnd <= 0) return 800;
@@ -459,6 +469,34 @@ export default function GasChart({
     return buildDetailPolyline(zoomTarget.points, detailWidth, detailHeight);
   }, [zoomTarget]);
 
+  useEffect(() => {
+    if (scrollRef.current == null) return;
+    if (sharedScrollLeft == null) return;
+
+    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
+      scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
+    }
+  }, [sharedScrollLeft]);
+
+  useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, viewHeight, hiddenNames, rows.length]);
+
   if (!Object.keys(safeGas).length || rows.length === 0) {
     return embedded ? null : (
       <div className="rounded-2xl border bg-white p-4 shadow-sm">
@@ -470,7 +508,78 @@ export default function GasChart({
 
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
-      {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
+      <style jsx>{`
+        .gas-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .gas-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .gas-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .gas-slider:focus {
+          outline: none;
+        }
+
+        .gas-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .gas-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .gas-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .gas-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .gas-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .gas-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
+
+      {!embedded && title ? (
+        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+      ) : null}
 
       <div
         className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
@@ -487,7 +596,9 @@ export default function GasChart({
             <div>
               {rows.map((row) => {
                 const hidden = hiddenNames.includes(row.name);
-                const active = visibleRowsReindexed.some((r) => r.name === row.name);
+                const active = visibleRowsReindexed.some(
+                  (r) => r.name === row.name
+                );
                 const color = inferGasColor(row.name);
 
                 return (
@@ -501,7 +612,9 @@ export default function GasChart({
                       borderBottom: "1px solid #d1d5db",
                     }}
                   >
-                    <div className="min-w-0 flex-1 truncate text-gray-900">{row.name}</div>
+                    <div className="min-w-0 flex-1 truncate text-gray-900">
+                      {row.name}
+                    </div>
                     <button
                       type="button"
                       onClick={() => {
@@ -524,42 +637,50 @@ export default function GasChart({
           <FixedAxisSpacer height={fullContentHeight} />
 
           <div className="overflow-x-hidden overflow-y-hidden">
-          <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
+            <div
+              ref={scrollRef}
+              className="gas-scroll-hidden"
+              style={{ overscrollBehaviorX: "none" }}
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const absX = Math.abs(e.deltaX);
+                const absY = Math.abs(e.deltaY);
 
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
+                if (absX <= absY || absX < 1) return;
 
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
+                const maxScroll = el.scrollWidth - el.clientWidth;
+                const nextLeft = el.scrollLeft + e.deltaX;
 
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+                const atLeftEdge = el.scrollLeft <= 0;
+                const atRightEdge = el.scrollLeft >= maxScroll - 1;
 
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
 
-    if (tryingGoPastLeft || tryingGoPastRight) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
+                if (tryingGoPastLeft || tryingGoPastRight) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
 
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
+                e.preventDefault();
+                const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+                el.scrollLeft = clamped;
+                setSliderValue(clamped);
+              }}
+              onScroll={(e) => {
+                const next = e.currentTarget.scrollLeft;
+                if (!isSyncingFromSliderRef.current) {
+                  setSliderValue(next);
+                }
+                onSharedScrollLeftChange?.(next);
+              }}
+            >
               <div style={{ width: contentWidth, height: fullContentHeight }}>
-                <div className="relative" style={{ width: contentWidth, height: fullContentHeight }}>
+                <div
+                  className="relative"
+                  style={{ width: contentWidth, height: fullContentHeight }}
+                >
                   <GasGridSvg
                     end={finalXEnd}
                     majorTicks={majorTicks}
@@ -595,7 +716,8 @@ export default function GasChart({
 
                         const lineStartX = textX + textWidth + 6;
                         const lineEndX = segRight - 6;
-                        const canDrawLine = !hideVisual && lineEndX > lineStartX + 2;
+                        const canDrawLine =
+                          !hideVisual && lineEndX > lineStartX + 2;
 
                         const isSelected =
                           zoomTarget &&
@@ -696,6 +818,37 @@ export default function GasChart({
                 </div>
               </div>
             </div>
+
+            <div className="px-2 pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(sliderValue, maxScrollLeft)}
+                onChange={(e) => {
+                  const next = Number(e.target.value);
+                  setSliderValue(next);
+
+                  const el = scrollRef.current;
+                  if (!el) return;
+
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
+
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="gas-slider"
+                aria-label="Gas chart horizontal scroll"
+              />
+            </div>
+
+            <div className="px-2 py-1 text-[11px] text-gray-500">
+              Drag the bar to move left or right across the gas timeline.
+            </div>
           </div>
         </div>
       </div>
@@ -704,9 +857,12 @@ export default function GasChart({
         <div className="mt-3 rounded-xl border bg-white p-3">
           <div className="mb-2 flex items-center justify-between">
             <div>
-              <div className="text-sm font-semibold text-gray-900">{zoomTarget.rowName} detail</div>
+              <div className="text-sm font-semibold text-gray-900">
+                {zoomTarget.rowName} detail
+              </div>
               <div className="text-xs text-gray-500">
-                {formatClockTime(zoomTarget.x0, timeZero)} - {formatClockTime(zoomTarget.x1, timeZero)}
+                {formatClockTime(zoomTarget.x0, timeZero)} -{" "}
+                {formatClockTime(zoomTarget.x1, timeZero)}
               </div>
             </div>
 

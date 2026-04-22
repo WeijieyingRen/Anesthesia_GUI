@@ -1,12 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
 export default function ConsentPage() {
   const router = useRouter();
+
+  const [hasCheckedConsent, setHasCheckedConsent] = useState(false);
+  const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
+
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const participantRaw = localStorage.getItem("participantInfo");
@@ -15,7 +20,24 @@ export default function ConsentPage() {
     }
   }, [router]);
 
+  const handleScroll = () => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
+    const threshold = 8;
+    const isAtBottom =
+      el.scrollTop + el.clientHeight >= el.scrollHeight - threshold;
+
+    if (isAtBottom) {
+      setHasScrolledToBottom(true);
+    }
+  };
+
+  const canContinue = hasScrolledToBottom && hasCheckedConsent;
+
   const handleAccept = () => {
+    if (!canContinue) return;
+
     localStorage.setItem(
       "consentInfo",
       JSON.stringify({
@@ -31,14 +53,13 @@ export default function ConsentPage() {
   return (
     <main className="min-h-screen bg-gray-50 flex items-center justify-center p-8">
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold mb-2">
-          Consent Letter
-        </h1>
-     
+        <h1 className="text-2xl font-bold mb-2">Consent Letter</h1>
 
-        <div className="space-y-4 text-sm leading-6 text-gray-700 max-h-[65vh] overflow-y-auto border rounded-md p-4 bg-gray-50">
-       
-
+        <div
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          className="space-y-4 text-sm leading-6 text-gray-700 max-h-[65vh] overflow-y-auto border rounded-md p-4 bg-gray-50"
+        >
           <p>
             <span className="font-semibold">DESCRIPTION:</span> You are invited
             to participate in a research study evaluating a prototype research
@@ -187,13 +208,15 @@ export default function ConsentPage() {
             If you have any questions, concerns or complaints about this
             research study, its procedures, risks and benefits, or alternative
             courses of treatment, you should ask the Protocol Director,
-            Weijieying Ren. You may contact them now or later at 407-432-4106.
+            Weijieying Ren. You may contact them now or later at
+            wjyren@stanford.edu.
           </p>
 
           <p>
             <span className="font-semibold">Injury Notification:</span> If you
             feel you have been hurt by being a part of this study, please
-            contact the Protocol Director, Weijieying Ren.at at 407-432-4106.
+            contact the Protocol Director, Weijieying Ren.at at
+            wjyren@stanford.edu.
           </p>
 
           <p>
@@ -216,22 +239,41 @@ export default function ConsentPage() {
           </p>
         </div>
 
+        <div className="mt-3 text-xs text-gray-600">
+          {hasScrolledToBottom ? (
+            <span className="text-green-700 font-medium">
+              ✓ You have reached the end of the consent letter.
+            </span>
+          ) : (
+            <span>Please scroll to the bottom of the consent letter before continuing.</span>
+          )}
+        </div>
+
         <div className="flex items-start space-x-3 mt-6">
           <input
             id="consent"
             type="checkbox"
             className="mt-1 h-4 w-4 rounded border-gray-300"
+            checked={hasCheckedConsent}
+            onChange={(e) => setHasCheckedConsent(e.target.checked)}
+            disabled={!hasScrolledToBottom}
           />
           <Label htmlFor="consent" className="text-sm leading-6">
             I have read the consent information above and I want to continue.
           </Label>
         </div>
 
+        {!hasScrolledToBottom && (
+          <p className="mt-2 text-xs text-amber-700">
+            You must scroll to the bottom of the consent letter before checking the box.
+          </p>
+        )}
+
         <div className="flex gap-3 mt-6">
           <Button variant="outline" onClick={() => router.push("/")}>
             Back
           </Button>
-          <Button onClick={handleAccept}>
+          <Button onClick={handleAccept} disabled={!canContinue}>
             Accept and Continue
           </Button>
         </div>
