@@ -51,30 +51,29 @@ export async function submitAnnotation(payload: SubmitPayload) {
   const pageOpenedAt = payload.pageOpenedAt ?? payload.panelOpenedAt ?? null;
   const panelOpenedAt = payload.panelOpenedAt ?? payload.pageOpenedAt ?? null;
 
-  const res = await fetch("/api/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...payload,
-
-      patientId,
-      patientFolder,
-
-      pageOpenedAt,
-      panelOpenedAt,
-
-      submittedAt,
-      clickedAt,
-    }),
+  // ===== DEMO MODE: 不写后端，直接返回成功 =====
+  console.log("[DEMO MODE] submitAnnotation skipped backend save:", {
+    ...payload,
+    patientId,
+    patientFolder,
+    pageOpenedAt,
+    panelOpenedAt,
+    submittedAt,
+    clickedAt,
   });
 
-  const data = await res.json().catch(() => null);
-
-  if (!res.ok || !data?.ok) {
-    throw new Error(data?.error || "Failed to submit annotation.");
-  }
-
-  return data;
+  return {
+    ok: true,
+    demo: true,
+    skippedBackend: true,
+    saved: {
+      patientId,
+      patientFolder,
+      panel: payload.panel,
+      action: payload.action,
+      task: payload.task ?? null,
+      submittedAt,
+      clickedAt,
+    },
+  };
 }
