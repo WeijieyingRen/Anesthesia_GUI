@@ -1,3 +1,0 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
-FA80B233-6C8D-F011-9217-005056BFF837,10454,1,2025-09-04 21:58:00+00:00,2025-09-04 23:01:59+00:00,normal saline,50.0,mL/hr,Intravenous,saline 0.9%,fluid_input,2025-09-04 21:25:00+00:00,2025-09-05 01:06:00+00:00,33.0,96.98333333333333,33.0,124.01666666666667
-FA80B233-6C8D-F011-9217-005056BFF837,10454,1,2025-09-04 23:02:00+00:00,2025-09-04 23:02:00+00:00,normal saline,100.0,mL,Intravenous,saline 0.9%,fluid_input,2025-09-04 21:25:00+00:00,2025-09-05 01:06:00+00:00,97.0,97.0,97.0,124.0

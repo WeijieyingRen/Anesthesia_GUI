@@ -1,3 +1,0 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
-D03464F4-AB49-EF11-920C-005056BFF837,10457,1,2024-07-19 14:15:00+00:00,2024-07-19 20:24:00+00:00,normosol,500.0,mL,Intravenous,normosol,fluid_input,2024-07-19 14:03:00+00:00,2024-07-19 20:46:00+00:00,12.0,381.0,12.0,22.0
-D03464F4-AB49-EF11-920C-005056BFF837,10456,1,2024-07-20 00:20:23+00:00,2024-07-20 13:15:00+00:00,LR IV infusion,75.0,mL/hr,Intravenous,lactated ringers,fluid_input,2024-07-19 14:03:00+00:00,2024-07-19 20:46:00+00:00,617.3833333333333,1392.0,617.3833333333333,-989.0

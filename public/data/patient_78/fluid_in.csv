@@ -1,2 +1,0 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
-1500F4E4-D178-EF11-920D-005056BFF837,10457,1,2024-09-17 18:34:00+00:00,2024-09-17 21:45:00+00:00,electrolyte-R (Normosol-R) IV infusion,25.0,mL/hr,Intravenous,normosol,fluid_input,2024-09-17 18:46:00+00:00,2024-09-17 21:40:00+00:00,-12.0,179.0,-12.0,-5.0

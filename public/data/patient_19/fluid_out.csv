@@ -1,2 +1,0 @@
-mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
-02AD9E36-BFCE-F011-921A-005056BFF837,B44D270E-3FBA-F011-9219-005056BFF837,10499,2,2025-10-31 16:16:00+00:00,,Estimated Blood Loss (ml),150.0,ML,Unknown Route,estimated blood loss,fluid_output,2025-10-31 14:11:00+00:00,2025-10-31 16:37:00+00:00,125.0,,125.0,

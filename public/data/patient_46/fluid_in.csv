@@ -1,3 +1,0 @@
-mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
-2C71C72D-2A0D-EF11-920A-005056BFF837,10457,1,2024-05-03 14:40:00+00:00,2024-05-03 18:53:00+00:00,normosol,1000.0,mL,Intravenous,normosol,fluid_input,2024-05-03 14:18:00+00:00,2024-05-03 19:16:00+00:00,22.0,275.0,22.0,23.0
-2C71C72D-2A0D-EF11-920A-005056BFF837,10464,1,2024-05-03 23:32:33+00:00,2024-05-04 16:49:00+00:00,NS + KCl 20 mEq/L IV infusion,75.0,mL/hr,Intravenous,saline w/kcl 0.9% + 20 meq/l,fluid_input,2024-05-03 14:18:00+00:00,2024-05-03 19:16:00+00:00,554.55,1591.0,554.55,-1293.0
