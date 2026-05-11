@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ManagementEvent } from "@/lib/types_management";
 import { submitAnnotation } from "@/lib/submit";
+
 type Props = {
   caseId: string;
   managementEvent: ManagementEvent | null;
@@ -14,7 +15,6 @@ type Props = {
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
-type VoiceTarget = "answer1" | "answer2" | null;
 
 type QuestionTiming = {
   startedAt: string | null;
@@ -80,6 +80,34 @@ function sanitizeFilePart(value: unknown) {
     .replace(/[^\w.-]/g, "_");
 }
 
+const MANAGEMENT_REASONING_PROMPT = {
+  instruction:
+    "Please interpret the highlighted medication event in the surrounding intraoperative context. Answer in the structured bullet format below.",
+  requestedElements: [
+    "1. Clinical purpose: What was the most likely clinical purpose of this medication event at this moment? For example, induction/emergence, anesthesia maintenance, analgesia or surgical stimulation, hemodynamic management, ventilation/airway management, neuromuscular blockade/reversal, prophylaxis/routine care, treatment of an abnormal event, or another purpose.",
+    "2. Supporting context: What surrounding evidence supports your interpretation, including vital-sign trends, medication timing, nearby medications, ventilation or gas changes, procedural phase, or surgical context?",
+    "3. Expected effect and observed response: What effect would be expected from this medication, and was the subsequent patient response consistent with that expectation?",
+    "4. Uncertainty and alternatives: How confident are you in this interpretation? If uncertain, what alternative purposes, missing information, or reasonable alternative management should be considered?",
+    "5. Counterfactual: What might have happened if this medication had not been given?",
+  ],
+};
+
+const DEFAULT_ANSWER_TEMPLATE = `1. Clinical purpose:
+
+
+2. Supporting context:
+
+
+3. Expected effect and observed response:
+
+
+4. Uncertainty, alternatives, or missing information:
+
+
+5. Counterfactual if the medication had not been given:
+
+`;
+
 export default function ManagementReasoningPanel({
   caseId,
   managementEvent,
@@ -89,9 +117,8 @@ export default function ManagementReasoningPanel({
   anesthesiaStart,
   onSaveSuccess,
 }: Props) {
-  const [answer1, setAnswer1] = useState("");
-  const [answer2, setAnswer2] = useState("");
-  const [recordingTarget, setRecordingTarget] = useState<VoiceTarget>(null);
+  const [answer, setAnswer] = useState(DEFAULT_ANSWER_TEMPLATE);
+  const [recording, setRecording] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = useState("");
   const [openGuideSections, setOpenGuideSections] = useState({
@@ -106,8 +133,7 @@ export default function ManagementReasoningPanel({
   const firstTypingAtRef = useRef<string | null>(null);
   const firstVoiceStartAtRef = useRef<string | null>(null);
 
-  const task1TimingRef = useRef<QuestionTiming>(makeEmptyQuestionTiming());
-  const task2TimingRef = useRef<QuestionTiming>(makeEmptyQuestionTiming());
+  const taskTimingRef = useRef<QuestionTiming>(makeEmptyQuestionTiming());
 
   useEffect(() => {
     const nowIso = new Date().toISOString();
@@ -117,34 +143,29 @@ export default function ManagementReasoningPanel({
     firstTypingAtRef.current = null;
     firstVoiceStartAtRef.current = null;
 
-    task1TimingRef.current = makeEmptyQuestionTiming(nowIso);
-    task2TimingRef.current = makeEmptyQuestionTiming(nowIso);
+    taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
   }, [caseId, managementEvent?.row_name, managementEvent?.time_min]);
 
   useEffect(() => {
-    setAnswer1("");
-    setAnswer2("");
-    setRecordingTarget(null);
+    setAnswer(DEFAULT_ANSWER_TEMPLATE);
+    setRecording(false);
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
     setSaveMessage("");
-  }, [managementEvent?.row_name, managementEvent?.time_min, managementEvent?.start_time]);
+  }, [
+    managementEvent?.row_name,
+    managementEvent?.time_min,
+    managementEvent?.start_time,
+  ]);
 
-  function markPageFirstInteraction() {
-    if (!firstInteractionAtRef.current) {
-      firstInteractionAtRef.current = new Date().toISOString();
-    }
-  }
-
-  function markTyping(target: Exclude<VoiceTarget, null>) {
+  function markTyping() {
     const nowIso = new Date().toISOString();
-    const ref = target === "answer1" ? task1TimingRef : task2TimingRef;
 
-    if (!ref.current.firstInteractionAt) {
-      ref.current.firstInteractionAt = nowIso;
+    if (!taskTimingRef.current.firstInteractionAt) {
+      taskTimingRef.current.firstInteractionAt = nowIso;
     }
-    if (!ref.current.firstTypingAt) {
-      ref.current.firstTypingAt = nowIso;
+    if (!taskTimingRef.current.firstTypingAt) {
+      taskTimingRef.current.firstTypingAt = nowIso;
     }
 
     if (!firstInteractionAtRef.current) {
@@ -155,15 +176,14 @@ export default function ManagementReasoningPanel({
     }
   }
 
-  function markVoiceStart(target: Exclude<VoiceTarget, null>) {
+  function markVoiceStart() {
     const nowIso = new Date().toISOString();
-    const ref = target === "answer1" ? task1TimingRef : task2TimingRef;
 
-    if (!ref.current.firstInteractionAt) {
-      ref.current.firstInteractionAt = nowIso;
+    if (!taskTimingRef.current.firstInteractionAt) {
+      taskTimingRef.current.firstInteractionAt = nowIso;
     }
-    if (!ref.current.firstVoiceStartAt) {
-      ref.current.firstVoiceStartAt = nowIso;
+    if (!taskTimingRef.current.firstVoiceStartAt) {
+      taskTimingRef.current.firstVoiceStartAt = nowIso;
     }
 
     if (!firstInteractionAtRef.current) {
@@ -174,7 +194,7 @@ export default function ManagementReasoningPanel({
     }
   }
 
-  async function startVoiceNote(target: Exclude<VoiceTarget, null>) {
+  async function startVoiceNote() {
     const SpeechRecognition =
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
@@ -190,7 +210,7 @@ export default function ManagementReasoningPanel({
     try {
       recognitionRef.current?.stop?.();
 
-      markVoiceStart(target);
+      markVoiceStart();
 
       const recognition = new SpeechRecognition();
       recognition.lang = "en-US";
@@ -202,28 +222,30 @@ export default function ManagementReasoningPanel({
           .map((r: any) => r[0].transcript)
           .join("");
 
-        if (target === "answer1") {
-          setAnswer1(transcript);
-        } else if (target === "answer2") {
-          setAnswer2(transcript);
-        }
+        setAnswer((prev) => {
+          const trimmedPrev = prev.trim();
+          if (!trimmedPrev || trimmedPrev === DEFAULT_ANSWER_TEMPLATE.trim()) {
+            return transcript;
+          }
+          return `${prev}\n${transcript}`;
+        });
       };
 
       recognition.onerror = () => {
-        setRecordingTarget(null);
+        setRecording(false);
       };
 
       recognition.onend = () => {
-        setRecordingTarget(null);
+        setRecording(false);
       };
 
       recognition.start();
       recognitionRef.current = recognition;
-      setRecordingTarget(target);
+      setRecording(true);
       setSaveStatus("idle");
       setSaveMessage("");
     } catch {
-      setRecordingTarget(null);
+      setRecording(false);
       setSaveStatus("error");
       setSaveMessage("Failed to start voice note.");
     }
@@ -231,7 +253,7 @@ export default function ManagementReasoningPanel({
 
   function stopVoiceNote() {
     recognitionRef.current?.stop?.();
-    setRecordingTarget(null);
+    setRecording(false);
   }
 
   function validateBeforeSave() {
@@ -239,12 +261,11 @@ export default function ManagementReasoningPanel({
       return "No management event selected.";
     }
 
-    if (!answer1.trim()) {
-      return "Task 1 incomplete: please answer why this intervention was given at this moment.";
-    }
+    const cleaned = answer.trim();
+    const templateOnly = cleaned === DEFAULT_ANSWER_TEMPLATE.trim();
 
-    if (!answer2.trim()) {
-      return "Task 2 incomplete: please answer what might have happened if this intervention had not been given.";
+    if (!cleaned || templateOnly) {
+      return "Please complete the management reasoning text before saving.";
     }
 
     return null;
@@ -285,16 +306,15 @@ export default function ManagementReasoningPanel({
         ).trim() || null;
 
       const submittedAt = new Date().toISOString();
-
-      task1TimingRef.current.submittedAt = submittedAt;
-      task2TimingRef.current.submittedAt = submittedAt;
+      taskTimingRef.current.submittedAt = submittedAt;
 
       const managementEventId =
-      sanitizeFilePart(
-        (managementEvent as any).event_id ??
-          `${managementEvent.row_name ?? "management"}_${managementEvent.time_min ?? "unknown"}`
-      ) || "management_event_unknown";
-      
+        sanitizeFilePart(
+          (managementEvent as any).event_id ??
+            `${managementEvent.row_name ?? "management"}_${
+              managementEvent.time_min ?? "unknown"
+            }`
+        ) || "management_event_unknown";
 
       await submitAnnotation({
         doctorId,
@@ -331,17 +351,13 @@ export default function ManagementReasoningPanel({
             unit: managementEvent.unit ?? null,
             route: managementEvent.route ?? null,
           },
+          prompt: MANAGEMENT_REASONING_PROMPT,
           tasks: {
-            task1_reason_for_intervention: {
-              question: "Why was this intervention given at this moment?",
-              answer: answer1.trim(),
-              timing: { ...task1TimingRef.current },
-            },
-            task2_counterfactual: {
+            medication_centered_management_reasoning: {
               question:
-                "What might have happened if this intervention had not been given?",
-              answer: answer2.trim(),
-              timing: { ...task2TimingRef.current },
+                "Please interpret this medication event using the requested structured bullet points.",
+              answer: answer.trim(),
+              timing: { ...taskTimingRef.current },
             },
           },
         },
@@ -372,7 +388,7 @@ export default function ManagementReasoningPanel({
   return (
     <div className="rounded-2xl border bg-white p-6">
       <h3 className="text-xl font-bold text-gray-900">
-        Patient-level Panel: Management Reasoning
+        Patient-level Panel: Medication-Centered Management Reasoning
       </h3>
 
       <div className="mt-6 space-y-2">
@@ -399,17 +415,20 @@ export default function ManagementReasoningPanel({
             <div className="border-t border-blue-200 bg-blue-50 px-4 py-4">
               <p className="text-sm leading-6 text-blue-900">
                 The goal of this annotation is to interpret the highlighted
-                management event in the context of the surrounding intraoperative
-                situation.
+                medication event in the context of the surrounding intraoperative
+                situation. The medication may reflect treatment of an abnormal
+                event, routine/background care, anesthesia maintenance,
+                analgesia, hemodynamic management, airway or ventilation
+                management, prophylaxis, or another management purpose.
               </p>
 
               <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-blue-900">
                 <li>patient physiology and vital sign changes,</li>
                 <li>surgical stimulus or procedural workflow,</li>
                 <li>transitions in anesthetic state,</li>
-                <li>other nearby interventions or strategy changes, and</li>
-                <li>the likely downstream effect on the course of the case.</li>
-                <li>Other important context you think is relevant to the annotation.</li>
+                <li>nearby medications, fluids, gas, or ventilation changes,</li>
+                <li>the likely downstream effect on the course of the case, and</li>
+                <li>uncertainty or missing information if the purpose is unclear.</li>
               </ul>
             </div>
           )}
@@ -437,16 +456,21 @@ export default function ManagementReasoningPanel({
           {openGuideSections.instructions && (
             <ul className="border-t border-rose-200 bg-rose-50 px-8 py-4 list-disc space-y-2 text-sm leading-6 text-rose-900">
               <li>
-                The focused management event has already been marked on the
+                The focused medication event has already been marked on the
                 corresponding chart on the right.
               </li>
               <li>
-                The surrounding context, including approximately 10 minutes before
-                and 10 minutes after this event, has already been highlighted.
+                The surrounding context, including approximately 15 minutes
+                around this event, has already been highlighted.
               </li>
               <li>
-                Please focus your reasoning on this event and the highlighted
-                surrounding context.
+                Please focus your reasoning on this medication event and the
+                highlighted surrounding context. You may refer to broader case
+                context if needed.
+              </li>
+              <li>
+                If the medication appears routine or the purpose is unclear, say
+                so explicitly rather than forcing a specific explanation.
               </li>
             </ul>
           )}
@@ -455,12 +479,12 @@ export default function ManagementReasoningPanel({
 
       <div className="mt-6 rounded-2xl border p-5">
         <div className="text-lg font-semibold text-gray-900">
-          Focused management event
+          Focused medication event
         </div>
 
         <div className="mt-3 space-y-2 text-sm text-gray-800">
           <div>
-            <span className="font-semibold text-gray-600">Event:</span>{" "}
+            <span className="font-semibold text-gray-600">Medication:</span>{" "}
             {managementEvent.row_name || "-"}
           </div>
 
@@ -490,78 +514,66 @@ export default function ManagementReasoningPanel({
         </div>
       </div>
 
-      <div className="mt-6 space-y-4">
-        <div className="rounded-2xl border p-5">
-          <div className="text-base font-semibold text-gray-900">
-            Task 1. Why was this intervention given at this moment? (Highlighted a 15 mins window around this intervention and you can refer to broaden context if needed.)
-          </div>
-
-          <textarea
-            value={answer1}
-            onChange={(e) => {
-              markTyping("answer1");
-              setAnswer1(e.target.value);
-            }}
-            className="mt-4 h-40 w-full rounded-xl border px-4 py-3 text-sm text-gray-800 outline-none focus:border-orange-400"
-            placeholder="Write your reasoning here..."
-          />
-
-          <div className="mt-4">
-            <button
-              type="button"
-              onClick={() =>
-                recordingTarget === "answer1"
-                  ? stopVoiceNote()
-                  : startVoiceNote("answer1")
-              }
-              className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                recordingTarget === "answer1"
-                  ? "bg-red-500 hover:bg-red-600"
-                  : "bg-orange-400 hover:bg-orange-500"
-              }`}
-            >
-              {recordingTarget === "answer1"
-                ? "Stop Recording"
-                : "Start Recording"}
-            </button>
-          </div>
+      <div className="mt-6 rounded-2xl border p-5">
+        <div className="text-base font-semibold text-gray-900">
+          Task. Medication-centered management reasoning
         </div>
 
-        <div className="rounded-2xl border p-5">
-          <div className="text-base font-semibold text-gray-900">
-            Task 2. What might have happened if this intervention had not been
-            given?
-          </div>
+        <p className="mt-2 text-sm leading-6 text-gray-600">
+          Please answer in the text box below using the following numbered
+          points.
+        </p>
 
-          <textarea
-            value={answer2}
-            onChange={(e) => {
-              markTyping("answer2");
-              setAnswer2(e.target.value);
-            }}
-            className="mt-4 h-40 w-full rounded-xl border px-4 py-3 text-sm text-gray-800 outline-none focus:border-orange-400"
-            placeholder="Write your reasoning here..."
-          />
+        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-gray-700">
+          <li>
+            <span className="font-semibold">Clinical purpose:</span> What was
+            the most likely purpose of this medication event at this moment?
+          </li>
+          <li>
+            <span className="font-semibold">Supporting context:</span> What
+            surrounding evidence supports your interpretation?
+          </li>
+          <li>
+            <span className="font-semibold">
+              Expected effect and observed response:
+            </span>{" "}
+            What effect would be expected, and was the subsequent response
+            consistent with that expectation?
+          </li>
+          <li>
+            <span className="font-semibold">
+              Uncertainty, alternatives, or missing information:
+            </span>{" "}
+            How confident are you, and what else should be considered?
+          </li>
+          <li>
+            <span className="font-semibold">Counterfactual:</span> What might
+            have happened if this medication had not been given?
+          </li>
+        </ol>
 
-          <div className="mt-4">
-            <button
-              type="button"
-              onClick={() =>
-                recordingTarget === "answer2"
-                  ? stopVoiceNote()
-                  : startVoiceNote("answer2")
-              }
-              className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                recordingTarget === "answer2"
-                  ? "bg-red-500 hover:bg-red-600"
-                  : "bg-orange-400 hover:bg-orange-500"
-              }`}
-            >
-              {recordingTarget === "answer2"
-                ? "Stop Recording"
-                : "Start Recording"}
-            </button>
-          </div>
+        <textarea
+          value={answer}
+          onChange={(e) => {
+            markTyping();
+            setAnswer(e.target.value);
+          }}
+          className="mt-4 h-80 w-full rounded-xl border px-4 py-3 font-mono text-sm text-gray-800 outline-none focus:border-orange-400"
+          placeholder={DEFAULT_ANSWER_TEMPLATE}
+        />
+
+        <div className="mt-4">
+          <button
+            type="button"
+            onClick={() => (recording ? stopVoiceNote() : startVoiceNote())}
+            className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+              recording
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-orange-400 hover:bg-orange-500"
+            }`}
+          >
+            {recording ? "Stop Recording" : "Start Recording"}
+          </button>
         </div>
       </div>
 
@@ -569,9 +581,8 @@ export default function ManagementReasoningPanel({
         <button
           type="button"
           onClick={() => {
-            setAnswer1("");
-            setAnswer2("");
-            setRecordingTarget(null);
+            setAnswer(DEFAULT_ANSWER_TEMPLATE);
+            setRecording(false);
             recognitionRef.current?.stop?.();
             setSaveStatus("idle");
             setSaveMessage("");
@@ -580,8 +591,7 @@ export default function ManagementReasoningPanel({
             firstInteractionAtRef.current = null;
             firstTypingAtRef.current = null;
             firstVoiceStartAtRef.current = null;
-            task1TimingRef.current = makeEmptyQuestionTiming(nowIso);
-            task2TimingRef.current = makeEmptyQuestionTiming(nowIso);
+            taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
           }}
           className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
         >
