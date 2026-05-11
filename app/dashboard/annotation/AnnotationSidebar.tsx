@@ -115,10 +115,10 @@ export default function AnnotationSidebar({
               />
               <div className="min-w-0">
                 <div className="text-sm font-semibold text-gray-800">
-                  Pick up to 3
+                  Pick 1 interesting episode
                 </div>
                 <div className="mt-1 text-xs text-gray-500">
-                  {episodeState.prioritizedEpisodeIds.length}/3 chosen
+                  {episodeState.prioritizedEpisodeIds.length}/1 chosen
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function AnnotationSidebar({
               />
               <div className="min-w-0">
                 <div className="text-sm font-semibold text-gray-800">
-                  Annotate selected episodes
+                  Annotate selected episode
                 </div>
                 <div className="mt-1 text-xs text-gray-500">
                   Detection → Mechanism → Intervention

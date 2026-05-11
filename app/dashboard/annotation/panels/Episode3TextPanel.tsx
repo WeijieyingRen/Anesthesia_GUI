@@ -13,6 +13,18 @@ type EpisodeButtonItem = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
+const NORMAL_EPISODE_OPTIONS = [
+  { value: "", label: "Select a normal / expected episode..." },
+  { value: "induction", label: "Induction" },
+  { value: "intubation", label: "Intubation" },
+  { value: "positioning", label: "Positioning" },
+  { value: "procedure_start", label: "Procedure Start" },
+  { value: "maintenance", label: "Anesthesia Maintenance" },
+  { value: "emergence", label: "Emergence" },
+  { value: "extubation", label: "Extubation" },
+  { value: "other", label: "Other" },
+] as const;
+
 function formatClockTime(offsetMin?: number | null, timeZero?: string | null) {
   if (!Number.isFinite(offsetMin) || !timeZero) return "-";
 
@@ -23,6 +35,47 @@ function formatClockTime(offsetMin?: number | null, timeZero?: string | null) {
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
+}
+
+function InstructionPanel({
+  title,
+  tone,
+  children,
+}: {
+  title: string;
+  tone: "blue" | "emerald";
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(true);
+  const styles =
+    tone === "blue"
+      ? {
+          shell: "border-blue-100 bg-blue-50 text-blue-900",
+          header: "border-blue-100 bg-blue-100 text-blue-950",
+          icon: "text-blue-700",
+        }
+      : {
+          shell: "border-emerald-100 bg-emerald-50 text-emerald-900",
+          header: "border-emerald-100 bg-emerald-100 text-emerald-950",
+          icon: "text-emerald-700",
+        };
+
+  return (
+    <div className={`overflow-hidden rounded-xl border ${styles.shell}`}>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className={`flex w-full items-center gap-3 border-b px-4 py-3 text-left text-sm font-semibold ${styles.header}`}
+      >
+        <span className={`text-xl font-bold leading-none ${styles.icon}`}>
+          {open ? "▾" : "▸"}
+        </span>
+        <span>{title}</span>
+      </button>
+
+      {open && <div className="p-4 text-sm leading-6">{children}</div>}
+    </div>
+  );
 }
 
 type Props = {
@@ -64,6 +117,10 @@ export default function Episode3TextPanel({
 
   const [freeTextMap, setFreeTextMap] = useState<Record<string, string>>({});
   const freeText = freeTextMap[eventId] ?? "";
+
+  const [normalEpisodeType, setNormalEpisodeType] = useState("");
+  const [normalEpisodeOther, setNormalEpisodeOther] = useState("");
+  const [normalReasoning, setNormalReasoning] = useState("");
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -198,9 +255,39 @@ export default function Episode3TextPanel({
 
   async function handleSave() {
     const currentText = freeText.trim();
+    const normalEventLabel =
+      normalEpisodeType === "other"
+        ? normalEpisodeOther.trim()
+        : NORMAL_EPISODE_OPTIONS.find((option) => option.value === normalEpisodeType)
+            ?.label ?? "";
+    const currentNormalReasoning = normalReasoning.trim();
 
     if (!currentText) {
       const message = "Please provide a free-text annotation before saving.";
+      setError(message);
+      setSaveStatus("error");
+      setSaveMessage(message);
+      return;
+    }
+
+    if (!normalEpisodeType || !normalEventLabel) {
+      const message = "Please select one normal / expected episode before saving.";
+      setError(message);
+      setSaveStatus("error");
+      setSaveMessage(message);
+      return;
+    }
+
+    if (normalEpisodeType === "other" && !normalEpisodeOther.trim()) {
+      const message = "Please specify the normal / expected episode.";
+      setError(message);
+      setSaveStatus("error");
+      setSaveMessage(message);
+      return;
+    }
+
+    if (!currentNormalReasoning) {
+      const message = "Please provide normal episode reasoning before saving.";
       setError(message);
       setSaveStatus("error");
       setSaveMessage(message);
@@ -255,13 +342,13 @@ export default function Episode3TextPanel({
 
         panel: "abnormality_reasoning",
         action: "submit",
-        task: "merged_episode_reasoning",
+        task: "abnormal_and_normal_episode_reasoning",
 
         submittedAt,
         clickedAt: submittedAt,
 
         answers: {
-          task: "merged_episode_reasoning",
+          task: "abnormal_and_normal_episode_reasoning",
 
           episodeNumber,
           episodeLabel:
@@ -274,7 +361,7 @@ export default function Episode3TextPanel({
           y2: selectedEvent?.y2 ?? null,
           anesthesiaStart,
 
-          prompt: {
+          abnormalEventPrompt: {
             instruction:
               "Describe the selected abnormal event and related clinical reasoning in one free-text response.",
             requestedElements: [
@@ -288,7 +375,23 @@ export default function Episode3TextPanel({
             ],
           },
 
-          freeText: currentText,
+          abnormalEventReasoning: currentText,
+          normalEpisodeReasoning: {
+            selectedEpisodeType: normalEpisodeType,
+            selectedEpisodeLabel: normalEventLabel,
+            otherEpisodeLabel:
+              normalEpisodeType === "other" ? normalEpisodeOther.trim() : null,
+            instruction:
+              "Describe a normal or expected episode and explain why the selected segment is clinically meaningful but not an abnormal event.",
+            requestedElements: [
+              "What normal or expected episode did you select?",
+              "What happened during that segment?",
+              "Why is this segment clinically meaningful?",
+              "Why should it be interpreted as expected or non-abnormal in context?",
+              "Which medications, airway events, gas/ventilation changes, surgical events, or workflow context support that interpretation?",
+            ],
+            freeText: currentNormalReasoning,
+          },
         },
       });
 
@@ -361,11 +464,8 @@ export default function Episode3TextPanel({
 
       </div>
 
-      <div className="mb-4 rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm leading-6 text-blue-900">
-        <div className="mb-2 font-semibold text-blue-950">
-          Please include:
-        </div>
-
+      <InstructionPanel title="Abnormal event instruction" tone="blue">
+        <div className="mb-2 font-semibold text-blue-950">Please include:</div>
         <ul className="ml-5 list-disc space-y-1">
           <li>What happened during this abnormal event?</li>
           <li>What was the likely trigger, etiology, or mechanism?</li>
@@ -381,7 +481,7 @@ export default function Episode3TextPanel({
             explanations.
           </li>
         </ul>
-      </div>
+      </InstructionPanel>
 
       {selectedEvent && (
         <div className="mb-4 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700">
@@ -405,6 +505,83 @@ export default function Episode3TextPanel({
         className="min-h-[320px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         placeholder="Example: The patient developed hypotension shortly after induction. The likely mechanism was vasodilation from anesthetic agents, possibly compounded by relative hypovolemia. Phenylephrine boluses were clinically relevant and produced a transient MAP increase, but the effect was not sustained..."
       />
+
+      <div className="mt-8 space-y-4 border-t pt-6">
+        <div>
+          <h3 className="text-xl font-bold text-gray-900">
+            Normal Episode Reasoning
+          </h3>
+        </div>
+
+        <InstructionPanel title="Normal episode instruction" tone="emerald">
+          <div className="mb-2 font-semibold text-emerald-950">
+            Please include:
+          </div>
+          <ul className="ml-5 list-disc space-y-1">
+            <li>Select one clinically interesting but expected segment, such as intubation.</li>
+            <li>Describe what happened during the selected segment.</li>
+            <li>Explain why it is clinically meaningful.</li>
+            <li>Explain why it should be interpreted as expected or non-abnormal in context.</li>
+            <li>
+              Mention relevant medications, airway events, gas/ventilation changes,
+              surgical events, or workflow context.
+            </li>
+          </ul>
+        </InstructionPanel>
+
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-gray-800">
+              Interesting normal / expected episode
+            </label>
+            <select
+              value={normalEpisodeType}
+              onChange={(e) => {
+                setNormalEpisodeType(e.target.value);
+                setSaveStatus("idle");
+                setSaveMessage("");
+              }}
+              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+            >
+              {NORMAL_EPISODE_OPTIONS.map((option) => (
+                <option key={option.value || "empty"} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {normalEpisodeType === "other" && (
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-800">
+                Other episode name
+              </label>
+              <input
+                type="text"
+                value={normalEpisodeOther}
+                onChange={(e) => {
+                  setNormalEpisodeOther(e.target.value);
+                  setSaveStatus("idle");
+                  setSaveMessage("");
+                }}
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                placeholder="Specify the normal / expected episode"
+              />
+            </div>
+          )}
+        </div>
+
+        <textarea
+          value={normalReasoning}
+          onChange={(e) => {
+            setNormalReasoning(e.target.value);
+            setSaveStatus("idle");
+            setSaveMessage("");
+          }}
+          className="min-h-[220px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+          placeholder="Example: Intubation was associated with expected airway manipulation and transient physiologic changes. The pattern was clinically meaningful but consistent with routine induction/intubation rather than a separate abnormal episode..."
+        />
+      </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-3">
@@ -430,6 +607,9 @@ export default function Episode3TextPanel({
             type="button"
             onClick={() => {
               setCurrentFreeText("");
+              setNormalEpisodeType("");
+              setNormalEpisodeOther("");
+              setNormalReasoning("");
               setError(null);
               setSaveStatus("idle");
               setSaveMessage("");
@@ -444,14 +624,14 @@ export default function Episode3TextPanel({
           <button
             type="button"
             onClick={handleSave}
-            disabled={saving || !freeText.trim()}
+            disabled={saving || !freeText.trim() || !normalReasoning.trim()}
             className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-              saving || !freeText.trim()
+              saving || !freeText.trim() || !normalReasoning.trim()
                 ? "cursor-not-allowed bg-blue-300"
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {saving ? "Saving..." : "Save & Next Episode"}
+            {saving ? "Saving..." : "Save Reasoning"}
           </button>
 
           {saveStatus !== "idle" && saveMessage && (

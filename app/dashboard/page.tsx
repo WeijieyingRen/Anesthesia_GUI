@@ -594,14 +594,9 @@ export default function DashboardPage() {
     setEpisodeState((prev) => {
       const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
 
-      if (!isSelected && prev.prioritizedEpisodeIds.length >= 3) {
-        alert("You must confirm exactly 3 episodes.");
-        return prev;
-      }
-
       const nextPrioritized = isSelected
         ? prev.prioritizedEpisodeIds.filter((id) => id !== episodeId)
-        : [...prev.prioritizedEpisodeIds, episodeId];
+        : [episodeId];
 
       const nextDetected = prev.detectedEpisodes.map((episode) =>
         episode.id === episodeId
@@ -966,9 +961,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
           },
           submittedAt,
         },
-        task2_select_up_to_3: {
+        task2_select_one_interesting_episode: {
           question:
-            "Select up to 3 episodes for detailed annotation from the detected episodes checklist.",
+            "Select 1 interesting episode for detailed annotation from the detected episodes checklist.",
           answer: {
             selectedEpisodes,
             selectedCount: selectedEpisodes.length,
@@ -1682,7 +1677,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 </span>
               </span>
               <span>
-                Confirmed for detailed annotation:{" "}
+                Selected for reasoning:{" "}
                 <span className="font-semibold text-gray-900">
                   {episodeState.prioritizedEpisodeIds.length}
                 </span>
@@ -1713,7 +1708,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
               >
-                {submitting ? "Saving..." : "Confirm 3 & Next Step"}
+                {submitting ? "Saving..." : "Save & Next Step"}
               </button>
             </div>
           </div>
@@ -1867,16 +1862,16 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
               {openEpisodeGuideSections.how && (
                 <ol className="border-t border-blue-200 bg-blue-50 px-8 py-4 text-sm leading-6 text-blue-900">
-                  <li>Drag directly on the VitalChart to draw a box around an abnormal episode.</li>
+                  <li>1. Drag directly on the VitalChart to draw a box around an abnormal episode.</li>
                   <li>
                     <span className="font-semibold text-red-500">
-                      Repeat until all abnormal episodes are identified.
+                      2. Repeat until all abnormal episodes are identified.
                     </span>
                   </li>
                   <li>
-                    Confirm the episodes that should move forward. If fewer than 3 abnormalities are identified, select all of them.
+                    3. select 1 interesting abnormal episode, Save and continue..
                   </li>
-                  <li>Save and continue.</li>
+          
                 </ol>
               )}
             </div>
@@ -1953,10 +1948,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       {episodeState.stage === "pick_top3" && (
         <div className="space-y-6">
           <h4 className="text-xl font-bold text-gray-900">
-            Task 2. Select up to 3 episodes for detailed annotation
+            Task 2. Select 1 interesting episode for detailed annotation
           </h4>
           <p className="text-sm text-gray-600">
-            From the detected episodes on the left, choose the most important ones you want to annotate in detail.
+            From the detected episodes on the left, choose the single most interesting episode you want to annotate in detail.
           </p>
 
 
