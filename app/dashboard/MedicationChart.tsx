@@ -699,19 +699,6 @@ function BolusOverlaySvg({
 
           return (
             <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
-              {shouldHighlight && (
-                <rect
-                  x={bodyLeft - 6}
-                  y={actualTop - 4}
-                  width={boxWidth + 12}
-                  height={boxHeight + 8}
-                  rx={8}
-                  ry={8}
-                  fill="none"
-                  stroke="#ef4444"
-                  strokeWidth={3}
-                />
-              )}
               {hasOverlap && (
                 <line
                   x1={cx}
@@ -727,8 +714,8 @@ function BolusOverlaySvg({
               <path
                 d={pathD}
                 fill={baseFill}
-                stroke={baseStroke}
-                strokeWidth={1.2}
+                stroke={shouldHighlight ? "#ef4444" : baseStroke}
+                strokeWidth={shouldHighlight ? 3 : 1.2}
               />
 
               <rect
@@ -836,27 +823,13 @@ function InfusionOverlaySvg({
 
           return (
             <g key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}>
-              {shouldHighlight && (
-                <rect
-                  x={x1 - 6}
-                  y={yTop - 4}
-                  width={Math.max(24, x2 - x1 + 12)}
-                  height={yBottom - yTop + 8}
-                  rx={8}
-                  ry={8}
-                  fill="none"
-                  stroke="#ef4444"
-                  strokeWidth={3}
-                />
-              )}
-
               {canDrawLine && (
                 <line
                   x1={lineStartX}
                   y1={centerY}
                   x2={lineEndX}
                   y2={centerY}
-                  stroke={baseStroke}
+                  stroke={shouldHighlight ? "#ef4444" : baseStroke}
                   strokeWidth={8}
                   opacity={0.95}
                   strokeLinecap="round"
@@ -866,8 +839,8 @@ function InfusionOverlaySvg({
               <path
                 d={headPath}
                 fill={baseFill}
-                stroke={baseStroke}
-                strokeWidth={1.1}
+                stroke={shouldHighlight ? "#ef4444" : baseStroke}
+                strokeWidth={shouldHighlight ? 3 : 1.1}
               />
 
               <rect
