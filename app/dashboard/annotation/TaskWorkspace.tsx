@@ -35,6 +35,7 @@ type TaskWorkspaceProps = {
   selectedDetectVital: DetectVital;
   onChangeSelectedDetectVital: (vital: DetectVital) => void;
   selectedWindow: SelectedWindow | null;
+  onChangeSelectedWindow?: (window: SelectedWindow | null) => void;
   anesthesiaStart?: string | null;
 
   gasData?: Record<string, TimeValuePoint[] | undefined>;
@@ -68,6 +69,7 @@ export default function TaskWorkspace({
   selectedDetectVital,
   onChangeSelectedDetectVital,
   selectedWindow,
+  onChangeSelectedWindow,
   anesthesiaStart,
   episodeState,
   onChangeEpisodeState,
@@ -90,15 +92,37 @@ export default function TaskWorkspace({
     (episodeId: string) => {
       if (!workflowEnabled || !episodeState || !onChangeEpisodeState) return;
 
+      const nextEpisode =
+        episodeState.detectedEpisodes.find((episode) => episode.id === episodeId) ??
+        null;
+
       onChangeEpisodeState({
         ...episodeState,
         activeEpisodeId: episodeId,
         annotateStep: "detect",
       });
 
+      if (nextEpisode) {
+        onChangeSelectedDetectVital(nextEpisode.vital);
+        onChangeSelectedWindow?.({
+          vital: nextEpisode.vital,
+          startMin: nextEpisode.startMin,
+          endMin: nextEpisode.endMin,
+          y1: nextEpisode.y1,
+          y2: nextEpisode.y2,
+        });
+      }
+
       onChangeTask("detect");
     },
-    [workflowEnabled, episodeState, onChangeEpisodeState, onChangeTask]
+    [
+      workflowEnabled,
+      episodeState,
+      onChangeEpisodeState,
+      onChangeSelectedDetectVital,
+      onChangeSelectedWindow,
+      onChangeTask,
+    ]
   );
 
   const handleBackToPreviousSection = React.useCallback(() => {

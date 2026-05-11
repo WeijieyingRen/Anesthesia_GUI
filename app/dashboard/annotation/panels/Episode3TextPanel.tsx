@@ -483,28 +483,35 @@ export default function Episode3TextPanel({
         </ul>
       </InstructionPanel>
 
-      {selectedEvent && (
-        <div className="mb-4 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700">
-          <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
-            <div>
-              <span className="font-semibold">Start:</span>{" "}
-              {formatClockTime(selectedEvent.startMin, anesthesiaStart)}
-            </div>
-
-            <div>
-              <span className="font-semibold">End:</span>{" "}
-              {formatClockTime(selectedEvent.endMin, anesthesiaStart)}
-            </div>
-          </div>
-        </div>
-      )}
-
       <textarea
         value={freeText}
         onChange={(e) => setCurrentFreeText(e.target.value)}
         className="min-h-[320px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         placeholder="Example: The patient developed hypotension shortly after induction. The likely mechanism was vasodilation from anesthetic agents, possibly compounded by relative hypovolemia. Phenylephrine boluses were clinically relevant and produced a transient MAP increase, but the effect was not sustained..."
       />
+
+      <div className="flex flex-wrap items-center gap-3">
+        {!recording ? (
+          <button
+            type="button"
+            onClick={startVoiceNote}
+            className="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+          >
+            Start Abnormal Event Voice Note
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={stopVoiceNote}
+            className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600"
+          >
+            Stop Voice Note
+          </button>
+        )}
+        <span className="text-xs text-gray-500">
+          Voice text will be inserted into the abnormal event reasoning box.
+        </span>
+      </div>
 
       <div className="mt-8 space-y-4 border-t pt-6">
         <div>
@@ -585,24 +592,6 @@ export default function Episode3TextPanel({
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-3">
-          {!recording ? (
-            <button
-              type="button"
-              onClick={startVoiceNote}
-              className="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
-            >
-              Start Voice Note
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={stopVoiceNote}
-              className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600"
-            >
-              Stop Voice Note
-            </button>
-          )}
-
           <button
             type="button"
             onClick={() => {

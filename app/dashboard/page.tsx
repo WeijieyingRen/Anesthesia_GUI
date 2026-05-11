@@ -72,14 +72,35 @@ const EPISODE_TASK_ORDER: AnnotationTaskKey[] = [
 function SectionCard({
   title,
   children,
+  collapsible = false,
+  open = true,
+  onToggle,
+  className = "",
 }: {
   title: string;
   children: React.ReactNode;
+  collapsible?: boolean;
+  open?: boolean;
+  onToggle?: () => void;
+  className?: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-white p-4 shadow-sm">
-      <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
-      {children}
+    <div className={`rounded-2xl border bg-white p-4 shadow-sm ${className}`}>
+      {collapsible ? (
+        <button
+          type="button"
+          onClick={onToggle}
+          className="mb-3 flex w-full items-center gap-3 text-left text-base font-bold text-gray-900"
+        >
+          <span className="text-2xl leading-none text-gray-700">
+            {open ? "▾" : "▸"}
+          </span>
+          <span>{title}</span>
+        </button>
+      ) : (
+        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+      )}
+      {(!collapsible || open) && children}
     </div>
   );
 }
@@ -388,6 +409,7 @@ export default function DashboardPage() {
     how: false,
     what: false,
   });
+  const [preopInfoOpen, setPreopInfoOpen] = useState(true);
 
   const voiceNote = useVoiceNote();
 
@@ -1358,7 +1380,12 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         )}
 
         <div className="grid gap-4">
-          <SectionCard title="Patient Pre-operative Information">
+          <SectionCard
+            title="Patient Pre-operative Information"
+            collapsible
+            open={preopInfoOpen}
+            onToggle={() => setPreopInfoOpen((value) => !value)}
+          >
             <div className="space-y-3">
               {demographic && (
                 <div>
@@ -1462,8 +1489,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             {!vitals || !hasAnyVitalData(vitals) ? (
               <div className="text-sm text-gray-500">No intraoperative data available.</div>
             ) : (
-              <div className="grid grid-cols-[minmax(520px,1.15fr)_minmax(0,1.85fr)] items-start gap-4">
-                <div className="min-w-0 max-w-[680px]">
+              <div className="space-y-4">
+                <div className="sticky top-2 z-30 min-w-0">
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <div className="space-y-3 border-b bg-white px-4 py-3">
                     <div className="space-y-2">
@@ -1503,7 +1530,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
           : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
       }`}
     >
-       Abnormality Reasoning
+       Observation Reasoning
     </button>
 
     <button
@@ -1650,7 +1677,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                         e.stopPropagation();
                         handleDeleteDetectedEpisode(episode.id);
                       }}
-                      className="flex h-5 w-5 items-center justify-center rounded-md text-gray-400 hover:bg-red-50 hover:text-red-600"
+                      className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700"
                       title="Delete event"
                     >
                       ×
@@ -1998,6 +2025,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   fluidOutRows={fluidOutRowsState}
   episodeState={episodeState}
   onChangeEpisodeState={setEpisodeState}
+  onChangeSelectedWindow={setSelectedWindow}
   completedTaskMap={episodeTaskCompletion}
   onChangeCompletedTaskMap={setEpisodeTaskCompletion}
 />
@@ -2012,7 +2040,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   </div>
                 </div>
 
-                <div className="min-w-0 space-y-4">
+                <div className="max-h-[72vh] min-w-0 space-y-3 overflow-auto rounded-xl border bg-white p-3 shadow-sm">
+                  <div className="px-1 text-sm font-bold text-gray-900">
+                    Visualization Panel
+                  </div>
                   <UnifiedTimelineCard
                     vitals={vitals}
                     medications={medications}
