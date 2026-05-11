@@ -1489,8 +1489,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             {!vitals || !hasAnyVitalData(vitals) ? (
               <div className="text-sm text-gray-500">No intraoperative data available.</div>
             ) : (
-              <div className="space-y-4">
-                <div className="sticky top-2 z-30 min-w-0">
+              <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(500px,0.95fr)_minmax(0,1.85fr)]">
+                <div className="sticky top-2 z-30 min-w-0 xl:max-w-[680px]">
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <div className="border-b bg-white px-4 py-2">
                     <div className="flex flex-wrap items-center gap-2">
