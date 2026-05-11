@@ -376,7 +376,7 @@ export default function ManagementReasoningPanel({
       </h3>
 
       <div className="mt-6 space-y-2">
-        <div className="rounded-lg border border-gray-200 bg-white">
+        <div className="overflow-hidden rounded-lg border border-amber-200 bg-amber-50">
           <button
             type="button"
             onClick={() =>
@@ -385,25 +385,25 @@ export default function ManagementReasoningPanel({
                 goal: !prev.goal,
               }))
             }
-            className="flex w-full items-center gap-3 px-4 py-3 text-left"
+            className="flex w-full items-center gap-3 bg-amber-100 px-4 py-3 text-left"
           >
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-amber-700">
               {openGuideSections.goal ? "▾" : "▸"}
             </span>
-            <span className="text-sm font-semibold text-gray-900">
+            <span className="text-sm font-semibold text-amber-950">
               Goal of Annotation
             </span>
           </button>
 
           {openGuideSections.goal && (
-            <div className="border-t border-gray-100 px-4 py-4">
-              <p className="text-sm leading-6 text-gray-700">
+            <div className="border-t border-amber-200 bg-amber-50 px-4 py-4">
+              <p className="text-sm leading-6 text-amber-900">
                 The goal of this annotation is to interpret the highlighted
                 management event in the context of the surrounding intraoperative
                 situation.
               </p>
 
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-gray-700">
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-amber-900">
                 <li>patient physiology and vital sign changes,</li>
                 <li>surgical stimulus or procedural workflow,</li>
                 <li>transitions in anesthetic state,</li>
@@ -415,7 +415,7 @@ export default function ManagementReasoningPanel({
           )}
         </div>
 
-        <div className="rounded-lg border border-gray-200 bg-white">
+        <div className="overflow-hidden rounded-lg border border-blue-200 bg-blue-50">
           <button
             type="button"
             onClick={() =>
@@ -424,18 +424,18 @@ export default function ManagementReasoningPanel({
                 instructions: !prev.instructions,
               }))
             }
-            className="flex w-full items-center gap-3 px-4 py-3 text-left"
+            className="flex w-full items-center gap-3 bg-blue-100 px-4 py-3 text-left"
           >
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-blue-700">
               {openGuideSections.instructions ? "▾" : "▸"}
             </span>
-            <span className="text-sm font-semibold text-gray-900">
+            <span className="text-sm font-semibold text-blue-950">
               Annotation Instructions
             </span>
           </button>
 
           {openGuideSections.instructions && (
-            <ul className="border-t border-gray-100 px-8 py-4 list-disc space-y-2 text-sm leading-6 text-gray-700">
+            <ul className="border-t border-blue-200 bg-blue-50 px-8 py-4 list-disc space-y-2 text-sm leading-6 text-blue-900">
               <li>
                 The focused management event has already been marked on the
                 corresponding chart on the right.

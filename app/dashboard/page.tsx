@@ -1843,7 +1843,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
           </h4>
 
           <div className="space-y-2">
-            <div className="rounded-lg border border-gray-200 bg-white">
+            <div className="overflow-hidden rounded-lg border border-blue-200 bg-blue-50">
               <button
                 type="button"
                 onClick={() =>
@@ -1852,24 +1852,24 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     how: !prev.how,
                   }))
                 }
-                className="flex w-full items-center gap-3 px-4 py-3 text-left"
+                className="flex w-full items-center gap-3 bg-blue-100 px-4 py-3 text-left"
               >
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-blue-700">
                   {openEpisodeGuideSections.how ? "▾" : "▸"}
                 </span>
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
                   1
                 </span>
-                <span className="text-sm font-semibold text-gray-900">
+                <span className="text-sm font-semibold text-blue-950">
                   How to annotate
                 </span>
               </button>
 
               {openEpisodeGuideSections.how && (
-                <ol className="border-t border-gray-100 px-8 py-4 text-sm leading-6 text-gray-700">
+                <ol className="border-t border-blue-200 bg-blue-50 px-8 py-4 text-sm leading-6 text-blue-900">
                   <li>Drag directly on the VitalChart to draw a box around an abnormal episode.</li>
                   <li>
-                    <span className="font-semibold text-red-600">
+                    <span className="font-semibold text-red-500">
                       Repeat until all abnormal episodes are identified.
                     </span>
                   </li>
@@ -1881,7 +1881,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               )}
             </div>
 
-            <div className="rounded-lg border border-gray-200 bg-white">
+            <div className="overflow-hidden rounded-lg border border-rose-200 bg-rose-50">
               <button
                 type="button"
                 onClick={() =>
@@ -1890,31 +1890,31 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     what: !prev.what,
                   }))
                 }
-                className="flex w-full items-center gap-3 px-4 py-3 text-left"
+                className="flex w-full items-center gap-3 bg-rose-100 px-4 py-3 text-left"
               >
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-rose-700">
                   {openEpisodeGuideSections.what ? "▾" : "▸"}
                 </span>
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-xs font-bold text-white">
                   2
                 </span>
-                <span className="text-sm font-semibold text-gray-900">
+                <span className="text-sm font-semibold text-rose-950">
                   What to annotate?
                 </span>
               </button>
 
               {openEpisodeGuideSections.what && (
-                <div className="border-t border-gray-100 px-4 py-4">
-                  <p className="mb-4 text-sm leading-6 text-gray-700">
+                <div className="border-t border-rose-200 bg-rose-50 px-4 py-4">
+                  <p className="mb-4 text-sm leading-6 text-rose-900">
                     Abnormal events are described as below events with your practical knowledge.
                   </p>
 
                   <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                     <div>
-                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-600">
                         Hemodynamics
                       </div>
-                      <ul className="space-y-1 text-sm text-gray-800">
+                      <ul className="space-y-1 text-sm text-rose-900">
                         <li>Hypotension</li>
                         <li>Hypertension</li>
                         <li>Bradycardia</li>
@@ -1922,10 +1922,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                       </ul>
                     </div>
                     <div>
-                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-600">
                         Oxygenation
                       </div>
-                      <ul className="space-y-1 text-sm text-gray-800">
+                      <ul className="space-y-1 text-sm text-rose-900">
                         <li>Hypoxia</li>
                         <li>Hypercapnia</li>
                         <li>Hypocapnia</li>
@@ -1934,10 +1934,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                       </ul>
                     </div>
                     <div>
-                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-600">
                         Temperature
                       </div>
-                      <ul className="space-y-1 text-sm text-gray-800">
+                      <ul className="space-y-1 text-sm text-rose-900">
                         <li>Hypothermia</li>
                         <li>Hyperthermia</li>
                       </ul>
