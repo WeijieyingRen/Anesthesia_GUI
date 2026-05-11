@@ -1,0 +1,2 @@
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+8A22CACC-E127-EF11-920B-005056BFF837,10468,1,2024-06-07 09:05:00+00:00,2024-06-07 18:12:00+00:00,D5-1/2 NS + KCl 20 mEq/L IV infusion,125.0,mL/hr,Intravenous,dextrose / saline w/kcl 5% / 0.45% + 20 meq/l,fluid_input,2024-06-07 05:53:00+00:00,2024-06-07 07:37:00+00:00,192.0,739.0,192.0,-635.0

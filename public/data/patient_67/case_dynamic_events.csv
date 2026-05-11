@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,aortic_clamp_off,aortic_clamp_on,artery_clamp_on,bed_position,block_complete,block_handoff,block_start,block_stop,carotid_clamp_off,carotid_clamp_on,cooling_started,cpr,defibrillation,head_of_bed_positioning,lma_inserted,lma_removed,position,renal_clamp_off,renal_clamp_on,table_turned_180,table_turned_90,throat_pack_in,throat_pack_out,tourniquet_deflated,tourniquet_inflated
+A560F4D4-1DB9-EE11-9204-005056BFF837,2024-01-17 20:52:00+00:00,,,,,,,1.0,,,,,,,,,,,,,,,,,,
+A560F4D4-1DB9-EE11-9204-005056BFF837,2024-01-17 21:04:00+00:00,,,,,1.0,,,,,,,,,,,,,,,,,,,,
+A560F4D4-1DB9-EE11-9204-005056BFF837,2024-01-17 21:38:00+00:00,,,,,,1.0,,1.0,,,,,,,,,,,,,,,,,
+A560F4D4-1DB9-EE11-9204-005056BFF837,2024-01-18 01:42:00+00:00,,,,<30 degrees,,,,,,,,,,,,,,,,,,,,,
+A560F4D4-1DB9-EE11-9204-005056BFF837,2024-01-18 05:18:00+00:00,,,,30 degrees,,,,,,,,,,,,,,,,,,,,,

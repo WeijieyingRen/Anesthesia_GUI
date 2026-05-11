@@ -1,0 +1,5 @@
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+93E6B186-310A-F011-9211-005056BFF837,10457,1,2025-03-21 14:16:00+00:00,2025-03-21 19:46:00+00:00,Normosol,1000.0,mL,Intravenous,normosol,fluid_input,2025-03-21 14:05:00+00:00,2025-03-21 20:12:00+00:00,11.0,341.0,11.0,26.0
+93E6B186-310A-F011-9211-005056BFF837,10457,1,2025-03-21 16:37:00+00:00,2025-03-21 16:37:00+00:00,Normosol,1000.0,mL,Intravenous,normosol,fluid_input,2025-03-21 14:05:00+00:00,2025-03-21 20:12:00+00:00,152.0,152.0,152.0,215.0
+93E6B186-310A-F011-9211-005056BFF837,10018,1,2025-03-21 17:51:00+00:00,2025-03-21 18:19:00+00:00,albumin 5%,250.0,mL,Intravenous,albumin 5%,fluid_input,2025-03-21 14:05:00+00:00,2025-03-21 20:12:00+00:00,226.0,254.0,226.0,113.0
+93E6B186-310A-F011-9211-005056BFF837,10456,1,2025-03-21 23:33:00+00:00,2025-03-22 19:06:00+00:00,LR IV infusion,100.0,mL/hr,Intravenous,lactated ringers,fluid_input,2025-03-21 14:05:00+00:00,2025-03-21 20:12:00+00:00,568.0,1741.0,568.0,-1374.0

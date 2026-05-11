@@ -1,0 +1,2 @@
+chart_type,row_name,event_type,highlight_mode,time_min,end_time_min,start_time,end_time,dose,unit,route
+gas,inSevoflurane %,gas_adjustment,interval,42.0,46.0,,,1.5499999999999998,abs_rate_per_min,

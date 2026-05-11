@@ -1,0 +1,2 @@
+chart_type,row_name,event_type,highlight_mode,time_min,end_time_min,start_time,end_time,dose,unit,route
+medication,propofol,infusion_adjustment,interval,60.0,117.0,2025-06-26 02:20:00+00:00,2025-06-26 03:17:00+00:00,25.0,mcg/kg/min,

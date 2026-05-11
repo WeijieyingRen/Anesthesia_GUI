@@ -1,0 +1,2 @@
+mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+E7B4B4D7-E006-EF11-920A-005056BFF837,10454,1,2024-04-25 23:43:37+00:00,2024-04-26 16:40:00+00:00,NS infusion,125.0,mL/hr,Intravenous,saline 0.9%,fluid_input,2024-04-25 14:02:00+00:00,2024-04-25 17:45:00+00:00,581.6166666666667,1598.0,581.6166666666667,-1375.0
