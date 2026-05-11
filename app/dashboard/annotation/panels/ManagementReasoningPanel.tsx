@@ -387,11 +387,7 @@ export default function ManagementReasoningPanel({
 
   return (
     <div className="rounded-2xl border bg-white p-6">
-      <h3 className="text-xl font-bold text-gray-900">
-        Patient-level Panel: Medication-Centered Management Reasoning
-      </h3>
-
-      <div className="mt-6 space-y-2">
+      <div className="space-y-2">
         <div className="overflow-hidden rounded-lg border border-blue-200 bg-blue-50">
           <button
             type="button"

@@ -129,17 +129,21 @@ export default function Episode3TextPanel({
 
   const [recording, setRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const [normalRecording, setNormalRecording] = useState(false);
+  const normalRecognitionRef = useRef<any>(null);
 
   useEffect(() => {
     setError(null);
 
     try {
       recognitionRef.current?.stop();
+      normalRecognitionRef.current?.stop();
     } catch {
       // ignore
     }
 
     setRecording(false);
+    setNormalRecording(false);
   }, [eventId]);
 
   function setCurrentFreeText(nextText: string) {
@@ -250,6 +254,87 @@ export default function Episode3TextPanel({
       // ignore
     } finally {
       setRecording(false);
+    }
+  }
+
+  async function startNormalVoiceNote() {
+    try {
+      const SpeechRecognition =
+        (window as any).SpeechRecognition ||
+        (window as any).webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert("Speech recognition is not supported. Please use Chrome or Edge.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.interimResults = true;
+      recognition.continuous = true;
+
+      const baseText = normalReasoning.trim();
+      let finalTranscript = "";
+
+      recognition.onresult = (event: any) => {
+        let interimTranscript = "";
+
+        for (let i = event.resultIndex; i < event.results.length; i += 1) {
+          const transcript = event.results[i][0].transcript;
+
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript;
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+
+        const combined = `${finalTranscript} ${interimTranscript}`.trim();
+
+        if (combined) {
+          const marker = "\n\n[Voice note in progress]\n";
+          setNormalReasoning(`${baseText}${baseText ? marker : ""}${combined}`.trim());
+          setSaveStatus("idle");
+          setSaveMessage("");
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error("Speech recognition error:", event);
+        setError("Speech recognition error. Please try again or type directly.");
+        setSaveStatus("error");
+        setSaveMessage("Speech recognition failed.");
+        setNormalRecording(false);
+      };
+
+      recognition.onend = () => {
+        setNormalRecording(false);
+
+        if (finalTranscript.trim()) {
+          setNormalReasoning(`${baseText}${baseText ? "\n\n" : ""}${finalTranscript.trim()}`.trim());
+        }
+      };
+
+      normalRecognitionRef.current = recognition;
+      recognition.start();
+      setNormalRecording(true);
+      setError(null);
+    } catch (e: any) {
+      console.error("Failed to start voice note:", e);
+      setError(e?.message ?? "Failed to start voice note.");
+      setSaveStatus("error");
+      setSaveMessage(e?.message ?? "Failed to start voice note.");
+      setNormalRecording(false);
+    }
+  }
+
+  function stopNormalVoiceNote() {
+    try {
+      normalRecognitionRef.current?.stop();
+    } catch {
+      // ignore
+    } finally {
+      setNormalRecording(false);
     }
   }
 
@@ -415,7 +500,7 @@ export default function Episode3TextPanel({
         <button
           type="button"
           onClick={onBackToEpisodeSelection}
-          className="flex w-full items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-left text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
+          className="inline-flex w-fit items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-left text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
         >
           <span className="text-lg leading-none">←</span>
           <span>Back to episode selection</span>
@@ -508,9 +593,6 @@ export default function Episode3TextPanel({
             Stop Voice Note
           </button>
         )}
-        <span className="text-xs text-gray-500">
-          Voice text will be inserted into the abnormal event reasoning box.
-        </span>
       </div>
 
       <div className="mt-8 space-y-4 border-t pt-6">
@@ -588,6 +670,26 @@ export default function Episode3TextPanel({
           className="min-h-[220px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
           placeholder="Example: Intubation was associated with expected airway manipulation and transient physiologic changes. The pattern was clinically meaningful but consistent with routine induction/intubation rather than a separate abnormal episode..."
         />
+
+        <div className="flex flex-wrap items-center gap-3">
+          {!normalRecording ? (
+            <button
+              type="button"
+              onClick={startNormalVoiceNote}
+              className="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+            >
+              Start Normal Episode Voice Note
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={stopNormalVoiceNote}
+              className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600"
+            >
+              Stop Voice Note
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
@@ -599,6 +701,8 @@ export default function Episode3TextPanel({
               setNormalEpisodeType("");
               setNormalEpisodeOther("");
               setNormalReasoning("");
+              stopVoiceNote();
+              stopNormalVoiceNote();
               setError(null);
               setSaveStatus("idle");
               setSaveMessage("");
