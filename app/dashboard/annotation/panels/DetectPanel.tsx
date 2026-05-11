@@ -473,18 +473,7 @@ export default function DetectPanel({
     annotation.shouldContinueAnnotation === "No" ||
     annotation.shouldContinueAnnotation === "Unclear";
 
-  const filteredEventTypeOptions: (EventType | "Others")[] = React.useMemo(() => {
-    if (selectedPrimaryVitals.length === 0) {
-      return ALL_EVENT_TYPE_OPTIONS;
-    }
-
-    const union = new Set<EventType>();
-    selectedPrimaryVitals.forEach((vital) => {
-      EVENT_TYPES_BY_VITAL[vital].forEach((evt) => union.add(evt));
-    });
-
-    return [...Array.from(union), "Others"];
-  }, [selectedPrimaryVitals]);
+  const filteredEventTypeOptions: (EventType | "Others")[] = ALL_EVENT_TYPE_OPTIONS;
 
   const isOtherEventType = annotation.eventType === "Others";
 
@@ -530,10 +519,6 @@ export default function DetectPanel({
   }
 
   function validateDetection(): string | null {
-    if (selectedPrimaryVitals.length === 0) {
-      return "Task 1 incomplete: please confirm at least one primary vital.";
-    }
-
     if (annotation.shouldContinueAnnotation === "") {
       return "Task 2 incomplete: please decide whether this episode should proceed to full annotation.";
     }
@@ -562,13 +547,6 @@ export default function DetectPanel({
 
     if (annotation.eventType === "") {
       return "Task 3 incomplete: please select the primary event type.";
-    }
-
-    if (
-      annotation.eventType !== "Others" &&
-      !filteredEventTypeOptions.includes(annotation.eventType)
-    ) {
-      return "Task 3 incomplete: please select an event type consistent with the selected primary vital(s).";
     }
 
     if (
@@ -683,7 +661,7 @@ export default function DetectPanel({
           tasks: {
             task1_primary_vitals: {
               question:
-                "Confirm bounding box window and primary vital(s) (select on the right chart).",
+                "Confirm selected episode window.",
               answer: {
                 vital: annotation.vital,
                 primaryVitals: selectedPrimaryVitals,
@@ -902,20 +880,8 @@ export default function DetectPanel({
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-          <TaskBlock title="Task 1. Confirm bounding box window and primary vital(s) (select on the right chart).">
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-[120px_110px_110px]">
-              <div>
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-                  Primary vital(s)
-                </div>
-
-                <PrimaryVitalDropdown
-                  options={VITAL_OPTIONS}
-                  selectedValues={selectedPrimaryVitals}
-                  onToggle={togglePrimaryVital}
-                />
-              </div>
-
+          <TaskBlock title="Task 1. Confirm selected episode window.">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <div>
                 <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                   Start
@@ -984,12 +950,6 @@ export default function DetectPanel({
                   <>
                     <div className="font-semibold text-gray-800">
                       How to choose the label
-                    </div>
-                    <div className="mt-1">
-                      The available event types are filtered by the selected primary vital(s).
-                    </div>
-                    <div className="mt-1">
-                      For example, HR shows bradycardia or tachycardia, while MAP/SBP/DBP show hypotension or hypertension.
                     </div>
                     <div className="mt-1">
                       You may also choose Normal physiologic dynamic if the selected window reflects a clinically meaningful but expected physiologic change rather than a harmful abnormality.

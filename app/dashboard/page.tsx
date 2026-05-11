@@ -1772,13 +1772,12 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
     <div className="order-1 min-w-0 p-4">
       {episodeState.stage === "select_all" && (
-        <div className="rounded-2xl border bg-white p-6">
-          <h4 className="mb-3 text-xl font-bold text-gray-900">
+        <div className="space-y-6">
+          <h4 className="text-xl font-bold text-gray-900">
             Task 1. Detect events associated with vital sign abnormalities.
           </h4>
 
-          <div className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="space-y-5 px-5 py-5">
+          <div className="space-y-5">
               <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
@@ -1849,26 +1848,24 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   </div>
                 </div>
               </div>
-            </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-600">
+            <div>
               Detected episodes:{" "}
               <span className="font-semibold text-gray-900">
                 {episodeState.detectedEpisodes.length}
               </span>
             </div>
-
-            <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
-            Confirmed for detailed annotation:{" "}
-<span className="font-semibold text-gray-900">
-  {episodeState.prioritizedEpisodeIds.length}
-</span>
+            <div>
+              Confirmed for detailed annotation:{" "}
+              <span className="font-semibold text-gray-900">
+                {episodeState.prioritizedEpisodeIds.length}
+              </span>
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-end gap-3">
+          <div className="flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={() => {
@@ -1899,22 +1896,22 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       )}
 
       {episodeState.stage === "pick_top3" && (
-        <div className="rounded-2xl border bg-white p-6">
-          <h4 className="mb-3 text-xl font-bold text-gray-900">
+        <div className="space-y-6">
+          <h4 className="text-xl font-bold text-gray-900">
             Task 2. Select up to 3 episodes for detailed annotation
           </h4>
-          <p className="mb-6 text-sm text-gray-600">
+          <p className="text-sm text-gray-600">
             From the detected episodes on the left, choose the most important ones you want to annotate in detail.
           </p>
 
-          <div className="rounded-xl border border-dashed bg-gray-50 p-4 text-sm text-gray-600">
-          Selected for detailed annotation:{" "}
-<span className="font-semibold text-gray-900">
-  {episodeState.prioritizedEpisodeIds.length}
-</span>
+          <div className="text-sm text-gray-600">
+            Selected for detailed annotation:{" "}
+            <span className="font-semibold text-gray-900">
+              {episodeState.prioritizedEpisodeIds.length}
+            </span>
           </div>
 
-          <div className="mt-6 flex items-center justify-between gap-3">
+          <div className="flex items-center justify-end gap-3">
            
 
           <button

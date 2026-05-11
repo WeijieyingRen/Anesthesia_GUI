@@ -1503,35 +1503,7 @@ const activeEndMin =
             <div>End: {formatClockTime(windowStats.endMin, timeZero)}</div>
             <div>Dur: {windowStats.duration} min</div>
 
-            {windowStats.vital === "MAP" ? (
-              <>
-                <div>
-                  SBP:{" "}
-                  {windowStats.sbp
-                    ? `${windowStats.sbp.min.toFixed(1)} ~ ${windowStats.sbp.max.toFixed(1)}`
-                    : "-"}
-                </div>
-                <div>
-                  DBP:{" "}
-                  {windowStats.dbp
-                    ? `${windowStats.dbp.min.toFixed(1)} ~ ${windowStats.dbp.max.toFixed(1)}`
-                    : "-"}
-                </div>
-                <div>
-                  MAP:{" "}
-                  {windowStats.map
-                    ? `${windowStats.map.min.toFixed(1)} ~ ${windowStats.map.max.toFixed(1)}`
-                    : "-"}
-                </div>
-              </>
-            ) : (
-              <div>
-                {windowStats.vital}:{" "}
-                {windowStats.min == null || windowStats.max == null
-                  ? "-"
-                  : `${windowStats.min.toFixed(1)} ~ ${windowStats.max.toFixed(1)}`}
-              </div>
-            )}
+
           </div>
         )}
 
