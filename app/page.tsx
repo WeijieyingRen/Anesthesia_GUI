@@ -3,7 +3,7 @@
 // app/page.tsx
 import type React from "react";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
@@ -56,7 +56,6 @@ export default function Home() {
   const [gender, setGender] = useState("");
 
   const [degrees, setDegrees] = useState<DegreeOption[]>([]);
-  const [degreeDropdownOpen, setDegreeDropdownOpen] = useState(false);
   const [degreeOther, setDegreeOther] = useState("");
 
   const [trainingCountry, setTrainingCountry] = useState("");
@@ -130,22 +129,11 @@ export default function Home() {
     return row?.[key] ?? "";
   }
 
-  function toggleDegree(value: DegreeOption) {
-    setDegrees((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value]
-    );
-  }
-
-  const hasOtherDegree = degrees.includes("Other");
+  const selectedDegree = degrees[0] ?? "";
+  const hasOtherDegree = selectedDegree === "Other";
   const hasOtherClinicalRole = clinicalRole === "Other";
   const hasOtherPracticeArea = practiceArea === "Other";
 
-  const degreeDisplay = useMemo(() => {
-    if (degrees.length === 0) return "Select degree(s)";
-    return degrees.join(", ");
-  }, [degrees]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -283,53 +271,35 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="space-y-2 relative">
-              <Label>Professional Degree(s)</Label>
-
-              <button
-                type="button"
-                onClick={() => setDegreeDropdownOpen((prev) => !prev)}
-                className="flex w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+            <div className="space-y-2">
+              <Label>Professional Degree</Label>
+              <Select
+                value={selectedDegree}
+                onValueChange={(value) => {
+                  setDegrees(value ? [value as DegreeOption] : []);
+                  if (value !== "Other") {
+                    setDegreeOther("");
+                  }
+                }}
               >
-                <span className="truncate text-left">{degreeDisplay}</span>
-                <span className="ml-2 text-xs text-gray-500">▼</span>
-              </button>
-
-              {degreeDropdownOpen && (
-                <div className="absolute z-50 mt-1 w-full rounded-md border bg-white shadow-md p-2 space-y-2">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select degree" />
+                </SelectTrigger>
+                <SelectContent>
                   {DEGREE_OPTIONS.map((degree) => (
-                    <label
-                      key={degree}
-                      className="flex items-center gap-2 rounded px-2 py-1 text-sm hover:bg-gray-50"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={degrees.includes(degree)}
-                        onChange={() => toggleDegree(degree)}
-                      />
-                      <span>{degree}</span>
-                    </label>
+                    <SelectItem key={degree} value={degree}>
+                      {degree}
+                    </SelectItem>
                   ))}
-
-                  <div className="flex justify-end pt-1">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setDegreeDropdownOpen(false)}
-                    >
-                      Done
-                    </Button>
-                  </div>
-                </div>
-              )}
+                </SelectContent>
+              </Select>
 
               {hasOtherDegree && (
                 <div className="space-y-2">
-                  <Label htmlFor="degreeOther">Please specify degree(s)</Label>
+                  <Label htmlFor="degreeOther">Please specify degree</Label>
                   <Input
                     id="degreeOther"
-                    placeholder="Enter your degree(s)"
+                    placeholder="Enter your degree"
                     value={degreeOther}
                     onChange={(e) => setDegreeOther(e.target.value)}
                   />
