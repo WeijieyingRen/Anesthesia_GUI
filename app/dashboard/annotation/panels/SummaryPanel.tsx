@@ -339,8 +339,8 @@ export default function SummaryPanel({
     <div className="bg-white">
       <div className="p-3">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-sm font-semibold text-gray-900">
-          <span>Patient-level Panel 1: Overall Intraoperative Summary</span>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <span>Patient-level Panel 1: Overall Intraoperative Summary</span>
             <div className="relative">
               <button
                 type="button"
@@ -350,14 +350,16 @@ export default function SummaryPanel({
                 Instructions
               </button>
               {instructionsOpen && (
-                <div className="absolute right-0 top-full z-50 mt-2 w-[min(420px,80vw)] rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
+                <div className="absolute left-0 top-full z-50 mt-2 w-[min(420px,80vw)] rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
                   Please summarize the overall intraoperative course for this patient,
                   including major abnormal events, likely mechanisms, important
                   interventions, and overall patient response.
                 </div>
               )}
             </div>
+          </div>
 
+          <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               disabled={saveStatus === "saving"}

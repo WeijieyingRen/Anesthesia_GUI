@@ -92,21 +92,7 @@ const MANAGEMENT_REASONING_PROMPT = {
   ],
 };
 
-const DEFAULT_ANSWER_TEMPLATE = `1. Clinical purpose:
-
-
-2. Supporting context:
-
-
-3. Expected effect and observed response:
-
-
-4. Uncertainty, alternatives, or missing information:
-
-
-5. Counterfactual if the medication had not been given:
-
-`;
+const DEFAULT_ANSWER_TEMPLATE = "";
 
 export default function ManagementReasoningPanel({
   caseId,
@@ -555,7 +541,7 @@ export default function ManagementReasoningPanel({
             setAnswer(e.target.value);
           }}
           className="mt-4 h-80 w-full rounded-xl border px-4 py-3 font-mono text-sm text-gray-800 outline-none focus:border-orange-400"
-          placeholder={DEFAULT_ANSWER_TEMPLATE}
+          placeholder="Write your medication-centered management reasoning here..."
         />
 
         <div className="mt-4">

@@ -593,6 +593,18 @@ export default function Episode3TextPanel({
             Stop Voice Note
           </button>
         )}
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={saving || !freeText.trim() || !normalReasoning.trim()}
+          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+            saving || !freeText.trim() || !normalReasoning.trim()
+              ? "cursor-not-allowed bg-blue-300"
+              : "bg-blue-600 hover:bg-blue-700"
+          }`}
+        >
+          {saving ? "Saving..." : "Save Reasoning"}
+        </button>
       </div>
 
       <div className="mt-8 space-y-4 border-t pt-6">
