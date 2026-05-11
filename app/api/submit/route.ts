@@ -3,6 +3,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { Storage } from "@google-cloud/storage";
 import fs from "fs/promises";
 import path from "path";
+import { isDriveUploadEnabled, uploadJsonToDrive } from "@/lib/drive-upload";
 
 type SubmitBody = {
   annotator?: { name?: string; email?: string };
@@ -585,6 +586,14 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "missing"
     );
     console.log("GCS_BUCKET =", process.env.GCS_BUCKET || "missing");
+    console.log(
+      "DRIVE_ENABLED =",
+      process.env.DRIVE_ENABLED === "true" ? "true" : "false"
+    );
+    console.log(
+      "DRIVE_FOLDER_ID =",
+      process.env.DRIVE_FOLDER_ID ? "configured" : "missing"
+    );
 
     const body = (await req.json()) as SubmitBody;
 
@@ -752,14 +761,88 @@ export async function POST(req: Request) {
       return { saved, warning };
     })();
 
-    const gcsResult = await uploadSubmissionToGCSWithRetry(body, gcsRecord, {
-      maxAttempts: 3,
-      initialDelayMs: 1000,
-    });
+    const storageObjectName = await buildGcsObjectPath(body);
+
+    let gcsResult: {
+      saved: true;
+      objectName: string;
+      attemptsUsed: number;
+    } | null = null;
+    let gcsWarning: string | null = null;
+
+    if (process.env.GCS_BUCKET) {
+      gcsResult = await uploadSubmissionToGCSWithRetry(body, gcsRecord, {
+        maxAttempts: 3,
+        initialDelayMs: 1000,
+      });
+    } else {
+      gcsWarning = "GCS_BUCKET not configured, skipped GCS save.";
+      console.warn(gcsWarning);
+    }
+
+    let driveResult: {
+      saved: boolean;
+      skipped: boolean;
+      fileId: string | null;
+      fileName: string | null;
+      folderId: string | null;
+      objectPath: string | null;
+      webViewLink: string | null;
+      warning: string | null;
+    } = {
+      saved: false,
+      skipped: !isDriveUploadEnabled(),
+      fileId: null,
+      fileName: null,
+      folderId: null,
+      objectPath: null,
+      webViewLink: null,
+      warning: isDriveUploadEnabled()
+        ? null
+        : "DRIVE_ENABLED is not true, skipped Drive save.",
+    };
+
+    if (isDriveUploadEnabled()) {
+      try {
+        const uploaded = await uploadJsonToDrive({
+          objectPath: storageObjectName,
+          data: gcsRecord,
+        });
+        driveResult = {
+          saved: true,
+          skipped: false,
+          fileId: uploaded.fileId,
+          fileName: uploaded.fileName,
+          folderId: uploaded.folderId,
+          objectPath: uploaded.objectPath,
+          webViewLink: uploaded.webViewLink ?? null,
+          warning: null,
+        };
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Unknown Drive upload error.";
+        console.error("Drive upload failed:", error);
+
+        if (process.env.DRIVE_REQUIRE_SUCCESS === "true") {
+          throw error;
+        }
+
+        driveResult = {
+          saved: false,
+          skipped: false,
+          fileId: null,
+          fileName: null,
+          folderId: null,
+          objectPath: storageObjectName,
+          webViewLink: null,
+          warning: message,
+        };
+      }
+    }
 
     let caseStatusIndexObjectName: string | null = null;
 
-    if (isFinalCaseSubmission(body)) {
+    if (process.env.GCS_BUCKET && isFinalCaseSubmission(body)) {
       try {
         caseStatusIndexObjectName = await updateCaseStatusIndex(body);
       } catch (error) {
@@ -794,16 +877,17 @@ export async function POST(req: Request) {
         warning: supabaseResult.warning,
       },
       gcs: {
-        attempted: true,
-        saved: true,
-        skipped: false,
+        attempted: Boolean(process.env.GCS_BUCKET),
+        saved: Boolean(gcsResult?.saved),
+        skipped: !process.env.GCS_BUCKET,
         bucket: process.env.GCS_BUCKET ?? null,
-        objectName: gcsResult.objectName,
-        attemptsUsed: gcsResult.attemptsUsed,
+        objectName: gcsResult?.objectName ?? storageObjectName,
+        attemptsUsed: gcsResult?.attemptsUsed ?? 0,
         caseStatusIndexObjectName,
-        warning: null,
+        warning: gcsWarning,
       },
-      debug_version: "gcs-folder-structure-v13-global-case-status-index",
+      drive: driveResult,
+      debug_version: "gcs-drive-folder-structure-v14",
     });
   } catch (error) {
     console.error("Submit route error:", error);
