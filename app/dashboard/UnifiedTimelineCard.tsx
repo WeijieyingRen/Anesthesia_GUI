@@ -51,6 +51,7 @@ type UnifiedTimelineCardProps = {
 
   selectedDetectVital: DetectVital;
   onChangeSelectedDetectVital: (vital: DetectVital) => void;
+  showVitalSelector?: boolean;
 
   selectedWindow: SelectedWindow | null;
   onChangeSelectedWindow: (window: SelectedWindow | null) => void;
@@ -230,6 +231,7 @@ export default function UnifiedTimelineCard({
   viewWindowWidthMin,
   selectedDetectVital,
   onChangeSelectedDetectVital,
+  showVitalSelector = true,
   selectedWindow,
   onChangeSelectedWindow,
   onCreateEventFromWindow,
@@ -444,7 +446,7 @@ export default function UnifiedTimelineCard({
         open={openSections.vitals}
         onToggle={() => toggleSection("vitals")}
       >
-        {(["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const).map((item) => {
+        {showVitalSelector ? (["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const).map((item) => {
           const active = selectedDetectVital === item;
           const label = item === "MAP" ? "BP" : item;
 
@@ -472,7 +474,7 @@ export default function UnifiedTimelineCard({
               {label}
             </button>
           );
-        })}
+        }) : null}
       </SectionHeader>
 
       {openSections.vitals && (

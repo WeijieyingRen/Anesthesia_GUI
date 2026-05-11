@@ -322,33 +322,17 @@ function buildEmptyEpisodeState(): EpisodeAnnotationState {
   };
 }
 
-function getEpisodeVitalDisplayName(vital: DetectVital): string {
-  if (vital === "MAP") return "BP";
-  return vital;
-}
-
-function buildEpisodeTitle(
-  episodes: DetectedEpisodeItem[],
-  vital: DetectVital
-): string {
-  const sameVitalCount = episodes.filter((e) => e.vital === vital).length;
-  return `${getEpisodeVitalDisplayName(vital)}-${sameVitalCount + 1}`;
+function buildEpisodeTitle(episodes: DetectedEpisodeItem[]): string {
+  return `Episode ${episodes.length + 1}`;
 }
 
 function renumberDetectedEpisodes(
   episodes: DetectedEpisodeItem[]
 ): DetectedEpisodeItem[] {
-  const counter: Record<string, number> = {};
-
-  return episodes.map((episode) => {
-    const key = episode.vital;
-    counter[key] = (counter[key] ?? 0) + 1;
-
-    return {
-      ...episode,
-      label: `${getEpisodeVitalDisplayName(episode.vital)}-${counter[key]}`,
-    };
-  });
+  return episodes.map((episode, index) => ({
+    ...episode,
+    label: `Episode ${index + 1}`,
+  }));
 }
 
 export default function DashboardPage() {
@@ -542,7 +526,7 @@ export default function DashboardPage() {
 
       const newEpisode: DetectedEpisodeItem = {
         id: `evt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        label: buildEpisodeTitle(prev.detectedEpisodes, window.vital),
+        label: buildEpisodeTitle(prev.detectedEpisodes),
         vital: window.vital,
         startMin: window.startMin,
         endMin: window.endMin,
@@ -1578,18 +1562,19 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   </div>
 )}
 {annotationLevel === "episode" && episodeState.stage !== "annotate" && (
-  <div className="grid grid-cols-[180px_minmax(0,1fr)] items-start bg-white">
-    <div className="border-r p-4">
+  <div className="grid grid-cols-1 items-start bg-white">
+    <div className="order-2 border-t p-4">
       <h3 className="mb-4 text-base font-bold text-gray-800">
         Checklist
       </h3>
 
       {episodeState.stage === "select_all" && (
-        <div className="space-y-2">
-          <div className="mb-2 text-xs font-medium text-gray-500">
-          Confirmed {episodeState.prioritizedEpisodeIds.length}
+        <div>
+          <div className="mb-3 text-xs font-medium text-gray-500">
+            Confirmed {episodeState.prioritizedEpisodeIds.length}
           </div>
 
+          <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {episodeState.detectedEpisodes.map((episode) => {
             const checked = episodeState.prioritizedEpisodeIds.includes(episode.id);
 
@@ -1603,7 +1588,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             return (
               <div
                 key={episode.id}
-                className={`w-full rounded-xl border px-3 py-2 transition ${
+                className={`w-full rounded-lg border px-3 py-2 transition ${
                   isPreviewing
                     ? "border-blue-700 bg-blue-300 shadow-sm"
                     : checked
@@ -1686,15 +1671,17 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               No events yet.
             </div>
           )}
+          </div>
         </div>
       )}
 
       {episodeState.stage === "pick_top3" && (
-        <div className="space-y-2">
-          <div className="mb-2 text-xs font-medium text-gray-500">
-          Selected {episodeState.prioritizedEpisodeIds.length} (up to 3)
+        <div>
+          <div className="mb-3 text-xs font-medium text-gray-500">
+            Selected {episodeState.prioritizedEpisodeIds.length} (up to 3)
           </div>
 
+          <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {episodeState.detectedEpisodes.map((episode) => {
             const checked =
               episodeState.prioritizedEpisodeIds.includes(episode.id);
@@ -1709,7 +1696,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             return (
               <div
                 key={episode.id}
-                className={`w-full rounded-xl border px-3 py-2 transition ${
+                className={`w-full rounded-lg border px-3 py-2 transition ${
                   isPreviewing
                     ? "border-blue-700 bg-blue-300 shadow-sm"
                     : checked
@@ -1778,11 +1765,12 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               No events yet.
             </div>
           )}
+          </div>
         </div>
       )}
     </div>
 
-    <div className="min-w-0 p-4">
+    <div className="order-1 min-w-0 p-4">
       {episodeState.stage === "select_all" && (
         <div className="rounded-2xl border bg-white p-6">
           <h4 className="mb-3 text-xl font-bold text-gray-900">
@@ -1802,11 +1790,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 </div>
                 <ol className="list-decimal space-y-1 pl-5 text-sm leading-6 text-blue-900">
               
-                  <li>On the right VitalChart panel, Choose one primary vital sign.</li>
-                  <li><span className="text-red-600 font-bold">Repeat this process until all abnormal episodes are identified.</span></li>
-                  <li>Repeat this process until all abnormal episodes are identified.</li>
+                  <li>On the right VitalChart panel, drag directly to draw a box around an abnormal episode.</li>
+                  <li><span className="text-red-600 font-bold">Repeat until all abnormal episodes are identified.</span></li>
                   <li>
-                  Select the 3 most important episodes for next step annotation. If fewer than 3 abnormality are identified, select all of them.
+                    Confirm the episodes that should move forward. If fewer than 3 abnormalities are identified, select all of them.
                   </li>
                   <li>Save and continue.</li>
                 </ol>
@@ -1826,9 +1813,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   Abnormal events are described as below events with your practical knowledge.
                 </p>
 
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                   <div className="rounded-lg bg-white/50 p-3">
-                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-rose-700">
+                    <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-700">
                       Hemodynamics
                     </div>
                     <ul className="space-y-1 text-sm text-rose-900">
@@ -1839,7 +1826,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     </ul>
                   </div>
                   <div className="rounded-lg bg-white/50 p-3">
-                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-rose-700">
+                    <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-700">
                       Oxygenation
                     </div>
                     <ul className="space-y-1 text-sm text-rose-900">
@@ -1852,7 +1839,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   </div>
 
                   <div className="rounded-lg bg-white/50 p-3">
-                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-rose-700">
+                    <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-700">
                       Temperature
                     </div>
                     <ul className="space-y-1 text-sm text-rose-900">
@@ -2018,6 +2005,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     viewWindowWidthMin={viewWindowWidthMin}
                     selectedDetectVital={selectedDetectVital}
                     onChangeSelectedDetectVital={setSelectedDetectVital}
+                    showVitalSelector={annotationLevel !== "episode"}
                     selectedWindow={selectedWindow}
                     onChangeSelectedWindow={handleSelectedWindowChange}
                     onCreateEventFromWindow={handleTimelineWindowCreate}
