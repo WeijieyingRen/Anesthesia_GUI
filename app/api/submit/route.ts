@@ -676,25 +676,44 @@ export async function POST(req: Request) {
         : "DRIVE_ENABLED is not true, skipped Drive save.",
     };
 
-    if (!isDriveUploadEnabled()) {
-      throw new Error("DRIVE_ENABLED is not true. Google Drive save skipped.");
+    if (isDriveUploadEnabled()) {
+      try {
+        const uploaded = await uploadJsonToDrive({
+          objectPath: driveObjectPath,
+          data: driveRecord,
+        });
+
+        driveResult = {
+          saved: true,
+          skipped: false,
+          fileId: uploaded.fileId,
+          fileName: uploaded.fileName,
+          folderId: uploaded.folderId,
+          objectPath: uploaded.objectPath,
+          webViewLink: uploaded.webViewLink ?? null,
+          warning: null,
+        };
+      } catch (error) {
+        const warning =
+          error instanceof Error ? error.message : "Unknown Drive upload error.";
+        console.error("Drive upload failed:", error);
+
+        if (process.env.DRIVE_REQUIRE_SUCCESS === "true") {
+          throw error;
+        }
+
+        driveResult = {
+          saved: false,
+          skipped: false,
+          fileId: null,
+          fileName: null,
+          folderId: null,
+          objectPath: driveObjectPath,
+          webViewLink: null,
+          warning,
+        };
+      }
     }
-
-    const uploaded = await uploadJsonToDrive({
-      objectPath: driveObjectPath,
-      data: driveRecord,
-    });
-
-    driveResult = {
-      saved: true,
-      skipped: false,
-      fileId: uploaded.fileId,
-      fileName: uploaded.fileName,
-      folderId: uploaded.folderId,
-      objectPath: uploaded.objectPath,
-      webViewLink: uploaded.webViewLink ?? null,
-      warning: null,
-    };
 
     const supabaseResult = await supabasePromise;
 
