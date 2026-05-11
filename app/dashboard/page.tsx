@@ -1854,7 +1854,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 }
                 className="flex w-full items-center gap-3 bg-blue-100 px-4 py-3 text-left"
               >
-                <span className="text-sm text-blue-700">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-xl font-bold text-blue-700">
                   {openEpisodeGuideSections.how ? "▾" : "▸"}
                 </span>
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
@@ -1892,7 +1892,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 }
                 className="flex w-full items-center gap-3 bg-rose-100 px-4 py-3 text-left"
               >
-                <span className="text-sm text-rose-700">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-xl font-bold text-rose-700">
                   {openEpisodeGuideSections.what ? "▾" : "▸"}
                 </span>
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-xs font-bold text-white">
