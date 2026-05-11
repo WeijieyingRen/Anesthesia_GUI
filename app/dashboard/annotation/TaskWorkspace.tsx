@@ -204,6 +204,7 @@ export default function TaskWorkspace({
               episodeNumber={episodeNumber}
               anesthesiaStart={anesthesiaStart}
               onSaveAndNextStep={() => onSaveAndNextStep("detect")}
+              onBackToEpisodeSelection={handleBackToPreviousSection}
               episodeList={episodeList}
               activeEpisodeId={episodeState.activeEpisodeId}
               completedMap={completedTaskMap}

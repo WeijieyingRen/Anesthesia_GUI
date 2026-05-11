@@ -33,6 +33,7 @@ type Props = {
   episodeNumber?: number;
   anesthesiaStart?: string | null;
   onSaveAndNextStep: () => void;
+  onBackToEpisodeSelection?: () => void;
 
   episodeList?: EpisodeButtonItem[];
   activeEpisodeId?: string | null;
@@ -51,6 +52,7 @@ export default function Episode3TextPanel({
   episodeNumber,
   anesthesiaStart,
   onSaveAndNextStep,
+  onBackToEpisodeSelection,
   episodeList = [],
   activeEpisodeId = null,
   completedMap = {},
@@ -306,6 +308,17 @@ export default function Episode3TextPanel({
 
   return (
     <div className="space-y-5">
+      {onBackToEpisodeSelection && (
+        <button
+          type="button"
+          onClick={onBackToEpisodeSelection}
+          className="flex w-full items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-left text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
+        >
+          <span className="text-lg leading-none">←</span>
+          <span>Back to episode selection</span>
+        </button>
+      )}
+
       {episodeList.length > 0 && (
         <div className="mb-5 bg-gray-50 p-4">
           <div className="mb-3 text-sm font-bold text-gray-900">
