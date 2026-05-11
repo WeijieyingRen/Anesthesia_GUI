@@ -463,7 +463,7 @@ export async function POST(req: Request) {
     );
     console.log(
       "DRIVE_ENABLED =",
-      process.env.DRIVE_ENABLED === "true" ? "true" : "false"
+      isDriveUploadEnabled() ? "true" : "false"
     );
     console.log(
       "DRIVE_FOLDER_ID =",

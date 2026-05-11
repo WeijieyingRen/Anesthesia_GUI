@@ -36,8 +36,14 @@ const FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
 
 let accessTokenPromise: Promise<string> | null = null;
 
+function isTruthyEnv(value: string | undefined): boolean {
+  return ["true", "1", "yes", "y", "on"].includes(
+    String(value ?? "").trim().toLowerCase()
+  );
+}
+
 export function isDriveUploadEnabled(): boolean {
-  return process.env.DRIVE_ENABLED === "true";
+  return isTruthyEnv(process.env.DRIVE_ENABLED);
 }
 
 function base64Url(value: string | Buffer): string {
