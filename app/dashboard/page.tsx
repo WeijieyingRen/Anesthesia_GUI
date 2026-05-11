@@ -384,6 +384,10 @@ export default function DashboardPage() {
   );
   const [episodeTaskCompletion, setEpisodeTaskCompletion] =
     useState<EpisodeTaskCompletionMap>({});
+  const [openEpisodeGuideSections, setOpenEpisodeGuideSections] = useState({
+    how: false,
+    what: false,
+  });
 
   const voiceNote = useVoiceNote();
 
@@ -1570,10 +1574,6 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
       {episodeState.stage === "select_all" && (
         <div>
-          <div className="mb-3 text-xs font-medium text-gray-500">
-            Confirmed {episodeState.prioritizedEpisodeIds.length}
-          </div>
-
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {episodeState.detectedEpisodes.map((episode) => {
             const checked = episodeState.prioritizedEpisodeIds.includes(episode.id);
@@ -1672,15 +1672,56 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             </div>
           )}
           </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-gray-600">
+              <span>
+                Detected episodes:{" "}
+                <span className="font-semibold text-gray-900">
+                  {episodeState.detectedEpisodes.length}
+                </span>
+              </span>
+              <span>
+                Confirmed for detailed annotation:{" "}
+                <span className="font-semibold text-gray-900">
+                  {episodeState.prioritizedEpisodeIds.length}
+                </span>
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  resetEpisodeWorkflow();
+                  logAction("episode_select_all_reset");
+                }}
+                className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+              >
+                Reset All
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  void handleAdvanceEpisodeStage();
+                }}
+                disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
+                className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                  episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                    ? "cursor-not-allowed bg-blue-300 text-white"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+                }`}
+              >
+                {submitting ? "Saving..." : "Confirm 3 & Next Step"}
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
       {episodeState.stage === "pick_top3" && (
         <div>
-          <div className="mb-3 text-xs font-medium text-gray-500">
-            Selected {episodeState.prioritizedEpisodeIds.length} (up to 3)
-          </div>
-
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {episodeState.detectedEpisodes.map((episode) => {
             const checked =
@@ -1766,6 +1807,30 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             </div>
           )}
           </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
+            <div className="text-sm text-gray-600">
+              Selected for detailed annotation:{" "}
+              <span className="font-semibold text-gray-900">
+                {episodeState.prioritizedEpisodeIds.length}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                void handleAdvanceEpisodeStage();
+              }}
+              disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
+              className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+                episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                  ? "cursor-not-allowed bg-blue-300 text-white"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              {submitting ? "Saving..." : "Save & Next Step"}
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -1777,120 +1842,110 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             Task 1. Detect events associated with vital sign abnormalities.
           </h4>
 
-          <div className="space-y-5">
-              <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                    1
-                  </span>
-                  <h4 className="text-sm font-semibold text-blue-900">
-                    How to annotate
-                  </h4>
-                </div>
-                <ol className="list-decimal space-y-1 pl-5 text-sm leading-6 text-blue-900">
-              
-                  <li>On the right VitalChart panel, drag directly to draw a box around an abnormal episode.</li>
-                  <li><span className="text-red-600 font-bold">Repeat until all abnormal episodes are identified.</span></li>
+          <div className="space-y-2">
+            <div className="rounded-lg border border-gray-200 bg-white">
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenEpisodeGuideSections((prev) => ({
+                    ...prev,
+                    how: !prev.how,
+                  }))
+                }
+                className="flex w-full items-center gap-3 px-4 py-3 text-left"
+              >
+                <span className="text-sm text-gray-500">
+                  {openEpisodeGuideSections.how ? "▾" : "▸"}
+                </span>
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                  1
+                </span>
+                <span className="text-sm font-semibold text-gray-900">
+                  How to annotate
+                </span>
+              </button>
+
+              {openEpisodeGuideSections.how && (
+                <ol className="border-t border-gray-100 px-8 py-4 text-sm leading-6 text-gray-700">
+                  <li>Drag directly on the VitalChart to draw a box around an abnormal episode.</li>
+                  <li>
+                    <span className="font-semibold text-red-600">
+                      Repeat until all abnormal episodes are identified.
+                    </span>
+                  </li>
                   <li>
                     Confirm the episodes that should move forward. If fewer than 3 abnormalities are identified, select all of them.
                   </li>
                   <li>Save and continue.</li>
                 </ol>
-              </div>
-
-              <div className="rounded-xl border border-rose-100 bg-rose-50 p-4">
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-xs font-bold text-white">
-                    2
-                  </span>
-                  <h4 className="text-sm font-semibold text-rose-900">
-                    What to annotate?
-                  </h4>
-                </div>
-
-                <p className="mb-4 text-sm leading-7 text-rose-900">
-                  Abnormal events are described as below events with your practical knowledge.
-                </p>
-
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                  <div className="rounded-lg bg-white/50 p-3">
-                    <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-700">
-                      Hemodynamics
-                    </div>
-                    <ul className="space-y-1 text-sm text-rose-900">
-                      <li>Hypotension</li>
-                      <li>Hypertension</li>
-                      <li>Bradycardia</li>
-                      <li>Tachycardia</li>
-                    </ul>
-                  </div>
-                  <div className="rounded-lg bg-white/50 p-3">
-                    <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-700">
-                      Oxygenation
-                    </div>
-                    <ul className="space-y-1 text-sm text-rose-900">
-                      <li>Hypoxia</li>
-                      <li>Hypercapnia</li>
-                      <li>Hypocapnia</li>
-                      <li>Tachypnea</li>
-                      <li>Bradypnea</li>
-                    </ul>
-                  </div>
-
-                  <div className="rounded-lg bg-white/50 p-3">
-                    <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-700">
-                      Temperature
-                    </div>
-                    <ul className="space-y-1 text-sm text-rose-900">
-                      <li>Hypothermia</li>
-                      <li>Hyperthermia</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-600">
-            <div>
-              Detected episodes:{" "}
-              <span className="font-semibold text-gray-900">
-                {episodeState.detectedEpisodes.length}
-              </span>
+              )}
             </div>
-            <div>
-              Confirmed for detailed annotation:{" "}
-              <span className="font-semibold text-gray-900">
-                {episodeState.prioritizedEpisodeIds.length}
-              </span>
+
+            <div className="rounded-lg border border-gray-200 bg-white">
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenEpisodeGuideSections((prev) => ({
+                    ...prev,
+                    what: !prev.what,
+                  }))
+                }
+                className="flex w-full items-center gap-3 px-4 py-3 text-left"
+              >
+                <span className="text-sm text-gray-500">
+                  {openEpisodeGuideSections.what ? "▾" : "▸"}
+                </span>
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-xs font-bold text-white">
+                  2
+                </span>
+                <span className="text-sm font-semibold text-gray-900">
+                  What to annotate?
+                </span>
+              </button>
+
+              {openEpisodeGuideSections.what && (
+                <div className="border-t border-gray-100 px-4 py-4">
+                  <p className="mb-4 text-sm leading-6 text-gray-700">
+                    Abnormal events are described as below events with your practical knowledge.
+                  </p>
+
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                    <div>
+                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                        Hemodynamics
+                      </div>
+                      <ul className="space-y-1 text-sm text-gray-800">
+                        <li>Hypotension</li>
+                        <li>Hypertension</li>
+                        <li>Bradycardia</li>
+                        <li>Tachycardia</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                        Oxygenation
+                      </div>
+                      <ul className="space-y-1 text-sm text-gray-800">
+                        <li>Hypoxia</li>
+                        <li>Hypercapnia</li>
+                        <li>Hypocapnia</li>
+                        <li>Tachypnea</li>
+                        <li>Bradypnea</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                        Temperature
+                      </div>
+                      <ul className="space-y-1 text-sm text-gray-800">
+                        <li>Hypothermia</li>
+                        <li>Hyperthermia</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-
-          <div className="flex items-center justify-end gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                resetEpisodeWorkflow();
-                logAction("episode_select_all_reset");
-              }}
-              className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-            >
-              Reset All
-            </button>
-
-            <button
-  type="button"
-  onClick={() => {
-    void handleAdvanceEpisodeStage();
-  }}
-  disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
-  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-    episodeState.prioritizedEpisodeIds.length === 0 || submitting
-      ? "cursor-not-allowed bg-blue-300 text-white"
-      : "bg-blue-600 text-white hover:bg-blue-700"
-  }`}
-            >
-             {submitting ? "Saving..." : "Confirm 3 & Next Step"}
-            </button>
           </div>
         </div>
       )}
@@ -1904,31 +1959,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             From the detected episodes on the left, choose the most important ones you want to annotate in detail.
           </p>
 
-          <div className="text-sm text-gray-600">
-            Selected for detailed annotation:{" "}
-            <span className="font-semibold text-gray-900">
-              {episodeState.prioritizedEpisodeIds.length}
-            </span>
-          </div>
 
-          <div className="flex items-center justify-end gap-3">
-           
-
-          <button
-  type="button"
-  onClick={() => {
-    void handleAdvanceEpisodeStage();
-  }}
-  disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
-  className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-    episodeState.prioritizedEpisodeIds.length === 0 || submitting
-      ? "cursor-not-allowed bg-blue-300 text-white"
-      : "bg-blue-600 text-white hover:bg-blue-700"
-  }`}
-            >
-            {submitting ? "Saving..." : "Save & Next Step"}
-            </button>
-          </div>
         </div>
       )}
     </div>
