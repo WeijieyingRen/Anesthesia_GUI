@@ -11,6 +11,8 @@ type EpisodeButtonItem = {
   endMin: number;
 };
 
+type SaveStatus = "idle" | "saving" | "success" | "error";
+
 type Props = {
   caseId: string;
   selectedEvent: any;
@@ -51,6 +53,8 @@ export default function Episode3TextPanel({
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+  const [saveMessage, setSaveMessage] = useState("");
 
   const [recording, setRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
@@ -72,6 +76,8 @@ export default function Episode3TextPanel({
       ...prev,
       [eventId]: nextText,
     }));
+    setSaveStatus("idle");
+    setSaveMessage("");
   }
 
   async function startVoiceNote() {
@@ -126,6 +132,8 @@ export default function Episode3TextPanel({
       recognition.onerror = (event: any) => {
         console.error("Speech recognition error:", event);
         setError("Speech recognition error. Please try again or type directly.");
+        setSaveStatus("error");
+        setSaveMessage("Speech recognition failed.");
         setRecording(false);
       };
 
@@ -158,6 +166,8 @@ export default function Episode3TextPanel({
     } catch (e: any) {
       console.error("Failed to start voice note:", e);
       setError(e?.message ?? "Failed to start voice note.");
+      setSaveStatus("error");
+      setSaveMessage(e?.message ?? "Failed to start voice note.");
       setRecording(false);
     }
   }
@@ -176,13 +186,18 @@ export default function Episode3TextPanel({
     const currentText = freeText.trim();
 
     if (!currentText) {
-      setError("Please provide a free-text annotation before saving.");
+      const message = "Please provide a free-text annotation before saving.";
+      setError(message);
+      setSaveStatus("error");
+      setSaveMessage(message);
       return;
     }
 
     try {
       setSaving(true);
       setError(null);
+      setSaveStatus("saving");
+      setSaveMessage("Saving annotation...");
 
       const submittedAt = new Date().toISOString();
 
@@ -263,19 +278,24 @@ export default function Episode3TextPanel({
         },
       });
 
+      setSaveStatus("success");
+      setSaveMessage("Saved successfully.");
       onSaveAndNextStep();
     } catch (e: any) {
       console.error("Failed to save merged episode reasoning:", e);
-      setError(e?.message ?? "Failed to save annotation.");
+      const message = e?.message ?? "Failed to save annotation.";
+      setError(message);
+      setSaveStatus("error");
+      setSaveMessage(message);
     } finally {
       setSaving(false);
     }
   }
 
   return (
-    <div className="rounded-2xl border bg-white p-6">
+    <div className="space-y-5">
       {episodeList.length > 0 && (
-        <div className="mb-5 rounded-xl border bg-gray-50 p-4">
+        <div className="mb-5 bg-gray-50 p-4">
           <div className="mb-3 text-sm font-bold text-gray-900">
             Selected episodes for annotation
           </div>
@@ -340,17 +360,12 @@ export default function Episode3TextPanel({
 
       {selectedEvent && (
         <div className="mb-4 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+          <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-3">
             <div>
               <span className="font-semibold">Episode:</span>{" "}
               {selectedEvent.episodeLabel ??
                 selectedEvent.title ??
                 "Selected event"}
-            </div>
-
-            <div>
-              <span className="font-semibold">Vital:</span>{" "}
-              {selectedEvent.vital ?? "N/A"}
             </div>
 
             <div>
@@ -372,12 +387,6 @@ export default function Episode3TextPanel({
         className="min-h-[320px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         placeholder="Example: The patient developed hypotension shortly after induction. The likely mechanism was vasodilation from anesthetic agents, possibly compounded by relative hypovolemia. Phenylephrine boluses were clinically relevant and produced a transient MAP increase, but the effect was not sustained..."
       />
-
-      {error && (
-        <div className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-          {error}
-        </div>
-      )}
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-3">
@@ -404,6 +413,8 @@ export default function Episode3TextPanel({
             onClick={() => {
               setCurrentFreeText("");
               setError(null);
+              setSaveStatus("idle");
+              setSaveMessage("");
             }}
             className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
           >
@@ -411,18 +422,34 @@ export default function Episode3TextPanel({
           </button>
         </div>
 
-        <button
-          type="button"
-          onClick={handleSave}
-          disabled={saving || !freeText.trim()}
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            saving || !freeText.trim()
-              ? "cursor-not-allowed bg-blue-300"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {saving ? "Saving..." : "Save & Next Episode"}
-        </button>
+        <div className="flex flex-col items-end gap-2">
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={saving || !freeText.trim()}
+            className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+              saving || !freeText.trim()
+                ? "cursor-not-allowed bg-blue-300"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {saving ? "Saving..." : "Save & Next Episode"}
+          </button>
+
+          {saveStatus !== "idle" && saveMessage && (
+            <div
+              className={`text-sm font-medium ${
+                saveStatus === "success"
+                  ? "text-green-700"
+                  : saveStatus === "error"
+                    ? "text-red-700"
+                    : "text-gray-500"
+              }`}
+            >
+              {saveMessage}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
