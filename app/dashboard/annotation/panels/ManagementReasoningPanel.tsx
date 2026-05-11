@@ -493,7 +493,7 @@ export default function ManagementReasoningPanel({
       <div className="mt-6 space-y-4">
         <div className="rounded-2xl border p-5">
           <div className="text-base font-semibold text-gray-900">
-            Task 1. Why was this intervention given at this moment?
+            Task 1. Why was this intervention given at this moment? (Highlighted a 15 mins window around this intervention and you can refer to broaden context if needed.)
           </div>
 
           <textarea

@@ -22,7 +22,16 @@ type DriveUploadResult = {
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const DRIVE_UPLOAD_API = "https://www.googleapis.com/upload/drive/v3";
-const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
+
+/**
+ * Use full Drive scope instead of drive.file.
+ *
+ * drive.file can be too restrictive for Shared Drive workflows,
+ * especially when the service account needs to search existing folders,
+ * create nested folders, and update existing JSON files.
+ */
+const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
+
 const FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
 
 let accessTokenPromise: Promise<string> | null = null;
@@ -33,6 +42,7 @@ export function isDriveUploadEnabled(): boolean {
 
 function base64Url(value: string | Buffer): string {
   const buffer = Buffer.isBuffer(value) ? value : Buffer.from(value);
+
   return buffer
     .toString("base64")
     .replace(/=/g, "")
@@ -53,6 +63,13 @@ async function loadServiceAccountCredentials(): Promise<ServiceAccountCredential
 
   if (inlineKey?.trim()) {
     const parsed = JSON.parse(inlineKey) as ServiceAccountCredentials;
+
+    if (!parsed.client_email || !parsed.private_key) {
+      throw new Error(
+        "DRIVE_SERVICE_ACCOUNT_KEY is present but missing client_email or private_key."
+      );
+    }
+
     return {
       client_email: parsed.client_email,
       private_key: parsed.private_key.replace(/\\n/g, "\n"),
@@ -60,9 +77,17 @@ async function loadServiceAccountCredentials(): Promise<ServiceAccountCredential
   }
 
   const keyPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
   if (keyPath?.trim()) {
     const raw = await fs.readFile(keyPath, "utf-8");
     const parsed = JSON.parse(raw) as ServiceAccountCredentials;
+
+    if (!parsed.client_email || !parsed.private_key) {
+      throw new Error(
+        "GOOGLE_APPLICATION_CREDENTIALS file is missing client_email or private_key."
+      );
+    }
+
     return {
       client_email: parsed.client_email,
       private_key: parsed.private_key.replace(/\\n/g, "\n"),
@@ -85,12 +110,14 @@ async function getDriveAccessToken(): Promise<string> {
     }
 
     const now = Math.floor(Date.now() / 1000);
+
     const header = base64Url(
       JSON.stringify({
         alg: "RS256",
         typ: "JWT",
       })
     );
+
     const payload = base64Url(
       JSON.stringify({
         iss: credentials.client_email,
@@ -102,9 +129,11 @@ async function getDriveAccessToken(): Promise<string> {
     );
 
     const unsignedJwt = `${header}.${payload}`;
+
     const signature = createSign("RSA-SHA256")
       .update(unsignedJwt)
       .sign(credentials.private_key);
+
     const assertion = `${unsignedJwt}.${base64Url(signature)}`;
 
     const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
@@ -120,11 +149,16 @@ async function getDriveAccessToken(): Promise<string> {
 
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
+      accessTokenPromise = null;
       throw new Error(`Failed to get Drive access token: ${errorText}`);
     }
 
-    const tokenJson = (await tokenResponse.json()) as { access_token?: string };
+    const tokenJson = (await tokenResponse.json()) as {
+      access_token?: string;
+    };
+
     if (!tokenJson.access_token) {
+      accessTokenPromise = null;
       throw new Error("Google token response did not include access_token.");
     }
 
@@ -139,6 +173,7 @@ async function driveRequest<T>(
   init: RequestInit = {}
 ): Promise<T> {
   const token = await getDriveAccessToken();
+
   const response = await fetch(url, {
     ...init,
     headers: {
@@ -149,7 +184,16 @@ async function driveRequest<T>(
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Drive API request failed (${response.status}): ${errorText}`);
+
+    console.error("[Drive] API request failed:", {
+      status: response.status,
+      url,
+      errorText,
+    });
+
+    throw new Error(
+      `Drive API request failed (${response.status}): ${errorText}`
+    );
   }
 
   return (await response.json()) as T;
@@ -189,6 +233,11 @@ async function createDriveFolder(
   parentFolderId: string,
   name: string
 ): Promise<DriveFile> {
+  console.log("[Drive] creating folder:", {
+    parentFolderId,
+    name,
+  });
+
   return driveRequest<DriveFile>(`${DRIVE_API}/files?supportsAllDrives=true`, {
     method: "POST",
     headers: {
@@ -210,11 +259,13 @@ async function ensureDriveFolderPath(
 
   for (const rawPart of folderParts) {
     const part = sanitizeDrivePathPart(rawPart);
+
     const existing = await findDriveFileByName(
       currentFolderId,
       part,
       FOLDER_MIME_TYPE
     );
+
     if (existing) {
       currentFolderId = existing.id;
       continue;
@@ -234,6 +285,7 @@ function buildMultipartBody(
   const boundary = `drive_upload_${Date.now()}_${Math.random()
     .toString(36)
     .slice(2)}`;
+
   const body = [
     `--${boundary}`,
     "Content-Type: application/json; charset=UTF-8",
@@ -259,14 +311,25 @@ async function upsertDriveJsonFile(
   data: Record<string, unknown>
 ): Promise<DriveFile> {
   const existing = await findDriveFileByName(parentFolderId, fileName);
-  const metadata = {
+
+  const metadata: Record<string, unknown> = {
     name: fileName,
     mimeType: "application/json",
-    parents: existing ? undefined : [parentFolderId],
   };
+
+  if (!existing) {
+    metadata.parents = [parentFolderId];
+  }
+
   const multipart = buildMultipartBody(metadata, data);
 
   if (existing) {
+    console.log("[Drive] updating existing JSON file:", {
+      fileId: existing.id,
+      fileName,
+      parentFolderId,
+    });
+
     return driveRequest<DriveFile>(
       `${DRIVE_UPLOAD_API}/files/${existing.id}?uploadType=multipart&fields=id,name,webViewLink&supportsAllDrives=true`,
       {
@@ -278,6 +341,11 @@ async function upsertDriveJsonFile(
       }
     );
   }
+
+  console.log("[Drive] creating new JSON file:", {
+    fileName,
+    parentFolderId,
+  });
 
   return driveRequest<DriveFile>(
     `${DRIVE_UPLOAD_API}/files?uploadType=multipart&fields=id,name,webViewLink&supportsAllDrives=true`,
@@ -300,6 +368,14 @@ export async function uploadJsonToDrive({
 }): Promise<DriveUploadResult> {
   const rootFolderId = process.env.DRIVE_FOLDER_ID;
 
+  console.log("[Drive] uploadJsonToDrive called:", {
+    enabled: process.env.DRIVE_ENABLED,
+    rootFolderId,
+    objectPath,
+    hasGoogleCredentials: Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+    hasInlineKey: Boolean(process.env.DRIVE_SERVICE_ACCOUNT_KEY),
+  });
+
   if (!isDriveUploadEnabled()) {
     throw new Error("DRIVE_ENABLED is not true.");
   }
@@ -311,8 +387,17 @@ export async function uploadJsonToDrive({
   const pathParts = objectPath.split("/").filter(Boolean);
   const rawFileName = pathParts.pop() ?? "submission.json";
   const fileName = sanitizeDrivePathPart(rawFileName);
+
   const folderId = await ensureDriveFolderPath(rootFolderId, pathParts);
   const file = await upsertDriveJsonFile(folderId, fileName, data);
+
+  console.log("[Drive] upload success:", {
+    fileId: file.id,
+    fileName,
+    folderId,
+    objectPath,
+    webViewLink: file.webViewLink,
+  });
 
   return {
     fileId: file.id,

@@ -39,6 +39,10 @@ type SubmitPayload = {
   response?: unknown;
   notes?: unknown;
   confidence?: unknown;
+
+  annotationState?: Record<string, unknown> | null;
+
+  [key: string]: unknown;
 };
 
 export async function submitAnnotation(payload: SubmitPayload) {
@@ -51,8 +55,7 @@ export async function submitAnnotation(payload: SubmitPayload) {
   const pageOpenedAt = payload.pageOpenedAt ?? payload.panelOpenedAt ?? null;
   const panelOpenedAt = payload.panelOpenedAt ?? payload.pageOpenedAt ?? null;
 
-  // ===== DEMO MODE: 不写后端，直接返回成功 =====
-  console.log("[DEMO MODE] submitAnnotation skipped backend save:", {
+  const normalizedPayload: SubmitPayload = {
     ...payload,
     patientId,
     patientFolder,
@@ -60,20 +63,56 @@ export async function submitAnnotation(payload: SubmitPayload) {
     panelOpenedAt,
     submittedAt,
     clickedAt,
+  };
+
+  console.log("[submitAnnotation] sending payload to /api/submit:", {
+    panel: normalizedPayload.panel,
+    action: normalizedPayload.action,
+    task: normalizedPayload.task ?? null,
+    patientId: normalizedPayload.patientId,
+    patientFolder: normalizedPayload.patientFolder,
+    caseId: normalizedPayload.caseId ?? null,
+    eventId: normalizedPayload.eventId ?? null,
+    episodeId: normalizedPayload.episodeId ?? null,
+    episodeNumber: normalizedPayload.episodeNumber ?? null,
+    episodeFolder: normalizedPayload.episodeFolder ?? null,
   });
 
-  return {
-    ok: true,
-    demo: true,
-    skippedBackend: true,
-    saved: {
-      patientId,
-      patientFolder,
-      panel: payload.panel,
-      action: payload.action,
-      task: payload.task ?? null,
-      submittedAt,
-      clickedAt,
+  const res = await fetch("/api/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  };
+    body: JSON.stringify(normalizedPayload),
+  });
+
+  let data: any = null;
+
+  try {
+    data = await res.json();
+  } catch {
+    data = null;
+  }
+
+  if (!res.ok || !data?.ok) {
+    console.error("[submitAnnotation] backend save failed:", {
+      status: res.status,
+      statusText: res.statusText,
+      data,
+    });
+
+    throw new Error(
+      data?.error ??
+        `Failed to save annotation: ${res.status} ${res.statusText}`
+    );
+  }
+
+  console.log("[submitAnnotation] backend save success:", {
+    panel: normalizedPayload.panel,
+    action: normalizedPayload.action,
+    task: normalizedPayload.task ?? null,
+    drive: data?.drive ?? null,
+  });
+
+  return data;
 }

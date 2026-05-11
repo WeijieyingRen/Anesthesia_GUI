@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { Storage } from "@google-cloud/storage";
 import fs from "fs/promises";
 import path from "path";
 import { isDriveUploadEnabled, uploadJsonToDrive } from "@/lib/drive-upload";
@@ -24,7 +23,7 @@ type SubmitBody = {
   caseId?: string | number | null;
   eventId?: string | number | null;
   selectedEventId?: string | number | null;
-  episodeId?: string | null;
+  episodeId?: string | number | null;
 
   episodeNumber?: number | string | null;
   episodeFolder?: string | null;
@@ -55,21 +54,19 @@ type SubmitBody = {
   [key: string]: unknown;
 };
 
-type CaseStatusIndexEntry = {
-  completed: boolean;
-  inProgress: boolean;
-  case_id: string | number | null;
-  updated_at: string;
+type StorageTarget = {
+  section:
+    | "summary"
+    | "abnormality_reasoning"
+    | "management_reasoning"
+    | "case_submission";
+  taskFolder?: "detection" | "mechanism" | "intervention";
+  fileName: string;
+  episodeFolder?: string;
 };
-
-type CaseStatusIndexFile = {
-  updated_at: string;
-  patients: Record<string, CaseStatusIndexEntry>;
-};
-
-const storage = new Storage();
 
 let supabaseClient: SupabaseClient | null = null;
+
 function getSupabaseClient(): SupabaseClient | null {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -87,7 +84,13 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
   if (accessCodeDoctorMapPromise) return accessCodeDoctorMapPromise;
 
   accessCodeDoctorMapPromise = (async () => {
-    const csvPath = path.join(process.cwd(), "public", "data", "access_code.csv");
+    const csvPath = path.join(
+      process.cwd(),
+      "public",
+      "data",
+      "access_code.csv"
+    );
+
     const raw = await fs.readFile(csvPath, "utf-8");
     const lines = raw.split(/\r?\n/).filter(Boolean);
 
@@ -104,6 +107,7 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
       const cols = line.split(",");
       const code = String(cols[codeIdx] ?? "").trim();
       const doctor = String(cols[doctorIdx] ?? "").trim();
+
       if (code && doctor) {
         map.set(code, doctor);
       }
@@ -142,26 +146,6 @@ function toTimestampMs(value: unknown): number | null {
   }
 
   return null;
-}
-
-function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
-  if (
-    body.answers &&
-    typeof body.answers === "object" &&
-    !Array.isArray(body.answers)
-  ) {
-    return body.answers;
-  }
-
-  const fallbackAnswers: Record<string, unknown> = {};
-
-  if (body.summary !== undefined) fallbackAnswers.summary = body.summary;
-  if (body.result !== undefined) fallbackAnswers.result = body.result;
-  if (body.response !== undefined) fallbackAnswers.response = body.response;
-  if (body.notes !== undefined) fallbackAnswers.notes = body.notes;
-  if (body.confidence !== undefined) fallbackAnswers.confidence = body.confidence;
-
-  return Object.keys(fallbackAnswers).length > 0 ? fallbackAnswers : null;
 }
 
 function sanitizePathPart(value: unknown): string {
@@ -219,6 +203,7 @@ function normalizePatientId(body: SubmitBody): string {
 
 function normalizeEpisodeFolder(body: SubmitBody): string {
   const explicitEpisodeFolder = body.episodeFolder;
+
   if (explicitEpisodeFolder) {
     const cleaned = sanitizePathPart(explicitEpisodeFolder);
     if (/^episode_\d+$/i.test(cleaned)) return cleaned;
@@ -226,6 +211,7 @@ function normalizeEpisodeFolder(body: SubmitBody): string {
   }
 
   const episodeNumber = body.episodeNumber;
+
   if (
     episodeNumber !== null &&
     episodeNumber !== undefined &&
@@ -248,16 +234,99 @@ function normalizeEpisodeFolder(body: SubmitBody): string {
   return `episode_${cleaned}`;
 }
 
-function detectStorageTarget(body: SubmitBody): {
-  section:
-    | "summary"
-    | "abnormality_reasoning"
-    | "management_reasoning"
-    | "case_submission";
-  taskFolder?: "detection" | "mechanism" | "intervention";
-  fileName: string;
-  episodeFolder?: string;
-} {
+function removeNullFields<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value.map((item) => removeNullFields(item)) as T;
+  }
+
+  if (value && typeof value === "object") {
+    const cleaned: Record<string, unknown> = {};
+
+    for (const [key, val] of Object.entries(value as Record<string, unknown>)) {
+      if (val === null || val === undefined) continue;
+      cleaned[key] = removeNullFields(val);
+    }
+
+    return cleaned as T;
+  }
+
+  return value;
+}
+
+function cleanAnnotationState(
+  annotationState: Record<string, unknown> | null | undefined
+): Record<string, unknown> | null {
+  if (
+    !annotationState ||
+    typeof annotationState !== "object" ||
+    Array.isArray(annotationState)
+  ) {
+    return null;
+  }
+
+  const blockedKeys = new Set([
+    "annotationLevel",
+    "selectedTask",
+    "selectedDetectVital",
+    "selectedWindow",
+  ]);
+
+  const cleaned: Record<string, unknown> = {};
+
+  for (const [key, value] of Object.entries(annotationState)) {
+    if (blockedKeys.has(key)) continue;
+    cleaned[key] = value;
+  }
+
+  return removeNullFields(cleaned);
+}
+
+function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
+  if (
+    body.answers &&
+    typeof body.answers === "object" &&
+    !Array.isArray(body.answers)
+  ) {
+    return cleanAnswers(body.answers, body);
+  }
+
+  const fallbackAnswers: Record<string, unknown> = {};
+
+  if (body.summary !== undefined) fallbackAnswers.summary = body.summary;
+  if (body.result !== undefined) fallbackAnswers.result = body.result;
+  if (body.response !== undefined) fallbackAnswers.response = body.response;
+  if (body.notes !== undefined) fallbackAnswers.notes = body.notes;
+  if (body.confidence !== undefined) fallbackAnswers.confidence = body.confidence;
+
+  return Object.keys(fallbackAnswers).length > 0
+    ? removeNullFields(fallbackAnswers)
+    : null;
+}
+
+function cleanAnswers(
+  answers: Record<string, unknown>,
+  body: SubmitBody
+): Record<string, unknown> {
+  const panel = String(body.panel ?? "").toLowerCase();
+  const task = String(body.task ?? "").toLowerCase();
+  const combined = `${panel} ${task}`;
+
+  const cloned: Record<string, unknown> = { ...answers };
+
+  // For selection overview, the task block repeats allDetectedEpisodes and
+  // selectedEpisodes. Keep the direct fields because they are easier to analyze.
+  if (
+    combined.includes("selection_overview") ||
+    combined.includes("abnormality_reasoning_selection") ||
+    combined.includes("checklist")
+  ) {
+    delete cloned.tasks;
+  }
+
+  return removeNullFields(cloned);
+}
+
+function detectStorageTarget(body: SubmitBody): StorageTarget {
   const panel = String(body.panel ?? "").toLowerCase();
   const action = String(body.action ?? "").toLowerCase();
   const task = String(body.task ?? "").toLowerCase();
@@ -327,9 +396,13 @@ function detectStorageTarget(body: SubmitBody): {
     };
   }
 
-  if (combined.includes("abnormality")) {
+  if (
+    combined.includes("merged_episode_reasoning") ||
+    combined.includes("abnormality")
+  ) {
     return {
       section: "abnormality_reasoning",
+      episodeFolder: normalizeEpisodeFolder(body),
       fileName: "abnormality_reasoning.json",
     };
   }
@@ -340,7 +413,7 @@ function detectStorageTarget(body: SubmitBody): {
   };
 }
 
-async function buildGcsObjectPath(body: SubmitBody): Promise<string> {
+async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
   const doctorId = await normalizeDoctorId(body);
   const accessCode = normalizeAccessCode(body);
   const patientId = normalizePatientId(body);
@@ -361,215 +434,18 @@ async function buildGcsObjectPath(body: SubmitBody): Promise<string> {
   }
 
   if (target.section === "abnormality_reasoning") {
-    if (!target.episodeFolder && !target.taskFolder) {
-      return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.fileName}`;
+    if (target.episodeFolder && target.taskFolder) {
+      return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.episodeFolder}/${target.taskFolder}/${target.fileName}`;
     }
-  
-    if (!target.episodeFolder || !target.taskFolder) {
-      throw new Error(
-        "Episode folder or task folder missing for abnormality_reasoning."
-      );
+
+    if (target.episodeFolder && !target.taskFolder) {
+      return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.episodeFolder}/${target.fileName}`;
     }
-  
-    return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.episodeFolder}/${target.taskFolder}/${target.fileName}`;
+
+    return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.fileName}`;
   }
 
-  throw new Error("Unsupported storage target.");
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function uploadSubmissionToGCSOnce(
-  body: SubmitBody,
-  data: Record<string, unknown>
-): Promise<{
-  objectName: string;
-}> {
-  const bucketName = process.env.GCS_BUCKET;
-
-  if (!bucketName) {
-    throw new Error("GCS_BUCKET not configured.");
-  }
-
-  const bucket = storage.bucket(bucketName);
-  const objectName = await buildGcsObjectPath(body);
-
-  await bucket.file(objectName).save(JSON.stringify(data, null, 2), {
-    contentType: "application/json",
-    resumable: false,
-    metadata: {
-      cacheControl: "no-store",
-    },
-  });
-
-  return { objectName };
-}
-
-async function uploadSubmissionToGCSWithRetry(
-  body: SubmitBody,
-  data: Record<string, unknown>,
-  options?: {
-    maxAttempts?: number;
-    initialDelayMs?: number;
-  }
-): Promise<{
-  saved: true;
-  objectName: string;
-  attemptsUsed: number;
-}> {
-  const maxAttempts = options?.maxAttempts ?? 3;
-  const initialDelayMs = options?.initialDelayMs ?? 1000;
-
-  let lastError: unknown = null;
-
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    try {
-      const { objectName } = await uploadSubmissionToGCSOnce(body, data);
-      return {
-        saved: true,
-        objectName,
-        attemptsUsed: attempt,
-      };
-    } catch (error) {
-      lastError = error;
-      console.error(`GCS upload attempt ${attempt}/${maxAttempts} failed:`, error);
-
-      if (attempt < maxAttempts) {
-        const waitMs = initialDelayMs * Math.pow(2, attempt - 1);
-        await sleep(waitMs);
-      }
-    }
-  }
-
-  throw new Error(
-    lastError instanceof Error
-      ? `GCS upload failed after ${maxAttempts} attempts: ${lastError.message}`
-      : `GCS upload failed after ${maxAttempts} attempts.`
-  );
-}
-
-function isFinalCaseSubmission(body: SubmitBody): boolean {
-  const hasAnnotationState =
-    body.annotationState &&
-    typeof body.annotationState === "object" &&
-    !Array.isArray(body.annotationState);
-
-  return Boolean(hasAnnotationState && body.caseId);
-}
-
-async function updateCaseStatusIndex(body: SubmitBody): Promise<string | null> {
-  const bucketName = process.env.GCS_BUCKET;
-  if (!bucketName) return null;
-
-  const annotationState =
-    body.annotationState && typeof body.annotationState === "object"
-      ? (body.annotationState as Record<string, any>)
-      : null;
-
-  if (!annotationState) return null;
-
-  const doctorId = await normalizeDoctorId(body);
-  const accessCode = normalizeAccessCode(body);
-  const patientId = normalizePatientId(body);
-
-  const doctorFolder = `${doctorId}_${accessCode}`;
-  const objectName = `${doctorFolder}/case_status_index.json`;
-
-  const patientSummaryCompleted = Boolean(
-    annotationState.patientSummaryCompleted
-  );
-  const managementReasoningCompleted = Boolean(
-    annotationState.managementReasoningCompleted
-  );
-
-  const episodeWorkflow =
-    annotationState.episodeWorkflow &&
-    typeof annotationState.episodeWorkflow === "object"
-      ? annotationState.episodeWorkflow
-      : null;
-
-  const episodeTaskCompletion =
-    annotationState.episodeTaskCompletion &&
-    typeof annotationState.episodeTaskCompletion === "object"
-      ? annotationState.episodeTaskCompletion
-      : {};
-
-  const prioritizedEpisodeIds: string[] = Array.isArray(
-    episodeWorkflow?.prioritizedEpisodeIds
-  )
-    ? episodeWorkflow.prioritizedEpisodeIds
-    : [];
-
-  const abnormalityReasoningCompleted =
-    prioritizedEpisodeIds.length > 0 &&
-    prioritizedEpisodeIds.every((episodeId: string) => {
-      const completed = (episodeTaskCompletion as Record<string, any>)?.[episodeId];
-      return Boolean(
-        completed?.detect && completed?.mechanism && completed?.fluidEval
-      );
-    });
-
-  const finalSubmitted =
-    patientSummaryCompleted &&
-    managementReasoningCompleted &&
-    abnormalityReasoningCompleted;
-
-  const inProgress =
-    !finalSubmitted &&
-    (patientSummaryCompleted ||
-      managementReasoningCompleted ||
-      prioritizedEpisodeIds.length > 0);
-
-  const nowIso = new Date().toISOString();
-  const bucket = storage.bucket(bucketName);
-  const file = bucket.file(objectName);
-
-  let indexData: CaseStatusIndexFile = {
-    updated_at: nowIso,
-    patients: {},
-  };
-
-  try {
-    const [exists] = await file.exists();
-    if (exists) {
-      const [buf] = await file.download();
-      const parsed = JSON.parse(buf.toString("utf-8"));
-      if (
-        parsed &&
-        typeof parsed === "object" &&
-        !Array.isArray(parsed) &&
-        parsed.patients &&
-        typeof parsed.patients === "object"
-      ) {
-        indexData = {
-          updated_at: String(parsed.updated_at ?? nowIso),
-          patients: parsed.patients as Record<string, CaseStatusIndexEntry>,
-        };
-      }
-    }
-  } catch (error) {
-    console.error("Failed to read existing case_status_index.json:", error);
-  }
-
-  indexData.updated_at = nowIso;
-  indexData.patients[patientId] = {
-    completed: finalSubmitted,
-    inProgress,
-    case_id: body.caseId ?? null,
-    updated_at: nowIso,
-  };
-
-  await file.save(JSON.stringify(indexData, null, 2), {
-    contentType: "application/json",
-    resumable: false,
-    metadata: {
-      cacheControl: "no-store",
-    },
-  });
-
-  return objectName;
+  throw new Error("Unsupported Drive storage target.");
 }
 
 export async function POST(req: Request) {
@@ -585,7 +461,6 @@ export async function POST(req: Request) {
       "SUPABASE_SERVICE_ROLE_KEY =",
       process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "missing"
     );
-    console.log("GCS_BUCKET =", process.env.GCS_BUCKET || "missing");
     console.log(
       "DRIVE_ENABLED =",
       process.env.DRIVE_ENABLED === "true" ? "true" : "false"
@@ -593,6 +468,14 @@ export async function POST(req: Request) {
     console.log(
       "DRIVE_FOLDER_ID =",
       process.env.DRIVE_FOLDER_ID ? "configured" : "missing"
+    );
+    console.log(
+      "GOOGLE_APPLICATION_CREDENTIALS =",
+      process.env.GOOGLE_APPLICATION_CREDENTIALS ? "configured" : "missing"
+    );
+    console.log(
+      "DRIVE_SERVICE_ACCOUNT_KEY =",
+      process.env.DRIVE_SERVICE_ACCOUNT_KEY ? "configured" : "missing"
     );
 
     const body = (await req.json()) as SubmitBody;
@@ -616,17 +499,25 @@ export async function POST(req: Request) {
     const task = body?.task ?? null;
     const panel = body?.panel ?? null;
 
-    const pageOpenedAtMs = toTimestampMs(body?.pageOpenedAt ?? body?.panelOpenedAt);
+    const pageOpenedAtMs = toTimestampMs(
+      body?.pageOpenedAt ?? body?.panelOpenedAt
+    );
     const firstInteractionAtMs = toTimestampMs(body?.firstInteractionAt);
     const firstTypingAtMs = toTimestampMs(body?.firstTypingAt);
     const firstVoiceStartAtMs = toTimestampMs(body?.firstVoiceStartAt);
-    const pageSubmittedAtMs = toTimestampMs(body?.submittedAt ?? body?.clickedAt);
+    const pageSubmittedAtMs = toTimestampMs(
+      body?.submittedAt ?? body?.clickedAt
+    );
 
-    const pageOpenedAtIso = toIsoTime(body?.pageOpenedAt ?? body?.panelOpenedAt);
+    const pageOpenedAtIso = toIsoTime(
+      body?.pageOpenedAt ?? body?.panelOpenedAt
+    );
     const firstInteractionAtIso = toIsoTime(body?.firstInteractionAt);
     const firstTypingAtIso = toIsoTime(body?.firstTypingAt);
     const firstVoiceStartAtIso = toIsoTime(body?.firstVoiceStartAt);
-    const pageSubmittedAtIso = toIsoTime(body?.submittedAt ?? body?.clickedAt);
+    const pageSubmittedAtIso = toIsoTime(
+      body?.submittedAt ?? body?.clickedAt
+    );
 
     const responseTimeSec =
       pageOpenedAtMs !== null && pageSubmittedAtMs !== null
@@ -654,8 +545,9 @@ export async function POST(req: Request) {
     const accessCode = normalizeAccessCode(body);
     const patientId = normalizePatientId(body);
     const target = detectStorageTarget(body);
+    const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
 
-    const compactPayload = {
+    const compactPayload = removeNullFields({
       annotator_name: annotatorName,
       annotator_email: annotatorEmail,
       doctor_id: doctorId,
@@ -672,6 +564,7 @@ export async function POST(req: Request) {
       task,
       storage_target: target,
       answers,
+      annotation_state: cleanedAnnotationState,
       timing: {
         page_opened_at: pageOpenedAtIso,
         first_interaction_at: firstInteractionAtIso,
@@ -685,7 +578,7 @@ export async function POST(req: Request) {
         panel_opened_at_legacy: toIsoTime(body?.panelOpenedAt),
         clicked_at_legacy: toIsoTime(body?.clickedAt),
       },
-    };
+    });
 
     const insertRow = {
       annotator_name: annotatorName,
@@ -700,7 +593,7 @@ export async function POST(req: Request) {
       payload: compactPayload,
     };
 
-    const gcsRecord = {
+    const driveRecord = removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
       patient_id: patientId,
@@ -715,10 +608,7 @@ export async function POST(req: Request) {
       task,
       saved_at: new Date().toISOString(),
       answers,
-      annotation_state:
-        body.annotationState && typeof body.annotationState === "object"
-          ? body.annotationState
-          : null,
+      annotation_state: cleanedAnnotationState,
       timing: {
         page_opened_at: pageOpenedAtIso,
         first_interaction_at: firstInteractionAtIso,
@@ -730,13 +620,14 @@ export async function POST(req: Request) {
         typing_to_submit_sec: typingToSubmitSec,
         voice_to_submit_sec: voiceToSubmitSec,
       },
-    };
+    });
 
     const supabasePromise = (async () => {
       let saved = false;
       let warning: string | null = null;
 
       const supabase = getSupabaseClient();
+
       if (!supabase) {
         console.warn("Supabase env vars missing, skip Supabase save.");
         warning = "Supabase env vars missing, skipped Supabase save.";
@@ -761,24 +652,7 @@ export async function POST(req: Request) {
       return { saved, warning };
     })();
 
-    const storageObjectName = await buildGcsObjectPath(body);
-
-    let gcsResult: {
-      saved: true;
-      objectName: string;
-      attemptsUsed: number;
-    } | null = null;
-    let gcsWarning: string | null = null;
-
-    if (process.env.GCS_BUCKET) {
-      gcsResult = await uploadSubmissionToGCSWithRetry(body, gcsRecord, {
-        maxAttempts: 3,
-        initialDelayMs: 1000,
-      });
-    } else {
-      gcsWarning = "GCS_BUCKET not configured, skipped GCS save.";
-      console.warn(gcsWarning);
-    }
+    const driveObjectPath = await buildDriveObjectPath(body);
 
     let driveResult: {
       saved: boolean;
@@ -795,60 +669,32 @@ export async function POST(req: Request) {
       fileId: null,
       fileName: null,
       folderId: null,
-      objectPath: null,
+      objectPath: driveObjectPath,
       webViewLink: null,
       warning: isDriveUploadEnabled()
         ? null
         : "DRIVE_ENABLED is not true, skipped Drive save.",
     };
 
-    if (isDriveUploadEnabled()) {
-      try {
-        const uploaded = await uploadJsonToDrive({
-          objectPath: storageObjectName,
-          data: gcsRecord,
-        });
-        driveResult = {
-          saved: true,
-          skipped: false,
-          fileId: uploaded.fileId,
-          fileName: uploaded.fileName,
-          folderId: uploaded.folderId,
-          objectPath: uploaded.objectPath,
-          webViewLink: uploaded.webViewLink ?? null,
-          warning: null,
-        };
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Unknown Drive upload error.";
-        console.error("Drive upload failed:", error);
-
-        if (process.env.DRIVE_REQUIRE_SUCCESS === "true") {
-          throw error;
-        }
-
-        driveResult = {
-          saved: false,
-          skipped: false,
-          fileId: null,
-          fileName: null,
-          folderId: null,
-          objectPath: storageObjectName,
-          webViewLink: null,
-          warning: message,
-        };
-      }
+    if (!isDriveUploadEnabled()) {
+      throw new Error("DRIVE_ENABLED is not true. Google Drive save skipped.");
     }
 
-    let caseStatusIndexObjectName: string | null = null;
+    const uploaded = await uploadJsonToDrive({
+      objectPath: driveObjectPath,
+      data: driveRecord,
+    });
 
-    if (process.env.GCS_BUCKET && isFinalCaseSubmission(body)) {
-      try {
-        caseStatusIndexObjectName = await updateCaseStatusIndex(body);
-      } catch (error) {
-        console.error("Failed to update case_status_index.json:", error);
-      }
-    }
+    driveResult = {
+      saved: true,
+      skipped: false,
+      fileId: uploaded.fileId,
+      fileName: uploaded.fileName,
+      folderId: uploaded.folderId,
+      objectPath: uploaded.objectPath,
+      webViewLink: uploaded.webViewLink ?? null,
+      warning: null,
+    };
 
     const supabaseResult = await supabasePromise;
 
@@ -857,7 +703,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       ok: true,
-      saved: {
+      saved: removeNullFields({
         doctorId,
         accessCode,
         patientId,
@@ -871,26 +717,17 @@ export async function POST(req: Request) {
         typingToSubmitSec,
         voiceToSubmitSec,
         totalServerSec,
-      },
+      }),
       supabase: {
         saved: supabaseResult.saved,
         warning: supabaseResult.warning,
       },
-      gcs: {
-        attempted: Boolean(process.env.GCS_BUCKET),
-        saved: Boolean(gcsResult?.saved),
-        skipped: !process.env.GCS_BUCKET,
-        bucket: process.env.GCS_BUCKET ?? null,
-        objectName: gcsResult?.objectName ?? storageObjectName,
-        attemptsUsed: gcsResult?.attemptsUsed ?? 0,
-        caseStatusIndexObjectName,
-        warning: gcsWarning,
-      },
       drive: driveResult,
-      debug_version: "gcs-drive-folder-structure-v14",
+      debug_version: "drive-only-clean-submit-route-v2",
     });
   } catch (error) {
     console.error("Submit route error:", error);
+
     return NextResponse.json(
       {
         ok: false,

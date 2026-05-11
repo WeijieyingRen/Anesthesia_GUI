@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-import { Storage } from "@google-cloud/storage";
 import fs from "fs/promises";
 import path from "path";
-
-const storage = new Storage();
 
 type AccessCodeRow = {
   doctor_id?: string;
@@ -21,7 +18,13 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
   if (accessCodeDoctorMapPromise) return accessCodeDoctorMapPromise;
 
   accessCodeDoctorMapPromise = (async () => {
-    const csvPath = path.join(process.cwd(), "public", "data", "access_code.csv");
+    const csvPath = path.join(
+      process.cwd(),
+      "public",
+      "data",
+      "access_code.csv"
+    );
+
     const raw = await fs.readFile(csvPath, "utf-8");
     const lines = raw.split(/\r?\n/).filter(Boolean);
 
@@ -36,6 +39,7 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
 
     for (const line of lines.slice(1)) {
       const cols = line.split(",");
+
       const row: AccessCodeRow = {
         doctor_id: cols[doctorIdx],
         access_code: cols[codeIdx],
@@ -73,27 +77,8 @@ function buildDoctorFolder(doctorId: string, accessCode: string) {
   return `${sanitizePathPart(doctorId)}_${sanitizePathPart(accessCode)}`;
 }
 
-async function readJsonIfExists(bucketName: string, objectName: string) {
-  const bucket = storage.bucket(bucketName);
-  const file = bucket.file(objectName);
-
-  const [exists] = await file.exists();
-  if (!exists) return null;
-
-  const [buf] = await file.download();
-  return JSON.parse(buf.toString("utf-8"));
-}
-
 export async function GET(req: Request) {
   try {
-    const bucketName = process.env.GCS_BUCKET;
-    if (!bucketName) {
-      return NextResponse.json(
-        { ok: false, error: "GCS_BUCKET not configured." },
-        { status: 500 }
-      );
-    }
-
     const { searchParams } = new URL(req.url);
     const accessCode = String(searchParams.get("accessCode") ?? "").trim();
 
@@ -105,6 +90,7 @@ export async function GET(req: Request) {
     }
 
     const doctorId = await resolveDoctorIdFromAccessCode(accessCode);
+
     if (!doctorId) {
       return NextResponse.json(
         { ok: false, error: "Invalid accessCode or doctor not found." },
@@ -113,42 +99,20 @@ export async function GET(req: Request) {
     }
 
     const doctorFolder = buildDoctorFolder(doctorId, accessCode);
-    const objectName = `${doctorFolder}/case_status_index.json`;
-
-    const indexData = await readJsonIfExists(bucketName, objectName);
-
-    if (!indexData) {
-      return NextResponse.json({
-        ok: true,
-        found: false,
-        source: "case_status_index",
-        doctorId,
-        accessCode,
-        patients: {},
-        raw: null,
-      });
-    }
-
-    const patients =
-      indexData &&
-      typeof indexData === "object" &&
-      !Array.isArray(indexData) &&
-      indexData.patients &&
-      typeof indexData.patients === "object"
-        ? indexData.patients
-        : {};
 
     return NextResponse.json({
       ok: true,
-      found: true,
-      source: "case_status_index",
+      found: false,
+      source: "local_access_code_only",
       doctorId,
       accessCode,
-      patients,
-      raw: indexData,
+      doctorFolder,
+      patients: {},
+      raw: null,
     });
   } catch (error) {
     console.error("case_status GET error:", error);
+
     return NextResponse.json(
       {
         ok: false,
