@@ -290,6 +290,7 @@ export default function ManagementReasoningPanel({
         (managementEvent as any).event_id ??
           `${managementEvent.row_name ?? "management"}_${managementEvent.time_min ?? "unknown"}`
       ) || "management_event_unknown";
+      
 
       await submitAnnotation({
         doctorId,

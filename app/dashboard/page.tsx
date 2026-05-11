@@ -67,8 +67,6 @@ type EpisodeTaskCompletionMap = Record<
 
 const EPISODE_TASK_ORDER: AnnotationTaskKey[] = [
   "detect",
-  "mechanism",
-  "fluidEval",
 ];
 
 function SectionCard({
@@ -465,8 +463,8 @@ export default function DashboardPage() {
       y2: activeEpisode.y2,
       completed: {
         detect: completed?.detect ?? false,
-        mechanism: completed?.mechanism ?? false,
-        fluidEval: completed?.fluidEval ?? false,
+        mechanism: false,
+        fluidEval: false,
       },
     };
   }, [activeEpisode, episodeTaskCompletion]);
@@ -496,11 +494,7 @@ export default function DashboardPage() {
   episodeState.prioritizedEpisodeIds.length > 0 &&
   prioritizedEpisodes.every((episode) => {
     const completed = episodeTaskCompletion[episode.id];
-    return (
-      completed?.detect &&
-      completed?.mechanism &&
-      completed?.fluidEval
-    );
+    return Boolean(completed?.detect);
   });
 
   function validateBeforeFinalSubmit(): string | null {
@@ -518,12 +512,7 @@ export default function DashboardPage() {
   
     const incompleteEpisodes = prioritizedEpisodes.filter((episode) => {
       const completed = episodeTaskCompletion[episode.id];
-      return (
-        !completed ||
-        !completed.detect ||
-        !completed.mechanism ||
-        !completed.fluidEval
-      );
+      return !completed || !completed.detect;
     });
   
     if (incompleteEpisodes.length > 0) {
@@ -565,9 +554,7 @@ export default function DashboardPage() {
       setEpisodeTaskCompletion((prevCompletion) => ({
         ...prevCompletion,
         [newEpisode.id]: {
-          detect: false,
-          mechanism: false,
-          fluidEval: false,
+          detect: false
         },
       }));
 
@@ -801,9 +788,7 @@ export default function DashboardPage() {
       ...prev,
       [activeEpisode.id]: {
         ...(prev[activeEpisode.id] ?? {
-          detect: false,
-          mechanism: false,
-          fluidEval: false,
+          detect: false
         }),
         [task]: true,
       },
@@ -1524,11 +1509,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       type="button"
       onClick={() => {
         setAnnotationLevel("episode");
-        if (
-          selectedTask !== "detect" &&
-          selectedTask !== "mechanism" &&
-          selectedTask !== "fluidEval"
-        ) {
+        if (selectedTask !== "detect") {
           setSelectedTask("detect");
         }
         logAction("annotation_level_click", { level: "episode" });
@@ -1977,14 +1958,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   task={selectedTask}
   onChangeTask={setSelectedTask}
   onSaveAndNextStep={(finishedTask) => {
-    if (
-      finishedTask === "detect" ||
-      finishedTask === "mechanism" ||
-      finishedTask === "fluidEval"
-    ) {
+    if (finishedTask === "detect") {
       handleSaveAndNextStep(finishedTask);
-    } else {
-      setSelectedTask(finishedTask);
     }
   }}
   selectedEvent={selectedEvent}
