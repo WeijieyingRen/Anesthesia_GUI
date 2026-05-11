@@ -94,6 +94,10 @@ export default function ManagementReasoningPanel({
   const [recordingTarget, setRecordingTarget] = useState<VoiceTarget>(null);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = useState("");
+  const [openGuideSections, setOpenGuideSections] = useState({
+    goal: false,
+    instructions: false,
+  });
 
   const recognitionRef = useRef<any>(null);
 
@@ -371,46 +375,82 @@ export default function ManagementReasoningPanel({
         Patient-level Panel: Management Reasoning
       </h3>
 
-      <div className="mt-6 rounded-2xl border border-amber-100 bg-amber-50 p-5">
-        <div className="text-lg font-semibold text-amber-900">
-          Goal of Annotation
+      <div className="mt-6 space-y-2">
+        <div className="rounded-lg border border-gray-200 bg-white">
+          <button
+            type="button"
+            onClick={() =>
+              setOpenGuideSections((prev) => ({
+                ...prev,
+                goal: !prev.goal,
+              }))
+            }
+            className="flex w-full items-center gap-3 px-4 py-3 text-left"
+          >
+            <span className="text-sm text-gray-500">
+              {openGuideSections.goal ? "▾" : "▸"}
+            </span>
+            <span className="text-sm font-semibold text-gray-900">
+              Goal of Annotation
+            </span>
+          </button>
+
+          {openGuideSections.goal && (
+            <div className="border-t border-gray-100 px-4 py-4">
+              <p className="text-sm leading-6 text-gray-700">
+                The goal of this annotation is to interpret the highlighted
+                management event in the context of the surrounding intraoperative
+                situation.
+              </p>
+
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-gray-700">
+                <li>patient physiology and vital sign changes,</li>
+                <li>surgical stimulus or procedural workflow,</li>
+                <li>transitions in anesthetic state,</li>
+                <li>other nearby interventions or strategy changes, and</li>
+                <li>the likely downstream effect on the course of the case.</li>
+                <li>Other important context you think is relevant to the annotation.</li>
+              </ul>
+            </div>
+          )}
         </div>
 
-        <p className="mt-3 text-sm leading-6 text-amber-900">
-          The goal of this annotation is to interpret the highlighted
-          management event in the context of the surrounding intraoperative
-          situation.
-        </p>
+        <div className="rounded-lg border border-gray-200 bg-white">
+          <button
+            type="button"
+            onClick={() =>
+              setOpenGuideSections((prev) => ({
+                ...prev,
+                instructions: !prev.instructions,
+              }))
+            }
+            className="flex w-full items-center gap-3 px-4 py-3 text-left"
+          >
+            <span className="text-sm text-gray-500">
+              {openGuideSections.instructions ? "▾" : "▸"}
+            </span>
+            <span className="text-sm font-semibold text-gray-900">
+              Annotation Instructions
+            </span>
+          </button>
 
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-amber-900">
-          <li>patient physiology and vital sign changes,</li>
-          <li>surgical stimulus or procedural workflow,</li>
-          <li>transitions in anesthetic state,</li>
-          <li>other nearby interventions or strategy changes, and</li>
-          <li>the likely downstream effect on the course of the case.</li>
-          <li>Other important context you think is relevant to the annotation.</li>
-        </ul>
-      </div>
-
-      <div className="mt-4 rounded-2xl border border-[#c7d8ee] bg-[#eef4fb] p-5">
-        <div className="text-lg font-semibold text-slate-900">
-          Annotation Instructions
+          {openGuideSections.instructions && (
+            <ul className="border-t border-gray-100 px-8 py-4 list-disc space-y-2 text-sm leading-6 text-gray-700">
+              <li>
+                The focused management event has already been marked on the
+                corresponding chart on the right.
+              </li>
+              <li>
+                The surrounding context, including approximately 10 minutes before
+                and 10 minutes after this event, has already been highlighted.
+              </li>
+              <li>
+                Please focus your reasoning on this event and the highlighted
+                surrounding context.
+              </li>
+            </ul>
+          )}
         </div>
-
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-800">
-          <li>
-            The focused management event has already been marked on the
-            corresponding chart on the right.
-          </li>
-          <li>
-            The surrounding context, including approximately 10 minutes before
-            and 10 minutes after this event, has already been highlighted.
-          </li>
-          <li>
-            Please focus your reasoning on this event and the highlighted
-            surrounding context.
-          </li>
-        </ul>
       </div>
 
       <div className="mt-6 rounded-2xl border p-5">

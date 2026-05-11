@@ -13,6 +13,18 @@ type EpisodeButtonItem = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
+function formatClockTime(offsetMin?: number | null, timeZero?: string | null) {
+  if (!Number.isFinite(offsetMin) || !timeZero) return "-";
+
+  const base = new Date(timeZero);
+  if (Number.isNaN(base.getTime())) return "-";
+
+  const dt = new Date(base.getTime() + Number(offsetMin) * 60000);
+  const hh = String(dt.getHours()).padStart(2, "0");
+  const mm = String(dt.getMinutes()).padStart(2, "0");
+  return `${hh}:${mm}`;
+}
+
 type Props = {
   caseId: string;
   selectedEvent: any;
@@ -360,22 +372,15 @@ export default function Episode3TextPanel({
 
       {selectedEvent && (
         <div className="mb-4 rounded-xl border bg-gray-50 p-4 text-sm text-gray-700">
-          <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-3">
-            <div>
-              <span className="font-semibold">Episode:</span>{" "}
-              {selectedEvent.episodeLabel ??
-                selectedEvent.title ??
-                "Selected event"}
-            </div>
-
+          <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
             <div>
               <span className="font-semibold">Start:</span>{" "}
-              {selectedEvent.startMin ?? "N/A"} min
+              {formatClockTime(selectedEvent.startMin, anesthesiaStart)}
             </div>
 
             <div>
               <span className="font-semibold">End:</span>{" "}
-              {selectedEvent.endMin ?? "N/A"} min
+              {formatClockTime(selectedEvent.endMin, anesthesiaStart)}
             </div>
           </div>
         </div>
