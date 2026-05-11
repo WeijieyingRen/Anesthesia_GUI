@@ -67,6 +67,7 @@ export default function SummaryPanel({
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState("");
   const [recording, setRecording] = React.useState(false);
+  const [instructionsOpen, setInstructionsOpen] = React.useState(false);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
 
@@ -335,20 +336,30 @@ export default function SummaryPanel({
   }
 
   return (
-    <div className="min-h-[640px] bg-white">
-      <div className="p-5">
-        <div className="mb-4 text-sm font-semibold text-gray-900">
-          Patient-level Panel 1: Overall Intraoperative Summary
+    <div className="bg-white">
+      <div className="p-3">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-sm font-semibold text-gray-900">
+          <span>Patient-level Panel 1: Overall Intraoperative Summary</span>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setInstructionsOpen((value) => !value)}
+              className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 hover:bg-blue-100"
+            >
+              Instructions
+            </button>
+            {instructionsOpen && (
+              <div className="absolute right-0 top-full z-50 mt-2 w-[min(420px,80vw)] rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
+                Please summarize the overall intraoperative course for this patient,
+                including major abnormal events, likely mechanisms, important
+                interventions, and overall patient response.
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="overflow-hidden rounded-xl border">
-          <TaskBlock title="Task 1. Overall Summary" noBorder>
-            <div className="mb-3 text-sm text-gray-600">
-              Please summarize the overall intraoperative course for this patient,
-              including major abnormal events, likely mechanisms, important
-              interventions, and overall patient response.
-            </div>
-
+          <div className="px-4 py-3">
             <textarea
               value={summaryText}
               disabled={saveStatus === "saving"}
@@ -356,11 +367,11 @@ export default function SummaryPanel({
                 markSummaryTyping();
                 setSummaryText(e.target.value);
               }}
-              className="min-h-[220px] w-full rounded-md border px-3 py-3 text-base text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"
+              className="min-h-[130px] w-full rounded-md border px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"
               placeholder="Write the overall patient-level intraoperative summary here..."
             />
 
-            <div className="mt-3">
+            <div className="mt-3 flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 disabled={saveStatus === "saving"}
@@ -375,11 +386,6 @@ export default function SummaryPanel({
               >
                 {recording ? "Stop Recording" : "Start Recording"}
               </button>
-            </div>
-          </TaskBlock>
-
-          <div className="border-t px-4 py-4">
-            <div className="flex flex-wrap gap-3">
               <button
                 type="button"
                 onClick={handleReset}
@@ -392,7 +398,6 @@ export default function SummaryPanel({
               >
                 Reset All
               </button>
-
               <button
                 type="button"
                 onClick={handleSaveSummary}

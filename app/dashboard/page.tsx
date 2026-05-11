@@ -1492,13 +1492,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               <div className="space-y-4">
                 <div className="sticky top-2 z-30 min-w-0">
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-                    <div className="space-y-3 border-b bg-white px-4 py-3">
-                    <div className="space-y-2">
-  <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-    Categories
-  </div>
-
-  <div className="pl-6 flex flex-wrap items-center gap-2">
+                    <div className="border-b bg-white px-4 py-2">
+                    <div className="flex flex-wrap items-center gap-2">
     <button
       type="button"
       onClick={() => {
@@ -1548,7 +1543,6 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     >
       Management Reasoning
     </button>
-  </div>
 </div>
 
     
@@ -2040,7 +2034,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   </div>
                 </div>
 
-                <div className="max-h-[72vh] min-w-0 space-y-3 overflow-auto rounded-xl border bg-white p-3 shadow-sm">
+                <div className="min-w-0 space-y-3 rounded-xl border bg-white p-3 shadow-sm">
                   <div className="px-1 text-sm font-bold text-gray-900">
                     Visualization Panel
                   </div>
