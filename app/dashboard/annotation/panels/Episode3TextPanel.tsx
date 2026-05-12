@@ -15,7 +15,7 @@ type SaveStatus = "idle" | "saving" | "success" | "error";
 
 const ABNORMAL_REASONING_TEMPLATE = ``;
 
-const EXAMPLE_OBSERVATION_SUMMARY = `From 11:15 to 11:32, the patient developed hypotension shortly after induction, likely due to anesthetic-induced vasodilation. The hypotension appeared clinically meaningful because the blood pressure dropped below the expected range after induction and required vasopressor support. The provider gave a phenylephrine bolus, after which the blood pressure improved adequately, suggesting an appropriate response to treatment. No clear preventive intervention was given, and this may represent a common post-induction hemodynamic response. Management was appropriate in this context; another vasopressor such as ephedrine could also have been reasonable depending on the heart rate and overall physiology.`;
+const EXAMPLE_OBSERVATION_SUMMARY = `From 11:15 to 11:32, the patient developed hypotension shortly after induction, likely due to anesthetic-induced vasodilation. The blood pressure ranged from 80-100s/40s-50s, with MAPs 55-65. The blood pressure nadir was 82/41 at 11:29. The hypotension appeared clinically meaningful because the blood pressure dropped below a clinically acceptable range after induction and required vasopressor support. The provider gave a phenylephrine bolus at 11:29, after which the blood pressure improved adequately, suggesting an appropriate response to treatment. No clear preventive intervention was given, and this may represent a common post-induction hemodynamic response. Management was appropriate in this context; another vasopressor such as ephedrine could also have been reasonable depending on the heart rate and overall physiology, however the heart rate was normal (80s) throughout the episode so phenylephrine was likely the more reasonable choice.`;
 
 function InstructionPanel({
   title,
@@ -362,139 +362,176 @@ export default function Episode3TextPanel({
 
 
           <p className="font-semibold text-blue-950">
-           The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.
+          The goal here is to learn more about abnormal episodes (preceding events, mechanism, and downstream consequences) and their management (including why medications were given and any alternative interventions). Please include these checklist items in your response:
+
           </p>
 
           <div>
             <p className="font-semibold text-blue-950">
               1. Selected Abnormal Episode
             </p>
-            <p>
-              Describe what happened during the selected episode, including the
-              timing, key abnormal pattern, raw data, clinical significance, and
-              any uncertainty.
-            </p>
+            
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
               2. Precursor Events (Etiology Reasoning)
             </p>
-            <p>
-              Describe any preceding events, physiologic trends, medications,
-              anesthetic changes, or surgical context that may have contributed
-              to the abnormal episode. If none are apparent, state that no clear
-              precursor is identified.
-            </p>
+           
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
               3. Response and Management Evaluation
             </p>
-            <p>
-              Describe what happened after the episode, including related
-              interventions, patient response, improvement, worsening, return to
-              baseline, or no clear downstream consequence. Briefly comment on
-              whether the observed management appeared appropriate in this
-              context.
-            </p>
+          
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
               4. Preventability / Alternative Management
             </p>
-            <p>
-              If clinically relevant, briefly comment on whether any preventive
-              measure, earlier intervention, or alternative management could have
-              been considered. If no clear preventive or alternative action was
-              needed, you may state that.
-            </p>
+            
           </div>
         </div>
       </InstructionPanel>
 
-      <InstructionPanel title="Example Summary" tone="blue" defaultOpen={false}>
+      <InstructionPanel title="Example" tone="blue" defaultOpen={false}>
         <p className="whitespace-pre-line rounded-lg border border-blue-100 bg-white p-3 text-gray-800">
           {EXAMPLE_OBSERVATION_SUMMARY}
         </p>
       </InstructionPanel>
 
       <InstructionPanel title="FAQ / Common Questions" tone="blue" defaultOpen={false}>
-        <div className="space-y-4 text-sm leading-6 text-blue-900">
-          <div>
-            <p className="font-semibold text-blue-950">
-              1. Do I need to separate precursor, abnormal episode, and downstream response explicitly?
-            </p>
-            <p>
-              Not necessarily. You may write a short integrated summary. However,
-              the summary should make clear what happened before the episode,
-              what defines the selected abnormal episode, and how the patient
-              responded afterward.
-            </p>
-          </div>
+  <div className="space-y-4 text-sm leading-6 text-blue-900">
+    <div>
+      <p className="font-semibold text-blue-950">
+        1. What should I include in my response?
+      </p>
 
-          <div>
-            <p className="font-semibold text-blue-950">
-              2. What if there is no clear precursor event?
-            </p>
-            <p>
-              It is fine to state that no obvious precursor is identified. For
-              example, the episode may appear to be directly related to induction,
-              anesthetic depth, surgical stimulation, medication effect, or
-              another nearby event.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold text-blue-950">
-              3. What if there is no clear downstream consequence?
-            </p>
-            <p>
-              Please state that no clear downstream consequence is seen, or
-              briefly describe that the patient returned toward baseline,
-              remained stable, or responded appropriately to management.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold text-blue-950">
-              4. Do I need to identify a preventive intervention?
-            </p>
-            <p>
-              No. Many abnormal episodes may not have an obvious preventive
-              measure. If prevention is not clinically relevant or not apparent
-              from the data, you can leave this part blank or state that no clear
-              preventive measure is identified.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold text-blue-950">
-              5. What if I am unsure about the cause?
-            </p>
-            <p>
-              Please describe your uncertainty rather than forcing one
-              explanation. You may mention several possible explanations and
-              indicate which one seems most likely based on timing, physiology,
-              medications, surgical context, or patient response.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold text-blue-950">
-              6. How detailed should my answer be?
-            </p>
-            <p>
-              A concise clinical explanation is enough. In most cases, five to
-              six sentences or a short dictated paragraph is sufficient, as long
-              as it explains the temporal relationship before, during, and after
-              the selected episode.
-            </p>
-          </div>
+      <div className="mt-2 space-y-3">
+        <div>
+          <p className="font-semibold text-blue-950">
+            Selected Abnormal Episode
+          </p>
+          <p>
+            Describe what happened during the selected episode, including the
+            timing, key abnormal pattern, raw data, clinical significance, and
+            any uncertainty.
+          </p>
         </div>
-      </InstructionPanel>
+
+        <div>
+          <p className="font-semibold text-blue-950">
+            Precursor Events (Etiology Reasoning)
+          </p>
+          <p>
+            Describe any preceding events, physiologic trends, medications,
+            anesthetic changes, or surgical context that may have contributed
+            to the abnormal episode. If none are apparent, state that no clear
+            precursor is identified.
+          </p>
+        </div>
+
+        <div>
+          <p className="font-semibold text-blue-950">
+            Response and Management Evaluation
+          </p>
+          <p>
+            Describe what happened after the episode, including related
+            interventions, patient response, improvement, worsening, return to
+            baseline, or no clear downstream consequence. Briefly comment on
+            whether the observed management appeared appropriate in this
+            context.
+          </p>
+        </div>
+
+        <div>
+          <p className="font-semibold text-blue-950">
+            Preventability / Alternative Management
+          </p>
+          <p>
+            If clinically relevant, briefly comment on whether any preventive
+            measure, earlier intervention, or alternative management could have
+            been considered. If no clear preventive or alternative action was
+            needed, you may state that.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        2. Do I need to separate precursor, abnormal episode, and downstream response explicitly?
+      </p>
+      <p>
+        Not necessarily. You may write a short integrated summary. However,
+        the summary should make clear what happened before the episode,
+        what defines the selected abnormal episode, and how the patient
+        responded afterward.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        3. What if there is no clear precursor event?
+      </p>
+      <p>
+        It is fine to state that no obvious precursor is identified. For
+        example, the episode may appear to be directly related to induction,
+        anesthetic depth, surgical stimulation, medication effect, or
+        another nearby event.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        4. What if there is no clear downstream consequence?
+      </p>
+      <p>
+        Please state that no clear downstream consequence is seen, or
+        briefly describe that the patient returned toward baseline,
+        remained stable, or responded appropriately to management.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        5. Do I need to identify a preventive intervention?
+      </p>
+      <p>
+        No. Many abnormal episodes may not have an obvious preventive
+        measure. If prevention is not clinically relevant or not apparent
+        from the data, you can leave this part blank or state that no clear
+        preventive measure is identified.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        6. What if I am unsure about the cause?
+      </p>
+      <p>
+        Please describe your uncertainty rather than forcing one
+        explanation. You may mention several possible explanations and
+        indicate which one seems most likely based on timing, physiology,
+        medications, surgical context, or patient response.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        7. How detailed should my answer be?
+      </p>
+      <p>
+        A concise clinical explanation is enough. In most cases, five to
+        six sentences or a short dictated paragraph is sufficient, as long
+        as it explains the temporal relationship before, during, and after
+        the selected episode.
+      </p>
+    </div>
+  </div>
+</InstructionPanel>
 
       <textarea
         value={freeText}

@@ -24,7 +24,7 @@ type QuestionTiming = {
   submittedAt: string | null;
 };
 
-const EXAMPLE_MANAGEMENT_SUMMARY_1 = `This phenylephrine bolus was most likely given to treat a downward drift in blood pressure. The surrounding context supports this because the patient had decreasing blood pressure and had required nearby boluses. The expected effect was an increase in vascular tone and blood pressure, and the blood pressure did improve afterward, suggesting an appropriate response. If this bolus had not been given, the patient may have remained hypotensive or continued to drift lower, depending on anesthetic depth, volume status, and surgical stimulation. The exact timing between this bolus and the observed blood pressure response should be interpreted cautiously.`;
+const EXAMPLE_MANAGEMENT_SUMMARY_1 = `This phenylephrine bolus was most likely given to treat a downward drift in blood pressure. The surrounding context supports this because the patient had decreasing blood pressure and had required nearby boluses. The expected effect was an increase in vascular tone and blood pressure, and the blood pressure did improve afterward (from 90s/40s to 100s/50s), suggesting an appropriate response. If this bolus had not been given, the patient may have remained hypotensive or continued to drift lower, depending on anesthetic depth, volume status, and surgical stimulation. One alternative would have been to lighten the anesthetic or administer pain medication, but this would require information on how deeply anesthetized the patient was and would have only been an acceptable alternative if the provider felt that the patient was too deeply anesthetized or had inadequate pain control and was responding to surgical stimulation..`;
 
 const EXAMPLE_MANAGEMENT_SUMMARY_2 = `This propofol decrease was most likely part of emergence planning near the end of the case. The supporting context is that it occurred toward the end of the procedure, when the provider was likely lightening the anesthetic to prepare the patient for wake-up and extubation. The expected effect would be for the patient to become less deeply anesthetized and wake up more quickly once the case was over. An alternative would have been to wait until later to reduce the propofol, depending on the expected remaining surgical time and the patient’s anesthetic depth.`;
 
@@ -433,42 +433,37 @@ export default function ManagementReasoningPanel({
           <div>
             <p className="font-semibold text-blue-950">
               1.  What was the most likely clinical purpose of this medication/gas
-              event?
+              event? And what makes you infer this?
             </p>
            
           </div>
 
-          <div>
-            <p className="font-semibold text-blue-950">
-              2.  What surrounding evidence supports your interpretation? 
-            </p>
-           
-          </div>
+       
 
           <div>
             <p className="font-semibold text-blue-950">
-              3.  What effect would be expected from this event, and was the
+              2.  What effect would be expected from this event, and was the
               subsequent patient response consistent with that expectation?
             </p>
            
           </div>
 
           <div>
-            <p className="font-semibold text-blue-950">4.  What might have happened if this
+            <p className="font-semibold text-blue-950">3.  What might have happened if this
             medication/gas event had not occurred?</p>
           
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
-              5. Is there reasonable alternative management possibilities based on your clinical practice?
+              4. Is there reasonable alternative management possibilities based on your clinical practice?
             </p>
           
           </div>
         </div>
       </InstructionPanel>
 
-      <InstructionPanel title="Example Summary" defaultOpen={false}>
+      <InstructionPanel title="Example" defaultOpen={false}>
         <div className="space-y-4">
           <div>
             <p className="mb-2 font-semibold text-blue-950">Example 1</p>

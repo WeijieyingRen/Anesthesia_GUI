@@ -1547,7 +1547,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
           : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
       }`}
     >
-       Observation Reasoning
+       Abnormality Reasoning
     </button>
 
     <button

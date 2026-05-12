@@ -390,70 +390,18 @@ export default function SummaryPanel({
         >
           <div className="space-y-3">
             <p>
-              Imagine that you are reconstructing this patient’s intraoperative
-              anesthetic course for another anesthesia provider who wants to
-              understand what happened during the case.
+            Please provide a detailed summary of the patient’s anesthetic course in narrative form. 
+Make sure to cover topics such as overall anesthetic approach, notable events (any abnormal vital signs), and interventions (medications, as well as why they were given or doses were changed). Comment on observations and management during key events such as induction of anesthesia, intubation, emergence, extubation. Discuss periods of stability and dynamic changes. 
+Anchor each event or intervention to specific time references using HH:MM format. 
             </p>
 
-            <p>
-            Make sure to cover topics such as overall anesthetic approach, notable pertinent positive and negative events, interesting observations or interventions, and red flags. Comment on observations and management during key events such as induction of anesthesia, intubation, emergence, extubation. Discuss periods of stability and dynamic changes. The receiving provider should be able to fully understand the patient’s intraoperative trajectory and key details from your report. 
-            </p>
+          
 
-            <div className="pt-2 font-semibold text-blue-950">
-              Please make sure to include:
-            </div>
-
-            <ol className="ml-5 list-decimal space-y-2">
-              <li>
-                <strong>Overall anesthetic approach:</strong> Describe the
-                overall anesthetic strategy, such as TIVA, volatile anesthesia,
-                regional/adjunctive techniques, or transitions between
-                approaches.
-              </li>
-
-              <li>
-                <strong>Key time-anchored events:</strong> Anchor important
-                events to specific HH:MM time references when available. Comment
-                on key phases such as premedication, induction, intubation,
-                maintenance, incision/surgical stimulation, emergence, reversal,
-                and extubation.
-              </li>
-
-              <li>
-                <strong>Clinically meaningful observations:</strong> Describe
-                notable pertinent positive and negative events, including
-                abnormal or interesting vital sign changes, periods of stability,
-                dynamic changes, and important negative findings such as stable
-                oxygenation or absence of major hemodynamic instability.
-              </li>
-
-              <li>
-                <strong>Interventions and clinical interpretation:</strong> Do
-                not simply list vital signs or medications. Connect key
-                observations and interventions to their likely clinical context,
-                purpose, and patient response. Explain why an event may have
-                occurred, why an intervention may have been performed, and how
-                the patient responded.
-              </li>
-
-              <li>
-                <strong>Uncertainty and ambiguity:</strong> Use uncertainty
-                language when appropriate, such as “likely,” “possibly,” “the
-                timing suggests,” “it appears,” or “the indication is unclear.”
-              </li>
-
-              <li>
-                <strong>Overall impression and red flags:</strong> End with an
-                overall assessment of the patient’s intraoperative course,
-                including hemodynamic and respiratory stability, red flags, and
-                any details that would be important for another anesthesia
-                provider to know.
-              </li>
-            </ol>
+        
           </div>
         </CollapsibleInstructionPanel>
 
-        <CollapsibleInstructionPanel title="Example Summary" defaultOpen={false}>
+        <CollapsibleInstructionPanel title="Example" defaultOpen={false}>
           <div className="space-y-3">
        
 
