@@ -26,6 +26,28 @@ type QuestionTiming = {
   submittedAt: string | null;
 };
 
+const SUMMARY_INSTRUCTION = `Imagine that you are reconstructing this patient’s intraoperative anesthetic course for another anesthesia provider who wants to understand what happened during the case.
+
+Produce a detailed, chronological summary of the patient’s anesthetic course such that the receiving provider can confidently understand the patient’s intraoperative trajectory and key clinical details.
+
+Make sure to cover topics such as overall anesthetic approach, notable pertinent positive and negative events, interesting observations or interventions, and red flags. Comment on observations and management during key events such as induction of anesthesia, intubation, maintenance, emergence, and extubation. Discuss periods of stability and dynamic changes.
+
+Do not simply list vital signs or medications. Connect key observations and interventions to their likely clinical context, purpose, and patient response.
+
+Anchor key events to specific time references using HH:MM format.`;
+
+const EXAMPLE_SUMMARY = `They got midazolam 2mg for premedication around 07:15. They had one isolated elevated BP of 160/101 at 07:13. It looks like they were induced with fentanyl, then propofol and rocuronium around 07:28. The blood pressure of 146/109 at 07:33 is likely stimulation with intubation, but overall the intubation was relatively hemodynamically stable.
+
+They were started on a propofol drip at 150 around 07:37. They had one slightly lower blood pressure of 117/78 at 07:47, likely during the quiet period of the case where anesthesia had been induced but the incision had not yet been made, so there was no surgical stimulation. They got decadron 8mg around 07:37, likely for postoperative nausea/vomiting prophylaxis.
+
+Their blood pressure increased a bit with incision to 145/98, but overall they stayed pretty hemodynamically stable throughout this part of the case. It looks like they also got methadone, a total of 10mg, given as two boluses of 5mg toward the beginning of the case, likely for postoperative pain control.
+
+They got labetalol 10mg around 08:10, which was likely because they had a BP of 149/85 at 08:06, and their blood pressure had been slightly elevated before that in the 130s-140s/70s-80s, though the reading immediately before the labetalol administration was actually fine at 122/65 at 08:08.
+
+They were re-paralyzed with 20mg of rocuronium at 08:23, likely to maintain paralysis during the case. Maintenance of anesthesia was largely with propofol as TIVA for the entire case, although sevoflurane was turned on at a low level initially at the beginning of the case; it looks like the provider changed their mind and decided to run this as a TIVA. After steady state was achieved, the propofol was reduced to 125 mcg/kg/min around 08:18 and further weaned to 100 and then 60 at 08:54, then turned off shortly thereafter.
+
+They remained hemodynamically stable with blood pressure on the lower side, in the 90s-100s/40s-50s, throughout the remainder of the case after the labetalol until extubation. Around 09:05, they were given 4mg zofran, likely for PONV prophylaxis, and 200mg of sugammadex for reversal of rocuronium immediately before extubation. They were then extubated around 09:12 and had one slightly elevated BP reading of 146/92 around that time, likely related to stimulation of extubation. Their oxygen saturation remained stable throughout the case at 97-100%.`;
+
 function makeEmptyQuestionTiming(nowIso?: string): QuestionTiming {
   return {
     startedAt: nowIso ?? null,
@@ -34,6 +56,37 @@ function makeEmptyQuestionTiming(nowIso?: string): QuestionTiming {
     firstVoiceStartAt: null,
     submittedAt: null,
   };
+}
+
+function CollapsibleInstructionPanel({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+
+  return (
+    <div className="mb-4 overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
+      >
+        <span className="text-xl font-bold leading-none text-blue-700">
+          {open ? "▾" : "▸"}
+        </span>
+        <span>{title}</span>
+      </button>
+
+      {open && (
+        <div className="p-4 text-sm leading-6 text-blue-900">{children}</div>
+      )}
+    </div>
+  );
 }
 
 export default function SummaryPanel({
@@ -50,7 +103,6 @@ export default function SummaryPanel({
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState("");
   const [recording, setRecording] = React.useState(false);
-  const [instructionsOpen, setInstructionsOpen] = React.useState(false);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = React.useState("");
 
@@ -282,10 +334,13 @@ export default function SummaryPanel({
           startMin,
           endMin,
           summaryText: summaryText.trim(),
+          prompt: {
+            instruction: SUMMARY_INSTRUCTION,
+            exampleSummary: EXAMPLE_SUMMARY,
+          },
           tasks: {
             task1_overall_summary: {
-              question:
-                "Please summarize the overall intraoperative course for this patient, including major abnormal events, likely mechanisms, important interventions, and overall patient response.",
+              question: SUMMARY_INSTRUCTION,
               answer: summaryText.trim(),
               timing: { ...summaryTimingRef.current },
             },
@@ -325,27 +380,139 @@ export default function SummaryPanel({
   return (
     <div className="bg-white">
       <div className="p-3">
-        <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold text-gray-900">
-          <span>Patient-level Panel 1: Overall Intraoperative Summary</span>
-
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setInstructionsOpen((value) => !value)}
-              className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 hover:bg-blue-100"
-            >
-              Instructions
-            </button>
-
-            {instructionsOpen && (
-              <div className="absolute left-0 top-full z-50 mt-2 w-[min(420px,80vw)] rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
-                Please summarize the overall intraoperative course for this
-                patient, including major abnormal events, likely mechanisms,
-                important interventions, and overall patient response.
-              </div>
-            )}
-          </div>
+        <div className="mb-3 text-sm font-semibold text-gray-900">
+          Patient-level Panel 1: Overall Intraoperative Summary
         </div>
+
+        <CollapsibleInstructionPanel
+          title="Annotation Instructions"
+          defaultOpen={false}
+        >
+          <div className="space-y-3">
+            <p>
+              Imagine that you are reconstructing this patient’s intraoperative
+              anesthetic course for another anesthesia provider who wants to
+              understand what happened during the case.
+            </p>
+
+            <p>
+            Make sure to cover topics such as overall anesthetic approach, notable pertinent positive and negative events, interesting observations or interventions, and red flags. Comment on observations and management during key events such as induction of anesthesia, intubation, emergence, extubation. Discuss periods of stability and dynamic changes. The receiving provider should be able to fully understand the patient’s intraoperative trajectory and key details from your report. 
+            </p>
+
+            <div className="pt-2 font-semibold text-blue-950">
+              Please make sure to include:
+            </div>
+
+            <ol className="ml-5 list-decimal space-y-2">
+              <li>
+                <strong>Overall anesthetic approach:</strong> Describe the
+                overall anesthetic strategy, such as TIVA, volatile anesthesia,
+                regional/adjunctive techniques, or transitions between
+                approaches.
+              </li>
+
+              <li>
+                <strong>Key time-anchored events:</strong> Anchor important
+                events to specific HH:MM time references when available. Comment
+                on key phases such as premedication, induction, intubation,
+                maintenance, incision/surgical stimulation, emergence, reversal,
+                and extubation.
+              </li>
+
+              <li>
+                <strong>Clinically meaningful observations:</strong> Describe
+                notable pertinent positive and negative events, including
+                abnormal or interesting vital sign changes, periods of stability,
+                dynamic changes, and important negative findings such as stable
+                oxygenation or absence of major hemodynamic instability.
+              </li>
+
+              <li>
+                <strong>Interventions and clinical interpretation:</strong> Do
+                not simply list vital signs or medications. Connect key
+                observations and interventions to their likely clinical context,
+                purpose, and patient response. Explain why an event may have
+                occurred, why an intervention may have been performed, and how
+                the patient responded.
+              </li>
+
+              <li>
+                <strong>Uncertainty and ambiguity:</strong> Use uncertainty
+                language when appropriate, such as “likely,” “possibly,” “the
+                timing suggests,” “it appears,” or “the indication is unclear.”
+              </li>
+
+              <li>
+                <strong>Overall impression and red flags:</strong> End with an
+                overall assessment of the patient’s intraoperative course,
+                including hemodynamic and respiratory stability, red flags, and
+                any details that would be important for another anesthesia
+                provider to know.
+              </li>
+            </ol>
+          </div>
+        </CollapsibleInstructionPanel>
+
+        <CollapsibleInstructionPanel title="Example Summary" defaultOpen={false}>
+          <div className="space-y-3">
+       
+
+            <p className="whitespace-pre-line rounded-lg border border-blue-100 bg-white p-3 text-gray-800">
+              {EXAMPLE_SUMMARY}
+            </p>
+          </div>
+        </CollapsibleInstructionPanel>
+
+        <CollapsibleInstructionPanel
+          title="FAQ / Common Questions"
+          defaultOpen={false}
+        >
+          <div className="space-y-3">
+            <div>
+              <p className="font-semibold text-blue-950">
+                Should I write a short handoff note?
+              </p>
+              <p>
+                No. Please write a detailed intraoperative course summary. The
+                goal is to reconstruct what happened during the case, not to
+                produce a brief sign-out.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-blue-950">
+                Should I only list medications and vital signs?
+              </p>
+              <p>
+                No. Please explain the likely clinical context and purpose. For
+                example, mention whether a blood pressure change may be related
+                to intubation, incision, anesthetic depth, medication effect, or
+                emergence.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-blue-950">
+                Should I mention normal or stable findings?
+              </p>
+              <p>
+                Yes, if they are clinically meaningful. For example, stable
+                oxygen saturation, absence of major hemodynamic instability, or
+                stable response after an intervention can be important.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-blue-950">
+                What if I am not sure why something happened?
+              </p>
+              <p>
+                Use uncertainty language such as “likely,” “possibly,” “the
+                timing suggests,” “it appears,” or “the indication is unclear.”
+              </p>
+            </div>
+          </div>
+        </CollapsibleInstructionPanel>
 
         <textarea
           value={summaryText}
@@ -358,7 +525,7 @@ export default function SummaryPanel({
           placeholder="Write the overall patient-level intraoperative summary here..."
         />
 
-<div className="mt-3 flex flex-wrap items-center justify-end gap-2">
+        <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
           <button
             type="button"
             disabled={saveStatus === "saving"}

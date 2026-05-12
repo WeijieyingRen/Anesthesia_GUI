@@ -13,36 +13,22 @@ type EpisodeButtonItem = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
-const ABNORMAL_REASONING_TEMPLATE = `1. Etiology reasoning:
-What were the most likely trigger, etiology, or mechanism of this episode? Please provide up to three hypotheses and assign a confidence percentage to each hypothesis.
+const ABNORMAL_REASONING_TEMPLATE = ``;
 
-Hypothesis 1:
-Hypothesis 2:
-Hypothesis 3:
-
-2. Relevant intervention selection:
-Which medications, fluids, gas or ventilation changes, positioning changes, surgical events, or other interventions were clinically relevant to this episode? Which nearby interventions were likely unrelated? Please briefly explain why.
-
-Relevant interventions:
-Unrelated or less relevant interventions:
-
-3. Alternative intervention:
-Based on your clinical practice, was there a reasonable alternative intervention that could have been considered? If yes, please describe it. If no, please state that no clear alternative intervention was needed.
-
-4. Preventive intervention / preventive attempt:
-Before this episode occurred, were any preventive interventions attempted? If yes, please describe them and explain why the abnormality may still have occurred despite these preventive measures. If no clear preventive intervention was observed, please state that.
-`;
+const EXAMPLE_OBSERVATION_SUMMARY = `From 11:15 to 11:32, the patient developed hypotension shortly after induction, likely due to anesthetic-induced vasodilation. The hypotension appeared clinically meaningful because the blood pressure dropped below the expected range after induction and required vasopressor support. The provider gave a phenylephrine bolus, after which the blood pressure improved adequately, suggesting an appropriate response to treatment. No clear preventive intervention was given, and this may represent a common post-induction hemodynamic response. Management was appropriate in this context; another vasopressor such as ephedrine could also have been reasonable depending on the heart rate and overall physiology.`;
 
 function InstructionPanel({
   title,
   tone,
   children,
+  defaultOpen = false,
 }: {
   title: string;
   tone: "blue" | "emerald";
   children: React.ReactNode;
+  defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(defaultOpen);
 
   const styles =
     tone === "blue"
@@ -58,7 +44,7 @@ function InstructionPanel({
         };
 
   return (
-    <div className={`overflow-hidden rounded-xl border ${styles.shell}`}>
+    <div className={`mb-4 overflow-hidden rounded-xl border ${styles.shell}`}>
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
@@ -294,9 +280,7 @@ export default function Episode3TextPanel({
           participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
         ).trim() || null;
 
-      const resolvedPatientId =
-        patientId ?? patientFolder ?? "unknown_patient";
-
+      const resolvedPatientId = patientId ?? patientFolder ?? "unknown_patient";
       const resolvedPatientFolder =
         patientFolder ?? patientId ?? "unknown_patient";
 
@@ -333,12 +317,12 @@ export default function Episode3TextPanel({
 
           abnormalEventPrompt: {
             instruction:
-              "Describe the selected abnormal event and the related clinical reasoning in one free-text response. Please organize your response using the four sections below.",
+            "The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.",
             requestedElements: [
-              "1. Etiology reasoning: What were the most likely trigger, etiology, or mechanism of this episode? Please provide up to three hypotheses and assign a confidence percentage to each hypothesis.",
-              "2. Relevant intervention selection: Which medications, fluids, gas or ventilation changes, positioning changes, surgical events, or other interventions were clinically relevant to this episode? Which nearby interventions were likely unrelated? Please briefly explain why.",
-              "3. Alternative intervention: Based on your clinical practice, was there a reasonable alternative intervention that could have been considered? If yes, please describe it. If no, please state that no clear alternative intervention was needed.",
-              "4. Preventive intervention / preventive attempt: Before this episode occurred, were any preventive interventions attempted? If yes, please describe them and explain why the abnormality may still have occurred despite these preventive measures. If no clear preventive intervention was observed, please state that.",
+              "1. Selected Abnormal Episode: Describe what happened during the selected episode, including timing, key abnormal pattern, raw data, clinical significance, and uncertainty.",
+              "2. Precursor Events: Describe any preceding events, physiologic trends, medications, anesthetic changes, or surgical context that may have contributed to the abnormal episode. If none are apparent, state that no clear precursor is identified.",
+              "3. Downstream Response and Management Evaluation: Describe what happened after the episode, including related interventions, patient response, improvement, worsening, return to baseline, or no clear downstream consequence. Briefly comment on whether the observed management appeared appropriate in this context.",
+              "4. Preventability / Alternative Management: If clinically relevant, briefly comment on whether any preventive measure, earlier intervention, or alternative management could have been considered. If no clear preventive or alternative action was needed, state that.",
             ],
           },
 
@@ -373,85 +357,150 @@ export default function Episode3TextPanel({
         </button>
       )}
 
-      {episodeList.length > 0 && (
-        <div className="mb-5 bg-gray-50 p-4">
-          <div className="mb-3 text-sm font-bold text-gray-900">
-            Selected episodes for annotation
+      <InstructionPanel title="Annotation Instructions" tone="blue" defaultOpen={false}>
+        <div className="space-y-4 text-sm leading-6 text-blue-900">
+
+
+          <p className="font-semibold text-blue-950">
+           The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.
+          </p>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              1. Selected Abnormal Episode
+            </p>
+            <p>
+              Describe what happened during the selected episode, including the
+              timing, key abnormal pattern, raw data, clinical significance, and
+              any uncertainty.
+            </p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {episodeList.map((episode, index) => {
-              const isActive = episode.id === activeEpisodeId;
-              const saved = Boolean(completedMap?.[episode.id]?.detect);
+          <div>
+            <p className="font-semibold text-blue-950">
+              2. Precursor Events (Etiology Reasoning)
+            </p>
+            <p>
+              Describe any preceding events, physiologic trends, medications,
+              anesthetic changes, or surgical context that may have contributed
+              to the abnormal episode. If none are apparent, state that no clear
+              precursor is identified.
+            </p>
+          </div>
 
-              return (
-                <button
-                  key={episode.id}
-                  type="button"
-                  onClick={() => onSelectEpisode?.(episode.id)}
-                  className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
-                    isActive
-                      ? "border-blue-600 bg-blue-50 text-blue-800 shadow-sm"
-                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  Episode {index + 1}
-                  {saved && (
-                    <span className="ml-2 rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-semibold text-green-700">
-                      Saved
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+          <div>
+            <p className="font-semibold text-blue-950">
+              3. Response and Management Evaluation
+            </p>
+            <p>
+              Describe what happened after the episode, including related
+              interventions, patient response, improvement, worsening, return to
+              baseline, or no clear downstream consequence. Briefly comment on
+              whether the observed management appeared appropriate in this
+              context.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              4. Preventability / Alternative Management
+            </p>
+            <p>
+              If clinically relevant, briefly comment on whether any preventive
+              measure, earlier intervention, or alternative management could have
+              been considered. If no clear preventive or alternative action was
+              needed, you may state that.
+            </p>
           </div>
         </div>
-      )}
+      </InstructionPanel>
 
-      <div className="mb-4">
-        <h3 className="text-xl font-bold text-gray-900">
-          Abnormal Event Reasoning
-        </h3>
-      </div>
+      <InstructionPanel title="Example Summary" tone="blue" defaultOpen={false}>
+        <p className="whitespace-pre-line rounded-lg border border-blue-100 bg-white p-3 text-gray-800">
+          {EXAMPLE_OBSERVATION_SUMMARY}
+        </p>
+      </InstructionPanel>
 
-      <InstructionPanel title="Abnormal event instruction" tone="blue">
-        <div className="mb-2 font-semibold text-blue-950">
-          Please organize your response using the following sections:
+      <InstructionPanel title="FAQ / Common Questions" tone="blue" defaultOpen={false}>
+        <div className="space-y-4 text-sm leading-6 text-blue-900">
+          <div>
+            <p className="font-semibold text-blue-950">
+              1. Do I need to separate precursor, abnormal episode, and downstream response explicitly?
+            </p>
+            <p>
+              Not necessarily. You may write a short integrated summary. However,
+              the summary should make clear what happened before the episode,
+              what defines the selected abnormal episode, and how the patient
+              responded afterward.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              2. What if there is no clear precursor event?
+            </p>
+            <p>
+              It is fine to state that no obvious precursor is identified. For
+              example, the episode may appear to be directly related to induction,
+              anesthetic depth, surgical stimulation, medication effect, or
+              another nearby event.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              3. What if there is no clear downstream consequence?
+            </p>
+            <p>
+              Please state that no clear downstream consequence is seen, or
+              briefly describe that the patient returned toward baseline,
+              remained stable, or responded appropriately to management.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              4. Do I need to identify a preventive intervention?
+            </p>
+            <p>
+              No. Many abnormal episodes may not have an obvious preventive
+              measure. If prevention is not clinically relevant or not apparent
+              from the data, you can leave this part blank or state that no clear
+              preventive measure is identified.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              5. What if I am unsure about the cause?
+            </p>
+            <p>
+              Please describe your uncertainty rather than forcing one
+              explanation. You may mention several possible explanations and
+              indicate which one seems most likely based on timing, physiology,
+              medications, surgical context, or patient response.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              6. How detailed should my answer be?
+            </p>
+            <p>
+              A concise clinical explanation is enough. In most cases, five to
+              six sentences or a short dictated paragraph is sufficient, as long
+              as it explains the temporal relationship before, during, and after
+              the selected episode.
+            </p>
+          </div>
         </div>
-        <ol className="ml-5 list-decimal space-y-1">
-          <li>
-            <strong>Etiology reasoning:</strong> What were the most likely
-            trigger, etiology, or mechanism of this episode? Please provide up
-            to three hypotheses and assign a confidence percentage to each
-            hypothesis.
-          </li>
-          <li>
-            <strong>Relevant intervention selection:</strong> Which medications,
-            fluids, gas or ventilation changes, positioning changes, surgical
-            events, or other interventions were clinically relevant to this
-            episode? Which nearby interventions were likely unrelated? Please
-            briefly explain why.
-          </li>
-          <li>
-            <strong>Alternative intervention:</strong> Based on your clinical
-            practice, was there a reasonable alternative intervention that could
-            have been considered?
-          </li>
-          <li>
-            <strong>Preventive intervention / preventive attempt:</strong>{" "}
-            Before this episode occurred, were any preventive interventions
-            attempted? If yes, please describe them and explain why the
-            abnormality may still have occurred despite these preventive
-            measures.
-          </li>
-        </ol>
       </InstructionPanel>
 
       <textarea
         value={freeText}
         onChange={(e) => setCurrentFreeText(e.target.value)}
         className="min-h-[360px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-        placeholder="Write abnormal event reasoning here..."
+        placeholder="write or dictate your response here..."
       />
 
       <div className="mt-5 flex w-full flex-wrap items-center gap-3">

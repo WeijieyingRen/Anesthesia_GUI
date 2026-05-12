@@ -24,6 +24,22 @@ type QuestionTiming = {
   submittedAt: string | null;
 };
 
+const EXAMPLE_MANAGEMENT_SUMMARY_1 = `This phenylephrine bolus was most likely given to treat a downward drift in blood pressure. The surrounding context supports this because the patient had decreasing blood pressure and had required nearby boluses. The expected effect was an increase in vascular tone and blood pressure, and the blood pressure did improve afterward, suggesting an appropriate response. If this bolus had not been given, the patient may have remained hypotensive or continued to drift lower, depending on anesthetic depth, volume status, and surgical stimulation. The exact timing between this bolus and the observed blood pressure response should be interpreted cautiously.`;
+
+const EXAMPLE_MANAGEMENT_SUMMARY_2 = `This propofol decrease was most likely part of emergence planning near the end of the case. The supporting context is that it occurred toward the end of the procedure, when the provider was likely lightening the anesthetic to prepare the patient for wake-up and extubation. The expected effect would be for the patient to become less deeply anesthetized and wake up more quickly once the case was over. An alternative would have been to wait until later to reduce the propofol, depending on the expected remaining surgical time and the patient’s anesthetic depth.`;
+
+const MANAGEMENT_REASONING_PROMPT = {
+  instruction:
+    "Interpret the highlighted medication/gas event in the context of the surrounding intraoperative course. Focus on its likely clinical purpose, supporting evidence, expected effect, observed patient response, counterfactual implication, and uncertainty if the indication is unclear.",
+  requestedElements: [
+    "1. Clinical purpose: What was the most likely clinical purpose of this medication/gas event at this moment?",
+    "2. Supporting context: What surrounding evidence supports your interpretation, including vital-sign trends, medication timing, nearby medications, fluids, gas or ventilation changes, surgical stimulus, procedural workflow, or transitions in anesthetic state?",
+    "3. Expected effect and observed response: What effect was expected, and did the patient appear to respond as expected?",
+    "4. Counterfactual: If clinically relevant, what might have happened if this medication/gas event had not occurred?",
+    "5. Uncertainty and alternatives: If the purpose is unclear, what alternative explanations, missing information, or reasonable alternative management possibilities should be considered?",
+  ],
+};
+
 function makeEmptyQuestionTiming(nowIso?: string): QuestionTiming {
   return {
     startedAt: nowIso ?? null,
@@ -83,17 +99,36 @@ function sanitizeFilePart(value: unknown) {
     .replace(/[^\w.-]/g, "_");
 }
 
-const MANAGEMENT_REASONING_PROMPT = {
-  instruction:
-    "Please interpret the highlighted medication event in the surrounding intraoperative context. Answer in the structured bullet format below.",
-  requestedElements: [
-    "1. Clinical purpose: What was the most likely clinical purpose of this medication event at this moment? For example, induction/emergence, anesthesia maintenance, analgesia or surgical stimulation, hemodynamic management, ventilation/airway management, neuromuscular blockade/reversal, prophylaxis/routine care, treatment of an abnormal event, or another purpose.",
-    "2. Supporting context: What surrounding evidence supports your interpretation, including vital-sign trends, medication timing, nearby medications, ventilation or gas changes, procedural phase, or surgical context?",
-    "3. Expected effect and observed response: What effect would be expected from this medication, and was the subsequent patient response consistent with that expectation?",
-    "4. Uncertainty and alternatives: How confident are you in this interpretation? If uncertain, what alternative purposes, missing information, or reasonable alternative management should be considered?",
-    "5. Counterfactual: What might have happened if this medication had not been given?",
-  ],
-};
+function InstructionPanel({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <div className="mb-4 overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
+      >
+        <span className="text-xl font-bold leading-none text-blue-700">
+          {open ? "▾" : "▸"}
+        </span>
+        <span>{title}</span>
+      </button>
+
+      {open && (
+        <div className="p-4 text-sm leading-6 text-blue-900">{children}</div>
+      )}
+    </div>
+  );
+}
 
 export default function ManagementReasoningPanel({
   caseId,
@@ -108,14 +143,6 @@ export default function ManagementReasoningPanel({
   const [recording, setRecording] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = useState("");
-
-  const [openGuideSections, setOpenGuideSections] = useState({
-    goal: false,
-    instructions: false,
-  });
-
-  const [managementInstructionsOpen, setManagementInstructionsOpen] =
-    useState(true);
 
   const recognitionRef = useRef<any>(null);
   const voiceBaseTextRef = useRef("");
@@ -145,7 +172,6 @@ export default function ManagementReasoningPanel({
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
     setSaveMessage("");
-    setManagementInstructionsOpen(true);
   }, [
     managementEvent?.row_name,
     managementEvent?.time_min,
@@ -354,11 +380,17 @@ export default function ManagementReasoningPanel({
             unit: managementEvent.unit ?? null,
             route: managementEvent.route ?? null,
           },
-          prompt: MANAGEMENT_REASONING_PROMPT,
+          prompt: {
+            ...MANAGEMENT_REASONING_PROMPT,
+            exampleSummaries: [
+              EXAMPLE_MANAGEMENT_SUMMARY_1,
+              EXAMPLE_MANAGEMENT_SUMMARY_2,
+            ],
+          },
           tasks: {
             medication_centered_management_reasoning: {
               question:
-                "Please interpret this medication event using the requested structured bullet points.",
+                "Please interpret this medication/gas event in the surrounding intraoperative context.",
               answer: answer.trim(),
               timing: { ...taskTimingRef.current },
             },
@@ -390,88 +422,163 @@ export default function ManagementReasoningPanel({
 
   return (
     <div className="rounded-2xl border bg-white p-6">
-      <div className="space-y-2">
-        <div className="overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
-          <button
-            type="button"
-            onClick={() =>
-              setOpenGuideSections((prev) => ({
-                ...prev,
-                goal: !prev.goal,
-              }))
-            }
-            className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
-          >
-            <span className="text-xl font-bold leading-none text-blue-700">
-              {openGuideSections.goal ? "▾" : "▸"}
-            </span>
-            <span>Goal of Annotation</span>
-          </button>
+      <InstructionPanel title="Annotation Instructions" defaultOpen={false}>
+        <div className="space-y-4 text-sm leading-6 text-blue-900">
+          <p className="font-semibold text-blue-950">
+            Please briefly explain the highlighted medication/gas event in the
+            surrounding intraoperative context. If the purpose is unclear, state
+            the uncertainty explicitly. Please include these checklist items in your response:
+          </p>
 
-          {openGuideSections.goal && (
-            <div className="p-4 text-sm leading-6 text-blue-900">
-              <p>
-                The goal of this annotation is to interpret the highlighted
-                medication event in the context of the surrounding intraoperative
-                situation. The medication may reflect treatment of an abnormal
-                event, routine/background care, anesthesia maintenance,
-                analgesia, hemodynamic management, airway or ventilation
-                management, prophylaxis, or another management purpose.
-              </p>
+          <div>
+            <p className="font-semibold text-blue-950">
+              1.  What was the most likely clinical purpose of this medication/gas
+              event?
+            </p>
+           
+          </div>
 
-              <ul className="mt-3 list-disc space-y-1 pl-5">
-                <li>Patient physiology and vital sign changes.</li>
-                <li>Surgical stimulus or procedural workflow.</li>
-                <li>Transitions in anesthetic state.</li>
-                <li>Nearby medications, fluids, gas, or ventilation changes.</li>
-                <li>The likely downstream effect on the course of the case.</li>
-                <li>Uncertainty or missing information if the purpose is unclear.</li>
-              </ul>
-            </div>
-          )}
+          <div>
+            <p className="font-semibold text-blue-950">
+              2.  What surrounding evidence supports your interpretation? 
+            </p>
+           
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              3.  What effect would be expected from this event, and was the
+              subsequent patient response consistent with that expectation?
+            </p>
+           
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">4.  What might have happened if this
+            medication/gas event had not occurred?</p>
+          
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              5. Is there reasonable alternative management possibilities based on your clinical practice?
+            </p>
+          
+          </div>
         </div>
+      </InstructionPanel>
 
-        <div className="overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
-          <button
-            type="button"
-            onClick={() =>
-              setOpenGuideSections((prev) => ({
-                ...prev,
-                instructions: !prev.instructions,
-              }))
-            }
-            className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
-          >
-            <span className="text-sm font-semibold text-rose-950">
-              {openGuideSections.instructions ? "▾" : "▸"}
-            </span>
-            <span>Annotation Instructions</span>
-          </button>
+      <InstructionPanel title="Example Summary" defaultOpen={false}>
+        <div className="space-y-4">
+          <div>
+            <p className="mb-2 font-semibold text-blue-950">Example 1</p>
+            <p className="whitespace-pre-line rounded-lg border border-blue-100 bg-white p-3 text-gray-800">
+              {EXAMPLE_MANAGEMENT_SUMMARY_1}
+            </p>
+          </div>
 
-          {openGuideSections.instructions && (
-            <ul className="list-disc space-y-2 p-4 pl-8 text-sm leading-6 text-blue-900">
-              <li>
-                The focused medication event has already been marked on the
-                corresponding chart on the right.
-              </li>
-              <li>
-                The surrounding context, including approximately 15 minutes
-                around this event, has already been highlighted.
-              </li>
-              <li>
-                Please focus your reasoning on this medication event and the
-                highlighted surrounding context. You may refer to broader case
-                context if needed.
-              </li>
-              <li>
-                If the medication appears routine or the purpose is unclear, say
-                so explicitly rather than forcing a specific explanation.
-              </li>
-            </ul>
-          )}
+          <div>
+            <p className="mb-2 font-semibold text-blue-950">Example 2</p>
+            <p className="whitespace-pre-line rounded-lg border border-blue-100 bg-white p-3 text-gray-800">
+              {EXAMPLE_MANAGEMENT_SUMMARY_2}
+            </p>
+          </div>
         </div>
-      </div>
+      </InstructionPanel>
 
+      <InstructionPanel title="FAQ / Common Questions" defaultOpen={false}>
+  <div className="space-y-4 text-sm leading-6 text-blue-900">
+    <div>
+      <p className="font-semibold text-blue-950">
+        1. Do I need to answer each checklist item separately?
+      </p>
+      <p>
+        No. You may write a short integrated clinical explanation. However, your
+        answer should still make clear the likely clinical purpose of the
+        highlighted medication/gas event, the surrounding evidence, the expected
+        effect, the observed patient response if visible, and any uncertainty or
+        reasonable alternative management.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        2. What if the medication/gas event appears routine?
+      </p>
+      <p>
+        Please state that it appears routine or background care, and briefly
+        explain why. For example, the event may reflect anesthetic maintenance,
+        emergence planning, analgesia, prophylaxis, neuromuscular
+        blockade/reversal, or ventilation management rather than treatment of an
+        abnormal event.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        3. What if the purpose of the event is unclear?
+      </p>
+      <p>
+        Please describe the uncertainty rather than forcing one explanation. You
+        may mention multiple plausible purposes and explain which one seems most
+        likely based on timing, vital-sign trends, nearby medications, surgical
+        context, anesthetic phase, and patient response.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        4. What if I cannot see a clear patient response afterward?
+      </p>
+      <p>
+        It is fine to say that no clear response is visible in the available
+        window. If possible, briefly state what response would normally be
+        expected and whether the available data are consistent, inconsistent, or
+        insufficient to judge.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        5. Do I always need to provide a counterfactual?
+      </p>
+      <p>
+        No. Include a counterfactual only when clinically meaningful. For
+        example, if a vasopressor was given for hypotension, you may comment that
+        blood pressure might have remained low or continued to drift downward
+        without it. If the event is routine or the effect is unclear, you may
+        state that no clear counterfactual consequence can be determined from the
+        available data.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        6. What counts as alternative management?
+      </p>
+      <p>
+        Alternative management means another reasonable clinical option that
+        could have been considered in the same context. For example, another
+        vasopressor, fluid administration, adjusting anesthetic depth, changing
+        ventilation, or waiting longer may be reasonable depending on the
+        patient&apos;s physiology. If no clear alternative is needed, you may say
+        the observed management was appropriate.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-semibold text-blue-950">
+        7. How detailed should my answer be?
+      </p>
+      <p>
+        A concise clinical explanation is enough. In most cases, five to six
+        sentences or one short dictated paragraph is sufficient, as long as it
+        explains why the event likely occurred and how it relates to the
+        surrounding intraoperative context.
+      </p>
+    </div>
+  </div>
+</InstructionPanel>
       <div className="mt-6 rounded-2xl border p-5">
         <div className="text-lg font-semibold text-gray-900">
           Focused medication event
@@ -509,52 +616,6 @@ export default function ManagementReasoningPanel({
         </div>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
-        <button
-          type="button"
-          onClick={() => setManagementInstructionsOpen((prev) => !prev)}
-          className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
-        >
-          <span className="text-xl font-bold leading-none text-blue-700">
-            {managementInstructionsOpen ? "▾" : "▸"}
-          </span>
-          <span>Task. Medication-centered management reasoning</span>
-        </button>
-
-        {managementInstructionsOpen && (
-          <div className="p-4 text-sm leading-6 text-blue-900">
-            <p className="mb-3 font-semibold text-blue-950">
-              Please answer in the text box below using the following numbered
-              points.
-            </p>
-
-            <ol className="ml-5 list-decimal space-y-2">
-              <li>
-                <strong>Clinical purpose:</strong> What was the most likely
-                purpose of this medication event at this moment?
-              </li>
-              <li>
-                <strong>Supporting context:</strong> What surrounding evidence
-                supports your interpretation?
-              </li>
-              <li>
-                <strong>Expected effect and observed response:</strong> What
-                effect would be expected, and was the subsequent response
-                consistent with that expectation?
-              </li>
-              <li>
-                <strong>Uncertainty, alternatives, or missing information:</strong>{" "}
-                How confident are you, and what else should be considered?
-              </li>
-              <li>
-                <strong>Counterfactual:</strong> What might have happened if
-                this medication had not been given?
-              </li>
-            </ol>
-          </div>
-        )}
-      </div>
-
       <textarea
         value={answer}
         onChange={(e) => {
@@ -562,7 +623,7 @@ export default function ManagementReasoningPanel({
           setAnswer(e.target.value);
         }}
         className="mt-4 h-80 w-full rounded-xl border border-gray-300 px-4 py-3 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-        placeholder="Write management reasoning here..."
+        placeholder="Write or dictate your management reasoning here..."
       />
 
       <div className="mt-5 flex w-full flex-wrap items-center gap-3 border-t pt-5">

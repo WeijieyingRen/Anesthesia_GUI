@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { submitAnnotation } from "@/lib/submit";
+
+import ObservationSelectionGuide from "./annotation/panels/ObservationSelectionGuide";
 import type {
   AnnotationTaskKey,
   DetectVital,
@@ -428,10 +430,7 @@ export default function DashboardPage() {
   );
   const [episodeTaskCompletion, setEpisodeTaskCompletion] =
     useState<EpisodeTaskCompletionMap>({});
-  const [openEpisodeGuideSections, setOpenEpisodeGuideSections] = useState({
-    how: false,
-    what: false,
-  });
+
   const [preopInfoOpen, setPreopInfoOpen] = useState(true);
 
   const voiceNote = useVoiceNote();
@@ -1607,109 +1606,113 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 {annotationLevel === "episode" && episodeState.stage !== "annotate" && (
   <div className="grid grid-cols-1 items-start bg-white">
     <div className="order-2 border-t p-4">
-      <h3 className="mb-4 text-base font-bold text-gray-800">
-        Checklist
-      </h3>
+      <h3 className="mb-4 text-base font-bold text-gray-800">Checklist</h3>
 
       {episodeState.stage === "select_all" && (
         <div>
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
-          {episodeState.detectedEpisodes.map((episode) => {
-            const checked = episodeState.prioritizedEpisodeIds.includes(episode.id);
+            {episodeState.detectedEpisodes.map((episode) => {
+              const checked = episodeState.prioritizedEpisodeIds.includes(
+                episode.id
+              );
 
-            const isPreviewing =
-              selectedWindow?.vital === episode.vital &&
-              selectedWindow?.startMin === episode.startMin &&
-              selectedWindow?.endMin === episode.endMin &&
-              selectedWindow?.y1 === episode.y1 &&
-              selectedWindow?.y2 === episode.y2;
+              const isPreviewing =
+                selectedWindow?.vital === episode.vital &&
+                selectedWindow?.startMin === episode.startMin &&
+                selectedWindow?.endMin === episode.endMin &&
+                selectedWindow?.y1 === episode.y1 &&
+                selectedWindow?.y2 === episode.y2;
 
-            return (
-              <div
-                key={episode.id}
-                className={`w-full rounded-lg border px-3 py-2 transition ${
-                  isPreviewing
-                    ? "border-blue-700 bg-blue-300 shadow-sm"
-                    : checked
+              return (
+                <div
+                  key={episode.id}
+                  className={`w-full rounded-lg border px-3 py-2 transition ${
+                    isPreviewing
+                      ? "border-blue-700 bg-blue-300 shadow-sm"
+                      : checked
                       ? "border-blue-400 bg-blue-100"
                       : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedDetectVital(episode.vital);
-                      setSelectedWindow({
-                        vital: episode.vital,
-                        startMin: episode.startMin,
-                        endMin: episode.endMin,
-                        y1: episode.y1,
-                        y2: episode.y2,
-                      });
-
-                      logAction("episode_checklist_preview", {
-                        stage: "select_all",
-                        episodeId: episode.id,
-                        vital: episode.vital,
-                        startMin: episode.startMin,
-                        endMin: episode.endMin,
-                      });
-                    }}
-                    className="min-w-0 flex-1 text-left focus:outline-none"
-                  >
-                    <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
-                      {episode.label}
-                    </div>
-                    <div className="mt-1 text-xs text-gray-500">
-                      {formatEpisodeTimeRange(episode.startMin, episode.endMin, anesthesiaStart)}
-                    </div>
-                  </button>
-
-                  <div className="flex items-center gap-2 shrink-0">
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
                     <button
                       type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleTogglePrioritizedEpisode(episode.id);
+                      onClick={() => {
+                        setSelectedDetectVital(episode.vital);
+                        setSelectedWindow({
+                          vital: episode.vital,
+                          startMin: episode.startMin,
+                          endMin: episode.endMin,
+                          y1: episode.y1,
+                          y2: episode.y2,
+                        });
 
-                        logAction("episode_select_all_toggle", {
+                        logAction("episode_checklist_preview", {
+                          stage: "select_all",
                           episodeId: episode.id,
-                          nextSelected: !checked,
+                          vital: episode.vital,
+                          startMin: episode.startMin,
+                          endMin: episode.endMin,
                         });
                       }}
-                      className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded border text-[10px] font-bold ${
-                        checked
-                          ? "border-blue-600 bg-blue-600 text-white"
-                          : "border-gray-300 bg-white text-transparent"
-                      }`}
-                      title={checked ? "Unconfirm episode" : "Confirm episode"}
+                      className="min-w-0 flex-1 text-left focus:outline-none"
                     >
-                      ✓
+                      <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                        {episode.label}
+                      </div>
+                      <div className="mt-1 text-xs text-gray-500">
+                        {formatEpisodeTimeRange(
+                          episode.startMin,
+                          episode.endMin,
+                          anesthesiaStart
+                        )}
+                      </div>
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteDetectedEpisode(episode.id);
-                      }}
-                      className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700"
-                      title="Delete event"
-                    >
-                      ×
-                    </button>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTogglePrioritizedEpisode(episode.id);
+
+                          logAction("episode_select_all_toggle", {
+                            episodeId: episode.id,
+                            nextSelected: !checked,
+                          });
+                        }}
+                        className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded border text-[10px] font-bold ${
+                          checked
+                            ? "border-blue-600 bg-blue-600 text-white"
+                            : "border-gray-300 bg-white text-transparent"
+                        }`}
+                        title={checked ? "Unconfirm episode" : "Confirm episode"}
+                      >
+                        ✓
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteDetectedEpisode(episode.id);
+                        }}
+                        className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700"
+                        title="Delete event"
+                      >
+                        ×
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
 
-          {episodeState.detectedEpisodes.length === 0 && (
-            <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
-              No events yet.
-            </div>
-          )}
+            {episodeState.detectedEpisodes.length === 0 && (
+              <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+                No events yet.
+              </div>
+            )}
           </div>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
@@ -1745,7 +1748,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 onClick={() => {
                   void handleAdvanceEpisodeStage();
                 }}
-                disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
+                disabled={
+                  episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                }
                 className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
                   episodeState.prioritizedEpisodeIds.length === 0 || submitting
                     ? "cursor-not-allowed bg-blue-300 text-white"
@@ -1762,89 +1767,94 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       {episodeState.stage === "pick_top3" && (
         <div>
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
-          {episodeState.detectedEpisodes.map((episode) => {
-            const checked =
-              episodeState.prioritizedEpisodeIds.includes(episode.id);
+            {episodeState.detectedEpisodes.map((episode) => {
+              const checked = episodeState.prioritizedEpisodeIds.includes(
+                episode.id
+              );
 
-            const isPreviewing =
-              selectedWindow?.vital === episode.vital &&
-              selectedWindow?.startMin === episode.startMin &&
-              selectedWindow?.endMin === episode.endMin &&
-              selectedWindow?.y1 === episode.y1 &&
-              selectedWindow?.y2 === episode.y2;
+              const isPreviewing =
+                selectedWindow?.vital === episode.vital &&
+                selectedWindow?.startMin === episode.startMin &&
+                selectedWindow?.endMin === episode.endMin &&
+                selectedWindow?.y1 === episode.y1 &&
+                selectedWindow?.y2 === episode.y2;
 
-            return (
-              <div
-                key={episode.id}
-                className={`w-full rounded-lg border px-3 py-2 transition ${
-                  isPreviewing
-                    ? "border-blue-700 bg-blue-300 shadow-sm"
-                    : checked
+              return (
+                <div
+                  key={episode.id}
+                  className={`w-full rounded-lg border px-3 py-2 transition ${
+                    isPreviewing
+                      ? "border-blue-700 bg-blue-300 shadow-sm"
+                      : checked
                       ? "border-blue-400 bg-blue-100"
                       : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedDetectVital(episode.vital);
-                      setSelectedWindow({
-                        vital: episode.vital,
-                        startMin: episode.startMin,
-                        endMin: episode.endMin,
-                        y1: episode.y1,
-                        y2: episode.y2,
-                      });
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedDetectVital(episode.vital);
+                        setSelectedWindow({
+                          vital: episode.vital,
+                          startMin: episode.startMin,
+                          endMin: episode.endMin,
+                          y1: episode.y1,
+                          y2: episode.y2,
+                        });
 
-                      logAction("episode_checklist_preview", {
-                        stage: "pick_top3",
-                        episodeId: episode.id,
-                        vital: episode.vital,
-                        startMin: episode.startMin,
-                        endMin: episode.endMin,
-                      });
-                    }}
-                    className="min-w-0 flex-1 text-left focus:outline-none"
-                  >
-                    <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
-                      {episode.label}
-                    </div>
-                    <div className="mt-1 text-xs text-gray-500">
-                      {formatEpisodeTimeRange(episode.startMin, episode.endMin, anesthesiaStart)}
-                    </div>
-                  </button>
+                        logAction("episode_checklist_preview", {
+                          stage: "pick_top3",
+                          episodeId: episode.id,
+                          vital: episode.vital,
+                          startMin: episode.startMin,
+                          endMin: episode.endMin,
+                        });
+                      }}
+                      className="min-w-0 flex-1 text-left focus:outline-none"
+                    >
+                      <div className="break-words whitespace-normal text-sm font-semibold text-gray-800">
+                        {episode.label}
+                      </div>
+                      <div className="mt-1 text-xs text-gray-500">
+                        {formatEpisodeTimeRange(
+                          episode.startMin,
+                          episode.endMin,
+                          anesthesiaStart
+                        )}
+                      </div>
+                    </button>
 
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleTogglePrioritizedEpisode(episode.id);
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTogglePrioritizedEpisode(episode.id);
 
-                      logAction("episode_pick_top3_toggle", {
-                        episodeId: episode.id,
-                        nextSelected: !checked,
-                      });
-                    }}
-                    className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
-                      checked
-                        ? "border-blue-600 bg-blue-600 text-white"
-                        : "border-gray-300 bg-white text-transparent"
-                    }`}
-                    title={checked ? "Unselect episode" : "Select episode"}
-                  >
-                    ✓
-                  </button>
+                        logAction("episode_pick_top3_toggle", {
+                          episodeId: episode.id,
+                          nextSelected: !checked,
+                        });
+                      }}
+                      className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
+                        checked
+                          ? "border-blue-600 bg-blue-600 text-white"
+                          : "border-gray-300 bg-white text-transparent"
+                      }`}
+                      title={checked ? "Unselect episode" : "Select episode"}
+                    >
+                      ✓
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
 
-          {episodeState.detectedEpisodes.length === 0 && (
-            <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
-              No events yet.
-            </div>
-          )}
+            {episodeState.detectedEpisodes.length === 0 && (
+              <div className="rounded-xl border border-dashed p-4 text-sm text-gray-500">
+                No events yet.
+              </div>
+            )}
           </div>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
@@ -1860,7 +1870,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               onClick={() => {
                 void handleAdvanceEpisodeStage();
               }}
-              disabled={episodeState.prioritizedEpisodeIds.length === 0 || submitting}
+              disabled={
+                episodeState.prioritizedEpisodeIds.length === 0 || submitting
+              }
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
                 episodeState.prioritizedEpisodeIds.length === 0 || submitting
                   ? "cursor-not-allowed bg-blue-300 text-white"
@@ -1875,127 +1887,28 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     </div>
 
     <div className="order-1 min-w-0 p-4">
-      {episodeState.stage === "select_all" && (
-        <div className="space-y-6">
-          <h4 className="text-xl font-bold text-gray-900">
-            Task 1. Detect events associated with vital sign abnormalities.
-          </h4>
+  {episodeState.stage === "select_all" && (
+    <div className="space-y-6">
+      <div className="mb-3 text-sm font-semibold text-gray-900">
+        Task 2. Detect events associated with vital sign abnormalities.
+      </div>
 
-          <div className="space-y-2">
-            <div className="overflow-hidden rounded-lg border border-blue-200 bg-blue-50">
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenEpisodeGuideSections((prev) => ({
-                    ...prev,
-                    how: !prev.how,
-                  }))
-                }
-                className="flex w-full items-center gap-3 bg-blue-100 px-4 py-3 text-left"
-              >
-                <span className="inline-flex h-9 w-9 items-center justify-center text-3xl font-black leading-none text-blue-700">
-                  {openEpisodeGuideSections.how ? "▾" : "▸"}
-                </span>
-                <span className="text-sm font-semibold text-blue-950">
-                  How to annotate
-                </span>
-              </button>
-
-              {openEpisodeGuideSections.how && (
-                <ol className="border-t border-blue-200 bg-blue-50 px-8 py-4 text-sm leading-6 text-blue-900">
-                  <li>1. Drag directly on the VitalChart to draw a box around an abnormal episode.</li>
-                  <li>
-                    <span className="font-semibold text-red-500">
-                      2. Repeat until all abnormal episodes are identified.
-                    </span>
-                  </li>
-                  <li>
-                    3. select 1 interesting abnormal episode, Save and continue..
-                  </li>
-          
-                </ol>
-              )}
-            </div>
-
-            <div className="overflow-hidden rounded-lg border border-rose-200 bg-rose-50">
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenEpisodeGuideSections((prev) => ({
-                    ...prev,
-                    what: !prev.what,
-                  }))
-                }
-                className="flex w-full items-center gap-3 bg-rose-100 px-4 py-3 text-left"
-              >
-                <span className="inline-flex h-9 w-9 items-center justify-center text-3xl font-black leading-none text-rose-700">
-                  {openEpisodeGuideSections.what ? "▾" : "▸"}
-                </span>
-                <span className="text-sm font-semibold text-rose-950">
-                  What to annotate?
-                </span>
-              </button>
-
-              {openEpisodeGuideSections.what && (
-                <div className="border-t border-rose-200 bg-rose-50 px-4 py-4">
-                  <p className="mb-4 text-sm leading-6 text-rose-900">
-                    Abnormal events are described as below events with your practical knowledge.
-                  </p>
-
-                  <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                    <div>
-                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-600">
-                        Hemodynamics
-                      </div>
-                      <ul className="space-y-1 text-sm text-rose-900">
-                        <li>Hypotension</li>
-                        <li>Hypertension</li>
-                        <li>Bradycardia</li>
-                        <li>Tachycardia</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-600">
-                        Oxygenation
-                      </div>
-                      <ul className="space-y-1 text-sm text-rose-900">
-                        <li>Hypoxia</li>
-                        <li>Hypercapnia</li>
-                        <li>Hypocapnia</li>
-                        <li>Tachypnea</li>
-                        <li>Bradypnea</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="mb-2 break-words text-[10px] font-semibold uppercase tracking-wide text-rose-600">
-                        Temperature
-                      </div>
-                      <ul className="space-y-1 text-sm text-rose-900">
-                        <li>Hypothermia</li>
-                        <li>Hyperthermia</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {episodeState.stage === "pick_top3" && (
-        <div className="space-y-6">
-          <h4 className="text-xl font-bold text-gray-900">
-            Task 2. Select 1 interesting episode for detailed annotation
-          </h4>
-          <p className="text-sm text-gray-600">
-            From the detected episodes on the left, choose the single most interesting episode you want to annotate in detail.
-          </p>
-
-
-        </div>
-      )}
+      <ObservationSelectionGuide />
     </div>
+  )}
+
+  {episodeState.stage === "pick_top3" && (
+    <div className="space-y-6">
+      <h4 className="text-xl font-bold text-gray-900">
+        Task 2. Select 1 interesting episode for detailed annotation
+      </h4>
+      <p className="text-sm text-gray-600">
+        From the detected episodes on the left, choose the single most
+        interesting episode you want to annotate in detail.
+      </p>
+    </div>
+  )}
+</div>
   </div>
 )}
 
@@ -2003,43 +1916,43 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   <div className="space-y-4 bg-white p-4">
     {selectedEvent ? (
       <TaskWorkspace
-  task={selectedTask}
-  onChangeTask={setSelectedTask}
-  onSaveAndNextStep={(finishedTask) => {
-    if (finishedTask === "detect") {
-      handleSaveAndNextStep(finishedTask);
-    }
-  }}
-  selectedEvent={selectedEvent}
-  caseId={caseId}
-  patientId={currentPatient?.folder ?? undefined}
-  patientFolder={currentPatient?.folder ?? undefined}
-  episodeNumber={activeEpisodeNumber ?? undefined}
-  selectedDetectVital={selectedDetectVital}
-  onChangeSelectedDetectVital={setSelectedDetectVital}
-  selectedWindow={selectedWindow}
-  anesthesiaStart={anesthesiaStart}
-  gasData={{
-    FiO2: vitals.gas["FiO2"],
-    "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
-    "Air (L/min)": vitals.gas["Air (L/min)"],
-    "N2O (L/min)": vitals.gas["N2O (L/min)"],
-    "inO2 %": vitals.gas["inO2 %"],
-    "inN2O %": vitals.gas["inN2O %"],
-    "inSevoflurane %": vitals.gas["inSevoflurane %"],
-    inIsoflurane: vitals.gas["inIsoflurane"],
-    "etMAC exhaled": vitals.gas["etMAC exhaled"],
-  }}
-  medBolusRows={medBolusRowsState}
-  medInfusionRows={medInfusionRowsState}
-  fluidInRows={fluidInRowsState}
-  fluidOutRows={fluidOutRowsState}
-  episodeState={episodeState}
-  onChangeEpisodeState={setEpisodeState}
-  onChangeSelectedWindow={setSelectedWindow}
-  completedTaskMap={episodeTaskCompletion}
-  onChangeCompletedTaskMap={setEpisodeTaskCompletion}
-/>
+        task={selectedTask}
+        onChangeTask={setSelectedTask}
+        onSaveAndNextStep={(finishedTask) => {
+          if (finishedTask === "detect") {
+            handleSaveAndNextStep(finishedTask);
+          }
+        }}
+        selectedEvent={selectedEvent}
+        caseId={caseId}
+        patientId={currentPatient?.folder ?? undefined}
+        patientFolder={currentPatient?.folder ?? undefined}
+        episodeNumber={activeEpisodeNumber ?? undefined}
+        selectedDetectVital={selectedDetectVital}
+        onChangeSelectedDetectVital={setSelectedDetectVital}
+        selectedWindow={selectedWindow}
+        anesthesiaStart={anesthesiaStart}
+        gasData={{
+          FiO2: vitals.gas["FiO2"],
+          "O2 (L/Min)": vitals.gas["O2 (L/Min)"],
+          "Air (L/min)": vitals.gas["Air (L/min)"],
+          "N2O (L/min)": vitals.gas["N2O (L/min)"],
+          "inO2 %": vitals.gas["inO2 %"],
+          "inN2O %": vitals.gas["inN2O %"],
+          "inSevoflurane %": vitals.gas["inSevoflurane %"],
+          inIsoflurane: vitals.gas["inIsoflurane"],
+          "etMAC exhaled": vitals.gas["etMAC exhaled"],
+        }}
+        medBolusRows={medBolusRowsState}
+        medInfusionRows={medInfusionRowsState}
+        fluidInRows={fluidInRowsState}
+        fluidOutRows={fluidOutRowsState}
+        episodeState={episodeState}
+        onChangeEpisodeState={setEpisodeState}
+        onChangeSelectedWindow={setSelectedWindow}
+        completedTaskMap={episodeTaskCompletion}
+        onChangeCompletedTaskMap={setEpisodeTaskCompletion}
+      />
     ) : (
       <div className="flex min-h-[560px] items-center justify-center rounded-xl border bg-white p-6 text-sm text-gray-500">
         Please select one prioritized episode.
@@ -2047,7 +1960,6 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     )}
   </div>
 )}
-               
                   </div>
                 </div>
 
@@ -2055,6 +1967,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   <div className="px-1 text-sm font-bold text-gray-900">
                     Visualization Panel
                   </div>
+
                   <UnifiedTimelineCard
                     vitals={vitals}
                     medications={medications}
