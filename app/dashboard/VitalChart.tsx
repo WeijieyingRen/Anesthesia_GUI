@@ -87,7 +87,7 @@ type HoverStats = {
   temp: number | null;
 };
 const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 0;
+const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
 const BASE_PX_PER_15_MIN = 64;
 const EDGE_HANDLE_PX = 16;
@@ -1481,15 +1481,23 @@ const activeEndMin =
       >
         {hoverStats && !isDragging && (
           <div
-            className="pointer-events-none absolute rounded-md border bg-white px-3 py-2 text-xs shadow"
+            className="pointer-events-none absolute rounded-md border border-gray-200 px-3 py-2 text-xs shadow"
             style={{
-              left: Math.min(minuteToPixel(hoverStats.time) + 8, plotWidth - 260),
+              left:
+                minuteToPixel(hoverStats.time) > plotWidth * 0.55
+                  ? Math.max(8, minuteToPixel(hoverStats.time) - 196)
+                  : Math.min(
+                      minuteToPixel(hoverStats.time) + 12,
+                      plotWidth - 196
+                    ),
               top: chartMarginTop + 8,
               zIndex: 1000,
+              backgroundColor: "rgba(255, 255, 255, 0.86)",
               color: "#111827",
               lineHeight: 1.45,
-              minWidth: 180,
-              maxWidth: 240,
+              minWidth: 172,
+              maxWidth: 188,
+              backdropFilter: "blur(2px)",
             }}
           >
             <div className="mb-1 font-semibold">
