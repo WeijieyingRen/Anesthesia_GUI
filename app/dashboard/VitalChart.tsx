@@ -1445,6 +1445,12 @@ const activeEndMin =
             <div className="mb-1 font-semibold">
               Time: {formatClockTime(hoverStats.time, timeZero)}
             </div>
+            <div>BP: {hoverStats.bpText}</div>
+            <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
+            <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
+            <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
+            <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
+            <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
           </div>
         )}
 

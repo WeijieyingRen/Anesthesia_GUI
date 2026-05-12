@@ -61,6 +61,14 @@ type ScatterPoint = {
   color: string;
 };
 
+type MedicationClickInfo = {
+  name: string;
+  timeText: string;
+  amountText: string;
+  x: number;
+  y: number;
+};
+
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
@@ -506,6 +514,34 @@ function formatMedicationTitle(
   return `${name}\nTime: ${timeText}\nVolume/Dose: ${amountText}${unitText}`;
 }
 
+function makeMedicationClickInfo(
+  name: string,
+  startMin: number,
+  endMin: number | null,
+  amount: number | null | undefined,
+  unit: string | null | undefined,
+  x: number,
+  y: number,
+  timeZero?: string | null
+): MedicationClickInfo {
+  const amountText =
+    amount == null || !Number.isFinite(Number(amount))
+      ? "-"
+      : `${formatMedNumber(Number(amount))}${unit ? ` ${unit}` : ""}`;
+  const timeText =
+    endMin == null
+      ? formatClockTime(startMin, timeZero)
+      : `${formatClockTime(startMin, timeZero)} - ${formatClockTime(endMin, timeZero)}`;
+
+  return {
+    name,
+    timeText,
+    amountText,
+    x,
+    y,
+  };
+}
+
 function LegendSwatch({
   color,
   stripe,
@@ -654,6 +690,7 @@ function BolusOverlaySvg({
   plotWidth,
   managementEvent,
   timeZero,
+  onMedicationClick,
 }: {
   end: number;
   rows: MedRow[];
@@ -662,6 +699,7 @@ function BolusOverlaySvg({
   plotWidth: number;
   managementEvent?: ManagementEvent | null;
   timeZero?: string | null;
+  onMedicationClick?: (info: MedicationClickInfo) => void;
 }) {
   const infusionRectsByRow = getInfusionLabelRects(rows, end, plotWidth);
 
@@ -671,7 +709,7 @@ function BolusOverlaySvg({
       height={height}
       viewBox={`0 0 ${svgWidth} ${height}`}
       preserveAspectRatio="none"
-      className="absolute inset-0 pointer-events-none"
+      className="absolute inset-0 pointer-events-auto"
     >
       <StripeDefs />
 
@@ -732,7 +770,25 @@ function BolusOverlaySvg({
           ].join(" ");
 
           return (
-            <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
+            <g
+              key={`bolus-overlay-${row.name}-${idx}-${p.time}`}
+              style={{ cursor: "pointer", pointerEvents: "auto" }}
+              onClick={(event) => {
+                event.stopPropagation();
+                onMedicationClick?.(
+                  makeMedicationClickInfo(
+                    row.name,
+                    p.time,
+                    null,
+                    p.dose,
+                    p.unit,
+                    bodyLeft,
+                    actualTop + boxHeight + 8,
+                    timeZero
+                  )
+                );
+              }}
+            >
               <title>
                 {formatMedicationTitle(row.name, p.time, null, p.dose, p.unit, timeZero)}
               </title>
@@ -791,6 +847,7 @@ function InfusionOverlaySvg({
   plotWidth,
   managementEvent,
   timeZero,
+  onMedicationClick,
 }: {
   end: number;
   rows: MedRow[];
@@ -799,6 +856,7 @@ function InfusionOverlaySvg({
   plotWidth: number;
   managementEvent?: ManagementEvent | null;
   timeZero?: string | null;
+  onMedicationClick?: (info: MedicationClickInfo) => void;
 }) {
   return (
     <svg
@@ -864,7 +922,25 @@ function InfusionOverlaySvg({
           ].join(" ");
 
           return (
-            <g key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}>
+            <g
+              key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}
+              style={{ cursor: "pointer", pointerEvents: "auto" }}
+              onClick={(event) => {
+                event.stopPropagation();
+                onMedicationClick?.(
+                  makeMedicationClickInfo(
+                    row.name,
+                    seg.start,
+                    seg.end,
+                    seg.rate,
+                    seg.unit,
+                    headX,
+                    yBottom + 8,
+                    timeZero
+                  )
+                );
+              }}
+            >
               <title>
                 {formatMedicationTitle(
                   row.name,
@@ -1061,6 +1137,8 @@ export default function MedicationChart({
 
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+  const [selectedMedicationInfo, setSelectedMedicationInfo] =
+    useState<MedicationClickInfo | null>(null);
 
   const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
   const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
@@ -1121,6 +1199,7 @@ export default function MedicationChart({
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
       setSliderValue(Math.min(el.scrollLeft, nextMax));
+      setSelectedMedicationInfo(null);
     }
 
     updateScrollMetrics();
@@ -1321,6 +1400,7 @@ export default function MedicationChart({
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
+                setSelectedMedicationInfo(null);
               }}
               onScroll={(e) => {
                 const next = e.currentTarget.scrollLeft;
@@ -1419,6 +1499,7 @@ export default function MedicationChart({
                     plotWidth={plotWidth}
                     managementEvent={managementEvent}
                     timeZero={timeZero}
+                    onMedicationClick={setSelectedMedicationInfo}
                   />
                 </div>
 
@@ -1431,8 +1512,42 @@ export default function MedicationChart({
                     plotWidth={plotWidth}
                     managementEvent={managementEvent}
                     timeZero={timeZero}
+                    onMedicationClick={setSelectedMedicationInfo}
                   />
                 </div>
+
+                {selectedMedicationInfo && (
+                  <div
+                    className="absolute z-40 min-w-[180px] rounded-md border border-gray-200 bg-white px-3 py-2 text-xs text-gray-900 shadow-lg"
+                    style={{
+                      left: Math.max(
+                        4,
+                        Math.min(selectedMedicationInfo.x + 8, plotWidth - 210)
+                      ),
+                      top: Math.max(
+                        4,
+                        Math.min(selectedMedicationInfo.y, fullContentHeight - 82)
+                      ),
+                      pointerEvents: "auto",
+                    }}
+                  >
+                    <div className="mb-1 flex items-start justify-between gap-3">
+                      <div className="font-semibold">
+                        {selectedMedicationInfo.name}
+                      </div>
+                      <button
+                        type="button"
+                        className="text-base font-bold leading-none text-gray-500 hover:text-gray-900"
+                        aria-label="Close medication details"
+                        onClick={() => setSelectedMedicationInfo(null)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <div>Time: {selectedMedicationInfo.timeText}</div>
+                    <div>Volume/Dose: {selectedMedicationInfo.amountText}</div>
+                  </div>
+                )}
               </div>
             </div>
 
