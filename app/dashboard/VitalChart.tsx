@@ -86,7 +86,7 @@ type HoverStats = {
   etco2: number | null;
   temp: number | null;
 };
-const LEGEND_COL_WIDTH = 0;
+const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 0;
 const PLOT_RIGHT = 20;
 const BASE_PX_PER_15_MIN = 64;
@@ -1207,7 +1207,57 @@ const activeEndMin =
           gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
         }}
       >
-        <div aria-hidden="true" />
+        <div className="border-r pr-0">
+          <div style={{ height: leftLegendTopSpacer }} />
+          <div className="space-y-1">
+            {keys.map((key) => {
+              const color = lineColors[key] ?? "#000000";
+              const marker = (lineMarkers[key] as MarkerType) ?? "circle";
+              const isHidden = hiddenKeys.includes(key);
+
+              return (
+                <div
+                  key={key}
+                  className="flex items-center justify-between px-2 py-1 text-sm"
+                  style={{
+                    backgroundColor: getRowBackground(key),
+                    opacity: isHidden ? 0.45 : 1,
+                  }}
+                >
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="truncate text-gray-900">
+                      {lineLabels[key] ?? key}
+                    </span>
+                    {lineUnits[key] ? (
+                      <span className="text-xs text-gray-500">
+                        {lineUnits[key]}
+                      </span>
+                    ) : null}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHiddenKeys((prev) =>
+                        prev.includes(key)
+                          ? prev.filter((k) => k !== key)
+                          : [...prev, key]
+                      );
+                    }}
+                    className="cursor-pointer transition hover:scale-105"
+                    title={
+                      isHidden
+                        ? `Show ${lineLabels[key] ?? key}`
+                        : `Hide ${lineLabels[key] ?? key}`
+                    }
+                  >
+                    <LegendMarker color={color} marker={marker} />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
         <FixedYAxis
           ticks={yTicks}

@@ -709,7 +709,7 @@ function BolusOverlaySvg({
       height={height}
       viewBox={`0 0 ${svgWidth} ${height}`}
       preserveAspectRatio="none"
-      className="absolute inset-0 pointer-events-auto"
+      className="absolute inset-0 pointer-events-none"
     >
       <StripeDefs />
 
@@ -864,7 +864,7 @@ function InfusionOverlaySvg({
       height={height}
       viewBox={`0 0 ${svgWidth} ${height}`}
       preserveAspectRatio="none"
-      className="absolute inset-0 pointer-events-auto"
+      className="absolute inset-0 pointer-events-none"
     >
       <StripeDefs />
 
