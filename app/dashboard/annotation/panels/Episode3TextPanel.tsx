@@ -13,29 +13,26 @@ type EpisodeButtonItem = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
-const NORMAL_EPISODE_OPTIONS = [
-  { value: "", label: "Select a normal / expected episode..." },
-  { value: "induction", label: "Induction" },
-  { value: "intubation", label: "Intubation" },
-  { value: "positioning", label: "Positioning" },
-  { value: "procedure_start", label: "Procedure Start" },
-  { value: "maintenance", label: "Anesthesia Maintenance" },
-  { value: "emergence", label: "Emergence" },
-  { value: "extubation", label: "Extubation" },
-  { value: "other", label: "Other" },
-] as const;
+const ABNORMAL_REASONING_HINT = `1. What happened during this abnormal event?
+Hint: Describe the vital-sign pattern, approximate timing, severity, and why this segment is abnormal.
 
-function formatClockTime(offsetMin?: number | null, timeZero?: string | null) {
-  if (!Number.isFinite(offsetMin) || !timeZero) return "-";
+2. What was the likely trigger, etiology, or mechanism?
+Hint: Explain the most likely physiology or cause, including anesthesia, surgery, positioning, ventilation, blood loss, or other context.
 
-  const base = new Date(timeZero);
-  if (Number.isNaN(base.getTime())) return "-";
+3. Which medications, fluids, gas/ventilation changes, surgical events, position changes, or other interventions were clinically relevant?
+Hint: Link nearby interventions to the abnormal event and say why they mattered.
 
-  const dt = new Date(base.getTime() + Number(offsetMin) * 60000);
-  const hh = String(dt.getHours()).padStart(2, "0");
-  const mm = String(dt.getMinutes()).padStart(2, "0");
-  return `${hh}:${mm}`;
-}
+4. How did the patient respond after the intervention?
+Hint: Describe whether the vitals improved, worsened, or stayed unchanged after the relevant action.
+
+5. Was the management appropriate in this context?
+Hint: State whether the response was clinically reasonable and why.
+
+6. Was there a reasonable alternative intervention?
+Hint: Mention other plausible actions if relevant, or say no clear alternative was needed.
+
+7. If uncertain, briefly describe the uncertainty or competing explanations.
+Hint: Note missing information, ambiguity, or competing explanations.`;
 
 function InstructionPanel({
   title,
@@ -118,10 +115,6 @@ export default function Episode3TextPanel({
   const [freeTextMap, setFreeTextMap] = useState<Record<string, string>>({});
   const freeText = freeTextMap[eventId] ?? "";
 
-  const [normalEpisodeType, setNormalEpisodeType] = useState("");
-  const [normalEpisodeOther, setNormalEpisodeOther] = useState("");
-  const [normalReasoning, setNormalReasoning] = useState("");
-
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
@@ -129,21 +122,17 @@ export default function Episode3TextPanel({
 
   const [recording, setRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
-  const [normalRecording, setNormalRecording] = useState(false);
-  const normalRecognitionRef = useRef<any>(null);
 
   useEffect(() => {
     setError(null);
 
     try {
       recognitionRef.current?.stop();
-      normalRecognitionRef.current?.stop();
     } catch {
       // ignore
     }
 
     setRecording(false);
-    setNormalRecording(false);
   }, [eventId]);
 
   function setCurrentFreeText(nextText: string) {
@@ -257,122 +246,11 @@ export default function Episode3TextPanel({
     }
   }
 
-  async function startNormalVoiceNote() {
-    try {
-      const SpeechRecognition =
-        (window as any).SpeechRecognition ||
-        (window as any).webkitSpeechRecognition;
-
-      if (!SpeechRecognition) {
-        alert("Speech recognition is not supported. Please use Chrome or Edge.");
-        return;
-      }
-
-      const recognition = new SpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = true;
-      recognition.continuous = true;
-
-      const baseText = normalReasoning.trim();
-      let finalTranscript = "";
-
-      recognition.onresult = (event: any) => {
-        let interimTranscript = "";
-
-        for (let i = event.resultIndex; i < event.results.length; i += 1) {
-          const transcript = event.results[i][0].transcript;
-
-          if (event.results[i].isFinal) {
-            finalTranscript += transcript;
-          } else {
-            interimTranscript += transcript;
-          }
-        }
-
-        const combined = `${finalTranscript} ${interimTranscript}`.trim();
-
-        if (combined) {
-          const marker = "\n\n[Voice note in progress]\n";
-          setNormalReasoning(`${baseText}${baseText ? marker : ""}${combined}`.trim());
-          setSaveStatus("idle");
-          setSaveMessage("");
-        }
-      };
-
-      recognition.onerror = (event: any) => {
-        console.error("Speech recognition error:", event);
-        setError("Speech recognition error. Please try again or type directly.");
-        setSaveStatus("error");
-        setSaveMessage("Speech recognition failed.");
-        setNormalRecording(false);
-      };
-
-      recognition.onend = () => {
-        setNormalRecording(false);
-
-        if (finalTranscript.trim()) {
-          setNormalReasoning(`${baseText}${baseText ? "\n\n" : ""}${finalTranscript.trim()}`.trim());
-        }
-      };
-
-      normalRecognitionRef.current = recognition;
-      recognition.start();
-      setNormalRecording(true);
-      setError(null);
-    } catch (e: any) {
-      console.error("Failed to start voice note:", e);
-      setError(e?.message ?? "Failed to start voice note.");
-      setSaveStatus("error");
-      setSaveMessage(e?.message ?? "Failed to start voice note.");
-      setNormalRecording(false);
-    }
-  }
-
-  function stopNormalVoiceNote() {
-    try {
-      normalRecognitionRef.current?.stop();
-    } catch {
-      // ignore
-    } finally {
-      setNormalRecording(false);
-    }
-  }
-
   async function handleSave() {
     const currentText = freeText.trim();
-    const normalEventLabel =
-      normalEpisodeType === "other"
-        ? normalEpisodeOther.trim()
-        : NORMAL_EPISODE_OPTIONS.find((option) => option.value === normalEpisodeType)
-            ?.label ?? "";
-    const currentNormalReasoning = normalReasoning.trim();
 
     if (!currentText) {
       const message = "Please provide a free-text annotation before saving.";
-      setError(message);
-      setSaveStatus("error");
-      setSaveMessage(message);
-      return;
-    }
-
-    if (!normalEpisodeType || !normalEventLabel) {
-      const message = "Please select one normal / expected episode before saving.";
-      setError(message);
-      setSaveStatus("error");
-      setSaveMessage(message);
-      return;
-    }
-
-    if (normalEpisodeType === "other" && !normalEpisodeOther.trim()) {
-      const message = "Please specify the normal / expected episode.";
-      setError(message);
-      setSaveStatus("error");
-      setSaveMessage(message);
-      return;
-    }
-
-    if (!currentNormalReasoning) {
-      const message = "Please provide normal episode reasoning before saving.";
       setError(message);
       setSaveStatus("error");
       setSaveMessage(message);
@@ -427,13 +305,13 @@ export default function Episode3TextPanel({
 
         panel: "abnormality_reasoning",
         action: "submit",
-        task: "abnormal_and_normal_episode_reasoning",
+        task: "abnormal_event_reasoning",
 
         submittedAt,
         clickedAt: submittedAt,
 
         answers: {
-          task: "abnormal_and_normal_episode_reasoning",
+          task: "abnormal_event_reasoning",
 
           episodeNumber,
           episodeLabel:
@@ -461,22 +339,6 @@ export default function Episode3TextPanel({
           },
 
           abnormalEventReasoning: currentText,
-          normalEpisodeReasoning: {
-            selectedEpisodeType: normalEpisodeType,
-            selectedEpisodeLabel: normalEventLabel,
-            otherEpisodeLabel:
-              normalEpisodeType === "other" ? normalEpisodeOther.trim() : null,
-            instruction:
-              "Describe a normal or expected episode and explain why the selected segment is clinically meaningful but not an abnormal event.",
-            requestedElements: [
-              "What normal or expected episode did you select?",
-              "What happened during that segment?",
-              "Why is this segment clinically meaningful?",
-              "Why should it be interpreted as expected or non-abnormal in context?",
-              "Which medications, airway events, gas/ventilation changes, surgical events, or workflow context support that interpretation?",
-            ],
-            freeText: currentNormalReasoning,
-          },
         },
       });
 
@@ -551,7 +413,7 @@ export default function Episode3TextPanel({
 
       <InstructionPanel title="Abnormal event instruction" tone="blue">
         <div className="mb-2 font-semibold text-blue-950">Please include:</div>
-        <ul className="ml-5 list-disc space-y-1">
+        <ol className="ml-5 list-decimal space-y-1">
           <li>What happened during this abnormal event?</li>
           <li>What was the likely trigger, etiology, or mechanism?</li>
           <li>
@@ -565,14 +427,14 @@ export default function Episode3TextPanel({
             If uncertain, briefly describe the uncertainty or competing
             explanations.
           </li>
-        </ul>
+        </ol>
       </InstructionPanel>
 
       <textarea
         value={freeText}
         onChange={(e) => setCurrentFreeText(e.target.value)}
         className="min-h-[320px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-        placeholder="Example: The patient developed hypotension shortly after induction. The likely mechanism was vasodilation from anesthetic agents, possibly compounded by relative hypovolemia. Phenylephrine boluses were clinically relevant and produced a transient MAP increase, but the effect was not sustained..."
+        placeholder={ABNORMAL_REASONING_HINT}
       />
 
       <div className="flex flex-wrap items-center gap-3">
@@ -596,9 +458,9 @@ export default function Episode3TextPanel({
         <button
           type="button"
           onClick={handleSave}
-          disabled={saving || !freeText.trim() || !normalReasoning.trim()}
+          disabled={saving || !freeText.trim()}
           className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            saving || !freeText.trim() || !normalReasoning.trim()
+            saving || !freeText.trim()
               ? "cursor-not-allowed bg-blue-300"
               : "bg-blue-600 hover:bg-blue-700"
           }`}
@@ -607,114 +469,13 @@ export default function Episode3TextPanel({
         </button>
       </div>
 
-      <div className="mt-8 space-y-4 border-t pt-6">
-        <div>
-          <h3 className="text-xl font-bold text-gray-900">
-            Normal Episode Reasoning
-          </h3>
-        </div>
-
-        <InstructionPanel title="Normal episode instruction" tone="emerald">
-          <div className="mb-2 font-semibold text-emerald-950">
-            Please include:
-          </div>
-          <ul className="ml-5 list-disc space-y-1">
-            <li>Select one clinically interesting but expected segment, such as intubation.</li>
-            <li>Describe what happened during the selected segment.</li>
-            <li>Explain why it is clinically meaningful.</li>
-            <li>Explain why it should be interpreted as expected or non-abnormal in context.</li>
-            <li>
-              Mention relevant medications, airway events, gas/ventilation changes,
-              surgical events, or workflow context.
-            </li>
-          </ul>
-        </InstructionPanel>
-
-        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div>
-            <label className="mb-2 block text-sm font-semibold text-gray-800">
-              Interesting normal / expected episode
-            </label>
-            <select
-              value={normalEpisodeType}
-              onChange={(e) => {
-                setNormalEpisodeType(e.target.value);
-                setSaveStatus("idle");
-                setSaveMessage("");
-              }}
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-            >
-              {NORMAL_EPISODE_OPTIONS.map((option) => (
-                <option key={option.value || "empty"} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {normalEpisodeType === "other" && (
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-gray-800">
-                Other episode name
-              </label>
-              <input
-                type="text"
-                value={normalEpisodeOther}
-                onChange={(e) => {
-                  setNormalEpisodeOther(e.target.value);
-                  setSaveStatus("idle");
-                  setSaveMessage("");
-                }}
-                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                placeholder="Specify the normal / expected episode"
-              />
-            </div>
-          )}
-        </div>
-
-        <textarea
-          value={normalReasoning}
-          onChange={(e) => {
-            setNormalReasoning(e.target.value);
-            setSaveStatus("idle");
-            setSaveMessage("");
-          }}
-          className="min-h-[220px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-          placeholder="Example: Intubation was associated with expected airway manipulation and transient physiologic changes. The pattern was clinically meaningful but consistent with routine induction/intubation rather than a separate abnormal episode..."
-        />
-
-        <div className="flex flex-wrap items-center gap-3">
-          {!normalRecording ? (
-            <button
-              type="button"
-              onClick={startNormalVoiceNote}
-              className="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
-            >
-              Start Normal Episode Voice Note
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={stopNormalVoiceNote}
-              className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600"
-            >
-              Stop Voice Note
-            </button>
-          )}
-        </div>
-      </div>
-
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-3">
           <button
             type="button"
             onClick={() => {
               setCurrentFreeText("");
-              setNormalEpisodeType("");
-              setNormalEpisodeOther("");
-              setNormalReasoning("");
               stopVoiceNote();
-              stopNormalVoiceNote();
               setError(null);
               setSaveStatus("idle");
               setSaveMessage("");
@@ -729,9 +490,9 @@ export default function Episode3TextPanel({
           <button
             type="button"
             onClick={handleSave}
-            disabled={saving || !freeText.trim() || !normalReasoning.trim()}
+            disabled={saving || !freeText.trim()}
             className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-              saving || !freeText.trim() || !normalReasoning.trim()
+              saving || !freeText.trim()
                 ? "cursor-not-allowed bg-blue-300"
                 : "bg-blue-600 hover:bg-blue-700"
             }`}

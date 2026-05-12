@@ -190,6 +190,29 @@ function formatBmi(
   return bmi.toFixed(1);
 }
 
+function formatClockTimeFromOffset(offsetMin: number, timeZero?: string | null) {
+  if (!Number.isFinite(offsetMin) || !timeZero) return null;
+
+  const base = new Date(timeZero);
+  if (Number.isNaN(base.getTime())) return null;
+
+  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const hh = String(dt.getHours()).padStart(2, "0");
+  const mm = String(dt.getMinutes()).padStart(2, "0");
+  return `${hh}:${mm}`;
+}
+
+function formatEpisodeTimeRange(
+  startMin: number,
+  endMin: number,
+  timeZero?: string | null
+) {
+  const start = formatClockTimeFromOffset(startMin, timeZero);
+  const end = formatClockTimeFromOffset(endMin, timeZero);
+  if (start && end) return `${start} - ${end}`;
+  return `${Math.round(startMin)} - ${Math.round(endMin)} min`;
+}
+
 function FieldGrid({
   items,
 }: {
@@ -1639,7 +1662,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                       {episode.label}
                     </div>
                     <div className="mt-1 text-xs text-gray-500">
-                      {Math.round(episode.startMin)} – {Math.round(episode.endMin)} min
+                      {formatEpisodeTimeRange(episode.startMin, episode.endMin, anesthesiaStart)}
                     </div>
                   </button>
 
@@ -1788,7 +1811,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                       {episode.label}
                     </div>
                     <div className="mt-1 text-xs text-gray-500">
-                      {Math.round(episode.startMin)} – {Math.round(episode.endMin)} min
+                      {formatEpisodeTimeRange(episode.startMin, episode.endMin, anesthesiaStart)}
                     </div>
                   </button>
 
@@ -1870,11 +1893,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 }
                 className="flex w-full items-center gap-3 bg-blue-100 px-4 py-3 text-left"
               >
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-xl font-bold text-blue-700">
+                <span className="inline-flex h-9 w-9 items-center justify-center text-3xl font-black leading-none text-blue-700">
                   {openEpisodeGuideSections.how ? "▾" : "▸"}
-                </span>
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                  1
                 </span>
                 <span className="text-sm font-semibold text-blue-950">
                   How to annotate
@@ -1908,11 +1928,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 }
                 className="flex w-full items-center gap-3 bg-rose-100 px-4 py-3 text-left"
               >
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-xl font-bold text-rose-700">
+                <span className="inline-flex h-9 w-9 items-center justify-center text-3xl font-black leading-none text-rose-700">
                   {openEpisodeGuideSections.what ? "▾" : "▸"}
-                </span>
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-xs font-bold text-white">
-                  2
                 </span>
                 <span className="text-sm font-semibold text-rose-950">
                   What to annotate?

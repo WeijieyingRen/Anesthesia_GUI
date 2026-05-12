@@ -93,6 +93,20 @@ const MANAGEMENT_REASONING_PROMPT = {
 };
 
 const DEFAULT_ANSWER_TEMPLATE = "";
+const MANAGEMENT_REASONING_HINT = `1. Clinical purpose
+Hint: What was the most likely purpose of this medication event at this moment?
+
+2. Supporting context
+Hint: What surrounding evidence supports your interpretation?
+
+3. Expected effect and observed response
+Hint: What effect would be expected, and was the subsequent response consistent with that expectation?
+
+4. Uncertainty, alternatives, or missing information
+Hint: How confident are you, and what else should be considered?
+
+5. Counterfactual
+Hint: What might have happened if this medication had not been given?`;
 
 export default function ManagementReasoningPanel({
   caseId,
@@ -541,7 +555,7 @@ export default function ManagementReasoningPanel({
             setAnswer(e.target.value);
           }}
           className="mt-4 h-80 w-full rounded-xl border px-4 py-3 font-mono text-sm text-gray-800 outline-none focus:border-orange-400"
-          placeholder="Write your medication-centered management reasoning here..."
+          placeholder={MANAGEMENT_REASONING_HINT}
         />
 
         <div className="mt-4">
