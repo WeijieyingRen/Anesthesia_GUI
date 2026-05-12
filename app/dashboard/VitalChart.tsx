@@ -87,7 +87,7 @@ type HoverStats = {
   temp: number | null;
 };
 const LEGEND_COL_WIDTH = 0;
-const AXIS_COL_WIDTH = 42;
+const AXIS_COL_WIDTH = 0;
 const PLOT_RIGHT = 20;
 const BASE_PX_PER_15_MIN = 64;
 const EDGE_HANDLE_PX = 16;
