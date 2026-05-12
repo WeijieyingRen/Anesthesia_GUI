@@ -55,6 +55,8 @@ type ScatterPoint = {
   y: number;
   medName: string;
   label: string;
+  dose?: number;
+  unit?: string;
   marker: MarkerType;
   color: string;
 };
@@ -389,6 +391,8 @@ function buildBolusScatter(
       y: row.rowIndex,
       medName: row.name,
       label: `${formatMedNumber(Number(p.dose))}`,
+      dose: p.dose,
+      unit: p.unit,
       marker: "bolus-box" as MarkerType,
       color: inferColor(row.name),
     }));
@@ -445,7 +449,11 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
@@ -469,9 +477,33 @@ function MedicationTooltip({
     <div className="rounded border bg-white px-3 py-2 text-xs shadow">
       <div className="font-semibold">{p.medName}</div>
       <div>Time: {formatClockTime(Number(p.x), timeZero)}</div>
-      <div>{p.label}</div>
+      <div>
+        Dose: {p.label}
+        {p.unit ? ` ${p.unit}` : ""}
+      </div>
     </div>
   );
+}
+
+function formatMedicationTitle(
+  name: string,
+  startMin: number,
+  endMin: number | null,
+  amount: number | null | undefined,
+  unit: string | null | undefined,
+  timeZero?: string | null
+) {
+  const amountText =
+    amount == null || !Number.isFinite(Number(amount))
+      ? "-"
+      : formatMedNumber(Number(amount));
+  const unitText = unit ? ` ${unit}` : "";
+  const timeText =
+    endMin == null
+      ? formatClockTime(startMin, timeZero)
+      : `${formatClockTime(startMin, timeZero)} - ${formatClockTime(endMin, timeZero)}`;
+
+  return `${name}\nTime: ${timeText}\nVolume/Dose: ${amountText}${unitText}`;
 }
 
 function LegendSwatch({
@@ -621,6 +653,7 @@ function BolusOverlaySvg({
   svgWidth,
   plotWidth,
   managementEvent,
+  timeZero,
 }: {
   end: number;
   rows: MedRow[];
@@ -628,6 +661,7 @@ function BolusOverlaySvg({
   svgWidth: number;
   plotWidth: number;
   managementEvent?: ManagementEvent | null;
+  timeZero?: string | null;
 }) {
   const infusionRectsByRow = getInfusionLabelRects(rows, end, plotWidth);
 
@@ -699,6 +733,10 @@ function BolusOverlaySvg({
 
           return (
             <g key={`bolus-overlay-${row.name}-${idx}-${p.time}`}>
+              <title>
+                {formatMedicationTitle(row.name, p.time, null, p.dose, p.unit, timeZero)}
+              </title>
+
               {hasOverlap && (
                 <line
                   x1={cx}
@@ -752,6 +790,7 @@ function InfusionOverlaySvg({
   svgWidth,
   plotWidth,
   managementEvent,
+  timeZero,
 }: {
   end: number;
   rows: MedRow[];
@@ -759,6 +798,7 @@ function InfusionOverlaySvg({
   svgWidth: number;
   plotWidth: number;
   managementEvent?: ManagementEvent | null;
+  timeZero?: string | null;
 }) {
   return (
     <svg
@@ -766,7 +806,7 @@ function InfusionOverlaySvg({
       height={height}
       viewBox={`0 0 ${svgWidth} ${height}`}
       preserveAspectRatio="none"
-      className="absolute inset-0 pointer-events-none"
+      className="absolute inset-0 pointer-events-auto"
     >
       <StripeDefs />
 
@@ -803,6 +843,8 @@ function InfusionOverlaySvg({
           const lineStartX = x1 + headWidth - 2;
           const lineEndX = x2;
           const canDrawLine = lineEndX > lineStartX + 2;
+          const endCapWidth = 7;
+          const endCapHeight = headHeight;
 
           const shouldHighlight =
             isMatchingMedicationRow(row.name, managementEvent) &&
@@ -823,16 +865,40 @@ function InfusionOverlaySvg({
 
           return (
             <g key={`inf-overlay-${row.name}-${idx}-${seg.start}-${seg.end}`}>
+              <title>
+                {formatMedicationTitle(
+                  row.name,
+                  seg.start,
+                  seg.end,
+                  seg.rate,
+                  seg.unit,
+                  timeZero
+                )}
+              </title>
+
               {canDrawLine && (
                 <line
                   x1={lineStartX}
                   y1={centerY}
-                  x2={lineEndX}
+                  x2={Math.max(lineStartX, lineEndX - endCapWidth)}
                   y2={centerY}
                   stroke={shouldHighlight ? "#ef4444" : baseStroke}
                   strokeWidth={8}
                   opacity={0.95}
-                  strokeLinecap="round"
+                  strokeLinecap="butt"
+                />
+              )}
+
+              {canDrawLine && (
+                <rect
+                  x={Math.max(lineStartX, lineEndX - endCapWidth)}
+                  y={centerY - endCapHeight / 2}
+                  width={endCapWidth}
+                  height={endCapHeight}
+                  rx={2}
+                  fill={baseFill}
+                  stroke={shouldHighlight ? "#ef4444" : baseStroke}
+                  strokeWidth={shouldHighlight ? 3 : 1.1}
                 />
               )}
 
@@ -1344,7 +1410,7 @@ export default function MedicationChart({
                   </ResponsiveContainer>
                 </div>
 
-                <div className="absolute inset-0 z-20 pointer-events-none">
+                <div className="absolute inset-0 z-20 pointer-events-auto">
                   <InfusionOverlaySvg
                     end={end}
                     rows={visibleRows}
@@ -1352,10 +1418,11 @@ export default function MedicationChart({
                     svgWidth={contentWidth}
                     plotWidth={plotWidth}
                     managementEvent={managementEvent}
+                    timeZero={timeZero}
                   />
                 </div>
 
-                <div className="absolute inset-0 z-30 pointer-events-none">
+                <div className="absolute inset-0 z-30 pointer-events-auto">
                   <BolusOverlaySvg
                     end={end}
                     rows={visibleRows}
@@ -1363,6 +1430,7 @@ export default function MedicationChart({
                     svgWidth={contentWidth}
                     plotWidth={plotWidth}
                     managementEvent={managementEvent}
+                    timeZero={timeZero}
                   />
                 </div>
               </div>

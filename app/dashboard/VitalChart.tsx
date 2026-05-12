@@ -86,7 +86,7 @@ type HoverStats = {
   etco2: number | null;
   temp: number | null;
 };
-const LEGEND_COL_WIDTH = 220;
+const LEGEND_COL_WIDTH = 0;
 const AXIS_COL_WIDTH = 42;
 const PLOT_RIGHT = 20;
 const BASE_PX_PER_15_MIN = 64;
@@ -284,7 +284,11 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
@@ -1203,45 +1207,7 @@ const activeEndMin =
           gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
         }}
       >
-        <div className="border-r pr-0">
-          <div style={{ height: leftLegendTopSpacer }} />
-          <div className="space-y-1">
-            {keys.map((key) => {
-              const color = lineColors[key] ?? "#000000";
-              const marker = (lineMarkers[key] as MarkerType) ?? "circle";
-              const isHidden = hiddenKeys.includes(key);
-
-              return (
-                <div
-                  key={key}
-                  className="flex items-center justify-between px-2 py-1 text-sm"
-                  style={{
-                    backgroundColor: getRowBackground(key),
-                    opacity: isHidden ? 0.45 : 1,
-                  }}
-                >
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="truncate text-gray-900">{lineLabels[key] ?? key}</span>
-                    {lineUnits[key] ? <span className="text-xs text-gray-500">{lineUnits[key]}</span> : null}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHiddenKeys((prev) =>
-                        prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-                      );
-                    }}
-                    className="cursor-pointer transition hover:scale-105"
-                    title={isHidden ? `Show ${lineLabels[key] ?? key}` : `Hide ${lineLabels[key] ?? key}`}
-                  >
-                    <LegendMarker color={color} marker={marker} />
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <div aria-hidden="true" />
 
         <FixedYAxis
           ticks={yTicks}
@@ -1479,12 +1445,6 @@ const activeEndMin =
             <div className="mb-1 font-semibold">
               Time: {formatClockTime(hoverStats.time, timeZero)}
             </div>
-            <div>BP: {hoverStats.bpText}</div>
-            <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
-            <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
-            <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
-            <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
-            <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
           </div>
         )}
 

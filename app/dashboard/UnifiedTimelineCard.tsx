@@ -79,7 +79,11 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
@@ -445,37 +449,7 @@ export default function UnifiedTimelineCard({
         title="Vitals"
         open={openSections.vitals}
         onToggle={() => toggleSection("vitals")}
-      >
-        {showVitalSelector ? (["MAP", "HR", "SPO2", "RR", "ETCO2", "TEMP"] as const).map((item) => {
-          const active = selectedDetectVital === item;
-          const label = item === "MAP" ? "BP" : item;
-
-          return (
-            <button
-              key={item}
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onChangeSelectedDetectVital(item);
-
-                if (selectedWindow) {
-                  onChangeSelectedWindow({
-                    ...selectedWindow,
-                    vital: item,
-                  });
-                }
-              }}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
-                active
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              {label}
-            </button>
-          );
-        }) : null}
-      </SectionHeader>
+      />
 
       {openSections.vitals && (
         <div className="space-y-0">
