@@ -45,6 +45,7 @@ function formatAbsoluteTime(time?: string) {
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   const ss = String(dt.getSeconds()).padStart(2, "0");
+
   return `${hh}:${mm}:${ss}`;
 }
 
@@ -61,6 +62,7 @@ function formatAbsoluteTimeFromOffset(
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   const ss = String(dt.getSeconds()).padStart(2, "0");
+
   return `${hh}:${mm}:${ss}`;
 }
 
@@ -71,6 +73,7 @@ function getDisplayTime(
   if (managementEvent.start_time) {
     return formatAbsoluteTime(managementEvent.start_time);
   }
+
   return formatAbsoluteTimeFromOffset(managementEvent.time_min, anesthesiaStart);
 }
 
@@ -92,22 +95,6 @@ const MANAGEMENT_REASONING_PROMPT = {
   ],
 };
 
-const DEFAULT_ANSWER_TEMPLATE = "";
-const MANAGEMENT_REASONING_HINT = `1. Clinical purpose
-Hint: What was the most likely purpose of this medication event at this moment?
-
-2. Supporting context
-Hint: What surrounding evidence supports your interpretation?
-
-3. Expected effect and observed response
-Hint: What effect would be expected, and was the subsequent response consistent with that expectation?
-
-4. Uncertainty, alternatives, or missing information
-Hint: How confident are you, and what else should be considered?
-
-5. Counterfactual
-Hint: What might have happened if this medication had not been given?`;
-
 export default function ManagementReasoningPanel({
   caseId,
   managementEvent,
@@ -117,16 +104,21 @@ export default function ManagementReasoningPanel({
   anesthesiaStart,
   onSaveSuccess,
 }: Props) {
-  const [answer, setAnswer] = useState(DEFAULT_ANSWER_TEMPLATE);
+  const [answer, setAnswer] = useState("");
   const [recording, setRecording] = useState(false);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [saveMessage, setSaveMessage] = useState("");
+
   const [openGuideSections, setOpenGuideSections] = useState({
     goal: false,
     instructions: false,
   });
 
+  const [managementInstructionsOpen, setManagementInstructionsOpen] =
+    useState(true);
+
   const recognitionRef = useRef<any>(null);
+  const voiceBaseTextRef = useRef("");
 
   const pageOpenedAtRef = useRef<string | null>(null);
   const firstInteractionAtRef = useRef<string | null>(null);
@@ -147,11 +139,13 @@ export default function ManagementReasoningPanel({
   }, [caseId, managementEvent?.row_name, managementEvent?.time_min]);
 
   useEffect(() => {
-    setAnswer(DEFAULT_ANSWER_TEMPLATE);
+    setAnswer("");
     setRecording(false);
+    voiceBaseTextRef.current = "";
     recognitionRef.current?.stop?.();
     setSaveStatus("idle");
     setSaveMessage("");
+    setManagementInstructionsOpen(true);
   }, [
     managementEvent?.row_name,
     managementEvent?.time_min,
@@ -164,6 +158,7 @@ export default function ManagementReasoningPanel({
     if (!taskTimingRef.current.firstInteractionAt) {
       taskTimingRef.current.firstInteractionAt = nowIso;
     }
+
     if (!taskTimingRef.current.firstTypingAt) {
       taskTimingRef.current.firstTypingAt = nowIso;
     }
@@ -171,6 +166,7 @@ export default function ManagementReasoningPanel({
     if (!firstInteractionAtRef.current) {
       firstInteractionAtRef.current = nowIso;
     }
+
     if (!firstTypingAtRef.current) {
       firstTypingAtRef.current = nowIso;
     }
@@ -182,6 +178,7 @@ export default function ManagementReasoningPanel({
     if (!taskTimingRef.current.firstInteractionAt) {
       taskTimingRef.current.firstInteractionAt = nowIso;
     }
+
     if (!taskTimingRef.current.firstVoiceStartAt) {
       taskTimingRef.current.firstVoiceStartAt = nowIso;
     }
@@ -189,6 +186,7 @@ export default function ManagementReasoningPanel({
     if (!firstInteractionAtRef.current) {
       firstInteractionAtRef.current = nowIso;
     }
+
     if (!firstVoiceStartAtRef.current) {
       firstVoiceStartAtRef.current = nowIso;
     }
@@ -211,6 +209,7 @@ export default function ManagementReasoningPanel({
       recognitionRef.current?.stop?.();
 
       markVoiceStart();
+      voiceBaseTextRef.current = answer.trim();
 
       const recognition = new SpeechRecognition();
       recognition.lang = "en-US";
@@ -219,24 +218,25 @@ export default function ManagementReasoningPanel({
 
       recognition.onresult = (e: any) => {
         const transcript = Array.from(e.results)
-          .map((r: any) => r[0].transcript)
-          .join("");
+          .map((result: any) => result[0].transcript)
+          .join("")
+          .trim();
 
-        setAnswer((prev) => {
-          const trimmedPrev = prev.trim();
-          if (!trimmedPrev || trimmedPrev === DEFAULT_ANSWER_TEMPLATE.trim()) {
-            return transcript;
-          }
-          return `${prev}\n${transcript}`;
-        });
+        if (!transcript) return;
+
+        const base = voiceBaseTextRef.current;
+        setAnswer(base ? `${base}\n\n${transcript}` : transcript);
       };
 
       recognition.onerror = () => {
         setRecording(false);
+        setSaveStatus("error");
+        setSaveMessage("Speech recognition failed.");
       };
 
       recognition.onend = () => {
         setRecording(false);
+        voiceBaseTextRef.current = "";
       };
 
       recognition.start();
@@ -246,6 +246,7 @@ export default function ManagementReasoningPanel({
       setSaveMessage("");
     } catch {
       setRecording(false);
+      voiceBaseTextRef.current = "";
       setSaveStatus("error");
       setSaveMessage("Failed to start voice note.");
     }
@@ -254,6 +255,7 @@ export default function ManagementReasoningPanel({
   function stopVoiceNote() {
     recognitionRef.current?.stop?.();
     setRecording(false);
+    voiceBaseTextRef.current = "";
   }
 
   function validateBeforeSave() {
@@ -262,9 +264,8 @@ export default function ManagementReasoningPanel({
     }
 
     const cleaned = answer.trim();
-    const templateOnly = cleaned === DEFAULT_ANSWER_TEMPLATE.trim();
 
-    if (!cleaned || templateOnly) {
+    if (!cleaned) {
       return "Please complete the management reasoning text before saving.";
     }
 
@@ -273,6 +274,7 @@ export default function ManagementReasoningPanel({
 
   async function handleSave() {
     const validationError = validateBeforeSave();
+
     if (validationError) {
       setSaveStatus("error");
       setSaveMessage(validationError);
@@ -286,6 +288,7 @@ export default function ManagementReasoningPanel({
       setSaveMessage("");
 
       let participantInfo: any = {};
+
       try {
         const raw = localStorage.getItem("participantInfo");
         participantInfo = raw ? JSON.parse(raw) : {};
@@ -388,7 +391,7 @@ export default function ManagementReasoningPanel({
   return (
     <div className="rounded-2xl border bg-white p-6">
       <div className="space-y-2">
-        <div className="overflow-hidden rounded-lg border border-blue-200 bg-blue-50">
+        <div className="overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
           <button
             type="button"
             onClick={() =>
@@ -397,19 +400,17 @@ export default function ManagementReasoningPanel({
                 goal: !prev.goal,
               }))
             }
-            className="flex w-full items-center gap-3 bg-blue-100 px-4 py-3 text-left"
+            className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
           >
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-xl font-bold text-blue-700">
+            <span className="text-xl font-bold leading-none text-blue-700">
               {openGuideSections.goal ? "▾" : "▸"}
             </span>
-            <span className="text-sm font-semibold text-blue-950">
-              Goal of Annotation
-            </span>
+            <span>Goal of Annotation</span>
           </button>
 
           {openGuideSections.goal && (
-            <div className="border-t border-blue-200 bg-blue-50 px-4 py-4">
-              <p className="text-sm leading-6 text-blue-900">
+            <div className="p-4 text-sm leading-6 text-blue-900">
+              <p>
                 The goal of this annotation is to interpret the highlighted
                 medication event in the context of the surrounding intraoperative
                 situation. The medication may reflect treatment of an abnormal
@@ -418,19 +419,19 @@ export default function ManagementReasoningPanel({
                 management, prophylaxis, or another management purpose.
               </p>
 
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-blue-900">
-                <li>patient physiology and vital sign changes,</li>
-                <li>surgical stimulus or procedural workflow,</li>
-                <li>transitions in anesthetic state,</li>
-                <li>nearby medications, fluids, gas, or ventilation changes,</li>
-                <li>the likely downstream effect on the course of the case, and</li>
-                <li>uncertainty or missing information if the purpose is unclear.</li>
+              <ul className="mt-3 list-disc space-y-1 pl-5">
+                <li>Patient physiology and vital sign changes.</li>
+                <li>Surgical stimulus or procedural workflow.</li>
+                <li>Transitions in anesthetic state.</li>
+                <li>Nearby medications, fluids, gas, or ventilation changes.</li>
+                <li>The likely downstream effect on the course of the case.</li>
+                <li>Uncertainty or missing information if the purpose is unclear.</li>
               </ul>
             </div>
           )}
         </div>
 
-        <div className="overflow-hidden rounded-lg border border-rose-200 bg-rose-50">
+        <div className="overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
           <button
             type="button"
             onClick={() =>
@@ -439,18 +440,16 @@ export default function ManagementReasoningPanel({
                 instructions: !prev.instructions,
               }))
             }
-            className="flex w-full items-center gap-3 bg-rose-100 px-4 py-3 text-left"
+            className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
           >
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-xl font-bold text-rose-700">
+            <span className="text-sm font-semibold text-rose-950">
               {openGuideSections.instructions ? "▾" : "▸"}
             </span>
-            <span className="text-sm font-semibold text-rose-950">
-              Annotation Instructions
-            </span>
+            <span>Annotation Instructions</span>
           </button>
 
           {openGuideSections.instructions && (
-            <ul className="border-t border-rose-200 bg-rose-50 px-8 py-4 list-disc space-y-2 text-sm leading-6 text-rose-900">
+            <ul className="list-disc space-y-2 p-4 pl-8 text-sm leading-6 text-blue-900">
               <li>
                 The focused medication event has already been marked on the
                 corresponding chart on the right.
@@ -510,74 +509,80 @@ export default function ManagementReasoningPanel({
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border p-5">
-        <div className="text-base font-semibold text-gray-900">
-          Task. Medication-centered management reasoning
-        </div>
+      <div className="mt-6 overflow-hidden rounded-xl border border-blue-100 bg-blue-50 text-blue-900">
+        <button
+          type="button"
+          onClick={() => setManagementInstructionsOpen((prev) => !prev)}
+          className="flex w-full items-center gap-3 border-b border-blue-100 bg-blue-100 px-4 py-3 text-left text-sm font-semibold text-blue-950"
+        >
+          <span className="text-xl font-bold leading-none text-blue-700">
+            {managementInstructionsOpen ? "▾" : "▸"}
+          </span>
+          <span>Task. Medication-centered management reasoning</span>
+        </button>
 
-        <p className="mt-2 text-sm leading-6 text-gray-600">
-          Please answer in the text box below using the following numbered
-          points.
-        </p>
+        {managementInstructionsOpen && (
+          <div className="p-4 text-sm leading-6 text-blue-900">
+            <p className="mb-3 font-semibold text-blue-950">
+              Please answer in the text box below using the following numbered
+              points.
+            </p>
 
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-gray-700">
-          <li>
-            <span className="font-semibold">Clinical purpose:</span> What was
-            the most likely purpose of this medication event at this moment?
-          </li>
-          <li>
-            <span className="font-semibold">Supporting context:</span> What
-            surrounding evidence supports your interpretation?
-          </li>
-          <li>
-            <span className="font-semibold">
-              Expected effect and observed response:
-            </span>{" "}
-            What effect would be expected, and was the subsequent response
-            consistent with that expectation?
-          </li>
-          <li>
-            <span className="font-semibold">
-              Uncertainty, alternatives, or missing information:
-            </span>{" "}
-            How confident are you, and what else should be considered?
-          </li>
-          <li>
-            <span className="font-semibold">Counterfactual:</span> What might
-            have happened if this medication had not been given?
-          </li>
-        </ol>
-
-        <textarea
-          value={answer}
-          onChange={(e) => {
-            markTyping();
-            setAnswer(e.target.value);
-          }}
-          className="mt-4 h-80 w-full rounded-xl border px-4 py-3 font-mono text-sm text-gray-800 outline-none focus:border-orange-400"
-          placeholder={MANAGEMENT_REASONING_HINT}
-        />
-
-        <div className="mt-4">
-          <button
-            type="button"
-            onClick={() => (recording ? stopVoiceNote() : startVoiceNote())}
-            className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-              recording
-                ? "bg-red-500 hover:bg-red-600"
-                : "bg-orange-400 hover:bg-orange-500"
-            }`}
-          >
-            {recording ? "Stop Recording" : "Start Recording"}
-          </button>
-        </div>
+            <ol className="ml-5 list-decimal space-y-2">
+              <li>
+                <strong>Clinical purpose:</strong> What was the most likely
+                purpose of this medication event at this moment?
+              </li>
+              <li>
+                <strong>Supporting context:</strong> What surrounding evidence
+                supports your interpretation?
+              </li>
+              <li>
+                <strong>Expected effect and observed response:</strong> What
+                effect would be expected, and was the subsequent response
+                consistent with that expectation?
+              </li>
+              <li>
+                <strong>Uncertainty, alternatives, or missing information:</strong>{" "}
+                How confident are you, and what else should be considered?
+              </li>
+              <li>
+                <strong>Counterfactual:</strong> What might have happened if
+                this medication had not been given?
+              </li>
+            </ol>
+          </div>
+        )}
       </div>
 
-      <div className="mt-6 flex items-center gap-3 border-t pt-6">
+      <textarea
+        value={answer}
+        onChange={(e) => {
+          markTyping();
+          setAnswer(e.target.value);
+        }}
+        className="mt-4 h-80 w-full rounded-xl border border-gray-300 px-4 py-3 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+        placeholder="Write management reasoning here..."
+      />
+
+      <div className="mt-5 flex w-full flex-wrap items-center gap-3 border-t pt-5">
+        <button
+          type="button"
+          onClick={recording ? stopVoiceNote : startVoiceNote}
+          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+            recording
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-orange-500 hover:bg-orange-600"
+          }`}
+        >
+          {recording ? "Stop Recording" : "Start Recording"}
+        </button>
+
         <button
           type="button"
           onClick={() => {
-            setAnswer(DEFAULT_ANSWER_TEMPLATE);
+            setAnswer("");
+            voiceBaseTextRef.current = "";
             setRecording(false);
             recognitionRef.current?.stop?.();
             setSaveStatus("idle");
@@ -589,9 +594,9 @@ export default function ManagementReasoningPanel({
             firstVoiceStartAtRef.current = null;
             taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
           }}
-          className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
         >
-          Reset All
+          Reset
         </button>
 
         <button
@@ -604,21 +609,23 @@ export default function ManagementReasoningPanel({
               : "bg-blue-600 hover:bg-blue-700"
           }`}
         >
-          {saveStatus === "saving" ? "Saving..." : "Save"}
+          {saveStatus === "saving" ? "Saving..." : "Save and Next"}
         </button>
-      </div>
 
-      {saveMessage && (
-        <div
-          className={`mt-4 rounded-md px-3 py-2 text-sm font-medium ${
-            saveStatus === "success"
-              ? "bg-green-50 text-green-700"
-              : "bg-red-50 text-red-700"
-          }`}
-        >
-          {saveMessage}
-        </div>
-      )}
+        {saveMessage && (
+          <div
+            className={`ml-2 text-sm font-medium ${
+              saveStatus === "success"
+                ? "text-green-700"
+                : saveStatus === "error"
+                ? "text-red-700"
+                : "text-gray-500"
+            }`}
+          >
+            {saveMessage}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

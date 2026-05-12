@@ -13,26 +13,25 @@ type EpisodeButtonItem = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
-const ABNORMAL_REASONING_HINT = `1. What happened during this abnormal event?
-Hint: Describe the vital-sign pattern, approximate timing, severity, and why this segment is abnormal.
+const ABNORMAL_REASONING_TEMPLATE = `1. Etiology reasoning:
+What were the most likely trigger, etiology, or mechanism of this episode? Please provide up to three hypotheses and assign a confidence percentage to each hypothesis.
 
-2. What was the likely trigger, etiology, or mechanism?
-Hint: Explain the most likely physiology or cause, including anesthesia, surgery, positioning, ventilation, blood loss, or other context.
+Hypothesis 1:
+Hypothesis 2:
+Hypothesis 3:
 
-3. Which medications, fluids, gas/ventilation changes, surgical events, position changes, or other interventions were clinically relevant?
-Hint: Link nearby interventions to the abnormal event and say why they mattered.
+2. Relevant intervention selection:
+Which medications, fluids, gas or ventilation changes, positioning changes, surgical events, or other interventions were clinically relevant to this episode? Which nearby interventions were likely unrelated? Please briefly explain why.
 
-4. How did the patient respond after the intervention?
-Hint: Describe whether the vitals improved, worsened, or stayed unchanged after the relevant action.
+Relevant interventions:
+Unrelated or less relevant interventions:
 
-5. Was the management appropriate in this context?
-Hint: State whether the response was clinically reasonable and why.
+3. Alternative intervention:
+Based on your clinical practice, was there a reasonable alternative intervention that could have been considered? If yes, please describe it. If no, please state that no clear alternative intervention was needed.
 
-6. Was there a reasonable alternative intervention?
-Hint: Mention other plausible actions if relevant, or say no clear alternative was needed.
-
-7. If uncertain, briefly describe the uncertainty or competing explanations.
-Hint: Note missing information, ambiguity, or competing explanations.`;
+4. Preventive intervention / preventive attempt:
+Before this episode occurred, were any preventive interventions attempted? If yes, please describe them and explain why the abnormality may still have occurred despite these preventive measures. If no clear preventive intervention was observed, please state that.
+`;
 
 function InstructionPanel({
   title,
@@ -44,6 +43,7 @@ function InstructionPanel({
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(true);
+
   const styles =
     tone === "blue"
       ? {
@@ -113,7 +113,7 @@ export default function Episode3TextPanel({
   }, [selectedEvent, activeEpisodeId]);
 
   const [freeTextMap, setFreeTextMap] = useState<Record<string, string>>({});
-  const freeText = freeTextMap[eventId] ?? "";
+  const freeText = freeTextMap[eventId] ?? ABNORMAL_REASONING_TEMPLATE;
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -133,6 +133,15 @@ export default function Episode3TextPanel({
     }
 
     setRecording(false);
+
+    setFreeTextMap((prev) => {
+      if (prev[eventId] !== undefined) return prev;
+
+      return {
+        ...prev,
+        [eventId]: ABNORMAL_REASONING_TEMPLATE,
+      };
+    });
   }, [eventId]);
 
   function setCurrentFreeText(nextText: string) {
@@ -180,7 +189,7 @@ export default function Episode3TextPanel({
         if (combined) {
           setFreeTextMap((prev) => {
             const marker = "\n\n[Voice note in progress]\n";
-            const current = prev[eventId] ?? "";
+            const current = prev[eventId] ?? ABNORMAL_REASONING_TEMPLATE;
             const base = current.includes(marker)
               ? current.split(marker)[0].trim()
               : current.trim();
@@ -207,7 +216,7 @@ export default function Episode3TextPanel({
         if (finalTranscript.trim()) {
           setFreeTextMap((prev) => {
             const marker = "\n\n[Voice note in progress]\n";
-            const current = prev[eventId] ?? "";
+            const current = prev[eventId] ?? ABNORMAL_REASONING_TEMPLATE;
 
             if (current.includes(marker)) {
               const base = current.split(marker)[0].trim();
@@ -282,9 +291,7 @@ export default function Episode3TextPanel({
 
       const doctorId =
         String(
-          participantInfo?.doctorId ??
-            localStorage.getItem("doctorId") ??
-            ""
+          participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
         ).trim() || null;
 
       const resolvedPatientId =
@@ -326,15 +333,12 @@ export default function Episode3TextPanel({
 
           abnormalEventPrompt: {
             instruction:
-              "Describe the selected abnormal event and related clinical reasoning in one free-text response.",
+              "Describe the selected abnormal event and the related clinical reasoning in one free-text response. Please organize your response using the four sections below.",
             requestedElements: [
-              "What happened during this abnormal event?",
-              "What was the likely trigger, etiology, or mechanism?",
-              "Which medications, fluids, gas or ventilation changes, positioning changes, surgical events, or other interventions were clinically relevant?",
-              "How did the patient respond after the intervention?",
-              "Was the management appropriate in this context?",
-              "Was there a reasonable alternative intervention?",
-              "If uncertain, describe the uncertainty or competing explanations.",
+              "1. Etiology reasoning: What were the most likely trigger, etiology, or mechanism of this episode? Please provide up to three hypotheses and assign a confidence percentage to each hypothesis.",
+              "2. Relevant intervention selection: Which medications, fluids, gas or ventilation changes, positioning changes, surgical events, or other interventions were clinically relevant to this episode? Which nearby interventions were likely unrelated? Please briefly explain why.",
+              "3. Alternative intervention: Based on your clinical practice, was there a reasonable alternative intervention that could have been considered? If yes, please describe it. If no, please state that no clear alternative intervention was needed.",
+              "4. Preventive intervention / preventive attempt: Before this episode occurred, were any preventive interventions attempted? If yes, please describe them and explain why the abnormality may still have occurred despite these preventive measures. If no clear preventive intervention was observed, please state that.",
             ],
           },
 
@@ -376,31 +380,31 @@ export default function Episode3TextPanel({
           </div>
 
           <div className="flex flex-wrap gap-2">
-  {episodeList.map((episode, index) => {
-    const isActive = episode.id === activeEpisodeId;
-    const saved = Boolean(completedMap?.[episode.id]?.detect);
+            {episodeList.map((episode, index) => {
+              const isActive = episode.id === activeEpisodeId;
+              const saved = Boolean(completedMap?.[episode.id]?.detect);
 
-    return (
-      <button
-        key={episode.id}
-        type="button"
-        onClick={() => onSelectEpisode?.(episode.id)}
-        className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
-          isActive
-            ? "border-blue-600 bg-blue-50 text-blue-800 shadow-sm"
-            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        }`}
-      >
-        Episode {index + 1}
-        {saved && (
-          <span className="ml-2 rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-semibold text-green-700">
-            Saved
-          </span>
-        )}
-      </button>
-    );
-  })}
-</div>
+              return (
+                <button
+                  key={episode.id}
+                  type="button"
+                  onClick={() => onSelectEpisode?.(episode.id)}
+                  className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+                    isActive
+                      ? "border-blue-600 bg-blue-50 text-blue-800 shadow-sm"
+                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  Episode {index + 1}
+                  {saved && (
+                    <span className="ml-2 rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-semibold text-green-700">
+                      Saved
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 
@@ -408,24 +412,37 @@ export default function Episode3TextPanel({
         <h3 className="text-xl font-bold text-gray-900">
           Abnormal Event Reasoning
         </h3>
-
       </div>
 
       <InstructionPanel title="Abnormal event instruction" tone="blue">
-        <div className="mb-2 font-semibold text-blue-950">Please include:</div>
+        <div className="mb-2 font-semibold text-blue-950">
+          Please organize your response using the following sections:
+        </div>
         <ol className="ml-5 list-decimal space-y-1">
-          <li>What happened during this abnormal event?</li>
-          <li>What was the likely trigger, etiology, or mechanism?</li>
           <li>
-            Which medications, fluids, gas/ventilation changes, surgical events,
-            position changes, or other interventions were clinically relevant?
+            <strong>Etiology reasoning:</strong> What were the most likely
+            trigger, etiology, or mechanism of this episode? Please provide up
+            to three hypotheses and assign a confidence percentage to each
+            hypothesis.
           </li>
-          <li>How did the patient respond after the intervention?</li>
-          <li>Was the management appropriate in this context?</li>
-          <li>Was there a reasonable alternative intervention?</li>
           <li>
-            If uncertain, briefly describe the uncertainty or competing
-            explanations.
+            <strong>Relevant intervention selection:</strong> Which medications,
+            fluids, gas or ventilation changes, positioning changes, surgical
+            events, or other interventions were clinically relevant to this
+            episode? Which nearby interventions were likely unrelated? Please
+            briefly explain why.
+          </li>
+          <li>
+            <strong>Alternative intervention:</strong> Based on your clinical
+            practice, was there a reasonable alternative intervention that could
+            have been considered?
+          </li>
+          <li>
+            <strong>Preventive intervention / preventive attempt:</strong>{" "}
+            Before this episode occurred, were any preventive interventions
+            attempted? If yes, please describe them and explain why the
+            abnormality may still have occurred despite these preventive
+            measures.
           </li>
         </ol>
       </InstructionPanel>
@@ -433,28 +450,37 @@ export default function Episode3TextPanel({
       <textarea
         value={freeText}
         onChange={(e) => setCurrentFreeText(e.target.value)}
-        className="min-h-[320px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-        placeholder={ABNORMAL_REASONING_HINT}
+        className="min-h-[360px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+        placeholder="Write abnormal event reasoning here..."
       />
 
-      <div className="flex flex-wrap items-center gap-3">
-        {!recording ? (
-          <button
-            type="button"
-            onClick={startVoiceNote}
-            className="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
-          >
-            Start Abnormal Event Voice Note
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={stopVoiceNote}
-            className="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600"
-          >
-            Stop Voice Note
-          </button>
-        )}
+      <div className="mt-5 flex w-full flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={recording ? stopVoiceNote : startVoiceNote}
+          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
+            recording
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-orange-500 hover:bg-orange-600"
+          }`}
+        >
+          {recording ? "Stop Recording" : "Start Recording"}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setCurrentFreeText(ABNORMAL_REASONING_TEMPLATE);
+            stopVoiceNote();
+            setError(null);
+            setSaveStatus("idle");
+            setSaveMessage("");
+          }}
+          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+        >
+          Reset
+        </button>
+
         <button
           type="button"
           onClick={handleSave}
@@ -465,55 +491,26 @@ export default function Episode3TextPanel({
               : "bg-blue-600 hover:bg-blue-700"
           }`}
         >
-          {saving ? "Saving..." : "Save Reasoning"}
+          {saving ? "Saving..." : "Save and Next"}
         </button>
-      </div>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={() => {
-              setCurrentFreeText("");
-              stopVoiceNote();
-              setError(null);
-              setSaveStatus("idle");
-              setSaveMessage("");
-            }}
-            className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-          >
-            Reset This Episode
-          </button>
-        </div>
-
-        <div className="flex flex-col items-end gap-2">
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={saving || !freeText.trim()}
-            className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-              saving || !freeText.trim()
-                ? "cursor-not-allowed bg-blue-300"
-                : "bg-blue-600 hover:bg-blue-700"
+        {saveStatus !== "idle" && saveMessage && (
+          <div
+            className={`ml-2 text-sm font-medium ${
+              saveStatus === "success"
+                ? "text-green-700"
+                : saveStatus === "error"
+                ? "text-red-700"
+                : "text-gray-500"
             }`}
           >
-            {saving ? "Saving..." : "Save Reasoning"}
-          </button>
+            {saveMessage}
+          </div>
+        )}
 
-          {saveStatus !== "idle" && saveMessage && (
-            <div
-              className={`text-sm font-medium ${
-                saveStatus === "success"
-                  ? "text-green-700"
-                  : saveStatus === "error"
-                    ? "text-red-700"
-                    : "text-gray-500"
-              }`}
-            >
-              {saveMessage}
-            </div>
-          )}
-        </div>
+        {error && saveStatus === "error" && !saveMessage && (
+          <div className="ml-2 text-sm font-medium text-red-700">{error}</div>
+        )}
       </div>
     </div>
   );

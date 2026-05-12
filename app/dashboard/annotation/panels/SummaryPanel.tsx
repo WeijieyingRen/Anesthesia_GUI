@@ -36,23 +36,6 @@ function makeEmptyQuestionTiming(nowIso?: string): QuestionTiming {
   };
 }
 
-function TaskBlock({
-  title,
-  children,
-  noBorder = false,
-}: {
-  title: string;
-  children: React.ReactNode;
-  noBorder?: boolean;
-}) {
-  return (
-    <div className={`${noBorder ? "" : "border-b"} px-4 py-4`}>
-      <div className="mb-3 text-sm font-semibold text-gray-900">{title}</div>
-      {children}
-    </div>
-  );
-}
-
 export default function SummaryPanel({
   eventId = "patient-summary",
   caseId = "unknown_case",
@@ -79,7 +62,9 @@ export default function SummaryPanel({
   const firstTypingAtRef = React.useRef<string | null>(null);
   const firstVoiceStartAtRef = React.useRef<string | null>(null);
 
-  const summaryTimingRef = React.useRef<QuestionTiming>(makeEmptyQuestionTiming());
+  const summaryTimingRef = React.useRef<QuestionTiming>(
+    makeEmptyQuestionTiming()
+  );
 
   React.useEffect(() => {
     const nowIso = new Date().toISOString();
@@ -108,6 +93,7 @@ export default function SummaryPanel({
 
   function markPageFirstInteraction(nowIso?: string) {
     const t = nowIso ?? new Date().toISOString();
+
     if (!firstInteractionAtRef.current) {
       firstInteractionAtRef.current = t;
     }
@@ -233,6 +219,7 @@ export default function SummaryPanel({
       setRecording(false);
 
       let participantInfo: any = {};
+
       try {
         const raw = localStorage.getItem("participantInfo");
         participantInfo = raw ? JSON.parse(raw) : {};
@@ -338,97 +325,95 @@ export default function SummaryPanel({
   return (
     <div className="bg-white">
       <div className="p-3">
-        <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-sm font-semibold text-gray-900">
-          <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <span>Patient-level Panel 1: Overall Intraoperative Summary</span>
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setInstructionsOpen((value) => !value)}
-                className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 hover:bg-blue-100"
-              >
-                Instructions
-              </button>
-              {instructionsOpen && (
-                <div className="absolute left-0 top-full z-50 mt-2 w-[min(420px,80vw)] rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
-                  Please summarize the overall intraoperative course for this patient,
-                  including major abnormal events, likely mechanisms, important
-                  interventions, and overall patient response.
-                </div>
-              )}
-            </div>
-          </div>
+        <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold text-gray-900">
+          <span>Patient-level Panel 1: Overall Intraoperative Summary</span>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="relative">
             <button
               type="button"
-              disabled={saveStatus === "saving"}
-              onClick={recording ? stopVoiceNote : startVoiceNote}
-              className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
-                saveStatus === "saving"
-                  ? "cursor-not-allowed bg-gray-400"
-                  : recording
-                  ? "bg-red-500 hover:bg-red-600"
-                  : "bg-orange-400 hover:bg-orange-500"
-              }`}
+              onClick={() => setInstructionsOpen((value) => !value)}
+              className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 hover:bg-blue-100"
             >
-              {recording ? "Stop Recording" : "Start Recording"}
+              Instructions
             </button>
-            <button
-              type="button"
-              onClick={handleReset}
-              disabled={saveStatus === "saving"}
-              className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
-                saveStatus === "saving"
-                  ? "cursor-not-allowed bg-gray-400"
-                  : "border border-gray-700 bg-gray-700 hover:bg-gray-800"
-              }`}
-            >
-              Reset All
-            </button>
-            <button
-              type="button"
-              onClick={handleSaveSummary}
-              disabled={saveStatus === "saving"}
-              className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
-                saveStatus === "saving"
-                  ? "cursor-wait bg-blue-300"
-                  : "bg-blue-600 hover:bg-blue-700"
-              }`}
-            >
-              {saveStatus === "saving" ? "Saving..." : "Save"}
-            </button>
-          </div>
-        </div>
 
-        <div className="overflow-hidden rounded-xl border">
-          <div className="px-4 py-3">
-            <textarea
-              value={summaryText}
-              disabled={saveStatus === "saving"}
-              onChange={(e) => {
-                markSummaryTyping();
-                setSummaryText(e.target.value);
-              }}
-              className="min-h-[190px] w-full rounded-md border px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"
-              placeholder="Write the overall patient-level intraoperative summary here..."
-            />
-
-            {saveMessage && (
-              <div
-                className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
-                  saveStatus === "success"
-                    ? "bg-green-50 text-green-700"
-                    : saveStatus === "saving"
-                    ? "bg-blue-50 text-blue-700"
-                    : "bg-red-50 text-red-700"
-                }`}
-              >
-                {saveMessage}
+            {instructionsOpen && (
+              <div className="absolute left-0 top-full z-50 mt-2 w-[min(420px,80vw)] rounded-lg border bg-white p-3 text-xs leading-5 text-gray-700 shadow-lg">
+                Please summarize the overall intraoperative course for this
+                patient, including major abnormal events, likely mechanisms,
+                important interventions, and overall patient response.
               </div>
             )}
           </div>
         </div>
+
+        <textarea
+          value={summaryText}
+          disabled={saveStatus === "saving"}
+          onChange={(e) => {
+            markSummaryTyping();
+            setSummaryText(e.target.value);
+          }}
+          className="min-h-[260px] w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"
+          placeholder="Write the overall patient-level intraoperative summary here..."
+        />
+
+<div className="mt-3 flex flex-wrap items-center justify-end gap-2">
+          <button
+            type="button"
+            disabled={saveStatus === "saving"}
+            onClick={recording ? stopVoiceNote : startVoiceNote}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
+              saveStatus === "saving"
+                ? "cursor-not-allowed bg-gray-400"
+                : recording
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-orange-400 hover:bg-orange-500"
+            }`}
+          >
+            {recording ? "Stop Recording" : "Start Recording"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={saveStatus === "saving"}
+            className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
+              saveStatus === "saving"
+                ? "cursor-not-allowed bg-gray-400"
+                : "border border-gray-700 bg-gray-700 hover:bg-gray-800"
+            }`}
+          >
+            Reset All
+          </button>
+
+          <button
+            type="button"
+            onClick={handleSaveSummary}
+            disabled={saveStatus === "saving"}
+            className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
+              saveStatus === "saving"
+                ? "cursor-wait bg-blue-300"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {saveStatus === "saving" ? "Saving..." : "Save and Next"}
+          </button>
+        </div>
+
+        {saveMessage && (
+          <div
+            className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
+              saveStatus === "success"
+                ? "bg-green-50 text-green-700"
+                : saveStatus === "saving"
+                ? "bg-blue-50 text-blue-700"
+                : "bg-red-50 text-red-700"
+            }`}
+          >
+            {saveMessage}
+          </div>
+        )}
       </div>
     </div>
   );
