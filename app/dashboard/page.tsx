@@ -571,7 +571,7 @@ export default function DashboardPage() {
   patientSummaryCompleted &&
   managementReasoningCompleted &&
   episodeState.prioritizedEpisodeIds.length > 0 &&
-  prioritizedEpisodes.every((episode) => {
+  prioritizedEpisodes.some((episode) => {
     const completed = episodeTaskCompletion[episode.id];
     return Boolean(completed?.detect);
   });
@@ -589,13 +589,13 @@ export default function DashboardPage() {
       return "Please select and annotate at least one episode before submitting.";
     }
   
-    const incompleteEpisodes = prioritizedEpisodes.filter((episode) => {
+    const hasAnnotatedEpisode = prioritizedEpisodes.some((episode) => {
       const completed = episodeTaskCompletion[episode.id];
-      return !completed || !completed.detect;
+      return Boolean(completed?.detect);
     });
-  
-    if (incompleteEpisodes.length > 0) {
-      return `There are ${incompleteEpisodes.length} selected episode(s) with incomplete subtasks.`;
+
+    if (!hasAnnotatedEpisode) {
+      return "Please save the detailed annotation for one selected episode before submitting.";
     }
   
     return null;
@@ -687,7 +687,7 @@ export default function DashboardPage() {
 
       const nextPrioritized = isSelected
         ? prev.prioritizedEpisodeIds.filter((id) => id !== episodeId)
-        : [episodeId];
+        : [...prev.prioritizedEpisodeIds, episodeId];
 
       const nextDetected = prev.detectedEpisodes.map((episode) =>
         episode.id === episodeId
@@ -894,21 +894,10 @@ export default function DashboardPage() {
       return;
     }
 
-    const currentEpisodeIndex = prioritizedEpisodes.findIndex(
-      (episode) => episode.id === activeEpisode.id
-    );
-
-    if (
-      currentEpisodeIndex >= 0 &&
-      currentEpisodeIndex < prioritizedEpisodes.length - 1
-    ) {
-      const nextEpisode = prioritizedEpisodes[currentEpisodeIndex + 1];
-      setEpisodeState((prev) => ({
-        ...prev,
-        activeEpisodeId: nextEpisode.id,
-      }));
-      setSelectedTask("detect");
-    }
+    logAction("episode_detail_annotation_saved", {
+      episodeId: activeEpisode.id,
+      task,
+    });
   }
 
   useEffect(() => {

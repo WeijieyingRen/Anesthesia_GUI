@@ -1267,9 +1267,10 @@ export default function TmpChart({
                 }
 
                 if (nextWindow) {
-                  onChangeSelectedWindow?.(nextWindow);
                   if (dragMode === "create") {
                     onCreateEventFromWindow?.(nextWindow);
+                  } else {
+                    onChangeSelectedWindow?.(nextWindow);
                   }
                 }
 

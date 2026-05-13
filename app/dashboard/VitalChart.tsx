@@ -704,9 +704,10 @@ export default function VitalChart({
     }
 
     if (nextWindow) {
-      onChangeSelectedWindow?.(nextWindow);
       if (dragMode === "create") {
         onCreateEventFromWindow?.(nextWindow);
+      } else {
+        onChangeSelectedWindow?.(nextWindow);
       }
     }
 
