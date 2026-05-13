@@ -129,11 +129,17 @@ export default function PatientList() {
   };
 
   const loadAllCaseStatuses = async (
-    accessCode: string
+    accessCode: string,
+    doctorName?: string
   ): Promise<Record<string, CaseStatusIndexEntry>> => {
     try {
+      const params = new URLSearchParams({ accessCode });
+      if (doctorName?.trim()) {
+        params.set("doctorName", doctorName.trim());
+      }
+
       const res = await fetch(
-        `/api/case_status?accessCode=${encodeURIComponent(accessCode)}`,
+        `/api/case_status?${params.toString()}`,
         { cache: "no-store" }
       );
 
@@ -204,9 +210,10 @@ export default function PatientList() {
         }
 
         const doctorId = await loadDoctorIdFromAccessCode(accessCode);
+        const doctorName = String(parsedParticipantInfo?.name ?? "").trim();
         const [folders, statusMap] = await Promise.all([
           loadAssignedPatientFolders(doctorId),
-          loadAllCaseStatuses(accessCode),
+          loadAllCaseStatuses(accessCode, doctorName),
         ]);
 
         const metas: CaseMeta[] = folders.map((folder) => {

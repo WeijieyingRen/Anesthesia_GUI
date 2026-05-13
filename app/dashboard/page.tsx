@@ -234,6 +234,31 @@ function readStoredJson<T>(key: string): T | null {
   }
 }
 
+type DashboardCaseDraft = {
+  selectedTask?: WorkspaceTaskKey;
+  annotationLevel?: AnnotationLevel;
+  selectedDetectVital?: DetectVital;
+  selectedWindow?: SelectedWindow | null;
+  patientSummaryCompleted?: boolean;
+  managementReasoningCompleted?: boolean;
+  episodeState?: EpisodeAnnotationState;
+  episodeTaskCompletion?: EpisodeTaskCompletionMap;
+  selectedManagementEventId?: string | null;
+  hasSubmitted?: boolean;
+};
+
+function dashboardDraftKey(patientFolder: string, caseId: string) {
+  return `dashboardDraft:${patientFolder}:${caseId}`;
+}
+
+function getManagementEventId(event: ManagementEvent | null | undefined) {
+  if (!event) return null;
+  return String(
+    (event as any).event_id ??
+      `${event.row_name ?? "management"}_${event.time_min ?? "unknown"}`
+  );
+}
+
 function formatEpisodeTimeRange(
   startMin: number,
   endMin: number,
@@ -531,6 +556,30 @@ export default function DashboardPage() {
       payload,
     });
     console.log("[ACTION]", { type, ts, payload });
+  }
+
+  function saveDashboardDraft() {
+    if (!currentPatient?.folder || !caseId || caseId === "unknown_case") return;
+
+    try {
+      localStorage.setItem(
+        dashboardDraftKey(currentPatient.folder, caseId),
+        JSON.stringify({
+          selectedTask,
+          annotationLevel,
+          selectedDetectVital,
+          selectedWindow,
+          patientSummaryCompleted,
+          managementReasoningCompleted,
+          episodeState,
+          episodeTaskCompletion,
+          selectedManagementEventId: getManagementEventId(selectedManagementEvent),
+          hasSubmitted,
+        } satisfies DashboardCaseDraft)
+      );
+    } catch {
+      // ignore
+    }
   }
 
   const prioritizedEpisodes = useMemo(() => {
@@ -1140,6 +1189,51 @@ export default function DashboardPage() {
       const parsedManagementEvents = prepareManagementEvents(shiftedManagementRows);
 setManagementEvents(parsedManagementEvents);
 setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
+
+      const savedDraft = readStoredJson<DashboardCaseDraft>(
+        dashboardDraftKey(folder, caseIdFromFile)
+      );
+
+      if (savedDraft) {
+        if (savedDraft.selectedTask) setSelectedTask(savedDraft.selectedTask);
+        if (savedDraft.annotationLevel) {
+          setAnnotationLevel(savedDraft.annotationLevel);
+        }
+        if (savedDraft.selectedDetectVital) {
+          setSelectedDetectVital(savedDraft.selectedDetectVital);
+        }
+        if (savedDraft.selectedWindow !== undefined) {
+          setSelectedWindow(savedDraft.selectedWindow ?? null);
+        }
+        if (typeof savedDraft.patientSummaryCompleted === "boolean") {
+          setPatientSummaryCompleted(savedDraft.patientSummaryCompleted);
+        }
+        if (typeof savedDraft.managementReasoningCompleted === "boolean") {
+          setManagementReasoningCompleted(
+            savedDraft.managementReasoningCompleted
+          );
+        }
+        if (savedDraft.episodeState) {
+          setEpisodeState(savedDraft.episodeState);
+        }
+        if (savedDraft.episodeTaskCompletion) {
+          setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
+        }
+        if (typeof savedDraft.hasSubmitted === "boolean") {
+          setHasSubmitted(savedDraft.hasSubmitted);
+        }
+        if (savedDraft.selectedManagementEventId) {
+          const restoredManagementEvent =
+            parsedManagementEvents.find(
+              (event) =>
+                getManagementEventId(event) ===
+                savedDraft.selectedManagementEventId
+            ) ?? null;
+          if (restoredManagementEvent) {
+            setSelectedManagementEvent(restoredManagementEvent);
+          }
+        }
+      }
       
     } catch (e: any) {
       console.error("Failed to load patient:", e);
@@ -1292,6 +1386,26 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       setSelectedManagementEvent(managementEvents[0]);
     }
   }, [annotationLevel, selectedManagementEvent, managementEvents]);
+
+  useEffect(() => {
+    if (loading) return;
+    saveDashboardDraft();
+  }, [
+    loading,
+    currentPatient?.folder,
+    caseId,
+    selectedTask,
+    annotationLevel,
+    selectedDetectVital,
+    selectedWindow,
+    patientSummaryCompleted,
+    managementReasoningCompleted,
+    episodeState,
+    episodeTaskCompletion,
+    selectedManagementEvent,
+    hasSubmitted,
+  ]);
+
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
   

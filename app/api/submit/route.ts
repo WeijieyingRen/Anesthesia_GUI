@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
-import { isDriveUploadEnabled, uploadJsonToDrive } from "@/lib/drive-upload";
+import {
+  isDriveUploadEnabled,
+  readJsonFromDrive,
+  uploadJsonToDrive,
+} from "@/lib/drive-upload";
 
 type SubmitBody = {
   annotator?: { name?: string; email?: string };
@@ -196,6 +200,14 @@ function normalizeDoctorFolderName(body: SubmitBody, fallbackDoctorId: string) {
     fallbackDoctorId;
 
   return sanitizePathPart(rawName);
+}
+
+function buildDoctorFolderName(
+  body: SubmitBody,
+  fallbackDoctorId: string,
+  accessCode: string
+) {
+  return `${normalizeDoctorFolderName(body, fallbackDoctorId)}_${accessCode}`;
 }
 
 function normalizePatientId(body: SubmitBody): string {
@@ -453,7 +465,7 @@ async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
   const accessCode = normalizeAccessCode(body);
   const patientId = normalizePatientId(body);
 
-  const doctorFolder = `${normalizeDoctorFolderName(body, doctorId)}_${accessCode}`;
+  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
   const target = detectStorageTarget(body);
 
   if (target.section === "summary") {
@@ -481,6 +493,62 @@ async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
   }
 
   throw new Error("Unsupported Drive storage target.");
+}
+
+async function updateCaseStatusIndex({
+  body,
+  doctorId,
+  accessCode,
+  patientId,
+  caseId,
+  panel,
+}: {
+  body: SubmitBody;
+  doctorId: string;
+  accessCode: string;
+  patientId: string;
+  caseId: string | number | null;
+  panel: string | null;
+}) {
+  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
+  const objectPath = `${doctorFolder}/case_status_index.json`;
+  const existing = await readJsonFromDrive({ objectPath });
+  const patients =
+    existing?.data?.patients &&
+    typeof existing.data.patients === "object" &&
+    !Array.isArray(existing.data.patients)
+      ? { ...(existing.data.patients as Record<string, unknown>) }
+      : {};
+
+  const previous =
+    patients[patientId] &&
+    typeof patients[patientId] === "object" &&
+    !Array.isArray(patients[patientId])
+      ? (patients[patientId] as Record<string, unknown>)
+      : {};
+  const now = new Date().toISOString();
+  const isCaseSummary = String(panel ?? "").toLowerCase().includes("case_summary");
+
+  patients[patientId] = removeNullFields({
+    ...previous,
+    patient_id: patientId,
+    case_id: caseId ?? previous.case_id ?? null,
+    inProgress: isCaseSummary ? false : true,
+    completed: isCaseSummary ? true : previous.completed === true,
+    updated_at: now,
+    completed_at: isCaseSummary ? now : previous.completed_at ?? null,
+    last_panel: panel,
+  });
+
+  await uploadJsonToDrive({
+    objectPath,
+    data: removeNullFields({
+      doctor_id: doctorId,
+      access_code: accessCode,
+      updated_at: now,
+      patients,
+    }),
+  });
 }
 
 export async function POST(req: Request) {
@@ -625,6 +693,15 @@ export async function POST(req: Request) {
     const uploaded = await uploadJsonToDrive({
       objectPath: driveObjectPath,
       data: driveRecord,
+    });
+
+    await updateCaseStatusIndex({
+      body,
+      doctorId,
+      accessCode,
+      patientId,
+      caseId,
+      panel,
     });
 
     const driveResult = {

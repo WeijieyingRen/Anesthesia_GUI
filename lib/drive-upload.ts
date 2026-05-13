@@ -20,6 +20,14 @@ type DriveUploadResult = {
   webViewLink?: string;
 };
 
+export type DriveJsonReadResult = {
+  fileId: string;
+  fileName: string;
+  objectPath: string;
+  data: Record<string, unknown>;
+  webViewLink?: string;
+};
+
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const DRIVE_UPLOAD_API = "https://www.googleapis.com/upload/drive/v3";
 
@@ -235,6 +243,27 @@ async function findDriveFileByName(
   return result.files?.[0] ?? null;
 }
 
+async function getDriveFileJson(fileId: string): Promise<Record<string, unknown>> {
+  const token = await getDriveAccessToken();
+  const response = await fetch(
+    `${DRIVE_API}/files/${fileId}?alt=media&supportsAllDrives=true`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `Drive file download failed (${response.status}): ${errorText}`
+    );
+  }
+
+  return (await response.json()) as Record<string, unknown>;
+}
+
 async function createDriveFolder(
   parentFolderId: string,
   name: string
@@ -410,6 +439,52 @@ export async function uploadJsonToDrive({
     fileName,
     folderId,
     objectPath,
+    webViewLink: file.webViewLink,
+  };
+}
+
+export async function readJsonFromDrive({
+  objectPath,
+}: {
+  objectPath: string;
+}): Promise<DriveJsonReadResult | null> {
+  const rootFolderId = process.env.DRIVE_FOLDER_ID;
+
+  if (!isDriveUploadEnabled()) {
+    throw new Error("DRIVE_ENABLED is not true.");
+  }
+
+  if (!rootFolderId) {
+    throw new Error("DRIVE_FOLDER_ID is missing.");
+  }
+
+  const pathParts = objectPath.split("/").filter(Boolean);
+  const rawFileName = pathParts.pop() ?? "submission.json";
+  const fileName = sanitizeDrivePathPart(rawFileName);
+
+  let currentFolderId = rootFolderId;
+  for (const rawPart of pathParts) {
+    const part = sanitizeDrivePathPart(rawPart);
+    const existing = await findDriveFileByName(
+      currentFolderId,
+      part,
+      FOLDER_MIME_TYPE
+    );
+
+    if (!existing) return null;
+    currentFolderId = existing.id;
+  }
+
+  const file = await findDriveFileByName(currentFolderId, fileName);
+  if (!file) return null;
+
+  const data = await getDriveFileJson(file.id);
+
+  return {
+    fileId: file.id,
+    fileName,
+    objectPath,
+    data,
     webViewLink: file.webViewLink,
   };
 }

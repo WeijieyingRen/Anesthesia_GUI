@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import { readJsonFromDrive } from "@/lib/drive-upload";
 
 type AccessCodeRow = {
   doctor_id?: string;
@@ -77,10 +78,19 @@ function buildDoctorFolder(doctorId: string, accessCode: string) {
   return `${sanitizePathPart(doctorId)}_${sanitizePathPart(accessCode)}`;
 }
 
+function buildNamedDoctorFolder(
+  doctorName: string | null | undefined,
+  doctorId: string,
+  accessCode: string
+) {
+  return `${sanitizePathPart(doctorName || doctorId)}_${sanitizePathPart(accessCode)}`;
+}
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const accessCode = String(searchParams.get("accessCode") ?? "").trim();
+    const doctorName = String(searchParams.get("doctorName") ?? "").trim();
 
     if (!accessCode) {
       return NextResponse.json(
@@ -98,7 +108,41 @@ export async function GET(req: Request) {
       );
     }
 
-    const doctorFolder = buildDoctorFolder(doctorId, accessCode);
+    const doctorFolder = buildNamedDoctorFolder(doctorName, doctorId, accessCode);
+    const legacyDoctorFolder = buildDoctorFolder(doctorId, accessCode);
+    let found = null;
+
+    try {
+      found =
+        (await readJsonFromDrive({
+          objectPath: `${doctorFolder}/case_status_index.json`,
+        })) ??
+        (doctorFolder === legacyDoctorFolder
+          ? null
+          : await readJsonFromDrive({
+              objectPath: `${legacyDoctorFolder}/case_status_index.json`,
+            }));
+    } catch (error) {
+      console.error("Failed to read Drive case status index:", error);
+    }
+
+    if (found) {
+      return NextResponse.json({
+        ok: true,
+        found: true,
+        source: "google_drive",
+        doctorId,
+        accessCode,
+        doctorFolder,
+        patients:
+          found.data?.patients &&
+          typeof found.data.patients === "object" &&
+          !Array.isArray(found.data.patients)
+            ? found.data.patients
+            : {},
+        raw: found.data,
+      });
+    }
 
     return NextResponse.json({
       ok: true,
