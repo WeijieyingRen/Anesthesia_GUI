@@ -52,10 +52,6 @@ function getBrowserTimezone() {
   }
 }
 
-function getBrowserTimezoneOffsetMin() {
-  return -new Date().getTimezoneOffset();
-}
-
 function getLocalTimestamp() {
   const date = new Date();
   const offsetMin = -date.getTimezoneOffset();
@@ -68,6 +64,25 @@ function getLocalTimestamp() {
     .slice(0, 19);
 
   return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function draftKey(patientId: string, caseId: string) {
+  return `annotationDraft:summary:${patientId}:${caseId}`;
+}
+
+function revisionKey(patientId: string, caseId: string) {
+  return `annotationRevision:summary:${patientId}:${caseId}`;
+}
+
+function nextRevisionNumber(patientId: string, caseId: string) {
+  try {
+    const key = revisionKey(patientId, caseId);
+    const next = Number(localStorage.getItem(key) ?? "0") + 1;
+    localStorage.setItem(key, String(next));
+    return next;
+  } catch {
+    return null;
+  }
 }
 
 function CollapsibleInstructionPanel({
@@ -141,7 +156,13 @@ export default function SummaryPanel({
     voiceDurationMsRef.current = 0;
 
     voiceBaseTextRef.current = "";
-  }, [caseId, eventId]);
+
+    try {
+      setSummaryText(localStorage.getItem(draftKey(patientId, caseId)) ?? "");
+    } catch {
+      setSummaryText("");
+    }
+  }, [caseId, eventId, patientId]);
 
   React.useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -303,7 +324,7 @@ export default function SummaryPanel({
       const typingDurationSec = roundSec(typingDurationMsRef.current);
       const voiceDurationSec = roundSec(voiceDurationMsRef.current);
       const localTimezone = getBrowserTimezone();
-      const localTimezoneOffsetMin = getBrowserTimezoneOffsetMin();
+      const revisionNumber = nextRevisionNumber(patientId, caseId);
 
       await submitAnnotation({
         doctorId,
@@ -324,7 +345,7 @@ export default function SummaryPanel({
         typingDurationSec,
         voiceDurationSec,
         localTimezone,
-        localTimezoneOffsetMin,
+        revisionNumber,
 
         participantInfo: {
           name: doctorName ?? undefined,
@@ -337,6 +358,19 @@ export default function SummaryPanel({
           summaryText: summaryText.trim(),
         },
       });
+
+      try {
+        localStorage.setItem(draftKey(patientId, caseId), summaryText.trim());
+        localStorage.setItem(
+          `annotationResult:summary:${patientId}:${caseId}`,
+          JSON.stringify({
+            summaryText: summaryText.trim(),
+            revisionNumber,
+          })
+        );
+      } catch {
+        // ignore
+      }
 
       setSaveStatus("success");
       setSaveMessage("Summary saved successfully to cloud storage.");
@@ -463,6 +497,11 @@ export default function SummaryPanel({
           onBlur={stopTypingTimer}
           onChange={(e) => {
             startTypingTimer();
+            try {
+              localStorage.setItem(draftKey(patientId, caseId), e.target.value);
+            } catch {
+              // ignore
+            }
             setSummaryText(e.target.value);
           }}
           className="min-h-[260px] w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"

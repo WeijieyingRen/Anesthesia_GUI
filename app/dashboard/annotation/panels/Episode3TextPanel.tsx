@@ -5,8 +5,10 @@ import { submitAnnotation } from "@/lib/submit";
 
 type EpisodeButtonItem = {
   id: string;
+  episodeIndex?: number;
   label: string;
   vital: string;
+  selected?: boolean;
   startMin: number;
   endMin: number;
   y1?: number;
@@ -33,10 +35,6 @@ function getBrowserTimezone() {
   }
 }
 
-function getBrowserTimezoneOffsetMin() {
-  return -new Date().getTimezoneOffset();
-}
-
 function getLocalTimestamp() {
   const date = new Date();
   const offsetMin = -date.getTimezoneOffset();
@@ -49,6 +47,43 @@ function getLocalTimestamp() {
     .slice(0, 19);
 
   return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function toLocalTimestamp(value?: string | null) {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  const offsetMin = -date.getTimezoneOffset();
+  const sign = offsetMin >= 0 ? "+" : "-";
+  const absOffset = Math.abs(offsetMin);
+  const offsetHours = String(Math.floor(absOffset / 60)).padStart(2, "0");
+  const offsetMinutes = String(absOffset % 60).padStart(2, "0");
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(0, 19);
+
+  return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function draftKey(patientId: string | undefined, caseId: string, eventId: string) {
+  return `annotationDraft:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}:${eventId}`;
+}
+
+function revisionKey(patientId: string | undefined, caseId: string) {
+  return `annotationRevision:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+}
+
+function nextRevisionNumber(patientId: string | undefined, caseId: string) {
+  try {
+    const key = revisionKey(patientId, caseId);
+    const next = Number(localStorage.getItem(key) ?? "0") + 1;
+    localStorage.setItem(key, String(next));
+    return next;
+  } catch {
+    return null;
+  }
 }
 
 const ABNORMAL_EVENT_PROMPT = {
@@ -185,19 +220,31 @@ export default function Episode3TextPanel({
 
     setFreeTextMap((prev) => {
       if (prev[eventId] !== undefined) return prev;
+      let savedDraft = "";
+
+      try {
+        savedDraft = localStorage.getItem(draftKey(patientId, caseId, eventId)) ?? "";
+      } catch {
+        savedDraft = "";
+      }
 
       return {
         ...prev,
-        [eventId]: ABNORMAL_REASONING_TEMPLATE,
+        [eventId]: savedDraft || ABNORMAL_REASONING_TEMPLATE,
       };
     });
-  }, [eventId]);
+  }, [caseId, eventId, patientId]);
 
   function setCurrentFreeText(nextText: string) {
     setFreeTextMap((prev) => ({
       ...prev,
       [eventId]: nextText,
     }));
+    try {
+      localStorage.setItem(draftKey(patientId, caseId, eventId), nextText);
+    } catch {
+      // ignore
+    }
     setSaveStatus("idle");
     setSaveMessage("");
   }
@@ -389,13 +436,18 @@ export default function Episode3TextPanel({
       const resolvedPatientFolder =
         patientFolder ?? patientId ?? "unknown_patient";
       const selectedEpisodes = episodeList.map((episode) => ({
+        episodeIndex: episode.episodeIndex ?? null,
+        selected: Boolean(episode.selected),
         startMin: episode.startMin,
         endMin: episode.endMin,
         y1: episode.y1 ?? null,
         y2: episode.y2 ?? null,
         createdAtUtc: episode.createdAtUtc ?? null,
+        createdAtLocal: toLocalTimestamp(episode.createdAtUtc),
         updatedAtUtc: episode.updatedAtUtc ?? null,
+        updatedAtLocal: toLocalTimestamp(episode.updatedAtUtc),
       }));
+      const revisionNumber = nextRevisionNumber(resolvedPatientId, caseId);
 
       await submitAnnotation({
         doctorId,
@@ -422,21 +474,55 @@ export default function Episode3TextPanel({
         typingDurationSec,
         voiceDurationSec: voiceRecordingDurationSec,
         localTimezone: getBrowserTimezone(),
-        localTimezoneOffsetMin: getBrowserTimezoneOffsetMin(),
+        revisionNumber,
 
         answers: {
           selectedEpisodes,
           annotatedEpisode: {
+            episodeIndex:
+              episodeList.find((episode) => episode.id === activeEpisodeId)
+                ?.episodeIndex ?? null,
+            selected: true,
             startMin: selectedEvent?.startMin ?? null,
             endMin: selectedEvent?.endMin ?? null,
             y1: selectedEvent?.y1 ?? null,
             y2: selectedEvent?.y2 ?? null,
             createdAtUtc: selectedEvent?.createdAtUtc ?? null,
+            createdAtLocal: toLocalTimestamp(selectedEvent?.createdAtUtc),
             updatedAtUtc: selectedEvent?.updatedAtUtc ?? null,
+            updatedAtLocal: toLocalTimestamp(selectedEvent?.updatedAtUtc),
           },
           abnormalityReasoningText: currentText,
         },
       });
+
+      try {
+        localStorage.setItem(draftKey(patientId, caseId, eventId), currentText);
+        localStorage.setItem(
+          `annotationResult:abnormality_reasoning:${resolvedPatientId}:${caseId}`,
+          JSON.stringify({
+            selectedEpisodes,
+            annotatedEpisode: {
+              episodeIndex:
+                episodeList.find((episode) => episode.id === activeEpisodeId)
+                  ?.episodeIndex ?? null,
+              selected: true,
+              startMin: selectedEvent?.startMin ?? null,
+              endMin: selectedEvent?.endMin ?? null,
+              y1: selectedEvent?.y1 ?? null,
+              y2: selectedEvent?.y2 ?? null,
+              createdAtUtc: selectedEvent?.createdAtUtc ?? null,
+              createdAtLocal: toLocalTimestamp(selectedEvent?.createdAtUtc),
+              updatedAtUtc: selectedEvent?.updatedAtUtc ?? null,
+              updatedAtLocal: toLocalTimestamp(selectedEvent?.updatedAtUtc),
+            },
+            abnormalityReasoningText: currentText,
+            revisionNumber,
+          })
+        );
+      } catch {
+        // ignore
+      }
 
       setSaveStatus("success");
       setSaveMessage("Saved successfully.");

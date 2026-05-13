@@ -105,10 +105,6 @@ function getBrowserTimezone() {
   }
 }
 
-function getBrowserTimezoneOffsetMin() {
-  return -new Date().getTimezoneOffset();
-}
-
 function getLocalTimestamp() {
   const date = new Date();
   const offsetMin = -date.getTimezoneOffset();
@@ -121,6 +117,25 @@ function getLocalTimestamp() {
     .slice(0, 19);
 
   return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function draftKey(patientId: string | undefined, caseId: string) {
+  return `annotationDraft:management_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+}
+
+function revisionKey(patientId: string | undefined, caseId: string) {
+  return `annotationRevision:management_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+}
+
+function nextRevisionNumber(patientId: string | undefined, caseId: string) {
+  try {
+    const key = revisionKey(patientId, caseId);
+    const next = Number(localStorage.getItem(key) ?? "0") + 1;
+    localStorage.setItem(key, String(next));
+    return next;
+  } catch {
+    return null;
+  }
 }
 
 function buildFocusEventLabel(
@@ -215,7 +230,11 @@ export default function ManagementReasoningPanel({
   }, [caseId, managementEvent?.row_name, managementEvent?.time_min]);
 
   useEffect(() => {
-    setAnswer("");
+    try {
+      setAnswer(localStorage.getItem(draftKey(patientId ?? patientFolder, caseId)) ?? "");
+    } catch {
+      setAnswer("");
+    }
     setRecording(false);
     voiceBaseTextRef.current = "";
     recognitionRef.current?.stop?.();
@@ -225,6 +244,9 @@ export default function ManagementReasoningPanel({
     managementEvent?.row_name,
     managementEvent?.time_min,
     managementEvent?.start_time,
+    patientId,
+    patientFolder,
+    caseId,
   ]);
 
   function markTyping() {
@@ -415,6 +437,9 @@ export default function ManagementReasoningPanel({
       taskTimingRef.current.submittedAt = submittedAt;
       stopVoiceNote();
       finalizeTypingDuration();
+      const resolvedPatientId = patientId ?? patientFolder ?? undefined;
+      const revisionNumber = nextRevisionNumber(resolvedPatientId, caseId);
+      const focusEvent = buildFocusEventLabel(managementEvent, anesthesiaStart);
 
       await submitAnnotation({
         doctorId,
@@ -452,13 +477,27 @@ export default function ManagementReasoningPanel({
         typingDurationSec: roundSec(typingDurationMsRef.current),
         voiceDurationSec: roundSec(voiceDurationMsRef.current),
         localTimezone: getBrowserTimezone(),
-        localTimezoneOffsetMin: getBrowserTimezoneOffsetMin(),
+        revisionNumber,
 
         answers: {
-          focusEvent: buildFocusEventLabel(managementEvent, anesthesiaStart),
+          focusEvent,
           managementReasoningText: answer.trim(),
         },
       });
+
+      try {
+        localStorage.setItem(draftKey(resolvedPatientId, caseId), answer.trim());
+        localStorage.setItem(
+          `annotationResult:management_reasoning:${resolvedPatientId ?? "unknown_patient"}:${caseId}`,
+          JSON.stringify({
+            focusEvent,
+            managementReasoningText: answer.trim(),
+            revisionNumber,
+          })
+        );
+      } catch {
+        // ignore
+      }
 
       setSaveStatus("success");
       setSaveMessage("Management reasoning saved successfully.");
@@ -682,6 +721,14 @@ export default function ManagementReasoningPanel({
         onBlur={finalizeTypingDuration}
         onChange={(e) => {
           markTyping();
+          try {
+            localStorage.setItem(
+              draftKey(patientId ?? patientFolder, caseId),
+              e.target.value
+            );
+          } catch {
+            // ignore
+          }
           setAnswer(e.target.value);
         }}
         className="mt-4 h-80 w-full rounded-xl border border-gray-300 px-4 py-3 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"

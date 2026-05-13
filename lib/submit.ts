@@ -29,6 +29,13 @@ type SubmitPayload = {
   firstTypingAt?: number | string | null;
   firstVoiceStartAt?: number | string | null;
   submittedAt?: number | string | null;
+  pageOpenedAtLocal?: string | null;
+  submittedAtLocal?: string | null;
+  totalDurationSec?: number | null;
+  typingDurationSec?: number | null;
+  voiceDurationSec?: number | null;
+  localTimezone?: string | null;
+  revisionNumber?: number | null;
 
   panelOpenedAt?: number | string | null; // legacy
   clickedAt?: number | string | null; // legacy

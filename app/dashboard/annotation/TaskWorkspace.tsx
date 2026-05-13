@@ -206,20 +206,19 @@ export default function TaskWorkspace({
         },
       };
 
-      const episodeList = episodeState.prioritizedEpisodeIds
-        .map((id) => episodeState.detectedEpisodes.find((x) => x.id === id))
-        .filter(Boolean)
-        .map((ep) => ({
-          id: ep!.id,
-          label: ep!.label,
-          vital: ep!.vital,
-          startMin: ep!.startMin,
-          endMin: ep!.endMin,
-          y1: ep!.y1,
-          y2: ep!.y2,
-          createdAtUtc: ep!.createdAtUtc,
-          updatedAtUtc: ep!.updatedAtUtc,
-        }));
+      const episodeList = episodeState.detectedEpisodes.map((ep, index) => ({
+          id: ep.id,
+          episodeIndex: index + 1,
+          label: ep.label,
+          vital: ep.vital,
+          selected: episodeState.prioritizedEpisodeIds.includes(ep.id),
+          startMin: ep.startMin,
+          endMin: ep.endMin,
+          y1: ep.y1,
+          y2: ep.y2,
+          createdAtUtc: ep.createdAtUtc,
+          updatedAtUtc: ep.updatedAtUtc,
+      }));
 
       return (
         <div className="flex min-h-[560px] flex-col bg-white">

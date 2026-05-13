@@ -203,6 +203,37 @@ function formatClockTimeFromOffset(offsetMin: number, timeZero?: string | null) 
   return `${hh}:${mm}`;
 }
 
+function getLocalTimestamp() {
+  const date = new Date();
+  const offsetMin = -date.getTimezoneOffset();
+  const sign = offsetMin >= 0 ? "+" : "-";
+  const absOffset = Math.abs(offsetMin);
+  const offsetHours = String(Math.floor(absOffset / 60)).padStart(2, "0");
+  const offsetMinutes = String(absOffset % 60).padStart(2, "0");
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(0, 19);
+
+  return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function getBrowserTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function readStoredJson<T>(key: string): T | null {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : null;
+  } catch {
+    return null;
+  }
+}
+
 function formatEpisodeTimeRange(
   startMin: number,
   endMin: number,
@@ -482,6 +513,8 @@ export default function DashboardPage() {
   const voiceNote = useVoiceNote();
 
   const sessionStartRef = useRef<number>(performance.now());
+  const sessionStartUtcRef = useRef<string>(new Date().toISOString());
+  const sessionStartLocalRef = useRef<string>(getLocalTimestamp());
   const actionLogRef = useRef<
     Array<{
       type: string;
@@ -985,6 +1018,8 @@ export default function DashboardPage() {
   async function loadPatient(folder: string) {
     try {
       sessionStartRef.current = performance.now();
+      sessionStartUtcRef.current = new Date().toISOString();
+      sessionStartLocalRef.current = getLocalTimestamp();
       actionLogRef.current = [];
       setHasSubmitted(false);
       setPatientSummaryCompleted(false);
@@ -1133,16 +1168,35 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   
     const patientFolder = currentPatient?.folder ?? null;
   
+    const summaryResult = patientFolder && caseId
+      ? readStoredJson(`annotationResult:summary:${patientFolder}:${caseId}`)
+      : null;
+    const abnormalityReasoningResult = patientFolder && caseId
+      ? readStoredJson(`annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`)
+      : null;
+    const managementReasoningResult = patientFolder && caseId
+      ? readStoredJson(`annotationResult:management_reasoning:${patientFolder}:${caseId}`)
+      : null;
+    const submittedAtUtc = new Date().toISOString();
+    const totalDurationSec = Number(
+      ((performance.now() - sessionStartRef.current) / 1000).toFixed(3)
+    );
+
     return {
-      // 关键字段：给后端/GCS 路径用
       doctorId,
       accessCode,
       patientId: patientFolder,
       patientFolder,
-  
-      // 原有字段
+
       caseId,
       folder: patientFolder,
+      panel: "case_summary",
+      pageOpenedAt: sessionStartUtcRef.current,
+      pageOpenedAtLocal: sessionStartLocalRef.current,
+      submittedAt: submittedAtUtc,
+      submittedAtLocal: getLocalTimestamp(),
+      totalDurationSec,
+      localTimezone: getBrowserTimezone(),
   
       participantInfo: {
         name: participantInfo?.name ?? null,
@@ -1150,41 +1204,19 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         accessCode,
         doctorId,
       },
-  
-      session: {
-        startedAtMs: sessionStartRef.current,
-        durationMs: performance.now() - sessionStartRef.current,
+
+      answers: {
+        summary: summaryResult,
+        abnormalityReasoning: abnormalityReasoningResult,
+        managementReasoning: managementReasoningResult,
+        completionStatus: {
+          patientSummaryCompleted,
+          abnormalityReasoningCompleted: prioritizedEpisodes.some(
+            (episode) => Boolean(episodeTaskCompletion[episode.id]?.detect)
+          ),
+          managementReasoningCompleted,
+        },
       },
-  
-      annotationState: {
-        annotationLevel,
-        selectedTask,
-        selectedDetectVital,
-        selectedWindow,
-        patientSummaryCompleted,
-        managementReasoningCompleted,
-        episodeWorkflow: episodeState,
-        episodeTaskCompletion,
-        selectedManagementEvent,
-      },
-  
-      data: {
-        demographic,
-        surgeryContext,
-        preop,
-        lab,
-        vitals,
-        medications,
-        fluids,
-        managementEvents,
-      },
-  
-      voice: {
-        text: voiceNote.text,
-        hasAudio: Boolean(voiceNote.audioBlob),
-      },
-  
-      actionLog: actionLogRef.current,
     };
   };
 

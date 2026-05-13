@@ -42,7 +42,7 @@ type SubmitBody = {
   typingDurationSec?: number | null;
   voiceDurationSec?: number | null;
   localTimezone?: string | null;
-  localTimezoneOffsetMin?: number | null;
+  revisionNumber?: number | null;
 
   panelOpenedAt?: number | string | null;
   clickedAt?: number | string | null;
@@ -339,6 +339,16 @@ function numericOrNull(value: unknown): number | null {
   return null;
 }
 
+function withRevisionSuffix(fileName: string, revisionNumber: unknown) {
+  const revision = numericOrNull(revisionNumber);
+  if (revision === null || revision <= 1) return fileName;
+
+  const dotIndex = fileName.lastIndexOf(".");
+  if (dotIndex < 0) return `${fileName}_${Math.floor(revision)}`;
+
+  return `${fileName.slice(0, dotIndex)}_${Math.floor(revision)}${fileName.slice(dotIndex)}`;
+}
+
 function detectStorageTarget(body: SubmitBody): StorageTarget {
   const panel = String(body.panel ?? "").toLowerCase();
   const action = String(body.action ?? "").toLowerCase();
@@ -353,14 +363,21 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   if (hasAnnotationState && !panel && !task) {
     return {
       section: "case_submission",
-      fileName: "final_submission.json",
+      fileName: "case_summary.json",
+    };
+  }
+
+  if (combined.includes("case_summary")) {
+    return {
+      section: "case_submission",
+      fileName: "case_summary.json",
     };
   }
 
   if (combined.includes("summary")) {
     return {
       section: "summary",
-      fileName: "summary.json",
+      fileName: withRevisionSuffix("summary.json", body.revisionNumber),
     };
   }
 
@@ -378,7 +395,10 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   if (combined.includes("management")) {
     return {
       section: "management_reasoning",
-      fileName: "management_reasoning.json",
+      fileName: withRevisionSuffix(
+        "management_reasoning.json",
+        body.revisionNumber
+      ),
     };
   }
 
@@ -415,7 +435,10 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   ) {
     return {
       section: "abnormality_reasoning",
-      fileName: "abnormality_reasoning.json",
+      fileName: withRevisionSuffix(
+        "abnormality_reasoning.json",
+        body.revisionNumber
+      ),
     };
   }
 
@@ -556,6 +579,7 @@ export async function POST(req: Request) {
       panelKey.includes("abnormality_reasoning") ||
       panelKey.includes("management_reasoning");
 
+    const savedAtUtc = new Date().toISOString();
     const driveRecord = removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
@@ -571,7 +595,8 @@ export async function POST(req: Request) {
             episode_folder: body?.episodeFolder ?? target.episodeFolder ?? null,
           }),
       panel,
-      saved_at: new Date().toISOString(),
+      saved_at_utc: savedAtUtc,
+      saved_at_local: body.submittedAtLocal ?? null,
       answers,
       annotation_state: cleanedAnnotationState,
       timing: {
@@ -586,8 +611,6 @@ export async function POST(req: Request) {
         voice_duration_sec:
           numericOrNull(body.voiceDurationSec) ?? voiceToSubmitSec,
         local_timezone: body.localTimezone ?? null,
-        local_timezone_offset_min:
-          numericOrNull(body.localTimezoneOffsetMin) ?? null,
       },
     });
 
