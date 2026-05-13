@@ -5,6 +5,10 @@ folder that you own. Do not use or share your Google account password. Use a
 Google Cloud service account and share only one Drive folder with that service
 account.
 
+Google Drive is the required submission target. If Drive is not configured or
+the service account cannot write to the folder, `/api/submit` returns an error
+instead of silently saving somewhere else.
+
 ## 1. Create a Google Drive folder
 
 1. Open Google Drive with your own account.
@@ -25,6 +29,12 @@ The folder ID is:
 ```
 
 You will use this value as `DRIVE_FOLDER_ID`.
+
+For the current Stanford annotation deployment, use:
+
+```text
+0AE3zDGMQaw-IUk9PVA
+```
 
 ## 2. Create a Google Cloud project
 
@@ -119,18 +129,7 @@ Important:
 - Do not put the JSON key in GitHub.
 - After adding environment variables, redeploy the project.
 
-## 8. Optional settings
-
-If you want a failed Drive upload to make the whole submit request fail, add:
-
-```env
-DRIVE_REQUIRE_SUCCESS=true
-```
-
-If this is not set, the app returns `ok: true` when the annotation save works
-elsewhere but includes a Drive warning in the API response.
-
-## 9. Expected Drive folder structure
+## 8. Expected Drive folder structure
 
 The app creates folders automatically under your selected Drive folder:
 
@@ -158,14 +157,15 @@ Anesthesia_GUI_Annotations/
 Each later save updates the same JSON file instead of creating endless duplicate
 files.
 
-## 10. How to test
+## 9. How to test
 
 1. Redeploy Vercel after setting environment variables.
 2. Open the app.
 3. Complete one annotation step and click save or submit.
 4. Open the Drive folder.
 5. Confirm a JSON file appears under the expected patient folder.
-6. If it does not appear, check Vercel logs for `Drive upload failed`.
+6. If it does not appear, check Vercel logs for `Submit route error` or
+   `[Drive]`.
 
 Common issues:
 

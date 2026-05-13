@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import fs from "fs/promises";
 import path from "path";
 import { isDriveUploadEnabled, uploadJsonToDrive } from "@/lib/drive-upload";
@@ -64,19 +63,6 @@ type StorageTarget = {
   fileName: string;
   episodeFolder?: string;
 };
-
-let supabaseClient: SupabaseClient | null = null;
-
-function getSupabaseClient(): SupabaseClient | null {
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !supabaseKey) return null;
-  if (supabaseClient) return supabaseClient;
-
-  supabaseClient = createClient(supabaseUrl, supabaseKey);
-  return supabaseClient;
-}
 
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
 
@@ -453,14 +439,7 @@ export async function POST(req: Request) {
     const t0 = Date.now();
 
     console.log(">>> NEW SUBMIT ROUTE HIT");
-    console.log(
-      "SUPABASE_URL =",
-      process.env.SUPABASE_URL ? "configured" : "missing"
-    );
-    console.log(
-      "SUPABASE_SERVICE_ROLE_KEY =",
-      process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "missing"
-    );
+    console.log("SUBMIT_STORAGE_TARGET = Google Drive");
     console.log(
       "DRIVE_ENABLED =",
       isDriveUploadEnabled() ? "true" : "false"
@@ -547,52 +526,6 @@ export async function POST(req: Request) {
     const target = detectStorageTarget(body);
     const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
 
-    const compactPayload = removeNullFields({
-      annotator_name: annotatorName,
-      annotator_email: annotatorEmail,
-      doctor_id: doctorId,
-      access_code: accessCode,
-      patient_id: patientId,
-      case_id: caseId,
-      event_id: eventId,
-      episode_id:
-        body?.episodeId ?? body?.selectedEventId ?? body?.eventId ?? null,
-      episode_number: body?.episodeNumber ?? null,
-      episode_folder: body?.episodeFolder ?? target.episodeFolder ?? null,
-      panel,
-      action,
-      task,
-      storage_target: target,
-      answers,
-      annotation_state: cleanedAnnotationState,
-      timing: {
-        page_opened_at: pageOpenedAtIso,
-        first_interaction_at: firstInteractionAtIso,
-        first_typing_at: firstTypingAtIso,
-        first_voice_start_at: firstVoiceStartAtIso,
-        page_submitted_at: pageSubmittedAtIso,
-        response_time_sec: responseTimeSec,
-        time_to_first_interaction_sec: timeToFirstInteractionSec,
-        typing_to_submit_sec: typingToSubmitSec,
-        voice_to_submit_sec: voiceToSubmitSec,
-        panel_opened_at_legacy: toIsoTime(body?.panelOpenedAt),
-        clicked_at_legacy: toIsoTime(body?.clickedAt),
-      },
-    });
-
-    const insertRow = {
-      annotator_name: annotatorName,
-      case_id: caseId,
-      event_id: eventId,
-      task,
-      panel,
-      action,
-      panel_opened_at: pageOpenedAtIso,
-      clicked_at: pageSubmittedAtIso,
-      response_time_sec: responseTimeSec,
-      payload: compactPayload,
-    };
-
     const driveRecord = removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
@@ -622,100 +555,29 @@ export async function POST(req: Request) {
       },
     });
 
-    const supabasePromise = (async () => {
-      let saved = false;
-      let warning: string | null = null;
-
-      const supabase = getSupabaseClient();
-
-      if (!supabase) {
-        console.warn("Supabase env vars missing, skip Supabase save.");
-        warning = "Supabase env vars missing, skipped Supabase save.";
-        return { saved, warning };
-      }
-
-      try {
-        const { error } = await supabase.from("submissions").insert(insertRow);
-
-        if (error) {
-          console.error("Supabase insert error:", error);
-          warning = error.message;
-        } else {
-          saved = true;
-        }
-      } catch (error) {
-        console.error("Supabase unexpected error:", error);
-        warning =
-          error instanceof Error ? error.message : "Unknown Supabase error.";
-      }
-
-      return { saved, warning };
-    })();
-
     const driveObjectPath = await buildDriveObjectPath(body);
 
-    let driveResult: {
-      saved: boolean;
-      skipped: boolean;
-      fileId: string | null;
-      fileName: string | null;
-      folderId: string | null;
-      objectPath: string | null;
-      webViewLink: string | null;
-      warning: string | null;
-    } = {
-      saved: false,
-      skipped: !isDriveUploadEnabled(),
-      fileId: null,
-      fileName: null,
-      folderId: null,
-      objectPath: driveObjectPath,
-      webViewLink: null,
-      warning: isDriveUploadEnabled()
-        ? null
-        : "DRIVE_ENABLED is not true, skipped Drive save.",
-    };
-
-    if (isDriveUploadEnabled()) {
-      try {
-        const uploaded = await uploadJsonToDrive({
-          objectPath: driveObjectPath,
-          data: driveRecord,
-        });
-
-        driveResult = {
-          saved: true,
-          skipped: false,
-          fileId: uploaded.fileId,
-          fileName: uploaded.fileName,
-          folderId: uploaded.folderId,
-          objectPath: uploaded.objectPath,
-          webViewLink: uploaded.webViewLink ?? null,
-          warning: null,
-        };
-      } catch (error) {
-        const warning =
-          error instanceof Error ? error.message : "Unknown Drive upload error.";
-        console.error("Drive upload failed:", error);
-
-        if (process.env.DRIVE_REQUIRE_SUCCESS === "true") {
-          throw error;
-        }
-
-        driveResult = {
-          saved: false,
-          skipped: false,
-          fileId: null,
-          fileName: null,
-          folderId: null,
-          objectPath: driveObjectPath,
-          webViewLink: null,
-          warning,
-        };
-      }
+    if (!isDriveUploadEnabled()) {
+      throw new Error(
+        "Google Drive save is required, but DRIVE_ENABLED is not true."
+      );
     }
 
-    const supabaseResult = await supabasePromise;
+    const uploaded = await uploadJsonToDrive({
+      objectPath: driveObjectPath,
+      data: driveRecord,
+    });
+
+    const driveResult = {
+      saved: true,
+      skipped: false,
+      fileId: uploaded.fileId,
+      fileName: uploaded.fileName,
+      folderId: uploaded.folderId,
+      objectPath: uploaded.objectPath,
+      webViewLink: uploaded.webViewLink ?? null,
+      warning: null,
+    };
 
     const totalServerSec = (Date.now() - t0) / 1000;
     console.log("submit route total sec =", totalServerSec);
@@ -737,12 +599,8 @@ export async function POST(req: Request) {
         voiceToSubmitSec,
         totalServerSec,
       }),
-      supabase: {
-        saved: supabaseResult.saved,
-        warning: supabaseResult.warning,
-      },
       drive: driveResult,
-      debug_version: "drive-only-clean-submit-route-v2",
+      debug_version: "google-drive-required-submit-route-v3",
     });
   } catch (error) {
     console.error("Submit route error:", error);
