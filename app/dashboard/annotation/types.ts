@@ -39,6 +39,12 @@ export type DetectedEpisodeItem = {
   y1: number;
   y2: number;
   selectedForAnnotation: boolean;
+
+  // Time when this bounding box was first created.
+  createdAtUtc?: string;
+
+  // Time when this bounding box was last adjusted.
+  updatedAtUtc?: string;
 };
 
 export type EpisodeAnnotationState = {
@@ -58,6 +64,11 @@ export type SidebarEventItem = {
   endMin: number;
   y1: number;
   y2: number;
+
+  // Passed from DetectedEpisodeItem to the final abnormality reasoning panel.
+  createdAtUtc?: string;
+  updatedAtUtc?: string;
+
   completed: Record<AnnotationTaskKey, boolean>;
 };
 
@@ -72,7 +83,7 @@ export type EventType =
   | "Tachypnea"
   | "Bradypnea"
   | "Hypothermia"
-  | "Hyperthermia"
+  | "Hyperthermia";
 
 export type DetectEventType = EventType | "Others";
 

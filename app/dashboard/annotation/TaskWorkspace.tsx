@@ -215,6 +215,10 @@ export default function TaskWorkspace({
           vital: ep!.vital,
           startMin: ep!.startMin,
           endMin: ep!.endMin,
+          y1: ep!.y1,
+          y2: ep!.y2,
+          createdAtUtc: ep!.createdAtUtc,
+          updatedAtUtc: ep!.updatedAtUtc,
         }));
 
       return (

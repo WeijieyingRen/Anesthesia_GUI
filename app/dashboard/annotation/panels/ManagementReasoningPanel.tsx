@@ -368,32 +368,26 @@ export default function ManagementReasoningPanel({
         submittedAt,
 
         answers: {
-          patientIndex,
           managementEvent: {
             id: managementEventId,
             row_name: managementEvent.row_name ?? null,
             event_type: managementEvent.event_type ?? null,
             time_min: managementEvent.time_min ?? null,
+            end_time_min: managementEvent.end_time_min ?? null,
             start_time: managementEvent.start_time ?? null,
             display_time: getDisplayTime(managementEvent, anesthesiaStart),
             dose: managementEvent.dose ?? null,
             unit: managementEvent.unit ?? null,
             route: managementEvent.route ?? null,
+            chart_type: managementEvent.chart_type ?? null,
           },
-          prompt: {
-            ...MANAGEMENT_REASONING_PROMPT,
-            exampleSummaries: [
-              EXAMPLE_MANAGEMENT_SUMMARY_1,
-              EXAMPLE_MANAGEMENT_SUMMARY_2,
-            ],
-          },
-          tasks: {
-            medication_centered_management_reasoning: {
-              question:
-                "Please interpret this medication/gas event in the surrounding intraoperative context.",
-              answer: answer.trim(),
-              timing: { ...taskTimingRef.current },
-            },
+          managementReasoningText: answer.trim(),
+          timing: {
+            startedAt: taskTimingRef.current.startedAt,
+            firstInteractionAt: taskTimingRef.current.firstInteractionAt,
+            firstTypingAt: taskTimingRef.current.firstTypingAt,
+            firstVoiceStartAt: taskTimingRef.current.firstVoiceStartAt,
+            submittedAt,
           },
         },
       });

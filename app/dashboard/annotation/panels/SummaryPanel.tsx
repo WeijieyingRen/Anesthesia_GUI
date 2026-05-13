@@ -18,14 +18,6 @@ type SummaryPanelProps = {
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
 
-type QuestionTiming = {
-  startedAt: string | null;
-  firstInteractionAt: string | null;
-  firstTypingAt: string | null;
-  firstVoiceStartAt: string | null;
-  submittedAt: string | null;
-};
-
 const SUMMARY_INSTRUCTION = `Imagine that you are reconstructing this patient’s intraoperative anesthetic course for another anesthesia provider who wants to understand what happened during the case.
 
 Produce a detailed, chronological summary of the patient’s anesthetic course such that the receiving provider can confidently understand the patient’s intraoperative trajectory and key clinical details.
@@ -48,14 +40,20 @@ They were re-paralyzed with 20mg of rocuronium at 08:23, likely to maintain para
 
 They remained hemodynamically stable with blood pressure on the lower side, in the 90s-100s/40s-50s, throughout the remainder of the case after the labetalol until extubation. Around 09:05, they were given 4mg zofran, likely for PONV prophylaxis, and 200mg of sugammadex for reversal of rocuronium immediately before extubation. They were then extubated around 09:12 and had one slightly elevated BP reading of 146/92 around that time, likely related to stimulation of extubation. Their oxygen saturation remained stable throughout the case at 97-100%.`;
 
-function makeEmptyQuestionTiming(nowIso?: string): QuestionTiming {
-  return {
-    startedAt: nowIso ?? null,
-    firstInteractionAt: null,
-    firstTypingAt: null,
-    firstVoiceStartAt: null,
-    submittedAt: null,
-  };
+function roundSec(ms: number) {
+  return Number((ms / 1000).toFixed(3));
+}
+
+function getBrowserTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function getBrowserTimezoneOffsetMin() {
+  return -new Date().getTimezoneOffset();
 }
 
 function CollapsibleInstructionPanel({
@@ -109,25 +107,24 @@ export default function SummaryPanel({
   const recognitionRef = React.useRef<any>(null);
   const voiceBaseTextRef = React.useRef("");
 
-  const pageOpenedAtRef = React.useRef<string | null>(null);
-  const firstInteractionAtRef = React.useRef<string | null>(null);
-  const firstTypingAtRef = React.useRef<string | null>(null);
-  const firstVoiceStartAtRef = React.useRef<string | null>(null);
+  const startedAtUtcRef = React.useRef<string | null>(null);
 
-  const summaryTimingRef = React.useRef<QuestionTiming>(
-    makeEmptyQuestionTiming()
-  );
+  const typingStartMsRef = React.useRef<number | null>(null);
+  const typingDurationMsRef = React.useRef<number>(0);
+
+  const voiceStartMsRef = React.useRef<number | null>(null);
+  const voiceDurationMsRef = React.useRef<number>(0);
 
   React.useEffect(() => {
-    const nowIso = new Date().toISOString();
+    startedAtUtcRef.current = new Date().toISOString();
 
-    pageOpenedAtRef.current = nowIso;
-    firstInteractionAtRef.current = null;
-    firstTypingAtRef.current = null;
-    firstVoiceStartAtRef.current = null;
+    typingStartMsRef.current = null;
+    typingDurationMsRef.current = 0;
+
+    voiceStartMsRef.current = null;
+    voiceDurationMsRef.current = 0;
+
     voiceBaseTextRef.current = "";
-
-    summaryTimingRef.current = makeEmptyQuestionTiming(nowIso);
   }, [caseId, eventId]);
 
   React.useEffect(() => {
@@ -143,50 +140,28 @@ export default function SummaryPanel({
     };
   }, [saveStatus]);
 
-  function markPageFirstInteraction(nowIso?: string) {
-    const t = nowIso ?? new Date().toISOString();
-
-    if (!firstInteractionAtRef.current) {
-      firstInteractionAtRef.current = t;
-    }
+  function startTypingTimer() {
+    if (typingStartMsRef.current !== null) return;
+    typingStartMsRef.current = performance.now();
   }
 
-  function markSummaryFirstInteraction(nowIso?: string) {
-    const t = nowIso ?? new Date().toISOString();
+  function stopTypingTimer() {
+    if (typingStartMsRef.current === null) return;
 
-    if (!summaryTimingRef.current.firstInteractionAt) {
-      summaryTimingRef.current.firstInteractionAt = t;
-    }
-
-    markPageFirstInteraction(t);
+    typingDurationMsRef.current += performance.now() - typingStartMsRef.current;
+    typingStartMsRef.current = null;
   }
 
-  function markSummaryTyping() {
-    const nowIso = new Date().toISOString();
-
-    markSummaryFirstInteraction(nowIso);
-
-    if (!summaryTimingRef.current.firstTypingAt) {
-      summaryTimingRef.current.firstTypingAt = nowIso;
-    }
-
-    if (!firstTypingAtRef.current) {
-      firstTypingAtRef.current = nowIso;
-    }
+  function startVoiceTimer() {
+    if (voiceStartMsRef.current !== null) return;
+    voiceStartMsRef.current = performance.now();
   }
 
-  function markSummaryVoiceStart() {
-    const nowIso = new Date().toISOString();
+  function stopVoiceTimer() {
+    if (voiceStartMsRef.current === null) return;
 
-    markSummaryFirstInteraction(nowIso);
-
-    if (!summaryTimingRef.current.firstVoiceStartAt) {
-      summaryTimingRef.current.firstVoiceStartAt = nowIso;
-    }
-
-    if (!firstVoiceStartAtRef.current) {
-      firstVoiceStartAtRef.current = nowIso;
-    }
+    voiceDurationMsRef.current += performance.now() - voiceStartMsRef.current;
+    voiceStartMsRef.current = null;
   }
 
   async function startVoiceNote() {
@@ -218,9 +193,7 @@ export default function SummaryPanel({
           .join("")
           .trim();
 
-        if (transcript.length > 0) {
-          markSummaryFirstInteraction();
-        }
+        if (!transcript) return;
 
         const base = voiceBaseTextRef.current;
         const nextText = base ? `${base} ${transcript}` : transcript;
@@ -228,21 +201,24 @@ export default function SummaryPanel({
       };
 
       recognition.onerror = () => {
+        stopVoiceTimer();
         setRecording(false);
       };
 
       recognition.onend = () => {
+        stopVoiceTimer();
         setRecording(false);
       };
 
-      markSummaryVoiceStart();
-
       recognition.start();
       recognitionRef.current = recognition;
+
+      startVoiceTimer();
       setRecording(true);
       setSaveStatus("idle");
       setSaveMessage("");
     } catch {
+      stopVoiceTimer();
       setRecording(false);
       setSaveStatus("error");
       setSaveMessage("Failed to start voice note.");
@@ -251,6 +227,7 @@ export default function SummaryPanel({
 
   function stopVoiceNote() {
     recognitionRef.current?.stop?.();
+    stopVoiceTimer();
     setRecording(false);
   }
 
@@ -267,8 +244,8 @@ export default function SummaryPanel({
         "Saving to cloud storage... Please wait and do not close the page."
       );
 
-      recognitionRef.current?.stop?.();
-      setRecording(false);
+      stopTypingTimer();
+      stopVoiceNote();
 
       let participantInfo: any = {};
 
@@ -291,22 +268,28 @@ export default function SummaryPanel({
             ""
         ).trim() || null;
 
-      const submittedAt = new Date().toISOString();
-      summaryTimingRef.current.submittedAt = submittedAt;
+      const doctorName =
+        String(participantInfo?.name ?? annotatorName ?? "").trim() || null;
+
+      const submittedAtUtc = new Date().toISOString();
+      const startedAtUtc = startedAtUtcRef.current ?? submittedAtUtc;
+
+      const totalDurationSec = Number(
+        (
+          (new Date(submittedAtUtc).getTime() -
+            new Date(startedAtUtc).getTime()) /
+          1000
+        ).toFixed(3)
+      );
+
+      const typingDurationSec = roundSec(typingDurationMsRef.current);
+      const voiceDurationSec = roundSec(voiceDurationMsRef.current);
 
       await submitAnnotation({
-        annotator:
-          annotatorName || annotatorEmail
-            ? { name: annotatorName, email: annotatorEmail }
-            : undefined,
-
-        participantInfo: {
-          name: participantInfo?.name ?? annotatorName ?? undefined,
-          email: participantInfo?.email ?? annotatorEmail ?? undefined,
-          doctorId: doctorId ?? undefined,
-          accessCode: accessCode ?? undefined,
-        },
-
+        /**
+         * Keep these fields for backend/GCS path construction.
+         * Do not remove unless /api/submit and lib/submit are also updated.
+         */
         doctorId,
         accessCode,
         patientId,
@@ -319,32 +302,44 @@ export default function SummaryPanel({
         panel: "summary_panel",
         action: "submit",
 
-        pageOpenedAt: pageOpenedAtRef.current,
-        firstInteractionAt: firstInteractionAtRef.current,
-        firstTypingAt: firstTypingAtRef.current,
-        firstVoiceStartAt: firstVoiceStartAtRef.current,
-        submittedAt,
+        participantInfo: {
+          name: doctorName ?? undefined,
+          email: participantInfo?.email ?? annotatorEmail ?? undefined,
+          doctorId: doctorId ?? undefined,
+          accessCode: accessCode ?? undefined,
+        },
 
-        panelOpenedAt: pageOpenedAtRef.current,
-        clickedAt: submittedAt,
-
+        /**
+         * Simplified saved content.
+         */
         answers: {
+          summaryText: summaryText.trim(),
+        },
+
+        /**
+         * Simplified timing.
+         * Main timestamps are UTC. Browser timezone is stored only for conversion later.
+         */
+        timing: {
+          startedAtUtc,
+          submittedAtUtc,
+          localTimezone: getBrowserTimezone(),
+          localTimezoneOffsetMin: getBrowserTimezoneOffsetMin(),
+          totalDurationSec,
+          typingDurationSec,
+          voiceDurationSec,
+        },
+
+        /**
+         * Optional metadata. You can delete this block if you truly do not want it.
+         * It can be useful later for audit/debugging.
+         */
+        metadata: {
           eventTitle,
           episodeLabel,
           startMin,
           endMin,
-          summaryText: summaryText.trim(),
-          prompt: {
-            instruction: SUMMARY_INSTRUCTION,
-            exampleSummary: EXAMPLE_SUMMARY,
-          },
-          tasks: {
-            task1_overall_summary: {
-              question: SUMMARY_INSTRUCTION,
-              answer: summaryText.trim(),
-              timing: { ...summaryTimingRef.current },
-            },
-          },
+          promptVersion: "summary_v1",
         },
       });
 
@@ -367,14 +362,17 @@ export default function SummaryPanel({
     setRecording(false);
     recognitionRef.current?.stop?.();
     voiceBaseTextRef.current = "";
+
     setSaveStatus("idle");
     setSaveMessage("");
 
-    const nowIso = new Date().toISOString();
-    firstInteractionAtRef.current = null;
-    firstTypingAtRef.current = null;
-    firstVoiceStartAtRef.current = null;
-    summaryTimingRef.current = makeEmptyQuestionTiming(nowIso);
+    startedAtUtcRef.current = new Date().toISOString();
+
+    typingStartMsRef.current = null;
+    typingDurationMsRef.current = 0;
+
+    voiceStartMsRef.current = null;
+    voiceDurationMsRef.current = 0;
   }
 
   return (
@@ -390,21 +388,21 @@ export default function SummaryPanel({
         >
           <div className="space-y-3">
             <p>
-            Please provide a detailed summary of the patient’s anesthetic course in narrative form. 
-Make sure to cover topics such as overall anesthetic approach, notable events (any abnormal vital signs), and interventions (medications, as well as why they were given or doses were changed). Comment on observations and management during key events such as induction of anesthesia, intubation, emergence, extubation. Discuss periods of stability and dynamic changes. 
-Anchor each event or intervention to specific time references using HH:MM format. 
+              Please provide a detailed summary of the patient’s anesthetic
+              course in narrative form. Make sure to cover topics such as
+              overall anesthetic approach, notable events such as abnormal vital
+              signs, and interventions such as medications, as well as why they
+              were given or why doses were changed. Comment on observations and
+              management during key events such as induction of anesthesia,
+              intubation, emergence, and extubation. Discuss periods of
+              stability and dynamic changes. Anchor each event or intervention
+              to specific time references using HH:MM format.
             </p>
-
-          
-
-        
           </div>
         </CollapsibleInstructionPanel>
 
         <CollapsibleInstructionPanel title="Example" defaultOpen={false}>
           <div className="space-y-3">
-       
-
             <p className="whitespace-pre-line rounded-lg border border-blue-100 bg-white p-3 text-gray-800">
               {EXAMPLE_SUMMARY}
             </p>
@@ -465,8 +463,10 @@ Anchor each event or intervention to specific time references using HH:MM format
         <textarea
           value={summaryText}
           disabled={saveStatus === "saving"}
+          onFocus={startTypingTimer}
+          onBlur={stopTypingTimer}
           onChange={(e) => {
-            markSummaryTyping();
+            startTypingTimer();
             setSummaryText(e.target.value);
           }}
           className="min-h-[260px] w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"

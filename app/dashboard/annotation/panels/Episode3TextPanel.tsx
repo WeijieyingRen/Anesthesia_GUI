@@ -9,6 +9,10 @@ type EpisodeButtonItem = {
   vital: string;
   startMin: number;
   endMin: number;
+  y1?: number;
+  y2?: number;
+  createdAtUtc?: string;
+  updatedAtUtc?: string;
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
@@ -16,6 +20,17 @@ type SaveStatus = "idle" | "saving" | "success" | "error";
 const ABNORMAL_REASONING_TEMPLATE = ``;
 
 const EXAMPLE_OBSERVATION_SUMMARY = `From 11:15 to 11:32, the patient developed hypotension shortly after induction, likely due to anesthetic-induced vasodilation. The blood pressure ranged from 80-100s/40s-50s, with MAPs 55-65. The blood pressure nadir was 82/41 at 11:29. The hypotension appeared clinically meaningful because the blood pressure dropped below a clinically acceptable range after induction and required vasopressor support. The provider gave a phenylephrine bolus at 11:29, after which the blood pressure improved adequately, suggesting an appropriate response to treatment. No clear preventive intervention was given, and this may represent a common post-induction hemodynamic response. Management was appropriate in this context; another vasopressor such as ephedrine could also have been reasonable depending on the heart rate and overall physiology, however the heart rate was normal (80s) throughout the episode so phenylephrine was likely the more reasonable choice.`;
+
+const ABNORMAL_EVENT_PROMPT = {
+  instruction:
+    "The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.",
+  requestedElements: [
+    "1. Selected Abnormal Episode: Describe what happened during the selected episode, including timing, key abnormal pattern, raw data, clinical significance, and uncertainty.",
+    "2. Precursor Events: Describe any preceding events, physiologic trends, medications, anesthetic changes, or surgical context that may have contributed to the abnormal episode. If none are apparent, state that no clear precursor is identified.",
+    "3. Downstream Response and Management Evaluation: Describe what happened after the episode, including related interventions, patient response, improvement, worsening, return to baseline, or no clear downstream consequence. Briefly comment on whether the observed management appeared appropriate in this context.",
+    "4. Preventability / Alternative Management: If clinically relevant, briefly comment on whether any preventive measure, earlier intervention, or alternative management could have been considered. If no clear preventive or alternative action was needed, state that.",
+  ],
+};
 
 function InstructionPanel({
   title,
@@ -109,7 +124,19 @@ export default function Episode3TextPanel({
   const [recording, setRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
 
+  const openedAtUtcRef = useRef<string | null>(null);
+  const openedAtMsRef = useRef<number | null>(null);
+  const voiceStartedAtMsRef = useRef<number | null>(null);
+  const voiceDurationMsRef = useRef<number>(0);
+
   useEffect(() => {
+    const nowUtc = new Date().toISOString();
+
+    openedAtUtcRef.current = nowUtc;
+    openedAtMsRef.current = performance.now();
+    voiceStartedAtMsRef.current = null;
+    voiceDurationMsRef.current = 0;
+
     setError(null);
 
     try {
@@ -137,6 +164,13 @@ export default function Episode3TextPanel({
     }));
     setSaveStatus("idle");
     setSaveMessage("");
+  }
+
+  function finalizeVoiceDuration() {
+    if (voiceStartedAtMsRef.current === null) return;
+
+    voiceDurationMsRef.current += performance.now() - voiceStartedAtMsRef.current;
+    voiceStartedAtMsRef.current = null;
   }
 
   async function startVoiceNote() {
@@ -190,6 +224,7 @@ export default function Episode3TextPanel({
 
       recognition.onerror = (event: any) => {
         console.error("Speech recognition error:", event);
+        finalizeVoiceDuration();
         setError("Speech recognition error. Please try again or type directly.");
         setSaveStatus("error");
         setSaveMessage("Speech recognition failed.");
@@ -197,6 +232,7 @@ export default function Episode3TextPanel({
       };
 
       recognition.onend = () => {
+        finalizeVoiceDuration();
         setRecording(false);
 
         if (finalTranscript.trim()) {
@@ -220,9 +256,14 @@ export default function Episode3TextPanel({
 
       recognitionRef.current = recognition;
       recognition.start();
+
+      voiceStartedAtMsRef.current = performance.now();
       setRecording(true);
       setError(null);
+      setSaveStatus("idle");
+      setSaveMessage("");
     } catch (e: any) {
+      finalizeVoiceDuration();
       console.error("Failed to start voice note:", e);
       setError(e?.message ?? "Failed to start voice note.");
       setSaveStatus("error");
@@ -237,6 +278,7 @@ export default function Episode3TextPanel({
     } catch {
       // ignore
     } finally {
+      finalizeVoiceDuration();
       setRecording(false);
     }
   }
@@ -253,12 +295,23 @@ export default function Episode3TextPanel({
     }
 
     try {
+      stopVoiceNote();
+
       setSaving(true);
       setError(null);
       setSaveStatus("saving");
       setSaveMessage("Saving annotation...");
 
-      const submittedAt = new Date().toISOString();
+      const submittedAtUtc = new Date().toISOString();
+      const openedAtUtc = openedAtUtcRef.current;
+      const responseTimeSec =
+        openedAtMsRef.current === null
+          ? null
+          : Number(((performance.now() - openedAtMsRef.current) / 1000).toFixed(3));
+
+      const voiceRecordingDurationSec = Number(
+        (voiceDurationMsRef.current / 1000).toFixed(3)
+      );
 
       let participantInfo: any = {};
       try {
@@ -283,6 +336,18 @@ export default function Episode3TextPanel({
       const resolvedPatientId = patientId ?? patientFolder ?? "unknown_patient";
       const resolvedPatientFolder =
         patientFolder ?? patientId ?? "unknown_patient";
+      const selectedEpisodes = episodeList.map((episode, index) => ({
+        episodeId: episode.id,
+        episodeNumber: index + 1,
+        episodeLabel: episode.label,
+        vital: episode.vital,
+        startMin: episode.startMin,
+        endMin: episode.endMin,
+        y1: episode.y1 ?? null,
+        y2: episode.y2 ?? null,
+        createdAtUtc: episode.createdAtUtc ?? null,
+        updatedAtUtc: episode.updatedAtUtc ?? null,
+      }));
 
       await submitAnnotation({
         doctorId,
@@ -296,37 +361,33 @@ export default function Episode3TextPanel({
 
         panel: "abnormality_reasoning",
         action: "submit",
-        task: "abnormal_event_reasoning",
 
-        submittedAt,
-        clickedAt: submittedAt,
+        submittedAt: submittedAtUtc,
+        clickedAt: submittedAtUtc,
+        pageOpenedAt: openedAtUtc,
 
         answers: {
-          task: "abnormal_event_reasoning",
-
-          episodeNumber,
-          episodeLabel:
-            selectedEvent?.episodeLabel ?? selectedEvent?.title ?? null,
-
-          vital: selectedEvent?.vital ?? null,
-          startMin: selectedEvent?.startMin ?? null,
-          endMin: selectedEvent?.endMin ?? null,
-          y1: selectedEvent?.y1 ?? null,
-          y2: selectedEvent?.y2 ?? null,
-          anesthesiaStart,
-
-          abnormalEventPrompt: {
-            instruction:
-            "The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.",
-            requestedElements: [
-              "1. Selected Abnormal Episode: Describe what happened during the selected episode, including timing, key abnormal pattern, raw data, clinical significance, and uncertainty.",
-              "2. Precursor Events: Describe any preceding events, physiologic trends, medications, anesthetic changes, or surgical context that may have contributed to the abnormal episode. If none are apparent, state that no clear precursor is identified.",
-              "3. Downstream Response and Management Evaluation: Describe what happened after the episode, including related interventions, patient response, improvement, worsening, return to baseline, or no clear downstream consequence. Briefly comment on whether the observed management appeared appropriate in this context.",
-              "4. Preventability / Alternative Management: If clinically relevant, briefly comment on whether any preventive measure, earlier intervention, or alternative management could have been considered. If no clear preventive or alternative action was needed, state that.",
-            ],
+          selectedEpisodes,
+          annotatedEpisode: {
+            episodeId: selectedEvent?.id ?? eventId,
+            episodeNumber: episodeNumber ?? null,
+            episodeLabel:
+              selectedEvent?.episodeLabel ?? selectedEvent?.title ?? null,
+            vital: selectedEvent?.vital ?? null,
+            startMin: selectedEvent?.startMin ?? null,
+            endMin: selectedEvent?.endMin ?? null,
+            y1: selectedEvent?.y1 ?? null,
+            y2: selectedEvent?.y2 ?? null,
+            createdAtUtc: selectedEvent?.createdAtUtc ?? null,
+            updatedAtUtc: selectedEvent?.updatedAtUtc ?? null,
           },
-
-          abnormalEventReasoning: currentText,
+          abnormalityReasoningText: currentText,
+          timing: {
+            openedAtUtc,
+            submittedAtUtc,
+            responseTimeSec,
+            voiceRecordingDurationSec,
+          },
         },
       });
 
@@ -334,7 +395,7 @@ export default function Episode3TextPanel({
       setSaveMessage("Saved successfully.");
       onSaveAndNextStep();
     } catch (e: any) {
-      console.error("Failed to save merged episode reasoning:", e);
+      console.error("Failed to save abnormality reasoning:", e);
       const message = e?.message ?? "Failed to save annotation.";
       setError(message);
       setSaveStatus("error");
@@ -357,41 +418,42 @@ export default function Episode3TextPanel({
         </button>
       )}
 
-      <InstructionPanel title="Annotation Instructions" tone="blue" defaultOpen={false}>
+      <InstructionPanel
+        title="Annotation Instructions"
+        tone="blue"
+        defaultOpen={false}
+      >
         <div className="space-y-4 text-sm leading-6 text-blue-900">
-
-
           <p className="font-semibold text-blue-950">
-          The goal here is to learn more about abnormal episodes (preceding events, mechanism, and downstream consequences) and their management (including why medications were given and any alternative interventions). Please include these checklist items in your response:
-
+            The goal here is to learn more about abnormal episodes (preceding
+            events, mechanism, and downstream consequences) and their management
+            (including why medications were given and any alternative
+            interventions). Please include these checklist items in your
+            response:
           </p>
 
           <div>
             <p className="font-semibold text-blue-950">
               1. Selected Abnormal Episode
             </p>
-            
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
               2. Precursor Events (Etiology Reasoning)
             </p>
-           
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
               3. Response and Management Evaluation
             </p>
-          
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
               4. Preventability / Alternative Management
             </p>
-            
           </div>
         </div>
       </InstructionPanel>
@@ -402,136 +464,141 @@ export default function Episode3TextPanel({
         </p>
       </InstructionPanel>
 
-      <InstructionPanel title="FAQ / Common Questions" tone="blue" defaultOpen={false}>
-  <div className="space-y-4 text-sm leading-6 text-blue-900">
-    <div>
-      <p className="font-semibold text-blue-950">
-        1. What should I include in my response?
-      </p>
+      <InstructionPanel
+        title="FAQ / Common Questions"
+        tone="blue"
+        defaultOpen={false}
+      >
+        <div className="space-y-4 text-sm leading-6 text-blue-900">
+          <div>
+            <p className="font-semibold text-blue-950">
+              1. What should I include in my response?
+            </p>
 
-      <div className="mt-2 space-y-3">
-        <div>
-          <p className="font-semibold text-blue-950">
-            Selected Abnormal Episode
-          </p>
-          <p>
-            Describe what happened during the selected episode, including the
-            timing, key abnormal pattern, raw data, clinical significance, and
-            any uncertainty.
-          </p>
+            <div className="mt-2 space-y-3">
+              <div>
+                <p className="font-semibold text-blue-950">
+                  Selected Abnormal Episode
+                </p>
+                <p>
+                  Describe what happened during the selected episode, including
+                  the timing, key abnormal pattern, raw data, clinical
+                  significance, and any uncertainty.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-blue-950">
+                  Precursor Events (Etiology Reasoning)
+                </p>
+                <p>
+                  Describe any preceding events, physiologic trends,
+                  medications, anesthetic changes, or surgical context that may
+                  have contributed to the abnormal episode. If none are
+                  apparent, state that no clear precursor is identified.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-blue-950">
+                  Response and Management Evaluation
+                </p>
+                <p>
+                  Describe what happened after the episode, including related
+                  interventions, patient response, improvement, worsening,
+                  return to baseline, or no clear downstream consequence.
+                  Briefly comment on whether the observed management appeared
+                  appropriate in this context.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-blue-950">
+                  Preventability / Alternative Management
+                </p>
+                <p>
+                  If clinically relevant, briefly comment on whether any
+                  preventive measure, earlier intervention, or alternative
+                  management could have been considered. If no clear preventive
+                  or alternative action was needed, you may state that.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              2. Do I need to separate precursor, abnormal episode, and
+              downstream response explicitly?
+            </p>
+            <p>
+              Not necessarily. You may write a short integrated summary.
+              However, the summary should make clear what happened before the
+              episode, what defines the selected abnormal episode, and how the
+              patient responded afterward.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              3. What if there is no clear precursor event?
+            </p>
+            <p>
+              It is fine to state that no obvious precursor is identified. For
+              example, the episode may appear to be directly related to
+              induction, anesthetic depth, surgical stimulation, medication
+              effect, or another nearby event.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              4. What if there is no clear downstream consequence?
+            </p>
+            <p>
+              Please state that no clear downstream consequence is seen, or
+              briefly describe that the patient returned toward baseline,
+              remained stable, or responded appropriately to management.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              5. Do I need to identify a preventive intervention?
+            </p>
+            <p>
+              No. Many abnormal episodes may not have an obvious preventive
+              measure. If prevention is not clinically relevant or not apparent
+              from the data, you can leave this part blank or state that no clear
+              preventive measure is identified.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              6. What if I am unsure about the cause?
+            </p>
+            <p>
+              Please describe your uncertainty rather than forcing one
+              explanation. You may mention several possible explanations and
+              indicate which one seems most likely based on timing, physiology,
+              medications, surgical context, or patient response.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              7. How detailed should my answer be?
+            </p>
+            <p>
+              A concise clinical explanation is enough. In most cases, five to
+              six sentences or a short dictated paragraph is sufficient, as long
+              as it explains the temporal relationship before, during, and after
+              the selected episode.
+            </p>
+          </div>
         </div>
-
-        <div>
-          <p className="font-semibold text-blue-950">
-            Precursor Events (Etiology Reasoning)
-          </p>
-          <p>
-            Describe any preceding events, physiologic trends, medications,
-            anesthetic changes, or surgical context that may have contributed
-            to the abnormal episode. If none are apparent, state that no clear
-            precursor is identified.
-          </p>
-        </div>
-
-        <div>
-          <p className="font-semibold text-blue-950">
-            Response and Management Evaluation
-          </p>
-          <p>
-            Describe what happened after the episode, including related
-            interventions, patient response, improvement, worsening, return to
-            baseline, or no clear downstream consequence. Briefly comment on
-            whether the observed management appeared appropriate in this
-            context.
-          </p>
-        </div>
-
-        <div>
-          <p className="font-semibold text-blue-950">
-            Preventability / Alternative Management
-          </p>
-          <p>
-            If clinically relevant, briefly comment on whether any preventive
-            measure, earlier intervention, or alternative management could have
-            been considered. If no clear preventive or alternative action was
-            needed, you may state that.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <p className="font-semibold text-blue-950">
-        2. Do I need to separate precursor, abnormal episode, and downstream response explicitly?
-      </p>
-      <p>
-        Not necessarily. You may write a short integrated summary. However,
-        the summary should make clear what happened before the episode,
-        what defines the selected abnormal episode, and how the patient
-        responded afterward.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-semibold text-blue-950">
-        3. What if there is no clear precursor event?
-      </p>
-      <p>
-        It is fine to state that no obvious precursor is identified. For
-        example, the episode may appear to be directly related to induction,
-        anesthetic depth, surgical stimulation, medication effect, or
-        another nearby event.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-semibold text-blue-950">
-        4. What if there is no clear downstream consequence?
-      </p>
-      <p>
-        Please state that no clear downstream consequence is seen, or
-        briefly describe that the patient returned toward baseline,
-        remained stable, or responded appropriately to management.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-semibold text-blue-950">
-        5. Do I need to identify a preventive intervention?
-      </p>
-      <p>
-        No. Many abnormal episodes may not have an obvious preventive
-        measure. If prevention is not clinically relevant or not apparent
-        from the data, you can leave this part blank or state that no clear
-        preventive measure is identified.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-semibold text-blue-950">
-        6. What if I am unsure about the cause?
-      </p>
-      <p>
-        Please describe your uncertainty rather than forcing one
-        explanation. You may mention several possible explanations and
-        indicate which one seems most likely based on timing, physiology,
-        medications, surgical context, or patient response.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-semibold text-blue-950">
-        7. How detailed should my answer be?
-      </p>
-      <p>
-        A concise clinical explanation is enough. In most cases, five to
-        six sentences or a short dictated paragraph is sufficient, as long
-        as it explains the temporal relationship before, during, and after
-        the selected episode.
-      </p>
-    </div>
-  </div>
-</InstructionPanel>
+      </InstructionPanel>
 
       <textarea
         value={freeText}
@@ -561,6 +628,11 @@ export default function Episode3TextPanel({
             setError(null);
             setSaveStatus("idle");
             setSaveMessage("");
+
+            openedAtUtcRef.current = new Date().toISOString();
+            openedAtMsRef.current = performance.now();
+            voiceStartedAtMsRef.current = null;
+            voiceDurationMsRef.current = 0;
           }}
           className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
         >

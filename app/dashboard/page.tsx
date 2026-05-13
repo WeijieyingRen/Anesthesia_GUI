@@ -3,7 +3,6 @@ import ManagementReasoningPanel from "./annotation/panels/ManagementReasoningPan
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
-import { submitAnnotation } from "@/lib/submit";
 
 import ObservationSelectionGuide from "./annotation/panels/ObservationSelectionGuide";
 import type {
@@ -526,6 +525,7 @@ export default function DashboardPage() {
     return idx >= 0 ? idx + 1 : null;
   }, [activeEpisode, prioritizedEpisodes]);
 
+
   const selectedEvent: SidebarEventItem | null = useMemo(() => {
     if (!activeEpisode) return null;
   
@@ -540,6 +540,10 @@ export default function DashboardPage() {
       endMin: activeEpisode.endMin,
       y1: activeEpisode.y1,
       y2: activeEpisode.y2,
+  
+      createdAtUtc: activeEpisode.createdAtUtc,
+      updatedAtUtc: activeEpisode.updatedAtUtc,
+  
       completed: {
         detect: completed?.detect ?? false,
         mechanism: false,
@@ -547,7 +551,6 @@ export default function DashboardPage() {
       },
     };
   }, [activeEpisode, episodeTaskCompletion]);
-
   useEffect(() => {
     if (!activeEpisode) return;
 
@@ -619,6 +622,8 @@ export default function DashboardPage() {
         return prev;
       }
 
+      const nowUtc = new Date().toISOString();
+
       const newEpisode: DetectedEpisodeItem = {
         id: `evt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
         label: buildEpisodeTitle(prev.detectedEpisodes),
@@ -628,6 +633,8 @@ export default function DashboardPage() {
         y1: window.y1,
         y2: window.y2,
         selectedForAnnotation: false,
+        createdAtUtc: nowUtc,
+        updatedAtUtc: nowUtc,
       };
 
       setEpisodeTaskCompletion((prevCompletion) => ({
@@ -731,33 +738,18 @@ export default function DashboardPage() {
         return;
       }
   
-      try {
-        setSubmitting(true);
-        setSubmitError(null);
+      setSubmitError(null);
+      setSelectedTask("detect");
+      setEpisodeState((prev) => ({
+        ...prev,
+        stage: "annotate",
+        activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
+      }));
   
-        await saveAbnormalitySelectionOverview("select_all");
-  
-        setSelectedTask("detect");
-        setEpisodeState((prev) => ({
-          ...prev,
-          stage: "annotate",
-          activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
-        }));
-        logAction("episode_stage_advance", {
-          from: "select_all",
-          to: "annotate",
-          selectionOverviewSaved: true,
-        });
-      } catch (e: any) {
-        console.error("Failed to save abnormality selection overview:", e);
-        setSubmitError(
-          e?.message ||
-            "Failed to save abnormality selection overview. Please click again."
-        );
-        return;
-      } finally {
-        setSubmitting(false);
-      }
+      logAction("episode_stage_advance", {
+        from: "select_all",
+        to: "annotate",
+      });
   
       return;
     }
@@ -768,33 +760,18 @@ export default function DashboardPage() {
         return;
       }
   
-      try {
-        setSubmitting(true);
-        setSubmitError(null);
+      setSubmitError(null);
+      setSelectedTask("detect");
+      setEpisodeState((prev) => ({
+        ...prev,
+        stage: "annotate",
+        activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
+      }));
   
-        await saveAbnormalitySelectionOverview("pick_top3");
-  
-        setSelectedTask("detect");
-        setEpisodeState((prev) => ({
-          ...prev,
-          stage: "annotate",
-          activeEpisodeId: prev.prioritizedEpisodeIds[0] ?? null,
-        }));
-        logAction("episode_stage_advance", {
-          from: "pick_top3",
-          to: "annotate",
-          selectionOverviewSaved: true,
-        });
-      } catch (e: any) {
-        console.error("Failed to save abnormality selection overview:", e);
-        setSubmitError(
-          e?.message ||
-            "Failed to save abnormality selection overview. Please click again."
-        );
-        return;
-      } finally {
-        setSubmitting(false);
-      }
+      logAction("episode_stage_advance", {
+        from: "pick_top3",
+        to: "annotate",
+      });
     }
   }
   function handleTimelineWindowCreate(window: SelectedWindow) {
@@ -855,6 +832,7 @@ export default function DashboardPage() {
           endMin: nextWindow.endMin,
           y1: nextWindow.y1,
           y2: nextWindow.y2,
+          updatedAtUtc: new Date().toISOString(),
         };
       });
   
@@ -1134,119 +1112,6 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     } finally {
       setLoading(false);
     }
-  }
-
-  function buildAbnormalitySelectionOverviewAnswers(params: {
-    stage: "select_all" | "pick_top3";
-    submittedAt: string;
-  }) {
-    const { stage, submittedAt } = params;
-  
-    const allDetectedEpisodes = episodeState.detectedEpisodes.map((episode) => ({
-      id: episode.id,
-      label: episode.label,
-      vital: episode.vital,
-      startMin: episode.startMin,
-      endMin: episode.endMin,
-      y1: episode.y1,
-      y2: episode.y2,
-      selectedForAnnotation: episodeState.prioritizedEpisodeIds.includes(episode.id),
-    }));
-  
-    const selectedEpisodes = episodeState.detectedEpisodes
-      .filter((episode) => episodeState.prioritizedEpisodeIds.includes(episode.id))
-      .map((episode) => ({
-        id: episode.id,
-        label: episode.label,
-        vital: episode.vital,
-        startMin: episode.startMin,
-        endMin: episode.endMin,
-        y1: episode.y1,
-        y2: episode.y2,
-      }));
-  
-    return {
-      selectionStage: stage,
-      submittedAt,
-      selectionSummary: {
-        detectedEpisodeCount: episodeState.detectedEpisodes.length,
-        selectedEpisodeCount: episodeState.prioritizedEpisodeIds.length,
-        prioritizedEpisodeIds: episodeState.prioritizedEpisodeIds,
-      },
-      allDetectedEpisodes,
-      selectedEpisodes,
-      tasks: {
-        task1_detect_events: {
-          question:
-            "Detect events associated with vital sign abnormalities and confirm which detected episodes should be carried forward.",
-          answer: {
-            detectedEpisodes: allDetectedEpisodes,
-            confirmedEpisodeIds: episodeState.prioritizedEpisodeIds,
-          },
-          submittedAt,
-        },
-        task2_select_one_interesting_episode: {
-          question:
-            "Select 1 interesting episode for detailed annotation from the detected episodes checklist.",
-          answer: {
-            selectedEpisodes,
-            selectedCount: selectedEpisodes.length,
-          },
-          submittedAt,
-        },
-      },
-    };
-  }
-  
-  async function saveAbnormalitySelectionOverview(
-    stage: "select_all" | "pick_top3"
-  ) {
-    const submittedAt = new Date().toISOString();
-  
-    let participantInfo: any = {};
-    try {
-      const raw = localStorage.getItem("participantInfo");
-      participantInfo = raw ? JSON.parse(raw) : {};
-    } catch {
-      participantInfo = {};
-    }
-  
-    const doctorId =
-      String(
-        participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
-      ).trim() || null;
-  
-    const accessCode =
-      String(
-        participantInfo?.accessCode ??
-          localStorage.getItem("doctorAccessCode") ??
-          ""
-      ).trim() || null;
-  
-    const patientFolder = currentPatient?.folder ?? "unknown_patient";
-  
-    await submitAnnotation({
-      doctorId,
-      accessCode,
-      patientId: patientFolder,
-      patientFolder,
-  
-      caseId,
-      eventId: "abnormality-selection-overview",
-      episodeId: "selection_overview",
-  
-      panel: "abnormality_reasoning_selection",
-      action: "submit",
-      task: "selection_overview",
-  
-      submittedAt,
-      clickedAt: submittedAt,
-  
-      answers: buildAbnormalitySelectionOverviewAnswers({
-        stage,
-        submittedAt,
-      }),
-    });
   }
 
   const collectSubmissionPayload = () => {
@@ -2102,7 +1967,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         fluidOutRows={fluidOutRowsState}
         episodeState={episodeState}
         onChangeEpisodeState={setEpisodeState}
-        onChangeSelectedWindow={setSelectedWindow}
+        onChangeSelectedWindow={handleSelectedWindowChange}
         completedTaskMap={episodeTaskCompletion}
         onChangeCompletedTaskMap={setEpisodeTaskCompletion}
       />
