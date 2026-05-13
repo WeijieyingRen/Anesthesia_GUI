@@ -648,15 +648,7 @@ export default function TimelineContextPanel({
                 />
 
                 {packedEvents.map((event, idx) => {
-                  const tRaw = event.relative_min!;
-                  const t =
-                    event.event_type === "anesthesia_start"
-                      ? 0
-                      : event.event_type === "anesthesia_stop"
-                        ? xEnd
-                        : tRaw;
-
-                  const x = minuteToX(t);
+                  const x = minuteToX(event.relative_min!);
                   const c = eventColor(event.group);
                   const label = shortenLabel(event.label ?? "");
                   const showTextLabel = shouldShowTextLabel(event);

@@ -422,6 +422,10 @@ export default function ManagementReasoningPanel({
 
   return (
     <div className="rounded-2xl border bg-white p-6">
+          <div className="mb-3 text-sm font-semibold text-gray-900">
+          Task 3: Reasoning on a given medication/gas event on the right medication/gas event panel
+        </div>
+
       <InstructionPanel title="Annotation Instructions" defaultOpen={false}>
         <div className="space-y-4 text-sm leading-6 text-blue-900">
           <p className="font-semibold text-blue-950">

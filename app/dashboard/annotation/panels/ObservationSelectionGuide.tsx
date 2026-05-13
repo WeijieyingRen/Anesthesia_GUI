@@ -43,16 +43,7 @@ export default function ObservationSelectionGuide() {
         defaultOpen={false}
       >
         <div className="space-y-3">
-          <p>
-            Please select clinically meaningful abnormal episodes from the vital
-            sign chart. A selected episode should be important enough that an
-            anesthesia provider would want to explain what happened, why it may
-            have happened, and how the patient responded.
-          </p>
-
-          <div className="pt-2 font-semibold text-blue-950">
-            Please make sure to:
-          </div>
+    
 
           <ol className="ml-5 list-decimal space-y-2">
             <li>

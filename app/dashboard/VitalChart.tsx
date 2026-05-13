@@ -93,6 +93,8 @@ const BASE_PX_PER_15_MIN = 64;
 const EDGE_HANDLE_PX = 16;
 const HANDLE_BORDER_PX = 4;
 const MIN_PREVIEW_BOX_PX = 18;
+const HOVER_PANEL_WIDTH = 112;
+const HOVER_PANEL_HEIGHT = 92;
 
 function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] {
   return (series ?? [])
@@ -450,6 +452,7 @@ export default function VitalChart({
   
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+  const [scrollViewportWidth, setScrollViewportWidth] = useState(0);
   const viewConfig = useMemo(() => {
     if (timeResolution === 5) {
       return {
@@ -500,6 +503,7 @@ export default function VitalChart({
   
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
+      setScrollViewportWidth(el.clientWidth);
       setSliderValue(Math.min(el.scrollLeft, nextMax));
     }
   
@@ -1022,6 +1026,66 @@ const activeEndMin =
     };
   }, [hoverMinute, series]);
 
+  const hoverPanelPosition = useMemo(() => {
+    const viewportWidth =
+      scrollViewportWidth || scrollRef.current?.clientWidth || HOVER_PANEL_WIDTH + 24;
+    const top = showTopTimeAxis ? 28 : chartMarginTop + 8;
+    const bottom = Math.max(top, height - chartMarginBottom - HOVER_PANEL_HEIGHT - 8);
+    const right = Math.max(8, viewportWidth - HOVER_PANEL_WIDTH - 8);
+
+    const candidates = [
+      { left: 8, top },
+      { left: 8, top: bottom },
+      { left: right, top },
+      { left: right, top: bottom },
+      { left: 8, top: Math.max(top, Math.round((height - HOVER_PANEL_HEIGHT) / 2)) },
+    ];
+
+    function scoreCandidate(candidate: { left: number; top: number }) {
+      const rect = {
+        left: candidate.left - 8,
+        right: candidate.left + HOVER_PANEL_WIDTH + 8,
+        top: candidate.top - 8,
+        bottom: candidate.top + HOVER_PANEL_HEIGHT + 8,
+      };
+
+      let coveredPoints = 0;
+
+      for (const key of visibleKeys) {
+        for (const point of series[key] ?? []) {
+          if (!Number.isFinite(point.time) || !Number.isFinite(point.value)) continue;
+
+          const x = minuteToPixel(point.time) - sliderValue;
+          if (x < rect.left || x > rect.right) continue;
+
+          const y = valueToPixel(point.value);
+          if (y >= rect.top && y <= rect.bottom) {
+            coveredPoints += 1;
+          }
+        }
+      }
+
+      return coveredPoints;
+    }
+
+    return candidates
+      .map((candidate, index) => ({
+        ...candidate,
+        score: scoreCandidate(candidate),
+        index,
+      }))
+      .sort((a, b) => a.score - b.score || a.index - b.index)[0];
+  }, [
+    chartMarginBottom,
+    chartMarginTop,
+    height,
+    scrollViewportWidth,
+    showTopTimeAxis,
+    sliderValue,
+    series,
+    visibleKeys,
+  ]);
+
   const overlayBox = useMemo(() => {
     if (!displayWindow) return null;
 
@@ -1268,7 +1332,7 @@ const activeEndMin =
           chartMarginBottom={chartMarginBottom}
         />
 
-<div className="min-w-0">
+<div className="relative min-w-0">
   <div
     ref={scrollRef}
     className="vital-scroll-hidden"
@@ -1479,39 +1543,6 @@ const activeEndMin =
           }
         }}
       >
-        {hoverStats && !isDragging && (
-          <div
-            className="pointer-events-none absolute rounded-md border border-gray-200 px-3 py-2 text-xs shadow"
-            style={{
-              left:
-                minuteToPixel(hoverStats.time) > plotWidth * 0.55
-                  ? Math.max(8, minuteToPixel(hoverStats.time) - 196)
-                  : Math.min(
-                      minuteToPixel(hoverStats.time) + 12,
-                      plotWidth - 196
-                    ),
-              top: chartMarginTop + 8,
-              zIndex: 1000,
-              backgroundColor: "rgba(255, 255, 255, 0.86)",
-              color: "#111827",
-              lineHeight: 1.45,
-              minWidth: 172,
-              maxWidth: 188,
-              backdropFilter: "blur(2px)",
-            }}
-          >
-            <div className="mb-1 font-semibold">
-              Time: {formatClockTime(hoverStats.time, timeZero)}
-            </div>
-            <div>BP: {hoverStats.bpText}</div>
-            <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
-            <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
-            <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
-            <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
-            <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
-          </div>
-        )}
-
         {windowStats && (
           <div
             className="pointer-events-none absolute rounded-md border bg-white px-2 py-1 text-xs shadow"
@@ -1660,6 +1691,34 @@ const activeEndMin =
       </div>
     </div>
   </div>
+
+  {hoverStats && !isDragging && (
+    <div
+      className="pointer-events-none absolute rounded-md border border-gray-200 px-1.5 py-1 text-[10px] shadow"
+      style={{
+        left: hoverPanelPosition.left,
+        top: hoverPanelPosition.top,
+        zIndex: 1000,
+        backgroundColor: "rgba(255, 255, 255, 0.62)",
+        color: "#111827",
+        lineHeight: 1.22,
+        width: "max-content",
+        minWidth: 104,
+        maxWidth: HOVER_PANEL_WIDTH,
+        backdropFilter: "blur(2px)",
+      }}
+    >
+      <div className="mb-0.5 font-semibold">
+        Time: {formatClockTime(hoverStats.time, timeZero)}
+      </div>
+      <div>BP: {hoverStats.bpText}</div>
+      <div>HR: {formatHoverValue(hoverStats.hr, 0)}</div>
+      <div>SpO2: {formatHoverValue(hoverStats.spo2, 0)}</div>
+      <div>RR: {formatHoverValue(hoverStats.rr, 0)}</div>
+      <div>ETCO2: {formatHoverValue(hoverStats.etco2, 0)}</div>
+      <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
+    </div>
+  )}
 
   <div className="px-2 pt-2">
     <input

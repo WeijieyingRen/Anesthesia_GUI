@@ -381,7 +381,7 @@ export default function SummaryPanel({
     <div className="bg-white">
       <div className="p-3">
         <div className="mb-3 text-sm font-semibold text-gray-900">
-          Patient-level Panel 1: Overall Intraoperative Summary
+          Task 1: Overall Intraoperative Summary
         </div>
 
         <CollapsibleInstructionPanel

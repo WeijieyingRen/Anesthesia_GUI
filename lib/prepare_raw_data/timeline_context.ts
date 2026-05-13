@@ -233,7 +233,10 @@ export function prepareTimelineContextData(
   episodeEndMin?: number,
   nearbyWindowMin = 15
 ): TimelineContextData {
-  const anesthesiaStart = caseStaticRow["anesthesia_start"] ?? undefined;
+  const anesthesiaStart =
+    caseStaticRow["__visualization_start"] ??
+    caseStaticRow["anesthesia_start"] ??
+    undefined;
 
   const staticEvents = STATIC_STAGE_KEYS
     .map((key): TimelineContextEvent | null => {

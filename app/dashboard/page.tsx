@@ -215,6 +215,52 @@ function formatEpisodeTimeRange(
   return `${Math.round(startMin)} - ${Math.round(endMin)} min`;
 }
 
+function roundDownToQuarterHourIso(value: unknown): string | null {
+  if (!value) return null;
+
+  const date = new Date(String(value));
+  if (Number.isNaN(date.getTime())) return null;
+
+  const rounded = new Date(date);
+  rounded.setMinutes(Math.floor(rounded.getMinutes() / 15) * 15, 0, 0);
+  return rounded.toISOString();
+}
+
+function getMinuteOffset(fromTime: unknown, toTime: unknown): number {
+  if (!fromTime || !toTime) return 0;
+
+  const from = new Date(String(fromTime));
+  const to = new Date(String(toTime));
+  if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) return 0;
+
+  const diffMin = (from.getTime() - to.getTime()) / 60000;
+  return Number.isFinite(diffMin) ? diffMin : 0;
+}
+
+function shiftRelativeTimeRows(
+  rows: CsvRow[],
+  fields: string[],
+  offsetMin: number
+): CsvRow[] {
+  if (!offsetMin) return rows;
+
+  return rows.map((row) => {
+    const next = { ...row };
+
+    for (const field of fields) {
+      const rawValue = next[field];
+      if (rawValue === null || rawValue === undefined || rawValue === "") continue;
+
+      const value = Number(rawValue);
+      if (Number.isFinite(value)) {
+        next[field] = value + offsetMin;
+      }
+    }
+
+    return next;
+  });
+}
+
 function FieldGrid({
   items,
 }: {
@@ -425,13 +471,14 @@ export default function DashboardPage() {
   const [managementEvents, setManagementEvents] = useState<ManagementEvent[]>([]);
   const [selectedManagementEvent, setSelectedManagementEvent] =
     useState<ManagementEvent | null>(null);
+  const [dashboardBackStack, setDashboardBackStack] = useState<number[]>([]);
   const [episodeState, setEpisodeState] = useState<EpisodeAnnotationState>(
     buildEmptyEpisodeState()
   );
   const [episodeTaskCompletion, setEpisodeTaskCompletion] =
     useState<EpisodeTaskCompletionMap>({});
 
-  const [preopInfoOpen, setPreopInfoOpen] = useState(true);
+  const [preopInfoOpen, setPreopInfoOpen] = useState(false);
 
   const voiceNote = useVoiceNote();
 
@@ -765,20 +812,39 @@ export default function DashboardPage() {
   }
 
   function handleSelectedWindowChange(nextWindow: SelectedWindow | null) {
+    const previousWindow = selectedWindow;
+  
     setSelectedWindow(nextWindow);
   
     if (!nextWindow) return;
   
-    // 只有 episode 模式下才需要把框的变化同步回左侧 checklist
     if (annotationLevel !== "episode") return;
   
-    // 只有 annotate 阶段，才把拖动结果写回当前 active episode
-    if (episodeState.stage !== "annotate") return;
-  
-    const targetEpisodeId = episodeState.activeEpisodeId;
-    if (!targetEpisodeId) return;
-  
     setEpisodeState((prev) => {
+      let targetEpisodeId: string | null = null;
+  
+      if (prev.stage === "annotate") {
+        targetEpisodeId = prev.activeEpisodeId;
+      }
+  
+      if (
+        (prev.stage === "select_all" || prev.stage === "pick_top3") &&
+        previousWindow
+      ) {
+        const matchedEpisode = prev.detectedEpisodes.find(
+          (episode) =>
+            episode.vital === previousWindow.vital &&
+            episode.startMin === previousWindow.startMin &&
+            episode.endMin === previousWindow.endMin &&
+            episode.y1 === previousWindow.y1 &&
+            episode.y2 === previousWindow.y2
+        );
+  
+        targetEpisodeId = matchedEpisode?.id ?? null;
+      }
+  
+      if (!targetEpisodeId) return prev;
+  
       const updatedEpisodes = prev.detectedEpisodes.map((episode) => {
         if (episode.id !== targetEpisodeId) return episode;
   
@@ -792,19 +858,20 @@ export default function DashboardPage() {
         };
       });
   
+      logAction("episode_window_adjust", {
+        episodeId: targetEpisodeId,
+        vital: nextWindow.vital,
+        startMin: nextWindow.startMin,
+        endMin: nextWindow.endMin,
+        y1: nextWindow.y1,
+        y2: nextWindow.y2,
+        stage: prev.stage,
+      });
+  
       return {
         ...prev,
         detectedEpisodes: updatedEpisodes,
       };
-    });
-  
-    logAction("episode_window_adjust", {
-      episodeId: targetEpisodeId,
-      vital: nextWindow.vital,
-      startMin: nextWindow.startMin,
-      endMin: nextWindow.endMin,
-      y1: nextWindow.y1,
-      y2: nextWindow.y2,
     });
   }
 
@@ -856,6 +923,7 @@ export default function DashboardPage() {
 
     setCurrentPatientIndex(idx);
     setSelectedPatients(gameData.selectedPatients || []);
+    setDashboardBackStack([]);
 
     if (gameData.selectedPatients?.length) {
       void loadPatient(gameData.selectedPatients[idx].folder);
@@ -864,6 +932,88 @@ export default function DashboardPage() {
       setLoadError("No selected patients found.");
     }
   }, [router]);
+
+  function persistCurrentPatientIndex(nextIndex: number) {
+    try {
+      const raw = localStorage.getItem("gameData");
+      if (!raw) return;
+
+      const gameData = JSON.parse(raw) as GameData;
+      localStorage.setItem(
+        "gameData",
+        JSON.stringify({
+          ...gameData,
+          currentPatientIndex: nextIndex,
+        })
+      );
+    } catch {
+      // ignore corrupted localStorage
+    }
+  }
+
+  async function navigateToPatientIndex(
+    nextIndex: number,
+    options: { pushCurrentToBackStack?: boolean } = {}
+  ) {
+    const nextPatient = selectedPatients[nextIndex];
+    if (!nextPatient) return;
+
+    if (options.pushCurrentToBackStack) {
+      setDashboardBackStack((prev) => [...prev, currentPatientIndex]);
+    }
+
+    setCurrentPatientIndex(nextIndex);
+    persistCurrentPatientIndex(nextIndex);
+    await loadPatient(nextPatient.folder);
+  }
+
+  async function handleBackNavigation() {
+    logAction("go_back");
+
+    const previousPatientIndex = dashboardBackStack[dashboardBackStack.length - 1];
+
+    if (previousPatientIndex !== undefined) {
+      setDashboardBackStack((prev) => prev.slice(0, -1));
+      await navigateToPatientIndex(previousPatientIndex);
+      return;
+    }
+
+    router.push("/patient-list");
+  }
+
+  async function handleNextNavigation() {
+    const nextIndex = currentPatientIndex + 1;
+
+    if (nextIndex >= selectedPatients.length) {
+      alert("No more patients.");
+      return;
+    }
+
+    if (!hasSubmitted) {
+      const validationError = validateBeforeFinalSubmit();
+
+      if (!validationError) {
+        logAction("next_with_submit");
+        const success = await submitCurrentSession();
+        if (!success) return;
+      } else {
+        const ok = window.confirm(
+          `${validationError}\n\nMove to the next patient without submitting this case?`
+        );
+
+        if (!ok) {
+          logAction("next_cancelled", { reason: "incomplete_case" });
+          return;
+        }
+
+        logAction("next_without_submit", { reason: validationError });
+      }
+    } else {
+      logAction("next_after_submit");
+    }
+
+    await navigateToPatientIndex(nextIndex, { pushCurrentToBackStack: true });
+  }
 
   async function loadPatient(folder: string) {
     try {
@@ -922,10 +1072,51 @@ export default function DashboardPage() {
       const caseStatic = caseStaticRows[0] ?? {};
       const preopRow = preopRows[0] ?? {};
       const labRow = labRows[0] ?? {};
+      const rawAnesthesiaStart = caseStatic["anesthesia_start"] ?? null;
+      const visualizationStart =
+        roundDownToQuarterHourIso(rawAnesthesiaStart) ?? rawAnesthesiaStart;
+      const visualizationOffsetMin = getMinuteOffset(
+        rawAnesthesiaStart,
+        visualizationStart
+      );
+      const visualizationCaseStatic = {
+        ...caseStatic,
+        __visualization_start: visualizationStart,
+      };
+      const shiftedPhyRows = shiftRelativeTimeRows(
+        phyRows,
+        ["relative_anesthesia_time"],
+        visualizationOffsetMin
+      );
+      const shiftedMedBolusRows = shiftRelativeTimeRows(
+        medBolusRows,
+        ["relative_anesthesia_time"],
+        visualizationOffsetMin
+      );
+      const shiftedMedInfusionRows = shiftRelativeTimeRows(
+        medInfusionRows,
+        ["relative_anesthesia_start", "relative_anesthesia_end"],
+        visualizationOffsetMin
+      );
+      const shiftedFluidInRows = shiftRelativeTimeRows(
+        fluidInRows,
+        ["relative_anesthesia_start", "relative_anesthesia_end"],
+        visualizationOffsetMin
+      );
+      const shiftedFluidOutRows = shiftRelativeTimeRows(
+        fluidOutRows,
+        ["relative_anesthesia_start", "relative_anesthesia_end"],
+        visualizationOffsetMin
+      );
+      const shiftedManagementRows = shiftRelativeTimeRows(
+        managementRows,
+        ["time_min", "end_time_min"],
+        visualizationOffsetMin
+      );
 
-      setCaseStaticRowState(caseStatic);
+      setCaseStaticRowState(visualizationCaseStatic);
       setCaseDynamicRowsState(caseDynamicRows);
-      setAnesthesiaStart(caseStatic["anesthesia_start"] ?? null);
+      setAnesthesiaStart(visualizationStart);
       setAnesthesiaStop(caseStatic["anesthesia_stop"] ?? null);
 
       setDemographic(
@@ -935,16 +1126,16 @@ export default function DashboardPage() {
       setSurgeryContext(prepareSurgeryContextData(caseInfo, caseStatic, preopRow));
       setPreop(preparePreopData(preopRow));
       setLab(prepareLabData(labRow));
-      setVitals(prepareVitalsDataRaw(phyRows));
+      setVitals(prepareVitalsDataRaw(shiftedPhyRows));
 
-      setMedBolusRowsState(medBolusRows);
-      setMedInfusionRowsState(medInfusionRows);
-      setFluidInRowsState(fluidInRows);
-      setFluidOutRowsState(fluidOutRows);
+      setMedBolusRowsState(shiftedMedBolusRows);
+      setMedInfusionRowsState(shiftedMedInfusionRows);
+      setFluidInRowsState(shiftedFluidInRows);
+      setFluidOutRowsState(shiftedFluidOutRows);
 
-      setMedications(prepareMedicationData(medBolusRows, medInfusionRows));
-      setFluids(prepareFluidData(fluidInRows, fluidOutRows));
-      const parsedManagementEvents = prepareManagementEvents(managementRows);
+      setMedications(prepareMedicationData(shiftedMedBolusRows, shiftedMedInfusionRows));
+      setFluids(prepareFluidData(shiftedFluidInRows, shiftedFluidOutRows));
+      const parsedManagementEvents = prepareManagementEvents(shiftedManagementRows);
 setManagementEvents(parsedManagementEvents);
 setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       
@@ -1288,17 +1479,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={async () => {
-                logAction("go_back_patient");
-
-                const prevIndex = currentPatientIndex - 1;
-
-                if (prevIndex >= 0) {
-                  setCurrentPatientIndex(prevIndex);
-                  await loadPatient(selectedPatients[prevIndex].folder);
-                } else {
-                  router.push("/patient-list");
-                }
+              onClick={() => {
+                void handleBackNavigation();
               }}
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
             >
@@ -1339,41 +1521,14 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
             <button
               type="button"
-              disabled={submitting || !canSubmitFinal}
-              onClick={async () => {
-                if (!hasSubmitted) {
-                  const validationError = validateBeforeFinalSubmit();
-                  if (validationError) {
-                    setSubmitError(validationError);
-                    return;
-                  }
-
-                  const ok = window.confirm(
-                    "You have not submitted your annotation yet.\n\nThis action cannot be undone. Continue?"
-                  );
-
-                  if (!ok) {
-                    logAction("next_cancelled");
-                    return;
-                  }
-
-                  logAction("next_with_submit");
-                  const success = await submitCurrentSession();
-                  if (!success) return;
-                } else {
-                  logAction("next_after_submit");
-                }
-
-                const nextIndex = currentPatientIndex + 1;
-                if (nextIndex < selectedPatients.length) {
-                  setCurrentPatientIndex(nextIndex);
-                  await loadPatient(selectedPatients[nextIndex].folder);
-                } else {
-                  alert("No more patients.");
-                }
+              disabled={
+                submitting || currentPatientIndex >= selectedPatients.length - 1
+              }
+              onClick={() => {
+                void handleNextNavigation();
               }}
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                submitting || !canSubmitFinal
+                submitting || currentPatientIndex >= selectedPatients.length - 1
                   ? "cursor-not-allowed bg-blue-300 text-white"
                   : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
@@ -1386,7 +1541,11 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               onClick={() => {
                 logAction("home_and_logout");
                 localStorage.removeItem("gameData");
-                router.push("/patient-list");
+                localStorage.removeItem("participantInfo");
+                localStorage.removeItem("doctorAccessCode");
+                localStorage.removeItem("doctorId");
+                localStorage.removeItem("consentInfo");
+                router.push("/");
               }}
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
             >
@@ -1889,9 +2048,13 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     <div className="order-1 min-w-0 p-4">
   {episodeState.stage === "select_all" && (
     <div className="space-y-6">
-      <div className="mb-3 text-sm font-semibold text-gray-900">
-        Task 2. Detect events associated with vital sign abnormalities.
-      </div>
+ <div className="mb-3 text-sm font-semibold text-gray-900">
+  Task 2.{" "}
+  <span className="text-red-600">Detect all abnormalities</span>
+  {" and "}
+  <span className="text-red-600">annotate one</span>
+  {" (next step)"}
+</div>
 
       <ObservationSelectionGuide />
     </div>
@@ -1899,9 +2062,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
   {episodeState.stage === "pick_top3" && (
     <div className="space-y-6">
-      <h4 className="text-xl font-bold text-gray-900">
-        Task 2. Select 1 interesting episode for detailed annotation
-      </h4>
+        <div className="mb-3 text-sm font-semibold text-gray-900">
+          Task 2: Select all abnormalities and annotate one
+        </div>
+
       <p className="text-sm text-gray-600">
         From the detected episodes on the left, choose the single most
         interesting episode you want to annotate in detail.
