@@ -72,6 +72,15 @@ export default function ObservationSelectionGuide() {
         defaultOpen={false}
       >
         <div className="space-y-4">
+        <div>
+            <p className="font-semibold text-blue-950">
+              Should I only annotate one or multiple episodes?
+            </p>
+            <p>
+             You can annotate one but we also support you to anotate multiple episodes if you want to.
+            </p>
+          </div>
+
           <div>
             <p className="font-semibold text-blue-950">
               What counts as a clinically meaningful abnormal episode?
