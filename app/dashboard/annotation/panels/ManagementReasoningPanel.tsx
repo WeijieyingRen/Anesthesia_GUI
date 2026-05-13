@@ -93,10 +93,49 @@ function getDisplayTime(
   return formatAbsoluteTimeFromOffset(managementEvent.time_min, anesthesiaStart);
 }
 
-function sanitizeFilePart(value: unknown) {
-  return String(value ?? "unknown")
-    .trim()
-    .replace(/[^\w.-]/g, "_");
+function roundSec(ms: number) {
+  return Number((ms / 1000).toFixed(3));
+}
+
+function getBrowserTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function getBrowserTimezoneOffsetMin() {
+  return -new Date().getTimezoneOffset();
+}
+
+function getLocalTimestamp() {
+  const date = new Date();
+  const offsetMin = -date.getTimezoneOffset();
+  const sign = offsetMin >= 0 ? "+" : "-";
+  const absOffset = Math.abs(offsetMin);
+  const offsetHours = String(Math.floor(absOffset / 60)).padStart(2, "0");
+  const offsetMinutes = String(absOffset % 60).padStart(2, "0");
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(0, 19);
+
+  return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function buildFocusEventLabel(
+  managementEvent: ManagementEvent,
+  anesthesiaStart?: string | null
+) {
+  const parts = [
+    managementEvent.row_name,
+    managementEvent.dose !== undefined && managementEvent.dose !== null
+      ? `${managementEvent.dose}${managementEvent.unit ? ` ${managementEvent.unit}` : ""}`
+      : null,
+    getDisplayTime(managementEvent, anesthesiaStart),
+  ].filter(Boolean);
+
+  return parts.join(" | ");
 }
 
 function InstructionPanel({
@@ -148,9 +187,14 @@ export default function ManagementReasoningPanel({
   const voiceBaseTextRef = useRef("");
 
   const pageOpenedAtRef = useRef<string | null>(null);
+  const pageOpenedAtLocalRef = useRef<string | null>(null);
   const firstInteractionAtRef = useRef<string | null>(null);
   const firstTypingAtRef = useRef<string | null>(null);
   const firstVoiceStartAtRef = useRef<string | null>(null);
+  const typingStartedAtMsRef = useRef<number | null>(null);
+  const typingDurationMsRef = useRef<number>(0);
+  const voiceStartedAtMsRef = useRef<number | null>(null);
+  const voiceDurationMsRef = useRef<number>(0);
 
   const taskTimingRef = useRef<QuestionTiming>(makeEmptyQuestionTiming());
 
@@ -158,9 +202,14 @@ export default function ManagementReasoningPanel({
     const nowIso = new Date().toISOString();
 
     pageOpenedAtRef.current = nowIso;
+    pageOpenedAtLocalRef.current = getLocalTimestamp();
     firstInteractionAtRef.current = null;
     firstTypingAtRef.current = null;
     firstVoiceStartAtRef.current = null;
+    typingStartedAtMsRef.current = null;
+    typingDurationMsRef.current = 0;
+    voiceStartedAtMsRef.current = null;
+    voiceDurationMsRef.current = 0;
 
     taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
   }, [caseId, managementEvent?.row_name, managementEvent?.time_min]);
@@ -180,6 +229,9 @@ export default function ManagementReasoningPanel({
 
   function markTyping() {
     const nowIso = new Date().toISOString();
+    if (typingStartedAtMsRef.current === null) {
+      typingStartedAtMsRef.current = performance.now();
+    }
 
     if (!taskTimingRef.current.firstInteractionAt) {
       taskTimingRef.current.firstInteractionAt = nowIso;
@@ -200,6 +252,9 @@ export default function ManagementReasoningPanel({
 
   function markVoiceStart() {
     const nowIso = new Date().toISOString();
+    if (voiceStartedAtMsRef.current === null) {
+      voiceStartedAtMsRef.current = performance.now();
+    }
 
     if (!taskTimingRef.current.firstInteractionAt) {
       taskTimingRef.current.firstInteractionAt = nowIso;
@@ -216,6 +271,22 @@ export default function ManagementReasoningPanel({
     if (!firstVoiceStartAtRef.current) {
       firstVoiceStartAtRef.current = nowIso;
     }
+  }
+
+  function finalizeTypingDuration() {
+    if (typingStartedAtMsRef.current === null) return;
+
+    typingDurationMsRef.current +=
+      performance.now() - typingStartedAtMsRef.current;
+    typingStartedAtMsRef.current = null;
+  }
+
+  function finalizeVoiceDuration() {
+    if (voiceStartedAtMsRef.current === null) return;
+
+    voiceDurationMsRef.current +=
+      performance.now() - voiceStartedAtMsRef.current;
+    voiceStartedAtMsRef.current = null;
   }
 
   async function startVoiceNote() {
@@ -255,12 +326,14 @@ export default function ManagementReasoningPanel({
       };
 
       recognition.onerror = () => {
+        finalizeVoiceDuration();
         setRecording(false);
         setSaveStatus("error");
         setSaveMessage("Speech recognition failed.");
       };
 
       recognition.onend = () => {
+        finalizeVoiceDuration();
         setRecording(false);
         voiceBaseTextRef.current = "";
       };
@@ -271,6 +344,7 @@ export default function ManagementReasoningPanel({
       setSaveStatus("idle");
       setSaveMessage("");
     } catch {
+      finalizeVoiceDuration();
       setRecording(false);
       voiceBaseTextRef.current = "";
       setSaveStatus("error");
@@ -280,6 +354,7 @@ export default function ManagementReasoningPanel({
 
   function stopVoiceNote() {
     recognitionRef.current?.stop?.();
+    finalizeVoiceDuration();
     setRecording(false);
     voiceBaseTextRef.current = "";
   }
@@ -333,17 +408,13 @@ export default function ManagementReasoningPanel({
             localStorage.getItem("doctorAccessCode") ??
             ""
         ).trim() || null;
+      const doctorName = String(participantInfo?.name ?? "").trim() || null;
 
       const submittedAt = new Date().toISOString();
+      const submittedAtLocal = getLocalTimestamp();
       taskTimingRef.current.submittedAt = submittedAt;
-
-      const managementEventId =
-        sanitizeFilePart(
-          (managementEvent as any).event_id ??
-            `${managementEvent.row_name ?? "management"}_${
-              managementEvent.time_min ?? "unknown"
-            }`
-        ) || "management_event_unknown";
+      stopVoiceNote();
+      finalizeTypingDuration();
 
       await submitAnnotation({
         doctorId,
@@ -353,42 +424,39 @@ export default function ManagementReasoningPanel({
         patientId: patientId ?? patientFolder ?? null,
         patientFolder: patientFolder ?? patientId ?? null,
 
-        eventId: managementEventId,
-        episodeId: managementEventId,
-        episodeFolder: managementEventId,
-
         panel: "management_reasoning_panel",
-        action: "submit",
-        task: "management_reasoning",
+        participantInfo: {
+          name: doctorName ?? undefined,
+          email: participantInfo?.email ?? undefined,
+          doctorId: doctorId ?? undefined,
+          accessCode: accessCode ?? undefined,
+        },
 
         pageOpenedAt: pageOpenedAtRef.current,
+        pageOpenedAtLocal: pageOpenedAtLocalRef.current,
         firstInteractionAt: firstInteractionAtRef.current,
         firstTypingAt: firstTypingAtRef.current,
         firstVoiceStartAt: firstVoiceStartAtRef.current,
         submittedAt,
+        submittedAtLocal,
+        totalDurationSec:
+          pageOpenedAtRef.current === null
+            ? null
+            : Number(
+                (
+                  (new Date(submittedAt).getTime() -
+                    new Date(pageOpenedAtRef.current).getTime()) /
+                  1000
+                ).toFixed(3)
+              ),
+        typingDurationSec: roundSec(typingDurationMsRef.current),
+        voiceDurationSec: roundSec(voiceDurationMsRef.current),
+        localTimezone: getBrowserTimezone(),
+        localTimezoneOffsetMin: getBrowserTimezoneOffsetMin(),
 
         answers: {
-          managementEvent: {
-            id: managementEventId,
-            row_name: managementEvent.row_name ?? null,
-            event_type: managementEvent.event_type ?? null,
-            time_min: managementEvent.time_min ?? null,
-            end_time_min: managementEvent.end_time_min ?? null,
-            start_time: managementEvent.start_time ?? null,
-            display_time: getDisplayTime(managementEvent, anesthesiaStart),
-            dose: managementEvent.dose ?? null,
-            unit: managementEvent.unit ?? null,
-            route: managementEvent.route ?? null,
-            chart_type: managementEvent.chart_type ?? null,
-          },
+          focusEvent: buildFocusEventLabel(managementEvent, anesthesiaStart),
           managementReasoningText: answer.trim(),
-          timing: {
-            startedAt: taskTimingRef.current.startedAt,
-            firstInteractionAt: taskTimingRef.current.firstInteractionAt,
-            firstTypingAt: taskTimingRef.current.firstTypingAt,
-            firstVoiceStartAt: taskTimingRef.current.firstVoiceStartAt,
-            submittedAt,
-          },
         },
       });
 
@@ -611,6 +679,7 @@ export default function ManagementReasoningPanel({
 
       <textarea
         value={answer}
+        onBlur={finalizeTypingDuration}
         onChange={(e) => {
           markTyping();
           setAnswer(e.target.value);
@@ -643,9 +712,15 @@ export default function ManagementReasoningPanel({
             setSaveMessage("");
 
             const nowIso = new Date().toISOString();
+            pageOpenedAtRef.current = nowIso;
+            pageOpenedAtLocalRef.current = getLocalTimestamp();
             firstInteractionAtRef.current = null;
             firstTypingAtRef.current = null;
             firstVoiceStartAtRef.current = null;
+            typingStartedAtMsRef.current = null;
+            typingDurationMsRef.current = 0;
+            voiceStartedAtMsRef.current = null;
+            voiceDurationMsRef.current = 0;
             taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
           }}
           className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"

@@ -21,7 +21,7 @@ type SubmitPayload = {
   patientFolder?: string | null;
 
   panel: string;
-  action: string;
+  action?: string;
   task?: string;
 
   pageOpenedAt?: number | string | null;

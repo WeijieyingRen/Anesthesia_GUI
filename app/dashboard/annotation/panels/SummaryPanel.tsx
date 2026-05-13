@@ -56,6 +56,20 @@ function getBrowserTimezoneOffsetMin() {
   return -new Date().getTimezoneOffset();
 }
 
+function getLocalTimestamp() {
+  const date = new Date();
+  const offsetMin = -date.getTimezoneOffset();
+  const sign = offsetMin >= 0 ? "+" : "-";
+  const absOffset = Math.abs(offsetMin);
+  const offsetHours = String(Math.floor(absOffset / 60)).padStart(2, "0");
+  const offsetMinutes = String(absOffset % 60).padStart(2, "0");
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(0, 19);
+
+  return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
 function CollapsibleInstructionPanel({
   title,
   children,
@@ -108,6 +122,7 @@ export default function SummaryPanel({
   const voiceBaseTextRef = React.useRef("");
 
   const startedAtUtcRef = React.useRef<string | null>(null);
+  const startedAtLocalRef = React.useRef<string | null>(null);
 
   const typingStartMsRef = React.useRef<number | null>(null);
   const typingDurationMsRef = React.useRef<number>(0);
@@ -117,6 +132,7 @@ export default function SummaryPanel({
 
   React.useEffect(() => {
     startedAtUtcRef.current = new Date().toISOString();
+    startedAtLocalRef.current = getLocalTimestamp();
 
     typingStartMsRef.current = null;
     typingDurationMsRef.current = 0;
@@ -272,7 +288,9 @@ export default function SummaryPanel({
         String(participantInfo?.name ?? annotatorName ?? "").trim() || null;
 
       const submittedAtUtc = new Date().toISOString();
+      const submittedAtLocal = getLocalTimestamp();
       const startedAtUtc = startedAtUtcRef.current ?? submittedAtUtc;
+      const startedAtLocal = startedAtLocalRef.current ?? submittedAtLocal;
 
       const totalDurationSec = Number(
         (
@@ -284,12 +302,10 @@ export default function SummaryPanel({
 
       const typingDurationSec = roundSec(typingDurationMsRef.current);
       const voiceDurationSec = roundSec(voiceDurationMsRef.current);
+      const localTimezone = getBrowserTimezone();
+      const localTimezoneOffsetMin = getBrowserTimezoneOffsetMin();
 
       await submitAnnotation({
-        /**
-         * Keep these fields for backend/GCS path construction.
-         * Do not remove unless /api/submit and lib/submit are also updated.
-         */
         doctorId,
         accessCode,
         patientId,
@@ -300,7 +316,15 @@ export default function SummaryPanel({
         episodeId: "patient-summary",
 
         panel: "summary_panel",
-        action: "submit",
+        pageOpenedAt: startedAtUtc,
+        pageOpenedAtLocal: startedAtLocal,
+        submittedAt: submittedAtUtc,
+        submittedAtLocal,
+        totalDurationSec,
+        typingDurationSec,
+        voiceDurationSec,
+        localTimezone,
+        localTimezoneOffsetMin,
 
         participantInfo: {
           name: doctorName ?? undefined,
@@ -309,37 +333,8 @@ export default function SummaryPanel({
           accessCode: accessCode ?? undefined,
         },
 
-        /**
-         * Simplified saved content.
-         */
         answers: {
           summaryText: summaryText.trim(),
-        },
-
-        /**
-         * Simplified timing.
-         * Main timestamps are UTC. Browser timezone is stored only for conversion later.
-         */
-        timing: {
-          startedAtUtc,
-          submittedAtUtc,
-          localTimezone: getBrowserTimezone(),
-          localTimezoneOffsetMin: getBrowserTimezoneOffsetMin(),
-          totalDurationSec,
-          typingDurationSec,
-          voiceDurationSec,
-        },
-
-        /**
-         * Optional metadata. You can delete this block if you truly do not want it.
-         * It can be useful later for audit/debugging.
-         */
-        metadata: {
-          eventTitle,
-          episodeLabel,
-          startMin,
-          endMin,
-          promptVersion: "summary_v1",
         },
       });
 
@@ -367,6 +362,7 @@ export default function SummaryPanel({
     setSaveMessage("");
 
     startedAtUtcRef.current = new Date().toISOString();
+    startedAtLocalRef.current = getLocalTimestamp();
 
     typingStartMsRef.current = null;
     typingDurationMsRef.current = 0;

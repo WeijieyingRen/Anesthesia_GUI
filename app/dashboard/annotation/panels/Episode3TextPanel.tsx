@@ -21,6 +21,36 @@ const ABNORMAL_REASONING_TEMPLATE = ``;
 
 const EXAMPLE_OBSERVATION_SUMMARY = `From 11:15 to 11:32, the patient developed hypotension shortly after induction, likely due to anesthetic-induced vasodilation. The blood pressure ranged from 80-100s/40s-50s, with MAPs 55-65. The blood pressure nadir was 82/41 at 11:29. The hypotension appeared clinically meaningful because the blood pressure dropped below a clinically acceptable range after induction and required vasopressor support. The provider gave a phenylephrine bolus at 11:29, after which the blood pressure improved adequately, suggesting an appropriate response to treatment. No clear preventive intervention was given, and this may represent a common post-induction hemodynamic response. Management was appropriate in this context; another vasopressor such as ephedrine could also have been reasonable depending on the heart rate and overall physiology, however the heart rate was normal (80s) throughout the episode so phenylephrine was likely the more reasonable choice.`;
 
+function roundSec(ms: number) {
+  return Number((ms / 1000).toFixed(3));
+}
+
+function getBrowserTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function getBrowserTimezoneOffsetMin() {
+  return -new Date().getTimezoneOffset();
+}
+
+function getLocalTimestamp() {
+  const date = new Date();
+  const offsetMin = -date.getTimezoneOffset();
+  const sign = offsetMin >= 0 ? "+" : "-";
+  const absOffset = Math.abs(offsetMin);
+  const offsetHours = String(Math.floor(absOffset / 60)).padStart(2, "0");
+  const offsetMinutes = String(absOffset % 60).padStart(2, "0");
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(0, 19);
+
+  return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
 const ABNORMAL_EVENT_PROMPT = {
   instruction:
     "The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.",
@@ -125,17 +155,23 @@ export default function Episode3TextPanel({
   const recognitionRef = useRef<any>(null);
 
   const openedAtUtcRef = useRef<string | null>(null);
+  const openedAtLocalRef = useRef<string | null>(null);
   const openedAtMsRef = useRef<number | null>(null);
   const voiceStartedAtMsRef = useRef<number | null>(null);
   const voiceDurationMsRef = useRef<number>(0);
+  const typingStartedAtMsRef = useRef<number | null>(null);
+  const typingDurationMsRef = useRef<number>(0);
 
   useEffect(() => {
     const nowUtc = new Date().toISOString();
 
     openedAtUtcRef.current = nowUtc;
+    openedAtLocalRef.current = getLocalTimestamp();
     openedAtMsRef.current = performance.now();
     voiceStartedAtMsRef.current = null;
     voiceDurationMsRef.current = 0;
+    typingStartedAtMsRef.current = null;
+    typingDurationMsRef.current = 0;
 
     setError(null);
 
@@ -171,6 +207,19 @@ export default function Episode3TextPanel({
 
     voiceDurationMsRef.current += performance.now() - voiceStartedAtMsRef.current;
     voiceStartedAtMsRef.current = null;
+  }
+
+  function startTypingTimer() {
+    if (typingStartedAtMsRef.current !== null) return;
+    typingStartedAtMsRef.current = performance.now();
+  }
+
+  function finalizeTypingDuration() {
+    if (typingStartedAtMsRef.current === null) return;
+
+    typingDurationMsRef.current +=
+      performance.now() - typingStartedAtMsRef.current;
+    typingStartedAtMsRef.current = null;
   }
 
   async function startVoiceNote() {
@@ -296,6 +345,7 @@ export default function Episode3TextPanel({
 
     try {
       stopVoiceNote();
+      finalizeTypingDuration();
 
       setSaving(true);
       setError(null);
@@ -303,15 +353,16 @@ export default function Episode3TextPanel({
       setSaveMessage("Saving annotation...");
 
       const submittedAtUtc = new Date().toISOString();
+      const submittedAtLocal = getLocalTimestamp();
       const openedAtUtc = openedAtUtcRef.current;
+      const openedAtLocal = openedAtLocalRef.current;
       const responseTimeSec =
         openedAtMsRef.current === null
           ? null
           : Number(((performance.now() - openedAtMsRef.current) / 1000).toFixed(3));
 
-      const voiceRecordingDurationSec = Number(
-        (voiceDurationMsRef.current / 1000).toFixed(3)
-      );
+      const voiceRecordingDurationSec = roundSec(voiceDurationMsRef.current);
+      const typingDurationSec = roundSec(typingDurationMsRef.current);
 
       let participantInfo: any = {};
       try {
@@ -332,15 +383,12 @@ export default function Episode3TextPanel({
         String(
           participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
         ).trim() || null;
+      const doctorName = String(participantInfo?.name ?? "").trim() || null;
 
       const resolvedPatientId = patientId ?? patientFolder ?? "unknown_patient";
       const resolvedPatientFolder =
         patientFolder ?? patientId ?? "unknown_patient";
-      const selectedEpisodes = episodeList.map((episode, index) => ({
-        episodeId: episode.id,
-        episodeNumber: index + 1,
-        episodeLabel: episode.label,
-        vital: episode.vital,
+      const selectedEpisodes = episodeList.map((episode) => ({
         startMin: episode.startMin,
         endMin: episode.endMin,
         y1: episode.y1 ?? null,
@@ -356,24 +404,29 @@ export default function Episode3TextPanel({
         patientFolder: resolvedPatientFolder,
 
         caseId,
-        eventId: selectedEvent?.id ?? eventId,
-        episodeId: selectedEvent?.id ?? eventId,
 
         panel: "abnormality_reasoning",
-        action: "submit",
+        participantInfo: {
+          name: doctorName ?? undefined,
+          email: participantInfo?.email ?? undefined,
+          doctorId: doctorId ?? undefined,
+          accessCode: accessCode ?? undefined,
+        },
 
         submittedAt: submittedAtUtc,
+        submittedAtLocal,
         clickedAt: submittedAtUtc,
         pageOpenedAt: openedAtUtc,
+        pageOpenedAtLocal: openedAtLocal,
+        totalDurationSec: responseTimeSec,
+        typingDurationSec,
+        voiceDurationSec: voiceRecordingDurationSec,
+        localTimezone: getBrowserTimezone(),
+        localTimezoneOffsetMin: getBrowserTimezoneOffsetMin(),
 
         answers: {
           selectedEpisodes,
           annotatedEpisode: {
-            episodeId: selectedEvent?.id ?? eventId,
-            episodeNumber: episodeNumber ?? null,
-            episodeLabel:
-              selectedEvent?.episodeLabel ?? selectedEvent?.title ?? null,
-            vital: selectedEvent?.vital ?? null,
             startMin: selectedEvent?.startMin ?? null,
             endMin: selectedEvent?.endMin ?? null,
             y1: selectedEvent?.y1 ?? null,
@@ -382,12 +435,6 @@ export default function Episode3TextPanel({
             updatedAtUtc: selectedEvent?.updatedAtUtc ?? null,
           },
           abnormalityReasoningText: currentText,
-          timing: {
-            openedAtUtc,
-            submittedAtUtc,
-            responseTimeSec,
-            voiceRecordingDurationSec,
-          },
         },
       });
 
@@ -602,7 +649,12 @@ export default function Episode3TextPanel({
 
       <textarea
         value={freeText}
-        onChange={(e) => setCurrentFreeText(e.target.value)}
+        onFocus={startTypingTimer}
+        onBlur={finalizeTypingDuration}
+        onChange={(e) => {
+          startTypingTimer();
+          setCurrentFreeText(e.target.value);
+        }}
         className="min-h-[360px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         placeholder="write or dictate your response here..."
       />
@@ -630,9 +682,12 @@ export default function Episode3TextPanel({
             setSaveMessage("");
 
             openedAtUtcRef.current = new Date().toISOString();
+            openedAtLocalRef.current = getLocalTimestamp();
             openedAtMsRef.current = performance.now();
             voiceStartedAtMsRef.current = null;
             voiceDurationMsRef.current = 0;
+            typingStartedAtMsRef.current = null;
+            typingDurationMsRef.current = 0;
           }}
           className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
         >

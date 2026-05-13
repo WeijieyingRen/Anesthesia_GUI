@@ -36,6 +36,13 @@ type SubmitBody = {
   firstTypingAt?: number | string | null;
   firstVoiceStartAt?: number | string | null;
   submittedAt?: number | string | null;
+  pageOpenedAtLocal?: string | null;
+  submittedAtLocal?: string | null;
+  totalDurationSec?: number | null;
+  typingDurationSec?: number | null;
+  voiceDurationSec?: number | null;
+  localTimezone?: string | null;
+  localTimezoneOffsetMin?: number | null;
 
   panelOpenedAt?: number | string | null;
   clickedAt?: number | string | null;
@@ -181,6 +188,16 @@ function normalizeAccessCode(body: SubmitBody): string {
   );
 }
 
+function normalizeDoctorFolderName(body: SubmitBody, fallbackDoctorId: string) {
+  const rawName =
+    body.participantInfo?.name ??
+    body.annotator?.name ??
+    body.participant?.name ??
+    fallbackDoctorId;
+
+  return sanitizePathPart(rawName);
+}
+
 function normalizePatientId(body: SubmitBody): string {
   return sanitizePathPart(
     body.patientId ?? body.patientFolder ?? body.caseId ?? "unknown_patient"
@@ -312,6 +329,16 @@ function cleanAnswers(
   return removeNullFields(cloned);
 }
 
+function numericOrNull(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  return null;
+}
+
 function detectStorageTarget(body: SubmitBody): StorageTarget {
   const panel = String(body.panel ?? "").toLowerCase();
   const action = String(body.action ?? "").toLowerCase();
@@ -388,7 +415,6 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   ) {
     return {
       section: "abnormality_reasoning",
-      episodeFolder: normalizeEpisodeFolder(body),
       fileName: "abnormality_reasoning.json",
     };
   }
@@ -404,7 +430,7 @@ async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
   const accessCode = normalizeAccessCode(body);
   const patientId = normalizePatientId(body);
 
-  const doctorFolder = `${doctorId}_${accessCode}`;
+  const doctorFolder = `${normalizeDoctorFolderName(body, doctorId)}_${accessCode}`;
   const target = detectStorageTarget(body);
 
   if (target.section === "summary") {
@@ -525,33 +551,43 @@ export async function POST(req: Request) {
     const patientId = normalizePatientId(body);
     const target = detectStorageTarget(body);
     const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
+    const panelKey = String(panel ?? "").toLowerCase();
+    const shouldOmitEventFields =
+      panelKey.includes("abnormality_reasoning") ||
+      panelKey.includes("management_reasoning");
 
     const driveRecord = removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
       patient_id: patientId,
       case_id: caseId ?? null,
-      event_id: eventId ?? null,
-      episode_id:
-        body?.episodeId ?? body?.selectedEventId ?? body?.eventId ?? null,
-      episode_number: body?.episodeNumber ?? null,
-      episode_folder: body?.episodeFolder ?? target.episodeFolder ?? null,
+      ...(shouldOmitEventFields
+        ? {}
+        : {
+            event_id: eventId ?? null,
+            episode_id:
+              body?.episodeId ?? body?.selectedEventId ?? body?.eventId ?? null,
+            episode_number: body?.episodeNumber ?? null,
+            episode_folder: body?.episodeFolder ?? target.episodeFolder ?? null,
+          }),
       panel,
-      action,
-      task,
       saved_at: new Date().toISOString(),
       answers,
       annotation_state: cleanedAnnotationState,
       timing: {
-        page_opened_at: pageOpenedAtIso,
-        first_interaction_at: firstInteractionAtIso,
-        first_typing_at: firstTypingAtIso,
-        first_voice_start_at: firstVoiceStartAtIso,
-        page_submitted_at: pageSubmittedAtIso,
-        response_time_sec: responseTimeSec,
-        time_to_first_interaction_sec: timeToFirstInteractionSec,
-        typing_to_submit_sec: typingToSubmitSec,
-        voice_to_submit_sec: voiceToSubmitSec,
+        page_opened_at_utc: pageOpenedAtIso,
+        page_opened_at_local: body.pageOpenedAtLocal ?? null,
+        page_submitted_at_utc: pageSubmittedAtIso,
+        page_submitted_at_local: body.submittedAtLocal ?? null,
+        total_duration_sec:
+          numericOrNull(body.totalDurationSec) ?? responseTimeSec,
+        typing_duration_sec:
+          numericOrNull(body.typingDurationSec) ?? typingToSubmitSec,
+        voice_duration_sec:
+          numericOrNull(body.voiceDurationSec) ?? voiceToSubmitSec,
+        local_timezone: body.localTimezone ?? null,
+        local_timezone_offset_min:
+          numericOrNull(body.localTimezoneOffsetMin) ?? null,
       },
     });
 
