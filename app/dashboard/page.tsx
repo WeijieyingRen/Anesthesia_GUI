@@ -57,6 +57,7 @@ type GameData = {
 
 type StoredSelected = {
   folder: string;
+  status?: "not_started" | "in_progress" | "completed";
 };
 
 type AnnotationLevel = "summary" | "episode" | "otherEvents";
@@ -647,6 +648,7 @@ export default function DashboardPage() {
   }, [activeEpisode]);
 
   function resetEpisodeWorkflow() {
+    if (hasSubmitted) return;
     setEpisodeState(buildEmptyEpisodeState());
     setEpisodeTaskCompletion({});
     setSelectedWindow(null);
@@ -687,6 +689,7 @@ export default function DashboardPage() {
   }
 
   function handleCreateEpisodeFromWindow(window: SelectedWindow) {
+    if (hasSubmitted) return;
     setEpisodeState((prev) => {
       const duplicate = prev.detectedEpisodes.some(
         (e) =>
@@ -742,6 +745,7 @@ export default function DashboardPage() {
   }
 
   function handleDeleteDetectedEpisode(episodeId: string) {
+    if (hasSubmitted) return;
     setEpisodeState((prev) => {
       const filteredDetected = prev.detectedEpisodes.filter((e) => e.id !== episodeId);
       const renumberedDetected = renumberDetectedEpisodes(filteredDetected);
@@ -771,6 +775,7 @@ export default function DashboardPage() {
   }
 
   function handleTogglePrioritizedEpisode(episodeId: string) {
+    if (hasSubmitted) return;
     setEpisodeState((prev) => {
       const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
 
@@ -809,6 +814,7 @@ export default function DashboardPage() {
 
   
   async function handleAdvanceEpisodeStage() {
+    if (hasSubmitted) return;
     if (episodeState.stage === "select_all") {
       if (episodeState.detectedEpisodes.length === 0) {
         setSubmitError("Please detect at least one episode before continuing.");
@@ -857,6 +863,7 @@ export default function DashboardPage() {
     }
   }
   function handleTimelineWindowCreate(window: SelectedWindow) {
+    if (hasSubmitted) return;
     if (annotationLevel === "episode") {
       if (episodeState.stage === "annotate") {
         return;
@@ -871,6 +878,7 @@ export default function DashboardPage() {
   }
 
   function handleSelectedWindowChange(nextWindow: SelectedWindow | null) {
+    if (hasSubmitted) return;
     const previousWindow = selectedWindow;
   
     setSelectedWindow(nextWindow);
@@ -936,6 +944,7 @@ export default function DashboardPage() {
   }
 
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
+    if (hasSubmitted) return;
     if (!activeEpisode) return;
 
     setEpisodeTaskCompletion((prev) => ({
@@ -1070,7 +1079,10 @@ export default function DashboardPage() {
       sessionStartUtcRef.current = new Date().toISOString();
       sessionStartLocalRef.current = getLocalTimestamp();
       actionLogRef.current = [];
-      setHasSubmitted(false);
+      const patientMeta = selectedPatients.find(
+        (patient) => patient.folder === folder
+      );
+      setHasSubmitted(patientMeta?.status === "completed");
       setPatientSummaryCompleted(false);
       setManagementReasoningCompleted(false);
       setSubmitError(null);
@@ -1219,7 +1231,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         if (savedDraft.episodeTaskCompletion) {
           setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
         }
-        if (typeof savedDraft.hasSubmitted === "boolean") {
+        if (
+          patientMeta?.status !== "completed" &&
+          typeof savedDraft.hasSubmitted === "boolean"
+        ) {
           setHasSubmitted(savedDraft.hasSubmitted);
         }
         if (savedDraft.selectedManagementEventId) {
@@ -1539,7 +1554,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             <button
               type="button"
               onClick={() => {
-                logAction("home_and_logout");
+                logAction("logout");
                 localStorage.removeItem("gameData");
                 localStorage.removeItem("participantInfo");
                 localStorage.removeItem("doctorAccessCode");
@@ -1549,7 +1564,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               }}
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
             >
-              Home & Logout
+              Logout
             </button>
           </div>
         </div>
@@ -1742,6 +1757,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   onSaveAndNextStep={() => {
     setPatientSummaryCompleted(true);
   }}
+  readOnly={hasSubmitted}
 />
                       </div>
                     )}
@@ -1759,6 +1775,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       onSaveSuccess={() => {
         setManagementReasoningCompleted(true);
       }}
+      readOnly={hasSubmitted}
     />
   </div>
 )}
@@ -1840,6 +1857,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                             nextSelected: !checked,
                           });
                         }}
+                        disabled={hasSubmitted}
                         className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded border text-[10px] font-bold ${
                           checked
                             ? "border-blue-600 bg-blue-600 text-white"
@@ -1856,7 +1874,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                           e.stopPropagation();
                           handleDeleteDetectedEpisode(episode.id);
                         }}
-                        className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700"
+                        disabled={hasSubmitted}
+                        className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
                         title="Delete event"
                       >
                         ×
@@ -1908,10 +1927,14 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   void handleAdvanceEpisodeStage();
                 }}
                 disabled={
-                  episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                  hasSubmitted ||
+                  episodeState.prioritizedEpisodeIds.length === 0 ||
+                  submitting
                 }
                 className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                  episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                  hasSubmitted ||
+                  episodeState.prioritizedEpisodeIds.length === 0 ||
+                  submitting
                     ? "cursor-not-allowed bg-blue-300 text-white"
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
@@ -1995,6 +2018,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                           nextSelected: !checked,
                         });
                       }}
+                      disabled={hasSubmitted}
                       className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
                         checked
                           ? "border-blue-600 bg-blue-600 text-white"
@@ -2030,10 +2054,14 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 void handleAdvanceEpisodeStage();
               }}
               disabled={
-                episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                hasSubmitted ||
+                episodeState.prioritizedEpisodeIds.length === 0 ||
+                submitting
               }
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                episodeState.prioritizedEpisodeIds.length === 0 || submitting
+                hasSubmitted ||
+                episodeState.prioritizedEpisodeIds.length === 0 ||
+                submitting
                   ? "cursor-not-allowed bg-blue-300 text-white"
                   : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
@@ -2114,6 +2142,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         episodeState={episodeState}
         onChangeEpisodeState={setEpisodeState}
         onChangeSelectedWindow={handleSelectedWindowChange}
+        readOnly={hasSubmitted}
         completedTaskMap={episodeTaskCompletion}
         onChangeCompletedTaskMap={setEpisodeTaskCompletion}
       />
@@ -2151,6 +2180,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     selectedWindow={selectedWindow}
                     onChangeSelectedWindow={handleSelectedWindowChange}
                     onCreateEventFromWindow={handleTimelineWindowCreate}
+                    readOnly={hasSubmitted}
                     sharedScrollLeft={sharedScrollLeft}
                     onSharedScrollLeftChange={setSharedScrollLeft}
                     timelineContext={timelineContext}

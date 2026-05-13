@@ -63,6 +63,7 @@ type UnifiedTimelineCardProps = {
   timelineContext: any;
 
   managementEvent?: ManagementEvent | null;
+  readOnly?: boolean;
 };
 
 type SectionKey =
@@ -243,6 +244,7 @@ export default function UnifiedTimelineCard({
   onSharedScrollLeftChange,
   timelineContext,
   managementEvent = null,
+  readOnly = false,
 }: UnifiedTimelineCardProps) {
   const hasVitalsData =
     hasAnyFinitePoints(vitals?.main) ||
@@ -467,8 +469,8 @@ export default function UnifiedTimelineCard({
               onChangeSelectedDetectVital={onChangeSelectedDetectVital}
               selectedWindow={vitalSelectedWindow}
               highlightWindow={sharedHighlightWindow}
-              onChangeSelectedWindow={onChangeSelectedWindow}
-              onCreateEventFromWindow={onCreateEventFromWindow}
+              onChangeSelectedWindow={readOnly ? undefined : onChangeSelectedWindow}
+              onCreateEventFromWindow={readOnly ? undefined : onCreateEventFromWindow}
               sharedScrollLeft={sharedScrollLeft}
               onSharedScrollLeftChange={onSharedScrollLeftChange}
               series={{
@@ -564,8 +566,8 @@ export default function UnifiedTimelineCard({
               embedded
               selectedWindow={tmpSelectedWindow}
               highlightWindow={sharedHighlightWindow}
-              onChangeSelectedWindow={onChangeSelectedWindow}
-              onCreateEventFromWindow={onCreateEventFromWindow}
+              onChangeSelectedWindow={readOnly ? undefined : onChangeSelectedWindow}
+              onCreateEventFromWindow={readOnly ? undefined : onCreateEventFromWindow}
               sharedScrollLeft={sharedScrollLeft}
               onSharedScrollLeftChange={onSharedScrollLeftChange}
             />

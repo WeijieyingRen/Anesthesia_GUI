@@ -51,6 +51,7 @@ type TaskWorkspaceProps = {
   onChangeCompletedTaskMap: React.Dispatch<
     React.SetStateAction<Record<string, Partial<Record<AnnotationTaskKey, boolean>>>>
   >;
+  readOnly?: boolean;
 };
 
 function isAnnotationTask(task: WorkspaceTaskKey): task is AnnotationTaskKey {
@@ -74,6 +75,7 @@ export default function TaskWorkspace({
   episodeState,
   onChangeEpisodeState,
   completedTaskMap,
+  readOnly = false,
 }: TaskWorkspaceProps) {
   const workflowEnabled =
     !!episodeState && !!onChangeEpisodeState && isAnnotationTask(task);
@@ -236,6 +238,7 @@ export default function TaskWorkspace({
               activeEpisodeId={episodeState.activeEpisodeId}
               completedMap={completedTaskMap}
               onSelectEpisode={setActiveEpisode}
+              readOnly={readOnly}
             />
           </div>
         </div>

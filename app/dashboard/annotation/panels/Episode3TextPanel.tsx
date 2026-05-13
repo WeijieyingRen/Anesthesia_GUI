@@ -158,6 +158,7 @@ type Props = {
     { detect?: boolean; mechanism?: boolean; fluidEval?: boolean } | undefined
   >;
   onSelectEpisode?: (episodeId: string) => void;
+  readOnly?: boolean;
 };
 
 export default function Episode3TextPanel({
@@ -173,6 +174,7 @@ export default function Episode3TextPanel({
   activeEpisodeId = null,
   completedMap = {},
   onSelectEpisode,
+  readOnly = false,
 }: Props) {
   const eventId = useMemo(() => {
     return String(selectedEvent?.id ?? activeEpisodeId ?? "unknown_event");
@@ -270,6 +272,7 @@ export default function Episode3TextPanel({
   }
 
   async function startVoiceNote() {
+    if (readOnly) return;
     try {
       const SpeechRecognition =
         (window as any).SpeechRecognition ||
@@ -380,6 +383,12 @@ export default function Episode3TextPanel({
   }
 
   async function handleSave() {
+    if (readOnly) {
+      setSaveStatus("error");
+      setSaveMessage("This submitted case is locked for review.");
+      return;
+    }
+
     const currentText = freeText.trim();
 
     if (!currentText) {
@@ -738,9 +747,11 @@ export default function Episode3TextPanel({
         onFocus={startTypingTimer}
         onBlur={finalizeTypingDuration}
         onChange={(e) => {
+          if (readOnly) return;
           startTypingTimer();
           setCurrentFreeText(e.target.value);
         }}
+        disabled={readOnly || saving}
         className="min-h-[360px] w-full rounded-xl border border-gray-300 p-4 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         placeholder="write or dictate your response here..."
       />
@@ -749,6 +760,7 @@ export default function Episode3TextPanel({
         <button
           type="button"
           onClick={recording ? stopVoiceNote : startVoiceNote}
+          disabled={readOnly || saving}
           className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
             recording
               ? "bg-red-500 hover:bg-red-600"
@@ -761,6 +773,7 @@ export default function Episode3TextPanel({
         <button
           type="button"
           onClick={() => {
+            if (readOnly) return;
             setCurrentFreeText(ABNORMAL_REASONING_TEMPLATE);
             stopVoiceNote();
             setError(null);
@@ -775,6 +788,7 @@ export default function Episode3TextPanel({
             typingStartedAtMsRef.current = null;
             typingDurationMsRef.current = 0;
           }}
+          disabled={readOnly || saving}
           className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
         >
           Reset
@@ -783,9 +797,9 @@ export default function Episode3TextPanel({
         <button
           type="button"
           onClick={handleSave}
-          disabled={saving || !freeText.trim()}
+          disabled={readOnly || saving || !freeText.trim()}
           className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            saving || !freeText.trim()
+            readOnly || saving || !freeText.trim()
               ? "cursor-not-allowed bg-blue-300"
               : "bg-blue-600 hover:bg-blue-700"
           }`}

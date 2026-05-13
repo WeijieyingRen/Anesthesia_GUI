@@ -18,7 +18,7 @@ interface CaseMeta {
 
 type GameData = {
   currentPatientIndex: number;
-  selectedPatients: Array<{ id: string; folder: string }>;
+  selectedPatients: Array<{ id: string; folder: string; status?: CaseStatus }>;
   diagnoses: Array<string | null>;
   startTime: string;
 };
@@ -265,6 +265,7 @@ export default function PatientList() {
       selectedPatients: selectedCases.map((c) => ({
         id: c.id,
         folder: c.folder,
+        status: c.status,
       })),
       diagnoses: Array(selectedCases.length).fill(null),
       startTime: new Date().toISOString(),
@@ -279,6 +280,7 @@ export default function PatientList() {
       selectedPatients: cases.map((c) => ({
         id: c.id,
         folder: c.folder,
+        status: c.status,
       })),
       diagnoses: Array(cases.length).fill(null),
       startTime: new Date().toISOString(),

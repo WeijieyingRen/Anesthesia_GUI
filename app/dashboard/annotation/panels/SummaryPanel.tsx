@@ -14,6 +14,7 @@ type SummaryPanelProps = {
   annotatorName?: string;
   annotatorEmail?: string;
   onSaveAndNextStep?: () => void;
+  readOnly?: boolean;
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
@@ -127,6 +128,7 @@ export default function SummaryPanel({
   annotatorName,
   annotatorEmail,
   onSaveAndNextStep,
+  readOnly = false,
 }: SummaryPanelProps) {
   const [summaryText, setSummaryText] = React.useState("");
   const [recording, setRecording] = React.useState(false);
@@ -202,6 +204,7 @@ export default function SummaryPanel({
   }
 
   async function startVoiceNote() {
+    if (readOnly) return;
     if (saveStatus === "saving") return;
 
     const SpeechRecognition =
@@ -269,6 +272,12 @@ export default function SummaryPanel({
   }
 
   async function handleSaveSummary() {
+    if (readOnly) {
+      setSaveStatus("error");
+      setSaveMessage("This submitted case is locked for review.");
+      return;
+    }
+
     if (!summaryText.trim()) {
       setSaveStatus("error");
       setSaveMessage("Please provide the patient-level summary.");
@@ -385,6 +394,7 @@ export default function SummaryPanel({
   }
 
   function handleReset() {
+    if (readOnly) return;
     if (saveStatus === "saving") return;
 
     setSummaryText("");
@@ -492,10 +502,11 @@ export default function SummaryPanel({
 
         <textarea
           value={summaryText}
-          disabled={saveStatus === "saving"}
+          disabled={readOnly || saveStatus === "saving"}
           onFocus={startTypingTimer}
           onBlur={stopTypingTimer}
           onChange={(e) => {
+            if (readOnly) return;
             startTypingTimer();
             try {
               localStorage.setItem(draftKey(patientId, caseId), e.target.value);
@@ -511,10 +522,10 @@ export default function SummaryPanel({
         <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
           <button
             type="button"
-            disabled={saveStatus === "saving"}
+            disabled={readOnly || saveStatus === "saving"}
             onClick={recording ? stopVoiceNote : startVoiceNote}
             className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
-              saveStatus === "saving"
+              readOnly || saveStatus === "saving"
                 ? "cursor-not-allowed bg-gray-400"
                 : recording
                 ? "bg-red-500 hover:bg-red-600"
@@ -527,9 +538,9 @@ export default function SummaryPanel({
           <button
             type="button"
             onClick={handleReset}
-            disabled={saveStatus === "saving"}
+            disabled={readOnly || saveStatus === "saving"}
             className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
-              saveStatus === "saving"
+              readOnly || saveStatus === "saving"
                 ? "cursor-not-allowed bg-gray-400"
                 : "border border-gray-700 bg-gray-700 hover:bg-gray-800"
             }`}
@@ -540,9 +551,9 @@ export default function SummaryPanel({
           <button
             type="button"
             onClick={handleSaveSummary}
-            disabled={saveStatus === "saving"}
+            disabled={readOnly || saveStatus === "saving"}
             className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
-              saveStatus === "saving"
+              readOnly || saveStatus === "saving"
                 ? "cursor-wait bg-blue-300"
                 : "bg-blue-600 hover:bg-blue-700"
             }`}

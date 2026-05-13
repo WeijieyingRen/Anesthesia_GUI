@@ -12,6 +12,7 @@ type Props = {
   patientFolder?: string;
   anesthesiaStart?: string | null;
   onSaveSuccess?: () => void;
+  readOnly?: boolean;
 };
 
 type SaveStatus = "idle" | "saving" | "success" | "error";
@@ -192,6 +193,7 @@ export default function ManagementReasoningPanel({
   patientFolder,
   anesthesiaStart,
   onSaveSuccess,
+  readOnly = false,
 }: Props) {
   const [answer, setAnswer] = useState("");
   const [recording, setRecording] = useState(false);
@@ -312,6 +314,7 @@ export default function ManagementReasoningPanel({
   }
 
   async function startVoiceNote() {
+    if (readOnly) return;
     const SpeechRecognition =
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
@@ -396,6 +399,12 @@ export default function ManagementReasoningPanel({
   }
 
   async function handleSave() {
+    if (readOnly) {
+      setSaveStatus("error");
+      setSaveMessage("This submitted case is locked for review.");
+      return;
+    }
+
     const validationError = validateBeforeSave();
 
     if (validationError) {
@@ -720,6 +729,7 @@ export default function ManagementReasoningPanel({
         value={answer}
         onBlur={finalizeTypingDuration}
         onChange={(e) => {
+          if (readOnly) return;
           markTyping();
           try {
             localStorage.setItem(
@@ -731,6 +741,7 @@ export default function ManagementReasoningPanel({
           }
           setAnswer(e.target.value);
         }}
+        disabled={readOnly || saveStatus === "saving"}
         className="mt-4 h-80 w-full rounded-xl border border-gray-300 px-4 py-3 text-sm leading-6 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         placeholder="Write or dictate your management reasoning here..."
       />
@@ -739,6 +750,7 @@ export default function ManagementReasoningPanel({
         <button
           type="button"
           onClick={recording ? stopVoiceNote : startVoiceNote}
+          disabled={readOnly || saveStatus === "saving"}
           className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
             recording
               ? "bg-red-500 hover:bg-red-600"
@@ -751,6 +763,7 @@ export default function ManagementReasoningPanel({
         <button
           type="button"
           onClick={() => {
+            if (readOnly) return;
             setAnswer("");
             voiceBaseTextRef.current = "";
             setRecording(false);
@@ -770,6 +783,7 @@ export default function ManagementReasoningPanel({
             voiceDurationMsRef.current = 0;
             taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
           }}
+          disabled={readOnly || saveStatus === "saving"}
           className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
         >
           Reset
@@ -778,9 +792,9 @@ export default function ManagementReasoningPanel({
         <button
           type="button"
           onClick={handleSave}
-          disabled={saveStatus === "saving"}
+          disabled={readOnly || saveStatus === "saving"}
           className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            saveStatus === "saving"
+            readOnly || saveStatus === "saving"
               ? "cursor-wait bg-blue-300"
               : "bg-blue-600 hover:bg-blue-700"
           }`}
