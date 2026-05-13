@@ -241,6 +241,7 @@ type DashboardCaseDraft = {
   selectedDetectVital?: DetectVital;
   selectedWindow?: SelectedWindow | null;
   patientSummaryCompleted?: boolean;
+  abnormalityReasoningCompleted?: boolean;
   managementReasoningCompleted?: boolean;
   episodeState?: EpisodeAnnotationState;
   episodeTaskCompletion?: EpisodeTaskCompletionMap;
@@ -514,6 +515,8 @@ export default function DashboardPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
+  const [abnormalityReasoningCompleted, setAbnormalityReasoningCompleted] =
+    useState(false);
   const [managementReasoningCompleted, setManagementReasoningCompleted] = useState(false);
   const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("summary");
   const [annotationLevel, setAnnotationLevel] = useState<AnnotationLevel>("summary");
@@ -571,6 +574,7 @@ export default function DashboardPage() {
           selectedDetectVital,
           selectedWindow,
           patientSummaryCompleted,
+          abnormalityReasoningCompleted,
           managementReasoningCompleted,
           episodeState,
           episodeTaskCompletion,
@@ -651,17 +655,15 @@ export default function DashboardPage() {
     if (hasSubmitted) return;
     setEpisodeState(buildEmptyEpisodeState());
     setEpisodeTaskCompletion({});
+    setAbnormalityReasoningCompleted(false);
     setSelectedWindow(null);
   }
 
   const canSubmitFinal =
   patientSummaryCompleted &&
+  abnormalityReasoningCompleted &&
   managementReasoningCompleted &&
-  episodeState.prioritizedEpisodeIds.length > 0 &&
-  prioritizedEpisodes.some((episode) => {
-    const completed = episodeTaskCompletion[episode.id];
-    return Boolean(completed?.detect);
-  });
+  episodeState.prioritizedEpisodeIds.length > 0;
 
   function validateBeforeFinalSubmit(): string | null {
     if (!patientSummaryCompleted) {
@@ -676,12 +678,7 @@ export default function DashboardPage() {
       return "Please select and annotate at least one episode before submitting.";
     }
   
-    const hasAnnotatedEpisode = prioritizedEpisodes.some((episode) => {
-      const completed = episodeTaskCompletion[episode.id];
-      return Boolean(completed?.detect);
-    });
-
-    if (!hasAnnotatedEpisode) {
+    if (!abnormalityReasoningCompleted) {
       return "Please save the detailed annotation for one selected episode before submitting.";
     }
   
@@ -1084,6 +1081,7 @@ export default function DashboardPage() {
       );
       setHasSubmitted(patientMeta?.status === "completed");
       setPatientSummaryCompleted(false);
+      setAbnormalityReasoningCompleted(false);
       setManagementReasoningCompleted(false);
       setSubmitError(null);
       setLoadError(null);
@@ -1220,6 +1218,11 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         if (typeof savedDraft.patientSummaryCompleted === "boolean") {
           setPatientSummaryCompleted(savedDraft.patientSummaryCompleted);
         }
+        if (typeof savedDraft.abnormalityReasoningCompleted === "boolean") {
+          setAbnormalityReasoningCompleted(
+            savedDraft.abnormalityReasoningCompleted
+          );
+        }
         if (typeof savedDraft.managementReasoningCompleted === "boolean") {
           setManagementReasoningCompleted(
             savedDraft.managementReasoningCompleted
@@ -1320,9 +1323,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         managementReasoning: managementReasoningResult,
         completionStatus: {
           patientSummaryCompleted,
-          abnormalityReasoningCompleted: prioritizedEpisodes.some(
-            (episode) => Boolean(episodeTaskCompletion[episode.id]?.detect)
-          ),
+          abnormalityReasoningCompleted,
           managementReasoningCompleted,
         },
       },
@@ -1414,6 +1415,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     selectedDetectVital,
     selectedWindow,
     patientSummaryCompleted,
+    abnormalityReasoningCompleted,
     managementReasoningCompleted,
     episodeState,
     episodeTaskCompletion,
@@ -2113,6 +2115,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         onSaveAndNextStep={(finishedTask) => {
           if (finishedTask === "detect") {
             handleSaveAndNextStep(finishedTask);
+            setAbnormalityReasoningCompleted(true);
           }
         }}
         selectedEvent={selectedEvent}
