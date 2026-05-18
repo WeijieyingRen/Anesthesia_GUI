@@ -35,6 +35,10 @@ import { prepareMedicationData } from "@/lib/prepare_raw_data/medications";
 import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
+import {
+  SPEECH_LANGUAGE_OPTIONS,
+  getSpeechRecognitionLanguage,
+} from "@/lib/speech-language";
 
 type CsvRow = Record<string, any>;
 
@@ -58,6 +62,12 @@ type GameData = {
 type StoredSelected = {
   folder: string;
   status?: "not_started" | "in_progress" | "completed";
+};
+
+type LocalDriveExportEntry = {
+  objectPath: string;
+  data: unknown;
+  savedAt?: string;
 };
 
 type AnnotationLevel = "summary" | "episode" | "otherEvents";
@@ -318,6 +328,154 @@ function shiftRelativeTimeRows(
   });
 }
 
+function normalizeManagementName(value: unknown) {
+  return String(value ?? "").trim().toLowerCase();
+}
+
+function rowMatchesManagementName(rowValue: unknown, targetValue: unknown) {
+  const rowName = normalizeManagementName(rowValue);
+  const target = normalizeManagementName(targetValue);
+
+  if (!rowName || !target) return false;
+
+  return rowName === target || rowName.includes(target) || target.includes(rowName);
+}
+
+function getGasChangeValues(
+  event: ManagementEvent,
+  phyRows: CsvRow[]
+): Pick<ManagementEvent, "change_from" | "change_to" | "change_unit"> | null {
+  const timeMin = toFiniteNumber(event.time_min);
+  if (timeMin === null) return null;
+
+  const endTimeMin = toFiniteNumber(event.end_time_min) ?? timeMin;
+  const points = phyRows
+    .map((row) => ({
+      time: toFiniteNumber(row["relative_anesthesia_time"]),
+      value: toFiniteNumber(row[event.row_name]),
+    }))
+    .filter(
+      (point): point is { time: number; value: number } =>
+        point.time !== null && point.value !== null
+    )
+    .sort((a, b) => a.time - b.time);
+
+  if (!points.length) return null;
+
+  const toPoint =
+    points.find((point) => point.time >= endTimeMin) ??
+    points.find((point) => point.time >= timeMin) ??
+    points[points.length - 1];
+  const fromPoint =
+    [...points].reverse().find((point) => point.time < timeMin) ??
+    points[0];
+
+  if (!fromPoint || !toPoint || fromPoint.value === toPoint.value) return null;
+
+  return {
+    change_from: fromPoint.value,
+    change_to: toPoint.value,
+    change_unit: getGasDisplayUnit(event.row_name, event.unit),
+  };
+}
+
+function getGasDisplayUnit(rowName: string, fallback?: string) {
+  const lower = rowName.toLowerCase();
+  if (rowName.includes("%")) return "%";
+  if (lower.includes("l/min")) return "L/min";
+  if (lower.includes("cm h2o")) return "cm H2O";
+  if (lower.includes("mmhg")) return "mmHg";
+  return fallback === "abs_rate_per_min" ? undefined : fallback;
+}
+
+function getMedicationInfusionChangeValues(
+  event: ManagementEvent,
+  medInfusionRows: CsvRow[]
+): Pick<ManagementEvent, "change_from" | "change_to" | "change_unit"> | null {
+  const timeMin = toFiniteNumber(event.time_min);
+  if (timeMin === null) return null;
+
+  const matchingRows = medInfusionRows
+    .filter((row) =>
+      rowMatchesManagementName(
+        row["medication"] || row["med_concept_desc"],
+        event.row_name
+      )
+    )
+    .map((row) => ({
+      start: toFiniteNumber(row["relative_anesthesia_start"]),
+      end: toFiniteNumber(row["relative_anesthesia_end"]),
+      dose: toFiniteNumber(row["dose"]),
+      unit: String(row["unit"] ?? "").trim() || event.unit,
+    }))
+    .filter(
+      (row): row is {
+        start: number;
+        end: number | null;
+        dose: number;
+        unit: string | undefined;
+      } =>
+        row.start !== null && row.dose !== null
+    )
+    .sort((a, b) => a.start - b.start);
+
+  if (!matchingRows.length) return null;
+
+  const toSegment =
+    matchingRows.find((row) => Math.abs(row.start - timeMin) <= 1) ??
+    matchingRows.find(
+      (row) =>
+        row.start <= timeMin &&
+        (row.end === null || row.end >= timeMin)
+    ) ??
+    matchingRows.find((row) => row.start >= timeMin);
+
+  if (!toSegment) return null;
+
+  const fromSegment =
+    [...matchingRows]
+      .reverse()
+      .find((row) => row.start < toSegment.start && row.dose !== toSegment.dose) ??
+    [...matchingRows].reverse().find((row) => row.start < toSegment.start);
+
+  if (!fromSegment || fromSegment.dose === toSegment.dose) return null;
+
+  return {
+    change_from: fromSegment.dose,
+    change_to: toSegment.dose,
+    change_unit: toSegment.unit ?? fromSegment.unit ?? event.unit,
+  };
+}
+
+function enrichManagementEventsWithChangeValues(
+  events: ManagementEvent[],
+  medInfusionRows: CsvRow[],
+  phyRows: CsvRow[]
+) {
+  return events.map((event) => {
+    const eventType = String(event.event_type ?? "").toLowerCase();
+
+    if (event.chart_type === "gas" && eventType.includes("gas_adjustment")) {
+      return {
+        ...event,
+        ...getGasChangeValues(event, phyRows),
+      };
+    }
+
+    if (
+      event.chart_type === "medication" &&
+      eventType.includes("infusion_adjustment")
+    ) {
+      return {
+        ...event,
+        ...getMedicationInfusionChangeValues(event, medInfusionRows),
+      };
+    }
+
+    return event;
+  });
+}
+
 function FieldGrid({
   items,
 }: {
@@ -392,7 +550,7 @@ function useVoiceNote() {
     }
 
     const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
+    recognition.lang = getSpeechRecognitionLanguage();
     recognition.interimResults = true;
     recognition.continuous = true;
 
@@ -484,6 +642,114 @@ function renumberDetectedEpisodes(
   }));
 }
 
+type ZipFileEntry = {
+  path: string;
+  data: string;
+};
+
+const CRC32_TABLE = (() => {
+  const table = new Uint32Array(256);
+
+  for (let i = 0; i < 256; i += 1) {
+    let c = i;
+    for (let j = 0; j < 8; j += 1) {
+      c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    }
+    table[i] = c >>> 0;
+  }
+
+  return table;
+})();
+
+function crc32(bytes: Uint8Array) {
+  let crc = 0xffffffff;
+
+  for (let i = 0; i < bytes.length; i += 1) {
+    crc = CRC32_TABLE[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+  }
+
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function writeUint16(output: number[], value: number) {
+  output.push(value & 0xff, (value >>> 8) & 0xff);
+}
+
+function writeUint32(output: number[], value: number) {
+  output.push(
+    value & 0xff,
+    (value >>> 8) & 0xff,
+    (value >>> 16) & 0xff,
+    (value >>> 24) & 0xff
+  );
+}
+
+function appendBytes(output: number[], bytes: Uint8Array) {
+  for (let i = 0; i < bytes.length; i += 1) {
+    output.push(bytes[i]);
+  }
+}
+
+function makeZipBlob(entries: ZipFileEntry[]) {
+  const encoder = new TextEncoder();
+  const output: number[] = [];
+  const centralDirectory: number[] = [];
+
+  for (const entry of entries) {
+    const nameBytes = encoder.encode(entry.path);
+    const dataBytes = encoder.encode(entry.data);
+    const crc = crc32(dataBytes);
+    const localHeaderOffset = output.length;
+
+    writeUint32(output, 0x04034b50);
+    writeUint16(output, 20);
+    writeUint16(output, 0x0800);
+    writeUint16(output, 0);
+    writeUint16(output, 0);
+    writeUint16(output, 0);
+    writeUint32(output, crc);
+    writeUint32(output, dataBytes.length);
+    writeUint32(output, dataBytes.length);
+    writeUint16(output, nameBytes.length);
+    writeUint16(output, 0);
+    appendBytes(output, nameBytes);
+    appendBytes(output, dataBytes);
+
+    writeUint32(centralDirectory, 0x02014b50);
+    writeUint16(centralDirectory, 20);
+    writeUint16(centralDirectory, 20);
+    writeUint16(centralDirectory, 0x0800);
+    writeUint16(centralDirectory, 0);
+    writeUint16(centralDirectory, 0);
+    writeUint16(centralDirectory, 0);
+    writeUint32(centralDirectory, crc);
+    writeUint32(centralDirectory, dataBytes.length);
+    writeUint32(centralDirectory, dataBytes.length);
+    writeUint16(centralDirectory, nameBytes.length);
+    writeUint16(centralDirectory, 0);
+    writeUint16(centralDirectory, 0);
+    writeUint16(centralDirectory, 0);
+    writeUint16(centralDirectory, 0);
+    writeUint32(centralDirectory, 0);
+    writeUint32(centralDirectory, localHeaderOffset);
+    appendBytes(centralDirectory, nameBytes);
+  }
+
+  const centralDirectoryOffset = output.length;
+  output.push(...centralDirectory);
+
+  writeUint32(output, 0x06054b50);
+  writeUint16(output, 0);
+  writeUint16(output, 0);
+  writeUint16(output, entries.length);
+  writeUint16(output, entries.length);
+  writeUint32(output, centralDirectory.length);
+  writeUint32(output, centralDirectoryOffset);
+  writeUint16(output, 0);
+
+  return new Blob([new Uint8Array(output)], { type: "application/zip" });
+}
+
 export default function DashboardPage() {
   const router = useRouter();
 
@@ -530,6 +796,8 @@ export default function DashboardPage() {
   const [managementEvents, setManagementEvents] = useState<ManagementEvent[]>([]);
   const [selectedManagementEvent, setSelectedManagementEvent] =
     useState<ManagementEvent | null>(null);
+  const [speechRecognitionLanguage, setSpeechRecognitionLanguage] =
+    useState("en-US");
   const [dashboardBackStack, setDashboardBackStack] = useState<number[]>([]);
   const [episodeState, setEpisodeState] = useState<EpisodeAnnotationState>(
     buildEmptyEpisodeState()
@@ -544,6 +812,7 @@ export default function DashboardPage() {
   const sessionStartRef = useRef<number>(performance.now());
   const sessionStartUtcRef = useRef<string>(new Date().toISOString());
   const sessionStartLocalRef = useRef<string>(getLocalTimestamp());
+  const visualizationPanelRef = useRef<HTMLDivElement | null>(null);
   const actionLogRef = useRef<
     Array<{
       type: string;
@@ -768,6 +1037,19 @@ export default function DashboardPage() {
       return next;
     });
 
+    setAbnormalityReasoningCompleted(false);
+    try {
+      const patientFolder = currentPatient?.folder ?? "unknown_patient";
+      localStorage.removeItem(
+        `annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`
+      );
+      localStorage.removeItem(
+        `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${episodeId}`
+      );
+    } catch {
+      // ignore localStorage cleanup failures
+    }
+
     logAction("episode_detected_delete", { episodeId });
   }
 
@@ -863,6 +1145,12 @@ export default function DashboardPage() {
     if (hasSubmitted) return;
     if (annotationLevel === "episode") {
       if (episodeState.stage === "annotate") {
+        if (episodeState.activeEpisodeId) {
+          handleSelectedWindowChange(window);
+        } else {
+          handleCreateEpisodeFromWindow(window);
+        }
+        setSelectedWindow(window);
         return;
       }
   
@@ -987,6 +1275,48 @@ export default function DashboardPage() {
       setLoadError("No selected patients found.");
     }
   }, [router]);
+
+  useEffect(() => {
+    setSpeechRecognitionLanguage(getSpeechRecognitionLanguage());
+  }, []);
+
+  function handleSpeechRecognitionLanguageChange(language: string) {
+    setSpeechRecognitionLanguage(language);
+    try {
+      localStorage.setItem("speechRecognitionLanguage", language);
+    } catch {
+      // ignore storage failures
+    }
+  }
+
+  function focusManagementEventOnTimeline() {
+    if (!selectedManagementEvent) return;
+
+    const eventTime = Number(selectedManagementEvent.time_min);
+    if (Number.isFinite(eventTime)) {
+      const pxPerMin = timeResolution === 5 ? 64 / 5 : 64 / 15;
+      const targetStart = Math.max(
+        0,
+        Math.min(
+          Math.max(0, sharedTimelineEnd - viewWindowWidthMin),
+          eventTime - Math.floor(viewWindowWidthMin * 0.25)
+        )
+      );
+
+      setViewStartMin(targetStart);
+      setSharedScrollLeft(Math.max(0, targetStart * pxPerMin));
+    }
+
+    visualizationPanelRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    logAction("management_direct_to_event", {
+      eventId: getManagementEventId(selectedManagementEvent),
+      timeMin: selectedManagementEvent.time_min,
+    });
+  }
 
   function persistCurrentPatientIndex(nextIndex: number) {
     try {
@@ -1196,7 +1526,11 @@ export default function DashboardPage() {
 
       setMedications(prepareMedicationData(shiftedMedBolusRows, shiftedMedInfusionRows));
       setFluids(prepareFluidData(shiftedFluidInRows, shiftedFluidOutRows));
-      const parsedManagementEvents = prepareManagementEvents(shiftedManagementRows);
+      const parsedManagementEvents = enrichManagementEventsWithChangeValues(
+        prepareManagementEvents(shiftedManagementRows),
+        shiftedMedInfusionRows,
+        shiftedPhyRows
+      );
 setManagementEvents(parsedManagementEvents);
 setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
@@ -1330,8 +1664,91 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     };
   };
 
+  function makeSafeFileNamePart(value: unknown, fallback: string) {
+    const text = String(value ?? "").trim();
+    if (!text) return fallback;
+
+    return text
+      .replace(/[^a-zA-Z0-9._-]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 80) || fallback;
+  }
+
+  function downloadSubmissionPayload(payload: ReturnType<typeof collectSubmissionPayload>) {
+    try {
+      const patientPart = makeSafeFileNamePart(payload.patientFolder, "unknown_patient");
+      const doctorNamePart = makeSafeFileNamePart(
+        payload.participantInfo?.name ?? payload.doctorId,
+        "unknown_doctor"
+      );
+      const accessCodePart = makeSafeFileNamePart(
+        payload.accessCode,
+        "unknown_code"
+      );
+      const doctorFolder = `${doctorNamePart}_${accessCodePart}`;
+      const root = `${doctorFolder}/${patientPart}`;
+      const fileName = `${doctorNamePart}_${accessCodePart}_${patientPart}.zip`;
+      const archiveKey = `localDriveExportArchive:${payload.patientId ?? payload.patientFolder ?? "unknown_patient"}:${payload.caseId ?? "unknown_case"}`;
+      const archived = JSON.parse(localStorage.getItem(archiveKey) || "[]");
+      const archiveEntries = Array.isArray(archived) ? archived : [];
+      const zipEntries: ZipFileEntry[] = archiveEntries
+        .filter(
+          (entry: any) =>
+            entry &&
+            typeof entry.objectPath === "string" &&
+            !entry.objectPath.includes("case_status_index.json")
+        )
+        .map((entry: any) => ({
+          path: entry.objectPath,
+          data: JSON.stringify(entry.data, null, 2),
+        }));
+      zipEntries.push({
+        path: `${root}/case_submission/case_summary.json`,
+        data: JSON.stringify(
+          {
+            doctor_id: payload.doctorId ?? "unknown_doctor",
+            access_code: payload.accessCode ?? "unknown_code",
+            patient_id:
+              payload.patientId ?? payload.patientFolder ?? "unknown_patient",
+            case_id: payload.caseId ?? null,
+            panel: payload.panel,
+            saved_at_utc: payload.submittedAt,
+            saved_at_local: payload.submittedAtLocal,
+            answers: payload.answers,
+            timing: {
+              page_opened_at_utc: payload.pageOpenedAt,
+              page_opened_at_local: payload.pageOpenedAtLocal,
+              page_submitted_at_utc: payload.submittedAt,
+              page_submitted_at_local: payload.submittedAtLocal,
+              total_duration_sec: payload.totalDurationSec,
+              local_timezone: payload.localTimezone,
+            },
+          },
+          null,
+          2
+        ),
+      });
+
+      const blob = makeZipBlob(zipEntries);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = fileName;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (error) {
+      console.error("Local submission download failed:", error);
+    }
+  }
+
   const submitCurrentSession = async (): Promise<boolean> => {
     const payload = collectSubmissionPayload();
+    downloadSubmissionPayload(payload);
 
     console.log("===== SUBMISSION PAYLOAD =====");
     console.log(payload);
@@ -1494,6 +1911,34 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 </h1>
 
           <div className="flex items-center gap-3">
+            <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+              Voice
+              <select
+                value={speechRecognitionLanguage}
+                onChange={(event) =>
+                  handleSpeechRecognitionLanguageChange(event.target.value)
+                }
+                className="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-800"
+              >
+                {SPEECH_LANGUAGE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <button
+              type="button"
+              onClick={() => {
+                logAction("home_to_patient_list");
+                router.push("/patient-list");
+              }}
+              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Home
+            </button>
+
             <button
               type="button"
               onClick={() => {
@@ -1777,6 +2222,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       onSaveSuccess={() => {
         setManagementReasoningCompleted(true);
       }}
+      onDirectToEvent={focusManagementEventOnTimeline}
       readOnly={hasSubmitted}
     />
   </div>
@@ -2009,27 +2455,42 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                       </div>
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleTogglePrioritizedEpisode(episode.id);
+                    <div className="flex shrink-0 items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTogglePrioritizedEpisode(episode.id);
 
-                        logAction("episode_pick_top3_toggle", {
-                          episodeId: episode.id,
-                          nextSelected: !checked,
-                        });
-                      }}
-                      disabled={hasSubmitted}
-                      className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
-                        checked
-                          ? "border-blue-600 bg-blue-600 text-white"
-                          : "border-gray-300 bg-white text-transparent"
-                      }`}
-                      title={checked ? "Unselect episode" : "Select episode"}
-                    >
-                      ✓
-                    </button>
+                          logAction("episode_pick_top3_toggle", {
+                            episodeId: episode.id,
+                            nextSelected: !checked,
+                          });
+                        }}
+                        disabled={hasSubmitted}
+                        className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
+                          checked
+                            ? "border-blue-600 bg-blue-600 text-white"
+                            : "border-gray-300 bg-white text-transparent"
+                        }`}
+                        title={checked ? "Unselect episode" : "Select episode"}
+                      >
+                        ✓
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteDetectedEpisode(episode.id);
+                        }}
+                        disabled={hasSubmitted}
+                        className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
+                        title="Delete event"
+                      >
+                        ×
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -2159,7 +2620,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   </div>
                 </div>
 
-                <div className="min-w-0 space-y-3 rounded-xl border bg-white p-3 shadow-sm">
+                <div
+                  ref={visualizationPanelRef}
+                  className="min-w-0 space-y-3 rounded-xl border bg-white p-3 shadow-sm"
+                >
                   <div className="px-1 text-sm font-bold text-gray-900">
                     Visualization Panel
                   </div>

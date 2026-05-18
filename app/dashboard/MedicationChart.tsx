@@ -958,7 +958,7 @@ function InfusionOverlaySvg({
                   y1={centerY}
                   x2={Math.max(lineStartX, lineEndX - endCapWidth)}
                   y2={centerY}
-                  stroke={shouldHighlight ? "#ef4444" : baseStroke}
+                  stroke={baseStroke}
                   strokeWidth={8}
                   opacity={0.95}
                   strokeLinecap="butt"
@@ -973,16 +973,16 @@ function InfusionOverlaySvg({
                   height={endCapHeight}
                   rx={2}
                   fill={baseFill}
-                  stroke={shouldHighlight ? "#ef4444" : baseStroke}
-                  strokeWidth={shouldHighlight ? 3 : 1.1}
+                  stroke={baseStroke}
+                  strokeWidth={1.1}
                 />
               )}
 
               <path
                 d={headPath}
                 fill={baseFill}
-                stroke={shouldHighlight ? "#ef4444" : baseStroke}
-                strokeWidth={shouldHighlight ? 3 : 1.1}
+                stroke={baseStroke}
+                strokeWidth={1.1}
               />
 
               <rect
@@ -996,16 +996,30 @@ function InfusionOverlaySvg({
               />
 
               {label && (
-                <text
-                  x={headX + bodyRectW / 2 + 1}
-                  y={centerY + 3.5}
-                  textAnchor="middle"
-                  fontSize={10}
-                  fill={textColor}
-                  fontWeight={500}
-                >
-                  {label}
-                </text>
+                <>
+                  {shouldHighlight && (
+                    <ellipse
+                      cx={headX + bodyRectW / 2 + 1}
+                      cy={centerY}
+                      rx={Math.max(14, bodyRectW / 2 - 2)}
+                      ry={9}
+                      fill="none"
+                      stroke="#ef4444"
+                      strokeWidth={2.5}
+                    />
+                  )}
+
+                  <text
+                    x={headX + bodyRectW / 2 + 1}
+                    y={centerY + 3.5}
+                    textAnchor="middle"
+                    fontSize={10}
+                    fill={textColor}
+                    fontWeight={500}
+                  >
+                    {label}
+                  </text>
+                </>
               )}
             </g>
           );

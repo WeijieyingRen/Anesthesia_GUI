@@ -31,7 +31,7 @@ export default function Results() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Load saved data + auto-export JSON
+  // Load saved data for the legacy summary view.
   useEffect(() => {
     try {
       const gameData = localStorage.getItem("gameData");
@@ -63,26 +63,6 @@ export default function Results() {
       setDiagnoses(validDiagnoses);
       setParticipantInfo(parsedParticipantInfo);
       setLoading(false);
-
-      // --- Auto-download JSON export ---
-      if (parsedGameData && parsedParticipantInfo) {
-        const exportObj = {
-          participant: parsedParticipantInfo,
-          session: parsedGameData,
-          exportedAt: new Date().toISOString(),
-        };
-
-        const blob = new Blob([JSON.stringify(exportObj, null, 2)], {
-          type: "application/json",
-        });
-
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `session_${parsedParticipantInfo.name || "anonymous"}_${Date.now()}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-      }
     } catch (err) {
       console.error("Error loading results:", err);
       setError("Could not load results data");
@@ -127,7 +107,7 @@ export default function Results() {
           </CardHeader>
           <CardContent className="text-center py-6">
             <p className="text-lg mb-2">
-              Your session results have been saved and automatically downloaded.
+              Your session results have been saved.
             </p>
             <p className="text-gray-600">
               You can now close this window or return to the home screen.

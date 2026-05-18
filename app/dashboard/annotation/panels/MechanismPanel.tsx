@@ -519,7 +519,7 @@ export default function MechanismPanel({
       recognitionRef.current?.stop?.();
 
       const recognition = new SpeechRecognition();
-      recognition.lang = "en-US";
+      recognition.lang = ((typeof localStorage !== "undefined" && localStorage.getItem("speechRecognitionLanguage")) || (typeof navigator !== "undefined" && navigator.language?.toLowerCase().startsWith("zh") ? "zh-CN" : typeof navigator !== "undefined" && navigator.language?.toLowerCase().startsWith("hi") ? "hi-IN" : "en-US"));
       recognition.interimResults = true;
       recognition.continuous = true;
 

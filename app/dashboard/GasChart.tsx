@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { TimeValuePoint } from "@/lib/types";
+import type { ManagementEvent } from "@/lib/types_management";
 
 const LEGEND_COL_WIDTH = 220;
 const AXIS_COL_WIDTH = 42;
@@ -25,6 +26,7 @@ type GasChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
+  managementEvent?: ManagementEvent | null;
   timeResolution?: TimeResolution;
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
@@ -262,6 +264,38 @@ function estimateTextWidth(text: string, fontSize = 10) {
   return Math.max(10, text.length * (fontSize * 0.62));
 }
 
+function normalizeManagementRowName(name: string | null | undefined) {
+  return String(name ?? "").trim().toLowerCase();
+}
+
+function isMatchingGasRow(rowName: string, managementEvent?: ManagementEvent | null) {
+  if (!managementEvent) return false;
+  if (managementEvent.chart_type !== "gas") return false;
+
+  const target = normalizeManagementRowName(managementEvent.row_name);
+  const current = normalizeManagementRowName(rowName);
+
+  if (!target || !current) return false;
+
+  return current === target || current.includes(target) || target.includes(current);
+}
+
+function isHighlightedGasSegment(
+  seg: GasWindowSegment,
+  managementEvent?: ManagementEvent | null
+) {
+  if (!isMatchingGasRow(seg.rowName, managementEvent)) return false;
+  if (!Number.isFinite(managementEvent?.time_min)) return false;
+
+  const highlightTime = Number(
+    Number.isFinite(managementEvent?.end_time_min)
+      ? managementEvent?.end_time_min
+      : managementEvent?.time_min
+  );
+
+  return seg.x0 <= highlightTime && highlightTime < seg.x1;
+}
+
 function FixedAxisSpacer({ height }: { height: number }) {
   return (
     <div
@@ -388,6 +422,7 @@ export default function GasChart({
   timeZero,
   embedded = false,
   highlightWindow = null,
+  managementEvent = null,
   timeResolution = 15,
   sharedScrollLeft,
   onSharedScrollLeftChange,
@@ -710,6 +745,10 @@ export default function GasChart({
                         const label = String(roundSmart(seg.firstValue));
                         const hideVisual = isZeroValue(seg.firstValue);
                         const textWidth = estimateTextWidth(label, 10);
+                        const shouldHighlight = isHighlightedGasSegment(
+                          seg,
+                          managementEvent
+                        );
 
                         const textX = segLeft + 6;
                         const textY = centerY + 3;
@@ -752,6 +791,18 @@ export default function GasChart({
 
                             {!hideVisual && (
                               <>
+                                {shouldHighlight && (
+                                  <ellipse
+                                    cx={textX + textWidth / 2}
+                                    cy={centerY}
+                                    rx={Math.max(13, textWidth / 2 + 6)}
+                                    ry={8}
+                                    fill="none"
+                                    stroke="#ef4444"
+                                    strokeWidth={2.5}
+                                  />
+                                )}
+
                                 <text
                                   x={textX}
                                   y={textY}

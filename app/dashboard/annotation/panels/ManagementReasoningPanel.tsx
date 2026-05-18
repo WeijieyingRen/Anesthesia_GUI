@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ManagementEvent } from "@/lib/types_management";
 import { submitAnnotation } from "@/lib/submit";
+import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
 
 type Props = {
   caseId: string;
@@ -12,6 +13,7 @@ type Props = {
   patientFolder?: string;
   anesthesiaStart?: string | null;
   onSaveSuccess?: () => void;
+  onDirectToEvent?: () => void;
   readOnly?: boolean;
 };
 
@@ -143,15 +145,57 @@ function buildFocusEventLabel(
   managementEvent: ManagementEvent,
   anesthesiaStart?: string | null
 ) {
+  const doseOrChange = buildDoseOrChangeLabel(managementEvent);
   const parts = [
     managementEvent.row_name,
-    managementEvent.dose !== undefined && managementEvent.dose !== null
-      ? `${managementEvent.dose}${managementEvent.unit ? ` ${managementEvent.unit}` : ""}`
-      : null,
+    doseOrChange,
     getDisplayTime(managementEvent, anesthesiaStart),
   ].filter(Boolean);
 
   return parts.join(" | ");
+}
+
+function formatClinicalNumber(value: number) {
+  if (!Number.isFinite(value)) return "";
+  if (Math.abs(value) >= 10) return String(Math.round(value * 10) / 10);
+  return String(Math.round(value * 1000) / 1000);
+}
+
+function isChangeManagementEvent(managementEvent: ManagementEvent) {
+  const eventType = String(managementEvent.event_type ?? "").toLowerCase();
+  return (
+    eventType.includes("infusion_adjustment") ||
+    eventType.includes("gas_adjustment") ||
+    eventType.includes("change")
+  );
+}
+
+function buildChangeLabel(managementEvent: ManagementEvent) {
+  if (
+    !Number.isFinite(managementEvent.change_from) ||
+    !Number.isFinite(managementEvent.change_to)
+  ) {
+    return null;
+  }
+
+  const unit = managementEvent.change_unit ?? managementEvent.unit ?? "";
+  const suffix = unit ? ` ${unit}` : "";
+
+  return `${formatClinicalNumber(Number(managementEvent.change_from))}${suffix} -> ${formatClinicalNumber(Number(managementEvent.change_to))}${suffix}`;
+}
+
+function buildDoseOrChangeLabel(managementEvent: ManagementEvent) {
+  const changeLabel = buildChangeLabel(managementEvent);
+
+  if (isChangeManagementEvent(managementEvent) && changeLabel) {
+    return changeLabel;
+  }
+
+  if (managementEvent.dose === undefined || managementEvent.dose === null) {
+    return null;
+  }
+
+  return `${managementEvent.dose}${managementEvent.unit ? ` ${managementEvent.unit}` : ""}`;
 }
 
 function InstructionPanel({
@@ -193,6 +237,7 @@ export default function ManagementReasoningPanel({
   patientFolder,
   anesthesiaStart,
   onSaveSuccess,
+  onDirectToEvent,
   readOnly = false,
 }: Props) {
   const [answer, setAnswer] = useState("");
@@ -334,7 +379,7 @@ export default function ManagementReasoningPanel({
       voiceBaseTextRef.current = answer.trim();
 
       const recognition = new SpeechRecognition();
-      recognition.lang = "en-US";
+      recognition.lang = getSpeechRecognitionLanguage();
       recognition.interimResults = true;
       recognition.continuous = true;
 
@@ -417,7 +462,9 @@ export default function ManagementReasoningPanel({
 
     try {
       setSaveStatus("saving");
-      setSaveMessage("");
+      setSaveMessage(
+        "Saving to cloud storage... Please wait and do not close the page."
+      );
 
       let participantInfo: any = {};
 
@@ -509,11 +556,14 @@ export default function ManagementReasoningPanel({
       }
 
       setSaveStatus("success");
-      setSaveMessage("Management reasoning saved successfully.");
+      setSaveMessage("Management reasoning saved successfully to cloud storage.");
       onSaveSuccess?.();
     } catch (error: any) {
       setSaveStatus("error");
-      setSaveMessage(error?.message || "Failed to save management reasoning.");
+      setSaveMessage(
+        error?.message ||
+          "Failed to save management reasoning to cloud storage. Please click Save again."
+      );
     }
   }
 
@@ -689,8 +739,17 @@ export default function ManagementReasoningPanel({
   </div>
 </InstructionPanel>
       <div className="mt-6 rounded-2xl border p-5">
-        <div className="text-lg font-semibold text-gray-900">
-          Focused medication event
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="text-lg font-semibold text-gray-900">
+            Focused medication event
+          </div>
+          <button
+            type="button"
+            onClick={onDirectToEvent}
+            className="rounded-md border border-blue-600 bg-white px-3 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-50"
+          >
+            Direct to event
+          </button>
         </div>
 
         <div className="mt-3 space-y-2 text-sm text-gray-800">
@@ -709,12 +768,18 @@ export default function ManagementReasoningPanel({
             {managementEvent.event_type || "-"}
           </div>
 
-          {managementEvent.dose != null && (
+          {isChangeManagementEvent(managementEvent) &&
+          buildChangeLabel(managementEvent) ? (
+            <div>
+              <span className="font-semibold text-gray-600">Change:</span>{" "}
+              {buildChangeLabel(managementEvent)}
+            </div>
+          ) : managementEvent.dose != null ? (
             <div>
               <span className="font-semibold text-gray-600">Dose:</span>{" "}
               {managementEvent.dose} {managementEvent.unit ?? ""}
             </div>
-          )}
+          ) : null}
 
           {managementEvent.route && (
             <div>

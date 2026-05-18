@@ -414,6 +414,7 @@ export default function UnifiedTimelineCard({
             timeZero={anesthesiaStart}
             embedded
             highlightWindow={sharedHighlightWindow}
+            managementEvent={managementEvent}
            
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}

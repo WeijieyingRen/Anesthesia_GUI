@@ -524,6 +524,10 @@ export default function VitalChart({
     return Math.max(domainMin, Math.min(domainMax, y));
   }
 
+  function clampMinute(minute: number) {
+    return Math.max(0, Math.min(effectiveXEnd, Math.round(minute)));
+  }
+
   function valueToPixel(value: number) {
     const el = chartOverlayRef.current;
     if (!el) return 0;
@@ -635,8 +639,8 @@ export default function VitalChart({
       const start = dragStartMin ?? minute;
       const startY = dragStartY ?? value;
 
-      const s = Math.min(start, minute);
-      const t = Math.max(start, minute);
+      const s = clampMinute(Math.min(start, minute));
+      const t = clampMinute(Math.max(start, minute));
 
       const y1 = clampY(Math.min(startY, value));
       const y2 = clampY(Math.max(startY, value));
@@ -653,7 +657,7 @@ export default function VitalChart({
     }
 
     if (dragMode === "resize-left" && selectedWindow) {
-      const s = Math.min(minute, selectedWindow.endMin - 1);
+      const s = Math.min(clampMinute(minute), selectedWindow.endMin - 1);
       nextWindow = {
         ...selectedWindow,
         startMin: Math.max(0, s),
@@ -661,7 +665,7 @@ export default function VitalChart({
     }
 
     if (dragMode === "resize-right" && selectedWindow) {
-      const t = Math.max(minute, selectedWindow.startMin + 1);
+      const t = Math.max(clampMinute(minute), selectedWindow.startMin + 1);
       nextWindow = {
         ...selectedWindow,
         endMin: Math.min(effectiveXEnd, t),
@@ -696,8 +700,8 @@ export default function VitalChart({
 
       nextWindow = {
         ...selectedWindow,
-        startMin: newStart,
-        endMin: newStart + moveWindowWidthMin,
+        startMin: clampMinute(newStart),
+        endMin: clampMinute(newStart + moveWindowWidthMin),
         y1: newY1,
         y2: newY1 + moveWindowHeightY,
       };

@@ -736,6 +736,10 @@ export async function POST(req: Request) {
         totalServerSec,
       }),
       drive: driveResult,
+      localExport: {
+        objectPath: uploaded.objectPath,
+        data: driveRecord,
+      },
       debug_version: "google-drive-required-submit-route-v3",
     });
   } catch (error) {

@@ -52,6 +52,41 @@ type SubmitPayload = {
   [key: string]: unknown;
 };
 
+type LocalExportEntry = {
+  objectPath: string;
+  data: unknown;
+  savedAt: string;
+};
+
+function archiveKey(patientId: unknown, caseId: unknown) {
+  return `localDriveExportArchive:${patientId ?? "unknown_patient"}:${caseId ?? "unknown_case"}`;
+}
+
+function rememberLocalDriveExport(payload: SubmitPayload, data: any) {
+  const localExport = data?.localExport;
+  if (
+    !localExport ||
+    typeof localExport.objectPath !== "string" ||
+    localExport.objectPath.includes("case_status_index.json")
+  ) {
+    return;
+  }
+
+  try {
+    const key = archiveKey(payload.patientId ?? payload.patientFolder, payload.caseId);
+    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    const entries: LocalExportEntry[] = Array.isArray(existing) ? existing : [];
+    entries.push({
+      objectPath: localExport.objectPath,
+      data: localExport.data,
+      savedAt: new Date().toISOString(),
+    });
+    localStorage.setItem(key, JSON.stringify(entries));
+  } catch {
+    // Local export is a best-effort fallback; cloud save remains authoritative.
+  }
+}
+
 export async function submitAnnotation(payload: SubmitPayload) {
   const submittedAt = payload.submittedAt ?? new Date().toISOString();
   const clickedAt = payload.clickedAt ?? submittedAt;
@@ -120,6 +155,8 @@ export async function submitAnnotation(payload: SubmitPayload) {
     task: normalizedPayload.task ?? null,
     drive: data?.drive ?? null,
   });
+
+  rememberLocalDriveExport(normalizedPayload, data);
 
   return data;
 }

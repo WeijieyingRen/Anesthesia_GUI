@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { submitAnnotation } from "@/lib/submit";
+import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
 
 type EpisodeButtonItem = {
   id: string;
@@ -65,6 +66,51 @@ function toLocalTimestamp(value?: string | null) {
     .slice(0, 19);
 
   return `${local}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
+function toFiniteNumber(value: unknown): number | null {
+  if (value === null || value === undefined || value === "") return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+function addMinutesToAnesthesiaStart(
+  offsetMin: unknown,
+  anesthesiaStart?: string | null
+) {
+  const offset = toFiniteNumber(offsetMin);
+  if (offset === null || !anesthesiaStart) return null;
+
+  const base = new Date(anesthesiaStart);
+  if (Number.isNaN(base.getTime())) return null;
+
+  return new Date(base.getTime() + offset * 60000);
+}
+
+function formatHHmm(date: Date | null, zone: "local" | "utc") {
+  if (!date) return null;
+
+  const hours =
+    zone === "utc" ? date.getUTCHours() : date.getHours();
+  const minutes =
+    zone === "utc" ? date.getUTCMinutes() : date.getMinutes();
+
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
+function buildEpisodeTimingFields(
+  episode: Partial<EpisodeButtonItem> | null | undefined,
+  anesthesiaStart?: string | null
+) {
+  const startMinute = toFiniteNumber(episode?.startMin);
+  const endMinute = toFiniteNumber(episode?.endMin);
+  const startDate = addMinutesToAnesthesiaStart(startMinute, anesthesiaStart);
+  const endDate = addMinutesToAnesthesiaStart(endMinute, anesthesiaStart);
+
+  return {
+    startMin: formatHHmm(startDate, "local"),
+    endMin: formatHHmm(endDate, "local"),
+  };
 }
 
 function draftKey(patientId: string | undefined, caseId: string, eventId: string) {
@@ -284,7 +330,7 @@ export default function Episode3TextPanel({
       }
 
       const recognition = new SpeechRecognition();
-      recognition.lang = "en-US";
+      recognition.lang = getSpeechRecognitionLanguage();
       recognition.interimResults = true;
       recognition.continuous = true;
 
@@ -406,7 +452,9 @@ export default function Episode3TextPanel({
       setSaving(true);
       setError(null);
       setSaveStatus("saving");
-      setSaveMessage("Saving annotation...");
+      setSaveMessage(
+        "Saving to cloud storage... Please wait and do not close the page."
+      );
 
       const submittedAtUtc = new Date().toISOString();
       const submittedAtLocal = getLocalTimestamp();
@@ -447,8 +495,7 @@ export default function Episode3TextPanel({
       const selectedEpisodes = episodeList.map((episode) => ({
         episodeIndex: episode.episodeIndex ?? null,
         selected: Boolean(episode.selected),
-        startMin: episode.startMin,
-        endMin: episode.endMin,
+        ...buildEpisodeTimingFields(episode, anesthesiaStart),
         y1: episode.y1 ?? null,
         y2: episode.y2 ?? null,
         createdAtUtc: episode.createdAtUtc ?? null,
@@ -456,6 +503,13 @@ export default function Episode3TextPanel({
         updatedAtUtc: episode.updatedAtUtc ?? null,
         updatedAtLocal: toLocalTimestamp(episode.updatedAtUtc),
       }));
+      const activeEpisodeForSave =
+        episodeList.find((episode) => episode.id === activeEpisodeId) ??
+        selectedEvent ??
+        null;
+      const annotatedEpisodeBase =
+        episodeList.find((episode) => episode.id === activeEpisodeId) ??
+        activeEpisodeForSave;
       const revisionNumber = nextRevisionNumber(resolvedPatientId, caseId);
 
       await submitAnnotation({
@@ -488,18 +542,15 @@ export default function Episode3TextPanel({
         answers: {
           selectedEpisodes,
           annotatedEpisode: {
-            episodeIndex:
-              episodeList.find((episode) => episode.id === activeEpisodeId)
-                ?.episodeIndex ?? null,
+            episodeIndex: annotatedEpisodeBase?.episodeIndex ?? null,
             selected: true,
-            startMin: selectedEvent?.startMin ?? null,
-            endMin: selectedEvent?.endMin ?? null,
-            y1: selectedEvent?.y1 ?? null,
-            y2: selectedEvent?.y2 ?? null,
-            createdAtUtc: selectedEvent?.createdAtUtc ?? null,
-            createdAtLocal: toLocalTimestamp(selectedEvent?.createdAtUtc),
-            updatedAtUtc: selectedEvent?.updatedAtUtc ?? null,
-            updatedAtLocal: toLocalTimestamp(selectedEvent?.updatedAtUtc),
+            ...buildEpisodeTimingFields(activeEpisodeForSave, anesthesiaStart),
+            y1: activeEpisodeForSave?.y1 ?? null,
+            y2: activeEpisodeForSave?.y2 ?? null,
+            createdAtUtc: activeEpisodeForSave?.createdAtUtc ?? null,
+            createdAtLocal: toLocalTimestamp(activeEpisodeForSave?.createdAtUtc),
+            updatedAtUtc: activeEpisodeForSave?.updatedAtUtc ?? null,
+            updatedAtLocal: toLocalTimestamp(activeEpisodeForSave?.updatedAtUtc),
           },
           abnormalityReasoningText: currentText,
         },
@@ -512,18 +563,15 @@ export default function Episode3TextPanel({
           JSON.stringify({
             selectedEpisodes,
             annotatedEpisode: {
-              episodeIndex:
-                episodeList.find((episode) => episode.id === activeEpisodeId)
-                  ?.episodeIndex ?? null,
+              episodeIndex: annotatedEpisodeBase?.episodeIndex ?? null,
               selected: true,
-              startMin: selectedEvent?.startMin ?? null,
-              endMin: selectedEvent?.endMin ?? null,
-              y1: selectedEvent?.y1 ?? null,
-              y2: selectedEvent?.y2 ?? null,
-              createdAtUtc: selectedEvent?.createdAtUtc ?? null,
-              createdAtLocal: toLocalTimestamp(selectedEvent?.createdAtUtc),
-              updatedAtUtc: selectedEvent?.updatedAtUtc ?? null,
-              updatedAtLocal: toLocalTimestamp(selectedEvent?.updatedAtUtc),
+              ...buildEpisodeTimingFields(activeEpisodeForSave, anesthesiaStart),
+              y1: activeEpisodeForSave?.y1 ?? null,
+              y2: activeEpisodeForSave?.y2 ?? null,
+              createdAtUtc: activeEpisodeForSave?.createdAtUtc ?? null,
+              createdAtLocal: toLocalTimestamp(activeEpisodeForSave?.createdAtUtc),
+              updatedAtUtc: activeEpisodeForSave?.updatedAtUtc ?? null,
+              updatedAtLocal: toLocalTimestamp(activeEpisodeForSave?.updatedAtUtc),
             },
             abnormalityReasoningText: currentText,
             revisionNumber,
@@ -534,7 +582,7 @@ export default function Episode3TextPanel({
       }
 
       setSaveStatus("success");
-      setSaveMessage("Saved successfully.");
+      setSaveMessage("Abnormality reasoning saved successfully to cloud storage.");
       onSaveAndNextStep();
     } catch (e: any) {
       console.error("Failed to save abnormality reasoning:", e);

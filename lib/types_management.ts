@@ -12,4 +12,8 @@ export type ManagementEvent = {
   dose?: number;
   unit?: string;
   route?: string;
+
+  change_from?: number;
+  change_to?: number;
+  change_unit?: string;
 };
