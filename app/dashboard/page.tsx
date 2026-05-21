@@ -2052,13 +2052,14 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   <FieldGrid
                     items={[
                       { label: "Procedure Room", value: surgeryContext.procedure_room },
-                      { label: "Department", value: surgeryContext.department },
+                      { label: "Procedure Service", value: surgeryContext.procedure_service },
                       { label: "Admission Type", value: surgeryContext.admission_type },
                       {
                         label: "Preoperative Diagnosis",
                         value: surgeryContext.preoperative_diagnosis,
                       },
                       { label: "Actual Procedure", value: surgeryContext.actual_procedure },
+                      { label: "Airway Type", value: surgeryContext.airway_type },
                       { label: "Anesthesia Type", value: surgeryContext.anesthesia_type },
                       { label: "Airway", value: surgeryContext.airway },
                       {

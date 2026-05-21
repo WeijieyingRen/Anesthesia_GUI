@@ -12,7 +12,7 @@ export function prepareSurgeryContextData(
 ): SurgeryContext {
   return {
     procedure_room: caseInfoRow["aims_procedure_room_name"] ?? undefined,
-    department: caseInfoRow["aims_primary_procedural_service"] ?? undefined,
+    procedure_service: caseInfoRow["aims_primary_procedural_service"] ?? undefined,
     admission_type: caseInfoRow["aims_admission_type"] ?? undefined,
     preoperative_diagnosis: caseInfoRow["aims_preoperative_diagnosis_text"] ?? undefined,
     actual_procedure: caseInfoRow["aims_actual_procedure_text"] ?? undefined,

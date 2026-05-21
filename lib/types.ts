@@ -52,6 +52,7 @@ export interface SurgeryContext {
   admission_type?: string;
   preoperative_diagnosis?: string;
   actual_procedure?: string;
+  procedure_service?: string;
   anesthesia_type?: string;
   airway?: string;
   airway_type?: string;
