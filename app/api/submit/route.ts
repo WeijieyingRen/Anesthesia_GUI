@@ -77,6 +77,36 @@ type StorageTarget = {
   episodeFolder?: string;
 };
 
+type ManifestSectionKey =
+  | "summary"
+  | "managementReasoning"
+  | "abnormalityReasoning"
+  | "caseSubmission";
+
+type ManifestCaseEntry = {
+  patientFolder: string;
+  realCaseId: string;
+  displayCaseId: string;
+  workflow: "annotation" | "review";
+  updatedAt: string;
+  lastPanel?: string | null;
+  hasSummary?: boolean;
+  hasManagementReasoning?: boolean;
+  hasAbnormalityReasoning?: boolean;
+  hasCaseSubmission?: boolean;
+  paths?: Partial<Record<ManifestSectionKey, string>>;
+};
+
+type CaseManifest = {
+  participant?: {
+    name?: string;
+    doctorId?: string;
+    accessCode?: string;
+  };
+  updatedAt?: string;
+  cases?: Record<string, ManifestCaseEntry>;
+};
+
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
 
 async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
@@ -222,10 +252,18 @@ function normalizeDisplayCaseId(body: SubmitBody): string {
   return sanitizePathPart(body.displayCaseId ?? "unknown_case");
 }
 
+function normalizeRealCaseId(body: SubmitBody): string {
+  return sanitizePathPart(body.caseId ?? "unknown_case_id");
+}
+
 function buildPatientCaseFolderName(body: SubmitBody): string {
   const patientId = normalizePatientId(body);
   const caseId = normalizeDisplayCaseId(body);
   return `patient_${patientId}_case_${caseId}`;
+}
+
+function buildManifestCaseKey(body: SubmitBody): string {
+  return `${normalizePatientId(body)}::${normalizeRealCaseId(body)}`;
 }
 
 function normalizeEpisodeFolder(body: SubmitBody): string {
@@ -545,6 +583,108 @@ async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
   throw new Error("Unsupported Drive storage target.");
 }
 
+function getManifestSectionKey(
+  target: StorageTarget
+): ManifestSectionKey | null {
+  if (target.section === "summary") return "summary";
+  if (target.section === "management_reasoning") return "managementReasoning";
+  if (target.section === "abnormality_reasoning" && !target.taskFolder) {
+    return "abnormalityReasoning";
+  }
+  if (target.section === "case_submission") return "caseSubmission";
+  return null;
+}
+
+async function updateCaseManifest({
+  body,
+  doctorId,
+  accessCode,
+  driveObjectPath,
+  workflowMode,
+  target,
+  savedAtUtc,
+}: {
+  body: SubmitBody;
+  doctorId: string;
+  accessCode: string;
+  driveObjectPath: string;
+  workflowMode: "annotation" | "review";
+  target: StorageTarget;
+  savedAtUtc: string;
+}) {
+  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
+  const objectPath = `${doctorFolder}/case_manifest.json`;
+  const existing = await readJsonFromDrive({ objectPath });
+  const manifest =
+    existing?.data && typeof existing.data === "object" && !Array.isArray(existing.data)
+      ? (existing.data as CaseManifest)
+      : {};
+
+  const cases =
+    manifest.cases && typeof manifest.cases === "object" && !Array.isArray(manifest.cases)
+      ? { ...manifest.cases }
+      : {};
+
+  const caseKey = buildManifestCaseKey(body);
+  const previous =
+    cases[caseKey] &&
+    typeof cases[caseKey] === "object" &&
+    !Array.isArray(cases[caseKey])
+      ? (cases[caseKey] as ManifestCaseEntry)
+      : null;
+
+  const sectionKey = getManifestSectionKey(target);
+  const nextPaths = {
+    ...(previous?.paths ?? {}),
+  };
+
+  if (sectionKey) {
+    nextPaths[sectionKey] = driveObjectPath;
+  }
+
+  cases[caseKey] = removeNullFields({
+    ...previous,
+    patientFolder: normalizePatientId(body),
+    realCaseId: normalizeRealCaseId(body),
+    displayCaseId: normalizeDisplayCaseId(body),
+    workflow: workflowMode,
+    updatedAt: savedAtUtc,
+    lastPanel: body.panel ?? null,
+    hasSummary:
+      sectionKey === "summary" ? true : previous?.hasSummary ?? false,
+    hasManagementReasoning:
+      sectionKey === "managementReasoning"
+        ? true
+        : previous?.hasManagementReasoning ?? false,
+    hasAbnormalityReasoning:
+      sectionKey === "abnormalityReasoning"
+        ? true
+        : previous?.hasAbnormalityReasoning ?? false,
+    hasCaseSubmission:
+      sectionKey === "caseSubmission"
+        ? true
+        : previous?.hasCaseSubmission ?? false,
+    paths: Object.keys(nextPaths).length > 0 ? nextPaths : undefined,
+  });
+
+  await uploadJsonToDrive({
+    objectPath,
+    data: removeNullFields({
+      participant: {
+        name:
+          body.participantInfo?.name ??
+          body.annotator?.name ??
+          body.participant?.name ??
+          null,
+        doctorId,
+        accessCode,
+      },
+      updatedAt: savedAtUtc,
+      cases,
+    }),
+  });
+}
+
 async function updateCaseStatusIndex({
   body,
   doctorId,
@@ -691,6 +831,12 @@ export async function POST(req: Request) {
     const accessCode = normalizeAccessCode(body);
     const patientId = normalizePatientId(body);
     const target = detectStorageTarget(body);
+    const workflowMode = await resolveWorkflowMode(
+      body,
+      doctorId,
+      accessCode,
+      patientId
+    );
     const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
     const panelKey = String(panel ?? "").toLowerCase();
     const shouldOmitEventFields =
@@ -752,6 +898,16 @@ export async function POST(req: Request) {
       patientId,
       caseId,
       panel,
+    });
+
+    await updateCaseManifest({
+      body,
+      doctorId,
+      accessCode,
+      driveObjectPath,
+      workflowMode,
+      target,
+      savedAtUtc,
     });
 
     const driveResult = {

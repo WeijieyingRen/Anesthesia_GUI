@@ -273,18 +273,234 @@ function dashboardDraftKey(patientFolder: string, caseId: string) {
   return `dashboardDraft:${patientFolder}:${caseId}`;
 }
 
+function clearCaseLocalDrafts(patientFolder: string, caseId: string) {
+  try {
+    const exactKeys = [
+      `annotationDraft:summary:${patientFolder}:${caseId}`,
+      `annotationResult:summary:${patientFolder}:${caseId}`,
+      `annotationRevision:summary:${patientFolder}:${caseId}`,
+      `annotationSaveNotice:summary:${patientFolder}:${caseId}`,
+      `annotationDraft:management_reasoning:${patientFolder}:${caseId}`,
+      `annotationResult:management_reasoning:${patientFolder}:${caseId}`,
+      `annotationRevision:management_reasoning:${patientFolder}:${caseId}`,
+      `annotationSaveNotice:management_reasoning:${patientFolder}:${caseId}`,
+      `annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`,
+      `annotationRevision:abnormality_reasoning:${patientFolder}:${caseId}`,
+      dashboardDraftKey(patientFolder, caseId),
+    ];
+
+    for (const key of exactKeys) {
+      localStorage.removeItem(key);
+    }
+
+    const prefixes = [
+      `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:`,
+      `annotationSaveNotice:abnormality_reasoning:${patientFolder}:${caseId}:`,
+    ];
+
+    const keysToRemove: string[] = [];
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+
+      if (prefixes.some((prefix) => key.startsWith(prefix))) {
+        keysToRemove.push(key);
+      }
+    }
+
+    for (const key of keysToRemove) {
+      localStorage.removeItem(key);
+    }
+  } catch {
+    // ignore
+  }
+}
+
+function extractPayloadCaseId(payload: DriveReviewPayload): string | null {
+  const candidates = [
+    payload.caseSubmission?.data?.caseId,
+    payload.summary?.data?.caseId,
+    payload.managementReasoning?.data?.caseId,
+    payload.abnormalityReasoning?.data?.caseId,
+  ];
+
+  for (const candidate of candidates) {
+    const normalized = String(candidate ?? "").trim();
+    if (normalized) return normalized;
+  }
+
+  return null;
+}
+
+function hasAnyDriveReviewContent(payload: DriveReviewPayload): boolean {
+  return Boolean(
+    payload.summary?.data ||
+      payload.managementReasoning?.data ||
+      payload.abnormalityReasoning?.data ||
+      payload.caseSubmission?.data
+  );
+}
+
+function resolveReviewDashboardDraft(payload: DriveReviewPayload) {
+  const annotationState =
+    payload.caseSubmission?.data?.annotation_state &&
+    typeof payload.caseSubmission.data.annotation_state === "object" &&
+    !Array.isArray(payload.caseSubmission.data.annotation_state)
+      ? ({
+          ...(payload.caseSubmission.data.annotation_state as Record<
+            string,
+            unknown
+          >),
+        } as Record<string, unknown>)
+      : null;
+
+  const abnormalityAnswers =
+    payload.abnormalityReasoning?.data?.answers &&
+    typeof payload.abnormalityReasoning.data.answers === "object" &&
+    !Array.isArray(payload.abnormalityReasoning.data.answers)
+      ? (payload.abnormalityReasoning.data.answers as Record<string, unknown>)
+      : null;
+
+  const annotatedEpisode =
+    abnormalityAnswers?.annotatedEpisode &&
+    typeof abnormalityAnswers.annotatedEpisode === "object" &&
+    !Array.isArray(abnormalityAnswers.annotatedEpisode)
+      ? (abnormalityAnswers.annotatedEpisode as Record<string, unknown>)
+      : null;
+
+  const annotatedEpisodeIndex = Number(annotatedEpisode?.episodeIndex);
+
+  const episodeState =
+    annotationState?.episodeState &&
+    typeof annotationState.episodeState === "object" &&
+    !Array.isArray(annotationState.episodeState)
+      ? ({
+          ...(annotationState.episodeState as Record<string, unknown>),
+        } as Record<string, unknown>)
+      : null;
+
+  const detectedEpisodes = Array.isArray(episodeState?.detectedEpisodes)
+    ? [...(episodeState?.detectedEpisodes as Array<Record<string, unknown>>)]
+    : [];
+  const prioritizedEpisodeIds = Array.isArray(episodeState?.prioritizedEpisodeIds)
+    ? [
+        ...(episodeState?.prioritizedEpisodeIds as Array<string>).filter(
+          (value) => typeof value === "string" && value.trim() !== ""
+        ),
+      ]
+    : [];
+
+  let activeEpisodeId =
+    typeof episodeState?.activeEpisodeId === "string" &&
+    episodeState.activeEpisodeId.trim() !== ""
+      ? episodeState.activeEpisodeId
+      : null;
+
+  if (Number.isFinite(annotatedEpisodeIndex) && annotatedEpisodeIndex > 0) {
+    const byLabel =
+      detectedEpisodes.find(
+        (episode) =>
+          String(episode?.label ?? "").trim() ===
+          `Episode ${Math.floor(annotatedEpisodeIndex)}`
+      ) ?? null;
+
+    activeEpisodeId =
+      (typeof byLabel?.id === "string" && byLabel.id.trim() !== ""
+        ? byLabel.id
+        : null) ??
+      prioritizedEpisodeIds[Math.floor(annotatedEpisodeIndex) - 1] ??
+      activeEpisodeId;
+  }
+
+  if (!activeEpisodeId) {
+    activeEpisodeId =
+      prioritizedEpisodeIds[0] ??
+      (typeof detectedEpisodes[0]?.id === "string"
+        ? String(detectedEpisodes[0].id)
+        : null);
+  }
+
+  const nextPrioritizedEpisodeIds =
+    activeEpisodeId && !prioritizedEpisodeIds.includes(activeEpisodeId)
+      ? [...prioritizedEpisodeIds, activeEpisodeId]
+      : prioritizedEpisodeIds;
+
+  const nextEpisodeState =
+    episodeState && detectedEpisodes.length > 0
+      ? {
+          ...episodeState,
+          stage: "annotate",
+          annotateStep: "detect",
+          detectedEpisodes,
+          prioritizedEpisodeIds: nextPrioritizedEpisodeIds,
+          activeEpisodeId,
+        }
+      : null;
+
+  const nextEpisodeTaskCompletion =
+    activeEpisodeId !== null
+      ? {
+          ...(annotationState?.episodeTaskCompletion &&
+          typeof annotationState.episodeTaskCompletion === "object" &&
+          !Array.isArray(annotationState.episodeTaskCompletion)
+            ? (annotationState.episodeTaskCompletion as Record<
+                string,
+                unknown
+              >)
+            : {}),
+          [activeEpisodeId]: {
+            detect: true,
+          },
+        }
+      : annotationState?.episodeTaskCompletion &&
+          typeof annotationState.episodeTaskCompletion === "object" &&
+          !Array.isArray(annotationState.episodeTaskCompletion)
+        ? (annotationState.episodeTaskCompletion as Record<string, unknown>)
+        : undefined;
+
+  const nextDraft: DashboardCaseDraft | null =
+    annotationState || nextEpisodeState
+      ? {
+          hasSubmitted: false,
+          patientSummaryCompleted:
+            annotationState?.patientSummaryCompleted === true,
+          managementReasoningCompleted:
+            annotationState?.managementReasoningCompleted === true,
+          abnormalityReasoningCompleted:
+            Boolean(
+              String(
+                abnormalityAnswers?.abnormalityReasoningText ?? ""
+              ).trim()
+            ) || annotationState?.abnormalityReasoningCompleted === true,
+          selectedManagementEventId:
+            typeof annotationState?.selectedManagementEventId === "string"
+              ? annotationState.selectedManagementEventId
+              : undefined,
+          episodeState: nextEpisodeState as EpisodeAnnotationState | undefined,
+          episodeTaskCompletion:
+            nextEpisodeTaskCompletion as
+              | EpisodeTaskCompletionMap
+              | undefined,
+        }
+      : null;
+
+  return {
+    draft: nextDraft,
+    eventId: activeEpisodeId,
+  };
+}
+
 function hydrateReviewDraftFromDrive({
   patientFolder,
   caseId,
-  eventId,
   payload,
 }: {
   patientFolder: string;
   caseId: string;
-  eventId: string | null;
   payload: DriveReviewPayload;
 }) {
   try {
+    const reviewDraft = resolveReviewDashboardDraft(payload);
     const summaryText = String(
       payload.summary?.data?.answers &&
         typeof payload.summary.data.answers === "object" &&
@@ -334,9 +550,9 @@ function hydrateReviewDraftFromDrive({
     ).trim();
 
     if (abnormalityText) {
-      if (eventId) {
+      if (reviewDraft.eventId) {
         localStorage.setItem(
-          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${eventId}`,
+          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${reviewDraft.eventId}`,
           abnormalityText
         );
       }
@@ -346,19 +562,11 @@ function hydrateReviewDraftFromDrive({
       );
     }
 
-    const annotationState =
-      payload.caseSubmission?.data?.annotation_state &&
-      typeof payload.caseSubmission.data.annotation_state === "object" &&
-      !Array.isArray(payload.caseSubmission.data.annotation_state)
-        ? (payload.caseSubmission.data.annotation_state as Record<string, unknown>)
-        : null;
-
-    if (annotationState) {
+    if (reviewDraft.draft) {
       localStorage.setItem(
         dashboardDraftKey(patientFolder, caseId),
         JSON.stringify({
-          ...annotationState,
-          hasSubmitted: false,
+          ...reviewDraft.draft,
         } satisfies DashboardCaseDraft)
       );
     }
@@ -1556,75 +1764,69 @@ export default function DashboardPage() {
       const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
       setCaseId(caseIdFromFile);
 
-      if (reviewMode) {
+      try {
+        let participantInfo: any = {};
         try {
-          let participantInfo: any = {};
-          try {
-            const raw = localStorage.getItem("participantInfo");
-            participantInfo = raw ? JSON.parse(raw) : {};
-          } catch {
-            participantInfo = {};
-          }
+          const raw = localStorage.getItem("participantInfo");
+          participantInfo = raw ? JSON.parse(raw) : {};
+        } catch {
+          participantInfo = {};
+        }
 
-          const accessCode =
-            String(
-              participantInfo?.accessCode ??
-                localStorage.getItem("doctorAccessCode") ??
-                ""
-            ).trim() || "";
-          const doctorName = String(participantInfo?.name ?? "").trim();
-          const displayCaseId =
-            String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
+        const accessCode =
+          String(
+            participantInfo?.accessCode ??
+              localStorage.getItem("doctorAccessCode") ??
+              ""
+          ).trim() || "";
+        const doctorName = String(participantInfo?.name ?? "").trim();
+        const displayCaseId =
+          String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
 
-          if (accessCode && displayCaseId) {
-            const params = new URLSearchParams({
-              accessCode,
-              doctorName,
-              patientId: folder,
-              displayCaseId,
-            });
+        clearCaseLocalDrafts(folder, caseIdFromFile);
 
-            const reviewRes = await fetch(
-              `/api/case_review_data?${params.toString()}`,
-              { cache: "no-store" }
-            );
+        if (accessCode && displayCaseId) {
+          const params = new URLSearchParams({
+            accessCode,
+            doctorName,
+            patientId: folder,
+            displayCaseId,
+            caseId: String(caseIdFromFile).trim(),
+          });
 
-            if (reviewRes.ok) {
-              const reviewPayload =
-                (await reviewRes.json()) as DriveReviewPayload;
-              const abnormalityData =
-                reviewPayload.abnormalityReasoning?.data?.answers &&
-                typeof reviewPayload.abnormalityReasoning.data.answers ===
-                  "object" &&
-                !Array.isArray(reviewPayload.abnormalityReasoning.data.answers)
-                  ? (reviewPayload.abnormalityReasoning.data.answers as Record<
-                      string,
-                      unknown
-                    >)
-                  : null;
-              const annotatedEpisode =
-                abnormalityData?.annotatedEpisode &&
-                typeof abnormalityData.annotatedEpisode === "object" &&
-                !Array.isArray(abnormalityData.annotatedEpisode)
-                  ? (abnormalityData.annotatedEpisode as Record<string, unknown>)
-                  : null;
+          const reviewRes = await fetch(
+            `/api/case_review_data?${params.toString()}`,
+            { cache: "no-store" }
+          );
 
-              const eventId =
-                typeof annotatedEpisode?.episodeIndex === "number"
-                  ? `review-episode-${annotatedEpisode.episodeIndex}`
-                  : null;
+          if (reviewRes.ok) {
+            const reviewPayload =
+              (await reviewRes.json()) as DriveReviewPayload;
 
-              hydrateReviewDraftFromDrive({
-                patientFolder: folder,
-                caseId: caseIdFromFile,
-                eventId,
-                payload: reviewPayload,
-              });
+            if (hasAnyDriveReviewContent(reviewPayload)) {
+              const remoteCaseId = extractPayloadCaseId(reviewPayload);
+              const caseIdsMatch =
+                !remoteCaseId ||
+                remoteCaseId === String(caseIdFromFile).trim();
+
+              if (caseIdsMatch) {
+                hydrateReviewDraftFromDrive({
+                  patientFolder: folder,
+                  caseId: caseIdFromFile,
+                  payload: reviewPayload,
+                });
+              } else {
+                console.warn("Skipping Drive hydrate due to caseId mismatch.", {
+                  patientFolder: folder,
+                  localCaseId: caseIdFromFile,
+                  remoteCaseId,
+                });
+              }
             }
           }
-        } catch (error) {
-          console.error("Failed to load review content from Drive:", error);
         }
+      } catch (error) {
+        console.error("Failed to load review content from Drive:", error);
       }
 
    
@@ -2342,11 +2544,11 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             {!vitals || !hasAnyVitalData(vitals) ? (
               <div className="text-sm text-gray-500">No intraoperative data available.</div>
             ) : (
-              <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(500px,0.95fr)_minmax(0,1.85fr)]">
-                <div className="sticky top-2 z-30 min-w-0 xl:max-w-[680px]">
+              <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(420px,0.66fr)_minmax(0,1.34fr)]">
+                <div className="sticky top-2 z-30 min-w-0 xl:max-w-[560px]">
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
                     <div className="border-b bg-white px-4 py-2">
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
     <button
       type="button"
       onClick={() => {
@@ -2354,7 +2556,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         setSelectedTask("summary");
         logAction("annotation_level_click", { level: "summary" });
       }}
-      className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+      className={`shrink-0 rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition ${
         annotationLevel === "summary"
           ? "border-blue-600 bg-blue-600 text-white"
           : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
@@ -2372,7 +2574,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         }
         logAction("annotation_level_click", { level: "episode" });
       }}
-      className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+      className={`shrink-0 rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition ${
         annotationLevel === "episode"
           ? "border-blue-600 bg-blue-600 text-white"
           : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
@@ -2388,7 +2590,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     setSelectedWindow(null);
     logAction("annotation_level_click", { level: "otherEvents" });
   }}
-      className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+      className={`shrink-0 rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition ${
         annotationLevel === "otherEvents"
           ? "border-blue-600 bg-blue-600 text-white"
           : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"

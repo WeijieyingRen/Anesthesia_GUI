@@ -15,6 +15,25 @@ type LoadedSection = {
   fileName: string;
 };
 
+type ManifestSectionKey =
+  | "summary"
+  | "managementReasoning"
+  | "abnormalityReasoning"
+  | "caseSubmission";
+
+type ManifestCaseEntry = {
+  patientFolder?: string;
+  realCaseId?: string;
+  displayCaseId?: string;
+  workflow?: "annotation" | "review";
+  updatedAt?: string;
+  paths?: Partial<Record<ManifestSectionKey, string>>;
+};
+
+type CaseManifest = {
+  cases?: Record<string, ManifestCaseEntry>;
+};
+
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
 
 function sanitizePathPart(value: unknown): string {
@@ -68,6 +87,15 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
 async function resolveDoctorIdFromAccessCode(accessCode: string) {
   const map = await loadAccessCodeDoctorMap();
   return map.get(accessCode) ?? null;
+}
+
+function buildManifestCaseKey(patientId: string, caseId: string) {
+  return `${sanitizePathPart(patientId)}::${sanitizePathPart(caseId)}`;
+}
+
+function extractCaseId(value: Record<string, unknown> | null | undefined) {
+  const normalized = String(value?.case_id ?? value?.caseId ?? "").trim();
+  return normalized || null;
 }
 
 function parseRevision(fileName: string, baseName: string) {
@@ -135,6 +163,102 @@ async function loadPreferredSection(args: {
   }).catch(() => null);
 }
 
+async function loadManifestCaseEntry(
+  doctorFolder: string,
+  patientId: string,
+  caseId: string
+): Promise<ManifestCaseEntry | null> {
+  const manifest = await readJsonFromDrive({
+    objectPath: `${doctorFolder}/case_manifest.json`,
+  }).catch(() => null);
+
+  const cases =
+    manifest?.data?.cases &&
+    typeof manifest.data.cases === "object" &&
+    !Array.isArray(manifest.data.cases)
+      ? (manifest.data.cases as Record<string, unknown>)
+      : null;
+
+  if (!cases) return null;
+
+  const entry = cases[buildManifestCaseKey(patientId, caseId)];
+  if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+    return null;
+  }
+
+  return entry as ManifestCaseEntry;
+}
+
+async function loadSectionFromManifestPath({
+  objectPath,
+  workflow,
+}: {
+  objectPath: string;
+  workflow?: "annotation" | "review";
+}): Promise<LoadedSection | null> {
+  const found = await readJsonFromDrive({ objectPath }).catch(() => null);
+  if (!found?.data || typeof found.data !== "object" || Array.isArray(found.data)) {
+    return null;
+  }
+
+  const fileName = objectPath.split("/").pop() ?? "unknown.json";
+
+  return {
+    data: found.data as Record<string, unknown>,
+    objectPath,
+    workflow: workflow === "review" ? "review" : "annotation",
+    fileName,
+  };
+}
+
+async function loadSectionsFromManifest(
+  entry: ManifestCaseEntry | null
+): Promise<{
+  summary: LoadedSection | null;
+  managementReasoning: LoadedSection | null;
+  abnormalityReasoning: LoadedSection | null;
+  caseSubmission: LoadedSection | null;
+}> {
+  const paths = entry?.paths;
+
+  const workflow = entry?.workflow;
+
+  const [summary, managementReasoning, abnormalityReasoning, caseSubmission] =
+    await Promise.all([
+      paths?.summary
+        ? loadSectionFromManifestPath({
+            objectPath: paths.summary,
+            workflow,
+          })
+        : Promise.resolve(null),
+      paths?.managementReasoning
+        ? loadSectionFromManifestPath({
+            objectPath: paths.managementReasoning,
+            workflow,
+          })
+        : Promise.resolve(null),
+      paths?.abnormalityReasoning
+        ? loadSectionFromManifestPath({
+            objectPath: paths.abnormalityReasoning,
+            workflow,
+          })
+        : Promise.resolve(null),
+      paths?.caseSubmission
+        ? loadSectionFromManifestPath({
+            objectPath: paths.caseSubmission,
+            workflow,
+          })
+        : Promise.resolve(null),
+    ]);
+
+  return {
+    summary,
+    managementReasoning,
+    abnormalityReasoning,
+    caseSubmission,
+  };
+}
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -142,10 +266,14 @@ export async function GET(req: Request) {
     const doctorName = String(searchParams.get("doctorName") ?? "").trim();
     const patientId = String(searchParams.get("patientId") ?? "").trim();
     const displayCaseId = String(searchParams.get("displayCaseId") ?? "").trim();
+    const caseId = String(searchParams.get("caseId") ?? "").trim();
 
-    if (!accessCode || !patientId || !displayCaseId) {
+    if (!accessCode || !patientId || !displayCaseId || !caseId) {
       return NextResponse.json(
-        { ok: false, error: "Missing accessCode, patientId, or displayCaseId." },
+        {
+          ok: false,
+          error: "Missing accessCode, patientId, displayCaseId, or caseId.",
+        },
         { status: 400 }
       );
     }
@@ -160,39 +288,79 @@ export async function GET(req: Request) {
 
     const doctorFolder = `${sanitizePathPart(doctorName || doctorId)}_${sanitizePathPart(accessCode)}`;
     const patientCaseFolder = `patient_${sanitizePathPart(patientId)}_case_${sanitizePathPart(displayCaseId)}`;
+    const manifestEntry = await loadManifestCaseEntry(
+      doctorFolder,
+      patientId,
+      caseId
+    );
 
-    const [summary, managementReasoning, abnormalityReasoning, caseSubmission] =
-      await Promise.all([
-        loadPreferredSection({
-          doctorFolder,
-          patientCaseFolder,
-          section: "summary",
-          baseName: "summary",
-        }),
-        loadPreferredSection({
-          doctorFolder,
-          patientCaseFolder,
-          section: "management_reasoning",
-          baseName: "management_reasoning",
-        }),
-        loadPreferredSection({
-          doctorFolder,
-          patientCaseFolder,
-          section: "abnormality_reasoning",
-          baseName: "abnormality_reasoning",
-        }),
-        loadPreferredSection({
-          doctorFolder,
-          patientCaseFolder,
-          section: "case_submission",
-          baseName: "case_summary",
-        }),
+    let { summary, managementReasoning, abnormalityReasoning, caseSubmission } =
+      await loadSectionsFromManifest(manifestEntry);
+
+    if (!caseSubmission) {
+      caseSubmission = await loadPreferredSection({
+        doctorFolder,
+        patientCaseFolder,
+        section: "case_submission",
+        baseName: "case_summary",
+      });
+    }
+
+    const matchedCaseId = extractCaseId(caseSubmission?.data);
+    const caseMatches = matchedCaseId === caseId;
+
+    if (!caseMatches) {
+      return NextResponse.json({
+        ok: true,
+        doctorFolder,
+        patientCaseFolder,
+        matched: false,
+        reason: matchedCaseId
+          ? "case_id_mismatch"
+          : "no_matching_case_submission",
+        summary: null,
+        managementReasoning: null,
+        abnormalityReasoning: null,
+        caseSubmission: null,
+      });
+    }
+
+    if (!summary || !managementReasoning || !abnormalityReasoning) {
+      const fallbackSections = await Promise.all([
+        summary
+          ? Promise.resolve(summary)
+          : loadPreferredSection({
+              doctorFolder,
+              patientCaseFolder,
+              section: "summary",
+              baseName: "summary",
+            }),
+        managementReasoning
+          ? Promise.resolve(managementReasoning)
+          : loadPreferredSection({
+              doctorFolder,
+              patientCaseFolder,
+              section: "management_reasoning",
+              baseName: "management_reasoning",
+            }),
+        abnormalityReasoning
+          ? Promise.resolve(abnormalityReasoning)
+          : loadPreferredSection({
+              doctorFolder,
+              patientCaseFolder,
+              section: "abnormality_reasoning",
+              baseName: "abnormality_reasoning",
+            }),
       ]);
+
+      [summary, managementReasoning, abnormalityReasoning] = fallbackSections;
+    }
 
     return NextResponse.json({
       ok: true,
       doctorFolder,
       patientCaseFolder,
+      matched: true,
       summary,
       managementReasoning,
       abnormalityReasoning,
