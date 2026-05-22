@@ -75,6 +75,14 @@ function revisionKey(patientId: string, caseId: string) {
   return `annotationRevision:summary:${patientId}:${caseId}`;
 }
 
+function saveNoticeKey(patientId: string, caseId: string) {
+  return `annotationSaveNotice:summary:${patientId}:${caseId}`;
+}
+
+function successSaveMessage() {
+  return "Saved. You can continue to revise it.";
+}
+
 function nextRevisionNumber(patientId: string, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
@@ -160,9 +168,36 @@ export default function SummaryPanel({
     voiceBaseTextRef.current = "";
 
     try {
-      setSummaryText(localStorage.getItem(draftKey(patientId, caseId)) ?? "");
+      const draftText = localStorage.getItem(draftKey(patientId, caseId)) ?? "";
+      const savedResult = localStorage.getItem(
+        `annotationResult:summary:${patientId}:${caseId}`
+      );
+      let fallbackText = "";
+      if (savedResult) {
+        try {
+          const parsed = JSON.parse(savedResult);
+          fallbackText = String(
+            parsed?.summaryText ??
+              parsed?.answers?.summaryText ??
+              ""
+          );
+        } catch {
+          fallbackText = "";
+        }
+      }
+      setSummaryText(draftText || fallbackText);
+      const savedNotice = localStorage.getItem(saveNoticeKey(patientId, caseId));
+      if (savedResult || savedNotice) {
+        setSaveStatus("success");
+        setSaveMessage(savedNotice || successSaveMessage());
+      } else {
+        setSaveStatus("idle");
+        setSaveMessage("");
+      }
     } catch {
       setSummaryText("");
+      setSaveStatus("idle");
+      setSaveMessage("");
     }
   }, [caseId, eventId, patientId]);
 
@@ -255,8 +290,6 @@ export default function SummaryPanel({
 
       startVoiceTimer();
       setRecording(true);
-      setSaveStatus("idle");
-      setSaveMessage("");
     } catch {
       stopVoiceTimer();
       setRecording(false);
@@ -381,8 +414,15 @@ export default function SummaryPanel({
         // ignore
       }
 
+      const successMessage = successSaveMessage();
+      try {
+        localStorage.setItem(saveNoticeKey(patientId, caseId), successMessage);
+      } catch {
+        // ignore
+      }
+
       setSaveStatus("success");
-      setSaveMessage("Summary saved successfully to cloud storage.");
+      setSaveMessage(successMessage);
       onSaveAndNextStep?.();
     } catch (error: any) {
       setSaveStatus("error");
@@ -413,6 +453,13 @@ export default function SummaryPanel({
 
     voiceStartMsRef.current = null;
     voiceDurationMsRef.current = 0;
+
+    try {
+      localStorage.removeItem(saveNoticeKey(patientId, caseId));
+      localStorage.removeItem(`annotationResult:summary:${patientId}:${caseId}`);
+    } catch {
+      // ignore
+    }
   }
 
   return (

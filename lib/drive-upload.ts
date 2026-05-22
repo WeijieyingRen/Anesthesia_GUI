@@ -9,6 +9,7 @@ type ServiceAccountCredentials = {
 type DriveFile = {
   id: string;
   name?: string;
+  mimeType?: string;
   webViewLink?: string;
 };
 
@@ -25,6 +26,13 @@ export type DriveJsonReadResult = {
   fileName: string;
   objectPath: string;
   data: Record<string, unknown>;
+  webViewLink?: string;
+};
+
+export type DriveEntry = {
+  id: string;
+  name?: string;
+  mimeType?: string;
   webViewLink?: string;
 };
 
@@ -241,6 +249,23 @@ async function findDriveFileByName(
   );
 
   return result.files?.[0] ?? null;
+}
+
+async function listDriveFiles(parentFolderId: string): Promise<DriveFile[]> {
+  const params = new URLSearchParams({
+    q: `'${escapeDriveQueryValue(parentFolderId)}' in parents and trashed=false`,
+    includeItemsFromAllDrives: "true",
+    supportsAllDrives: "true",
+    corpora: "allDrives",
+    pageSize: "1000",
+    fields: "files(id,name,mimeType,webViewLink)",
+  });
+
+  const result = await driveRequest<{ files?: DriveFile[] }>(
+    `${DRIVE_API}/files?${params.toString()}`
+  );
+
+  return result.files ?? [];
 }
 
 async function getDriveFileJson(fileId: string): Promise<Record<string, unknown>> {
@@ -487,4 +512,46 @@ export async function readJsonFromDrive({
     data,
     webViewLink: file.webViewLink,
   };
+}
+
+export async function listDriveEntries({
+  objectPath,
+}: {
+  objectPath?: string;
+} = {}): Promise<DriveEntry[]> {
+  const rootFolderId = process.env.DRIVE_FOLDER_ID;
+
+  if (!isDriveUploadEnabled()) {
+    throw new Error("DRIVE_ENABLED is not true.");
+  }
+
+  if (!rootFolderId) {
+    throw new Error("DRIVE_FOLDER_ID is missing.");
+  }
+
+  let currentFolderId = rootFolderId;
+
+  if (objectPath) {
+    const pathParts = objectPath.split("/").filter(Boolean);
+
+    for (const rawPart of pathParts) {
+      const part = sanitizeDrivePathPart(rawPart);
+      const existing = await findDriveFileByName(
+        currentFolderId,
+        part,
+        FOLDER_MIME_TYPE
+      );
+
+      if (!existing) return [];
+      currentFolderId = existing.id;
+    }
+  }
+
+  const files = await listDriveFiles(currentFolderId);
+  return files.map((file) => ({
+    id: file.id,
+    name: file.name,
+    mimeType: file.mimeType,
+    webViewLink: file.webViewLink,
+  }));
 }

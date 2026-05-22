@@ -19,6 +19,7 @@ type SubmitPayload = {
   accessCode?: string | null;
   patientId?: string | null;
   patientFolder?: string | null;
+  displayCaseId?: string | number | null;
 
   panel: string;
   action?: string;
@@ -48,6 +49,7 @@ type SubmitPayload = {
   confidence?: unknown;
 
   annotationState?: Record<string, unknown> | null;
+  workflowMode?: "annotation" | "review" | null;
 
   [key: string]: unknown;
 };
@@ -97,10 +99,36 @@ export async function submitAnnotation(payload: SubmitPayload) {
   const pageOpenedAt = payload.pageOpenedAt ?? payload.panelOpenedAt ?? null;
   const panelOpenedAt = payload.panelOpenedAt ?? payload.pageOpenedAt ?? null;
 
+  let workflowMode = payload.workflowMode ?? null;
+  let displayCaseId = payload.displayCaseId ?? null;
+  if (!workflowMode) {
+    try {
+      const storedWorkflowMode = localStorage.getItem("currentWorkflowMode");
+      if (
+        storedWorkflowMode === "annotation" ||
+        storedWorkflowMode === "review"
+      ) {
+        workflowMode = storedWorkflowMode;
+      }
+    } catch {
+      workflowMode = null;
+    }
+  }
+
+  if (displayCaseId === null || displayCaseId === undefined || displayCaseId === "") {
+    try {
+      displayCaseId = localStorage.getItem("currentDisplayCaseId");
+    } catch {
+      displayCaseId = null;
+    }
+  }
+
   const normalizedPayload: SubmitPayload = {
     ...payload,
     patientId,
     patientFolder,
+    displayCaseId,
+    workflowMode,
     pageOpenedAt,
     panelOpenedAt,
     submittedAt,

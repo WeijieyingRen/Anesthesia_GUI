@@ -14,11 +14,18 @@ interface CaseMeta {
   id: string;
   folder: string;
   status: CaseStatus;
+  displayCaseId: number;
 }
 
 type GameData = {
   currentPatientIndex: number;
-  selectedPatients: Array<{ id: string; folder: string; status?: CaseStatus }>;
+  selectedPatients: Array<{
+    id: string;
+    folder: string;
+    status?: CaseStatus;
+    workflowMode?: "annotation" | "review";
+    displayCaseId?: number;
+  }>;
   diagnoses: Array<string | null>;
   startTime: string;
 };
@@ -49,7 +56,7 @@ function getStatusBadgeClass(status: CaseStatus): string {
 }
 
 function getButtonLabel(status: CaseStatus): string {
-  if (status === "completed") return "Review";
+  if (status === "completed") return "Review and Revise";
   if (status === "in_progress") return "Continue";
   return "Start";
 }
@@ -216,7 +223,7 @@ export default function PatientList() {
           loadAllCaseStatuses(accessCode, doctorName),
         ]);
 
-        const metas: CaseMeta[] = folders.map((folder) => {
+        const metas: CaseMeta[] = folders.map((folder, index) => {
           const item = statusMap[folder];
           let status: CaseStatus = "not_started";
 
@@ -230,6 +237,7 @@ export default function PatientList() {
             id: folder,
             folder,
             status,
+            displayCaseId: index + 1,
           };
         });
 
@@ -266,6 +274,9 @@ export default function PatientList() {
         id: c.id,
         folder: c.folder,
         status: c.status,
+        workflowMode:
+          c.status === "completed" ? "review" : "annotation",
+        displayCaseId: c.displayCaseId,
       })),
       diagnoses: Array(selectedCases.length).fill(null),
       startTime: new Date().toISOString(),
@@ -274,6 +285,8 @@ export default function PatientList() {
 
   const handleStartSingleCase = (caseItem: CaseMeta) => {
     const startIndex = cases.findIndex((c) => c.folder === caseItem.folder);
+    const workflowMode =
+      caseItem.status === "completed" ? "review" : "annotation";
   
     const gameData: GameData = {
       currentPatientIndex: startIndex >= 0 ? startIndex : 0,
@@ -281,6 +294,9 @@ export default function PatientList() {
         id: c.id,
         folder: c.folder,
         status: c.status,
+        workflowMode:
+          c.folder === caseItem.folder ? workflowMode : c.status === "completed" ? "review" : "annotation",
+        displayCaseId: c.displayCaseId,
       })),
       diagnoses: Array(cases.length).fill(null),
       startTime: new Date().toISOString(),

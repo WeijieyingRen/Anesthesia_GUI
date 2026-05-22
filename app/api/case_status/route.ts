@@ -1,11 +1,25 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
-import { readJsonFromDrive } from "@/lib/drive-upload";
+import {
+  listDriveEntries,
+  readJsonFromDrive,
+  type DriveJsonReadResult,
+} from "@/lib/drive-upload";
 
 type AccessCodeRow = {
   doctor_id?: string;
   access_code?: string;
+};
+
+type CaseStatusIndexEntry = {
+  patient_id?: string;
+  case_id?: string | number | null;
+  inProgress?: boolean;
+  completed?: boolean;
+  updated_at?: string;
+  completed_at?: string | null;
+  last_panel?: string;
 };
 
 function sanitizePathPart(value: unknown): string {
@@ -74,16 +88,124 @@ async function resolveDoctorIdFromAccessCode(
   }
 }
 
-function buildDoctorFolder(doctorId: string, accessCode: string) {
-  return `${sanitizePathPart(doctorId)}_${sanitizePathPart(accessCode)}`;
+function buildCombinedDoctorFolder(doctorFolderName: string, accessCode: string) {
+  return `${doctorFolderName}_${sanitizePathPart(accessCode)}`;
 }
 
-function buildNamedDoctorFolder(
-  doctorName: string | null | undefined,
+function buildNestedDoctorFolder(doctorFolderName: string, accessCode: string) {
+  return `${doctorFolderName}/${sanitizePathPart(accessCode)}`;
+}
+
+function extractPatients(
+  found: DriveJsonReadResult | null
+): Record<string, CaseStatusIndexEntry> {
+  if (!found?.data?.patients || typeof found.data.patients !== "object") {
+    return {};
+  }
+
+  return found.data.patients as Record<string, CaseStatusIndexEntry>;
+}
+
+function mergePatientStatus(
+  current: CaseStatusIndexEntry | undefined,
+  incoming: CaseStatusIndexEntry
+): CaseStatusIndexEntry {
+  if (!current) return incoming;
+
+  const currentUpdatedAt = String(current.updated_at ?? "");
+  const incomingUpdatedAt = String(incoming.updated_at ?? "");
+  const incomingIsNewer = incomingUpdatedAt > currentUpdatedAt;
+
+  return {
+    ...current,
+    ...incoming,
+    inProgress:
+      Boolean(current.inProgress) || Boolean(incoming.inProgress),
+    completed:
+      Boolean(current.completed) || Boolean(incoming.completed),
+    updated_at: incomingIsNewer
+      ? incoming.updated_at ?? current.updated_at
+      : current.updated_at ?? incoming.updated_at,
+    completed_at:
+      current.completed_at ?? incoming.completed_at ?? null,
+    last_panel: incomingIsNewer
+      ? incoming.last_panel ?? current.last_panel
+      : current.last_panel ?? incoming.last_panel,
+    case_id: current.case_id ?? incoming.case_id ?? null,
+    patient_id: current.patient_id ?? incoming.patient_id,
+  };
+}
+
+async function readExistingIndexes(
+  accessCode: string,
   doctorId: string,
-  accessCode: string
+  doctorName: string
 ) {
-  return `${sanitizePathPart(doctorName || doctorId)}_${sanitizePathPart(accessCode)}`;
+  const sanitizedAccessCode = sanitizePathPart(accessCode);
+  const folderNames = [
+    sanitizePathPart(doctorName || doctorId),
+    sanitizePathPart(doctorId),
+  ].filter(Boolean);
+
+  const candidatePaths = new Set<string>();
+
+  for (const folderName of folderNames) {
+    candidatePaths.add(
+      `${buildNestedDoctorFolder(folderName, sanitizedAccessCode)}/case_status_index.json`
+    );
+    candidatePaths.add(
+      `${buildCombinedDoctorFolder(folderName, sanitizedAccessCode)}/case_status_index.json`
+    );
+  }
+
+  try {
+    const rootEntries = await listDriveEntries();
+
+    for (const entry of rootEntries) {
+      if (!entry.name) continue;
+
+      if (entry.name.endsWith(`_${sanitizedAccessCode}`)) {
+        candidatePaths.add(`${entry.name}/case_status_index.json`);
+      }
+
+      const nestedFolderEntries = await listDriveEntries({
+        objectPath: entry.name,
+      });
+      if (
+        nestedFolderEntries.some(
+          (child) => child.name === sanitizedAccessCode
+        )
+      ) {
+        candidatePaths.add(
+          `${entry.name}/${sanitizedAccessCode}/case_status_index.json`
+        );
+      }
+    }
+  } catch (error) {
+    console.error("Failed to enumerate Drive folders for case status:", error);
+  }
+
+  const foundIndexes: DriveJsonReadResult[] = [];
+
+  for (const objectPath of candidatePaths) {
+    try {
+      const found = await readJsonFromDrive({ objectPath });
+      if (!found) continue;
+
+      const matchesDoctor =
+        String(found.data?.doctor_id ?? "").trim() === doctorId;
+      const matchesAccessCode =
+        String(found.data?.access_code ?? "").trim() === accessCode;
+
+      if (matchesDoctor && matchesAccessCode) {
+        foundIndexes.push(found);
+      }
+    } catch (error) {
+      console.error(`Failed to read Drive index ${objectPath}:`, error);
+    }
+  }
+
+  return foundIndexes;
 }
 
 export async function GET(req: Request) {
@@ -108,51 +230,32 @@ export async function GET(req: Request) {
       );
     }
 
-    const doctorFolder = buildNamedDoctorFolder(doctorName, doctorId, accessCode);
-    const legacyDoctorFolder = buildDoctorFolder(doctorId, accessCode);
-    let found = null;
+    const foundIndexes = await readExistingIndexes(
+      accessCode,
+      doctorId,
+      doctorName
+    );
 
-    try {
-      found =
-        (await readJsonFromDrive({
-          objectPath: `${doctorFolder}/case_status_index.json`,
-        })) ??
-        (doctorFolder === legacyDoctorFolder
-          ? null
-          : await readJsonFromDrive({
-              objectPath: `${legacyDoctorFolder}/case_status_index.json`,
-            }));
-    } catch (error) {
-      console.error("Failed to read Drive case status index:", error);
-    }
+    const mergedPatients: Record<string, CaseStatusIndexEntry> = {};
+    for (const found of foundIndexes) {
+      const patients = extractPatients(found);
 
-    if (found) {
-      return NextResponse.json({
-        ok: true,
-        found: true,
-        source: "google_drive",
-        doctorId,
-        accessCode,
-        doctorFolder,
-        patients:
-          found.data?.patients &&
-          typeof found.data.patients === "object" &&
-          !Array.isArray(found.data.patients)
-            ? found.data.patients
-            : {},
-        raw: found.data,
-      });
+      for (const [patientId, entry] of Object.entries(patients)) {
+        mergedPatients[patientId] = mergePatientStatus(
+          mergedPatients[patientId],
+          entry
+        );
+      }
     }
 
     return NextResponse.json({
       ok: true,
-      found: false,
-      source: "local_access_code_only",
+      found: foundIndexes.length > 0,
+      source: foundIndexes.length > 0 ? "google_drive_merged" : "none",
       doctorId,
       accessCode,
-      doctorFolder,
-      patients: {},
-      raw: null,
+      patients: mergedPatients,
+      matchedIndexes: foundIndexes.map((entry) => entry.objectPath),
     });
   } catch (error) {
     console.error("case_status GET error:", error);

@@ -22,6 +22,7 @@ type SubmitBody = {
 
   patientId?: string | null;
   patientFolder?: string | null;
+  displayCaseId?: string | number | null;
 
   caseId?: string | number | null;
   eventId?: string | number | null;
@@ -60,6 +61,7 @@ type SubmitBody = {
   confidence?: unknown;
 
   annotationState?: Record<string, unknown> | null;
+  workflowMode?: "annotation" | "review" | null;
 
   [key: string]: unknown;
 };
@@ -214,6 +216,16 @@ function normalizePatientId(body: SubmitBody): string {
   return sanitizePathPart(
     body.patientId ?? body.patientFolder ?? body.caseId ?? "unknown_patient"
   );
+}
+
+function normalizeDisplayCaseId(body: SubmitBody): string {
+  return sanitizePathPart(body.displayCaseId ?? "unknown_case");
+}
+
+function buildPatientCaseFolderName(body: SubmitBody): string {
+  const patientId = normalizePatientId(body);
+  const caseId = normalizeDisplayCaseId(body);
+  return `patient_${patientId}_case_${caseId}`;
 }
 
 function normalizeEpisodeFolder(body: SubmitBody): string {
@@ -460,36 +472,74 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   };
 }
 
+async function resolveWorkflowMode(
+  body: SubmitBody,
+  doctorId: string,
+  accessCode: string,
+  patientId: string
+): Promise<"annotation" | "review"> {
+  if (body.workflowMode === "annotation" || body.workflowMode === "review") {
+    return body.workflowMode;
+  }
+
+  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
+  const existing = await readJsonFromDrive({
+    objectPath: `${doctorFolder}/case_status_index.json`,
+  });
+  const patients =
+    existing?.data?.patients &&
+    typeof existing.data.patients === "object" &&
+    !Array.isArray(existing.data.patients)
+      ? (existing.data.patients as Record<string, unknown>)
+      : {};
+
+  const patientStatus =
+    patients[patientId] &&
+    typeof patients[patientId] === "object" &&
+    !Array.isArray(patients[patientId])
+      ? (patients[patientId] as Record<string, unknown>)
+      : null;
+
+  return patientStatus?.completed === true ? "review" : "annotation";
+}
+
 async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
   const doctorId = await normalizeDoctorId(body);
   const accessCode = normalizeAccessCode(body);
   const patientId = normalizePatientId(body);
+  const patientCaseFolder = buildPatientCaseFolderName(body);
 
   const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
   const target = detectStorageTarget(body);
+  const workflowMode = await resolveWorkflowMode(
+    body,
+    doctorId,
+    accessCode,
+    patientId
+  );
 
   if (target.section === "summary") {
-    return `${doctorFolder}/${patientId}/summary/${target.fileName}`;
+    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/summary/${target.fileName}`;
   }
 
   if (target.section === "management_reasoning") {
-    return `${doctorFolder}/${patientId}/management_reasoning/${target.fileName}`;
+    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/management_reasoning/${target.fileName}`;
   }
 
   if (target.section === "case_submission") {
-    return `${doctorFolder}/${patientId}/case_submission/${target.fileName}`;
+    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/case_submission/${target.fileName}`;
   }
 
   if (target.section === "abnormality_reasoning") {
     if (target.episodeFolder && target.taskFolder) {
-      return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.episodeFolder}/${target.taskFolder}/${target.fileName}`;
+      return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/abnormality_reasoning/${target.episodeFolder}/${target.taskFolder}/${target.fileName}`;
     }
 
     if (target.episodeFolder && !target.taskFolder) {
-      return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.episodeFolder}/${target.fileName}`;
+      return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/abnormality_reasoning/${target.episodeFolder}/${target.fileName}`;
     }
 
-    return `${doctorFolder}/${patientId}/abnormality_reasoning/${target.fileName}`;
+    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/abnormality_reasoning/${target.fileName}`;
   }
 
   throw new Error("Unsupported Drive storage target.");

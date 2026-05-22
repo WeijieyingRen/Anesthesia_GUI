@@ -35,10 +35,7 @@ import { prepareMedicationData } from "@/lib/prepare_raw_data/medications";
 import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
-import {
-  SPEECH_LANGUAGE_OPTIONS,
-  getSpeechRecognitionLanguage,
-} from "@/lib/speech-language";
+import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
 
 type CsvRow = Record<string, any>;
 
@@ -54,6 +51,9 @@ type GameData = {
   currentPatientIndex: number;
   selectedPatients: Array<{
     folder: string;
+    status?: "not_started" | "in_progress" | "completed";
+    workflowMode?: "annotation" | "review";
+    displayCaseId?: number;
   }>;
   diagnoses?: any[];
   startTime?: string;
@@ -62,6 +62,8 @@ type GameData = {
 type StoredSelected = {
   folder: string;
   status?: "not_started" | "in_progress" | "completed";
+  workflowMode?: "annotation" | "review";
+  displayCaseId?: number;
 };
 
 type LocalDriveExportEntry = {
@@ -259,8 +261,110 @@ type DashboardCaseDraft = {
   hasSubmitted?: boolean;
 };
 
+type DriveReviewPayload = {
+  ok?: boolean;
+  summary?: { data?: Record<string, unknown> | null } | null;
+  managementReasoning?: { data?: Record<string, unknown> | null } | null;
+  abnormalityReasoning?: { data?: Record<string, unknown> | null } | null;
+  caseSubmission?: { data?: Record<string, unknown> | null } | null;
+};
+
 function dashboardDraftKey(patientFolder: string, caseId: string) {
   return `dashboardDraft:${patientFolder}:${caseId}`;
+}
+
+function hydrateReviewDraftFromDrive({
+  patientFolder,
+  caseId,
+  eventId,
+  payload,
+}: {
+  patientFolder: string;
+  caseId: string;
+  eventId: string | null;
+  payload: DriveReviewPayload;
+}) {
+  try {
+    const summaryText = String(
+      payload.summary?.data?.answers &&
+        typeof payload.summary.data.answers === "object" &&
+        !Array.isArray(payload.summary.data.answers)
+        ? (payload.summary.data.answers as Record<string, unknown>).summaryText ?? ""
+        : ""
+    ).trim();
+
+    if (summaryText) {
+      localStorage.setItem(
+        `annotationDraft:summary:${patientFolder}:${caseId}`,
+        summaryText
+      );
+      localStorage.setItem(
+        `annotationResult:summary:${patientFolder}:${caseId}`,
+        JSON.stringify(payload.summary?.data ?? {})
+      );
+    }
+
+    const managementText = String(
+      payload.managementReasoning?.data?.answers &&
+        typeof payload.managementReasoning.data.answers === "object" &&
+        !Array.isArray(payload.managementReasoning.data.answers)
+        ? (payload.managementReasoning.data.answers as Record<string, unknown>)
+            .managementReasoningText ?? ""
+        : ""
+    ).trim();
+
+    if (managementText) {
+      localStorage.setItem(
+        `annotationDraft:management_reasoning:${patientFolder}:${caseId}`,
+        managementText
+      );
+      localStorage.setItem(
+        `annotationResult:management_reasoning:${patientFolder}:${caseId}`,
+        JSON.stringify(payload.managementReasoning?.data ?? {})
+      );
+    }
+
+    const abnormalityText = String(
+      payload.abnormalityReasoning?.data?.answers &&
+        typeof payload.abnormalityReasoning.data.answers === "object" &&
+        !Array.isArray(payload.abnormalityReasoning.data.answers)
+        ? (payload.abnormalityReasoning.data.answers as Record<string, unknown>)
+            .abnormalityReasoningText ?? ""
+        : ""
+    ).trim();
+
+    if (abnormalityText) {
+      if (eventId) {
+        localStorage.setItem(
+          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${eventId}`,
+          abnormalityText
+        );
+      }
+      localStorage.setItem(
+        `annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`,
+        JSON.stringify(payload.abnormalityReasoning?.data ?? {})
+      );
+    }
+
+    const annotationState =
+      payload.caseSubmission?.data?.annotation_state &&
+      typeof payload.caseSubmission.data.annotation_state === "object" &&
+      !Array.isArray(payload.caseSubmission.data.annotation_state)
+        ? (payload.caseSubmission.data.annotation_state as Record<string, unknown>)
+        : null;
+
+    if (annotationState) {
+      localStorage.setItem(
+        dashboardDraftKey(patientFolder, caseId),
+        JSON.stringify({
+          ...annotationState,
+          hasSubmitted: false,
+        } satisfies DashboardCaseDraft)
+      );
+    }
+  } catch (error) {
+    console.error("Failed to hydrate review draft from Drive:", error);
+  }
 }
 
 function getManagementEventId(event: ManagementEvent | null | undefined) {
@@ -760,6 +864,7 @@ export default function DashboardPage() {
   const [selectedPatients, setSelectedPatients] = useState<StoredSelected[]>([]);
   const currentPatient = selectedPatients[currentPatientIndex];
   const currentCaseLabel = currentPatient?.folder ?? "unknown_patient";
+  const currentDisplayCaseId = currentPatient?.displayCaseId ?? currentPatientIndex + 1;
   const [caseId, setCaseId] = useState("unknown_case");
   const [demographic, setDemographic] = useState<PatientDemographic | null>(null);
   const [surgeryContext, setSurgeryContext] = useState<SurgeryContext | null>(null);
@@ -780,6 +885,7 @@ export default function DashboardPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [isReviewMode, setIsReviewMode] = useState(false);
   const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
   const [abnormalityReasoningCompleted, setAbnormalityReasoningCompleted] =
     useState(false);
@@ -796,8 +902,6 @@ export default function DashboardPage() {
   const [managementEvents, setManagementEvents] = useState<ManagementEvent[]>([]);
   const [selectedManagementEvent, setSelectedManagementEvent] =
     useState<ManagementEvent | null>(null);
-  const [speechRecognitionLanguage, setSpeechRecognitionLanguage] =
-    useState("en-US");
   const [dashboardBackStack, setDashboardBackStack] = useState<number[]>([]);
   const [episodeState, setEpisodeState] = useState<EpisodeAnnotationState>(
     buildEmptyEpisodeState()
@@ -806,6 +910,7 @@ export default function DashboardPage() {
     useState<EpisodeTaskCompletionMap>({});
 
   const [preopInfoOpen, setPreopInfoOpen] = useState(false);
+  const isCaseLocked = hasSubmitted && !isReviewMode;
 
   const voiceNote = useVoiceNote();
 
@@ -921,20 +1026,25 @@ export default function DashboardPage() {
   }, [activeEpisode]);
 
   function resetEpisodeWorkflow() {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     setEpisodeState(buildEmptyEpisodeState());
     setEpisodeTaskCompletion({});
     setAbnormalityReasoningCompleted(false);
     setSelectedWindow(null);
   }
 
-  const canSubmitFinal =
-  patientSummaryCompleted &&
-  abnormalityReasoningCompleted &&
-  managementReasoningCompleted &&
-  episodeState.prioritizedEpisodeIds.length > 0;
+  const canSubmitFinal = isReviewMode
+    ? true
+    : patientSummaryCompleted &&
+      abnormalityReasoningCompleted &&
+      managementReasoningCompleted &&
+      episodeState.prioritizedEpisodeIds.length > 0;
 
   function validateBeforeFinalSubmit(): string | null {
+    if (isReviewMode) {
+      return null;
+    }
+
     if (!patientSummaryCompleted) {
       return "Please complete and save the patient-level summary before submitting.";
     }
@@ -955,7 +1065,7 @@ export default function DashboardPage() {
   }
 
   function handleCreateEpisodeFromWindow(window: SelectedWindow) {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     setEpisodeState((prev) => {
       const duplicate = prev.detectedEpisodes.some(
         (e) =>
@@ -1011,7 +1121,7 @@ export default function DashboardPage() {
   }
 
   function handleDeleteDetectedEpisode(episodeId: string) {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     setEpisodeState((prev) => {
       const filteredDetected = prev.detectedEpisodes.filter((e) => e.id !== episodeId);
       const renumberedDetected = renumberDetectedEpisodes(filteredDetected);
@@ -1054,7 +1164,7 @@ export default function DashboardPage() {
   }
 
   function handleTogglePrioritizedEpisode(episodeId: string) {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     setEpisodeState((prev) => {
       const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
 
@@ -1093,7 +1203,7 @@ export default function DashboardPage() {
 
   
   async function handleAdvanceEpisodeStage() {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     if (episodeState.stage === "select_all") {
       if (episodeState.detectedEpisodes.length === 0) {
         setSubmitError("Please detect at least one episode before continuing.");
@@ -1142,7 +1252,7 @@ export default function DashboardPage() {
     }
   }
   function handleTimelineWindowCreate(window: SelectedWindow) {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     if (annotationLevel === "episode") {
       if (episodeState.stage === "annotate") {
         if (episodeState.activeEpisodeId) {
@@ -1163,7 +1273,7 @@ export default function DashboardPage() {
   }
 
   function handleSelectedWindowChange(nextWindow: SelectedWindow | null) {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     const previousWindow = selectedWindow;
   
     setSelectedWindow(nextWindow);
@@ -1229,7 +1339,7 @@ export default function DashboardPage() {
   }
 
   function handleSaveAndNextStep(task: AnnotationTaskKey) {
-    if (hasSubmitted) return;
+    if (isCaseLocked) return;
     if (!activeEpisode) return;
 
     setEpisodeTaskCompletion((prev) => ({
@@ -1269,25 +1379,15 @@ export default function DashboardPage() {
     setDashboardBackStack([]);
 
     if (gameData.selectedPatients?.length) {
-      void loadPatient(gameData.selectedPatients[idx].folder);
+      void loadPatient(
+        gameData.selectedPatients[idx].folder,
+        gameData.selectedPatients[idx]
+      );
     } else {
       setLoading(false);
       setLoadError("No selected patients found.");
     }
   }, [router]);
-
-  useEffect(() => {
-    setSpeechRecognitionLanguage(getSpeechRecognitionLanguage());
-  }, []);
-
-  function handleSpeechRecognitionLanguageChange(language: string) {
-    setSpeechRecognitionLanguage(language);
-    try {
-      localStorage.setItem("speechRecognitionLanguage", language);
-    } catch {
-      // ignore storage failures
-    }
-  }
 
   function focusManagementEventOnTimeline() {
     if (!selectedManagementEvent) return;
@@ -1347,7 +1447,7 @@ export default function DashboardPage() {
       setDashboardBackStack((prev) => [...prev, currentPatientIndex]);
     }
 
-    setCurrentPatientIndex(nextIndex);
+      setCurrentPatientIndex(nextIndex);
     persistCurrentPatientIndex(nextIndex);
     await loadPatient(nextPatient.folder);
   }
@@ -1375,6 +1475,12 @@ export default function DashboardPage() {
     }
 
     if (!hasSubmitted) {
+      if (isReviewMode) {
+        logAction("next_in_review_mode_without_validation");
+        await navigateToPatientIndex(nextIndex, { pushCurrentToBackStack: true });
+        return;
+      }
+
       const validationError = validateBeforeFinalSubmit();
 
       if (!validationError) {
@@ -1394,22 +1500,41 @@ export default function DashboardPage() {
         logAction("next_without_submit", { reason: validationError });
       }
     } else {
-      logAction("next_after_submit");
+      logAction(isReviewMode ? "next_in_review_mode" : "next_after_submit");
     }
 
     await navigateToPatientIndex(nextIndex, { pushCurrentToBackStack: true });
   }
 
-  async function loadPatient(folder: string) {
+  async function loadPatient(
+    folder: string,
+    patientMetaOverride?: StoredSelected | null
+  ) {
     try {
       sessionStartRef.current = performance.now();
       sessionStartUtcRef.current = new Date().toISOString();
       sessionStartLocalRef.current = getLocalTimestamp();
       actionLogRef.current = [];
-      const patientMeta = selectedPatients.find(
-        (patient) => patient.folder === folder
-      );
-      setHasSubmitted(patientMeta?.status === "completed");
+      const patientMeta =
+        patientMetaOverride ??
+        selectedPatients.find((patient) => patient.folder === folder);
+      const reviewMode =
+        patientMeta?.workflowMode === "review" ||
+        patientMeta?.status === "completed";
+      setHasSubmitted(false);
+      setIsReviewMode(reviewMode);
+      try {
+        localStorage.setItem(
+          "currentWorkflowMode",
+          reviewMode ? "review" : "annotation"
+        );
+        localStorage.setItem(
+          "currentDisplayCaseId",
+          String(patientMeta?.displayCaseId ?? currentPatientIndex + 1)
+        );
+      } catch {
+        // ignore
+      }
       setPatientSummaryCompleted(false);
       setAbnormalityReasoningCompleted(false);
       setManagementReasoningCompleted(false);
@@ -1425,10 +1550,82 @@ export default function DashboardPage() {
       setViewStartMin(0);
       setManagementEvents([]);
       setSelectedManagementEvent(null);
-      resetEpisodeWorkflow();
+      setEpisodeState(buildEmptyEpisodeState());
+      setEpisodeTaskCompletion({});
 
       const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
       setCaseId(caseIdFromFile);
+
+      if (reviewMode) {
+        try {
+          let participantInfo: any = {};
+          try {
+            const raw = localStorage.getItem("participantInfo");
+            participantInfo = raw ? JSON.parse(raw) : {};
+          } catch {
+            participantInfo = {};
+          }
+
+          const accessCode =
+            String(
+              participantInfo?.accessCode ??
+                localStorage.getItem("doctorAccessCode") ??
+                ""
+            ).trim() || "";
+          const doctorName = String(participantInfo?.name ?? "").trim();
+          const displayCaseId =
+            String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
+
+          if (accessCode && displayCaseId) {
+            const params = new URLSearchParams({
+              accessCode,
+              doctorName,
+              patientId: folder,
+              displayCaseId,
+            });
+
+            const reviewRes = await fetch(
+              `/api/case_review_data?${params.toString()}`,
+              { cache: "no-store" }
+            );
+
+            if (reviewRes.ok) {
+              const reviewPayload =
+                (await reviewRes.json()) as DriveReviewPayload;
+              const abnormalityData =
+                reviewPayload.abnormalityReasoning?.data?.answers &&
+                typeof reviewPayload.abnormalityReasoning.data.answers ===
+                  "object" &&
+                !Array.isArray(reviewPayload.abnormalityReasoning.data.answers)
+                  ? (reviewPayload.abnormalityReasoning.data.answers as Record<
+                      string,
+                      unknown
+                    >)
+                  : null;
+              const annotatedEpisode =
+                abnormalityData?.annotatedEpisode &&
+                typeof abnormalityData.annotatedEpisode === "object" &&
+                !Array.isArray(abnormalityData.annotatedEpisode)
+                  ? (abnormalityData.annotatedEpisode as Record<string, unknown>)
+                  : null;
+
+              const eventId =
+                typeof annotatedEpisode?.episodeIndex === "number"
+                  ? `review-episode-${annotatedEpisode.episodeIndex}`
+                  : null;
+
+              hydrateReviewDraftFromDrive({
+                patientFolder: folder,
+                caseId: caseIdFromFile,
+                eventId,
+                payload: reviewPayload,
+              });
+            }
+          }
+        } catch (error) {
+          console.error("Failed to load review content from Drive:", error);
+        }
+      }
 
    
       const [
@@ -1568,10 +1765,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         if (savedDraft.episodeTaskCompletion) {
           setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
         }
-        if (
-          patientMeta?.status !== "completed" &&
-          typeof savedDraft.hasSubmitted === "boolean"
-        ) {
+        if (!reviewMode && typeof savedDraft.hasSubmitted === "boolean") {
           setHasSubmitted(savedDraft.hasSubmitted);
         }
         if (savedDraft.selectedManagementEventId) {
@@ -1633,6 +1827,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       accessCode,
       patientId: patientFolder,
       patientFolder,
+      displayCaseId: currentDisplayCaseId,
+      workflowMode: isReviewMode ? "review" : "annotation",
 
       caseId,
       folder: patientFolder,
@@ -1649,6 +1845,19 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         email: participantInfo?.email ?? null,
         accessCode,
         doctorId,
+      },
+
+      annotationState: {
+        selectedTask,
+        annotationLevel,
+        selectedDetectVital,
+        selectedWindow,
+        patientSummaryCompleted,
+        abnormalityReasoningCompleted,
+        managementReasoningCompleted,
+        episodeState,
+        episodeTaskCompletion,
+        selectedManagementEventId: getManagementEventId(selectedManagementEvent),
       },
 
       answers: {
@@ -1677,6 +1886,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   function downloadSubmissionPayload(payload: ReturnType<typeof collectSubmissionPayload>) {
     try {
       const patientPart = makeSafeFileNamePart(payload.patientFolder, "unknown_patient");
+      const casePart = makeSafeFileNamePart(payload.displayCaseId, "unknown_case");
       const doctorNamePart = makeSafeFileNamePart(
         payload.participantInfo?.name ?? payload.doctorId,
         "unknown_doctor"
@@ -1686,8 +1896,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         "unknown_code"
       );
       const doctorFolder = `${doctorNamePart}_${accessCodePart}`;
-      const root = `${doctorFolder}/${patientPart}`;
-      const fileName = `${doctorNamePart}_${accessCodePart}_${patientPart}.zip`;
+      const modePart = payload.workflowMode === "review" ? "review" : "annotation";
+      const root = `${doctorFolder}/${modePart}/patient_${patientPart}_case_${casePart}`;
+      const fileName = `${doctorNamePart}_${accessCodePart}_${patientPart}_case_${casePart}.zip`;
       const archiveKey = `localDriveExportArchive:${payload.patientId ?? payload.patientFolder ?? "unknown_patient"}:${payload.caseId ?? "unknown_case"}`;
       const archived = JSON.parse(localStorage.getItem(archiveKey) || "[]");
       const archiveEntries = Array.isArray(archived) ? archived : [];
@@ -1772,7 +1983,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         return false;
       }
 
-      setHasSubmitted(true);
+      if (!isReviewMode) {
+        setHasSubmitted(true);
+      }
       return true;
     } catch (e) {
       console.error("Submit exception:", e);
@@ -1908,26 +2121,12 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
         <h1 className="flex items-center gap-4 text-2xl font-bold">
         <span>{currentCaseLabel.replace("_", " ")}</span>
+        <span className="rounded-md bg-gray-100 px-2 py-1 text-sm font-medium text-gray-600">
+          Case {currentDisplayCaseId}
+        </span>
 </h1>
 
           <div className="flex items-center gap-3">
-            <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-              Voice
-              <select
-                value={speechRecognitionLanguage}
-                onChange={(event) =>
-                  handleSpeechRecognitionLanguageChange(event.target.value)
-                }
-                className="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-800"
-              >
-                {SPEECH_LANGUAGE_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-
             <button
               type="button"
               onClick={() => {
@@ -1949,15 +2148,19 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               Back
             </button>
 
-            {hasSubmitted && (
+            {isReviewMode ? (
+              <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-700">
+                Review Mode
+              </span>
+            ) : hasSubmitted ? (
               <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
                 ✅ Submitted
               </span>
-            )}
+            ) : null}
 
             <button
               type="button"
-              disabled={hasSubmitted || submitting || !canSubmitFinal}
+              disabled={submitting || (!isReviewMode && (hasSubmitted || !canSubmitFinal))}
               onClick={async () => {
                 const validationError = validateBeforeFinalSubmit();
                 if (validationError) {
@@ -1965,20 +2168,26 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   return;
                 }
 
-                logAction("submit_session");
+                logAction(isReviewMode ? "submit_review_session" : "submit_session");
                 await submitCurrentSession();
               }}
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                hasSubmitted
-                  ? "cursor-not-allowed bg-green-200 text-green-800"
-                  : submitting
-                    ? "cursor-wait bg-blue-300 text-white"
+                submitting
+                  ? "cursor-wait bg-blue-300 text-white"
+                  : !isReviewMode && hasSubmitted
+                    ? "cursor-not-allowed bg-green-200 text-green-800"
                     : !canSubmitFinal
                       ? "cursor-not-allowed bg-blue-300 text-white"
                       : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             >
-              {hasSubmitted ? "Submitted" : submitting ? "Submitting..." : "Submit"}
+              {submitting
+                ? "Submitting..."
+                : isReviewMode
+                  ? "Submit Review"
+                  : hasSubmitted
+                    ? "Submitted"
+                    : "Submit"}
             </button>
 
             <button
@@ -2205,7 +2414,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   onSaveAndNextStep={() => {
     setPatientSummaryCompleted(true);
   }}
-  readOnly={hasSubmitted}
+  readOnly={isCaseLocked}
 />
                       </div>
                     )}
@@ -2224,7 +2433,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         setManagementReasoningCompleted(true);
       }}
       onDirectToEvent={focusManagementEventOnTimeline}
-      readOnly={hasSubmitted}
+      readOnly={isCaseLocked}
     />
   </div>
 )}
@@ -2306,7 +2515,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                             nextSelected: !checked,
                           });
                         }}
-                        disabled={hasSubmitted}
+                        disabled={isCaseLocked}
                         className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded border text-[10px] font-bold ${
                           checked
                             ? "border-blue-600 bg-blue-600 text-white"
@@ -2323,7 +2532,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                           e.stopPropagation();
                           handleDeleteDetectedEpisode(episode.id);
                         }}
-                        disabled={hasSubmitted}
+                        disabled={isCaseLocked}
                         className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
                         title="Delete event"
                       >
@@ -2376,12 +2585,12 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   void handleAdvanceEpisodeStage();
                 }}
                 disabled={
-                  hasSubmitted ||
+                  isCaseLocked ||
                   episodeState.prioritizedEpisodeIds.length === 0 ||
                   submitting
                 }
                 className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                  hasSubmitted ||
+                  isCaseLocked ||
                   episodeState.prioritizedEpisodeIds.length === 0 ||
                   submitting
                     ? "cursor-not-allowed bg-blue-300 text-white"
@@ -2468,7 +2677,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                             nextSelected: !checked,
                           });
                         }}
-                        disabled={hasSubmitted}
+                        disabled={isCaseLocked}
                         className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
                           checked
                             ? "border-blue-600 bg-blue-600 text-white"
@@ -2485,7 +2694,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                           e.stopPropagation();
                           handleDeleteDetectedEpisode(episode.id);
                         }}
-                        disabled={hasSubmitted}
+                        disabled={isCaseLocked}
                         className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
                         title="Delete event"
                       >
@@ -2518,12 +2727,12 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 void handleAdvanceEpisodeStage();
               }}
               disabled={
-                hasSubmitted ||
+                isCaseLocked ||
                 episodeState.prioritizedEpisodeIds.length === 0 ||
                 submitting
               }
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                hasSubmitted ||
+                isCaseLocked ||
                 episodeState.prioritizedEpisodeIds.length === 0 ||
                 submitting
                   ? "cursor-not-allowed bg-blue-300 text-white"
@@ -2607,7 +2816,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         episodeState={episodeState}
         onChangeEpisodeState={setEpisodeState}
         onChangeSelectedWindow={handleSelectedWindowChange}
-        readOnly={hasSubmitted}
+        readOnly={isCaseLocked}
         completedTaskMap={episodeTaskCompletion}
         onChangeCompletedTaskMap={setEpisodeTaskCompletion}
       />
@@ -2648,7 +2857,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     selectedWindow={selectedWindow}
                     onChangeSelectedWindow={handleSelectedWindowChange}
                     onCreateEventFromWindow={handleTimelineWindowCreate}
-                    readOnly={hasSubmitted}
+                    readOnly={isCaseLocked}
                     sharedScrollLeft={sharedScrollLeft}
                     onSharedScrollLeftChange={setSharedScrollLeft}
                     timelineContext={timelineContext}

@@ -11,31 +11,11 @@ import Papa from "papaparse";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type CsvRow = Record<string, any>;
 
 const CSV_BASE = "/data";
-
-const DEGREE_OPTIONS = [
-  "MD",
-  "DO",
-  "MBBS",
-  "PhD",
-  "MD/PhD",
-  "CRNA",
-  "RN",
-  "PA",
-  "Other",
-] as const;
-
-type DegreeOption = (typeof DEGREE_OPTIONS)[number];
 
 const PRACTICE_AREA_OPTIONS = [
   "General anesthesiology",
@@ -55,8 +35,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
 
-  const [degrees, setDegrees] = useState<DegreeOption[]>([]);
-  const [degreeOther, setDegreeOther] = useState("");
+  const [degree, setDegree] = useState("");
 
   const [trainingCountry, setTrainingCountry] = useState("");
 
@@ -81,8 +60,13 @@ export default function Home() {
 
       if (saved?.name) setName(saved.name);
       if (saved?.gender) setGender(saved.gender);
-      if (Array.isArray(saved?.degrees)) setDegrees(saved.degrees);
-      if (saved?.degreeOther) setDegreeOther(saved.degreeOther);
+      if (typeof saved?.degree === "string") {
+        setDegree(saved.degree);
+      } else if (Array.isArray(saved?.degrees)) {
+        const firstDegree = String(saved.degrees[0] ?? "").trim();
+        const fallbackOther = String(saved?.degreeOther ?? "").trim();
+        setDegree(firstDegree === "Other" ? fallbackOther : firstDegree);
+      }
       if (saved?.trainingCountry) setTrainingCountry(saved.trainingCountry);
       if (saved?.clinicalRole) setClinicalRole(saved.clinicalRole);
       if (saved?.clinicalRoleOther) setClinicalRoleOther(saved.clinicalRoleOther);
@@ -129,8 +113,6 @@ export default function Home() {
     return row?.[key] ?? "";
   }
 
-  const selectedDegree = degrees[0] ?? "";
-  const hasOtherDegree = selectedDegree === "Other";
   const hasOtherClinicalRole = clinicalRole === "Other";
   const hasOtherPracticeArea = practiceArea === "Other";
 
@@ -141,7 +123,7 @@ export default function Home() {
 
     const trimmedName = name.trim();
     const trimmedGender = gender.trim();
-    const trimmedDegreeOther = degreeOther.trim();
+    const trimmedDegree = degree.trim();
     const trimmedTrainingCountry = trainingCountry.trim();
     const trimmedClinicalRoleOther = clinicalRoleOther.trim();
     const trimmedPracticeAreaOther = practiceAreaOther.trim();
@@ -168,11 +150,10 @@ export default function Home() {
       return;
     }
 
-    if (hasOtherDegree && !trimmedDegreeOther) {
+    if (!trimmedDegree) {
       setError("Please specify your professional degree(s).");
       return;
     }
-
     if (hasOtherPracticeArea && !trimmedPracticeAreaOther) {
       setError("Please specify your primary area of anesthesia practice.");
       return;
@@ -203,8 +184,9 @@ export default function Home() {
       const participantInfo = {
         name: trimmedName,
         gender: trimmedGender,
-        degrees,
-        degreeOther: trimmedDegreeOther,
+        degree: trimmedDegree,
+        degrees: [trimmedDegree],
+        degreeOther: "",
         trainingCountry: trimmedTrainingCountry,
         clinicalRole,
         clinicalRoleOther: trimmedClinicalRoleOther,
@@ -258,7 +240,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="gender">Gender (optional)</Label>
+              <Label htmlFor="gender">Gender</Label>
               <Input
                 id="gender"
                 placeholder="Enter your gender"
@@ -272,39 +254,14 @@ export default function Home() {
             </div>
 
             <div className="space-y-2">
-              <Label>Professional Degree</Label>
-              <Select
-                value={selectedDegree}
-                onValueChange={(value) => {
-                  setDegrees(value ? [value as DegreeOption] : []);
-                  if (value !== "Other") {
-                    setDegreeOther("");
-                  }
-                }}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select degree" />
-                </SelectTrigger>
-                <SelectContent>
-                  {DEGREE_OPTIONS.map((degree) => (
-                    <SelectItem key={degree} value={degree}>
-                      {degree}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {hasOtherDegree && (
-                <div className="space-y-2">
-                  <Label htmlFor="degreeOther">Please specify degree</Label>
-                  <Input
-                    id="degreeOther"
-                    placeholder="Enter your degree"
-                    value={degreeOther}
-                    onChange={(e) => setDegreeOther(e.target.value)}
-                  />
-                </div>
-              )}
+              <Label htmlFor="degree">Professional Degree</Label>
+              <Input
+                id="degree"
+                placeholder="e.g., MD, PhD, MS, MD-PhD"
+                value={degree}
+                onChange={(e) => setDegree(e.target.value)}
+                required
+              />
             </div>
 
             <div className="space-y-2">
@@ -340,8 +297,8 @@ export default function Home() {
                   <SelectItem value="Attending physician">
                     Attending physician
                   </SelectItem>
-                  <SelectItem value="CRNA / Nurse anesthetist">
-                    CRNA / Nurse anesthetist
+                  <SelectItem value="Nurse anesthetist">
+                    Nurse anesthetist
                   </SelectItem>
                   <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
@@ -362,45 +319,7 @@ export default function Home() {
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="practiceArea">
-                Primary Area of Anesthesia Practice (optional)
-              </Label>
-              <Select
-                value={practiceArea}
-                onValueChange={(value) => {
-                  setPracticeArea(value as PracticeAreaOption);
-                  if (value !== "Other") {
-                    setPracticeAreaOther("");
-                  }
-                }}
-              >
-                <SelectTrigger id="practiceArea">
-                  <SelectValue placeholder="Select your primary practice area" />
-                </SelectTrigger>
-                <SelectContent>
-                  {PRACTICE_AREA_OPTIONS.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {hasOtherPracticeArea && (
-                <div className="space-y-2">
-                  <Label htmlFor="practiceAreaOther">
-                    Please specify your practice area
-                  </Label>
-                  <Input
-                    id="practiceAreaOther"
-                    placeholder="Enter your primary practice area"
-                    value={practiceAreaOther}
-                    onChange={(e) => setPracticeAreaOther(e.target.value)}
-                  />
-                </div>
-              )}
-            </div>
+    
 
             <div className="space-y-2">
               <Label htmlFor="experienceYears">

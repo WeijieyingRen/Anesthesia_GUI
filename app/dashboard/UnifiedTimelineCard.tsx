@@ -384,7 +384,9 @@ export default function UnifiedTimelineCard({
           timeZero={anesthesiaStart}
           timeResolution={timeResolution}
           episodeWindow={
-            selectedWindow
+            managementHighlightWindow
+              ? managementHighlightWindow
+              : selectedWindow
               ? {
                   startMin: selectedWindow.startMin,
                   endMin: selectedWindow.endMin,

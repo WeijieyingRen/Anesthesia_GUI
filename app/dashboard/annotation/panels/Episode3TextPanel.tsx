@@ -121,6 +121,18 @@ function revisionKey(patientId: string | undefined, caseId: string) {
   return `annotationRevision:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
 }
 
+function saveNoticeKey(
+  patientId: string | undefined,
+  caseId: string,
+  eventId: string
+) {
+  return `annotationSaveNotice:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}:${eventId}`;
+}
+
+function successSaveMessage() {
+  return "Saved. You can continue to revise it.";
+}
+
 function nextRevisionNumber(patientId: string | undefined, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
@@ -276,12 +288,47 @@ export default function Episode3TextPanel({
         savedDraft = "";
       }
 
+      if (!savedDraft) {
+        try {
+          const savedResult = localStorage.getItem(
+            `annotationResult:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}`
+          );
+          if (savedResult) {
+            const parsed = JSON.parse(savedResult);
+            savedDraft = String(
+              parsed?.abnormalityReasoningText ??
+                parsed?.answers?.abnormalityReasoningText ??
+                ""
+            );
+          }
+        } catch {
+          savedDraft = "";
+        }
+      }
+
       return {
         ...prev,
         [eventId]: savedDraft || ABNORMAL_REASONING_TEMPLATE,
       };
     });
-  }, [caseId, eventId, patientId]);
+
+    try {
+      const resolvedPatientId = patientId ?? patientFolder;
+      const savedNotice = localStorage.getItem(
+        saveNoticeKey(resolvedPatientId, caseId, eventId)
+      );
+      if (savedNotice) {
+        setSaveStatus("success");
+        setSaveMessage(savedNotice);
+      } else {
+        setSaveStatus("idle");
+        setSaveMessage("");
+      }
+    } catch {
+      setSaveStatus("idle");
+      setSaveMessage("");
+    }
+  }, [caseId, eventId, patientId, patientFolder]);
 
   function setCurrentFreeText(nextText: string) {
     setFreeTextMap((prev) => ({
@@ -293,8 +340,6 @@ export default function Episode3TextPanel({
     } catch {
       // ignore
     }
-    setSaveStatus("idle");
-    setSaveMessage("");
   }
 
   function finalizeVoiceDuration() {
@@ -405,8 +450,6 @@ export default function Episode3TextPanel({
       voiceStartedAtMsRef.current = performance.now();
       setRecording(true);
       setError(null);
-      setSaveStatus("idle");
-      setSaveMessage("");
     } catch (e: any) {
       finalizeVoiceDuration();
       console.error("Failed to start voice note:", e);
@@ -581,8 +624,18 @@ export default function Episode3TextPanel({
         // ignore
       }
 
+      const successMessage = successSaveMessage();
+      try {
+        localStorage.setItem(
+          saveNoticeKey(resolvedPatientId, caseId, eventId),
+          successMessage
+        );
+      } catch {
+        // ignore
+      }
+
       setSaveStatus("success");
-      setSaveMessage("Abnormality reasoning saved successfully to cloud storage.");
+      setSaveMessage(successMessage);
       onSaveAndNextStep();
     } catch (e: any) {
       console.error("Failed to save abnormality reasoning:", e);
@@ -835,6 +888,15 @@ export default function Episode3TextPanel({
             voiceDurationMsRef.current = 0;
             typingStartedAtMsRef.current = null;
             typingDurationMsRef.current = 0;
+
+            try {
+              const resolvedPatientId = patientId ?? patientFolder;
+              localStorage.removeItem(
+                saveNoticeKey(resolvedPatientId, caseId, eventId)
+              );
+            } catch {
+              // ignore
+            }
           }}
           disabled={readOnly || saving}
           className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
