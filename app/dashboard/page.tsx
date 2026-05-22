@@ -336,158 +336,225 @@ function hasAnyDriveReviewContent(payload: DriveReviewPayload): boolean {
   return Boolean(
     payload.summary?.data ||
       payload.managementReasoning?.data ||
-      payload.abnormalityReasoning?.data ||
-      payload.caseSubmission?.data
+      payload.abnormalityReasoning?.data
   );
 }
 
+function asRecord(value: unknown): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  return value as Record<string, unknown>;
+}
+
+function getSavedAnswers(
+  section?: { data?: Record<string, unknown> | null } | null
+): Record<string, unknown> | null {
+  return asRecord(section?.data?.answers);
+}
+
+function extractSummaryResultRecord(payload: DriveReviewPayload) {
+  return asRecord(payload.summary?.data);
+}
+
+function extractAbnormalityResultRecord(payload: DriveReviewPayload) {
+  return asRecord(payload.abnormalityReasoning?.data);
+}
+
+function extractManagementResultRecord(payload: DriveReviewPayload) {
+  return asRecord(payload.managementReasoning?.data);
+}
+
+function extractAbnormalityAnswersFromReviewPayload(payload: DriveReviewPayload) {
+  return getSavedAnswers(payload.abnormalityReasoning);
+}
+
+function extractManagementAnswersFromReviewPayload(payload: DriveReviewPayload) {
+  return getSavedAnswers(payload.managementReasoning);
+}
+
+function extractSummaryAnswersFromReviewPayload(payload: DriveReviewPayload) {
+  return getSavedAnswers(payload.summary);
+}
+
 function resolveReviewDashboardDraft(payload: DriveReviewPayload) {
-  const annotationState =
-    payload.caseSubmission?.data?.annotation_state &&
-    typeof payload.caseSubmission.data.annotation_state === "object" &&
-    !Array.isArray(payload.caseSubmission.data.annotation_state)
-      ? ({
-          ...(payload.caseSubmission.data.annotation_state as Record<
-            string,
-            unknown
-          >),
-        } as Record<string, unknown>)
-      : null;
-
-  const abnormalityAnswers =
-    payload.abnormalityReasoning?.data?.answers &&
-    typeof payload.abnormalityReasoning.data.answers === "object" &&
-    !Array.isArray(payload.abnormalityReasoning.data.answers)
-      ? (payload.abnormalityReasoning.data.answers as Record<string, unknown>)
-      : null;
-
-  const annotatedEpisode =
-    abnormalityAnswers?.annotatedEpisode &&
-    typeof abnormalityAnswers.annotatedEpisode === "object" &&
-    !Array.isArray(abnormalityAnswers.annotatedEpisode)
-      ? (abnormalityAnswers.annotatedEpisode as Record<string, unknown>)
-      : null;
-
-  const annotatedEpisodeIndex = Number(annotatedEpisode?.episodeIndex);
-
-  const episodeState =
-    annotationState?.episodeState &&
-    typeof annotationState.episodeState === "object" &&
-    !Array.isArray(annotationState.episodeState)
-      ? ({
-          ...(annotationState.episodeState as Record<string, unknown>),
-        } as Record<string, unknown>)
-      : null;
-
-  const detectedEpisodes = Array.isArray(episodeState?.detectedEpisodes)
-    ? [...(episodeState?.detectedEpisodes as Array<Record<string, unknown>>)]
-    : [];
-  const prioritizedEpisodeIds = Array.isArray(episodeState?.prioritizedEpisodeIds)
-    ? [
-        ...(episodeState?.prioritizedEpisodeIds as Array<string>).filter(
-          (value) => typeof value === "string" && value.trim() !== ""
-        ),
-      ]
-    : [];
-
-  let activeEpisodeId =
-    typeof episodeState?.activeEpisodeId === "string" &&
-    episodeState.activeEpisodeId.trim() !== ""
-      ? episodeState.activeEpisodeId
-      : null;
-
-  if (Number.isFinite(annotatedEpisodeIndex) && annotatedEpisodeIndex > 0) {
-    const byLabel =
-      detectedEpisodes.find(
-        (episode) =>
-          String(episode?.label ?? "").trim() ===
-          `Episode ${Math.floor(annotatedEpisodeIndex)}`
-      ) ?? null;
-
-    activeEpisodeId =
-      (typeof byLabel?.id === "string" && byLabel.id.trim() !== ""
-        ? byLabel.id
-        : null) ??
-      prioritizedEpisodeIds[Math.floor(annotatedEpisodeIndex) - 1] ??
-      activeEpisodeId;
-  }
-
-  if (!activeEpisodeId) {
-    activeEpisodeId =
-      prioritizedEpisodeIds[0] ??
-      (typeof detectedEpisodes[0]?.id === "string"
-        ? String(detectedEpisodes[0].id)
-        : null);
-  }
-
-  const nextPrioritizedEpisodeIds =
-    activeEpisodeId && !prioritizedEpisodeIds.includes(activeEpisodeId)
-      ? [...prioritizedEpisodeIds, activeEpisodeId]
-      : prioritizedEpisodeIds;
-
-  const nextEpisodeState =
-    episodeState && detectedEpisodes.length > 0
-      ? {
-          ...episodeState,
-          stage: "annotate",
-          annotateStep: "detect",
-          detectedEpisodes,
-          prioritizedEpisodeIds: nextPrioritizedEpisodeIds,
-          activeEpisodeId,
-        }
-      : null;
-
-  const nextEpisodeTaskCompletion =
-    activeEpisodeId !== null
-      ? {
-          ...(annotationState?.episodeTaskCompletion &&
-          typeof annotationState.episodeTaskCompletion === "object" &&
-          !Array.isArray(annotationState.episodeTaskCompletion)
-            ? (annotationState.episodeTaskCompletion as Record<
-                string,
-                unknown
-              >)
-            : {}),
-          [activeEpisodeId]: {
-            detect: true,
-          },
-        }
-      : annotationState?.episodeTaskCompletion &&
-          typeof annotationState.episodeTaskCompletion === "object" &&
-          !Array.isArray(annotationState.episodeTaskCompletion)
-        ? (annotationState.episodeTaskCompletion as Record<string, unknown>)
-        : undefined;
+  const abnormalityAnswers = extractAbnormalityAnswersFromReviewPayload(payload);
 
   const nextDraft: DashboardCaseDraft | null =
-    annotationState || nextEpisodeState
+    abnormalityAnswers
       ? {
           hasSubmitted: false,
-          patientSummaryCompleted:
-            annotationState?.patientSummaryCompleted === true,
-          managementReasoningCompleted:
-            annotationState?.managementReasoningCompleted === true,
+          patientSummaryCompleted: false,
+          managementReasoningCompleted: false,
           abnormalityReasoningCompleted:
             Boolean(
-              String(
-                abnormalityAnswers?.abnormalityReasoningText ?? ""
-              ).trim()
-            ) || annotationState?.abnormalityReasoningCompleted === true,
-          selectedManagementEventId:
-            typeof annotationState?.selectedManagementEventId === "string"
-              ? annotationState.selectedManagementEventId
-              : undefined,
-          episodeState: nextEpisodeState as EpisodeAnnotationState | undefined,
-          episodeTaskCompletion:
-            nextEpisodeTaskCompletion as
-              | EpisodeTaskCompletionMap
-              | undefined,
+              String(abnormalityAnswers?.abnormalityReasoningText ?? "").trim()
+            ),
         }
       : null;
 
   return {
     draft: nextDraft,
-    eventId: activeEpisodeId,
+    eventId: null,
   };
+}
+
+function extractSummaryTextFromReviewPayload(payload: DriveReviewPayload) {
+  const answers = extractSummaryAnswersFromReviewPayload(payload);
+
+  return String(
+    answers?.summaryText ??
+      ""
+  ).trim();
+}
+
+function extractAbnormalityTextFromReviewPayload(payload: DriveReviewPayload) {
+  const answers = extractAbnormalityAnswersFromReviewPayload(payload);
+
+  return String(
+    answers?.abnormalityReasoningText ??
+      ""
+  ).trim();
+}
+
+function extractManagementTaskAnswersFromReviewPayload(payload: DriveReviewPayload) {
+  const answers = extractManagementAnswersFromReviewPayload(payload);
+  const tasks = asRecord(answers?.tasks);
+
+  const task1 = asRecord(tasks?.task1_reason_for_intervention);
+  const task2 = asRecord(tasks?.task2_counterfactual);
+
+  const answer1 = String(task1?.answer ?? "").trim();
+  const answer2 = String(task2?.answer ?? "").trim();
+
+  return {
+    answer1,
+    answer2,
+    mergedText: [answer1, answer2]
+      .filter(Boolean)
+      .map((text, index) => `Task ${index + 1}: ${text}`)
+      .join("\n\n"),
+  };
+}
+
+function extractManagementTextFromReviewPayload(payload: DriveReviewPayload) {
+  const answers = extractManagementAnswersFromReviewPayload(payload);
+  const extracted = extractManagementTaskAnswersFromReviewPayload(payload);
+
+  return String(
+    answers?.managementReasoningText ??
+      answers?.freeText ??
+      extracted.mergedText ??
+      ""
+  ).trim();
+}
+
+function extractAbnormalityEventIdFromPayload(payload: DriveReviewPayload) {
+  const answers = extractAbnormalityAnswersFromReviewPayload(payload);
+
+  return String(
+      answers?.eventId ??
+      answers?.episodeId ??
+      ""
+  ).trim();
+}
+
+function parseClockTimeToOffsetMin(
+  value: unknown,
+  anesthesiaStart?: string | null
+): number | null {
+  const text = String(value ?? "").trim();
+  if (!text || !anesthesiaStart) return null;
+
+  const match = text.match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) return null;
+
+  const base = new Date(anesthesiaStart);
+  if (Number.isNaN(base.getTime())) return null;
+
+  const target = new Date(base);
+  target.setHours(Number(match[1]), Number(match[2]), 0, 0);
+
+  return Math.round((target.getTime() - base.getTime()) / 60000);
+}
+
+function buildEpisodeStateFromStoredAbnormalityResult({
+  abnormalityResult,
+  anesthesiaStart,
+}: {
+  abnormalityResult: Record<string, unknown> | null;
+  anesthesiaStart?: string | null;
+}) {
+  const abnormalityAnswers =
+    asRecord(abnormalityResult?.answers) ?? abnormalityResult;
+
+  const selectedEpisodes = Array.isArray(abnormalityAnswers?.selectedEpisodes)
+    ? (abnormalityAnswers.selectedEpisodes as Array<Record<string, unknown>>)
+    : [];
+
+  if (selectedEpisodes.length === 0) {
+    return null;
+  }
+
+  const detectedEpisodes: DetectedEpisodeItem[] = [];
+  const prioritizedEpisodeIds: string[] = [];
+
+  for (const episode of selectedEpisodes) {
+    const episodeIndex = Number(episode.episodeIndex);
+    const startMin = parseClockTimeToOffsetMin(
+      episode.startMin,
+      anesthesiaStart
+    );
+    const endMin = parseClockTimeToOffsetMin(episode.endMin, anesthesiaStart);
+
+    if (
+      !Number.isFinite(episodeIndex) ||
+      startMin === null ||
+      endMin === null
+    ) {
+      continue;
+    }
+
+    const id = `review-episode-${Math.floor(episodeIndex)}`;
+    const selected = Boolean(episode.selected);
+
+    detectedEpisodes.push({
+      id,
+      label: `Episode ${Math.floor(episodeIndex)}`,
+      vital: "MAP",
+      startMin,
+      endMin,
+      y1: Number(episode.y1 ?? 0),
+      y2: Number(episode.y2 ?? 0),
+      selectedForAnnotation: selected,
+      createdAtUtc: String(episode.createdAtUtc ?? "") || undefined,
+      updatedAtUtc: String(episode.updatedAtUtc ?? "") || undefined,
+    });
+
+    if (selected) {
+      prioritizedEpisodeIds.push(id);
+    }
+  }
+
+  if (detectedEpisodes.length === 0) return null;
+
+  const annotatedEpisode = asRecord(abnormalityAnswers?.annotatedEpisode);
+  const annotatedEpisodeIndex = Number(annotatedEpisode?.episodeIndex);
+  const activeEpisodeId =
+    Number.isFinite(annotatedEpisodeIndex) && annotatedEpisodeIndex > 0
+      ? `review-episode-${Math.floor(annotatedEpisodeIndex)}`
+      : prioritizedEpisodeIds[0] ?? detectedEpisodes[0]?.id ?? null;
+
+  return {
+    stage: "annotate",
+    annotateStep: "detect",
+    detectedEpisodes,
+    prioritizedEpisodeIds:
+      prioritizedEpisodeIds.length > 0
+        ? prioritizedEpisodeIds
+        : activeEpisodeId
+          ? [activeEpisodeId]
+          : [],
+    activeEpisodeId,
+  } satisfies EpisodeAnnotationState;
 }
 
 function hydrateReviewDraftFromDrive({
@@ -501,75 +568,89 @@ function hydrateReviewDraftFromDrive({
 }) {
   try {
     const reviewDraft = resolveReviewDashboardDraft(payload);
-    const summaryText = String(
-      payload.summary?.data?.answers &&
-        typeof payload.summary.data.answers === "object" &&
-        !Array.isArray(payload.summary.data.answers)
-        ? (payload.summary.data.answers as Record<string, unknown>).summaryText ?? ""
-        : ""
-    ).trim();
+
+    const summaryText = extractSummaryTextFromReviewPayload(payload);
+    const summaryResult = extractSummaryResultRecord(payload);
 
     if (summaryText) {
       localStorage.setItem(
         `annotationDraft:summary:${patientFolder}:${caseId}`,
         summaryText
       );
+
       localStorage.setItem(
         `annotationResult:summary:${patientFolder}:${caseId}`,
-        JSON.stringify(payload.summary?.data ?? {})
+        JSON.stringify(summaryResult ?? {})
       );
     }
 
-    const managementText = String(
-      payload.managementReasoning?.data?.answers &&
-        typeof payload.managementReasoning.data.answers === "object" &&
-        !Array.isArray(payload.managementReasoning.data.answers)
-        ? (payload.managementReasoning.data.answers as Record<string, unknown>)
-            .managementReasoningText ?? ""
-        : ""
-    ).trim();
+    const managementText = extractManagementTextFromReviewPayload(payload);
+    const managementResult = extractManagementResultRecord(payload);
 
     if (managementText) {
       localStorage.setItem(
         `annotationDraft:management_reasoning:${patientFolder}:${caseId}`,
         managementText
       );
+
       localStorage.setItem(
         `annotationResult:management_reasoning:${patientFolder}:${caseId}`,
-        JSON.stringify(payload.managementReasoning?.data ?? {})
+        JSON.stringify(managementResult ?? {})
       );
     }
 
-    const abnormalityText = String(
-      payload.abnormalityReasoning?.data?.answers &&
-        typeof payload.abnormalityReasoning.data.answers === "object" &&
-        !Array.isArray(payload.abnormalityReasoning.data.answers)
-        ? (payload.abnormalityReasoning.data.answers as Record<string, unknown>)
-            .abnormalityReasoningText ?? ""
-        : ""
-    ).trim();
+    const abnormalityText = extractAbnormalityTextFromReviewPayload(payload);
+    const abnormalityResult = extractAbnormalityResultRecord(payload);
+
+    let abnormalityEventId =
+      reviewDraft.eventId || extractAbnormalityEventIdFromPayload(payload);
+
+    if (!abnormalityEventId) {
+      const abnormalityData = abnormalityResult;
+      abnormalityEventId = String(
+        abnormalityData?.event_id ??
+          abnormalityData?.episode_id ??
+          ""
+      ).trim();
+    }
 
     if (abnormalityText) {
-      if (reviewDraft.eventId) {
+      if (abnormalityEventId) {
         localStorage.setItem(
-          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${reviewDraft.eventId}`,
+          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${abnormalityEventId}`,
           abnormalityText
         );
       }
+
       localStorage.setItem(
         `annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`,
-        JSON.stringify(payload.abnormalityReasoning?.data ?? {})
+        JSON.stringify(abnormalityResult ?? {})
       );
     }
 
-    if (reviewDraft.draft) {
-      localStorage.setItem(
-        dashboardDraftKey(patientFolder, caseId),
-        JSON.stringify({
-          ...reviewDraft.draft,
-        } satisfies DashboardCaseDraft)
-      );
-    }
+    const nextDraft: DashboardCaseDraft = {
+      ...(reviewDraft.draft ?? {}),
+      patientSummaryCompleted: Boolean(summaryText),
+      abnormalityReasoningCompleted: Boolean(abnormalityText),
+      managementReasoningCompleted: Boolean(managementText),
+      selectedManagementEventId:
+        reviewDraft.draft?.selectedManagementEventId ?? undefined,
+      hasSubmitted: false,
+    };
+
+    localStorage.setItem(
+      dashboardDraftKey(patientFolder, caseId),
+      JSON.stringify(nextDraft)
+    );
+
+    console.log("[Review hydrate] restored from Drive", {
+      summaryText: Boolean(summaryText),
+      abnormalityText: Boolean(abnormalityText),
+      managementText: Boolean(managementText),
+      abnormalityEventId,
+      patientFolder,
+      caseId,
+    });
   } catch (error) {
     console.error("Failed to hydrate review draft from Drive:", error);
   }
@@ -1116,6 +1197,7 @@ export default function DashboardPage() {
   );
   const [episodeTaskCompletion, setEpisodeTaskCompletion] =
     useState<EpisodeTaskCompletionMap>({});
+  const [reviewHydrationVersion, setReviewHydrationVersion] = useState(0);
 
   const [preopInfoOpen, setPreopInfoOpen] = useState(false);
   const isCaseLocked = hasSubmitted && !isReviewMode;
@@ -1729,6 +1811,8 @@ export default function DashboardPage() {
       const reviewMode =
         patientMeta?.workflowMode === "review" ||
         patientMeta?.status === "completed";
+      let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
+        Promise.resolve(null);
       setHasSubmitted(false);
       setIsReviewMode(reviewMode);
       try {
@@ -1760,6 +1844,7 @@ export default function DashboardPage() {
       setSelectedManagementEvent(null);
       setEpisodeState(buildEmptyEpisodeState());
       setEpisodeTaskCompletion({});
+      setReviewHydrationVersion(0);
 
       const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
       setCaseId(caseIdFromFile);
@@ -1794,36 +1879,18 @@ export default function DashboardPage() {
             caseId: String(caseIdFromFile).trim(),
           });
 
-          const reviewRes = await fetch(
+          reviewPayloadPromise = fetch(
             `/api/case_review_data?${params.toString()}`,
             { cache: "no-store" }
-          );
-
-          if (reviewRes.ok) {
-            const reviewPayload =
-              (await reviewRes.json()) as DriveReviewPayload;
-
-            if (hasAnyDriveReviewContent(reviewPayload)) {
-              const remoteCaseId = extractPayloadCaseId(reviewPayload);
-              const caseIdsMatch =
-                !remoteCaseId ||
-                remoteCaseId === String(caseIdFromFile).trim();
-
-              if (caseIdsMatch) {
-                hydrateReviewDraftFromDrive({
-                  patientFolder: folder,
-                  caseId: caseIdFromFile,
-                  payload: reviewPayload,
-                });
-              } else {
-                console.warn("Skipping Drive hydrate due to caseId mismatch.", {
-                  patientFolder: folder,
-                  localCaseId: caseIdFromFile,
-                  remoteCaseId,
-                });
-              }
-            }
-          }
+          )
+            .then(async (reviewRes) => {
+              if (!reviewRes.ok) return null;
+              return (await reviewRes.json()) as DriveReviewPayload;
+            })
+            .catch((error) => {
+              console.error("Failed to load review content from Drive:", error);
+              return null;
+            });
         }
       } catch (error) {
         console.error("Failed to load review content from Drive:", error);
@@ -1933,9 +2000,44 @@ export default function DashboardPage() {
 setManagementEvents(parsedManagementEvents);
 setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
+      try {
+        const reviewPayload = await reviewPayloadPromise;
+
+        if (reviewPayload && hasAnyDriveReviewContent(reviewPayload)) {
+          const remoteCaseId = extractPayloadCaseId(reviewPayload);
+          const caseIdsMatch =
+            !remoteCaseId || remoteCaseId === String(caseIdFromFile).trim();
+
+          if (caseIdsMatch) {
+            hydrateReviewDraftFromDrive({
+              patientFolder: folder,
+              caseId: caseIdFromFile,
+              payload: reviewPayload,
+            });
+            setReviewHydrationVersion((value) => value + 1);
+          } else {
+            console.warn("Skipping Drive hydrate due to caseId mismatch.", {
+              patientFolder: folder,
+              localCaseId: caseIdFromFile,
+              remoteCaseId,
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Failed to hydrate review content from Drive:", error);
+      }
+
       const savedDraft = readStoredJson<DashboardCaseDraft>(
         dashboardDraftKey(folder, caseIdFromFile)
       );
+      const storedAbnormalityResult =
+        readStoredJson<Record<string, unknown>>(
+          `annotationResult:abnormality_reasoning:${folder}:${caseIdFromFile}`
+        );
+      const fallbackEpisodeState = buildEpisodeStateFromStoredAbnormalityResult({
+        abnormalityResult: storedAbnormalityResult,
+        anesthesiaStart: visualizationStart,
+      });
 
       if (savedDraft) {
         if (savedDraft.selectedTask) setSelectedTask(savedDraft.selectedTask);
@@ -1963,9 +2065,17 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         }
         if (savedDraft.episodeState) {
           setEpisodeState(savedDraft.episodeState);
+        } else if (fallbackEpisodeState) {
+          setEpisodeState(fallbackEpisodeState);
         }
         if (savedDraft.episodeTaskCompletion) {
           setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
+        } else if (fallbackEpisodeState?.activeEpisodeId) {
+          setEpisodeTaskCompletion({
+            [fallbackEpisodeState.activeEpisodeId]: {
+              detect: true,
+            },
+          });
         }
         if (!reviewMode && typeof savedDraft.hasSubmitted === "boolean") {
           setHasSubmitted(savedDraft.hasSubmitted);
@@ -1981,12 +2091,30 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             setSelectedManagementEvent(restoredManagementEvent);
           }
         }
+      } else if (fallbackEpisodeState) {
+        setEpisodeState(fallbackEpisodeState);
+        if (fallbackEpisodeState.activeEpisodeId) {
+          setEpisodeTaskCompletion({
+            [fallbackEpisodeState.activeEpisodeId]: {
+              detect: true,
+            },
+          });
+        }
+        setAbnormalityReasoningCompleted(
+          Boolean(
+            String(
+              storedAbnormalityResult?.abnormalityReasoningText ??
+                storedAbnormalityResult?.freeText ??
+                ""
+            ).trim()
+          )
+        );
       }
+      setLoading(false);
       
     } catch (e: any) {
       console.error("Failed to load patient:", e);
       setLoadError(e?.message ?? "Failed to load patient.");
-    } finally {
       setLoading(false);
     }
   }
@@ -2088,19 +2216,14 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   function downloadSubmissionPayload(payload: ReturnType<typeof collectSubmissionPayload>) {
     try {
       const patientPart = makeSafeFileNamePart(payload.patientFolder, "unknown_patient");
-      const casePart = makeSafeFileNamePart(payload.displayCaseId, "unknown_case");
-      const doctorNamePart = makeSafeFileNamePart(
-        payload.participantInfo?.name ?? payload.doctorId,
-        "unknown_doctor"
-      );
+      const casePart = makeSafeFileNamePart(payload.caseId, "unknown_case");
       const accessCodePart = makeSafeFileNamePart(
         payload.accessCode,
         "unknown_code"
       );
-      const doctorFolder = `${doctorNamePart}_${accessCodePart}`;
       const modePart = payload.workflowMode === "review" ? "review" : "annotation";
-      const root = `${doctorFolder}/${modePart}/patient_${patientPart}_case_${casePart}`;
-      const fileName = `${doctorNamePart}_${accessCodePart}_${patientPart}_case_${casePart}.zip`;
+      const root = `${accessCodePart}/${modePart}/patient_${patientPart}_${casePart}`;
+      const fileName = `${accessCodePart}_${modePart}_${patientPart}_${casePart}.zip`;
       const archiveKey = `localDriveExportArchive:${payload.patientId ?? payload.patientFolder ?? "unknown_patient"}:${payload.caseId ?? "unknown_case"}`;
       const archived = JSON.parse(localStorage.getItem(archiveKey) || "[]");
       const archiveEntries = Array.isArray(archived) ? archived : [];
@@ -2606,6 +2729,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     {annotationLevel === "summary" && (
                       <div className="bg-white">
                       <SummaryPanel
+  key={`summary:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}`}
   caseId={caseId}
   patientId={currentPatient?.folder ?? "unknown_patient"}
   eventId="patient-summary"
@@ -2625,6 +2749,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 {annotationLevel === "otherEvents" && (
   <div className="bg-white">
     <ManagementReasoningPanel
+      key={`management:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}:${getManagementEventId(selectedManagementEvent) ?? "none"}`}
       caseId={caseId}
       managementEvent={selectedManagementEvent}
       patientIndex={currentPatientIndex + 1}
@@ -2634,7 +2759,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       onSaveSuccess={() => {
         setManagementReasoningCompleted(true);
       }}
-      onDirectToEvent={focusManagementEventOnTimeline}
+      
       readOnly={isCaseLocked}
     />
   </div>
@@ -2983,6 +3108,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   <div className="space-y-4 bg-white p-4">
     {selectedEvent ? (
       <TaskWorkspace
+        key={`episode:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}:${selectedEvent.id}`}
         task={selectedTask}
         onChangeTask={setSelectedTask}
         onSaveAndNextStep={(finishedTask) => {

@@ -13,7 +13,6 @@ type Props = {
   patientFolder?: string;
   anesthesiaStart?: string | null;
   onSaveSuccess?: () => void;
-  onDirectToEvent?: () => void;
   readOnly?: boolean;
 };
 
@@ -245,7 +244,6 @@ export default function ManagementReasoningPanel({
   patientFolder,
   anesthesiaStart,
   onSaveSuccess,
-  onDirectToEvent,
   readOnly = false,
 }: Props) {
   const [answer, setAnswer] = useState("");
@@ -784,18 +782,9 @@ export default function ManagementReasoningPanel({
   </div>
 </InstructionPanel>
       <div className="mt-6 rounded-2xl border p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="text-lg font-semibold text-gray-900">
-            Focused medication event
-          </div>
-          <button
-            type="button"
-            onClick={onDirectToEvent}
-            className="rounded-md border border-blue-600 bg-white px-3 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-50"
-          >
-            Direct to event
-          </button>
-        </div>
+      <div className="text-lg font-semibold text-gray-900">
+  Focused medication event
+</div>
 
         <div className="mt-3 space-y-2 text-sm text-gray-800">
           <div>

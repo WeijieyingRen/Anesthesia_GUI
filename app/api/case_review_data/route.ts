@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
-import { listDriveEntries, readJsonFromDrive } from "@/lib/drive-upload";
+import { readJsonFromDrive } from "@/lib/drive-upload";
 
 type AccessCodeRow = {
   doctor_id?: string;
@@ -24,7 +24,7 @@ type ManifestSectionKey =
 type ManifestCaseEntry = {
   patientFolder?: string;
   realCaseId?: string;
-  displayCaseId?: string;
+  fullName?: string | null;
   workflow?: "annotation" | "review";
   updatedAt?: string;
   paths?: Partial<Record<ManifestSectionKey, string>>;
@@ -32,6 +32,22 @@ type ManifestCaseEntry = {
 
 type CaseManifest = {
   cases?: Record<string, ManifestCaseEntry>;
+};
+
+type CaseStatusTaskEntry = {
+  latest_path?: string | null;
+  completed?: boolean;
+  updated_at?: string | null;
+};
+
+type CaseStatusIndexEntry = {
+  patient_id?: string;
+  case_id?: string;
+  tasks?: {
+    summary?: CaseStatusTaskEntry;
+    abnormality_reasoning?: CaseStatusTaskEntry;
+    management_reasoning?: CaseStatusTaskEntry;
+  };
 };
 
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
@@ -73,9 +89,7 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
 
       const code = String(row.access_code ?? "").trim();
       const doctor = String(row.doctor_id ?? "").trim();
-      if (code && doctor) {
-        map.set(code, doctor);
-      }
+      if (code && doctor) map.set(code, doctor);
     }
 
     return map;
@@ -98,95 +112,64 @@ function extractCaseId(value: Record<string, unknown> | null | undefined) {
   return normalized || null;
 }
 
-function parseRevision(fileName: string, baseName: string) {
-  const escaped = baseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = fileName.match(new RegExp(`^${escaped}(?:_(\\d+))?\\.json$`));
-  if (!match) return null;
-  return match[1] ? Number(match[1]) : 1;
+function extractMatchedCaseIdFromSections(sections: Array<LoadedSection | null>) {
+  for (const section of sections) {
+    const caseId = extractCaseId(section?.data);
+    if (caseId) return caseId;
+  }
+
+  return null;
 }
 
-async function loadLatestSectionFromWorkflow({
-  doctorFolder,
-  workflow,
-  patientCaseFolder,
-  section,
-  baseName,
-}: {
-  doctorFolder: string;
-  workflow: "annotation" | "review";
-  patientCaseFolder: string;
-  section: string;
-  baseName: string;
-}): Promise<LoadedSection | null> {
-  const sectionPath = `${doctorFolder}/${workflow}/${patientCaseFolder}/${section}`;
-  const entries = await listDriveEntries({ objectPath: sectionPath });
-
-  const candidates = entries
-    .filter((entry) => entry.name && parseRevision(entry.name, baseName) !== null)
-    .sort((a, b) => {
-      const aRev = parseRevision(a.name ?? "", baseName) ?? 0;
-      const bRev = parseRevision(b.name ?? "", baseName) ?? 0;
-      return bRev - aRev;
-    });
-
-  const latest = candidates[0];
-  if (!latest?.name) return null;
-
-  const objectPath = `${sectionPath}/${latest.name}`;
-  const found = await readJsonFromDrive({ objectPath });
-  if (!found) return null;
-
-  return {
-    data: found.data,
-    objectPath,
-    workflow,
-    fileName: latest.name,
-  };
-}
-
-async function loadPreferredSection(args: {
-  doctorFolder: string;
-  patientCaseFolder: string;
-  section: string;
-  baseName: string;
-}): Promise<LoadedSection | null> {
-  const review = await loadLatestSectionFromWorkflow({
-    ...args,
-    workflow: "review",
-  }).catch(() => null);
-
-  if (review) return review;
-
-  return loadLatestSectionFromWorkflow({
-    ...args,
-    workflow: "annotation",
-  }).catch(() => null);
-}
-
-async function loadManifestCaseEntry(
-  doctorFolder: string,
+function extractCaseStatusEntry(
+  indexData: Record<string, unknown> | null | undefined,
   patientId: string,
   caseId: string
-): Promise<ManifestCaseEntry | null> {
-  const manifest = await readJsonFromDrive({
-    objectPath: `${doctorFolder}/case_manifest.json`,
-  }).catch(() => null);
-
+): CaseStatusIndexEntry | null {
   const cases =
-    manifest?.data?.cases &&
-    typeof manifest.data.cases === "object" &&
-    !Array.isArray(manifest.data.cases)
-      ? (manifest.data.cases as Record<string, unknown>)
+    indexData?.cases &&
+    typeof indexData.cases === "object" &&
+    !Array.isArray(indexData.cases)
+      ? (indexData.cases as Record<string, unknown>)
       : null;
 
   if (!cases) return null;
 
-  const entry = cases[buildManifestCaseKey(patientId, caseId)];
+  const caseKey = buildManifestCaseKey(patientId, caseId);
+  const entry = cases[caseKey];
+
   if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
     return null;
   }
 
-  return entry as ManifestCaseEntry;
+  return entry as CaseStatusIndexEntry;
+}
+
+async function loadSectionsFromCaseStatusEntry(
+  entry: CaseStatusIndexEntry | null
+) {
+  const summaryPath = String(entry?.tasks?.summary?.latest_path ?? "").trim();
+  const managementPath = String(
+    entry?.tasks?.management_reasoning?.latest_path ?? ""
+  ).trim();
+  const abnormalityPath = String(
+    entry?.tasks?.abnormality_reasoning?.latest_path ?? ""
+  ).trim();
+
+  const [summary, managementReasoning, abnormalityReasoning] =
+    await Promise.all([
+      summaryPath
+        ? loadSectionFromManifestPath({ objectPath: summaryPath })
+        : Promise.resolve(null),
+      managementPath
+        ? loadSectionFromManifestPath({ objectPath: managementPath })
+        : Promise.resolve(null),
+      abnormalityPath
+        ? loadSectionFromManifestPath({ objectPath: abnormalityPath })
+        : Promise.resolve(null),
+    ]);
+
+  return { summary, managementReasoning, abnormalityReasoning };
 }
 
 async function loadSectionFromManifestPath({
@@ -201,78 +184,27 @@ async function loadSectionFromManifestPath({
     return null;
   }
 
-  const fileName = objectPath.split("/").pop() ?? "unknown.json";
-
   return {
     data: found.data as Record<string, unknown>,
     objectPath,
     workflow: workflow === "review" ? "review" : "annotation",
-    fileName,
-  };
-}
-
-async function loadSectionsFromManifest(
-  entry: ManifestCaseEntry | null
-): Promise<{
-  summary: LoadedSection | null;
-  managementReasoning: LoadedSection | null;
-  abnormalityReasoning: LoadedSection | null;
-  caseSubmission: LoadedSection | null;
-}> {
-  const paths = entry?.paths;
-
-  const workflow = entry?.workflow;
-
-  const [summary, managementReasoning, abnormalityReasoning, caseSubmission] =
-    await Promise.all([
-      paths?.summary
-        ? loadSectionFromManifestPath({
-            objectPath: paths.summary,
-            workflow,
-          })
-        : Promise.resolve(null),
-      paths?.managementReasoning
-        ? loadSectionFromManifestPath({
-            objectPath: paths.managementReasoning,
-            workflow,
-          })
-        : Promise.resolve(null),
-      paths?.abnormalityReasoning
-        ? loadSectionFromManifestPath({
-            objectPath: paths.abnormalityReasoning,
-            workflow,
-          })
-        : Promise.resolve(null),
-      paths?.caseSubmission
-        ? loadSectionFromManifestPath({
-            objectPath: paths.caseSubmission,
-            workflow,
-          })
-        : Promise.resolve(null),
-    ]);
-
-  return {
-    summary,
-    managementReasoning,
-    abnormalityReasoning,
-    caseSubmission,
+    fileName: objectPath.split("/").pop() ?? "unknown.json",
   };
 }
 
 export async function GET(req: Request) {
   try {
+    const t0 = Date.now();
     const { searchParams } = new URL(req.url);
     const accessCode = String(searchParams.get("accessCode") ?? "").trim();
-    const doctorName = String(searchParams.get("doctorName") ?? "").trim();
     const patientId = String(searchParams.get("patientId") ?? "").trim();
-    const displayCaseId = String(searchParams.get("displayCaseId") ?? "").trim();
     const caseId = String(searchParams.get("caseId") ?? "").trim();
 
-    if (!accessCode || !patientId || !displayCaseId || !caseId) {
+    if (!accessCode || !patientId || !caseId) {
       return NextResponse.json(
         {
           ok: false,
-          error: "Missing accessCode, patientId, displayCaseId, or caseId.",
+          error: "Missing accessCode, patientId, or caseId.",
         },
         { status: 400 }
       );
@@ -286,85 +218,53 @@ export async function GET(req: Request) {
       );
     }
 
-    const doctorFolder = `${sanitizePathPart(doctorName || doctorId)}_${sanitizePathPart(accessCode)}`;
-    const patientCaseFolder = `patient_${sanitizePathPart(patientId)}_case_${sanitizePathPart(displayCaseId)}`;
-    const manifestEntry = await loadManifestCaseEntry(
-      doctorFolder,
+    const indexPath = `${sanitizePathPart(accessCode)}/case_status_index.json`;
+    const indexFound = await readJsonFromDrive({ objectPath: indexPath }).catch(
+      () => null
+    );
+    const caseStatusEntry = extractCaseStatusEntry(
+      indexFound?.data,
       patientId,
       caseId
     );
 
-    let { summary, managementReasoning, abnormalityReasoning, caseSubmission } =
-      await loadSectionsFromManifest(manifestEntry);
+    const {
+      summary,
+      managementReasoning,
+      abnormalityReasoning,
+    } = await loadSectionsFromCaseStatusEntry(caseStatusEntry);
 
-    if (!caseSubmission) {
-      caseSubmission = await loadPreferredSection({
-        doctorFolder,
-        patientCaseFolder,
-        section: "case_submission",
-        baseName: "case_summary",
-      });
-    }
+    const matchedCaseId = extractMatchedCaseIdFromSections([
+      summary,
+      managementReasoning,
+      abnormalityReasoning,
+    ]);
 
-    const matchedCaseId = extractCaseId(caseSubmission?.data);
-    const caseMatches = matchedCaseId === caseId;
-
-    if (!caseMatches) {
+    if (!matchedCaseId || matchedCaseId !== caseId) {
       return NextResponse.json({
         ok: true,
-        doctorFolder,
-        patientCaseFolder,
         matched: false,
-        reason: matchedCaseId
-          ? "case_id_mismatch"
-          : "no_matching_case_submission",
+        accessCode,
+        patientId,
+        caseId,
         summary: null,
         managementReasoning: null,
         abnormalityReasoning: null,
-        caseSubmission: null,
       });
-    }
-
-    if (!summary || !managementReasoning || !abnormalityReasoning) {
-      const fallbackSections = await Promise.all([
-        summary
-          ? Promise.resolve(summary)
-          : loadPreferredSection({
-              doctorFolder,
-              patientCaseFolder,
-              section: "summary",
-              baseName: "summary",
-            }),
-        managementReasoning
-          ? Promise.resolve(managementReasoning)
-          : loadPreferredSection({
-              doctorFolder,
-              patientCaseFolder,
-              section: "management_reasoning",
-              baseName: "management_reasoning",
-            }),
-        abnormalityReasoning
-          ? Promise.resolve(abnormalityReasoning)
-          : loadPreferredSection({
-              doctorFolder,
-              patientCaseFolder,
-              section: "abnormality_reasoning",
-              baseName: "abnormality_reasoning",
-            }),
-      ]);
-
-      [summary, managementReasoning, abnormalityReasoning] = fallbackSections;
     }
 
     return NextResponse.json({
       ok: true,
-      doctorFolder,
-      patientCaseFolder,
       matched: true,
+      accessCode,
+      patientId,
+      caseId,
+      indexPath,
+      fastPathHit: Boolean(caseStatusEntry),
+      elapsedMs: Date.now() - t0,
       summary,
       managementReasoning,
       abnormalityReasoning,
-      caseSubmission,
     });
   } catch (error) {
     console.error("case_review_data GET error:", error);

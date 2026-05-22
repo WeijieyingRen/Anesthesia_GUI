@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import {
   isDriveUploadEnabled,
+  listDriveEntries,
   readJsonFromDrive,
   uploadJsonToDrive,
 } from "@/lib/drive-upload";
@@ -67,45 +68,11 @@ type SubmitBody = {
 };
 
 type StorageTarget = {
-  section:
-    | "summary"
-    | "abnormality_reasoning"
-    | "management_reasoning"
-    | "case_submission";
-  taskFolder?: "detection" | "mechanism" | "intervention";
+  section: "summary" | "abnormality_reasoning" | "management_reasoning";
   fileName: string;
-  episodeFolder?: string;
 };
 
-type ManifestSectionKey =
-  | "summary"
-  | "managementReasoning"
-  | "abnormalityReasoning"
-  | "caseSubmission";
-
-type ManifestCaseEntry = {
-  patientFolder: string;
-  realCaseId: string;
-  displayCaseId: string;
-  workflow: "annotation" | "review";
-  updatedAt: string;
-  lastPanel?: string | null;
-  hasSummary?: boolean;
-  hasManagementReasoning?: boolean;
-  hasAbnormalityReasoning?: boolean;
-  hasCaseSubmission?: boolean;
-  paths?: Partial<Record<ManifestSectionKey, string>>;
-};
-
-type CaseManifest = {
-  participant?: {
-    name?: string;
-    doctorId?: string;
-    accessCode?: string;
-  };
-  updatedAt?: string;
-  cases?: Record<string, ManifestCaseEntry>;
-};
+type TaskKey = "summary" | "abnormality_reasoning" | "management_reasoning";
 
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
 
@@ -146,35 +113,6 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
   })();
 
   return accessCodeDoctorMapPromise;
-}
-
-function toIsoTime(value: unknown): string | null {
-  if (value === null || value === undefined) return null;
-
-  if (typeof value === "number" && Number.isFinite(value)) {
-    const d = new Date(value);
-    return Number.isNaN(d.getTime()) ? null : d.toISOString();
-  }
-
-  if (typeof value === "string" && value.trim() !== "") {
-    const d = new Date(value);
-    return Number.isNaN(d.getTime()) ? null : d.toISOString();
-  }
-
-  return null;
-}
-
-function toTimestampMs(value: unknown): number | null {
-  if (value === null || value === undefined) return null;
-
-  if (typeof value === "number" && Number.isFinite(value)) return value;
-
-  if (typeof value === "string" && value.trim() !== "") {
-    const ms = new Date(value).getTime();
-    return Number.isNaN(ms) ? null : ms;
-  }
-
-  return null;
 }
 
 function sanitizePathPart(value: unknown): string {
@@ -224,79 +162,80 @@ function normalizeAccessCode(body: SubmitBody): string {
   );
 }
 
-function normalizeDoctorFolderName(body: SubmitBody, fallbackDoctorId: string) {
-  const rawName =
-    body.participantInfo?.name ??
-    body.annotator?.name ??
-    body.participant?.name ??
-    fallbackDoctorId;
-
-  return sanitizePathPart(rawName);
-}
-
-function buildDoctorFolderName(
-  body: SubmitBody,
-  fallbackDoctorId: string,
-  accessCode: string
-) {
-  return `${normalizeDoctorFolderName(body, fallbackDoctorId)}_${accessCode}`;
-}
-
 function normalizePatientId(body: SubmitBody): string {
   return sanitizePathPart(
     body.patientId ?? body.patientFolder ?? body.caseId ?? "unknown_patient"
   );
 }
 
-function normalizeDisplayCaseId(body: SubmitBody): string {
-  return sanitizePathPart(body.displayCaseId ?? "unknown_case");
-}
-
 function normalizeRealCaseId(body: SubmitBody): string {
   return sanitizePathPart(body.caseId ?? "unknown_case_id");
 }
 
+function resolveFullName(body: SubmitBody, fallbackDoctorId: string) {
+  const rawName =
+    body.participantInfo?.name ??
+    body.annotator?.name ??
+    body.participant?.name ??
+    fallbackDoctorId;
+
+  return String(rawName ?? fallbackDoctorId).trim() || fallbackDoctorId;
+}
+
+function buildAccessCodeRoot(accessCode: string) {
+  return sanitizePathPart(accessCode);
+}
+
 function buildPatientCaseFolderName(body: SubmitBody): string {
   const patientId = normalizePatientId(body);
-  const caseId = normalizeDisplayCaseId(body);
-  return `patient_${patientId}_case_${caseId}`;
+  const caseId = normalizeRealCaseId(body);
+  return `patient_${patientId}_${caseId}`;
 }
 
-function buildManifestCaseKey(body: SubmitBody): string {
-  return `${normalizePatientId(body)}::${normalizeRealCaseId(body)}`;
+function buildCaseKey(patientId: string, caseId: string | number | null) {
+  return `${sanitizePathPart(patientId)}::${sanitizePathPart(
+    caseId ?? "unknown_case_id"
+  )}`;
 }
 
-function normalizeEpisodeFolder(body: SubmitBody): string {
-  const explicitEpisodeFolder = body.episodeFolder;
+function toIsoTime(value: unknown): string | null {
+  if (value === null || value === undefined) return null;
 
-  if (explicitEpisodeFolder) {
-    const cleaned = sanitizePathPart(explicitEpisodeFolder);
-    if (/^episode_\d+$/i.test(cleaned)) return cleaned;
-    return cleaned;
+  if (typeof value === "number" && Number.isFinite(value)) {
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? null : d.toISOString();
   }
 
-  const episodeNumber = body.episodeNumber;
-
-  if (
-    episodeNumber !== null &&
-    episodeNumber !== undefined &&
-    String(episodeNumber).trim() !== ""
-  ) {
-    const n = Number(episodeNumber);
-    if (Number.isFinite(n) && n > 0) {
-      return `episode_${Math.floor(n)}`;
-    }
+  if (typeof value === "string" && value.trim() !== "") {
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? null : d.toISOString();
   }
 
-  const raw =
-    body.episodeId ?? body.selectedEventId ?? body.eventId ?? "episode_unknown";
+  return null;
+}
 
-  const cleaned = sanitizePathPart(raw);
+function toTimestampMs(value: unknown): number | null {
+  if (value === null || value === undefined) return null;
 
-  if (/^episode_\d+$/i.test(cleaned)) return cleaned;
-  if (/^\d+$/.test(cleaned)) return `episode_${cleaned}`;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
 
-  return `episode_${cleaned}`;
+  if (typeof value === "string" && value.trim() !== "") {
+    const ms = new Date(value).getTime();
+    return Number.isNaN(ms) ? null : ms;
+  }
+
+  return null;
+}
+
+function numericOrNull(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+
+  if (typeof value === "string" && value.trim() !== "") {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  return null;
 }
 
 function removeNullFields<T>(value: T): T {
@@ -346,6 +285,27 @@ function cleanAnnotationState(
   return removeNullFields(cleaned);
 }
 
+function cleanAnswers(
+  answers: Record<string, unknown>,
+  body: SubmitBody
+): Record<string, unknown> {
+  const panel = String(body.panel ?? "").toLowerCase();
+  const task = String(body.task ?? "").toLowerCase();
+  const combined = `${panel} ${task}`;
+
+  const cloned: Record<string, unknown> = { ...answers };
+
+  if (
+    combined.includes("selection_overview") ||
+    combined.includes("abnormality_reasoning_selection") ||
+    combined.includes("checklist")
+  ) {
+    delete cloned.tasks;
+  }
+
+  return removeNullFields(cloned);
+}
+
 function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
   if (
     body.answers &&
@@ -368,37 +328,11 @@ function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
     : null;
 }
 
-function cleanAnswers(
-  answers: Record<string, unknown>,
-  body: SubmitBody
-): Record<string, unknown> {
-  const panel = String(body.panel ?? "").toLowerCase();
-  const task = String(body.task ?? "").toLowerCase();
-  const combined = `${panel} ${task}`;
-
-  const cloned: Record<string, unknown> = { ...answers };
-
-  // For selection overview, the task block repeats allDetectedEpisodes and
-  // selectedEpisodes. Keep the direct fields because they are easier to analyze.
-  if (
-    combined.includes("selection_overview") ||
-    combined.includes("abnormality_reasoning_selection") ||
-    combined.includes("checklist")
-  ) {
-    delete cloned.tasks;
-  }
-
-  return removeNullFields(cloned);
-}
-
-function numericOrNull(value: unknown): number | null {
-  if (typeof value === "number" && Number.isFinite(value)) return value;
-  if (typeof value === "string" && value.trim() !== "") {
-    const n = Number(value);
-    return Number.isFinite(n) ? n : null;
-  }
-
-  return null;
+function parseRevision(fileName: string, baseName: string) {
+  const escaped = baseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = fileName.match(new RegExp(`^${escaped}(?:_(\\d+))?\\.json$`));
+  if (!match) return null;
+  return match[1] ? Number(match[1]) : 1;
 }
 
 function withRevisionSuffix(fileName: string, revisionNumber: unknown) {
@@ -408,99 +342,72 @@ function withRevisionSuffix(fileName: string, revisionNumber: unknown) {
   const dotIndex = fileName.lastIndexOf(".");
   if (dotIndex < 0) return `${fileName}_${Math.floor(revision)}`;
 
-  return `${fileName.slice(0, dotIndex)}_${Math.floor(revision)}${fileName.slice(dotIndex)}`;
+  return `${fileName.slice(0, dotIndex)}_${Math.floor(revision)}${fileName.slice(
+    dotIndex
+  )}`;
+}
+
+async function resolveRevisionedFileName(
+  sectionPath: string,
+  baseFileName: string,
+  revisionNumber: unknown
+) {
+  const explicitRevision = numericOrNull(revisionNumber);
+  if (explicitRevision !== null && explicitRevision > 0) {
+    return withRevisionSuffix(baseFileName, explicitRevision);
+  }
+
+  try {
+    const baseName = baseFileName.replace(/\.json$/i, "");
+    const entries = await listDriveEntries({ objectPath: sectionPath });
+    const latestRevision = entries.reduce((max, entry) => {
+      const revision = entry.name ? parseRevision(entry.name, baseName) : null;
+      return revision && revision > max ? revision : max;
+    }, 0);
+
+    return withRevisionSuffix(baseFileName, latestRevision + 1);
+  } catch {
+    return withRevisionSuffix(baseFileName, 1);
+  }
+}
+
+function resolveWorkflowMode(body: SubmitBody): "annotation" | "review" {
+  if (body.workflowMode === "review") return "review";
+  return "annotation";
 }
 
 function detectStorageTarget(body: SubmitBody): StorageTarget {
   const panel = String(body.panel ?? "").toLowerCase();
-  const action = String(body.action ?? "").toLowerCase();
   const task = String(body.task ?? "").toLowerCase();
-  const combined = `${panel} ${action} ${task}`;
-
-  const hasAnnotationState =
-    body.annotationState &&
-    typeof body.annotationState === "object" &&
-    !Array.isArray(body.annotationState);
-
-  if (hasAnnotationState && !panel && !task) {
-    return {
-      section: "case_submission",
-      fileName: "case_summary.json",
-    };
-  }
-
-  if (combined.includes("case_summary")) {
-    return {
-      section: "case_submission",
-      fileName: "case_summary.json",
-    };
-  }
+  const action = String(body.action ?? "").toLowerCase();
+  const combined = `${panel} ${task} ${action}`;
 
   if (combined.includes("summary")) {
     return {
       section: "summary",
-      fileName: withRevisionSuffix("summary.json", body.revisionNumber),
-    };
-  }
-
-  if (
-    combined.includes("selection_overview") ||
-    combined.includes("abnormality_reasoning_selection") ||
-    combined.includes("checklist")
-  ) {
-    return {
-      section: "abnormality_reasoning",
-      fileName: "selection_overview.json",
+      fileName: "summary.json",
     };
   }
 
   if (combined.includes("management")) {
     return {
       section: "management_reasoning",
-      fileName: withRevisionSuffix(
-        "management_reasoning.json",
-        body.revisionNumber
-      ),
-    };
-  }
-
-  if (combined.includes("detect")) {
-    return {
-      section: "abnormality_reasoning",
-      taskFolder: "detection",
-      episodeFolder: normalizeEpisodeFolder(body),
-      fileName: "detection.json",
-    };
-  }
-
-  if (combined.includes("mechanism")) {
-    return {
-      section: "abnormality_reasoning",
-      taskFolder: "mechanism",
-      episodeFolder: normalizeEpisodeFolder(body),
-      fileName: "mechanism.json",
-    };
-  }
-
-  if (combined.includes("intervention")) {
-    return {
-      section: "abnormality_reasoning",
-      taskFolder: "intervention",
-      episodeFolder: normalizeEpisodeFolder(body),
-      fileName: "intervention.json",
+      fileName: "management_reasoning.json",
     };
   }
 
   if (
-    combined.includes("merged_episode_reasoning") ||
-    combined.includes("abnormality")
+    combined.includes("abnormality") ||
+    combined.includes("selection_overview") ||
+    combined.includes("checklist") ||
+    combined.includes("detect") ||
+    combined.includes("mechanism") ||
+    combined.includes("intervention") ||
+    combined.includes("merged_episode_reasoning")
   ) {
     return {
       section: "abnormality_reasoning",
-      fileName: withRevisionSuffix(
-        "abnormality_reasoning.json",
-        body.revisionNumber
-      ),
+      fileName: "abnormality_reasoning.json",
     };
   }
 
@@ -510,179 +417,33 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   };
 }
 
-async function resolveWorkflowMode(
-  body: SubmitBody,
-  doctorId: string,
-  accessCode: string,
-  patientId: string
-): Promise<"annotation" | "review"> {
-  if (body.workflowMode === "annotation" || body.workflowMode === "review") {
-    return body.workflowMode;
-  }
-
-  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
-  const existing = await readJsonFromDrive({
-    objectPath: `${doctorFolder}/case_status_index.json`,
-  });
-  const patients =
-    existing?.data?.patients &&
-    typeof existing.data.patients === "object" &&
-    !Array.isArray(existing.data.patients)
-      ? (existing.data.patients as Record<string, unknown>)
-      : {};
-
-  const patientStatus =
-    patients[patientId] &&
-    typeof patients[patientId] === "object" &&
-    !Array.isArray(patients[patientId])
-      ? (patients[patientId] as Record<string, unknown>)
-      : null;
-
-  return patientStatus?.completed === true ? "review" : "annotation";
+function getTaskKey(target: StorageTarget): TaskKey {
+  return target.section;
 }
 
-async function buildDriveObjectPath(body: SubmitBody): Promise<string> {
-  const doctorId = await normalizeDoctorId(body);
-  const accessCode = normalizeAccessCode(body);
-  const patientId = normalizePatientId(body);
-  const patientCaseFolder = buildPatientCaseFolderName(body);
-
-  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
-  const target = detectStorageTarget(body);
-  const workflowMode = await resolveWorkflowMode(
-    body,
-    doctorId,
-    accessCode,
-    patientId
-  );
-
-  if (target.section === "summary") {
-    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/summary/${target.fileName}`;
-  }
-
-  if (target.section === "management_reasoning") {
-    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/management_reasoning/${target.fileName}`;
-  }
-
-  if (target.section === "case_submission") {
-    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/case_submission/${target.fileName}`;
-  }
-
-  if (target.section === "abnormality_reasoning") {
-    if (target.episodeFolder && target.taskFolder) {
-      return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/abnormality_reasoning/${target.episodeFolder}/${target.taskFolder}/${target.fileName}`;
-    }
-
-    if (target.episodeFolder && !target.taskFolder) {
-      return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/abnormality_reasoning/${target.episodeFolder}/${target.fileName}`;
-    }
-
-    return `${doctorFolder}/${workflowMode}/${patientCaseFolder}/abnormality_reasoning/${target.fileName}`;
-  }
-
-  throw new Error("Unsupported Drive storage target.");
-}
-
-function getManifestSectionKey(
-  target: StorageTarget
-): ManifestSectionKey | null {
-  if (target.section === "summary") return "summary";
-  if (target.section === "management_reasoning") return "managementReasoning";
-  if (target.section === "abnormality_reasoning" && !target.taskFolder) {
-    return "abnormalityReasoning";
-  }
-  if (target.section === "case_submission") return "caseSubmission";
-  return null;
-}
-
-async function updateCaseManifest({
+async function buildDriveObjectPath({
   body,
-  doctorId,
   accessCode,
-  driveObjectPath,
   workflowMode,
   target,
-  savedAtUtc,
 }: {
   body: SubmitBody;
-  doctorId: string;
   accessCode: string;
-  driveObjectPath: string;
   workflowMode: "annotation" | "review";
   target: StorageTarget;
-  savedAtUtc: string;
-}) {
-  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
-  const objectPath = `${doctorFolder}/case_manifest.json`;
-  const existing = await readJsonFromDrive({ objectPath });
-  const manifest =
-    existing?.data && typeof existing.data === "object" && !Array.isArray(existing.data)
-      ? (existing.data as CaseManifest)
-      : {};
+}): Promise<string> {
+  const rootFolder = buildAccessCodeRoot(accessCode);
+  const patientCaseFolder = buildPatientCaseFolderName(body);
 
-  const cases =
-    manifest.cases && typeof manifest.cases === "object" && !Array.isArray(manifest.cases)
-      ? { ...manifest.cases }
-      : {};
+  const sectionPath = `${rootFolder}/${workflowMode}/${patientCaseFolder}/${target.section}`;
 
-  const caseKey = buildManifestCaseKey(body);
-  const previous =
-    cases[caseKey] &&
-    typeof cases[caseKey] === "object" &&
-    !Array.isArray(cases[caseKey])
-      ? (cases[caseKey] as ManifestCaseEntry)
-      : null;
+  const fileName = await resolveRevisionedFileName(
+    sectionPath,
+    target.fileName,
+    body.revisionNumber
+  );
 
-  const sectionKey = getManifestSectionKey(target);
-  const nextPaths = {
-    ...(previous?.paths ?? {}),
-  };
-
-  if (sectionKey) {
-    nextPaths[sectionKey] = driveObjectPath;
-  }
-
-  cases[caseKey] = removeNullFields({
-    ...previous,
-    patientFolder: normalizePatientId(body),
-    realCaseId: normalizeRealCaseId(body),
-    displayCaseId: normalizeDisplayCaseId(body),
-    workflow: workflowMode,
-    updatedAt: savedAtUtc,
-    lastPanel: body.panel ?? null,
-    hasSummary:
-      sectionKey === "summary" ? true : previous?.hasSummary ?? false,
-    hasManagementReasoning:
-      sectionKey === "managementReasoning"
-        ? true
-        : previous?.hasManagementReasoning ?? false,
-    hasAbnormalityReasoning:
-      sectionKey === "abnormalityReasoning"
-        ? true
-        : previous?.hasAbnormalityReasoning ?? false,
-    hasCaseSubmission:
-      sectionKey === "caseSubmission"
-        ? true
-        : previous?.hasCaseSubmission ?? false,
-    paths: Object.keys(nextPaths).length > 0 ? nextPaths : undefined,
-  });
-
-  await uploadJsonToDrive({
-    objectPath,
-    data: removeNullFields({
-      participant: {
-        name:
-          body.participantInfo?.name ??
-          body.annotator?.name ??
-          body.participant?.name ??
-          null,
-        doctorId,
-        accessCode,
-      },
-      updatedAt: savedAtUtc,
-      cases,
-    }),
-  });
+  return `${sectionPath}/${fileName}`;
 }
 
 async function updateCaseStatusIndex({
@@ -691,43 +452,95 @@ async function updateCaseStatusIndex({
   accessCode,
   patientId,
   caseId,
+  displayCaseId,
   panel,
+  target,
+  workflowMode,
+  driveObjectPath,
 }: {
   body: SubmitBody;
   doctorId: string;
   accessCode: string;
   patientId: string;
   caseId: string | number | null;
+  displayCaseId?: string | number | null;
   panel: string | null;
+  target: StorageTarget;
+  workflowMode: "annotation" | "review";
+  driveObjectPath: string;
 }) {
-  const doctorFolder = buildDoctorFolderName(body, doctorId, accessCode);
-  const objectPath = `${doctorFolder}/case_status_index.json`;
-  const existing = await readJsonFromDrive({ objectPath });
-  const patients =
-    existing?.data?.patients &&
-    typeof existing.data.patients === "object" &&
-    !Array.isArray(existing.data.patients)
-      ? { ...(existing.data.patients as Record<string, unknown>) }
+  const rootFolder = buildAccessCodeRoot(accessCode);
+  const objectPath = `${rootFolder}/case_status_index.json`;
+
+  const existing = await readJsonFromDrive({ objectPath }).catch(() => null);
+
+  const oldCases =
+    existing?.data?.cases &&
+    typeof existing.data.cases === "object" &&
+    !Array.isArray(existing.data.cases)
+      ? { ...(existing.data.cases as Record<string, any>) }
       : {};
+
+  const now = new Date().toISOString();
+  const fullName = resolveFullName(body, doctorId);
+  const normalizedPatientId = sanitizePathPart(patientId);
+  const normalizedCaseId = sanitizePathPart(caseId ?? "unknown_case_id");
+  const caseKey = buildCaseKey(normalizedPatientId, normalizedCaseId);
 
   const previous =
-    patients[patientId] &&
-    typeof patients[patientId] === "object" &&
-    !Array.isArray(patients[patientId])
-      ? (patients[patientId] as Record<string, unknown>)
+    oldCases[caseKey] &&
+    typeof oldCases[caseKey] === "object" &&
+    !Array.isArray(oldCases[caseKey])
+      ? oldCases[caseKey]
       : {};
-  const now = new Date().toISOString();
-  const isCaseSummary = String(panel ?? "").toLowerCase().includes("case_summary");
 
-  patients[patientId] = removeNullFields({
-    ...previous,
-    patient_id: patientId,
-    case_id: caseId ?? previous.case_id ?? null,
-    inProgress: isCaseSummary ? false : true,
-    completed: isCaseSummary ? true : previous.completed === true,
+  const previousTasks = previous.tasks ?? {};
+
+  const tasks = {
+    summary: {
+      completed: Boolean(previousTasks.summary?.completed),
+      latest_path: previousTasks.summary?.latest_path ?? null,
+      updated_at: previousTasks.summary?.updated_at ?? null,
+    },
+    abnormality_reasoning: {
+      completed: Boolean(previousTasks.abnormality_reasoning?.completed),
+      latest_path: previousTasks.abnormality_reasoning?.latest_path ?? null,
+      updated_at: previousTasks.abnormality_reasoning?.updated_at ?? null,
+    },
+    management_reasoning: {
+      completed: Boolean(previousTasks.management_reasoning?.completed),
+      latest_path: previousTasks.management_reasoning?.latest_path ?? null,
+      updated_at: previousTasks.management_reasoning?.updated_at ?? null,
+    },
+  };
+
+  const taskKey = getTaskKey(target);
+
+  tasks[taskKey] = {
+    completed: true,
+    latest_path: driveObjectPath,
     updated_at: now,
-    completed_at: isCaseSummary ? now : previous.completed_at ?? null,
+  };
+
+  const allCompleted =
+    tasks.summary.completed &&
+    tasks.abnormality_reasoning.completed &&
+    tasks.management_reasoning.completed;
+
+  oldCases[caseKey] = removeNullFields({
+    ...previous,
+    patient_id: normalizedPatientId,
+    case_id: normalizedCaseId,
+    display_case_id: displayCaseId ?? previous.display_case_id ?? null,
+    full_name: fullName,
+    workflow: workflowMode,
+    status: allCompleted ? "completed" : "in_progress",
+    completed: allCompleted,
+    inProgress: !allCompleted,
+    updated_at: now,
+    completed_at: allCompleted ? previous.completed_at ?? now : null,
     last_panel: panel,
+    tasks,
   });
 
   await uploadJsonToDrive({
@@ -735,8 +548,9 @@ async function updateCaseStatusIndex({
     data: removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
+      full_name: fullName,
       updated_at: now,
-      patients,
+      cases: oldCases,
     }),
   });
 }
@@ -747,10 +561,7 @@ export async function POST(req: Request) {
 
     console.log(">>> NEW SUBMIT ROUTE HIT");
     console.log("SUBMIT_STORAGE_TARGET = Google Drive");
-    console.log(
-      "DRIVE_ENABLED =",
-      isDriveUploadEnabled() ? "true" : "false"
-    );
+    console.log("DRIVE_ENABLED =", isDriveUploadEnabled() ? "true" : "false");
     console.log(
       "DRIVE_FOLDER_ID =",
       process.env.DRIVE_FOLDER_ID ? "configured" : "missing"
@@ -766,21 +577,8 @@ export async function POST(req: Request) {
 
     const body = (await req.json()) as SubmitBody;
 
-    const annotatorName =
-      body?.annotator?.name ??
-      body?.participant?.name ??
-      body?.participantInfo?.name ??
-      null;
-
-    const annotatorEmail =
-      body?.annotator?.email ??
-      body?.participant?.email ??
-      body?.participantInfo?.email ??
-      "unknown_user";
-
     const caseId = body?.caseId ?? null;
     const eventId = body?.eventId ?? body?.selectedEventId ?? null;
-
     const action = body?.action ?? "session";
     const task = body?.task ?? null;
     const panel = body?.panel ?? null;
@@ -801,9 +599,7 @@ export async function POST(req: Request) {
     const firstInteractionAtIso = toIsoTime(body?.firstInteractionAt);
     const firstTypingAtIso = toIsoTime(body?.firstTypingAt);
     const firstVoiceStartAtIso = toIsoTime(body?.firstVoiceStartAt);
-    const pageSubmittedAtIso = toIsoTime(
-      body?.submittedAt ?? body?.clickedAt
-    );
+    const pageSubmittedAtIso = toIsoTime(body?.submittedAt ?? body?.clickedAt);
 
     const responseTimeSec =
       pageOpenedAtMs !== null && pageSubmittedAtMs !== null
@@ -826,39 +622,39 @@ export async function POST(req: Request) {
         : null;
 
     const answers = buildAnswers(body);
-
     const doctorId = await normalizeDoctorId(body);
     const accessCode = normalizeAccessCode(body);
     const patientId = normalizePatientId(body);
     const target = detectStorageTarget(body);
-    const workflowMode = await resolveWorkflowMode(
-      body,
-      doctorId,
-      accessCode,
-      patientId
-    );
+    const workflowMode = resolveWorkflowMode(body);
     const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
-    const panelKey = String(panel ?? "").toLowerCase();
-    const shouldOmitEventFields =
-      panelKey.includes("abnormality_reasoning") ||
-      panelKey.includes("management_reasoning");
 
     const savedAtUtc = new Date().toISOString();
+
+    const driveObjectPath = await buildDriveObjectPath({
+      body,
+      accessCode,
+      workflowMode,
+      target,
+    });
+
     const driveRecord = removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
+      full_name: resolveFullName(body, doctorId),
       patient_id: patientId,
       case_id: caseId ?? null,
-      ...(shouldOmitEventFields
-        ? {}
-        : {
-            event_id: eventId ?? null,
-            episode_id:
-              body?.episodeId ?? body?.selectedEventId ?? body?.eventId ?? null,
-            episode_number: body?.episodeNumber ?? null,
-            episode_folder: body?.episodeFolder ?? target.episodeFolder ?? null,
-          }),
+      display_case_id: body.displayCaseId ?? null,
+      event_id: eventId ?? null,
+      episode_id:
+        body?.episodeId ?? body?.selectedEventId ?? body?.eventId ?? null,
+      episode_number: body?.episodeNumber ?? null,
+      episode_folder: body?.episodeFolder ?? null,
+      workflow_mode: workflowMode,
+      task_key: getTaskKey(target),
       panel,
+      action,
+      task,
       saved_at_utc: savedAtUtc,
       saved_at_local: body.submittedAtLocal ?? null,
       answers,
@@ -866,10 +662,14 @@ export async function POST(req: Request) {
       timing: {
         page_opened_at_utc: pageOpenedAtIso,
         page_opened_at_local: body.pageOpenedAtLocal ?? null,
+        first_interaction_at_utc: firstInteractionAtIso,
+        first_typing_at_utc: firstTypingAtIso,
+        first_voice_start_at_utc: firstVoiceStartAtIso,
         page_submitted_at_utc: pageSubmittedAtIso,
         page_submitted_at_local: body.submittedAtLocal ?? null,
         total_duration_sec:
           numericOrNull(body.totalDurationSec) ?? responseTimeSec,
+        time_to_first_interaction_sec: timeToFirstInteractionSec,
         typing_duration_sec:
           numericOrNull(body.typingDurationSec) ?? typingToSubmitSec,
         voice_duration_sec:
@@ -877,8 +677,6 @@ export async function POST(req: Request) {
         local_timezone: body.localTimezone ?? null,
       },
     });
-
-    const driveObjectPath = await buildDriveObjectPath(body);
 
     if (!isDriveUploadEnabled()) {
       throw new Error(
@@ -897,29 +695,12 @@ export async function POST(req: Request) {
       accessCode,
       patientId,
       caseId,
+      displayCaseId: body.displayCaseId ?? null,
       panel,
-    });
-
-    await updateCaseManifest({
-      body,
-      doctorId,
-      accessCode,
-      driveObjectPath,
-      workflowMode,
       target,
-      savedAtUtc,
+      workflowMode,
+      driveObjectPath: uploaded.objectPath,
     });
-
-    const driveResult = {
-      saved: true,
-      skipped: false,
-      fileId: uploaded.fileId,
-      fileName: uploaded.fileName,
-      folderId: uploaded.folderId,
-      objectPath: uploaded.objectPath,
-      webViewLink: uploaded.webViewLink ?? null,
-      warning: null,
-    };
 
     const totalServerSec = (Date.now() - t0) / 1000;
     console.log("submit route total sec =", totalServerSec);
@@ -935,18 +716,29 @@ export async function POST(req: Request) {
         panel,
         action,
         task,
+        workflowMode,
+        taskKey: getTaskKey(target),
         responseTimeSec,
         timeToFirstInteractionSec,
         typingToSubmitSec,
         voiceToSubmitSec,
         totalServerSec,
       }),
-      drive: driveResult,
+      drive: {
+        saved: true,
+        skipped: false,
+        fileId: uploaded.fileId,
+        fileName: uploaded.fileName,
+        folderId: uploaded.folderId,
+        objectPath: uploaded.objectPath,
+        webViewLink: uploaded.webViewLink ?? null,
+        warning: null,
+      },
       localExport: {
         objectPath: uploaded.objectPath,
         data: driveRecord,
       },
-      debug_version: "google-drive-required-submit-route-v3",
+      debug_version: "access-code-index-submit-route-v4",
     });
   } catch (error) {
     console.error("Submit route error:", error);
