@@ -13,10 +13,22 @@ type SubmitBody = {
   annotator?: { name?: string; email?: string };
   participant?: { name?: string; email?: string };
   participantInfo?: {
-    name?: string;
-    email?: string;
-    accessCode?: string;
-    doctorId?: string;
+    name?: string | null;
+    email?: string | null;
+    accessCode?: string | null;
+    doctorId?: string | null;
+
+    gender?: string | null;
+    professionalDegree?: string | null;
+    degree?: string | null;
+    countryOfPrimaryClinicalTraining?: string | null;
+    trainingCountry?: string | null;
+    currentClinicalRole?: string | null;
+    clinicalRole?: string | null;
+    yearsHandsOnAnesthesiaClinicalCare?: string | number | null;
+    yearsExperience?: string | number | null;
+
+    [key: string]: unknown;
   };
 
   doctorId?: string | null;
@@ -69,11 +81,19 @@ type SubmitBody = {
 };
 
 type StorageTarget = {
-  section: "summary" | "abnormality_reasoning" | "management_reasoning";
+  section:
+    | "summary"
+    | "abnormality_reasoning"
+    | "management_reasoning"
+    | "case_submission";
   fileName: string;
 };
 
-type TaskKey = "summary" | "abnormality_reasoning" | "management_reasoning";
+type TaskKey =
+  | "summary"
+  | "abnormality_reasoning"
+  | "management_reasoning"
+  | "case_submission";
 
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
 
@@ -258,6 +278,62 @@ function removeNullFields<T>(value: T): T {
   return value;
 }
 
+function buildParticipantMetadata(body: SubmitBody) {
+  const info = body.participantInfo ?? {};
+
+  return removeNullFields({
+    name:
+      info.name ??
+      body.annotator?.name ??
+      body.participant?.name ??
+      null,
+
+    email:
+      info.email ??
+      body.annotator?.email ??
+      body.participant?.email ??
+      null,
+
+    doctor_id:
+      body.doctorId ??
+      info.doctorId ??
+      null,
+
+    access_code:
+      body.accessCode ??
+      info.accessCode ??
+      null,
+
+    gender:
+      info.gender ??
+      null,
+
+    professional_degree:
+      info.professionalDegree ??
+      info.degree ??
+      null,
+
+    country_of_primary_clinical_training:
+      info.countryOfPrimaryClinicalTraining ??
+      info.trainingCountry ??
+      null,
+
+    current_clinical_role:
+      info.currentClinicalRole ??
+      info.clinicalRole ??
+      null,
+
+    years_hands_on_anesthesia_clinical_care:
+      info.yearsHandsOnAnesthesiaClinicalCare ??
+      info.yearsExperience ??
+      null,
+  });
+}
+
+function isCaseSubmissionTarget(target: StorageTarget): boolean {
+  return target.section === "case_submission";
+}
+
 function cleanAnnotationState(
   annotationState: Record<string, unknown> | null | undefined
 ): Record<string, unknown> | null {
@@ -383,10 +459,18 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   const action = String(body.action ?? "").toLowerCase();
   const combined = `${panel} ${task} ${action}`;
 
-  if (combined.includes("summary")) {
+  // IMPORTANT:
+  // Final case-level submit uses panel = "case_summary".
+  // It must be saved to case_submission/case_summary.json,
+  // not summary/summary.json.
+  if (
+    panel === "case_summary" ||
+    panel === "case_submission" ||
+    combined.includes("case_submission")
+  ) {
     return {
-      section: "summary",
-      fileName: "summary.json",
+      section: "case_submission",
+      fileName: "case_summary.json",
     };
   }
 
@@ -409,6 +493,13 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
     return {
       section: "abnormality_reasoning",
       fileName: "abnormality_reasoning.json",
+    };
+  }
+
+  if (combined.includes("summary")) {
+    return {
+      section: "summary",
+      fileName: "summary.json",
     };
   }
 
@@ -517,16 +608,25 @@ async function updateCaseStatusIndex({
 
   const taskKey = getTaskKey(target);
 
-  tasks[taskKey] = {
-    completed: true,
-    latest_path: driveObjectPath,
-    updated_at: now,
-  };
+  if (!isCaseSubmissionTarget(target)) {
+    const panelTaskKey = taskKey as
+      | "summary"
+      | "abnormality_reasoning"
+      | "management_reasoning";
 
-  const allCompleted =
+    tasks[panelTaskKey] = {
+      completed: true,
+      latest_path: driveObjectPath,
+      updated_at: now,
+    };
+  }
+
+  const allPanelTasksCompleted =
     tasks.summary.completed &&
     tasks.abnormality_reasoning.completed &&
     tasks.management_reasoning.completed;
+
+  const isFinalCaseSubmission = isCaseSubmissionTarget(target);
 
   oldCases[caseKey] = removeNullFields({
     ...previous,
@@ -535,13 +635,36 @@ async function updateCaseStatusIndex({
     display_case_id: displayCaseId ?? previous.display_case_id ?? null,
     full_name: fullName,
     workflow: workflowMode,
-    status: allCompleted ? "completed" : "in_progress",
-    completed: allCompleted,
-    inProgress: !allCompleted,
+
+    status:
+      isFinalCaseSubmission || allPanelTasksCompleted
+        ? "completed"
+        : "in_progress",
+
+    completed:
+      isFinalCaseSubmission || allPanelTasksCompleted,
+
+    inProgress:
+      !(isFinalCaseSubmission || allPanelTasksCompleted),
+
     updated_at: now,
-    completed_at: allCompleted ? previous.completed_at ?? now : null,
+
+    completed_at:
+      isFinalCaseSubmission || allPanelTasksCompleted
+        ? previous.completed_at ?? now
+        : null,
+
     last_panel: panel,
+
     tasks,
+
+    case_submission: isFinalCaseSubmission
+      ? {
+          completed: true,
+          latest_path: driveObjectPath,
+          updated_at: now,
+        }
+      : previous.case_submission ?? null,
   });
 
   await uploadJsonToDrive({
@@ -658,8 +781,16 @@ export async function POST(req: Request) {
       task,
       saved_at_utc: savedAtUtc,
       saved_at_local: body.submittedAtLocal ?? null,
+
+      // Only final case-level submission keeps participant metadata.
+      // Individual summary / abnormality / management files do not keep it.
+      participant_metadata: isCaseSubmissionTarget(target)
+        ? buildParticipantMetadata(body)
+        : null,
+
       answers,
       annotation_state: cleanedAnnotationState,
+
       timing: {
         page_opened_at_utc: pageOpenedAtIso,
         page_opened_at_local: body.pageOpenedAtLocal ?? null,
@@ -739,7 +870,7 @@ export async function POST(req: Request) {
         objectPath: uploaded.objectPath,
         data: driveRecord,
       },
-      debug_version: "access-code-index-submit-route-v4",
+      debug_version: "access-code-index-submit-route-v5-case-submission",
     });
   } catch (error) {
     console.error("Submit route error:", error);

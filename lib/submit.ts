@@ -1,11 +1,18 @@
 type SubmitPayload = {
   annotator?: { name?: string; email?: string };
   participant?: { name?: string; email?: string };
+
   participantInfo?: {
     name?: string;
     email?: string;
     doctorId?: string;
     accessCode?: string;
+
+    gender?: string;
+    professionalDegree?: string;
+    countryOfPrimaryClinicalTraining?: string;
+    currentClinicalRole?: string;
+    yearsHandsOnAnesthesiaClinicalCare?: string | number;
   };
 
   caseId?: string | number | null;
@@ -61,11 +68,14 @@ type LocalExportEntry = {
 };
 
 function archiveKey(patientId: unknown, caseId: unknown) {
-  return `localDriveExportArchive:${patientId ?? "unknown_patient"}:${caseId ?? "unknown_case"}`;
+  return `localDriveExportArchive:${
+    patientId ?? "unknown_patient"
+  }:${caseId ?? "unknown_case"}`;
 }
 
 function rememberLocalDriveExport(payload: SubmitPayload, data: any) {
   const localExport = data?.localExport;
+
   if (
     !localExport ||
     typeof localExport.objectPath !== "string" ||
@@ -75,17 +85,60 @@ function rememberLocalDriveExport(payload: SubmitPayload, data: any) {
   }
 
   try {
-    const key = archiveKey(payload.patientId ?? payload.patientFolder, payload.caseId);
+    const key = archiveKey(
+      payload.patientId ?? payload.patientFolder,
+      payload.caseId
+    );
+
     const existing = JSON.parse(localStorage.getItem(key) || "[]");
-    const entries: LocalExportEntry[] = Array.isArray(existing) ? existing : [];
+    const entries: LocalExportEntry[] = Array.isArray(existing)
+      ? existing
+      : [];
+
     entries.push({
       objectPath: localExport.objectPath,
       data: localExport.data,
       savedAt: new Date().toISOString(),
     });
+
     localStorage.setItem(key, JSON.stringify(entries));
   } catch {
     // Local export is a best-effort fallback; cloud save remains authoritative.
+  }
+}
+
+function readParticipantInfoFromStorage(): SubmitPayload["participantInfo"] {
+  try {
+    const raw = localStorage.getItem("participantInfo");
+    if (!raw) return {};
+
+    const parsed = JSON.parse(raw);
+
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+
+    return {
+      name: parsed.name,
+      email: parsed.email,
+      doctorId: parsed.doctorId,
+      accessCode: parsed.accessCode,
+
+      gender: parsed.gender,
+      professionalDegree:
+        parsed.professionalDegree ?? parsed.degree,
+      countryOfPrimaryClinicalTraining:
+        parsed.countryOfPrimaryClinicalTraining ??
+        parsed.trainingCountry,
+      currentClinicalRole:
+        parsed.currentClinicalRole ??
+        parsed.clinicalRole,
+      yearsHandsOnAnesthesiaClinicalCare:
+        parsed.yearsHandsOnAnesthesiaClinicalCare ??
+        parsed.yearsExperience,
+    };
+  } catch {
+    return {};
   }
 }
 
@@ -101,9 +154,11 @@ export async function submitAnnotation(payload: SubmitPayload) {
 
   let workflowMode = payload.workflowMode ?? null;
   let displayCaseId = payload.displayCaseId ?? null;
+
   if (!workflowMode) {
     try {
       const storedWorkflowMode = localStorage.getItem("currentWorkflowMode");
+
       if (
         storedWorkflowMode === "annotation" ||
         storedWorkflowMode === "review"
@@ -115,13 +170,19 @@ export async function submitAnnotation(payload: SubmitPayload) {
     }
   }
 
-  if (displayCaseId === null || displayCaseId === undefined || displayCaseId === "") {
+  if (
+    displayCaseId === null ||
+    displayCaseId === undefined ||
+    displayCaseId === ""
+  ) {
     try {
       displayCaseId = localStorage.getItem("currentDisplayCaseId");
     } catch {
       displayCaseId = null;
     }
   }
+
+  const participantInfoFromStorage = readParticipantInfoFromStorage();
 
   const normalizedPayload: SubmitPayload = {
     ...payload,
@@ -133,6 +194,11 @@ export async function submitAnnotation(payload: SubmitPayload) {
     panelOpenedAt,
     submittedAt,
     clickedAt,
+
+    participantInfo: {
+      ...participantInfoFromStorage,
+      ...(payload.participantInfo ?? {}),
+    },
   };
 
   console.log("[submitAnnotation] sending payload to /api/submit:", {
@@ -146,6 +212,7 @@ export async function submitAnnotation(payload: SubmitPayload) {
     episodeId: normalizedPayload.episodeId ?? null,
     episodeNumber: normalizedPayload.episodeNumber ?? null,
     episodeFolder: normalizedPayload.episodeFolder ?? null,
+    participantInfo: normalizedPayload.participantInfo ?? null,
   });
 
   const res = await fetch("/api/submit", {
