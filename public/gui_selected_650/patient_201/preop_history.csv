@@ -1,0 +1,42 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+6A75F286-FDF6-ED11-91FB-005056BFF837,Allergy,Allergen ELG-1016,ELG-1016,SHELLFISH CONTAINING PRODUCTS
+6A75F286-FDF6-ED11-91FB-005056BFF837,Allergy,Allergen ELG-23333,ELG-23333,SCALLOPS
+6A75F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+6A75F286-FDF6-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis S06.5XAA,S06.5XAA,SDH (subdural hematoma) (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 6 hours, Disp-60 Tablet, R-0, E-Prescribe"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10451,ERX-10451,"lisinopriL tablet take 1 Tablet (5 mg total) by mouth daily, Disp-60 Tablet, R-1, E-Prescribe"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-221404,ERX-221404,"XYZAL PO take by mouth daily, Historical Med"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-33500,ERX-33500,"LEXAPRO 10 MG PO TABS take by mouth every bedtime, Historical Med"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"ATORVASTATIN 40 MG PO TABS take by mouth every morning, Historical Med"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-83177,ERX-83177,"AMLODIPINE 2.5 MG PO TABS take 2 Tablets (5 mg total) by mouth every morning, Historical Med"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1167620,EDG-1167620,"Hearing loss sensory, bilateral"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-139894,EDG-139894,Sleep apnea
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142294,EDG-142294,Allergic rhinitis
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-144196,EDG-144196,Deviated septum
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-150228,EDG-150228,Nasal turbinate hypertrophy
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-181579,EDG-181579,Tongue neoplasm
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1900848,EDG-1900848,"BPPV (benign paroxysmal positional vertigo), left"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-198284,EDG-198284,Stroke (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121657,EAP-121657,HX KNEE ARTHROSCOPY
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135464,EAP-135464,CAROTID ARTERY ENDARTERECTOMY / BYPASS
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-148979,EAP-148979,EYE SURGERY PROCEDURE
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188044,EAP-188044,TONSILLECTOMY
+6A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-429666,EAP-429666,CRANIOTOMY ANEURYSM
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1055296,1055296,Wheelchair dependence
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1072650,1072650,Left hemiparesis (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1099876,1099876,"12/6 (GKS): R CEA, prior R stroke with residual LUE plegic"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1118751,1118751,Cognitive communication deficit
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1228024,1228024,Wenckebach second degree AV block
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1251785,1251785,ICB (intracranial bleed) (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1860232,1860232,Delayed emergence from anesthesia
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 201733,201733,DVT (deep venous thrombosis) (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2041212,2041212,Cerebrovascular accident (CVA) due to occlusion of right carotid artery (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2117791,2117791,Other hyperlipidemia
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2221077,2221077,Requires assistance with activities of daily living (ADL)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2329425,2329425,Aphasia due to acute cerebrovascular accident (CVA) (CMS-HCC)
+6A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 5188,5188,"3/28 (GKS): h/o R CEA, now s/p clipping of unruptured R ICA terminus and R ophthalmic aneurysms (also has L M1 terminus aneurysm)"
+6A75F286-FDF6-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-165390,EDG-165390,SDH (subdural hematoma) (CMS-HCC)

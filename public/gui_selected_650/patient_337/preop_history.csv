@@ -1,0 +1,47 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 173.42,173.42,Squamous cell carcinoma of scalp and skin of neck
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I65.23,I65.23,"Carotid stenosis, bilateral"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10466,ERX-10466,"LORATADINE 10 MG PO TABS take 1 Tablet (10 mg total) by mouth daily, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-11112,ERX-11112,"PRAVASTATIN 40 MG PO TABS take 1 Tablet (40 mg total) by mouth every bedtime, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO take by mouth as needed, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-198588,ERX-198588,"CALCIUM CARBONATE-VITAMIN D3 600 MG-10 MCG (400 UNIT) PO TABS take 1 Tablet by mouth daily, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231551,ERX-231551,"FARXIGA 10 MG PO TABS Farxiga 10 mg tablet Take 1 tablet every day by oral route., Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-680,ERX-680,"ASPIRIN 81 MG PO CHEW take 1 Tablet (81 mg total) by mouth daily, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-80208,ERX-80208,"metoprolol succinate (Toprol XL) extended release tablet metoprolol succinate ER 50 mg tablet,extended release 24 hr, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-8118,ERX-8118,"TRIAMCINOLONE ACETONIDE 0.1 % TP OINT Apply to skin rash/lesions twice a day, Disp-60 g, R-3, E-Prescribe"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"CLOPIDOGREL 75 MG PO TABS clopidogrel 75 mg tablet TAKE ONE TABLET BY MOUTH ONE TIME DAILY, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"PANTOPRAZOLE 40 MG PO TBEC take 1 Tablet (40 mg total) by mouth as needed, Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"LOSARTAN 100 MG PO TABS 0.5 Tablets (50 mg total), Historical Med"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1055035,EDG-1055035,PAD (peripheral artery disease) (CMS-HCC)
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-113369,EDG-113369,Ischemic colitis (CMS-HCC)
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118628,EDG-118628,AAA (abdominal aortic aneurysm) (CMS-HCC)
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118948,EDG-118948,Chronic obstructive pulmonary disease (CMS-HCC)
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142159,EDG-142159,Osteoporosis
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-155166,EDG-155166,Carotid stenosis
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1866681,EDG-1866681,Congenital third kidney
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-201194,EDG-201194,Chronic kidney disease
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121807,EAP-121807,HX AAA REPAIR
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135940,EAP-135940,TOTAL ABDOMINAL HYSTERECTOMY
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1056415,1056415,Frailty
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1099872,1099872,"Carotid stenosis, bilateral"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1178764,1178764,Squamous cell carcinoma of scalp and skin of neck
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1220017,1220017,H/O thoracic aortic aneurysm repair
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 122780,122780,Chronic obstructive lung disease (CMS-HCC)
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138145,138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+04DCB1FE-4CB0-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1178764,EDG-1178764,Squamous cell carcinoma of scalp and skin of neck

@@ -1,0 +1,60 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+99F69F0D-5A91-F011-9217-005056BFF837,Allergy,Allergen ELG-8627,ELG-8627,DEXMEDETOMIDINE
+99F69F0D-5A91-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+99F69F0D-5A91-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+99F69F0D-5A91-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J94.8,J94.8,Hydrothorax
+99F69F0D-5A91-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z90.2,Z90.2,S/P pneumonectomy
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-110888,ERX-110888,"ENOXAPARIN 30 MG/0.3 ML SC SYRG Inject 0.3 mL (30 mg total) subcutaneous (under the skin) every 12 hours, Disp-3 each, R-0, Phone In"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-113246,ERX-113246,"CARBOXYMETHYLCELLULOSE SODIUM 0.5 % OPHT DPET Instill 1 drop to both eyes as needed Allow at least 10 min between administration of multiple ophthalmic products., Disp-100 each, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-125759,ERX-125759,"pregabalin (Lyrica) capsule Take 1 capsule (100 mg total) by mouth 2 times a day, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-125778,ERX-125778,"RAMELTEON 8 MG PO TABS Take 1 tablet (8 mg total) by mouth every bedtime as needed, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-17362,ERX-17362,"HEPARIN, PORCINE (PF) 100 UNIT/ML IV SYRG 1 mL by Intravenous route 3 times a day Via PICC line PRN, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-222104,ERX-222104,"XARELTO 15 MG PO TABS Take 1 tablet (15 mg total) by mouth 2 times a day, DAW, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-250,ERX-250,"ALBUTEROL SULFATE 2.5 MG /3 ML (0.083 %) INH NEBU 3 mL (2.5 mg total) by Nebulization route 3 times a day, Disp-90 mL, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-2608,ERX-2608,"doxepin capsule Take 1 capsule (10 mg total) by mouth 2 times a day, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-29676,ERX-29676,"SODIUM CHLORIDE 0.65 % NASAL SPRA 3 sprays by Nasal route 4 times a day as needed (congestion), Disp-44 mL, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 6 hours as needed, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-40926,ERX-40926,"SENNOSIDES-DOCUSATE SODIUM 8.6-50 MG PO TABS Take 2 tablets by mouth 2 times a day, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-5373,ERX-5373,"NALOXONE 0.4 MG/ML INJ SOLN 0.1 mL (0.04 mg total) by Intravenous route One Time for 1 dose, Disp-0.1 mL, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-7227,ERX-7227,"SIMETHICONE 80 MG PO CHEW Take 1 tablet (80 mg total) by mouth 4 times a day as needed for Gas pain/Bloating, Disp-30 tablet, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-7327,ERX-7327,"SODIUM CHLORIDE 3 % INH NEBU 3 mL by Nebulization route every 4 hours while awake, Disp-240 mL, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-88444,ERX-88444,"ESOMEPRAZOLE MAGNESIUM 40 MG PO CPDR Take 40 mg by mouth daily, Historical Med"
+99F69F0D-5A91-F011-9217-005056BFF837,Home Medication,Home Medication ERX-96559,ERX-96559,"PIPERACILLIN-TAZOBACTAM-DEXTRS 3.375 GRAM/50 ML IV PGBK 50 mL (3.375 g total) by Intravenous route every 8 hours Premix, Disp-54000 mL, R-0, No Print"
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1098219,EDG-1098219,Feeding by G-tube (CMS-HCC)
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1127388,EDG-1127388,Trauma of chest
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1764212,EDG-1764212,Sluggish pupillary reflex
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1860171,EDG-1860171,On mechanically assisted ventilation (CMS-HCC)
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-2030140,EDG-2030140,Acute hypoxemic respiratory failure (CMS-HCC)
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-2396456,EDG-2396456,Patient receiving ECMO
+99F69F0D-5A91-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-66596,EDG-66596,Hemothorax
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134756,EAP-134756,CHEST EXPLORATION AND/ OR WASHOUT; WITH OR WITHOUT STERNAL CLOSURE; INSIDE THE OPERATING ROOM
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134760,EAP-134760,MEDIAN STERNOTOMY WITH LUNGS BLEBS / WEDGE RESECTION
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134772,EAP-134772,PNEUMONECTOMY
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135028,EAP-135028,BRONCHOSCOPY FLEXIBLE WITH/ WITHOUT BIOPSIES
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135452,EAP-135452,TRACHEOSTOMY
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135656,EAP-135656,EXTRACORPOREAL CIRCULATION MEMBRANE OXYGENATION PLACEMENT OR REPOSITIONING
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-434903,EAP-434903,EXTRACORPOREAL CIRCULATION MEMBRANE OXYGENATION RAMP STUDY WITH OR WITHOUT REMOVAL
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-456933,EAP-456933,STERNAL OPEN REDUCTION INTERNAL FIXATION
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-458131,EAP-458131,BRONCHOSCOPY RIGID WITH OR WITHOUT BIOPSY
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-458459,EAP-458459,BRONCHOSCOPY RIGID WITH LESION EXCISION AND/ OR TUMOR DESTRUCTION
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-463906,EAP-463906,PROCEDURE REVISION; SECONDARY MODIFIER
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-474091,EAP-474091,BRONCHOSCOPY WITH TRANSBRONCHIAL BIOPSY; SINGLE LOBE
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-474796,EAP-474796,EXTRACORPOREAL CIRCULATION MEMBRANE OXYGENATION REMOVAL
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-475842,EAP-475842,THORACOTOMY WITH DECORTICATION WITH OR WITHOUT BRONCHOSCOPY
+99F69F0D-5A91-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 1037072,1037072,Right ventricular dysfunction
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 1043209,1043209,DVT of upper extremity (deep vein thrombosis) (CMS-HCC)
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 1053313,1053313,S/P pneumonectomy
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 1056747,1056747,Methicillin susceptible Staphylococcus aureus pneumonia (CMS-HCC)
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 109164,109164,"Bronchus, stenosis"
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 1094078,1094078,History of tracheostomy
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 1218419,1218419,H/O extracorporeal membrane oxygenation treatment
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 122797,122797,Bronchopleural fistula (CMS-HCC)
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 2160306,2160306,"Aspiration pneumonia, unspecified aspiration pneumonia type, unspecified laterality, unspecified part of lung (CMS-HCC)"
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 2220476,2220476,Dehiscence of bronchial anastomosis
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 66595,66595,Hemopneumothorax
+99F69F0D-5A91-F011-9217-005056BFF837,Problem List,Problem List Entry 66599,66599,Hydrothorax
+99F69F0D-5A91-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1053313,EDG-1053313,S/P pneumonectomy

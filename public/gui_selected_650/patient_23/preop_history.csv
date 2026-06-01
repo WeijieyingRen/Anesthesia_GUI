@@ -1,0 +1,36 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I47.1,I47.1,Atrial tachycardia (CMS-HCC)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO take by mouth as needed 2 tabs PRN, Historical Med"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Historical Med"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"FUROSEMIDE 20 MG PO TABS take 1 Tablet (20 mg total) by mouth daily, Historical Med"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3701,ERX-3701,"HYDRALAZINE 50 MG PO TABS take 1 Tablet (50 mg total) by mouth 2 times a day, Historical Med"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet TAKE 1 TABLET DAILY, Disp-90 Tablet, R-3, E-Prescribe"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-88045,ERX-88045,"simvastatin (Zocor) tablet take 1 Tablet (20 mg total) by mouth every bedtime, Disp-30 Tab, R-0, Historical Med"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-94682,ERX-94682,"dofetilide (Tikosyn) capsule take 1 Capsule (500 mcg total) by mouth 2 times a day (every 12 hours), Disp-180 Capsule, R-3, E-Prescribe"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1287499,EDG-1287499,Atrial fibrillation and flutter (CMS-HCC)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-90847,EDG-90847,Aortic regurgitation
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-91046,EDG-91046,Arthritis
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3562,EAP-3562,EP ATRIAL FIBRILLATION ABLATION (HYBRID PART 2)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-472991,EAP-472991,EP ATYPICAL ATRIAL FLUTTER ABLATION
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1027292,1027292,"CKD (chronic kidney disease), stage I"
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1168252,1168252,Hx of cardiac catheterization
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 141880,141880,SOB (shortness of breath)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 3191,3191,Tobacco use disorder
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 65452,65452,Low back pain
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 66488,66488,COPD (chronic obstructive pulmonary disease) (CMS-HCC)
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 90847,90847,Aortic regurgitation
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+F4496EAB-DE9B-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-176387,EDG-176387,Atrial tachycardia (CMS-HCC)

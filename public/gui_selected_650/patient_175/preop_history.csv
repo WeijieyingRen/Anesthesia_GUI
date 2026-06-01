@@ -1,0 +1,29 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+BB30D410-A38C-F011-9217-005056BFF837,Allergy,Allergen ELG-27607,ELG-27607,TEBENTAFUSP-TEBN
+BB30D410-A38C-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+BB30D410-A38C-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C69.40,C69.40,Melanoma of uvea metastatic to liver (CMS-HCC)
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-10466,ERX-10466,"loratadine (Claritin) tablet Take 1 tablet (10 mg total) by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet Take 0.5 mg by mouth 4 times a day as needed, Historical Med"
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG [PHI] TABS Take 1 tablet by mouth daily, Disp-60 tablet, R-3, E-Prescribe"
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-324,ERX-324,"ALPRAZolam (Xanax) tablet Take 1 tablet (0.25 mg total) by mouth as needed PRN, Historical Med"
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-5940,ERX-5940,"OXYCODONE-ACETAMINOPHEN 5-325 MG [PHI] TABS Take 1 tablet by mouth every 4 hours as needed, Historical Med"
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-6583,ERX-6583,"prochlorperazine tablet Take 1 tablet (5 mg total) by mouth every 6 hours as needed, Disp-60 tablet, R-3, E-Prescribe"
+BB30D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet Take 1 tablet (4 mg total) by mouth every 8 hours as needed, Historical Med"
+BB30D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1896086,EDG-1896086,Ductal carcinoma in situ (DCIS) of breast
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121733,EAP-121733,HX LUMPECTOMY
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121844,EAP-121844,HX BLADDER REPAIR
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-148979,EAP-148979,EYE SURGERY PROCEDURE
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-244292,EAP-244292,BREAST RECONSTRUCTION OTHER TECHNIQUE
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-455425,EAP-455425,"HX HYSTERECTOMY (OVARIES UNKNOWN, CERVIX UNKNOWN)"
+BB30D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-466802,EAP-466802,IR ARTERIOGRAPHY PERCUTANEOUS HEPATIC PERFUSION
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1080753,1080753,History of breast cancer
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1088408,1088408,"Neutropenia, drug-induced"
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1162625,1162625,OAB (overactive bladder)
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1418247,1418247,"Abrasion of right cornea, initial encounter"
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 148666,148666,Hypothyroid
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1534689,1534689,"Anterior uveal melanoma, left (CMS-HCC)"
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 2353372,2353372,Melanoma of uvea metastatic to liver (CMS-HCC)
+BB30D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 2394866,2394866,Cancer treatment started (CMS-HCC)
+BB30D410-A38C-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2353372,EDG-2353372,Melanoma of uvea metastatic to liver (CMS-HCC)

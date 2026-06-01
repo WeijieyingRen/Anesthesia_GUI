@@ -1,0 +1,61 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+92A6F169-C784-F011-9217-005056BFF837,Allergy,Allergen ELG-7973,ELG-7973,CLOPIDOGREL
+92A6F169-C784-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+92A6F169-C784-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+92A6F169-C784-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis H33.21,H33.21,"Retinal detachment, right"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-11111,ERX-11111,"PRAVASTATIN 20 MG [PHI] TABS Take 1 tablet (20 mg total) by mouth every morning, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-11561,ERX-11561,"TIMOLOL MALEATE 0.25 % OPHT DROP Instill 1 drop to right eye 2 times a day, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-116178,ERX-116178,"rosuvastatin tablet Take 1 tablet (20 mg total) by mouth every bedtime, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 [PHI] take 5,000 Units by mouth daily, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-251769,ERX-251769,"MOUNJARO 10 MG/0.5 ML SC PNIJ every 7 days, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-39268,ERX-39268,"CYMBALTA 20 MG [PHI] CPDR take by mouth every morning, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-4420,ERX-4420,"LEVOTHYROXINE 25 MCG [PHI] TABS Take 1 tablet (25 mcg total) by mouth every morning before breakfast, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-77012,ERX-77012,"LOSARTAN 50 MG [PHI] TABS Take 2 tablets (100 mg total) by mouth every morning, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-77371,ERX-77371,"LATANOPROST 0.005 % OPHT DROP instill 1 Drop to both eyes every bedtime, Disp-2.5 mL, R-11, E-Prescribe"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-91540,ERX-91540,"DORZOLAMIDE-TIMOLOL 22.3-6.8 MG/ML OPHT DROP Instill 1 drop to both eyes 2 times a day, Disp-20 mL, R-3, E-Prescribe"
+92A6F169-C784-F011-9217-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"METOPROLOL SUCCINATE 25 MG [PHI] TB24 Take 1 tablet (25 mg total) by mouth every morning, Historical Med"
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1053482,EDG-1053482,S/P [PHI] surgery
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142294,EDG-142294,Allergic rhinitis
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142324,EDG-142324,Glaucoma
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142378,EDG-142378,Vitamin D deficiency
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-148666,EDG-148666,Hypothyroid
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1759882,EDG-1759882,Overweight
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-192513,EDG-192513,Pre-diabetes
+92A6F169-C784-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-90782,EDG-90782,Anxiety
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121627,EAP-121627,HX LIPOSUCTION
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121634,EAP-121634,HX VITRECTOMY
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-133412,EAP-133412,TRABECULECTOMY
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-198992,EAP-198992,HX [PHI]
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-421265,EAP-421265,CESAREAN SECTION
+92A6F169-C784-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-480099,EAP-480099,[PHI] BREAST GUIDED BIOPSY STEREOTACTIC PRONE LEFT
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1053482,1053482,S/P [PHI] surgery
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1054467,1054467,Osteoarthritis of right knee
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1060799,1060799,Lipoprotein deficiency disorder
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1074569,1074569,Attention deficit hyperactivity disorder (ADHD)
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1084195,1084195,"Retinal detachment, right"
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1084199,1084199,Left retinal detachment
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1098462,1098462,Chorioretinal scar of left eye
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1098628,1098628,Pseudophakia of both eyes
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 138474,138474,Type II diabetes mellitus (CMS-HCC)
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 142294,142294,Allergic rhinitis
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 144615,144615,Pain
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 15354,15354,"Special screening for malignant neoplasms, colon"
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 161902,161902,Mantoux: positive
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1742126,1742126,"PVD (posterior vitreous detachment), bilateral"
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 1814812,1814812,"Low tension glaucoma of right eye, severe stage"
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 189918,189918,Constipation
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 2117075,2117075,Other specified congenital malformations of limb(s)
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 2143734,2143734,"Chest pain, unspecified type"
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 8920,8920,Plantar fascial fibromatosis
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 97303,97303,Heart murmur
+92A6F169-C784-F011-9217-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+92A6F169-C784-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1084194,EDG-1084194,Right retinal detachment

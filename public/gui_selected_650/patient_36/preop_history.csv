@@ -1,0 +1,38 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+5A78915E-C6EC-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+5A78915E-C6EC-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+5A78915E-C6EC-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-180991,ERX-180991,"MAGNESIUM PO take by mouth 2 times a day, Historical Med"
+5A78915E-C6EC-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-182398,ERX-182398,"MULTIVITAMIN PO take by mouth every morning, Historical Med"
+5A78915E-C6EC-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-228452,ERX-228452,"ELIQUIS 5 MG PO TABS take 1 Tablet by mouth 2 times a day, Historical Med"
+5A78915E-C6EC-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily Start 4 days pre-procedure, and continue 30 days after, no refills. First dose 4/28/23, Disp-35 Tablet, R-0, E-Prescribe"
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-10009,EDG-10009,Palpitations
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-105090,EDG-105090,Seizure (CMS-HCC)
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1230473,EDG-1230473,Fall from roof
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-15123,EDG-15123,Long term (current) use of anticoagulants
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-133636,EAP-133636,SHOULDER TOTAL ARTHROPLASTY
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134238,EAP-134238,CERVICAL CONIZATION
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-148979,EAP-148979,EYE SURGERY PROCEDURE
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-149880,EAP-149880,CHOLECYSTECTOMY
+5A78915E-C6EC-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188065,EAP-188065,ERCP
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 105090,105090,Seizure (CMS-HCC)
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1071165,1071165,History of subarachnoid hemorrhage
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118813,118813,PAF (paroxysmal atrial fibrillation) (CMS-HCC)
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1220009,1220009,H/O total shoulder replacement
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1256681,1256681,Stress due to illness of family member
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 165258,165258,"Fall from ladder with left occipital skull fracture & bifrontal, left temporal pole tSAH with significant blossoming on repeat CT"
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 203532,203532,Pulmonary nodule
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 91850,91850,Bradycardia
+5A78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 97303,97303,Heart murmur
+5A78915E-C6EC-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

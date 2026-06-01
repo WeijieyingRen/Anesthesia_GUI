@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Allergy,Latex allergy,allergy,No
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R52,R52,Acute pain
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Encounter Diagnosis,Encounter Diagnosis S91.301A,S91.301A,"Open wound of right foot, initial encounter"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 2 tablets (1,000 mg total) by mouth after meals, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-125758,ERX-125758,"pregabalin (Lyrica) capsule Take 1 capsule (75 mg total) by mouth 2 times a day, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-1357,ERX-1357,"CARBAMAZEPINE 200 MG PO TABS Take 1 tablet (200 mg total) by mouth 2 times a day, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-13632,ERX-13632,"BISACODYL 5 MG PO TBEC Take by mouth, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-204020,ERX-204020,"oxyCODONE (Roxicodone) tablet Take 1 tablet (10 mg total) by mouth every 4 hours as needed, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-211199,ERX-211199,"BUPRENORPHINE-NALOXONE 8-2 MG SL FILM Place 1 Film under the tongue and let dissolve daily, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-236402,ERX-236402,"NALOXONE 4 MG/ACTUATION NASAL SPRY 1 spray (4 mg total) by Nasal route Q24H PRN, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-25856,ERX-25856,"gabapentin (Neurontin) tablet Take 1 tablet (800 mg total) by mouth 4 times a day, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"FERROUS SULFATE 325 MG (65 MG IRON) PO TABS Take 1 tablet (325 mg total) by mouth every other day, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Home Medication,Home Medication ERX-79730,ERX-79730,"oxybutynin (Ditropan XL) extended release tablet Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Past Surgical History,Past Surgical History EAP-135122,EAP-135122,KNEE AMPUTATION
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Problem List,Problem List Entry 1024732,1024732,Acute pain
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Problem List,Problem List Entry 1053818,1053818,Soft tissue infection
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Problem List,Problem List Entry 1141661,1141661,Open wound of right foot
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Problem List,Problem List Entry 2299667,2299667,"Osteomyelitis of right foot, unspecified type (CMS-HCC)"
+4A6BC8DE-2DDF-F011-921B-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1053892,EDG-1053892,Peripheral arterial disease

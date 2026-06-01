@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-1088,ELG-1088,"YEAST, DRIED"
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3592,ELG-3592,GRAPEFRUIT
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 599.71,599.71,Gross hematuria
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C18.9,C18.9,Adenocarcinoma of colon (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E43,E43,Severe protein-calorie malnutrition (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.3,G89.3,Cancer related pain
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K56.609,K56.609,SBO (small bowel obstruction) (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K76.9,K76.9,Liver lesion
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R11.0,R11.0,Nausea
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis V66.7,V66.7,Encounter for palliative care
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-27838,ERX-27838,"SODIUM CHLORIDE 0.9 % IV SOLP 10 mL by Intravenous route daily as directed, Historical Med"
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-6582,ERX-6582,"prochlorperazine tablet take 1 Tablet (10 mg total) by mouth every 8 hours as needed for Nausea/Vomiting, Historical Med"
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-7227,ERX-7227,"SIMETHICONE 80 MG PO CHEW take 1 Tablet (80 mg total) by mouth every 4 hours as needed, Historical Med"
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth 2 times a day, Historical Med"
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed, Historical Med"
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188621,EAP-188621,IR NEPHROSTOMY CATHETER CHANGE
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1048299,1048299,Gross hematuria
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1066296,1066296,Liver lesion
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1070053,1070053,Metastatic neoplasm (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1095494,1095494,Nephrostomy status (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1104001,1104001,Lesion of lung
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1128385,1128385,Rectal adenocarcinoma (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118845,118845,SBO (small bowel obstruction) (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 119095,119095,Adenocarcinoma of colon (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 138516,138516,Severe protein-calorie malnutrition (CMS-HCC)
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142383,142383,Acute pyelonephritis
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 186826,186826,Anemia of chronic disease
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 192260,192260,Muscle weakness
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 72303,72303,Hypomagnesemia
+A9B11BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia

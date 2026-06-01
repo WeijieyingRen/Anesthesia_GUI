@@ -1,0 +1,5 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+733D0C55-202F-F011-9212-005056BFF837,2025-05-07 20:45:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2025-05-07 20:45:00+00:00,2025-05-07 22:28:00+00:00,0.0,0.0,0.0,0.0,103.0
+733D0C55-202F-F011-9212-005056BFF837,2025-05-07 21:11:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-05-07 20:45:00+00:00,2025-05-07 22:28:00+00:00,26.0,26.0,26.0,26.0,77.0
+733D0C55-202F-F011-9212-005056BFF837,2025-05-07 21:52:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-05-07 20:45:00+00:00,2025-05-07 22:28:00+00:00,67.0,67.0,67.0,67.0,36.0
+733D0C55-202F-F011-9212-005056BFF837,2025-05-07 22:20:00+00:00,position,bed_position,<30 degrees,Bed Position: <30 degrees,2025-05-07 20:45:00+00:00,2025-05-07 22:28:00+00:00,95.0,95.0,95.0,95.0,8.0

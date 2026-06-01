@@ -1,0 +1,32 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+6B7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Allergen ELG-3835,ELG-3835,AMPICILLIN
+6B7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Allergen ELG-4620,ELG-4620,AMOXICILLIN
+6B7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Allergen ELG-5602,ELG-5602,METOCLOPRAMIDE
+6B7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+6B7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Latex allergy,allergy,No
+6B7E8C09-85F9-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K43.9,K43.9,Ventral hernia without obstruction or gangrene
+6B7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-116177,ERX-116177,"ROSUVASTATIN 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every bedtime, Historical Med"
+6B7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-5016,ERX-5016,"metroNIDAZOLE tablet take 1 Tablet (500 mg total) by mouth as directed 1 Day Before Your Surgery: At 2 PM: Take Neomycin (1 gram/1000 mg) and Metronidazole (500 mg) At 4 PM: Take Neomycin (1 gram/1000 mg) and Metronidazole (500 mg) At 11 PM: Take Neomycin (1 gram/1000 mg) and Metronidazole (500 mg), Disp-3 Tablet, R-0, E-Prescribe"
+6B7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-5472,ERX-5472,"NEOMYCIN 500 MG PO TABS take 2 Tablets (1,000 mg total) by mouth as directed 1 Day Before Your Surgery: At 2 PM: Take Neomycin (1 gram/1000 mg) and Metronidazole (500 mg) At 4 PM: Take Neomycin (1 gram/1000 mg) and Metronidazole (500 mg) At 11 PM: Take Neomycin (1 gram/1000 mg) and Metronidazole (500 mg), Disp-6 Tablet, R-0, E-Prescribe"
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1026426,EDG-1026426,Paraganglioma (CMS-HCC)
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1096743,EDG-1096743,"GIST (gastrointestinal stromal tumor), malignant (CMS-HCC)"
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-159927,EDG-159927,HLD (hyperlipidemia)
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-193234,EDG-193234,Pheochromocytoma
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-79462,EDG-79462,Acute blood loss anemia
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121856,EAP-121856,HX CESAREAN SECTION
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-134566,EAP-134566,GASTRECTOMY TOTAL
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-134608,EAP-134608,AORTORENAL BYPASS
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-138115,EAP-138115,EXPLORATORY LAPAROTOMY ABDOMINORETROPERITONEAL EXCISION OF INTRA ABDOMINAL TUMOR/CYST/ENDOMETRIOMAS
+6B7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-138169,EAP-138169,MEDIAN STERNOTOMY RESECTION OF MASS / TUMOR
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1026426,1026426,Paraganglioma (CMS-HCC)
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1055957,1055957,Fever
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1059567,1059567,"GIST, malignant (CMS-HCC)"
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1292306,1292306,Hereditary paraganglioma syndrome
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1859975,1859975,History of pheochromocytoma
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 201357,201357,Genetic counseling
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 2342710,2342710,"History of nephrectomy, left"
+6B7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 5626,5626,Acute respiratory failure (CMS-HCC)
+6B7E8C09-85F9-EE11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2053656,EDG-2053656,Ventral incisional hernia without obstruction or gangrene

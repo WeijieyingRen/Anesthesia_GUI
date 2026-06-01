@@ -1,0 +1,3 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+B91FC612-788F-EE11-9203-005056BFF837,2023-10-31 00:00:00+00:00,position,temperature_control,"""ambient warming""","""R SHC OPT ANE TEMP CONTROL"": ""ambient warming""",2023-10-30 23:50:00+00:00,2023-10-31 01:00:00+00:00,10.0,10.0,10.0,10.0,60.0
+B91FC612-788F-EE11-9203-005056BFF837,2023-10-31 01:00:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2023-10-30 23:50:00+00:00,2023-10-31 01:00:00+00:00,70.0,70.0,70.0,70.0,0.0

@@ -1,0 +1,46 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+5FCC959C-D85F-F011-9216-005056BFF837,Allergy,Allergen ELG-16643,ELG-16643,OTHER MEDICATION [UNKNOWN MEDICATION (SPECIFY IN COMMENTS)]
+5FCC959C-D85F-F011-9216-005056BFF837,Allergy,Allergen ELG-5779,ELG-5779,PENICILLIN G
+5FCC959C-D85F-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.19,I48.19,Persistent atrial fibrillation (CMS-HCC)
+5FCC959C-D85F-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-113232,ERX-113232,"DUTASTERIDE 0.5 MG [PHI] CAPS Take 0.5 mg by mouth daily, Disp-90 capsule, R-3, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-211513,ERX-211513,"DABIGATRAN ETEXILATE 150 MG [PHI] CAPS TAKE 1 CAPSULE(150 MG) BY MOUTH TWICE DAILY, Disp-60 capsule, R-5, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL tablet Take 1 tablet (20 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-80208,ERX-80208,"metoprolol succinate (Toprol XL) extended release tablet Take 1 tablet (50 mg total) by mouth daily, Disp-90 tablet, R-2, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-81669,ERX-81669,"simvastatin (Zocor) tablet Take 1 tablet (10 mg total) by mouth every bedtime, Disp-90 tablet, R-3, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-82092,ERX-82092,"dofetilide (Tikosyn) capsule Take 1 capsule (250 mcg total) by mouth 2 times a day, Disp-180 capsule, R-3, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG [PHI] CAPS Take 1 capsule (0.4 mg total) by mouth daily, Disp-90 capsule, R-3, E-Prescribe"
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-105090,EDG-105090,Seizure (CMS-HCC)
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1099326,EDG-1099326,"Foot drop, bilateral"
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-118898,EDG-118898,Colon cancer (CMS-HCC)
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-125778,EDG-125778,Cataract
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-144719,EDG-144719,Rotator cuff injury
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-192513,EDG-192513,Pre-diabetes
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-2237364,EDG-2237364,Benign prostatic hyperplasia with urinary retention
+5FCC959C-D85F-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-98239,EDG-98239,Hypercholesterolemia
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-121670,EAP-121670,HX ROTATOR CUFF REPAIR
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-121843,EAP-121843,HX VASECTOMY
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-134304,EAP-134304,CYSTOSCOPY WITH BLADDER BIOPSY
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-135426,EAP-135426,PROCTOSCOPY
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-135934,EAP-135934,COLECTOMY PARTIAL LOW ANTERIOR OR TRANSVERSE; WITH END TO END ANASTAMOSIS; WITH OR WITHOUT ILEOSTOMY
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-447130,EAP-447130,CATARACT EXTRACTION WITH INTRAOCULAR LENS AND PHACOEMULSIFICATION W/ ABERROMETRY & TORIC LENS
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-508189,EAP-508189,SPINAL FUSION DISCECTOMY ANTERIOR AND POSTERIOR WITH INSTRUMENTATION; 2 LEVELS
+5FCC959C-D85F-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1033341,1033341,Persistent atrial fibrillation (CMS-HCC)
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1056415,1056415,Frailty
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1097216,1097216,Lesion of bladder
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1099326,1099326,"Foot drop, bilateral"
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1134909,1134909,Low back pain with sciatica
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 1853326,1853326,History of cardiac murmur as a child
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 192513,192513,Pre-diabetes
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 77497,77497,Lumbar radiculopathy
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 86129,86129,Urinary retention
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 98239,98239,Hypercholesterolemia
+5FCC959C-D85F-F011-9216-005056BFF837,Problem List,Problem List Entry 9926,9926,Syncope and collapse
+5FCC959C-D85F-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

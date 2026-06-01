@@ -1,0 +1,35 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D49.2,D49.2,Thoracic spine tumor
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-169673,ERX-169673,"ATORVASTATIN PO take by mouth daily in the morning, Historical Med"
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-236406,ERX-236406,"naloxone (NARCAN) 4 mg/actuation nasal spray Spray 0.1 mL (4 mg) into one nostril for suspected overdose. Repeat into other nostril after 2 to 3 minutes if no or minimal response., Disp-2 Each, R-1, E-Prescribe"
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROCODONE-ACETAMINOPHEN 5-325 MG PO TABS take 1 Tablet by mouth every 8 hours as needed ICD 10 M54.50 G89.29, Disp-90 Tablet, R-0, E-Prescribe"
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1054165,EDG-1054165,Right shoulder pain
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1097672,EDG-1097672,History of chickenpox
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1121513,EDG-1121513,Acid reflux disease
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1569779,EDG-1569779,"Cochlear otosclerosis of ear, right"
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-5107,EDG-5107,Atrial fibrillation (CMS-HCC)
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-70856,EDG-70856,Erosive esophagitis
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-80998,EDG-80998,Sprain of calcaneofibular ligament
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-133446,EAP-133446,STAPEDECTOMY
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134666,EAP-134666,INGUINAL HERNIA REPAIR WITH MESH LAPAROSCOPIC
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-137143,EAP-137143,STAPEDECTOMY REVISION
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-250324,EAP-250324,COLONOSCOPY & POLYPECTOMY
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3400,EAP-3400,EP ATRIAL FIBRILLATION ABLATION
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-472985,EAP-472985,EP PVC ABLATION
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-843,EAP-843,ENDOSCOPY PROCEDURE
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 10090,10090,"Abdominal pain, right upper quadrant"
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1054138,1054138,Chronic lumbar pain
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1081504,1081504,History of colonic polyps
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 109235,109235,PVC's (premature ventricular contractions)
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1121513,1121513,Acid reflux disease
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 125031,125031,Ankle pain
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1494821880,1494821880,COVID-19
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+534A6EAB-DE9B-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1126039,EDG-1126039,Intradural tumor

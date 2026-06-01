@@ -86,6 +86,19 @@ function shouldShowIconLabel(event: TimelineContextEvent) {
   );
 }
 
+function shouldUseBedIcon(event: TimelineContextEvent) {
+  return (
+    event.group === "positioning" &&
+    (event.label?.includes("Bed Position:") ||
+      event.label?.includes("Head-of-bed Positioning"))
+  );
+}
+
+function shouldShowHeaderLabel(event: TimelineContextEvent) {
+  if (shouldShowTextLabel(event)) return false;
+  return Boolean((event.label ?? "").trim());
+}
+
 function getEventValueText(event: TimelineContextEvent) {
   const raw = (event.label ?? "").trim();
   if (!raw) return "";
@@ -121,14 +134,14 @@ function getEventLegendLabel(event: TimelineContextEvent) {
     return valueText ? `Bed: ${valueText}` : "Bed position";
   }
 
-  return "";
+  return shortenLabel(event.label ?? "");
 }
 
 function getEventLegendKey(event: TimelineContextEvent) {
   if (event.event_type === "emergence") return "emergence";
   if (event.label?.includes("Head-of-bed Positioning")) return "hob_position";
   if (event.label?.includes("Bed Position:")) return "bed_position";
-  return "";
+  return `${event.source}:${event.group}:${event.event_type}:${event.label ?? ""}`;
 }
 
 function eventColor(group: TimelineContextEvent["group"]) {
@@ -338,6 +351,109 @@ function EmergenceIcon({
   );
 }
 
+type GenericSymbolType =
+  | "circle"
+  | "triangle"
+  | "diamond"
+  | "square"
+  | "star"
+  | "pentagon";
+
+function getEventSymbolType(event: TimelineContextEvent): GenericSymbolType {
+  switch (event.event_type) {
+    case "lma_inserted":
+    case "lma_removed":
+    case "one_lung_ventilation":
+    case "two_lung_ventilation":
+    case "jet_ventilation":
+      return "triangle";
+    case "extubated_awake":
+    case "extubated_deep":
+    case "bronchoscopy":
+      return "circle";
+    case "block_start":
+    case "block_complete":
+    case "block_stop":
+      return "square";
+    case "table_turned_90":
+    case "table_turned_180":
+      return "diamond";
+    case "uterine_incision":
+    case "baby_delivered":
+    case "tourniquet_inflated":
+    case "tourniquet_deflated":
+    case "aortic_clamp_on":
+    case "aortic_clamp_off":
+    case "renal_clamp_on":
+    case "renal_clamp_off":
+    case "carotid_clamp_on":
+    case "carotid_clamp_off":
+    case "bypass_on":
+    case "bypass_off":
+    case "circulatory_arrest":
+    case "cpr":
+    case "defibrillation":
+      return "star";
+    default:
+      return event.group === "positioning" ? "pentagon" : "circle";
+  }
+}
+
+function GenericEventSymbol({
+  x,
+  y,
+  color,
+  type,
+  size = 12,
+}: {
+  x: number;
+  y: number;
+  color: string;
+  type: GenericSymbolType;
+  size?: number;
+}) {
+  const r = size / 2;
+
+  switch (type) {
+    case "triangle":
+      return (
+        <polygon
+          points={`${x},${y - r} ${x + r * 0.92},${y + r * 0.82} ${x - r * 0.92},${y + r * 0.82}`}
+          fill={color}
+        />
+      );
+    case "diamond":
+      return (
+        <polygon
+          points={`${x},${y - r} ${x + r},${y} ${x},${y + r} ${x - r},${y}`}
+          fill={color}
+        />
+      );
+    case "square":
+      return <rect x={x - r} y={y - r} width={size} height={size} rx={2} fill={color} />;
+    case "star": {
+      const outer = r;
+      const inner = r * 0.48;
+      const points = Array.from({ length: 10 }, (_, index) => {
+        const angle = -Math.PI / 2 + (index * Math.PI) / 5;
+        const radius = index % 2 === 0 ? outer : inner;
+        return `${x + Math.cos(angle) * radius},${y + Math.sin(angle) * radius}`;
+      }).join(" ");
+      return <polygon points={points} fill={color} />;
+    }
+    case "pentagon": {
+      const points = Array.from({ length: 5 }, (_, index) => {
+        const angle = -Math.PI / 2 + (index * 2 * Math.PI) / 5;
+        return `${x + Math.cos(angle) * r},${y + Math.sin(angle) * r}`;
+      }).join(" ");
+      return <polygon points={points} fill={color} />;
+    }
+    case "circle":
+    default:
+      return <circle cx={x} cy={y} r={r} fill={color} />;
+  }
+}
+
 function TimelineMiniIcon({
   event,
   x,
@@ -361,7 +477,15 @@ function TimelineMiniIcon({
     return <BedIcon x={x} y={y} color={color} tilted={false} />;
   }
 
-  return null;
+  return (
+    <GenericEventSymbol
+      x={x}
+      y={y}
+      color={color}
+      type={getEventSymbolType(event)}
+      size={10}
+    />
+  );
 }
 
 function LegendIcon({
@@ -395,7 +519,17 @@ function LegendIcon({
     );
   }
 
-  return null;
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" className="mr-1 inline-block align-[-2px]">
+      <GenericEventSymbol
+        x={7}
+        y={7}
+        color={color}
+        type={getEventSymbolType(event)}
+        size={11}
+      />
+    </svg>
+  );
 }
 
 function AxisSpacer({ height }: { height: number }) {
@@ -440,11 +574,14 @@ export default function TimelineContextPanel({
 }: TimelineContextPanelProps) {
   const [isExpanded, setIsExpanded] = React.useState(true);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = React.useRef(false);
+  const [sliderValue, setSliderValue] = React.useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
 
   const packedEvents = React.useMemo(() => packEvents(context), [context]);
 
   const legendEvents = React.useMemo(() => {
-    const items = packedEvents.filter((event) => shouldShowIconLabel(event));
+    const items = packedEvents.filter((event) => shouldShowHeaderLabel(event));
     const seen = new Set<string>();
 
     return items.filter((event) => {
@@ -495,8 +632,26 @@ export default function TimelineContextPanel({
 
     if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
       scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
     }
   }, [sharedScrollLeft]);
+
+  React.useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, isExpanded]);
 
   if (!context) return null;
   if (!packedEvents.length) return null;
@@ -504,6 +659,74 @@ export default function TimelineContextPanel({
 
   return (
     <div className="rounded-lg border bg-white px-2 py-1 shadow-sm">
+      <style jsx>{`
+        .timeline-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .timeline-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .timeline-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .timeline-slider:focus {
+          outline: none;
+        }
+
+        .timeline-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .timeline-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .timeline-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .timeline-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .timeline-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .timeline-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
       <div className="mb-1 flex items-center justify-between">
         <button
           type="button"
@@ -540,47 +763,51 @@ export default function TimelineContextPanel({
           <div />
           <AxisSpacer height={SVG_HEIGHT} />
 
-          <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
+          <div className="overflow-x-hidden overflow-y-hidden">
+            <div
+              ref={scrollRef}
+              className="timeline-scroll-hidden"
+              style={{ overscrollBehaviorX: "none" }}
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const absX = Math.abs(e.deltaX);
+                const absY = Math.abs(e.deltaY);
 
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
+                if (absX <= absY || absX < 1) return;
 
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
+                const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                const nextLeft = el.scrollLeft + e.deltaX;
 
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+                const atLeftEdge = el.scrollLeft <= 0;
+                const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
 
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
 
-    if (tryingGoPastLeft || tryingGoPastRight) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
+                if (tryingGoPastLeft || tryingGoPastRight) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
 
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
-            <div style={{ width: contentWidth, height: SVG_HEIGHT }}>
-              <svg
-                width={contentWidth}
-                height={SVG_HEIGHT}
-                viewBox={`0 0 ${contentWidth} ${SVG_HEIGHT}`}
-                preserveAspectRatio="none"
-              >
+                e.preventDefault();
+                el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+              }}
+              onScroll={(e) => {
+                const next = e.currentTarget.scrollLeft;
+                if (!isSyncingFromSliderRef.current) {
+                  setSliderValue(next);
+                }
+                onSharedScrollLeftChange?.(next);
+              }}
+            >
+              <div style={{ width: contentWidth, height: SVG_HEIGHT }}>
+                <svg
+                  width={contentWidth}
+                  height={SVG_HEIGHT}
+                  viewBox={`0 0 ${contentWidth} ${SVG_HEIGHT}`}
+                  preserveAspectRatio="none"
+                >
                 {majorTicks.map((tick) => {
                   const x = minuteToX(tick);
                   return (
@@ -652,7 +879,7 @@ export default function TimelineContextPanel({
                   const c = eventColor(event.group);
                   const label = shortenLabel(event.label ?? "");
                   const showTextLabel = shouldShowTextLabel(event);
-                  const showIconLabel = shouldShowIconLabel(event);
+                  const isBedIconEvent = shouldUseBedIcon(event);
                   const isPositioning = event.group === "positioning";
 
                   const stemBase = isPositioning ? 12 : 4;
@@ -675,11 +902,11 @@ export default function TimelineContextPanel({
                         ? BOTTOM_LABEL_Y
                         : BOTTOM_LABEL_Y - 10;
 
-                  const iconY = event.side === "top" ? AXIS_Y - 12 : AXIS_Y + 12;
-
                   return (
                     <g key={`${event.event_type}-${idx}-${event.relative_min}`}>
-                      <circle cx={x} cy={AXIS_Y} r={3} fill={c.fill} />
+                      {!isBedIconEvent ? (
+                        <circle cx={x} cy={AXIS_Y} r={3} fill={c.fill} />
+                      ) : null}
 
                       {showTextLabel && (
                         <>
@@ -732,16 +959,42 @@ export default function TimelineContextPanel({
 
                           <title>{event.label}</title>
                         </>
-                      ) : showIconLabel ? (
+                      ) : shouldShowHeaderLabel(event) ? (
                         <>
-                          <TimelineMiniIcon event={event} x={x} y={iconY} color={c.text} />
+                          <TimelineMiniIcon event={event} x={x} y={AXIS_Y} color={c.text} />
                           <title>{event.label}</title>
                         </>
                       ) : null}
                     </g>
                   );
                 })}
-              </svg>
+                </svg>
+              </div>
+            </div>
+            <div className="px-2 pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(sliderValue, maxScrollLeft)}
+                onChange={(e) => {
+                  const next = Number(e.target.value);
+                  setSliderValue(next);
+                  const el = scrollRef.current;
+                  if (!el) return;
+
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
+
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="timeline-slider"
+                aria-label="Timeline and event horizontal scroll"
+              />
             </div>
           </div>
         </div>

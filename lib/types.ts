@@ -19,6 +19,7 @@ export type TimelineStatic = {
   emergence?: string;
   anesthesia_timeout?: string;
 };
+
 export type TimelineContextEvent = {
   source: "static" | "dynamic";
   group: "milestone" | "airway" | "positioning" | "block" | "surgical";
@@ -80,13 +81,82 @@ export interface SurgeryContext {
 }
 
 export interface PreopAssessment {
+  // Basic preoperative risk / baseline
   asa_status?: number;
+  height?: number;
+  weight?: number;
+  npo_since?: string | number;
+  emergent?: string | number;
+
+  // Airway assessment
   mallampati_score?: string | number;
-  npo_since?: string;
-  limited_cervical_rom?: string | number;
+  mallampati_na?: string | number;
   tm_distance?: string | number;
+  thick_neck?: string | number;
+  limited_cervical_rom?: string | number;
   abnormal_oropharynx_anatomy?: string | number;
+  airway_comments?: string;
+
+  // Dental / airway-related details
+  no_notable_dental_hx?: string | number;
+  chipped_teeth?: string | number;
+  loose_teeth?: string | number;
+  dental_hx_comments?: string;
+  beard?: string | number;
+  tracheostomy_present?: string | number;
+
+  // Cardiovascular exam
+  irregular_rhythm?: string | number;
+  murmur?: string | number;
+  carotid_bruit?: string | number;
+  peripheral_edema?: string | number;
+  heart_sounds?: string | number;
+  cardiovascular_exam_normal?: string | number;
+  cardiovascular_exam_comments?: string;
+
+  // Pulmonary exam
+  pulmonary_exam_normal?: string | number;
+  breath_sounds?: string | number;
+  wheezes?: string | number;
+  rales?: string | number;
+  decreased_breath_sounds?: string | number;
+  pulmonary_exam_comments?: string;
+  wheezing?: string | number;
+
+  // IV / access risk
+  iv_access_difficult?: string | number;
+  difficult_iv_placement?: string | number;
+
+  // Other selected preop findings
+  level_of_consciousness?: string | number;
+  orientation_level?: string | number;
+  ekg?: string | number;
+  chart_reviewed?: string | number;
+  plan_risks_discussed_with?: string | number;
+
+  // Anesthesia planning
+  anesthesia_plan?: string | number;
+  post_op_block?: string | number;
+  anesthesia_plan_comments?: string;
 }
+
+export type PreopHistoryItem = {
+  mpog_case_id?: string;
+  history_category?: string;
+  category?: string;
+  feature_name?: string;
+  feature?: string;
+  feature_code?: string;
+  value?: string | number;
+  value_combined?: string | number;
+  aims_preop_concept_desc?: string;
+  aims_value_text?: string;
+  aims_value_numeric?: string | number;
+  rank?: string | number;
+  row_count?: string | number;
+  unique_case_count?: string | number;
+  example_values?: string;
+};
 
 export interface LabData {
   sodium?: number;

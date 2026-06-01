@@ -1,0 +1,4 @@
+mpog_case_id,observation_time,CVP,PAPS,PAPD,PAPM,Cerebral Oximetry Left,Cerebral Oximetry Right,anesthesia_start,anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+CAEC0473-DA2A-EE11-9200-005056BFF837,2023-07-20 22:55:00+00:00,-12.0,,,,,,2023-07-20 22:34:00+00:00,2023-07-21 03:30:00+00:00,21.0,21.0,275.0
+CAEC0473-DA2A-EE11-9200-005056BFF837,2023-07-20 22:56:00+00:00,-14.0,,,,,,2023-07-20 22:34:00+00:00,2023-07-21 03:30:00+00:00,22.0,22.0,274.0
+CAEC0473-DA2A-EE11-9200-005056BFF837,2023-07-20 22:58:00+00:00,65.0,,,,,,2023-07-20 22:34:00+00:00,2023-07-21 03:30:00+00:00,24.0,24.0,272.0

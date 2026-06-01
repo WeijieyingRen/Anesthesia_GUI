@@ -1,0 +1,2 @@
+mpog_dose_id,mpog_case_id,mpog_med_concept_id,dose_type,start_time,end_time,medication,med_concept_desc,dose,unit,route,aims_patient_dosing_weight,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+A6A53EC8-5832-F011-9212-005056BFF837,F1461B2A-9816-EF11-920B-005056BFF837,10377,2,2024-05-15 22:54:00+00:00,2024-05-15 22:58:00+00:00,propofol injection,propofol,50.0,mcg/kg/min,Intravenous,73.0,2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,66.0,70.0,66.0,66.0,24.0

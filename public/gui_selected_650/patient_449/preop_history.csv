@@ -1,0 +1,29 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+EE6141C6-5865-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+EE6141C6-5865-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+EE6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 512.89,512.89,Other pneumothorax
+EE6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C34.91,C34.91,"Malignant neoplasm of right lung, unspecified part of lung (CMS-HCC)"
+EE6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis F10.931,F10.931,Alcohol withdrawal with delirium (CMS-HCC)
+EE6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+EE6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J93.82,J93.82,Air leak
+EE6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R41.0,R41.0,Delirium
+EE6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet Take 1 tablet (5 mg total) by mouth every 4 hours as needed for Pain Use for moderate-to-severe pain not controled by Tylenol, ibuprofen, gabapentin, and lidocaine patches., Disp-30 tablet, R-0, E-PrescribeG89.18"
+EE6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule Take 1 capsule (300 mg total) by mouth 3 times a day, Disp-90 capsule, R-0, E-Prescribe"
+EE6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL tablet Take 0.5 tablets (10 mg total) by mouth daily, Historical Med"
+EE6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+EE6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121731,EAP-121731,HX HERNIA REPAIR UMBILICAL
+EE6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+EE6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-448457,EAP-448457,LOBECTOMY ROBOTIC ASSISTED THORACOSCOPIC WITH/ WITHOUT BRONCHOSCOPY
+EE6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-463040,EAP-463040,BRONCHOSCOPY WITH OR WITHOUT CRYOBIOPSY AND/ OR NAVIGATION; CT GUIDED
+EE6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-474077,EAP-474077,BRONCHOSCOPY WITH ENDOBRONCHIAL ULTRASOUND
+EE6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-487287,EAP-487287,ROBOTIC DAVINCI [PHI] DUAL CONSOLE; SECONDARY PROCEDURE
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1178817,1178817,Other pneumothorax
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 145278,145278,Alcohol withdrawal with delirium (CMS-HCC)
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1886216,1886216,Degeneration of intervertebral disc of lumbar region
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1967312,1967312,"Malignant neoplasm of right lung, unspecified part of lung (CMS-HCC)"
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 2056472,2056472,Mass of right lung
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 8821,8821,Sciatica
+EE6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 93617,93617,Delirium
+EE6141C6-5865-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1185646,EDG-1185646,Air leak

@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+B345EFC0-9DA8-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+B345EFC0-9DA8-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+B345EFC0-9DA8-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis H57.89,H57.89,Thyroid eye disease
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-14887,ERX-14887,"methylPREDNISolone (Medrol) dosepak Follow instructions on packaging. Begin the follow day after surgery, Disp-21 Tablet, R-0, E-Prescribe"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-169425,ERX-169425,"ARTIFICIAL TEARS OPHT instill 1 Drop to both eyes as needed, Historical Med"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take by mouth 3 times a week Takes 5,000 IU 2 times weekly, Historical Med"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-19546,ERX-19546,"neomycin-polymyxin-dexamethasone (Maxitrol) ophthalmic ointment instill to right eye 3 times a day For 7 days after surgery, Disp-3.5 g, R-1, E-Prescribe"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-219728,ERX-219728,"PROBIOTIC PO take by mouth 2 times a week , Historical Med"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-223742,ERX-223742,OCUVITE ADULT 50+ PO Historical Med
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-2568,ERX-2568,"docusate sodium (Colace) capsule take 1 Capsule (50 mg total) by mouth 2 times a day as needed, Disp-60 Capsule, R-0, E-Prescribe"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-33500,ERX-33500,"LEXAPRO 10 MG PO TABS take 2 Tablets (20 mg total) by mouth daily, Historical Med"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROcodone-acetaminophen (Norco) 5-325 mg tablet take 1 Tablet by mouth every 4 hours as needed for Pain After surgery, Disp-10 Tablet, R-0, E-Prescribe"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"THERAPEUTIC MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed for Nausea/Vomiting After surgery, Disp-10 Tablet, R-0, E-Prescribe"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-9500,ERX-9500,"cephalexin (Keflex) capsule take 1 Capsule (500 mg total) by mouth 4 times a day for 7 days After surgery, Disp-28 Capsule, R-0, E-Prescribe"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+B345EFC0-9DA8-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-98452,EDG-98452,Hyperthyroidism
+B345EFC0-9DA8-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121856,EAP-121856,HX CESAREAN SECTION
+B345EFC0-9DA8-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-133432,EAP-133432,STRABISMUS REPAIR
+B345EFC0-9DA8-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-198992,EAP-198992,HX [PHI]
+B345EFC0-9DA8-EE11-9203-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression
+B345EFC0-9DA8-EE11-9203-005056BFF837,Problem List,Problem List Entry 1288100,1288100,Graves disease
+B345EFC0-9DA8-EE11-9203-005056BFF837,Problem List,Problem List Entry 142320,142320,Esotropia
+B345EFC0-9DA8-EE11-9203-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+B345EFC0-9DA8-EE11-9203-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+B345EFC0-9DA8-EE11-9203-005056BFF837,Problem List,Problem List Entry 8693,8693,"Pain in joint, lower leg"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1027176,EDG-1027176,Exposure keratopathy
+B345EFC0-9DA8-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1722584,EDG-1722584,"Eyelid retraction, unspecified laterality"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2339741,EDG-2339741,"Lagophthalmos, unspecified lagophthalmos type, unspecified laterality"
+B345EFC0-9DA8-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-95337,EDG-95337,Proptosis

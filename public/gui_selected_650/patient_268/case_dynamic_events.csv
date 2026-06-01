@@ -1,0 +1,11 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 15:34:00+00:00,position,table_turned_180,1,Table Turned 180,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,1.0,1.0,1.0,1.0,603.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 15:44:00+00:00,position,temperature_control,"""water blanket warming;blankets;full body""","""R SHC OPT ANE TEMP CONTROL"": ""water blanket warming;blankets;full body""",2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,11.0,11.0,11.0,11.0,593.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 17:09:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,96.0,96.0,96.0,96.0,508.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 17:20:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,107.0,107.0,107.0,107.0,497.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 17:52:00+00:00,position,local_by_surgeons,local by surgeons,Local by Surgeons: local by surgeons,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,139.0,139.0,139.0,139.0,465.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 21:56:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,383.0,383.0,383.0,383.0,221.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 22:24:00+00:00,position,local_by_surgeons,local by surgeons,Local by Surgeons: local by surgeons,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,411.0,411.0,411.0,411.0,193.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-11 23:38:57+00:00,line,arterial_line,1,Arterial Line,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,485.95,485.95,485.95,485.95,118.05
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-12 01:30:00+00:00,position,bair_hugger,on,Bair Hugger placed over patient: on,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,597.0,597.0,597.0,597.0,7.0
+64C0645A-9595-ED11-91F9-005056BFF837,2023-01-12 01:30:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2023-01-11 15:33:00+00:00,2023-01-12 01:37:00+00:00,597.0,597.0,597.0,597.0,7.0

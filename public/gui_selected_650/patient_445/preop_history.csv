@@ -1,0 +1,41 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+F3338B00-D728-F011-9212-005056BFF837,Allergy,Latex Allergy,Allergy,No
+F3338B00-D728-F011-9212-005056BFF837,Allergy,Latex allergy,allergy,No
+F3338B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R91.1,R91.1,Lung nodule
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 4 hours as needed for Pain (Do not exceed 4g in 24hrs), Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-125756,ERX-125756,"pregabalin (Lyrica) capsule Take 2 capsules (50 mg total) by mouth 3 times a day, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-205553,ERX-205553,"CHOLECALCIFEROL (VITAMIN D3) 50 MCG (2,000 UNIT) [PHI] TABS Take 1 tablet (50 mcg total) by mouth daily, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-222101,ERX-222101,"rivaroxaban (Xarelto) tablet Take 1 tablet (15 mg total) by mouth daily in the evening With meal, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-232954,ERX-232954,"EMPAGLIFLOZIN 25 MG [PHI] TABS Take 1 tablet (25 mg total) by mouth every day, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet Take 1 tablet (40 mg total) by mouth 2 times a day, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-3701,ERX-3701,"hydrALAZINE 50 mg tablet Take 1 tablet (50 mg total) by mouth 3 times a day Hold for SBP <90, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 4 hours as needed (breathing difficulty), Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG daily Two inhalers (name unknown), Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-620986,ERX-620986,"INSULIN ASPART 100 UNIT/ML SC STANDARD CORRECTIVE SCALE (BEDTIME) Inject 3 units subcutaneously in the every morning.Inject 4 units in the every evening Inject 4 units once daily (Hold if NPO or BG <90).(Per sliding scale if 70-200=0; 201-250=2; 251-300=3; 301-350=4; 351-400=5), Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin (Lipitor) 40 mg tablet Take 1 tablet (40 mg total) by mouth every bedtime, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-80996,ERX-80996,"metoprolol succinate (Toprol XL) 200 mg extended release tablet Take 1 tablet (200 mg total) by mouth daily Hold for HR<50, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"amLODIPine 10 mg tablet Take 1 tablet (10 mg total) by mouth every day Hold for SBP<90, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-89742,ERX-89742,"INSULIN NPH ISOPH U-100 HUMAN 100 UNIT/ML SC SUSP Inject 19 units subcutaneous (under the skin) every bedtime, Historical Med"
+F3338B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1059855,1059855,Hx of CABG
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1098428,1098428,T2DM (type 2 diabetes mellitus) (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1162795,1162795,Acquired absence of right leg below knee (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1219292,1219292,Hx of myocardial infarction
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 142324,142324,Glaucoma
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 142327,142327,Heart failure (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 159927,159927,HLD (hyperlipidemia)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 164726,164726,PTSD (post-traumatic stress disorder)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 189100,189100,Arthritis of spine
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 192855,192855,Lung nodule
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 198226,198226,CVA (cerebral vascular accident) (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2065364,2065364,"Chronic obstructive pulmonary disease, unspecified (CMS-HCC)"
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2103239,2103239,Chronic systolic (congestive) heart failure (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2347364,2347364,Below-knee amputation of right lower extremity (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2356853,2356853,Ischemic ulcer of foot due to atherosclerosis of lower extremity (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 66750,66750,Benign essential hypertension
+F3338B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 78990,78990,Diabetic neuropathy (CMS-HCC)
+F3338B00-D728-F011-9212-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-192855,EDG-192855,Lung nodule

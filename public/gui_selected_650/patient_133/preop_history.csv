@@ -1,0 +1,43 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+38205478-2326-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+38205478-2326-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+38205478-2326-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C24.0,C24.0,Bile duct carcinoma (CMS-HCC)
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-203465,ERX-203465,"potassium phosphate-sodium phosphate (PhosNAK) packet take 1 Packet by mouth 4 times a day with meals and bedtime, Disp-20 Packet, R-0, E-Prescribe"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-232958,ERX-232958,"JARDIANCE 10 MG PO TABS take 1 Tablet by mouth Morning, Historical Med"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-28995,ERX-28995,"METFORMIN 500 MG PO TB24 take by mouth 2 times a day, Historical Med"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-33228,ERX-33228,"AMOXICILLIN-POT CLAVULANATE 875-125 MG PO TABS take 1 Tablet by mouth 2 times a day, Disp-42 Tablet, R-2, E-Prescribe"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"clopidogrel (Plavix) 75 mg tablet (maintenance dose) take 1 Tablet (75 mg total) by mouth daily, Historical Med"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG PO CAPS take 1 Capsule (0.4 mg total) by mouth 2 times a day, Disp-60 Capsule, R-3, E-Prescribe"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth every morning before breakfast, Disp-30 Tablet, R-3, E-Prescribe"
+38205478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-98,ERX-98,"ACETAMINOPHEN 500 MG PO CAPS take 1,000 mg by mouth every 8 hours, Disp-30 Capsule, R-0, E-Prescribe"
+38205478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+38205478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-67599,EDG-67599,Carotid artery occlusion
+38205478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-78949,EDG-78949,Diabetes mellitus (CMS-HCC)
+38205478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121722,EAP-121722,HX EGD
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188125,EAP-188125,ERCP WITH OR WITHOUT BRUSHING
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188127,EAP-188127,ERCP WITH BIOPSY
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188129,EAP-188129,ERCP WITH SPHINCTEROTOMY
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188139,EAP-188139,ERCP WITH STENT PLACEMENT
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188141,EAP-188141,ERCP WITH STENT EXCHANGE
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188143,EAP-188143,ERCP WITH BALLOON DILATATION
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188323,EAP-188323,IR BILIARY DRAIN EXCHANGE
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188327,EAP-188327,IR BILIARY DRAIN PLACEMENT
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-436326,EAP-436326,ERCP W/ REM OF FOREIGN BODY OR STENT FROM BILIARY OR PANCREATIC DUCT
+38205478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 1025559,1025559,Bile duct carcinoma (CMS-HCC)
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 1081504,1081504,History of colonic polyps
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 1192943,1192943,Duodenal ulcer
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 1226963,1226963,Intrahepatic bile duct dilation
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 138145,138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 155166,155166,Carotid stenosis
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 198226,198226,CVA (cerebral vascular accident) (CMS-HCC)
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 2025205,2025205,"Fever, unspecified fever cause"
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 72008,72008,Ascending cholangitis
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 91452,91452,Bile duct obstruction
+38205478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+38205478-2326-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1025559,EDG-1025559,Bile duct carcinoma (CMS-HCC)

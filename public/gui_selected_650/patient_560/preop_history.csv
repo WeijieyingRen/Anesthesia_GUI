@@ -1,0 +1,47 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+2A7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Allergen ELG-17262,ELG-17262,RED BLOOD CELL ANTIBODY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+2A7E8C09-85F9-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-11111,ERX-11111,"PRAVASTATIN 20 MG PO TABS Take 1 tablet (20 mg total) by mouth daily, R-0, Historical Med"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-11442,ERX-11442,"sucralfate tablet take 1 Tablet (1 g total) by mouth every 6 hours .Start 4 days prior to procedure and continue for 1 month after., Disp-140 Tablet, R-0, E-Prescribe"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-180175,ERX-180175,"LASIX PO take 20 mg by mouth every morning, Historical Med"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-266739,ERX-266739,"VERZENIO PO take by mouth, Historical Med"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-7437,ERX-7437,"spironolactone (Aldactone) tablet take 0.5 Tablets (12.5 mg total) by mouth every morning, Historical Med"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-81239,ERX-81239,alendronate (Fosamax) tablet (weekly regimen) Historical Med
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily Start 4 days prior to ablation and continue for 1 month after., Disp-40 Tablet, R-0, E-Prescribe"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-93295,ERX-93295,"ZOLPIDEM 10 MG PO TABS Take 0.5 tablets (5 mg total) by mouth every bedtime as needed 1/2 tab as needed, R-0, Historical Med"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-10048,EDG-10048,Heartburn
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1025765,EDG-1025765,Liposarcoma (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-102901,EDG-102901,Parotitis
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1034744,EDG-1034744,Colon polyps
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-144379,EDG-144379,High cholesterol
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-63549,EDG-63549,"Chronic kidney disease, unspecified"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-92982,EDG-92982,Colon polyp
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121716,EAP-121716,HX SKIN CANCER REMOVAL
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-134796,EAP-134796,THYROIDECTOMY MEDIAN STERNOTOMY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-136695,EAP-136695,RADICAL NECK DISSECTION MODIFIED
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-137615,EAP-137615,THORACOSCOPY WITH DECORTICATION WITH/ WITHOUT BRONCHOSCOPY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-138169,EAP-138169,MEDIAN STERNOTOMY RESECTION OF MASS / TUMOR
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-196517,EAP-196517,HX KIDNEY SURGERY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-196522,EAP-196522,HX ORTHOPEDIC SURGERY
+2A7E8C09-85F9-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-429604,EAP-429604,CHEST STERNOTOMY REDO; SECONDARY PROCEDURE
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1025765,1025765,Liposarcoma (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1033463,1033463,Chronic lymphocytic leukemia (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1091979,1091979,SVC syndrome
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1100472,1100472,"Pleural effusion, right"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 120083,120083,Malignant neoplasm of kidney (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1233770,1233770,Difficult airway
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 1539907,1539907,"Malignant neoplasm of kidney, unspecified laterality (CMS-HCC)"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 2322254,2322254,"Hypertension, unspecified type"
+2A7E8C09-85F9-EE11-920A-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+2A7E8C09-85F9-EE11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

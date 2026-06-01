@@ -1,0 +1,44 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C79.51,C79.51,Secondary malignant neoplasm of bone (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C79.51,C79.51,Metastasis to bone (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 4 hours as needed for Pain, Disp-30 Tablet, R-0, E-Prescribe"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 4 to 6 hours as needed for Pain, Disp-20 Tablet, R-0, E-Prescribe"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule take 1 Capsule (100 mg total) by mouth 3 times a day, Disp-270 Capsule, R-0, E-Prescribe"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-183652,ERX-183652,"NUTRITIONAL SUPPLEMENTS PO take by mouth, Historical Med"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-8689,ERX-8689,"VITAMIN D2 50,000 UNIT PO CAPS take 1 Cap by mouth once a week, Disp-60 Cap, R-2, Fax"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1121587,EDG-1121587,Endometrial adenocarcinoma (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-142378,EDG-142378,Vitamin D deficiency
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1529997,EDG-1529997,"Adenocarcinoma (epithelial) of ovary, unspecified laterality (CMS-HCC)"
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-192855,EDG-192855,Lung nodule
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-2060567,EDG-2060567,Deep venous thrombosis (DVT) of left peroneal vein (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121850,EAP-121850,HX HYSTERECTOMY
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-417482,EAP-417482,FOOT SURGERY
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-474089,EAP-474089,BRONCHOSCOPY WITH NAVIGATION
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-474147,EAP-474147,BRONCHOSCOPY WITH CRYOBIOPSY
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 102568,102568,Ovarian cancer (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1048564,1048564,Impingement syndrome of shoulder region
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 108448,108448,Hammer toe
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1092558,1092558,Elevated LFTs
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1121876,1121876,History of deep venous thrombosis
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1132645,1132645,Secondary malignant neoplasm of bone (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1134849,1134849,Current use of long term anticoagulation
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 118892,118892,Uterine cancer (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 120051,120051,Malignant neoplasm of endometrium (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1245931,1245931,Chronic left hip pain
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 141835,141835,Weakness
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 14559,14559,Personal history of malignant neoplasm of other parts of uterus
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 152160,152160,TEV (talipes equinovarus)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1711,1711,Malignant neoplasm of ovary (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 192855,192855,Lung nodule
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 2060447,2060447,Chronic deep vein thrombosis (DVT) of left peroneal vein (CMS-HCC)
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 74897,74897,Cyst of breast
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Problem List,Problem List Entry 9518,9518,Talipes calcaneovalgus
+7D6E0B2C-D9FE-ED11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-119281,EDG-119281,Metastasis to bone (CMS-HCC)

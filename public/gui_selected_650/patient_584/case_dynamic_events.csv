@@ -1,0 +1,4 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+9BF6CFC3-FF43-EE11-9200-005056BFF837,2023-07-26 19:26:00+00:00,airway,lma_inserted,1,LMA Inserted,2023-07-26 18:43:00+00:00,2023-07-26 21:15:00+00:00,43.0,43.0,43.0,43.0,109.0
+9BF6CFC3-FF43-EE11-9200-005056BFF837,2023-07-26 20:58:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2023-07-26 18:43:00+00:00,2023-07-26 21:15:00+00:00,135.0,135.0,135.0,135.0,17.0
+9BF6CFC3-FF43-EE11-9200-005056BFF837,2023-07-26 21:10:00+00:00,position,bed_position,<30 degrees,Bed Position: <30 degrees,2023-07-26 18:43:00+00:00,2023-07-26 21:15:00+00:00,147.0,147.0,147.0,147.0,5.0

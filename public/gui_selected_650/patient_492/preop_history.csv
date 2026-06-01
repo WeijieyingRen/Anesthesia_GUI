@@ -1,0 +1,48 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CCE888D5-9F1E-F011-9212-005056BFF837,Allergy,Latex Allergy,Allergy,No
+CCE888D5-9F1E-F011-9212-005056BFF837,Allergy,Latex allergy,allergy,No
+CCE888D5-9F1E-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.6,N18.6,ESRD (end stage renal disease) (CMS-HCC)
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-10588,ERX-10588,"metolazone tablet Take 1 tablet (5 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-123688,ERX-123688,"CALCIUM ACETATE(PHOSPHAT BIND) 667 MG PO CAPS Take 1 capsule (667 mg total) by mouth 3 times a day with meals, Disp-270 capsule, R-3, No Print"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-203624,ERX-203624,"sevelamer carbonate (Renvela) tablet Take 3 tablets (2,400 mg total) by mouth 3 times a day with meals, Disp-810 tablet, R-3, E-Prescribe"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-3296,ERX-3296,"furosemide tablet Take 1 tablet (80 mg total) by mouth 2 times a day, Historical Med"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Take 1 each by mouth daily Pro-Renal Plus D, Historical Med"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"PREDNISONE 5 MG PO TABS TAKE 1 TABLET (5 MG TOTAL) BY MOUTH DAILY., Disp-30 tablet, R-14, E-Prescribe"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-78033,ERX-78033,"carvediloL (Coreg) tablet Take 1 tablet (25 mg total) by mouth 2 times a day with meals, Disp-180 tablet, R-3, E-Prescribe"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-86299,ERX-86299,"epoetin alfa (Epogen/Procrit) injection Inject 23,000 units subcutaneous (under the skin) One Time Receives through Wellbound, Historical Med"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-86385,ERX-86385,"SYRINGE WITH NEEDLE 3 ML 25 X 5/8"" MISC SYRG Use as directed to inject Retacrit, Disp-100 Each, R-3, E-Prescribe"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-89476,ERX-89476,"losartan tablet Take 1 tablet (25 mg total) by mouth daily, Historical Med"
+CCE888D5-9F1E-F011-9212-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule Take 4 capsules (4 mg total) by mouth every day, Disp-360 capsule, R-3, E-Prescribe"
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-125708,EDG-125708,Malignant neoplasm (CMS-HCC)
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142114,EDG-142114,Urinary tract infection
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142325,EDG-142325,Gout
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-195848,EDG-195848,HPTH (hyperparathyroidism)
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-200561,EDG-200561,FSGS (focal segmental glomerulosclerosis)
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-63549,EDG-63549,"Chronic kidney disease, unspecified"
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-79174,EDG-79174,Thyroid nodule
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121689,EAP-121689,HX RENAL BIOPSY
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121779,EAP-121779,HX KIDNEY TRANSPLANT
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121817,EAP-121817,HX HERNIA REPAIR
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121832,EAP-121832,HX NEPHRECTOMY
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-135794,EAP-135794,PERITONEAL CATHETER INSERTION
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-188215,EAP-188215,COLONOSCOPY WITH OR WITHOUT BIOPSY
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-196517,EAP-196517,HX KIDNEY SURGERY
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-446545,EAP-446545,HX AV FISTULA
+CCE888D5-9F1E-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-446548,EAP-446548,HX DIALYSIS CATHETER
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 10056,10056,Diarrhea
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 1030067,1030067,"CKD (chronic kidney disease) stage 5, GFR less than 15 ml/min (CMS-HCC)"
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 1121643,1121643,History of renal transplant
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 195847,195847,Hyperparathyroidism
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 201257,201257,ESRD (end stage renal disease) (CMS-HCC)
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 2204033,2204033,"Diarrhea, unspecified type"
+CCE888D5-9F1E-F011-9212-005056BFF837,Problem List,Problem List Entry 79174,79174,Thyroid nodule
+CCE888D5-9F1E-F011-9212-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-63548,EDG-63548,End stage renal disease (CMS-HCC)

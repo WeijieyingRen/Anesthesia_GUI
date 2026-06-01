@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+F5C6560C-CEF4-EE11-920A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+F5C6560C-CEF4-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+F5C6560C-CEF4-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-21300,ERX-21300,"PENTOXIFYLLINE 400 MG PO TBSR Take 1x per day for a week then 2x per day, Disp-90 Tablet, R-1, E-Prescribe"
+F5C6560C-CEF4-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-228452,ERX-228452,"ELIQUIS 5 MG PO TABS take 1 Tablet by mouth 2 times a day, Historical Med"
+F5C6560C-CEF4-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-37404,ERX-37404,"CIALIS 5 MG PO TABS take 1 Tablet (5 mg total) by mouth DAILY, Disp-90 Tablet, R-4, E-Prescribe"
+F5C6560C-CEF4-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG PO CAPS take 1 Capsule (0.4 mg total) by mouth every bedtime, Disp-90 Capsule, R-3, E-Prescribe"
+F5C6560C-CEF4-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet take 1.5 Tablets (37.5 mg total) by mouth daily, Disp-135 Tablet, R-5, E-Prescribe"
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1080273,EDG-1080273,BPH (benign prostatic hyperplasia)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1178879,EDG-1178879,IFG (impaired fasting glucose)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-118812,EDG-118812,Paroxysmal atrial fibrillation (CMS-HCC)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-135606,EDG-135606,Elevated PSA
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-15123,EDG-15123,Long term (current) use of anticoagulants
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-92982,EDG-92982,Colon polyp
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Medical History,Past Medical History EDG-94116,EDG-94116,Diverticulosis
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121716,EAP-121716,HX SKIN CANCER REMOVAL
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121787,EAP-121787,HX SHOULDER SURGERY
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-134466,EAP-134466,APPENDECTOMY
+F5C6560C-CEF4-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 1080273,1080273,BPH (benign prostatic hyperplasia)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 1178879,1178879,IFG (impaired fasting glucose)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 135606,135606,Elevated PSA
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 201475,201475,Erectile dysfunction
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 22386,22386,Peyronie's disease
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+F5C6560C-CEF4-EE11-920A-005056BFF837,Problem List,Problem List Entry 94116,94116,Diverticulosis
+F5C6560C-CEF4-EE11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

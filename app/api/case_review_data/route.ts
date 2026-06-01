@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { readJsonFromDrive } from "@/lib/drive-upload";
-
-type AccessCodeRow = {
-  doctor_id?: string;
-  access_code?: string;
+type AccessCodeLookupEntry = {
+  doctorId: string;
+  workflowMode: "annotation" | "review";
+  annotationCode: string;
+  reviewCode: string | null;
 };
 
 type LoadedSection = {
@@ -50,56 +51,70 @@ type CaseStatusIndexEntry = {
   };
 };
 
-let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
+let accessCodeLookupPromise: Promise<Map<string, AccessCodeLookupEntry>> | null = null;
 
 function sanitizePathPart(value: unknown): string {
   if (value === null || value === undefined) return "unknown";
   return String(value).trim().replace(/[^\w.-]/g, "_") || "unknown";
 }
 
-async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
-  if (accessCodeDoctorMapPromise) return accessCodeDoctorMapPromise;
+async function loadAccessCodeLookup(): Promise<Map<string, AccessCodeLookupEntry>> {
+  if (accessCodeLookupPromise) return accessCodeLookupPromise;
 
-  accessCodeDoctorMapPromise = (async () => {
-    const csvPath = path.join(
+  accessCodeLookupPromise = (async () => {
+    const map = new Map<string, AccessCodeLookupEntry>();
+    const reviewCsvPath = path.join(
       process.cwd(),
       "public",
-      "data",
-      "access_code.csv"
+      "assigned_code",
+      "access_review_code.csv"
     );
 
-    const raw = await fs.readFile(csvPath, "utf-8");
-    const lines = raw.split(/\r?\n/).filter(Boolean);
-    const map = new Map<string, string>();
+    try {
+      const raw = await fs.readFile(reviewCsvPath, "utf-8");
+      const lines = raw.split(/\r?\n/).filter(Boolean);
+      const header = lines[0]?.split(",") ?? [];
+      const doctorIdx = header.indexOf("doctor_id");
+      const annotationIdx = header.indexOf("annotation_code");
+      const reviewIdx = header.indexOf("review_code");
 
-    if (lines.length < 2) return map;
+      if (doctorIdx >= 0 && annotationIdx >= 0 && reviewIdx >= 0) {
+        for (const line of lines.slice(1)) {
+          const cols = line.split(",");
+          const doctorId = String(cols[doctorIdx] ?? "").trim();
+          const annotationCode = String(cols[annotationIdx] ?? "").trim();
+          const reviewCode = String(cols[reviewIdx] ?? "").trim();
+          if (!doctorId || !annotationCode) continue;
 
-    const header = lines[0].split(",");
-    const doctorIdx = header.indexOf("doctor_id");
-    const codeIdx = header.indexOf("access_code");
+          map.set(annotationCode, {
+            doctorId,
+            workflowMode: "annotation",
+            annotationCode,
+            reviewCode: reviewCode || null,
+          });
 
-    if (doctorIdx < 0 || codeIdx < 0) return map;
-
-    for (const line of lines.slice(1)) {
-      const cols = line.split(",");
-      const row: AccessCodeRow = {
-        doctor_id: cols[doctorIdx],
-        access_code: cols[codeIdx],
-      };
-
-      const code = String(row.access_code ?? "").trim();
-      const doctor = String(row.doctor_id ?? "").trim();
-      if (code && doctor) map.set(code, doctor);
+          if (reviewCode) {
+            map.set(reviewCode, {
+              doctorId,
+              workflowMode: "review",
+              annotationCode,
+              reviewCode,
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load access_review_code.csv:", error);
     }
 
     return map;
   })();
 
-  return accessCodeDoctorMapPromise;
+  return accessCodeLookupPromise;
 }
 
-async function resolveDoctorIdFromAccessCode(accessCode: string) {
-  const map = await loadAccessCodeDoctorMap();
+async function resolveAccessCodeEntry(accessCode: string) {
+  const map = await loadAccessCodeLookup();
   return map.get(accessCode) ?? null;
 }
 
@@ -210,15 +225,16 @@ export async function GET(req: Request) {
       );
     }
 
-    const doctorId = await resolveDoctorIdFromAccessCode(accessCode);
-    if (!doctorId) {
+    const accessEntry = await resolveAccessCodeEntry(accessCode);
+    if (!accessEntry) {
       return NextResponse.json(
         { ok: false, error: "Invalid accessCode or doctor not found." },
         { status: 404 }
       );
     }
 
-    const indexPath = `${sanitizePathPart(accessCode)}/case_status_index.json`;
+    const sourceAccessCode = accessEntry.annotationCode;
+    const indexPath = `${sanitizePathPart(sourceAccessCode)}/case_status_index.json`;
     const indexFound = await readJsonFromDrive({ objectPath: indexPath }).catch(
       () => null
     );
@@ -245,6 +261,7 @@ export async function GET(req: Request) {
         ok: true,
         matched: false,
         accessCode,
+        sourceAccessCode,
         patientId,
         caseId,
         summary: null,
@@ -257,6 +274,8 @@ export async function GET(req: Request) {
       ok: true,
       matched: true,
       accessCode,
+      workflowMode: accessEntry.workflowMode,
+      sourceAccessCode,
       patientId,
       caseId,
       indexPath,

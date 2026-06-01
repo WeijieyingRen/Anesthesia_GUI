@@ -1,0 +1,36 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+14040159-AA12-EF11-920A-005056BFF837,Allergy,Latex Allergy Band Applied,Applied,N/A;No
+14040159-AA12-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.0,I48.0,Paroxysmal atrial fibrillation (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.92,I48.92,"Atrial flutter, unspecified type (CMS-HCC)"
+14040159-AA12-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-10449,ERX-10449,"lisinopriL tablet take 1 tablet by mouth once daily, Disp-30 Tablet, R-11, E-Prescribe"
+14040159-AA12-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-11421,ERX-11421,"sotalol (Betapace) tablet take 2 Tablets (160 mg total) by mouth 2 times a day, Disp-360 Tablet, R-3, E-Prescribe"
+14040159-AA12-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+14040159-AA12-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-5008,ERX-5008,"metoprolol tartrate (Lopressor) tablet take 2 Tablets (200 mg total) by mouth 2 times a day, Disp-360 Tablet, R-3, E-Prescribe"
+14040159-AA12-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-8752,ERX-8752,"warfarin (COUMADIN) tablet take 1 Tab by mouth daily in the evening, Disp-30 Tab, R-6, E-Prescribe"
+14040159-AA12-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-1258070,EDG-1258070,History of cardioversion
+14040159-AA12-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+14040159-AA12-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+14040159-AA12-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-67121,EDG-67121,Hypertrophic cardiomyopathy (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-133680,EAP-133680,HEMORRHOIDECTOMY
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-3400,EAP-3400,EP ATRIAL FIBRILLATION ABLATION
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-445007,EAP-445007,TRANSESOPHAGEAL ECHOCARDIOGRAPHY
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-472990,EAP-472990,EP TYPICAL ATRIAL FLUTTER ABLATION
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-472991,EAP-472991,EP ATYPICAL ATRIAL FLUTTER ABLATION
+14040159-AA12-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-511315,EAP-511315,ECHOCARDIOGRAPHY TRANSESOPHAGEAL
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 1033341,1033341,Persistent atrial fibrillation (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 1256953,1256953,Encounter for loop recorder check
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 1277655,1277655,Status post placement of implantable loop recorder
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 142424,142424,Obesity BMI=46
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 176387,176387,Atrial tachycardia (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 2232203,2232203,Morbid obesity with body mass index (BMI) of 40.0 or higher (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 2349387,2349387,Other persistent atrial fibrillation (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 2368498,2368498,COVID
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 5108,5108,Atrial flutter (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Problem List,Problem List Entry 67121,67121,Hypertrophic cardiomyopathy (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-176387,EDG-176387,Atrial tachycardia (CMS-HCC)
+14040159-AA12-EF11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139290,EDG-2139290,"Atrial flutter, unspecified type (CMS-HCC)"

@@ -1,0 +1,17 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+1CE51B83-AFA4-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+1CE51B83-AFA4-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,Yes
+1CE51B83-AFA4-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D49.89,D49.89,Thymoma
+1CE51B83-AFA4-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+1CE51B83-AFA4-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-11239,ERX-11239,"pyridostigmine tablet Take 0.5 tablets (30 mg total) by mouth 3 times a day, Historical Med"
+1CE51B83-AFA4-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-185874,ERX-185874,"PREDNISONE PO Take 10 mg by mouth daily, Historical Med"
+1CE51B83-AFA4-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-246872,ERX-246872,"IBRANCE 125 MG PO TABS Take 1 tablet (125 mg total) by mouth daily Last dose 12/4., Historical Med"
+1CE51B83-AFA4-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Vyvgart IV weekly for 4 weeks then off for 4 weeks, Historical Med"
+1CE51B83-AFA4-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-134512,EAP-134512,DIAPHRAGM PLICATION
+1CE51B83-AFA4-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-134774,EAP-134774,RIB RESECTION
+1CE51B83-AFA4-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-138419,EAP-138419,THORACOTOMY WITH WEDGE RESECTION
+1CE51B83-AFA4-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+1CE51B83-AFA4-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-512025,EAP-512025,HYPERTHERMIC INTRATHORACIC CHEMOTHERAPY; ADJUNCT
+1CE51B83-AFA4-EE11-9203-005056BFF837,Problem List,Problem List Entry 106333,106333,Thymoma
+1CE51B83-AFA4-EE11-9203-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+1CE51B83-AFA4-EE11-9203-005056BFF837,Problem List,Problem List Entry 192021,192021,MG with exacerbation (myasthenia [PHI]) (CMS-HCC)

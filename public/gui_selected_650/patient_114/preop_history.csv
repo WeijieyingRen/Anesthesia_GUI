@@ -1,0 +1,17 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+D092FF13-B753-EE11-9200-005056BFF837,Allergy,Allergen ELG-9259,ELG-9259,MILK
+D092FF13-B753-EE11-9200-005056BFF837,Allergy,Allergen ELG-977,ELG-977,PORK/PORCINE CONTAINING PRODUCTS
+D092FF13-B753-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+D092FF13-B753-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+D092FF13-B753-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K86.89,K86.89,Pancreatic mass
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10070,ERX-10070,"FLUoxetine (PROzac) capsule take 30 mg by mouth daily, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10466,ERX-10466,"loratadine tablet take 1 Tablet (10 mg total) by mouth daily as needed, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-12025,ERX-12025,"meclizine tablet take 1 Tablet (25 mg total) by mouth every 6 hours as needed, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-18138,ERX-18138,"SENNA 8.6 MG PO TABS take 2 Tablets (17.2 mg total) by mouth daily as needed, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-201476,ERX-201476,"FEROSUL 325 MG (65 MG IRON) PO TABS take 1 Tablet by mouth daily, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-5016,ERX-5016,"metroNIDAZOLE tablet take 1 Tablet (500 mg total) by mouth 4 times a day, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-7797,ERX-7797,"tetracycline capsule take 1 Capsule (500 mg total) by mouth 4 times a day, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-88444,ERX-88444,"ESOMEPRAZOLE MAGNESIUM 40 MG PO CPDR take 40 mg by mouth 2 times a day, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-90805,ERX-90805,"BISMUTH SUBSALICYLATE 262 MG PO CHEW take 2 Tablets by mouth 4 times a day, Historical Med"
+D092FF13-B753-EE11-9200-005056BFF837,Problem List,Problem List Entry 1033449,1033449,Pancreatic mass
+D092FF13-B753-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1033449,EDG-1033449,Pancreatic mass

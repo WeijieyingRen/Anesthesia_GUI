@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+B5242150-4DBB-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+B5242150-4DBB-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+B5242150-4DBB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C79.89,C79.89,Metastatic squamous cell carcinoma to parotid gland (CMS-HCC)
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10674,ERX-10674,"mupirocin (BACTROBAN) 2% ointment Apply to sore on nose twice daily, Disp-22 g, R-0, E-Prescribe"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1-2 Tablets (5-10 mg total) by mouth every 4 hours as needed, Disp-120 Tablet, R-0, E-PrescribeSwitching from morphine back to oxy per pt's tolerance. Ok to dispense."
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-172040,ERX-172040,"CENTRUM SILVER PO take by mouth every morning, Historical Med"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO take by mouth as needed, Historical Med"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-199689,ERX-199689,"DI-DAK-SOL 0.0125 % TP SOLN Soak left post auricular area for 10 minutes then rinse. Repeat 1-2 times daily., Disp-473 mL, R-0, E-Prescribe"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-20920,ERX-20920,"morphine (MS Contin) controlled release tablet take 1 Tablet (15 mg total) by mouth daily in the evening, Disp-30 Tablet, R-0, E-Prescribe"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-25855,ERX-25855,"gabapentin (Neurontin) tablet take 2 Tablets (1,200 mg total) by mouth 3 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3845,ERX-3845,"ibuprofen tablet TAKE 1 TABLET BY MOUTH EVERY 6 HOURS AS NEEDED, Disp-120 Tablet, R-0, E-Prescribe"
+B5242150-4DBB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-81642,ERX-81642,"VALSARTAN-HYDROCHLOROTHIAZIDE 160-12.5 MG PO TABS take 1 Tablet by mouth every morning, Historical Med"
+B5242150-4DBB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+B5242150-4DBB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1098197,EDG-1098197,History of chicken pox
+B5242150-4DBB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+B5242150-4DBB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1105480,1105480,Cancer related pain
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1109387,1109387,Metastatic squamous cell carcinoma to parotid gland (CMS-HCC)
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1120979,1120979,Neuropathic pain
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1178764,1178764,Squamous cell carcinoma of scalp and skin of neck
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 203532,203532,Pulmonary nodule
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2353527,2353527,Chemotherapy-induced fatigue
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+B5242150-4DBB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+B5242150-4DBB-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1109387,EDG-1109387,Metastatic squamous cell carcinoma to parotid gland (CMS-HCC)
+B5242150-4DBB-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1178764,EDG-1178764,Squamous cell carcinoma of scalp and skin of neck

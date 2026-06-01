@@ -1,0 +1,67 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+75B67699-B472-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+75B67699-B472-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+75B67699-B472-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M48.061,M48.061,"Spinal stenosis of lumbar region, unspecified whether neurogenic claudication present"
+75B67699-B472-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 2 tablets (1,000 mg total) by mouth 3 times a day after meals For pain, Disp-30 tablet, R-0, E-Prescribe"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-112856,ERX-112856,"valsartan (Diovan) tablet Take 0.5 tablets (20 mg total) by mouth every morning, Historical MedPaused since Mon 8/11/2025 until manually resumed"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-113205,ERX-113205,"ezetimibe (Zetia) tablet Take 1 tablet (10 mg total) by mouth daily in the evening, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-123772,ERX-123772,"DULoxetine (Cymbalta) delayed release capsule Take 1 capsule (30 mg total) by mouth 2 times a day, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-125874,ERX-125874,"zolpidem (Ambien CR) controlled release tablet Take 1 tablet (12.5 mg total) by mouth every bedtime, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-200408,ERX-200408,"BUDESONIDE-FORMOTEROL 160-4.5 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route 2 times a day, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-205553,ERX-205553,"cholecalciferol (Vitamin D3) 50 mcg (2,000 unit) TABS Take 2 tablets (4,000 units total) by mouth every morning, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-206374,ERX-206374,"FENOFIBRIC ACID (CHOLINE) 45 MG [PHI] CPDR Take 1 capsule (45 mg total) by mouth every morning, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-209463,ERX-209463,"COQ10 (UBIQUINOL) 200 MG [PHI] CAPS Take 1 capsule (200 mg total) by mouth daily in the evening, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-228206,ERX-228206,"ICOSAPENT ETHYL 1 GRAM [PHI] CAPS Take 2 capsules by mouth 2 times a day, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-241265,ERX-241265,"FIASP U-100 INSULIN 100 UNIT/ML SC SOLN 50 units by Other route daily via insulin pump, [PHI], Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-310,ERX-310,"allopurinol (Zyloprim) tablet Take 2 tablets (200 mg total) by mouth every morning, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet Take 1 tablet (40 mg total) by mouth as needed, Disp-30 tablet, R-0, No Print"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 4 hours as needed, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-680,ERX-680,"ASPIRIN 81 MG [PHI] CHEW Take 1 tablet (81 mg total) by mouth daily in the evening, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-78005,ERX-78005,"atorvastatin (Lipitor) tablet Take 1 tablet (80 mg total) by mouth daily in the evening, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-78559,ERX-78559,"carvediloL (Coreg) tablet Take 1 tablet (12.5 mg total) by mouth 2 times a day, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-79491,ERX-79491,"cetirizine (ZyrTEC) tablet Take 1 tablet (10 mg total) by mouth daily in the evening, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-91619,ERX-91619,"MONTELUKAST 10 MG [PHI] TABS Take 1 tablet (10 mg total) by mouth daily in the evening, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Home Medication,Home Medication ERX-93683,ERX-93683,"pioglitazone tablet Take 1 tablet (30 mg total) by mouth every morning, Historical Med"
+75B67699-B472-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+75B67699-B472-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+75B67699-B472-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135002,EAP-135002,FACIAL AND/ OR SCALP FLAP REPAIR OR RECONSTRUCTION
+75B67699-B472-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-270982,EAP-270982,ESWL FOR GALLSTONES
+75B67699-B472-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-476113,EAP-476113,PR LEG/ANKLE SURGERY PROC UNLISTED
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1024732,1024732,Acute pain
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 105032,105032,Scoliosis
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1077703,1077703,Common bile duct (CBD) obstruction (CMS-HCC)
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 108857,108857,Sacroiliitis
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1092558,1092558,Elevated LFTs
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1118010,1118010,Failed back surgical syndrome
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1118887,1118887,Spinal stenosis of lumbar region with neurogenic claudication
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1119097,1119097,Fluid overload
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1167525,1167525,"Cause of injury, fall"
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1170840,1170840,History of renal [PHI]
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 117324,117324,Dysrhythmia
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 118948,118948,Chronic obstructive pulmonary disease (CMS-HCC)
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1615848,1615848,"Swelling of ankle, unspecified laterality"
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1868670,1868670,Diabetic nephropathy associated with type 2 diabetes mellitus (CMS-HCC)
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 190777,190777,Heart disease and kidney failure due to high blood pressure
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 1956993,1956993,"Closed fracture of multiple ribs of left side, initial encounter"
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 2037983,2037983,History of DVT in adulthood
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 2055940,2055940,"Recurrent major depressive disorder, in partial remission"
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 2186959,2186959,Stage 3a chronic kidney disease (CMS-HCC)
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 2323472,2323472,"7/29 ([PHI]): L2-L3, L3-L4 ALIF (BEDREST UNTIL PSF FRIDAY)"
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 2341354,2341354,History of difficult venous access
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 2356283,2356283,Hematoma of left knee region
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 77497,77497,Lumbar radiculopathy
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 93779,93779,Dysthymia
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 97303,97303,Heart murmur
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 98464,98464,Hyperuricemia
+75B67699-B472-F011-9217-005056BFF837,Problem List,Problem List Entry 98706,98706,Insomnia
+75B67699-B472-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139242,EDG-2139242,"Scoliosis, unspecified scoliosis type, unspecified spinal region"
+75B67699-B472-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2323472,EDG-2323472,"Spinal stenosis of lumbar region, unspecified whether neurogenic claudication present"

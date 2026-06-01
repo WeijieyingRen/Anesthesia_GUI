@@ -1,0 +1,30 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+69E65277-5FB7-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+69E65277-5FB7-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C22.0,C22.0,Hepatocellular carcinoma (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 12 hours as needed for Pain, Disp-8 Tablet, R-0, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-11425,ERX-11425,"spironolactone (Aldactone) tablet take 1.5 Tablets (150 mg total) by mouth daily, Disp-60 Tablet, R-5, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-127761,ERX-127761,"ZINC SULFATE 50 MG ZINC (220 MG) PO CAPS take 220 mg of zinc sulfate by mouth daily, Disp-30 Capsule, R-4, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-17466,ERX-17466,"mirtazapine (Remeron) tablet take 1 Tablet (15 mg total) by mouth every bedtime, Disp-30 Tablet, R-3, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-210444,ERX-210444,"rifAXIMin (Xifaxan) 550 mg TABS take 550 mg by mouth 2 times a day, Historical Med"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet take 1.5 Tablets (60 mg total) by mouth daily, Disp-60 Tablet, R-5, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-38245,ERX-38245,"LACTULOSE 10 GRAM/15 ML PO SOLN take 30 mL (20 g total) by mouth 2 times a day, Disp-946 mL, R-6, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-83930,ERX-83930,"OMEPRAZOLE 40 MG PO CPDR take 40 mg by mouth daily, Disp-30 Capsule, R-0, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-84475,ERX-84475,"carvediloL tablet take 1 Tablet (3.125 mg total) by mouth 2 times a day with meals, Disp-60 Tablet, R-11, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-8639,ERX-8639,"VITAMIN A capsule take 1 Capsule (10,000 Units total) by mouth daily, Disp-30 Capsule, R-0, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 6 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-92834,EDG-92834,Cirrhosis (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-97784,EDG-97784,Hepatocellular carcinoma (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121729,EAP-121729,HX HERNIA REPAIR INGUINAL
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121731,EAP-121731,HX HERNIA REPAIR UMBILICAL
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-1591,EAP-1591,IR PARACENTESIS
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188097,EAP-188097,EGD WITH BANDING OF VARICES
+69E65277-5FB7-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188377,EAP-188377,IR CHEMO EMBOLIZATION
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 113351,113351,Malnutrition (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1139446,1139446,Alcoholic cirrhosis of liver with ascites (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 198226,198226,CVA (cerebral vascular accident) (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 6150,6150,Hepatic encephalopathy (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Problem List,Problem List Entry 97784,97784,Hepatocellular carcinoma (CMS-HCC)
+69E65277-5FB7-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-97784,EDG-97784,Hepatocellular carcinoma (CMS-HCC)

@@ -1,0 +1,7 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+48DF5D32-25B6-EF11-920E-005056BFF837,2024-12-04 21:44:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-12-04 21:20:00+00:00,2024-12-05 00:14:00+00:00,24.0,24.0,24.0,24.0,150.0
+48DF5D32-25B6-EF11-920E-005056BFF837,2024-12-04 21:49:00+00:00,airway,lma_inserted,1,LMA Inserted,2024-12-04 21:20:00+00:00,2024-12-05 00:14:00+00:00,29.0,29.0,29.0,29.0,145.0
+48DF5D32-25B6-EF11-920E-005056BFF837,2024-12-04 21:59:00+00:00,position,temperature_control,"""blankets;forced air warming;full body""","""R SHC OPT ANE TEMP CONTROL"": ""blankets;forced air warming;full body""",2024-12-04 21:20:00+00:00,2024-12-05 00:14:00+00:00,39.0,39.0,39.0,39.0,135.0
+48DF5D32-25B6-EF11-920E-005056BFF837,2024-12-04 23:48:00+00:00,airway,lma_removed,1,LMA Removed,2024-12-04 21:20:00+00:00,2024-12-05 00:14:00+00:00,148.0,148.0,148.0,148.0,26.0
+48DF5D32-25B6-EF11-920E-005056BFF837,2024-12-04 23:48:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2024-12-04 21:20:00+00:00,2024-12-05 00:14:00+00:00,148.0,148.0,148.0,148.0,26.0
+48DF5D32-25B6-EF11-920E-005056BFF837,2024-12-05 00:05:00+00:00,position,bed_position,flat,Bed Position: flat,2024-12-04 21:20:00+00:00,2024-12-05 00:14:00+00:00,165.0,165.0,165.0,165.0,9.0

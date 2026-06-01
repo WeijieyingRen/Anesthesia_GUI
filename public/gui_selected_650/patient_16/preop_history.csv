@@ -1,0 +1,22 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+05080756-30C0-EE11-9204-005056BFF837,Allergy,Latex Allergy,Allergy,No
+05080756-30C0-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+05080756-30C0-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-11421,ERX-11421,"sotalol (Betapace) tablet take 1 Tablet (80 mg total) by mouth 2 times a day, Disp-60 Tablet, R-10, E-Prescribe"
+05080756-30C0-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-171640,ERX-171640,"CARAFATE PO take by mouth, Historical Med"
+05080756-30C0-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-222105,ERX-222105,"XARELTO 20 MG PO TABS take 20 mg by mouth daily, Disp-30 Tablet, R-11, E-Prescribe"
+05080756-30C0-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL 20 mg tablet Take 2 tablets (40 mg total) by mouth daily in the evening, Historical Med"
+05080756-30C0-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+05080756-30C0-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Historical Med"
+05080756-30C0-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-118812,EDG-118812,Paroxysmal atrial fibrillation (CMS-HCC)
+05080756-30C0-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+05080756-30C0-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 105387,105387,Snoring
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 1215090,1215090,Soft tissue neoplasm
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 1256669,1256669,Daytime hypersomnolence
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 176791,176791,High triglycerides
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 2033645,2033645,Non morbid obesity
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 2349387,2349387,Other persistent atrial fibrillation (CMS-HCC)
+05080756-30C0-EE11-9204-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+05080756-30C0-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

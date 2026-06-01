@@ -1,0 +1,39 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+949C3F21-DA1F-EE11-91FC-005056BFF837,Allergy,Allergen ELG-15638,ELG-15638,CODEINE-GUAIFENESIN
+949C3F21-DA1F-EE11-91FC-005056BFF837,Allergy,Allergen ELG-2826,ELG-2826,CODEINE
+949C3F21-DA1F-EE11-91FC-005056BFF837,Allergy,Allergen ELG-3937,ELG-3937,CLINDAMYCIN
+949C3F21-DA1F-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+949C3F21-DA1F-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10041,ERX-10041,"flecainide tablet take 1 Tablet (100 mg total) by mouth every day, Disp-90 Tablet, R-3, E-Prescribe"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-171349,ERX-171349,"CALCIUM + D PO take 2 Tablets by mouth every morning (Gummies), Historical Med"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-179275,ERX-179275,"IRON (FERROUS SULFATE) PO take 1 Tablet by mouth daily, Historical Med"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO take 2 Tablets by mouth every morning (Gummies), Historical Med"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-221404,ERX-221404,"XYZAL PO take by mouth as needed, Historical Med"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-234486,ERX-234486,"CHOLECALCIFEROL (VITAMIN D3) 25 MCG/DROP ( 1000 UNIT/DROP) PO DROP take 2,000 Units by mouth every morning, Historical Med"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-28409,ERX-28409,"ESTRADIOL 0.1 MG/24 HR TD PTWK APPLY 1 PATCH TOPICALLY TO SKIN ONCE A WEEK, Disp-24 Patch, R-9, E-Prescribe"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-6496,ERX-6496,"predniSONE tablet Take 2 tablets by mouth as needed for facial swelling., Disp-10 Tablet, R-1, E-Prescribe"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-83817,ERX-83817,"valACYclovir (Valtrex) tablet TAKE 1 TABLET (500 MG TOTAL) BY MOUTH 2 TIMES A DAY FOR 3 DAYS AT FIRST SIGN OF RASH., Disp-30 Tablet, R-12, E-Prescribe"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily DO NOT START UNTIL 4 DAYS BEFORE YOUR ABLATION WITH DR. BADHWAR, CONTINUE FOR 30 DAYS AFTER, Disp-35 Tablet, R-0, E-Prescribe"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-102374,EDG-102374,Osteoarthritis
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-102443,EDG-102443,Osteopenia
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1093400,EDG-1093400,Tubular adenoma of colon
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-198717,EDG-198717,Lymphocytic colitis
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-97885,EDG-97885,Herpes
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-133917,EAP-133917,FINGER / THUMB LESION / MASS / CYST EXCISION
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-134490,EAP-134490,EXPLORATORY LAPAROTOMY WITH OR WITHOUT BIOPSY
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135928,EAP-135928,SMALL BOWEL RESECTION
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-149457,EAP-149457,COLONOSCOPY AND BIOPSY
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188215,EAP-188215,COLONOSCOPY WITH BIOPSY
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-35678,EAP-35678,APPENDECTOMY
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-394078,EAP-394078,KNEE ARTHROSCOPY; BILATERAL
+949C3F21-DA1F-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-480163,EAP-480163,HX TOTAL VAG HYSTERECTOMY & BILAT SALPINGO-OOPHORECTOMY (NO CERVIX/NO OVARIES)
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1148850,1148850,Ulcerative colitis without complications (CMS-HCC)
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1183726,1183726,Primary osteoarthritis of both knees
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 118812,118812,Paroxysmal atrial fibrillation (CMS-HCC)
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1558370,1558370,"Finger stiffness, right"
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 159861,159861,Herpes simplex infection
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1761037,1761037,Hormone replacement therapy
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2244405,2244405,Complete intestinal obstruction (CMS-HCC)
+949C3F21-DA1F-EE11-91FC-005056BFF837,Problem List,Problem List Entry 92983,92983,Colonic polyp
+949C3F21-DA1F-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

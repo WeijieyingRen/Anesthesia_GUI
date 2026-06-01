@@ -1751,10 +1751,6 @@ const activeEndMin =
       aria-label="Vital chart horizontal scroll"
     />
   </div>
-
-  <div className="px-2 py-1 text-[11px] text-gray-500">
-    Drag the bar to move left or right across the vital timeline.
-  </div>
 </div>
 
       </div>

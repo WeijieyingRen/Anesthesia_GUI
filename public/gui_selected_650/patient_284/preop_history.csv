@@ -1,0 +1,84 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+56DA7288-21E4-ED11-91FB-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+56DA7288-21E4-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,Yes
+56DA7288-21E4-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,Yes
+56DA7288-21E4-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 782.1,782.1,Rash and other nonspecific skin eruption
+56DA7288-21E4-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T81.42XA,T81.42XA,Deep postoperative wound infection
+56DA7288-21E4-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T84.50XS,T84.50XS,"Infection or inflammatory reaction due to internal joint prosthesis, sequela"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-12729,ERX-12729,"TRIAMTERENE-HYDROCHLOROTHIAZID 37.5-25 MG PO CAPS take 1 Capsule by mouth every morning, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"ASPIRIN 81 MG PO TBEC take 1 Tablet (81 mg total) by mouth daily Last dose taken 03/27/2023, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-172505,ERX-172505,"CHOLEST OFF PO take by mouth DAILY Last dose taken 03/27/23, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO take by mouth every day Last dose taken 03/27/23, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take by mouth DAILY Last dose taken 03/27/23, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-220947,ERX-220947,"TURMERIC (BULK) MISC by Misc.(Non-Drug; Combo Route) route DAILY Last dose taken 03/27/23, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-236406,ERX-236406,"naloxone (NARCAN) 4 mg/actuation nasal spray Spray 0.1 mL (4 mg) into one nostril for suspected overdose. Repeat into other nostril after 2 to 3 minutes if no or minimal response., Disp-2 Each, R-1, E-Prescribe"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-28384,ERX-28384,"HYDROCODONE-ACETAMINOPHEN 10-325 MG PO TABS take 1 Tablet by mouth every 4 to 6 hours as needed for Pain, Disp-30 Tablet, R-0, E-Prescribe"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"FERROUS SULFATE 325 MG (65 MG IRON) PO TABS take 1 Tablet (325 mg total) by mouth daily, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-33227,ERX-33227,"AMOXICILLIN-POT CLAVULANATE 500-125 MG PO TABS TAKE 1 TABLET BY MOUTH EVERY 8 HOURS, Disp-270 Tablet, R-3, E-Prescribe"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-3700,ERX-3700,"HYDRALAZINE 25 MG PO TABS take 1 Tablet (25 mg total) by mouth 2 times a day, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 1 Puff by Inhalation route every 6 hours as needed for Bronchospasm/Wheezing or Shortness of breath, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily Last dose 03/27/23, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-78005,ERX-78005,"ATORVASTATIN 80 MG PO TABS take 1 Tablet (80 mg total) by mouth every bedtime, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"AMLODIPINE 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every morning, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-91619,ERX-91619,"MONTELUKAST 10 MG PO TABS take 1 Tablet (10 mg total) by mouth Morning, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"METOPROLOL SUCCINATE 25 MG PO TB24 take 1 Tablet (25 mg total) by mouth Q24H Morning, Historical Med"
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1029629,EDG-1029629,Pulmonary HTN (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1080273,EDG-1080273,BPH (benign prostatic hyperplasia)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1130345,EDG-1130345,Synovial cyst of lumbar facet joint
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1225526,EDG-1225526,Infection of prosthesis (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-122781,EDG-122781,Chronic obstructive pulmonary disease (COPD) (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1234743,EDG-1234743,Chronic infection of left knee joint prosthesis (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-138151,EDG-138151,CAD (coronary artery disease)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-189219,EDG-189219,LVH (left ventricular hypertrophy)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-201733,EDG-201733,DVT (deep venous thrombosis) (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-203488,EDG-203488,Systolic murmur
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-203532,EDG-203532,Pulmonary nodule
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-2323036,EDG-2323036,"Spinal stenosis, lumbar region with neurogenic claudication"
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-90866,EDG-90866,Aortic stenosis
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121630,EAP-121630,HX CATARACT REMOVAL
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121706,EAP-121706,HX CARDIAC CATHERIZATION
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135148,EAP-135148,KNEE TOTAL JOINT REVISION
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135216,EAP-135216,KNEE INCISION AND DRAINAGE
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135676,EAP-135676,SPLIT THICKNESS SKIN GRAFT; SECONDARY PROCEDURE
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135686,EAP-135686,FLAP ROTATIONAL
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-136324,EAP-136324,SHOULDER ARTHROSCOPY WITH ROTATOR CUFF REPAIR
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-246620,EAP-246620,UNLISTED PROCEDURE FEMUR/KNEE
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-429596,EAP-429596,BONE CEMENTING; SECONDARY PROCEDURE
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-478815,EAP-478815,SPINE/LUMBAR DISK SURGERY
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-507867,EAP-507867,LUMBAR DECOMPRESSION; 1 LEVEL; BILATERAL
+56DA7288-21E4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-536399,EAP-536399,KNEE ARTHROPLASTY
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 103888,103888,Emphysema lung (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1056633,1056633,Acute nontraumatic kidney injury (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1062131,1062131,Septic arthritis of knee (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1085333,1085333,Prosthetic joint implant failure (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 111043,111043,Aortic valve disease
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1118734,1118734,"Spinal stenosis, lumbar region, with neurogenic claudication"
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1130345,1130345,Synovial cyst of lumbar facet joint
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1135813,1135813,History of DVT (deep vein thrombosis)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1137287,1137287,Left leg cellulitis
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1169145,1169145,OSA on CPAP
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1222227,1222227,Hx of valvular heart disease
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1246110,1246110,Infection of total knee replacement (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 125778,125778,Cataract
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 13103,13103,Infection and inflammatory reaction due to internal joint prosthesis (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 141871,141871,Dyspnea
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 144144,144144,Chronic pain
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 144618,144618,"Pain in joint, shoulder region"
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1843023,1843023,Nontraumatic complete tear of right rotator cuff
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1843516,1843516,Status post revision of total replacement of left knee
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2032092,2032092,Coronary artery disease involving native coronary artery of native heart without angina pectoris
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 203532,203532,Pulmonary nodule
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2059147,2059147,Essential hypertension with goal blood pressure less than 140/90
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 85794,85794,Substance abuse (CMS-HCC)
+56DA7288-21E4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+56DA7288-21E4-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2143061,EDG-2143061,"Left knee pain, unspecified chronicity"

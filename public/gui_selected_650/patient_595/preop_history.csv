@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CC51F4BB-5173-EF11-920C-005056BFF837,Allergy,Allergen ELG-13417,ELG-13417,ADHESIVE TAPE-SILICONES
+CC51F4BB-5173-EF11-920C-005056BFF837,Allergy,Allergen ELG-16311,ELG-16311,ADHESIVE
+CC51F4BB-5173-EF11-920C-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+CC51F4BB-5173-EF11-920C-005056BFF837,Allergy,Allergen ELG-4619,ELG-4619,CHLORHEXIDINE
+CC51F4BB-5173-EF11-920C-005056BFF837,Allergy,Latex Allergy,Allergy,No
+CC51F4BB-5173-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C85.98,C85.98,Malignant lymphomas of lymph nodes of multiple sites (CMS-HCC)
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-112593,ERX-112593,"FILGRASTIM 480 MCG/0.8 ML INJ SYRG Inject 0.8 mL (480 mcg total) subcutaneous (under the skin) every morning Inject total of 780mcg (300+480 mcg) each morning until apheresis is complete., Disp-8 each, R-1, E-Prescribe"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-112594,ERX-112594,"FILGRASTIM 300 MCG/0.5 ML INJ SYRG Inject 0.5 mL (300 mcg total) subcutaneous (under the skin) every morning Inject total of 780mcg (300+480 mcg) each morning until apheresis is complete., Disp-8 each, R-1, E-Prescribe"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-16123,ERX-16123,"OXYCODONE 5 MG PO CAPS Take 5 mg by mouth every 4 hours as needed for Pain, Disp-30 capsule, R-0, E-Prescribe"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-169876,ERX-169876,"B COMPLEX 1 PO Take by mouth, Historical Med"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-172660,ERX-172660,"CLARITIN PO Take by mouth, Historical Med"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-180991,ERX-180991,"MAGNESIUM PO Take by mouth, Historical Med"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO Take by mouth, Historical Med"
+CC51F4BB-5173-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"Bactrim SS post apheresis Take 1 tablet by mouth every day , start day after cell collection is done., Disp-30 tablet, R-0, E-Prescribe"
+CC51F4BB-5173-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+CC51F4BB-5173-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+CC51F4BB-5173-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-126318,EDG-126318,Endometriosis
+CC51F4BB-5173-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-6194,EDG-6194,Acute cholecystitis
+CC51F4BB-5173-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121732,EAP-121732,HX LAPAROSCOPY
+CC51F4BB-5173-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188603,EAP-188603,IR MEDIASTINUM BIOPSY
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 116074,116074,Mediastinal mass
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 138405,138405,Malignant lymphomas of lymph nodes of multiple sites (CMS-HCC)
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 1759778,1759778,Infectious diarrhea
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 1866838,1866838,Nutrition impaired due to imbalance of nutrients
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 192513,192513,Pre-diabetes
+CC51F4BB-5173-EF11-920C-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+CC51F4BB-5173-EF11-920C-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-138405,EDG-138405,Malignant lymphomas of lymph nodes of multiple sites (CMS-HCC)

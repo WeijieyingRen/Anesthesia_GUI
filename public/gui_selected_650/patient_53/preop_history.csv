@@ -1,0 +1,52 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+2504DCB5-9C92-EE11-9203-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+2504DCB5-9C92-EE11-9203-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+2504DCB5-9C92-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,Yes
+2504DCB5-9C92-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,Yes
+2504DCB5-9C92-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I42.8,I42.8,NICM (nonischemic cardiomyopathy) (CMS-HCC)
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-11664,ERX-11664,"warfarin tablet Take 1-2 tablet daily or as directed, Disp-60 Tablet, R-3, E-Prescribe"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-172935,ERX-172935,"COENZYME Q10 PO take 1 Tablet by mouth every day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-177289,ERX-177289,"GAS-X PO take 1 Tablet by mouth daily as needed, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-181395,ERX-181395,"MELATONIN PO take 1 Tablet by mouth every bedtime as needed (Sublingual tablet), Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-191831,ERX-191831,"VITAMIN B-12 PO take 1,000 Units by mouth every day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take 1 Tablet by mouth every day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-231551,ERX-231551,"FARXIGA 10 MG PO TABS take 10 mg by mouth every day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-247779,ERX-247779,"BREZTRI AEROSPHERE 160-9-4.8 MCG/ACTUATION INH HFAA 2 Inhalations by Inhalation route 2 times a day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-250,ERX-250,"ALBUTEROL SULFATE 2.5 MG /3 ML (0.083 %) INH NEBU 3 mL (2.5 mg total) by Nebulization route every 6 hours as needed, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-3698,ERX-3698,"hydrALAZINE 10 mg tablet take 1 Tablet (10 mg total) by mouth 3 times a day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-4068,ERX-4068,"isosorbide dinitrate tablet take 1 Tablet (5 mg total) by mouth 3 times a day, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-7437,ERX-7437,"spironolactone (Aldactone) tablet take 1 Tablet (25 mg total) by mouth daily, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-9310,ERX-9310,"bumetanide tablet take 1-2 Tablets (1-2 mg total) by mouth daily, Historical Med"
+2504DCB5-9C92-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-419816,EAP-419816,[PHI] BREAST GUIDED BIOPSY STEREOTACTIC UPRIGHT RIGHT
+2504DCB5-9C92-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 10009,10009,Palpitations
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 106069,106069,Supraventricular tachycardia (CMS-HCC)
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 108446,108446,Cervical spondylosis
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1103710,1103710,Left ventricular thrombus
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1131527,1131527,Right ventricular thrombus
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1139281,1139281,Primary osteoarthritis
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1164277,1164277,History of vertigo
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1168514,1168514,S/P placement of cardiac pacemaker
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1169114,1169114,"Low back pain, episodic"
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1170678,1170678,NICM (nonischemic cardiomyopathy) (CMS-HCC)
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 118948,118948,Chronic obstructive pulmonary disease (CMS-HCC)
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1254219,1254219,Impairment of balance
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1277428,1277428,Non-rheumatic mitral regurgitation
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1280036,1280036,Multiple premature ventricular complexes
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 141871,141871,Dyspnea
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 142190,142190,Diverticulosis of colon
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 142199,142199,Heart disease
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 15469,15469,Chronic combined systolic and diastolic heart failure (CMS-HCC)
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1760694,1760694,ICD (implantable cardioverter-defibrillator) in place
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1794722,1794722,Left bundle [PHI] block (LBBB)
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1858015,1858015,Impaired gait and mobility
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1860385,1860385,Atherosclerosis of coronary artery without angina pectoris
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1865483,1865483,Lumbosacral spondylosis with radiculopathy
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 1880865,1880865,Mild atherosclerosis of both carotid arteries
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 188097,188097,Ischemic cardiomyopathy
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 199575,199575,"Anticoagulation monitoring, INR range 2-3 per SHC OAC"
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 5104,5104,Paroxysmal ventricular tachycardia (CMS-HCC)
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 86021,86021,Neck pain
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 89705,89705,Electrocardiogram abnormal
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 97303,97303,Heart murmur
+2504DCB5-9C92-EE11-9203-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia

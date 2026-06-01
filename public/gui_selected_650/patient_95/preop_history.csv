@@ -1,0 +1,62 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+179B7E93-D7C7-ED11-91FB-005056BFF837,Allergy,Allergen ELG-16643,ELG-16643,UNKNOWN MEDICATION (SPECIFY IN COMMENTS)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+179B7E93-D7C7-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+179B7E93-D7C7-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+179B7E93-D7C7-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K57.92,K57.92,Diverticulitis
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-201084,ERX-201084,"TWINRIX outpatient prescription - 3 dose series (hepatitis A-hepatitis B vaccine) Inject 1 mL into a muscle as a series of 3 doses on a 0, 1, and 6 month schedule., Disp-1 mL, R-2, E-PrescribeINDICATION: Crohns Disease (ICD-10: K50.90) on immunosuppressive therapy (ICD-10: D84.9)."
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-203909,ERX-203909,"VYVANSE 40 MG PO CAPS take 1 Capsule (40 mg total) by mouth every morning, Disp-90 Capsule, R-0, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-209555,ERX-209555,"STELARA 90 MG/ML SC SYRG inject 1 mL (90 mg total) into a muscle Q8 WEEKS, Disp-1 mL, R-6, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-248303,ERX-248303,"SOD SULF-POT CHLORIDE-MAG SULF 1.479-0.188- 0.225 GRAM PO TABS take 1 Kit by mouth as directed Take 12 tablets at 4 PM and 12 tablets at 8 PM the day before your procedure, Disp-24 Tablet, R-0, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-3720,ERX-3720,"hydrochlorothiazide tablet take 1 Tablet (25 mg total) by mouth every morning, Disp-90 Tablet, R-12, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-37561,ERX-37561,"CLIMARA PRO 0.045-0.015 MG/24 HR TD PTWK APPLY 1 PATCH TO SKIN EVERY 7 DAYS AVOID THE BREAST TISSUE, Disp-12 Patch, R-12, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88444,ERX-88444,"ESOMEPRAZOLE MAGNESIUM 40 MG PO CPDR take 40 mg by mouth every morning before breakfast, Historical Med"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-89476,ERX-89476,"losartan tablet take 1 Tablet (25 mg total) by mouth daily, Disp-90 Tablet, R-12, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-92173,ERX-92173,"zolpidem tablet take 1 Tablet (5 mg total) by mouth every bedtime as needed for Insomnia, Disp-10 Tablet, R-0, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94528,ERX-94528,"sertraline tablet take 1 Tablet (50 mg total) by mouth daily, Disp-90 Tablet, R-12, E-Prescribe"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1059889,EDG-1059889,Left elbow pain
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-107460,EDG-107460,Weight gain
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-116208,EDG-116208,Toe deformity
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-123419,EDG-123419,Callus
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-124907,EDG-124907,Elbow pain
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-141806,EDG-141806,Fatigue
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-164726,EDG-164726,PTSD (post-traumatic stress disorder)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1650335,EDG-1650335,"Calf ulcer, left, with necrosis of muscle (CMS-HCC)"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-70859,EDG-70859,Gastroesophageal reflux disease
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-71225,EDG-71225,Inflammatory bowel disease
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-8876,EDG-8876,Bunion
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-91283,EDG-91283,Autoimmune disease (CMS-HCC)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-92982,EDG-92982,Colon polyp
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-93382,EDG-93382,Crohn disease (CMS-HCC)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-96001,EDG-96001,Foot pain
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121659,EAP-121659,HX BUNIONECTOMY
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121687,EAP-121687,HX LAPAROTOMY
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121722,EAP-121722,HX EGD
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135220,EAP-135220,KNEE LESION / MASS EXCISION
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135570,EAP-135570,FOOT TENDON REPAIR / TRANSFER
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135688,EAP-135688,FLAP FREE MICROVASCULAR
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-149457,EAP-149457,COLONOSCOPY AND BIOPSY
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-433961,EAP-433961,OTHER
+179B7E93-D7C7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-480140,EAP-480140,US BREAST GUIDED CORE BIOPSY RIGHT
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1053384,1053384,Tenosynovitis of finger: L 3rd flexor tendon
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 106354,106354,Hashimoto's disease
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1099497,1099497,Bunion of great toe of left foot
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1108833,1108833,MRSA infection
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1148291,1148291,Acquired deformity of left lower leg
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 146751,146751,Crohn's colitis (CMS-HCC)
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1725649,1725649,"Leg pain, diffuse, left"
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1824437,1824437,Open wound of left lower leg with complication
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 92319,92319,Cellulitis
+179B7E93-D7C7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 94106,94106,Diverticulitis
+179B7E93-D7C7-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-94106,EDG-94106,Diverticulitis

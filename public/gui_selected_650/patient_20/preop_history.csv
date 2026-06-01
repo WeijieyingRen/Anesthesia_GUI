@@ -1,0 +1,15 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+ED3E1863-538C-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+ED3E1863-538C-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+ED3E1863-538C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-176663,ERX-176663,"FISH OIL PO take by mouth 3 times a day , Historical Med"
+ED3E1863-538C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day Start AFTER Colonoscopy. Please take first dose Nov 1 2023, Disp-180 Tablet, R-3, E-Prescribe"
+ED3E1863-538C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-367,ERX-367,"AMBIEN 10 MG PO TABS take 1 Tab by mouth as needed (take as needed for travel), Disp-30 Tab, R-0, E-Prescribe"
+ED3E1863-538C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily Start 4 days pre-procedure, and continue 30 days after, no refills. First dose 11/17/23, Disp-35 Tablet, R-0, E-Prescribe"
+ED3E1863-538C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet take 1 Tablet (25 mg total) by mouth daily in the evening, Disp-90 Tablet, R-3, E-Prescribe"
+ED3E1863-538C-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+ED3E1863-538C-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+ED3E1863-538C-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+ED3E1863-538C-EE11-9203-005056BFF837,Problem List,Problem List Entry 1081504,1081504,History of colonic polyps
+ED3E1863-538C-EE11-9203-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+ED3E1863-538C-EE11-9203-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+ED3E1863-538C-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

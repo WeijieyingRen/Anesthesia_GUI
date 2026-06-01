@@ -1,0 +1,78 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CAA7950B-58D8-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3122,ELG-3122,ATENOLOL
+CAA7950B-58D8-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3315,ELG-3315,HEPARIN (PORCINE)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3469,ELG-3469,HYDROCHLOROTHIAZIDE
+CAA7950B-58D8-ED11-91FB-005056BFF837,Allergy,Allergen ELG-5370,ELG-5370,HYDRALAZINE
+CAA7950B-58D8-ED11-91FB-005056BFF837,Allergy,Allergen ELG-5372,ELG-5372,PRAZOSIN
+CAA7950B-58D8-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D75.829,D75.829,Heparin-induced thrombocytopenia (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I71.22,I71.22,Aneurysm of aortic arch without rupture (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I71.40,I71.40,"Abdominal aortic aneurysm (AAA) without rupture, unspecified part (CMS-HCC)"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-13410,ERX-13410,"acetaminophen (Tylenol) tablet take 1 Tablet (650 mg total) by mouth every 6 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth daily, Disp-100 Tablet, R-3, E-Prescribe"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-180984,ERX-180984,"MAGNESIUM MALATE MISC 1 Tablet by Misc.(Non-Drug; Combo Route) route daily 95 mg, Historical Med"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-216515,ERX-216515,"CURCUMIN MISC 48 mg by Misc.(Non-Drug; Combo Route) route Daily 1 tablet, Historical Med"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet 5 mg BID for 6 months, Disp-120 Tablet, R-2, E-Prescribe"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-233335,ERX-233335,"IPRATROPIUM-ALBUTEROL 20-100 MCG/ACTUATION INH MIST 1 Puff by Inhalation route 4 times a day, Historical Med"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 1 Puff by Inhalation route every 4 hours as needed Uses once a day, Historical Med"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet take 1 Tablet (40 mg total) by mouth Daily at night, Disp-30 Tablet, R-1, E-PrescribePlease contact PCP for future refills"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-8118,ERX-8118,"TRIAMCINOLONE ACETONIDE 0.1 % TP OINT by Topical route daily as needed, Historical Med"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"AMLODIPINE 5 MG PO TABS take 1 Tablet (5 mg total) by mouth daily, Historical Med"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"LOSARTAN 100 MG PO TABS take 0.5 Tablets (50 mg total) by mouth Morning, Disp-30 Tablet, R-0, E-Prescribe"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1039235,EDG-1039235,Diaphragm paralysis
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1042465,EDG-1042465,Prediabetes
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-107123,EDG-107123,Uterine fibroid
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1072243,EDG-1072243,Thoracic radiculopathy
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1100225,EDG-1100225,Aneurysm of right iliac artery (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1167796,EDG-1167796,Hx of venous thromboembolic disease
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1171590,EDG-1171590,"Hx of repair of dissecting thoracic aortic aneurysm, Stanford type A"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118812,EDG-118812,Paroxysmal atrial fibrillation (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-138118,EDG-138118,HTN (hypertension)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-141680,EDG-141680,Heparin-induced thrombocytopenia (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142294,EDG-142294,Allergic rhinitis
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142378,EDG-142378,Vitamin D deficiency
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1494821577,EDG-1494821577,History of 2019 novel coronavirus disease (COVID-19)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-15123,EDG-15123,Long term (current) use of anticoagulants
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1759998,EDG-1759998,Heart problem
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-198284,EDG-198284,Stroke (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-201733,EDG-201733,DVT (deep venous thrombosis) (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-2360301,EDG-2360301,"Chronic kidney disease, stage 3b (CMS-HCC)"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-67226,EDG-67226,Ventricular premature beats
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121803,EAP-121803,HX ANGIOPLASTY
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134798,EAP-134798,AORTIC TYPE A DISSECTION REPAIR WITH CARDIOPULMONARY BYPASS
+CAA7950B-58D8-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-136429,EAP-136429,CAROTID SUBCLAVIAN ARTERY BYPASS
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1039235,1039235,Diaphragm paralysis
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 107123,107123,Uterine fibroid
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1072243,1072243,Thoracic radiculopathy
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1099867,1099867,Occlusion of left carotid artery
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1100225,1100225,Aneurysm of right iliac artery (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1167796,1167796,Hx of venous thromboembolic disease
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1171590,1171590,"Hx of repair of dissecting thoracic aortic aneurysm, Stanford type A"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118812,118812,Paroxysmal atrial fibrillation (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 141680,141680,Heparin-induced thrombocytopenia (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142294,142294,Allergic rhinitis
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1759878,1759878,Headache
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1858116,1858116,"Impaired functional mobility, balance, gait, and endurance"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 191423,191423,Primary hyperaldosteronism (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 200329,200329,Obstructive sleep apnea
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2029057,2029057,Cerebrovascular accident (CVA) (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2180028,2180028,Abdominal aortic aneurysm (AAA) (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2360301,2360301,"Chronic kidney disease, stage 3b (CMS-HCC)"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2361062,2361062,Suspected glaucoma of right eye
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2375296,2375296,Aneurysm of aortic arch without rupture (CMS-HCC)
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2695,2695,"Obesity, unspecified"
+CAA7950B-58D8-ED11-91FB-005056BFF837,Problem List,Problem List Entry 67226,67226,Ventricular premature beats
+CAA7950B-58D8-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2377734,EDG-2377734,"Abdominal aortic aneurysm (AAA) without rupture, unspecified part (CMS-HCC)"

@@ -1,0 +1,26 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+1775F286-FDF6-ED11-91FB-005056BFF837,Allergy,Allergen ELG-7364,ELG-7364,BEE VENOM [VENOM-HONEY BEE]
+1775F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+1775F286-FDF6-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+1775F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10452,ERX-10452,"LISINOPRIL-HYDROCHLOROTHIAZIDE 20-12.5 MG PO TABS take 1 Tablet by mouth every morning, Historical Med"
+1775F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-11442,ERX-11442,"sucralfate (CARAFATE) tablet take 1 Tablet (1 g total) by mouth 2 times a day Start 4 days before procedure, continue for 30 days after, then stop., Disp-68 Tablet, R-0, Normal"
+1775F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-116179,ERX-116179,"rosuvastatin tablet take 0.5 Tablets (20 mg total) by mouth every morning, Historical Med"
+1775F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day Start AFTER procedure, pick up from pharmacy to have available., Disp-60 Tablet, R-4, E-Prescribe"
+1775F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-31421,ERX-31421,"TOPROL XL 100 MG PO TB24 take 1 Tablet (100 mg total) by mouth every morning, Historical Med"
+1775F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily Start 4 days before procedure, continue for 30 days after, then stop., Disp-35 Tablet, R-0, Normal"
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1188199,EDG-1188199,Burn (any degree) involving 10-19 percent of body surface with third degree burn of 10-19% (CMS-HCC)
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-3400,EAP-3400,EP ATRIAL FIBRILLATION ABLATION
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-35678,EAP-35678,APPENDECTOMY
+1775F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-427727,EAP-427727,HC SKIN SUB GRAFT TRNK/ARM/LEG
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 10009,10009,Palpitations
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1035501,1035501,Aortic root dilatation (CMS-HCC)
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1136476,1136476,Paroxysmal A-fib (CMS-HCC)
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 97303,97303,Heart murmur
+1775F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+1775F286-FDF6-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

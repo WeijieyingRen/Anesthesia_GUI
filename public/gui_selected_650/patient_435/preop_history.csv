@@ -1,0 +1,96 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E9918A28-16B1-ED11-91FA-005056BFF837,Allergy,Allergen ELG-7866,ELG-7866,RITUXIMAB
+E9918A28-16B1-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+E9918A28-16B1-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D68.9,D68.9,Coagulopathy (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D84.9,D84.9,Immunosuppression (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E11.69,E11.69,Erectile dysfunction due to type 2 diabetes mellitus (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute postoperative pain
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Post-op pain
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I10,I10,"Hypertension, unspecified type"
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I27.20,I27.20,Pulmonary HTN (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J18.9,J18.9,"Community acquired pneumonia, unspecified laterality"
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J84.89,J84.89,NSIP (nonspecific interstitial pneumonitis) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J84.9,J84.9,Interstitial lung disease (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J84.9,J84.9,ILD (interstitial lung disease) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J93.9,J93.9,"Pneumothorax, right"
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J96.11,J96.11,Chronic hypoxemic respiratory failure (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K71.9,K71.9,Drug-induced liver injury
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K83.1,K83.1,Cholestasis
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K92.2,K92.2,Acute GI bleeding
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis L76.82,L76.82,Pain at surgical incision
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M05.9,M05.9,"Rheumatoid arthritis with positive rheumatoid factor, involving unspecified site (CMS-HCC)"
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M06.9,M06.9,"Rheumatoid arthritis, involving unspecified site, unspecified whether rheumatoid factor present (CMS-HCC)"
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M35.1,M35.1,Mixed connective tissue disease (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N17.9,N17.9,Acute kidney injury (nontraumatic) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.30,N18.30,"Stage 3 chronic kidney disease, unspecified whether stage 3a or 3b CKD (CMS-HCC)"
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R09.02,R09.02,Hypoxia
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R21,R21,Rash and nonspecific skin eruption
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R52,R52,Acute pain
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z01.818,Z01.818,Encounter for pre-transplant evaluation for lung transplant
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z79.899,Z79.899,High risk medication use
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z91.89,Z91.89,At risk for opportunistic infections
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,S/P lung transplant (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,Lung transplant recipient (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,Status post lung transplantation (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 1 Tablet (500 mg total) by mouth 4 times a day as needed for Pain, Disp-100 Tablet, R-1, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"senna (Senokot) 8.6 mg tablet take 2 Tablets by mouth daily as needed for Constipation, Disp-60 Tablet, R-2, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-117598,ERX-117598,"Alcohol swabs Use as directed to administer insulin and check blood sugars, Disp-300 Each, R-11, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-16027,ERX-16027,"Sharps container 1 Each by Misc.(Non-Drug; Combo Route) route as directed, Disp-1 Each, R-0, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-16050,ERX-16050,"glucose (Glutose) 4 gram chewable tablet take 1 Tablet (4 g total) by mouth as needed for Low blood sugar, Disp-30 Tablet, R-0, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-19483,ERX-19483,"calcium carbonate-vitamin D (OS-CAL500 +D) 500 mg-200 unit tablet take 1 Tablet by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-203639,ERX-203639,"HUMALOG KWIKPEN INSULIN 100 UNIT/ML SC INPN inject 6 Units subcutaneous (under the skin) 3 times a day before meals Additionally, inject 0-12 units 4 times a day before meals and at bedtime per sliding scale., Disp-15 mL, R-11, No Print"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-210305,ERX-210305,"OneTouch Delica lancets 33 Gauge Use to check blood glucoses 4 times daily before meals and bedtime, Disp-300 Each, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-222403,ERX-222403,"OneTouch Verio test strip Use to check blood glucoses 4 times daily before meals and bedtime, Disp-300 Strip, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-228386,ERX-228386,"pen needle 32 x 5/32"" Use as directed to administer insulin. Up to 6 times/day, Disp-200 Each, R-11, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231412,ERX-231412,"posaconazole (Noxafil) 100 mg enteric coated tablet take 3 Tablets (300 mg total) by mouth daily, Disp-270 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231561,ERX-231561,"HUMULIN N NPH INSULIN KWIKPEN 100 UNIT/ML (3 ML) SC INPN Inject 20 units subcutaneously (under the skin) every morning and 15 units every evening., Disp-15 mL, R-11, No Print"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231712,ERX-231712,"OneTouch Verio Blood-Glucose system 1 Each by Misc.(Non-Drug; Combo Route) route as directed, Disp-1 Each, R-0, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"polyethylene glycol (MIRAlax) 17 gram packet Mix 1 packet with 8 oz of water and drink twice daily as needed for constipation., Disp-60 Each, R-11, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"ferrous sulfate (Feosol) 325 mg (65 mg iron) tablet take 1 Tablet (325 mg total) by mouth every Monday, Wednesday and Friday, Disp-36 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet take 1 Tablet (1 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet HOLD; do not take unless told otherwise by your transplant team., Disp-60 Tablet, R-2, No Print"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-37637,ERX-37637,"metoprolol tartrate (Lopressor) tablet take 1.5 Tablets (37.5 mg total) by mouth 2 times a day, Disp-90 Tablet, R-11, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-5751,ERX-5751,"NYSTATIN 100,000 UNIT/ML PO SUSP 5 mL by Swish & Swallow route 3 times a day, Disp-450 mL, R-11, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet Take 10 mg (1 tablet) by mouth twice daily or as directed., Disp-180 Tablet, R-1, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"predniSONE tablet Take 5 mg (1 tablet) by mouth twice daily or as directed., Disp-180 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"trimethoprim-sulfamethoxazole (Bactrim) 80-400 mg tablet take 1 Tablet by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"valGANciclovir (Valcyte) 450 mg tablet take 2 Tablets (900 mg total) by mouth daily, Disp-180 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-7857,ERX-7857,"multivitamin tablet take 1 Tablet by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-80562,ERX-80562,"mycophenolate (CellCept) capsule take 3 Capsules (750 mg total) by mouth 2 times a day, Disp-540 Capsule, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule Take 1.5 mg by mouth every morning and 2 mg every evening (dose as of 11/23/22)., Disp-540 Capsule, R-3, No Print"
+E9918A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-95803,ERX-95803,"tacrolimus (Prograf) capsule Take 1.5 mg by mouth every morning and 2 mg every evening (dose as of 11/23/22)., Disp-180 Capsule, R-3, No Print"
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1027853,EDG-1027853,NSIP (nonspecific interstitial pneumonitis) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1053341,EDG-1053341,Reflux gastritis
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-138118,EDG-138118,HTN (hypertension)
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-198428,EDG-198428,RA (rheumatoid arthritis) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-2342753,EDG-2342753,Erectile dysfunction due to type 2 diabetes mellitus (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135936,EAP-135936,COLECTOMY TOTAL WITH END ILEOSTOMY
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188219,EAP-188219,COLONOSCOPY WITH CONTROL OF BLEEDING ANY METHOD
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188421,EAP-188421,IR VISCERAL ARTERIOGRAPHY EMBOLIZATION
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-449042,EAP-449042,HX VATS LUNG BIOPSY
+E9918A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-474081,EAP-474081,BRONCHOSCOPY WITH BRUSHING
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1024059,1024059,Complication of anesthesia
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1027289,1027289,CKD (chronic kidney disease)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1027853,1027853,NSIP (nonspecific interstitial pneumonitis) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1029629,1029629,Pulmonary HTN (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1053341,1053341,Reflux gastritis
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1096333,1096333,Chronic hypoxemic respiratory failure (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1231770,1231770,Health care maintenance
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 129253,129253,Interstitial lung disease (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1292939,1292939,Encounter for pre-transplant evaluation for lung transplant
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 153168,153168,Acute GI bleeding
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 160396,160396,ILD (interstitial lung disease) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1759762,1759762,Rheumatoid arthritis (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 198428,198428,RA (rheumatoid arthritis) (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 200808,200808,Hypoxia
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2109164,2109164,Other long term (current) drug therapy
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2342753,2342753,Erectile dysfunction due to type 2 diabetes mellitus (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 5940,5940,Gastroparesis
+E9918A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 65053,65053,Mixed connective tissue disease (CMS-HCC)
+E9918A28-16B1-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1238273,EDG-1238273,S/P lung transplant (CMS-HCC)

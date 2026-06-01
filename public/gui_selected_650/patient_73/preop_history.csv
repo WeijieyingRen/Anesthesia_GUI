@@ -1,0 +1,27 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Allergen ELG-1549,ELG-1549,NIACIN
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Allergen ELG-18254,ELG-18254,OTHER NON-MEDS (SPECIFY IN COMMENTS)
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Allergen ELG-4620,ELG-4620,AMOXICILLIN
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Allergen ELG-513,ELG-513,IODINATED CONTRAST MEDIA
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Allergen ELG-8991,ELG-8991,IODINE
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+55D64E30-1DA3-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+55D64E30-1DA3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule 1 Capsule (300 mg total), Historical Med"
+55D64E30-1DA3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-20920,ERX-20920,"morphine (MS Contin) controlled release tablet 3 Tablets (45 mg total), Historical Med"
+55D64E30-1DA3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-2510,ERX-2510,"diphenhydrAMINE capsule Take one capsule (50 mg) by mouth 1 hour prior to your radiology exam., Disp-1 Capsule, R-0, Phone In"
+55D64E30-1DA3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-6498,ERX-6498,"predniSONE tablet Take one tablet (50 mg) by mouth 13 hours, 7 hours, and 1 hour prior to your radiology exam (for a total of 3 doses prior to your exam)., Disp-3 Tablet, R-0, Phone In"
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-106461,EDG-106461,Tobacco dependence
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-118845,EDG-118845,SBO (small bowel obstruction) (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-119082,EDG-119082,Ileal cancer (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-1277702,EDG-1277702,Local recurrence of malignant neoplasm of colon (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-178566,EDG-178566,Cecal cancer (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-2374594,EDG-2374594,Polysubstance use disorder
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121729,EAP-121729,HX HERNIA REPAIR INGUINAL
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-134490,EAP-134490,EXPLORATORY LAPAROTOMY WITH OR WITHOUT BIOPSY
+55D64E30-1DA3-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-648768,EAP-648768,HX PARTIAL COLECTOMY
+55D64E30-1DA3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1136125,1136125,Moderate cigarette smoker
+55D64E30-1DA3-EE11-9203-005056BFF837,Problem List,Problem List Entry 122780,122780,Chronic obstructive lung disease (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1555,1555,Malignant neoplasm of cecum (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Problem List,Problem List Entry 167038,167038,Type 2 diabetes mellitus (CMS-HCC)
+55D64E30-1DA3-EE11-9203-005056BFF837,Problem List,Problem List Entry 71630,71630,Bilateral inguinal hernia
+55D64E30-1DA3-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-201343,EDG-201343,Psoas abscess (CMS-HCC)

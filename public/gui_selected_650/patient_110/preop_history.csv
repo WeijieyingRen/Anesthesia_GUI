@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+30B26D2F-E4CD-F011-921A-005056BFF837,Allergy,Allergen ELG-4619,ELG-4619,CHLORHEXIDINE
+30B26D2F-E4CD-F011-921A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+30B26D2F-E4CD-F011-921A-005056BFF837,Allergy,Latex allergy,allergy,No
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-172592,ERX-172592,"CINNAMON [PHI] Take by mouth every day, Historical Med"
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-191831,ERX-191831,"VITAMIN B-12 [PHI] Take by mouth, Historical Med"
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-191860,ERX-191860,"VITAMIN D2 [PHI] Take by mouth every day, Historical Med"
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-4426,ERX-4426,"levothyroxine tablet Take 1 tablet (200 mcg total) by mouth every morning before breakfast, Historical Med"
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) [PHI] TABS Take 1 tablet by mouth daily, Historical Med"
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-86649,ERX-86649,"EXEMESTANE 25 MG [PHI] TABS Take 1 tablet (25 mg total) by mouth daily, Disp-30 tablet, R-3, E-PrescribePaused since Fri 10/31/2025 until manually resumed"
+30B26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-9221,ERX-9221,"benazepril tablet Take 1 tablet (20 mg total) by mouth daily in the evening, Historical Med"
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-1137923,EDG-1137923,Type 2 diabetes mellitus without complications (CMS-HCC)
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-118870,EDG-118870,Breast cancer (CMS-HCC)
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-142205,EDG-142205,Hypothyroidism
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121627,EAP-121627,HX LIPOSUCTION
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121735,EAP-121735,HX BREAST LUMPECTOMY
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121736,EAP-121736,HX BREAST BIOPSY
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-138273,EAP-138273,BREAST BIOPSY OR LUMPECTOMY WITH DEVICE LOCALIZATION AND SENTINEL NODE BIOPSY
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-394065,EAP-394065,BREAST REDUCTION; BILATERAL
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-480110,EAP-480110,[PHI] BREAST GUIDED NEEDLE LOCALIZATION LEFT
+30B26D2F-E4CD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-480630,EAP-480630,REDUCTION MAMMAPLASTY
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 142424,142424,Obesity
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 1729339,1729339,"Invasive ductal carcinoma of breast, female, left (CMS-HCC)"
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+30B26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+30B26D2F-E4CD-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2330820,EDG-2330820,Invasive lobular carcinoma of breast in female (CMS-HCC)

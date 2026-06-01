@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+ADAFAAB6-2573-EE11-9202-005056BFF837,Allergy,Latex Allergy,Allergy,No
+ADAFAAB6-2573-EE11-9202-005056BFF837,Allergy,Latex allergy,allergy,No
+ADAFAAB6-2573-EE11-9202-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R91.1,R91.1,Lung nodule
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-169250,ERX-169250,"APPLE CIDER VINEGAR PO Take 500 mg by mouth every day, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-176663,ERX-176663,"FISH OIL PO Take by mouth every day, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-200273,ERX-200273,"Golytely - Dr. [PHI] Please drink only clear liquids the day prior to surgery and begin prep at 4:00 pm. Drink 8 oz every 10-15 minutes until finished., Disp-4000 mL, R-0, E-Prescribe"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-219729,ERX-219729,"PROBIOTIC WITH PREBIOTIC PO take by mouth every day, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-220948,ERX-220948,"TURMERIC ROOT EXTRACT PO take by mouth 1 Capsule daily, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-243836,ERX-243836,"NIVESTYM 480 MCG/0.8 ML SC SYRG inject 0.8 mL subcutaneous (under the skin) as directed 24 hours after dacarbazine infusion daily x 10 days every 3 weeks., Disp-8 mL, R-11, E-Prescribe10 each = 8 mls =21 days supply. PA APPROVED"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet Take 1 tablet (1 mg total) by mouth daily, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-3727,ERX-3727,"HYDROCORTISONE 2.5 % TP [PHI] Apply to perianal area twice a day, Disp-30 g, R-0, E-Prescribe"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-3738,ERX-3738,"hydrocortisone (Anusol-HC) 25 mg suppository insert 1 Suppository (25 mg total) into the rectum 2 times a day, Disp-24 Suppository, R-0, E-Prescribe"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG ""Papaya Leaf"" 600mg capsule once daily, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG ""Wheat grass juice"" 2.5 g wheatgrass juice powder dissolved in water once daily., Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Lion's Mane Mushroom 1 capsule daily, Historical Med"
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Medical History,Past Medical History EDG-101975,EDG-101975,Neutropenia (CMS-HCC)
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Medical History,Past Medical History EDG-144281,EDG-144281,Fibroids
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Medical History,Past Medical History EDG-91046,EDG-91046,Arthritis
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-121644,EAP-121644,HX ACL RECONSTRUCTION
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-121856,EAP-121856,HX CESAREAN SECTION
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-134250,EAP-134250,DILATION AND CURETTAGE
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-188607,EAP-188607,IR MEDIPORT DUAL LUMEN PLACEMENT
+ADAFAAB6-2573-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-433961,EAP-433961,OTHER
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 101975,101975,Neutropenia (CMS-HCC)
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 1030022,1030022,Uterine leiomyosarcoma (CMS-HCC)
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 118892,118892,Uterine cancer (CMS-HCC)
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 1233770,1233770,Difficult airway
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 1795223,1795223,Malignant neoplasm metastatic to lung (CMS-HCC)
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 192855,192855,Lung nodule
+ADAFAAB6-2573-EE11-9202-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+ADAFAAB6-2573-EE11-9202-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1030022,EDG-1030022,Uterine leiomyosarcoma (CMS-HCC)

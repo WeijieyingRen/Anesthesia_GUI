@@ -1,0 +1,10 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-17 22:20:00+00:00,position,breath_sounds_lul,clear,Breath Sounds LUL: clear,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,28.0,28.0,28.0,28.0,109.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-17 22:20:00+00:00,position,breath_sounds_rll,clear;diminished,Breath Sounds RLL: clear;diminished,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,28.0,28.0,28.0,28.0,109.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-17 22:20:00+00:00,position,breath_sounds_rml,clear;diminished,Breath Sounds RML: clear;diminished,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,28.0,28.0,28.0,28.0,109.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-17 22:20:00+00:00,position,breath_sounds_rul,clear,Breath Sounds RUL: clear,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,28.0,28.0,28.0,28.0,109.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-18 00:00:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,128.0,128.0,128.0,128.0,9.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-18 00:00:00+00:00,position,breath_sounds_lul,clear,Breath Sounds LUL: clear,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,128.0,128.0,128.0,128.0,9.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-18 00:00:00+00:00,position,breath_sounds_rll,clear;diminished,Breath Sounds RLL: clear;diminished,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,128.0,128.0,128.0,128.0,9.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-18 00:00:00+00:00,position,breath_sounds_rml,clear;diminished,Breath Sounds RML: clear;diminished,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,128.0,128.0,128.0,128.0,9.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-18 00:00:00+00:00,position,breath_sounds_rul,clear,Breath Sounds RUL: clear,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,128.0,128.0,128.0,128.0,9.0

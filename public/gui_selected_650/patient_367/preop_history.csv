@@ -1,0 +1,17 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+A3028D2B-B0BA-EE11-9204-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+A3028D2B-B0BA-EE11-9204-005056BFF837,Allergy,Latex Allergy,Allergy,No
+A3028D2B-B0BA-EE11-9204-005056BFF837,Allergy,Latex allergy,allergy,No
+A3028D2B-B0BA-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z01.818,Z01.818,Pre-op testing
+A3028D2B-B0BA-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-10451,ERX-10451,"lisinopriL tablet Take 1 tablet (5 mg total) by mouth every morning, Historical Med"
+A3028D2B-B0BA-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-1661,ERX-1661,"chlorthalidone tablet take 0.5 Tablets (12.5 mg total) by mouth daily, Disp-30 Tablet, R-2, E-Prescribe"
+A3028D2B-B0BA-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+A3028D2B-B0BA-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+A3028D2B-B0BA-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+A3028D2B-B0BA-EE11-9204-005056BFF837,Problem List,Problem List Entry 129312,129312,Esthesioneuroblastoma (CMS-HCC)
+A3028D2B-B0BA-EE11-9204-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+A3028D2B-B0BA-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+A3028D2B-B0BA-EE11-9204-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+A3028D2B-B0BA-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-114026,EDG-114026,"Neuroblastoma, olfactory (CMS-HCC)"
+A3028D2B-B0BA-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-129312,EDG-129312,Esthesioneuroblastoma (CMS-HCC)
+A3028D2B-B0BA-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-138329,EDG-138329,Malignant neoplasm of nasal cavity (CMS-HCC)

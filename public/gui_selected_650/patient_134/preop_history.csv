@@ -1,0 +1,35 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Allergy,Allergen ELG-2826,ELG-2826,CODEINE
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Allergy,Allergen ELG-5307,ELG-5307,GABAPENTIN
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Allergy,Latex Allergy,Allergy,No
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Allergy,Latex allergy,allergy,No
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Home Medication,Home Medication ERX-21062,ERX-21062,"citalopram (CeleXA) tablet take 1 Tablet (20 mg total) by mouth every bedtime, Historical Med"
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Home Medication,Home Medication ERX-226359,ERX-226359,"MYRBETRIQ 25 MG PO TB24 take 1 Tablet by mouth daily, Historical Med"
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Home Medication,Home Medication ERX-680,ERX-680,"ASPIRIN 81 MG PO CHEW take 2 Tablets (162 mg total) by mouth as needed for Pain, Historical Med"
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Home Medication,Home Medication ERX-78559,ERX-78559,"CARVEDILOL 12.5 MG PO TABS take 1 Tablet (12.5 mg total) by mouth 2 times a day, Historical Med"
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Home Medication,Home Medication ERX-8898,ERX-8898,"ZOFRAN 4 MG PO TABS take 1 Tablet (4 mg total) by mouth 2 times a day, Historical Med"
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet take 1 Tablet (100 mg total) by mouth Morning, Historical Med"
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Surgical History,Past Surgical History EAP-121657,EAP-121657,HX KNEE ARTHROSCOPY
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Surgical History,Past Surgical History EAP-121658,EAP-121658,HX SHOULDER ARTHROSCOPY
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Surgical History,Past Surgical History EAP-121733,EAP-121733,HX LUMPECTOMY
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Past Surgical History,Past Surgical History EAP-480163,EAP-480163,HX TOTAL VAG HYSTERECTOMY & BILAT SALPINGO-OOPHORECTOMY (NO CERVIX/NO OVARIES)
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 1033449,1033449,Pancreatic mass
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 1080753,1080753,History of breast cancer
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 125822,125822,Chest pain
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 162258,162258,Mixed anxiety and depressive disorder
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 192513,192513,Pre-diabetes
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 193233,193233,Adrenal nodule (CMS-HCC)
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 2232203,2232203,Morbid obesity with body mass index (BMI) of 40.0 or higher (CMS-HCC)
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Problem List,Problem List Entry 71872,71872,Fatty liver
+FA8F9E32-E0F0-EE11-9209-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1967415,EDG-1967415,"Malignant neoplasm of pancreas, unspecified location of malignancy (CMS-HCC)"

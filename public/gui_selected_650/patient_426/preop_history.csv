@@ -1,0 +1,36 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+520280EC-7F49-EE11-9200-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+520280EC-7F49-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+520280EC-7F49-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I73.9,I73.9,PVD (peripheral vascular disease) (CMS-HCC)
+520280EC-7F49-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J90,J90,Pleural effusion
+520280EC-7F49-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K22.3,K22.3,Esophageal perforation
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-1080,ERX-1080,"BISACODYL 10 MG PR SUPP insert 1 Suppository (10 mg total) into the rectum daily as needed, Disp-30 Suppository, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-123730,ERX-123730,"NITAZOXANIDE 500 MG PO TABS take 1 Tablet (500 mg total) by mouth 2 times a day, Disp-30 Tablet, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-14858,ERX-14858,"POTASSIUM CHLORIDE-D5-0.9%NACL 20 MEQ/L IV SOLP 50 mL/hr by Intravenous route Continuous, Disp-5000 mL, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-16050,ERX-16050,"GLUCOSE 4 GRAM PO CHEW 4-8 Tablets (16-32 g total) by Feeding Tube route as needed, Disp-30 Tablet, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-198509,ERX-198509,"ONDANSETRON HCL (PF) 4 MG/2 ML INJ SOLN 2 mL (4 mg total) by Intravenous route every 6 hours as needed (if unable to tolerate PO), Disp-2 mL, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-229996,ERX-229996,"LACTOBACILLUS RHAMNOSUS GG 15 BILLION CELL PO CPSP 1 Capsule by Feeding Tube route daily, Disp-10 Capsule, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-238315,ERX-238315,"FAT EMUL-SOY-MCT-OLIV-FISH OIL 20 % IV EMUL 250 mL by Intravenous route DAILY, Disp-1000 mL, R-30, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-239507,ERX-239507,"SALIVA STIMULANT COMB. NO.7 MM GEL take 0.5 Inches by mouth every 4 hours as needed (dry mouth), Disp-1 g, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-520102,ERX-520102,"cefepime (MAXIPIME) 2 gm IVPB 2 g by Intravenous route every 8 hours, Disp-20 Bag, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-541466,ERX-541466,"INSULIN REGULAR 100 UNIT/ML SC HIGH SCALE NPO inject 0-12 Units subcutaneous (under the skin) every 6 hours, Disp-10 mL, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-7327,ERX-7327,"SODIUM CHLORIDE 3 % INH NEBU 3 mL by RT Inhalation route 2 times a day as needed, Disp-240 mL, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-82384,ERX-82384,"PANTOPRAZOLE 40 MG IV SOLR 40 mg by Intravenous route daily, Disp-1 Each, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-89065,ERX-89065,"LIDOCAINE 5 % TP PTMD apply 1 Patch to skin daily, Disp-10 Patch, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-89742,ERX-89742,"INSULIN NPH ISOPH U-100 HUMAN 100 UNIT/ML SC SUSP inject 6 Units subcutaneous (under the skin) 2 times a day, Disp-10 mL, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 6 hours as needed, Disp-10 Tablet, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94550,ERX-94550,"CASPOFUNGIN 50 MG IV SOLR 50 mg by Intravenous route daily, Disp-1 Each, R-0, No Print"
+520280EC-7F49-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-133949,EAP-133949,ARM ARTERY / VEIN EXPLORATION/ REPAIR TRAUMATIC RUPTURE
+520280EC-7F49-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-134023,EAP-134023,ARM REMOVAL FOREIGN BODY
+520280EC-7F49-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135898,EAP-135898,CHEST TUBE INSERTION
+520280EC-7F49-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-136190,EAP-136190,ESOPHAGOGASTRODUODENOSCOPY WITH STENT PLACEMENT
+520280EC-7F49-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-137615,EAP-137615,THORACOSCOPY WITH DECORTICATION WITH/ WITHOUT BRONCHOSCOPY
+520280EC-7F49-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188115,EAP-188115,EGD WITH STENT PLACEMENT
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 1170683,1170683,"DM2 (diabetes mellitus, type 2) (CMS-HCC)"
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 118930,118930,A-fib (CMS-HCC)
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 2186609,2186609,Multifocal pneumonia
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 66850,66850,Coronary artery disease
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 94601,94601,Empyema of lung (CMS-HCC)
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 95256,95256,Esophageal perforation
+520280EC-7F49-EE11-9200-005056BFF837,Problem List,Problem List Entry 98349,98349,Hypernatremia

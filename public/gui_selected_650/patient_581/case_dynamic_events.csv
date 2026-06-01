@@ -1,0 +1,2 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+18591764-4A76-EE11-9202-005056BFF837,2023-10-24 21:40:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2023-10-24 20:35:00+00:00,2023-10-24 21:45:00+00:00,65.0,65.0,65.0,65.0,5.0

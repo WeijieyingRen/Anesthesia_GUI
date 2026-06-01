@@ -1,0 +1,16 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis H46.8,H46.8,Compressive optic neuropathy due to thyroid disease
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10403,ERX-10403,"levothyroxine tablet take 1 Tablet (88 mcg total) by mouth every morning before breakfast, Historical Med"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-14031,ERX-14031,"TUMS ULTRA 400 MG CALCIUM (1,000 MG) PO CHEW Tums Ultra 400 mg calcium (1,000 mg) chewable tablet Take 1 tablet twice a day by oral route., Historical Med"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-14887,ERX-14887,"methylPREDNISolone (Medrol) dosepak Follow instructions on packaging. Begin the following day after surgery, Disp-21 Tablet, R-0, E-Prescribe"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-19546,ERX-19546,"NEOMYCIN-POLYMYXIN B-DEXAMETH 3.5 MG/G-10,000 UNIT/G-0.1 % OPHT OINT instill to left eye 3 times a day For 7 days after surgery, Disp-3.5 g, R-1, E-Prescribe"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROcodone-acetaminophen (NORCO) 5-325 mg tablet take 1-2 Tablets by mouth every 4 hours as needed for Pain After surgery, Disp-30 Tablet, R-0, E-Prescribe"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed for Nausea/Vomiting After surgery, Disp-10 Tablet, R-0, E-Prescribe"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-9500,ERX-9500,"cephalexin (Keflex) capsule take 1 Capsule (500 mg total) by mouth 4 times a day for 7 days After surgery, Disp-28 Capsule, R-0, E-Prescribe"
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1060789,1060789,Thyroid eye disease
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 142320,142320,Esotropia
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2365988,2365988,Compressive optic neuropathy due to thyroid disease
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1060789,EDG-1060789,Thyroid eye disease
+4CF7CFC3-FF43-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1128771,EDG-1128771,Compressive optic neuropathy

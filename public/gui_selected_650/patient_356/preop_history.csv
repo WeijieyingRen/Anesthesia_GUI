@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+02F3BBB5-2D86-EF11-920D-005056BFF837,Allergy,Latex Allergy,Allergy,No
+02F3BBB5-2D86-EF11-920D-005056BFF837,Allergy,Latex allergy,allergy,No
+02F3BBB5-2D86-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis S05.31XA,S05.31XA,"Ruptured globe of right eye, initial encounter"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis S05.31XS,S05.31XS,"Ruptured globe of right eye, sequela"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-133424,EAP-133424,RUPTURED GLOBE REPAIR WITH UVEAL TISSUE
+02F3BBB5-2D86-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-135078,EAP-135078,EYELID LACERATION REPAIR
+02F3BBB5-2D86-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-135110,EAP-135110,LACRIMAL / TEAR DUCT PROBING
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1098674,1098674,Ruptured globe of right eye
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1100474,1100474,Pneumothorax on left
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1133707,1133707,Cervical spine fracture (CMS-HCC)
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1145270,1145270,Pedestrian injured in traffic accident involving motor vehicle
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1575139,1575139,"Exposure keratoconjunctivitis of eye, right"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 165258,165258,SAH (subarachnoid hemorrhage) (CMS-HCC)
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 170184,170184,Post-traumatic cerebrospinal fluid otorrhea
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1702965,1702965,"Rupture of globe, unspecified laterality, initial encounter"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 1709354,1709354,"Closed fracture of multiple ribs, unspecified laterality, initial encounter"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 2160882,2160882,"Contusion of lung, unspecified laterality, initial encounter"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 2357703,2357703,"(Ramayya) SAH, SDH, IPH 2/2 Auto v. Ped"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Problem List,Problem List Entry 79462,79462,Acute blood loss anemia
+02F3BBB5-2D86-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2025326,EDG-2025326,"Pansinusitis, unspecified chronicity"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2157579,EDG-2157579,"Open fracture of frontal sinus, initial encounter (CMS-HCC)"
+02F3BBB5-2D86-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2360203,EDG-2360203,"Open fracture of right zygomaticomaxillary complex, initial encounter (CMS-HCC)"

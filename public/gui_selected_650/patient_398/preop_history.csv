@@ -1,0 +1,39 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+66D4F5F8-30D6-EE11-9204-005056BFF837,Allergy,Allergen ELG-23245,ELG-23245,CAT DANDER
+66D4F5F8-30D6-EE11-9204-005056BFF837,Allergy,Latex Allergy,Allergy,No
+66D4F5F8-30D6-EE11-9204-005056BFF837,Allergy,Latex allergy,allergy,No
+66D4F5F8-30D6-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C44.529,C44.529,Squamous cell carcinoma of skin of chest
+66D4F5F8-30D6-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C77.3,C77.3,Squamous cell carcinoma metastatic to lymph node of upper extremity (CMS-HCC)
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 6 hours, Disp-30 Tablet, R-0, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-10674,ERX-10674,"mupirocin (BACTROBAN) 2% ointment Apply to open area on the right underarm twice a day, Disp-22 g, R-1, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth every morning with breakfast, Disp-30 Tablet, R-0, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-28995,ERX-28995,METFORMIN 500 MG PO TB24 Historical Med
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROCODONE-ACETAMINOPHEN 5-325 MG PO TABS take 1 Tablet by mouth every 8 hours as needed for Pain (severe pain), Disp-40 Tablet, R-0, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-3727,ERX-3727,"hydrocortisone 2.5% cream Apply to affected areas in the groin twice a day. Mix 1:1 with terbinafine cream for this area., Disp-28 g, R-1, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-3844,ERX-3844,"ibuprofen tablet take 1 Tablet (600 mg total) by mouth every 6 hours as needed for Pain (mild to moderate pain), Disp-90 Tablet, R-1, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-77620,ERX-77620,"TERBINAFINE HCL 1 % TP [PHI] Apply to affected areas in the groin and right underarm twice a day, Disp-28.4 g, R-1, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-8113,ERX-8113,"triamcinolone acetonide (ARISTOCORT) 0.1% cream by Topical route Apply to affected areas twice a day (avoid use on face, neck, armpit, and groin), Disp-45 g, R-1, E-Prescribe"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-2385164,EDG-2385164,Squamous cell carcinoma metastatic to lymph node of upper extremity (CMS-HCC)
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-133870,EAP-133870,FINGER / THUMB AMPUTATION
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-133878,EAP-133878,FINGER/ THUMB CLOSED REDUCTION WITH PINNING; 1 DIGIT
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-133880,EAP-133880,FINGER / THUMB NERVE DECOMPRESSION
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-133923,EAP-133923,HAND INCISION AND DRAINAGE
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-133927,EAP-133927,HAND LESION / MASS EXCISION
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-134720,EAP-134720,AXILLARY LYMPH NODE DISSECTION
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-134850,EAP-134850,AXILLARY LESION / MASS EXCISION
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-135676,EAP-135676,SPLIT THICKNESS SKIN GRAFT; SECONDARY PROCEDURE
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-135688,EAP-135688,FLAP FREE MICROVASCULAR
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-136527,EAP-136527,CHEST WALL LESION / MASS WIDE EXCISION
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-437448,EAP-437448,IR AXILLA LYMPH NODE BIOPSY
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-439615,EAP-439615,BONE CEMENT BEAD PLACEMENT; SECONDARY PROCEDURE
+66D4F5F8-30D6-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-453589,EAP-453589,CLEAN CLOSURE; SECONDARY PROCEDURE
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 1033526,1033526,Post-menopausal
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 165327,165327,SCC (squamous cell carcinoma)
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 1830140,1830140,Squamous cell carcinoma of skin of right thumb
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 2054705,2054705,"Type 2 diabetes mellitus without complication, without long-term current use of insulin (CMS-HCC)"
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 2239779,2239779,Class 1 obesity due to excess calories without serious comorbidity with body mass index (BMI) of 31.0 to 31.9 in adult
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 2385164,2385164,Squamous cell carcinoma metastatic to lymph node of upper extremity (CMS-HCC)
+66D4F5F8-30D6-EE11-9204-005056BFF837,Problem List,Problem List Entry 98239,98239,Hypercholesterolemia
+66D4F5F8-30D6-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1118103,EDG-1118103,Metastatic squamous cell carcinoma to soft tissue (CMS-HCC)
+66D4F5F8-30D6-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1961557,EDG-1961557,"Open wound of right axillary region with complication, subsequent encounter"

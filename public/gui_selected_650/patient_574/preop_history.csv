@@ -1,0 +1,54 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R19.7,R19.7,"Diarrhea, unspecified type"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 6 hours as needed, Disp-30 Tablet, R-2, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin 81 mg enteric coated tablet take 1 Tablet (81 mg total) by mouth daily in the evening, Historical Med"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-236399,ERX-236399,"ENSURE ENLIVE 0.08 GRAM-1.5 KCAL/ML PO LIQD take 1 Bottle by mouth every day (chocolate flavor), Disp-7110 mL, R-0, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-242001,ERX-242001,"DOLUTEGRAVIR-RILPIVIRINE 50-25 MG PO TABS take 1 Tablet by mouth every day, Disp-90 Tablet, R-0, E-PrescribePlease DC the individual rx for rilpivirine and dolutegravir sent 8/3 by MD Juthani. Only keep and dispense Juluca. thx"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-27197,ERX-27197,"KEPPRA 500 MG PO TABS take 1 Tablet (500 mg total) by mouth Daily at night, Disp-30 Tablet, R-1, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3071,ERX-3071,"FERROUS SULFATE 300 MG (60 MG IRON)/5 ML PO LIQD take 5 mL (300 mg total) by mouth every 48 hours, Disp-150 mL, R-0, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-4560,ERX-4560,"loperamide capsule take 1 Capsule (2 mg total) by mouth every 6 hours as needed for Diarrhea, Disp-120 Capsule, R-3, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-7313,ERX-7313,"sodium bicarbonate tablet take 2 Tablets (1,300 mg total) by mouth 2 times a day, Disp-60 Tablet, R-0, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-95354,ERX-95354,"ATOVAQUONE 750 MG/5 ML PO SUSP take 10 mL (1,500 mg total) by mouth every morning with breakfast, Disp-300 mL, R-1, E-Prescribe"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-10078,EDG-10078,Nocturia
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-105272,EDG-105272,Sinusitis
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1052906,EDG-1052906,Bilateral hydronephrosis
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-105778,EDG-105778,Strabismus
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1162625,EDG-1162625,OAB (overactive bladder)
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118951,EDG-118951,Colorectal cancer (CMS-HCC)
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-127997,EDG-127997,Renal failure
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-147682,EDG-147682,Eye movement disorder
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-159922,EDG-159922,HIV (human immunodeficiency virus infection) (CMS-HCC)
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-177472,EDG-177472,Urgency incontinence
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-189727,EDG-189727,Laryngitis
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-198933,EDG-198933,Viral URI
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-57790,EDG-57790,Overflow incontinence
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-86129,EDG-86129,Urinary retention
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-86278,EDG-86278,Loss of voice
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134302,EAP-134302,CYSTOSCOPY
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134694,EAP-134694,ABDOMINAL WALL MASS / BIOPSY /FISTULA EXCISION
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135648,EAP-135648,CYSTECTOMY PARTIAL / SEGMENTAL
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135696,EAP-135696,MAGNETIC RESONANCE IMAGING; OUTSIDE THE OPERATING ROOM
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-136489,EAP-136489,COLECTOMY PARTIAL
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-149551,EAP-149551,COMPLEX CYSTOMETROGRAM
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188215,EAP-188215,COLONOSCOPY WITH BIOPSY
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188629,EAP-188629,IR NEPHROSTOMY CATHETER PLACEMENT
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-189252,EAP-189252,IR ABSCESS DRAIN PLACEMENT
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 105778,105778,Strabismus
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1070512,1070512,Failure to thrive in adult
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1070515,1070515,FTT (failure to thrive) in adult
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1095455,1095455,Mass of urinary bladder
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1121148,1121148,Brain lesion
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 113315,113315,Iron deficiency anemia
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1278701,1278701,Adenocarcinoma of cecum (CMS-HCC)
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142341,142341,Acute renal failure (CMS-HCC)
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 159922,159922,HIV (human immunodeficiency virus infection) (CMS-HCC)
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 187730,187730,Recurrent UTI
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2025305,2025305,"Acute renal failure, unspecified acute renal failure type (CMS-HCC)"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2025319,2025319,"Altered mental status, unspecified altered mental status type"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2054987,2054987,Duane syndrome of right eye
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2204033,2204033,"Diarrhea, unspecified type"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2305718,2305718,"Acute renal failure superimposed on chronic kidney disease, unspecified CKD stage, unspecified acute renal failure type (CMS-HCC)"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2348207,2348207,"HIV infection, unspecified symptom status (CMS-HCC)"
+67D7CFAC-4CA5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 84716,84716,AIDS (CMS-HCC)

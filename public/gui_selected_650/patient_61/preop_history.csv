@@ -1,0 +1,35 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+18B3D47C-FE17-EE11-91FC-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+18B3D47C-FE17-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,Yes
+18B3D47C-FE17-EE11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+18B3D47C-FE17-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K56.609,K56.609,SBO (small bowel obstruction) (CMS-HCC)
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 6 hours, Disp-30 Tablet, R-0, No Print"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10368,ERX-10368,"KETOCONAZOLE 2 % TP CREA 30 g by Topical route as needed (na), Historical Med"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-116051,ERX-116051,"ARIPIPRAZOLE 5 MG PO TABS take 1 Tablet (5 mg total) by mouth daily, Historical Med"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-204706,ERX-204706,"melatonin tablet take 1 Tablet (5 mg total) by mouth every bedtime as needed, Disp-30 Tablet, R-0, No Print"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-206708,ERX-206708,"QUETIAPINE 150 MG PO TB24 take 1 Tablet (150 mg total) by mouth every bedtime, Historical Med"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-92835,ERX-92835,"INSULIN LISPRO 100 UNIT/ML SC SOLN inject subcutaneous (under the skin) every 6 hours, Historical Med"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ONDANSETRON 4 MG PO TBDL take 1 Tablet (4 mg total) by mouth every 6 hours, Historical Med"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-9621,ERX-9621,"clindamycin capsule take 1 Capsule (300 mg total) by mouth 3 times a day, Historical Med"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1071387,EDG-1071387,Omphalocele
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1098281,EDG-1098281,Autism spectrum disorder
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-114319,EDG-114319,Intestinal malrotation
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-144317,EDG-144317,Gallstones
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-68995,EDG-68995,Dextrocardia
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-71730,EDG-71730,Hiatal hernia
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-134686,EAP-134686,ABDOMINAL INCISION AND DRAINAGE
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135452,EAP-135452,TRACHEOSTOMY
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135928,EAP-135928,SMALL BOWEL RESECTION
+18B3D47C-FE17-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-17696,EAP-17696,GASTROSTOMY TUBE
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 118845,118845,SBO (small bowel obstruction) (CMS-HCC)
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1218571,1218571,H/O small bowel obstruction
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1763377,1763377,History of omphalocele
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1866597,1866597,Infection of skin due to methicillin resistant Staphylococcus aureus (MRSA)
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2332934,2332934,Chronic iron deficiency anemia
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 68995,68995,Dextrocardia
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 71730,71730,Hiatal hernia
+18B3D47C-FE17-EE11-91FC-005056BFF837,Problem List,Problem List Entry 91277,91277,Autistic disorder
+18B3D47C-FE17-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1097276,EDG-1097276,Enterocutaneous fistula
+18B3D47C-FE17-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1291469,EDG-1291469,Hiatal hernia with gangrene
+18B3D47C-FE17-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1692231,EDG-1692231,"Chronic wound infection of abdomen, initial encounter"
+18B3D47C-FE17-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2121453,EDG-2121453,Biliary calculus of other site without obstruction

@@ -1,0 +1,2 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,fluid_direction,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+A04784CC-0E21-F011-9212-005056BFF837,A3D92A86-4E05-EF11-920A-005056BFF837,10457,1,2024-04-23 21:40:00+00:00,2024-04-23 23:18:00+00:00,normosol,1000.0,mL,Intravenous,normosol,crystalloid_colloid,input,2024-04-23 21:24:00+00:00,2024-04-23 23:36:00+00:00,16.0,114.0,16.0,16.0,18.0

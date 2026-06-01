@@ -1,0 +1,13 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 00:54:00+00:00,position,temperature_control,"""forced air warming;upper body""","""R SHC OPT ANE TEMP CONTROL"": ""forced air warming;upper body""",2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,21.0,21.0,21.0,21.0,135.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 00:58:00+00:00,airway,lma_inserted,1,LMA Inserted,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,25.0,25.0,25.0,25.0,131.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 02:12:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,99.0,99.0,99.0,99.0,57.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 02:12:00+00:00,airway,lma_removed,1,LMA Removed,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,99.0,99.0,99.0,99.0,57.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 02:15:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,102.0,102.0,102.0,102.0,54.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 02:35:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,122.0,122.0,122.0,122.0,34.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 02:45:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,132.0,132.0,132.0,132.0,24.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 03:00:00+00:00,position,bed_position,45 degrees,Bed Position: 45 degrees,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,147.0,147.0,147.0,147.0,9.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 03:00:00+00:00,position,lul_breath_sounds,clear,LUL Breath Sounds: clear,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,147.0,147.0,147.0,147.0,9.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 03:00:00+00:00,position,rll_breath_sounds,absent,RLL Breath Sounds: absent,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,147.0,147.0,147.0,147.0,9.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 03:00:00+00:00,position,rml_breath_sounds,absent,RML Breath Sounds: absent,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,147.0,147.0,147.0,147.0,9.0
+99F69F0D-5A91-F011-9217-005056BFF837,2025-09-10 03:00:00+00:00,position,rul_breath_sounds,absent,RUL Breath Sounds: absent,2025-09-10 00:33:00+00:00,2025-09-10 03:09:00+00:00,147.0,147.0,147.0,147.0,9.0

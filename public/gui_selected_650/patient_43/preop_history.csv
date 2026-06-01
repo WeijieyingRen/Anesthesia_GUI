@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+22351B45-8F59-F011-9216-005056BFF837,Allergy,Allergen ELG-21817,ELG-21817,HEPARIN
+22351B45-8F59-F011-9216-005056BFF837,Allergy,Latex allergy,allergy,No
+22351B45-8F59-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 785.51,785.51,Cardiogenic shock (CMS-HCC)
+22351B45-8F59-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I50.84,I50.84,End stage heart failure (CMS-HCC)
+22351B45-8F59-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I50.9,I50.9,"Heart failure, unspecified HF chronicity, unspecified heart failure type (CMS-HCC)"
+22351B45-8F59-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z12.11,Z12.11,Encounter for screening colonoscopy
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet Take 2 tablets (650 mg total) by mouth every 6 hours as needed, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-10595,ERX-10595,"mexiletine capsule Take 1 capsule (150 mg total) by mouth every 8 hours, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-110889,ERX-110889,"ENOXAPARIN 60 MG/0.6 ML SC SYRG Inject 0.55 mL (55 mg total) subcutaneous (under the skin) every 12 hours, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet Take 1 tablet (81 mg total) by mouth daily, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-232955,ERX-232955,"EMPAGLIFLOZIN 10 MG [PHI] TABS Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-2444,ERX-2444,"DIGOXIN 125 MCG (0.125 MG) [PHI] TABS Take 0.5 tablets (0.0625 mg total) by mouth daily, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-248162,ERX-248162,"TRELEGY ELLIPTA 200-62.5-25 MCG INH DSDV 1 puff by Inhalation route daily, [PHI], Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-35943,ERX-35943,"potassium chloride (Klor-Con M20) 20 mEq controlled release tablet Take 2 tablets (40 mEq total) by mouth 2 times a day, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Home Medication,Home Medication ERX-9311,ERX-9311,"bumetanide tablet Take 1 tablet (2 mg total) by mouth 2 times a day, Historical Med"
+22351B45-8F59-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188885,EAP-188885,CV SWAN GANZ
+22351B45-8F59-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+22351B45-8F59-F011-9216-005056BFF837,Problem List,Problem List Entry 10015,10015,Cardiogenic shock (CMS-HCC)
+22351B45-8F59-F011-9216-005056BFF837,Problem List,Problem List Entry 1969646,1969646,"Acute on chronic heart failure, unspecified heart failure type (CMS-HCC)"
+22351B45-8F59-F011-9216-005056BFF837,Problem List,Problem List Entry 2243897,2243897,End stage heart failure (CMS-HCC)
+22351B45-8F59-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1119257,EDG-1119257,Encounter for screening colonoscopy
+22351B45-8F59-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2157345,EDG-2157345,"Pneumonia due to infectious organism, unspecified laterality, unspecified part of lung"

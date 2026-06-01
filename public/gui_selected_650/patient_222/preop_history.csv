@@ -1,0 +1,25 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+98C0645A-9595-ED11-91F9-005056BFF837,Allergy,Latex Allergy,Allergy,No
+98C0645A-9595-ED11-91F9-005056BFF837,Allergy,Latex allergy,allergy,No
+98C0645A-9595-ED11-91F9-005056BFF837,Home Medication,Home Medication ERX-10404,ERX-10404,"levothyroxine (Synthroid) 112 mcg tablet take 100 mcg by mouth every morning before breakfast, Historical Med"
+98C0645A-9595-ED11-91F9-005056BFF837,Home Medication,Home Medication ERX-168488,ERX-168488,"ALLEGRA PO take 1 Tablet by mouth every day, Historical Med"
+98C0645A-9595-ED11-91F9-005056BFF837,Home Medication,Home Medication ERX-234721,ERX-234721,"octreotide (SandoSTATIN LAR Depot) 10 mg SSRR inject into a muscle, Historical Med"
+98C0645A-9595-ED11-91F9-005056BFF837,Home Medication,Home Medication ERX-24398,ERX-24398,"metFORMIN (Glucophage) tablet take 1 Tablet (1,000 mg total) by mouth 2 times a day, Historical Med"
+98C0645A-9595-ED11-91F9-005056BFF837,Home Medication,Home Medication ERX-311,ERX-311,"allopurinol (Zyloprim) tablet take 1 Tablet (300 mg total) by mouth daily in the evening, Historical Med"
+98C0645A-9595-ED11-91F9-005056BFF837,Home Medication,Home Medication ERX-620401,ERX-620401,Cabergoline 0.25 mg Historical Med
+98C0645A-9595-ED11-91F9-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+98C0645A-9595-ED11-91F9-005056BFF837,Past Medical History,Past Medical History EDG-142205,EDG-142205,Hypothyroidism
+98C0645A-9595-ED11-91F9-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+98C0645A-9595-ED11-91F9-005056BFF837,Past Medical History,Past Medical History EDG-2220753,EDG-2220753,Heavy exercise
+98C0645A-9595-ED11-91F9-005056BFF837,Past Medical History,Past Medical History EDG-78749,EDG-78749,Acromegaly (CMS-HCC)
+98C0645A-9595-ED11-91F9-005056BFF837,Past Medical History,Past Medical History EDG-98417,EDG-98417,Hyperprolactinemia (CMS-HCC)
+98C0645A-9595-ED11-91F9-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+98C0645A-9595-ED11-91F9-005056BFF837,Past Surgical History,Past Surgical History EAP-121822,EAP-121822,HX LAP CHOLECYSTECTOMY
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 138145,138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 192486,192486,Hyperglycemia
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 200329,200329,Obstructive sleep apnea
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 2220753,2220753,Heavy exercise
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 78749,78749,Acromegaly (CMS-HCC)
+98C0645A-9595-ED11-91F9-005056BFF837,Problem List,Problem List Entry 98417,98417,Hyperprolactinemia (CMS-HCC)
+98C0645A-9595-ED11-91F9-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1025246,EDG-1025246,Adenoma

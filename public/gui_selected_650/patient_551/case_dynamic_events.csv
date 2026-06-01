@@ -1,0 +1,4 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+30990E39-AF99-EE11-9203-005056BFF837,2023-12-08 22:55:00+00:00,position,temperature_control,"""blankets;ambient warming;forced air warming""","""R SHC OPT ANE TEMP CONTROL"": ""blankets;ambient warming;forced air warming""",2023-12-08 22:55:00+00:00,2023-12-09 02:20:00+00:00,0.0,0.0,0.0,0.0,205.0
+30990E39-AF99-EE11-9203-005056BFF837,2023-12-09 01:46:00+00:00,position,local_by_surgeons,local by surgeons,Local by Surgeons: local by surgeons,2023-12-08 22:55:00+00:00,2023-12-09 02:20:00+00:00,171.0,171.0,171.0,171.0,34.0
+30990E39-AF99-EE11-9203-005056BFF837,2023-12-09 02:05:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2023-12-08 22:55:00+00:00,2023-12-09 02:20:00+00:00,190.0,190.0,190.0,190.0,15.0

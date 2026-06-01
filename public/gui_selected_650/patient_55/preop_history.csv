@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4375F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4375F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-13410,ERX-13410,"acetaminophen (Tylenol) tablet take 1 Tablet (650 mg total) by mouth every 4 to 6 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth daily, Historical Med"
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-19257,ERX-19257,"LIPITOR 20 MG PO TABS take 1 Tablet (20 mg total) by mouth daily in the evening, Historical Med"
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-30264,ERX-30264,"citalopram (CeleXA) tablet take 1 Tablet (10 mg total) by mouth daily in the evening, Historical Med"
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-5009,ERX-5009,"metoprolol tartrate (Lopressor) tablet take 0.5 Tablets (25 mg total) by mouth 2 times a day, Historical Med"
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG PO CAPS take 1 Capsule (0.4 mg total) by mouth daily in the evening, Historical Med"
+4375F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88967,ERX-88967,"lansoprazole (Prevacid) delayed release capsule take 1 Capsule (30 mg total) by mouth daily, Historical Med"
+4375F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+4375F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-200333,EDG-200333,OSA (obstructive sleep apnea)
+4375F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188121,EAP-188121,EGD WITH ENDOSCOPIC ULTRASOUND
+4375F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188125,EAP-188125,ERCP WITH OR WITHOUT BRUSHING
+4375F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188127,EAP-188127,ERCP WITH BIOPSY
+4375F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188141,EAP-188141,ERCP WITH STENT EXCHANGE
+4375F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+4375F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 159927,159927,HLD (hyperlipidemia)
+4375F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+4375F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+4375F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 6208,6208,Cholangitis
+4375F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 89779,89779,Abscess
+4375F286-FDF6-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1135403,EDG-1135403,Mass of pancreas

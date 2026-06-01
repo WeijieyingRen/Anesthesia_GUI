@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+EC74F286-FDF6-ED11-91FB-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+EC74F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+EC74F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+EC74F286-FDF6-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C50.912,C50.912,"Invasive ductal carcinoma of breast, female, left (CMS-HCC)"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet TAKE 1 TABLET(20 MG) BY MOUTH TWICE DAILY, Disp-180 Tablet, R-2, E-Prescribe**Patient requests 90 days supply**"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-116357,ERX-116357,"buPROPion extended release tablet take 1 Tablet (300 mg total) by mouth every morning, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-116358,ERX-116358,"buPROPion extended release tablet take 1 Tablet (150 mg total) by mouth every morning, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-123773,ERX-123773,"DULoxetine (Cymbalta) delayed release capsule take 1 Capsule (60 mg total) by mouth 2 times a day, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-180991,ERX-180991,"MAGNESIUM PO take by mouth, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule take 1 Capsule (100 mg total) by mouth 2 times a day as needed, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-231551,ERX-231551,"FARXIGA 10 MG PO TABS take 1 Tablet by mouth Morning, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-24398,ERX-24398,"metFORMIN (Glucophage) tablet take 1 Tablet (1,000 mg total) by mouth 2 times a day, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-24711,ERX-24711,"LISINOPRIL-HYDROCHLOROTHIAZIDE 10-12.5 MG PO TABS take 1 Tablet by mouth AM, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR TAKE 2 CAPSULES(40 MG) BY MOUTH DAILY, Disp-30 Capsule, R-2, E-PrescribeZERO refills remain on this prescription. Your patient is requesting advance approval of refills for this medication to PREVENT ANY MISSED DOSES"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118870,EDG-118870,Breast cancer (CMS-HCC)
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121822,EAP-121822,HX LAP CHOLECYSTECTOMY
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188611,EAP-188611,IR MEDIPORT SINGLE LUMEN PLACEMENT
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-480139,EAP-480139,US BREAST GUIDED CORE BIOPSY LEFT
+EC74F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-536850,EAP-536850,LIPOMA EXCISION
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1729339,1729339,"Invasive ductal carcinoma of breast, female, left (CMS-HCC)"
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1835,1835,Secondary malignant neoplasm of breast (CMS-HCC)
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 3041,3041,Generalized anxiety disorder
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+EC74F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+EC74F286-FDF6-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2305742,EDG-2305742,"Malignant neoplasm of left female breast, unspecified estrogen receptor status, unspecified site of breast (CMS-HCC)"

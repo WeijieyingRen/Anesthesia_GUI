@@ -1,0 +1,143 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-10808,ELG-10808,ANTIFUNGAL CREAM [UNDECYLENIC AC-ZINC UNDECYLENA]
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-11593,ELG-11593,COLD & ALLERGY [BROMPHENIRAMINE-PHENYLEPHRINE]
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-11663,ELG-11663,CODEINE PHOSPHATE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-11720,ELG-11720,LOMOTIL [DIPHENOXYLATE-ATROPINE]
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-11749,ELG-11749,HYDROCODONE-ACETAMINOPHEN
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-12175,ELG-12175,TAPE [ADHESIVE TAPE]
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-16643,ELG-16643,OTHER MEDICATION [UNKNOWN MEDICATION (SPECIFY IN COMMENTS)]
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2030,ELG-2030,HYDROCODONE TANNATE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2818,ELG-2818,MEPERIDINE HCL
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2831,ELG-2831,HYDROCODONE BITARTRATE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2834,ELG-2834,OXYCODONE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2842,ELG-2842,METHADONE HCL
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-2881,ELG-2881,ACETAMINOPHEN
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-4540,ELG-4540,FENTANYL
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-5484,ELG-5484,MEPERIDINE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-5492,ELG-5492,METHADONE
+37D611D6-DCD0-EF11-920E-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 2 Tablets (1,000 mg total) by mouth every 6 hours as needed for Pain, Disp-60 Tablet, R-0, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"metFORMIN tablet Take 1 tablet (500 mg total) by mouth 3 times a day with meals To decrease appetite and aid in weight management, Disp-270 tablet, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-116179,ERX-116179,"rosuvastatin tablet Take 1 tablet (40 mg total) by mouth daily, Disp-90 tablet, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-125757,ERX-125757,"pregabalin (Lyrica) capsule ( GENERIC FOR LYRICA) TAKE 1 CAPSULE BY MOUTH TWICE DAILY AS NEEDED, Disp-180 capsule, R-5, E-PrescribeCURES checked by MD, last filled 9/7/24, pt prefers 90d supply if possible at next refill, prefers white/blue capsule"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"ASPIRIN 81 MG PO TBEC Take 1 tablet (81 mg total) by mouth every morning, Historical Med"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-205569,ERX-205569,"VITAMIN D3 50 MCG (2,000 UNIT) PO TABS Take 1 tablet (2,000 units total) by mouth every day, Historical Med"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-209478,ERX-209478,"ESTRADIOL 10 MCG VAG TABS INSERT 1 TABLET IN THE VAGINA AT BEDTIME TWICE A WEEK, Disp-24 tablet, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR take 20 mg by mouth 2 times a day, Disp-180 Capsule, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-29348,ERX-29348,"DILTIAZEM HCL 240 MG PO CDCR TAKE 1 CAPSULE(240 MG) BY MOUTH DAILY, Disp-90 Capsule, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3720,ERX-3720,"hydrochlorothiazide tablet TAKE 1 TABLET(25 MG) BY MOUTH IN THE MORNING, Disp-90 tablet, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-436,ERX-436,"amitriptyline tablet TAKE 1 TABLET(50 MG) BY MOUTH EVERY NIGHT AT BEDTIME, Disp-90 Tablet, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-4422,ERX-4422,"LEVOTHYROXINE 75 MCG PO TABS TAKE 1 TABLET(75 MCG) BY MOUTH EVERY MORNING BEFORE BREAKFAST, Disp-90 tablet, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Bi-Est (Estriol/Estradiol) 1.25mg capsule - Take one capsule po BID, Womens International Arizona Pharmacy P 800-699-8143 F 800-330-0268, Disp-180 Each, R-12, FaxPer pharmacist [PHI], this is to replace prior Rx for Estriol/Estradio/Estrone (Salmon Logo) Olive 1/0.125/0.125mg oil capsule BID"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-92173,ERX-92173,"zolpidem tablet Take 0.5 tablets (2.5 mg total) by mouth every bedtime as needed for Insomnia, Disp-30 tablet, R-1, E-PrescribeCURES checked by MD, last filled 11/3/23"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-93179,ERX-93179,"ESTRADIOL 0.01 % (0.1 MG/GRAM) VAG [PHI] Insert 2 g into the vagina daily, Historical Med"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-93715,ERX-93715,"celecoxib (CeleBREX) 100 mg capsule Take 1 capsule (100 mg total) by mouth 2 times a day, Disp-180 capsule, R-12, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-9631,ERX-9631,"CLOBETASOL 0.05 % TP OINT Apply a pea sized amount to vulva at bedtime. 2 nights a week, Disp-30 g, R-3, E-Prescribe"
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-100086,EDG-100086,Lichen sclerosus
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-102443,EDG-102443,Osteopenia
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-103474,EDG-103474,Postherpetic neuralgia
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1035127,EDG-1035127,Dysphagia
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1043251,EDG-1043251,ACL (anterior cruciate ligament) tear
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1054153,EDG-1054153,Left foot drop
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-109235,EDG-109235,PVC's (premature ventricular contractions)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1128425,EDG-1128425,Anal sphincter incompetence
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1167678,EDG-1167678,Hx of colonoscopy
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-118687,EDG-118687,DDD (degenerative disc disease)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-118969,EDG-118969,Lower extremity edema
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1220589,EDG-1220589,Hx of falling
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1230819,EDG-1230819,History of anesthesia complications
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1238977,EDG-1238977,S/P total knee arthroplasty
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-138118,EDG-138118,HTN (hypertension)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142205,EDG-142205,Hypothyroidism
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142373,EDG-142373,Tinnitus
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142474,EDG-142474,Coronary atherosclerosis
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142819,EDG-142819,Palindromic rheumatism
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-14513,EDG-14513,Need for prophylactic hormone replacement therapy (postmenopausal)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1890288,EDG-1890288,High frequency hearing loss of both ears
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-192467,EDG-192467,Urinary urgency
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-199135,EDG-199135,"Advanced directives, counseling/discussion"
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-2028223,EDG-2028223,Lower esophageal ring (Schatzki)
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-5796,EDG-5796,Esophageal reflux
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-64392,EDG-64392,Urticaria due to cold
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-64979,EDG-64979,[PHI] of toe
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-66850,EDG-66850,Coronary artery disease
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-70734,EDG-70734,Dry mouth
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-96472,EDG-96472,Gingivitis
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-97491,EDG-97491,Migraine headache
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-97703,EDG-97703,Hemorrhoid
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-99371,EDG-99371,Lactose intolerance
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-1072220,EAP-1072220,SACROSPINOUS/ UTEROSACRAL LIGAMENT SUSPENSION; VAGINAL APPROACH
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121653,EAP-121653,HX MENISCECTOMY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121680,EAP-121680,HX HEART CATHETERIZATION
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121736,EAP-121736,HX BREAST BIOPSY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121748,EAP-121748,HX HYSTERECTOMY VAGINAL
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121803,EAP-121803,HX ANGIOPLASTY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121814,EAP-121814,HX CORONARY STENT PLACEMENT
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121845,EAP-121845,HX TUBAL LIGATION
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121855,EAP-121855,HX OOPHORECTOMY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-133376,EAP-133376,CATARACT EXTRACTION WITH INTRAOCULAR LENS AND PHACOEMULSIFICATION
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134143,EAP-134143,ANKLE INCISION AND DRAINAGE
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134248,EAP-134248,CYSTOCELE REPAIR
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134274,EAP-134274,VAGINAL ENTEROCELE / RECTOCELE REPAIR; WITH OR WITHOUT ANTERIOR & POSTERIOR REPAIR
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134302,EAP-134302,CYSTOSCOPY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135200,EAP-135200,KNEE ARTHROSCOPY PARTIAL MENISCECTOMY MEDIAL AND/ OR LATERAL
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135212,EAP-135212,KNEE / LOWER EXTREMITY DEBRIDEMENT
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135240,EAP-135240,KNEE TOTAL JOINT REPLACEMENT
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135678,EAP-135678,WOUND DEBRIDMENT
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-159,EAP-159,ANORECTAL MANOMETRY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188105,EAP-188105,EGD WITH ESOPHAGEAL DILATION WITH WIRE GUIDED BOUGIE
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188107,EAP-188107,EGD WITH ESOPHAGEAL DILATION WITH BALLOON
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-507868,EAP-507868,LUMBAR DECOMPRESSION; 2 LEVELS
+37D611D6-DCD0-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 103097,103097,Neuropathy
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 103474,103474,Postherpetic neuralgia
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1045032,1045032,Overweight (BMI 25.0-29.9)
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1053177,1053177,Incomplete RBBB
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1053608,1053608,Lumbar disc herniation with radiculopathy
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1075491,1075491,Acute ischemic stroke (CMS-HCC)
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1099454,1099454,"11/6/2023 (Dr [PHI]): s/p L2-4 laminectomy, L2-3 discectomy"
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1118734,1118734,"Spinal stenosis, lumbar region, with neurogenic claudication"
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1128425,1128425,Anal sphincter incompetence
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1167678,1167678,Hx of colonoscopy
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1215039,1215039,Diagnosis unknown
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1219930,1219930,H/O heart artery stent
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1220589,1220589,Hx of falling
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1230819,1230819,History of anesthesia complications
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1238977,1238977,S/P total knee arthroplasty
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1252792,1252792,Prolapse of female pelvic organs
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 142474,142474,Coronary atherosclerosis
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1494811646,1494811646,COVID-19 virus infection
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1674592,1674592,"PCO (posterior capsular opacification), unspecified laterality"
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 1890288,1890288,High frequency hearing loss of both ears
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 192858,192858,Preventative health care
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 199135,199135,"Advanced directives, counseling/discussion"
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 2028223,2028223,Lower esophageal ring (Schatzki)
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 2139062,2139062,"Cerebrovascular accident (CVA), unspecified mechanism (CMS-HCC)"
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 2186448,2186448,Epiretinal membrane (ERM) of both eyes
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 5796,5796,Esophageal reflux
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 78070,78070,Left homonymous hemianopsia
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 78196,78196,Chronic allergic conjunctivitis
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 86129,86129,Urinary retention
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 97491,97491,Migraine headache
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+37D611D6-DCD0-EF11-920E-005056BFF837,Problem List,Problem List Entry 98706,98706,Insomnia
+37D611D6-DCD0-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139062,EDG-2139062,"Cerebrovascular accident (CVA), unspecified mechanism (CMS-HCC)"

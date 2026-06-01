@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+39A03A8A-1B8A-EF11-920D-005056BFF837,Allergy,Allergen ELG-3778,ELG-3778,HYDROXYUREA
+39A03A8A-1B8A-EF11-920D-005056BFF837,Allergy,Latex Allergy,Allergy,No
+39A03A8A-1B8A-EF11-920D-005056BFF837,Allergy,Latex allergy,allergy,No
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C85.90,C85.90,"Lymphoma, unspecified body region, unspecified lymphoma type (CMS-HCC)"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E22.2,E22.2,SIADH (syndrome of inappropriate ADH production)
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis H05.10,H05.10,Infection of orbit
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I67.6,I67.6,Orbital apex-sphenoid syndrome
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J32.4,J32.4,"Pansinusitis, unspecified chronicity"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis deferred
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-10043,ERX-10043,"flecainide tablet Take 1 tablet (50 mg total) by mouth 2 times a day, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-10368,ERX-10368,"KETOCONAZOLE 2 % TP CREA 1 Application by Topical route as needed, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-11148,ERX-11148,"propafenone tablet Take 1 tablet (300 mg total) by mouth every day, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-222188,ERX-222188,"ruxolitinib (Jakafi) tablet Take 5 mg by mouth 2 times a day, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-231551,ERX-231551,"FARXIGA 10 MG PO TABS Take 1 tablet (10 mg total) by mouth every morning, DAW, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-234671,ERX-234671,"DEFERASIROX 360 MG PO TABS Take 1 tablet by mouth every bedtime, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-311,ERX-311,"ALLOPURINOL 300 MG PO TABS Take 1 tablet (300 mg total) by mouth every other day, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet Take 1 tablet (20 mg total) by mouth every other day, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-4572,ERX-4572,"LORazepam tablet Take 1 tablet (0.5 mg total) by mouth 3 times a day as needed, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-717,ERX-717,"ATENOLOL 25 MG PO TABS Take 1 tablet (25 mg total) by mouth daily in the evening, Historical Med"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-447132,EAP-447132,ORBITOTOMY WITH OR WITHOUT BIOPSY
+39A03A8A-1B8A-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+39A03A8A-1B8A-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-537311,EAP-537311,FUNCTIONAL ENDOSCOPIC SINUS SURGERY (A)
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 100488,100488,Lymphoma (CMS-HCC)
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 1027297,1027297,"CKD (chronic kidney disease), stage IV (CMS-HCC)"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 1112590,1112590,"Orbital cellulitis, right"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 138848,138848,Disease of nasal cavity and sinuses
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 1854241,1854241,Infection of orbit
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 190126,190126,Fungal sinusitis
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 2139161,2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"
+39A03A8A-1B8A-EF11-920D-005056BFF837,Problem List,Problem List Entry 78888,78888,SIADH (syndrome of inappropriate ADH production)
+39A03A8A-1B8A-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2065511,EDG-2065511,Other disorders of orbit

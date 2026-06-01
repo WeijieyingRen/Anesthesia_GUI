@@ -1,0 +1,43 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+9EF38D23-02EA-EF11-920F-005056BFF837,Allergy,Allergen ELG-4617,ELG-4617,AMLODIPINE
+9EF38D23-02EA-EF11-920F-005056BFF837,Allergy,Allergen ELG-6833,ELG-6833,TAMSULOSIN
+9EF38D23-02EA-EF11-920F-005056BFF837,Allergy,Latex Allergy,Allergy,No
+9EF38D23-02EA-EF11-920F-005056BFF837,Allergy,Latex allergy,allergy,No
+9EF38D23-02EA-EF11-920F-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z98.890,Z98.890,"Hx of repair of dissecting thoracic aortic aneurysm, [PHI] type A"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"ASPIRIN 81 MG PO TBEC Take 1 tablet (81 mg total) by mouth, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-14550,ERX-14550,"terazosin (HYTRIN) capsule take 1 Cap by mouth 3 times a day, Disp-90 Cap, R-0, E-Prescribe"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-14550,ERX-14550,"TERAZOSIN 1 MG PO CAPS Take 1 capsule (1 mg total) by mouth 2 times a day, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-176803,ERX-176803,"FLONASE NASAL by Nasal route, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-199135,ERX-199135,"hydrochlorothiazide tablet Take 1 tablet (12.5 mg total) by mouth daily, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-25855,ERX-25855,"gabapentin (Neurontin) tablet Take 1 tablet (600 mg total) by mouth as needed 300 mg at night, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-263630,ERX-263630,"OSTEOBLOX CF PO Take by mouth, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-5115,ERX-5115,"minoxidil tablet Take 1 tablet (2.5 mg total) by mouth 2 times a day, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Focus factor, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"atorvastatin tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-78559,ERX-78559,"carvediloL (Coreg) tablet Take 1 tablet (12.5 mg total) by mouth 2 times a day with meals, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-79491,ERX-79491,"CETIRIZINE 10 MG PO TABS Take 1 tablet (10 mg total) by mouth allertic, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"PANTOPRAZOLE 40 MG PO TBEC Take 1 tablet (40 mg total) by mouth, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet Take 1 tablet (100 mg total) by mouth daily, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-98,ERX-98,"ACETAMINOPHEN 500 MG PO CAPS Take 500 mg by mouth 3 times a day as needed, Historical Med"
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-1123843,EDG-1123843,Aneurysm of descending thoracic aorta
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-1171590,EDG-1171590,"Hx of repair of dissecting thoracic aortic aneurysm, [PHI] type A"
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-1231347,EDG-1231347,"Former smoker, stopped smoking in distant past"
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-176498,EDG-176498,Chronic pain disorder
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-203601,EDG-203601,Alcohol use
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-2394414,EDG-2394414,"CKD stage 3b, GFR 30-44 ml/min (CMS-HCC)"
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121729,EAP-121729,HX HERNIA REPAIR INGUINAL
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121792,EAP-121792,HX ADENOIDECTOMY
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121843,EAP-121843,HX VASECTOMY
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-134798,EAP-134798,AORTIC TYPE A DISSECTION REPAIR WITH CARDIOPULMONARY BYPASS
+9EF38D23-02EA-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-148979,EAP-148979,EYE SURGERY PROCEDURE
+9EF38D23-02EA-EF11-920F-005056BFF837,Problem List,Problem List Entry 1024753,1024753,Acute postoperative pain
+9EF38D23-02EA-EF11-920F-005056BFF837,Problem List,Problem List Entry 1171501,1171501,"Dissecting aneurysm of thoracic aorta, [PHI] type A (CMS-HCC)"
+9EF38D23-02EA-EF11-920F-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+9EF38D23-02EA-EF11-920F-005056BFF837,Problem List,Problem List Entry 1762426,1762426,Alcohol consumption of one to four drinks per day
+9EF38D23-02EA-EF11-920F-005056BFF837,Problem List,Problem List Entry 1794836,1794836,Gastroesophageal reflux disease with esophagitis
+9EF38D23-02EA-EF11-920F-005056BFF837,Problem List,Problem List Entry 79462,79462,Acute blood loss anemia
+9EF38D23-02EA-EF11-920F-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1171590,EDG-1171590,"Hx of repair of dissecting thoracic aortic aneurysm, [PHI] type A"

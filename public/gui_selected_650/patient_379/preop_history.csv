@@ -1,0 +1,59 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C41.9,C41.9,Osteosarcoma (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.0,I48.0,Paroxysmal atrial fibrillation (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.81,Z94.81,S/P allogeneic bone marrow transplant (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-13410,ERX-13410,"acetaminophen (Tylenol) tablet take 1 Tablet (650 mg total) by mouth every 6 hours for pain after adrenal gland surgery, Disp-30 Tablet, R-0, E-Prescribe"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-182398,ERX-182398,"MULTIVITAMIN PO take 3,000 Int'l Units by mouth every day, Historical Med"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO take 1,000 mcg by mouth, Historical Med"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take 3,000 mg by mouth, Historical Med"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"atorvastatin tablet take 1 Tablet (20 mg total) by mouth daily, Disp-90 Tablet, R-11, E-Prescribe"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-8654,ERX-8654,"VITAMIN B-12 1,000 MCG PO TABS take 1 Tablet (1,000 mcg total) by mouth every day, Historical Med"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-103097,EDG-103097,Neuropathy
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1134789,EDG-1134789,Benign colonic polyp
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-154317,EDG-154317,BCC (basal cell carcinoma)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-161974,EDG-161974,MDS (myelodysplastic syndrome) (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-201733,EDG-201733,DVT (deep venous thrombosis) (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-6094,EDG-6094,Anal fissure
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134642,EAP-134642,ADRENALECTOMY LAPAROSCOPIC
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134774,EAP-134774,RIB RESECTION
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135688,EAP-135688,FLAP FREE MICROVASCULAR
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-136527,EAP-136527,CHEST WALL LESION / MASS WIDE EXCISION
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188215,EAP-188215,COLONOSCOPY WITH BIOPSY
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188225,EAP-188225,COLONOSCOPY WITH REMOVAL OF LESION BY SNARE
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-189252,EAP-189252,IR ABSCESS DRAIN PLACEMENT
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-450082,EAP-450082,FLAP REVISION
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-463906,EAP-463906,PROCEDURE REVISION; SECONDARY MODIFIER
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-501536,EAP-501536,CHEST WALL RECONSTRUCTION
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1020001,1020001,Postnasal drip
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1033450,1033450,Adrenal mass (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1044672,1044672,Cytomegalovirus (CMV) viremia (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1060634,1060634,Sepsis (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 106324,106324,Thrombosis
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1071898,1071898,Peripheral neuropathy
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1131343,1131343,"Hypogammaglobulinemia, acquired (CMS-HCC)"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1168015,1168015,S/P allogeneic bone marrow transplant (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1169235,1169235,Impaired mobility and ADLs
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142294,142294,Allergic rhinitis
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 157607,157607,EBV infection
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 161974,161974,MDS (myelodysplastic syndrome) (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1876250,1876250,Monoallelic mutation of TP53 gene
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 193314,193314,Sarcoma (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 193446,193446,Osteosarcoma (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2111392,2111392,"Altered mental status, unspecified"
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+E0B8CA37-8FE2-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-193314,EDG-193314,Sarcoma (CMS-HCC)

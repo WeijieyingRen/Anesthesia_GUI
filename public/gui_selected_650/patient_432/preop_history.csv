@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+5A330069-2E7E-EE11-9202-005056BFF837,Allergy,Allergen ELG-286,ELG-286,NSAIDS (NON-STEROIDAL ANTI-INFLAMMATORY DRUG)
+5A330069-2E7E-EE11-9202-005056BFF837,Allergy,Allergen ELG-3541,ELG-3541,IBUPROFEN
+5A330069-2E7E-EE11-9202-005056BFF837,Allergy,Latex Allergy,Allergy,No
+5A330069-2E7E-EE11-9202-005056BFF837,Allergy,Latex allergy,allergy,No
+5A330069-2E7E-EE11-9202-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C49.9,C49.9,Sarcoma (CMS-HCC)
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"metFORMIN tablet Take 2 tablets (1,000 mg total) by mouth daily, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS take 1 Tablet by mouth daily, Disp-30 Tablet, R-0, E-Prescribe"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-116178,ERX-116178,"rosuvastatin tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-15900,ERX-15900,"ACCU-CHEK SOFTCLIX LANCETS MISC MISC USE ONCE DAILY TO TWICE DAILY USE AS DIRECTED, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-172935,ERX-172935,"COENZYME Q10 PO take 1 Capsule by mouth every day, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-198421,ERX-198421,"JANUVIA 50 MG PO TABS Take 1 tablet (50 mg total) by mouth daily, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-228224,ERX-228224,"VASCEPA 1 GRAM PO CAPS take 2 Capsules by mouth 2 times a day, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-80208,ERX-80208,"metoprolol succinate (Toprol XL) extended release tablet Take 1 tablet (50 mg total) by mouth daily, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"amLODIPine tablet Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed for Nausea, Disp-10 Tablet, R-0, E-Prescribe"
+5A330069-2E7E-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-98,ERX-98,"ACETAMINOPHEN 500 MG PO CAPS take 500 mg by mouth every 6 hours as needed for Pain, Disp-30 Capsule, R-0, E-Prescribe"
+5A330069-2E7E-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-135676,EAP-135676,SPLIT THICKNESS SKIN GRAFT; SECONDARY PROCEDURE
+5A330069-2E7E-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-135688,EAP-135688,FLAP FREE MICROVASCULAR
+5A330069-2E7E-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-136244,EAP-136244,FOREARM RADICAL TUMOR SOFT TISSUE RESECTION
+5A330069-2E7E-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-439615,EAP-439615,BONE CEMENT BEAD PLACEMENT; SECONDARY PROCEDURE
+5A330069-2E7E-EE11-9202-005056BFF837,Past Surgical History,Past Surgical History EAP-453589,EAP-453589,CLEAN CLOSURE; SECONDARY PROCEDURE
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 1099485,1099485,"Wrist pain, left"
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 1134273,1134273,"Jaw pain, non-TMJ"
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 193314,193314,Sarcoma (CMS-HCC)
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 203533,203533,Pulmonary nodules
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 97158,97158,Seasonal allergies
+5A330069-2E7E-EE11-9202-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+5A330069-2E7E-EE11-9202-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-193314,EDG-193314,Sarcoma (CMS-HCC)

@@ -1,4 +1,10 @@
 import type { TimelineContextData, TimelineContextEvent } from "@/lib/types";
+import {
+  mapDynamicTimelineGroup,
+  removeDynamicEventsCoveredByStatic,
+  shouldShowDynamicTimelineEvent,
+  shouldShowStaticTimelineEvent,
+} from "@/lib/timeline-event-config";
 
 const toDate = (v: any): Date | undefined => {
   if (!v) return undefined;
@@ -19,137 +25,53 @@ const toRelativeMinute = (
 };
 
 const hasValue = (v: any): boolean => {
-  return !(
-    v === null ||
-    v === undefined ||
-    v === "" ||
-    v === 0 ||
-    v === "0"
-  );
+  return !(v === null || v === undefined || String(v).trim() === "");
 };
 
 const toYesNo = (v: any): boolean => Number(v) === 1;
 
 const STATIC_STAGE_KEYS = [
   "anesthesia_start",
-  "induction",
-  "intubation",
+  "anesthesia_stop",
   "procedure_start",
   "procedure_end",
+  "induction",
+  "intubation",
   "extubation",
-  "emergence",
-  "anesthesia_stop",
+  "lma_inserted",
+  "lma_removed",
+  "block_start",
+  "block_complete",
+  "block_stop",
 ] as const;
-
-const DYNAMIC_EVENT_GROUPS: Record<string, TimelineContextEvent["group"]> = {
-  lma_inserted: "airway",
-  lma_removed: "airway",
-  throat_pack_in: "airway",
-  throat_pack_out: "airway",
-  head_of_bed_positioning: "airway",
-
-  bed_position: "positioning",
-  position: "positioning",
-  table_turned_90: "positioning",
-  table_turned_180: "positioning",
-  cooling_started: "positioning",
-
-  block_start: "block",
-  block_stop: "block",
-  block_complete: "block",
-  block_handoff: "block",
-
-  aortic_clamp_on: "surgical",
-  aortic_clamp_off: "surgical",
-  carotid_clamp_on: "surgical",
-  carotid_clamp_off: "surgical",
-  renal_clamp_on: "surgical",
-  renal_clamp_off: "surgical",
-  artery_clamp_on: "surgical",
-  tourniquet_inflated: "surgical",
-  tourniquet_deflated: "surgical",
-  cpr: "surgical",
-  defibrillation: "surgical",
-};
 
 function formatStaticLabel(key: string): string {
   const labelMap: Record<string, string> = {
     anesthesia_start: "Anesthesia Start",
-    induction: "Induction",
-    intubation: "Intubation",
+    anesthesia_stop: "Anesthesia Stop",
     procedure_start: "Procedure Start",
     procedure_end: "Procedure End",
+    induction: "Induction",
+    intubation: "Intubation",
     extubation: "Extubation",
-    emergence: "Emergence",
-    anesthesia_stop: "Anesthesia Stop",
-    anesthesia_timeout: "Anesthesia Timeout",
+    lma_inserted: "LMA Inserted",
+    lma_removed: "LMA Removed",
+    block_start: "Block Start",
+    block_complete: "Block Complete",
+    block_stop: "Block Stop",
   };
 
   return labelMap[key] ?? key;
 }
 
-function formatDynamicLabel(eventType: string, eventValue: any): string {
-  const valueText =
-    typeof eventValue === "string"
-      ? eventValue.trim()
-      : String(eventValue ?? "").trim();
+function formatDynamicLabel(eventType: string, eventLabel: any): string {
+  const labelText = String(eventLabel ?? "").trim();
+  if (labelText) return labelText;
 
-  switch (eventType) {
-    case "bed_position":
-      return valueText ? `Bed Position: ${valueText}` : "Bed Position";
-    case "position":
-      return valueText ? `Position: ${valueText}` : "Position";
-    case "head_of_bed_positioning":
-      return valueText
-        ? `Head-of-bed: ${valueText}`
-        : "Head-of-bed Positioning";
-    case "lma_inserted":
-      return "LMA Inserted";
-    case "lma_removed":
-      return "LMA Removed";
-    case "throat_pack_in":
-      return "Throat Pack In";
-    case "throat_pack_out":
-      return "Throat Pack Out";
-    case "block_start":
-      return "Block Start";
-    case "block_stop":
-      return "Block Stop";
-    case "block_complete":
-      return "Block Complete";
-    case "block_handoff":
-      return "Block Handoff";
-    case "cooling_started":
-      return "Cooling Started";
-    case "cpr":
-      return "CPR";
-    case "defibrillation":
-      return "Defibrillation";
-    case "tourniquet_inflated":
-      return "Tourniquet Inflated";
-    case "tourniquet_deflated":
-      return "Tourniquet Deflated";
-    case "aortic_clamp_on":
-      return "Aortic Clamp On";
-    case "aortic_clamp_off":
-      return "Aortic Clamp Off";
-    case "carotid_clamp_on":
-      return "Carotid Clamp On";
-    case "carotid_clamp_off":
-      return "Carotid Clamp Off";
-    case "renal_clamp_on":
-      return "Renal Clamp On";
-    case "renal_clamp_off":
-      return "Renal Clamp Off";
-    case "artery_clamp_on":
-      return "Artery Clamp On";
-    case "table_turned_90":
-      return "Table Turned 90°";
-    case "table_turned_180":
-      return "Table Turned 180°";
-    default:
-      return valueText ? `${eventType}: ${valueText}` : eventType;
-  }
+  return eventType
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 }
 
 function inferCurrentStage(
@@ -233,15 +155,21 @@ export function prepareTimelineContextData(
   episodeEndMin?: number,
   nearbyWindowMin = 15
 ): TimelineContextData {
-  const anesthesiaStart =
+  const anesthesiaStart = caseStaticRow["anesthesia_start"] ?? undefined;
+  const visualizationStart =
     caseStaticRow["__visualization_start"] ??
     caseStaticRow["anesthesia_start"] ??
     undefined;
 
+  const visualizationOffsetMin =
+    toRelativeMinute(anesthesiaStart, visualizationStart) ?? 0;
+
   const staticEvents = STATIC_STAGE_KEYS
     .map((key): TimelineContextEvent | null => {
       const rawTime = caseStaticRow[key];
-      if (!rawTime) return null;
+      if (!shouldShowStaticTimelineEvent(key)) return null;
+      if (!hasValue(rawTime)) return null;
+      if (!toDate(rawTime)) return null;
 
       return {
         source: "static",
@@ -250,33 +178,47 @@ export function prepareTimelineContextData(
         label: formatStaticLabel(key),
         raw_value: rawTime,
         observation_time: rawTime,
-        relative_min: toRelativeMinute(rawTime, anesthesiaStart),
+        relative_min: toRelativeMinute(rawTime, visualizationStart),
       };
     })
     .filter((x): x is TimelineContextEvent => x !== null)
     .sort((a, b) => (a.relative_min ?? 0) - (b.relative_min ?? 0));
 
-  const dynamicEvents: TimelineContextEvent[] = [];
+  const dynamicEventsBeforeConflictRemoval: TimelineContextEvent[] = [];
 
   for (const row of caseDynamicRows ?? []) {
-    const obsTime = row["observation_time"] ?? undefined;
-    const relMin = toRelativeMinute(obsTime, anesthesiaStart);
+    const eventGroup = String(row["event_group"] ?? "").trim();
+    const eventType = String(row["event_name"] ?? "").trim();
+    const eventValue = row["event_value"];
+    const eventLabel = row["event_label"];
+    const observationTime = String(row["observation_time"] ?? "").trim() || undefined;
+    const group = mapDynamicTimelineGroup(eventGroup);
 
-    for (const [eventType, group] of Object.entries(DYNAMIC_EVENT_GROUPS)) {
-      const value = row[eventType];
-      if (!hasValue(value)) continue;
-
-      dynamicEvents.push({
-        source: "dynamic",
-        group,
-        event_type: eventType,
-        label: formatDynamicLabel(eventType, value),
-        raw_value: value,
-        observation_time: obsTime,
-        relative_min: relMin,
-      });
+    if (!group) continue;
+    if (!shouldShowDynamicTimelineEvent({ event_group: eventGroup, event_name: eventType })) {
+      continue;
     }
+
+    const relativeMinRaw = Number(row["relative_anesthesia_time"]);
+    const relativeMin = Number.isFinite(relativeMinRaw)
+      ? relativeMinRaw + visualizationOffsetMin
+      : toRelativeMinute(observationTime, visualizationStart);
+
+    dynamicEventsBeforeConflictRemoval.push({
+      source: "dynamic",
+      group,
+      event_type: eventType,
+      label: formatDynamicLabel(eventType, eventLabel),
+      raw_value: eventValue,
+      observation_time: observationTime,
+      relative_min: relativeMin,
+    });
   }
+
+  const dynamicEvents = removeDynamicEventsCoveredByStatic(
+    staticEvents,
+    dynamicEventsBeforeConflictRemoval
+  );
 
   dynamicEvents.sort((a, b) => (a.relative_min ?? 0) - (b.relative_min ?? 0));
 

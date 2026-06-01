@@ -1,0 +1,36 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N28.89,N28.89,Left renal mass
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10453,ERX-10453,"lisinopril-hydrochlorothiazide (PRINZIDE) 20-25 mg tablet take 1 Tab by mouth daily. , Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10466,ERX-10466,"loratadine (CLARITIN) 10 mg tablet take 1 Tablet (10 mg total) by mouth daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-199339,ERX-199339,"Omega-3 Fatty Acids-Vitamin E (FISH OIL) 1,000 mg CAPS take by mouth daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-232955,ERX-232955,"EMPAGLIFLOZIN 10 MG PO TABS take 1 Tablet (10 mg total) by mouth daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-239594,ERX-239594,"ACCU-CHEK GUIDE TEST STRIPS MISC STRP USE STRIP TO CHECK BLOOD SUGAR ONCE DAILY, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-24398,ERX-24398,"metFORMIN (Glucophage) tablet daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-37650,ERX-37650,"glipiZIDE (Glucotrol XL) sustained release tablet take 1 Tablet (10 mg total) by mouth every morning, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet take 1 Tablet (40 mg total) by mouth daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet take 1 Tablet (5 mg total) by mouth daily, Historical Med"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1066304,EDG-1066304,Left renal mass
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134364,EAP-134364,TRANSURETHRAL RESECTION OF PROSTATE
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-198118,EAP-198118,EXCISION INFERIOR TURBINATE
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-35267,EAP-35267,PALATOPHARYNGOPLASTY
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1066305,1066305,Left kidney mass
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1103511,1103511,"Renal mass, left"
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 97158,97158,Seasonal allergies
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+FDD2C434-FDEB-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1066304,EDG-1066304,Left renal mass

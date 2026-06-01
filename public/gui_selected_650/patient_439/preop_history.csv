@@ -1,0 +1,16 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+D3FAD359-6809-F011-9211-005056BFF837,Allergy,Latex Allergy,Allergy,No
+D3FAD359-6809-F011-9211-005056BFF837,Allergy,Latex allergy,allergy,No
+D3FAD359-6809-F011-9211-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R91.1,R91.1,Lung nodule
+D3FAD359-6809-F011-9211-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet Take 2 tablets (650 mg total) by mouth every 8 hours as needed, Historical Med"
+D3FAD359-6809-F011-9211-005056BFF837,Home Medication,Home Medication ERX-10371,ERX-10371,"KETOROLAC 10 MG PO TABS Take 1 tablet (10 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-0, E-Prescribe"
+D3FAD359-6809-F011-9211-005056BFF837,Home Medication,Home Medication ERX-176663,ERX-176663,"FISH OIL PO Take 2 capsules by mouth every other day, Historical Med"
+D3FAD359-6809-F011-9211-005056BFF837,Home Medication,Home Medication ERX-236747,ERX-236747,"TRI-[PHI]-MARZIA 0.18/0.215/0.25 MG-25 MCG PO TABS Take 1 tablet by mouth daily, [PHI], Historical Med"
+D3FAD359-6809-F011-9211-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 1 puff by Inhalation route every 4 hours as needed, Historical Med"
+D3FAD359-6809-F011-9211-005056BFF837,Problem List,Problem List Entry 1119323,1119323,Cavitary lesion of lung
+D3FAD359-6809-F011-9211-005056BFF837,Problem List,Problem List Entry 1231740,1231740,Postural instability
+D3FAD359-6809-F011-9211-005056BFF837,Problem List,Problem List Entry 192855,192855,Lung nodule
+D3FAD359-6809-F011-9211-005056BFF837,Problem List,Problem List Entry 2139408,2139408,"Acute pericarditis, unspecified type"
+D3FAD359-6809-F011-9211-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+D3FAD359-6809-F011-9211-005056BFF837,Problem List,Problem List Entry 79238,79238,Subclinical hypothyroidism
+D3FAD359-6809-F011-9211-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-192855,EDG-192855,Lung nodule

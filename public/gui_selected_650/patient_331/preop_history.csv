@@ -1,0 +1,72 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E2C823D6-FD01-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+E2C823D6-FD01-EE11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 148.1,148.1,Malignant neoplasm of pyriform sinus (CMS-HCC)
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 275.41,275.41,Hypocalcemia
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 300.02,300.02,Generalized anxiety disorder
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C13.9,C13.9,Cancer of hypopharynx (CMS-HCC)
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D72.829,D72.829,"Leukocytosis, unspecified type"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E55.9,E55.9,Vitamin D deficiency
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E87.6,E87.6,Hypokalemia
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E88.09,E88.09,Hypoalbuminemia
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Postoperative pain
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.3,G89.3,Cancer related pain
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K21.9,K21.9,"Gastroesophageal reflux disease, unspecified whether esophagitis present"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K71.6,K71.6,Drug-induced hepatitis
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R13.10,R13.10,"Dysphagia, unspecified type"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R22.0,R22.0,Cheek swelling
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R74.8,R74.8,Elevated alkaline phosphatase level
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R94.31,R94.31,QT prolongation
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis V66.7,V66.7,Encounter for palliative care
+E2C823D6-FD01-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z90.02,Z90.02,History of laryngectomy
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet 1 Tablet (20 mg total) by Feeding Tube route 2 times a day, Disp-60 Tablet, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 1 Tablet (500 mg total) by mouth every 6 hours as needed for Pain, Disp-30 Tablet, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10368,ERX-10368,"KETOCONAZOLE 2 % TP CREA by Topical route, Historical Med"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10813,ERX-10813,"OXYCODONE 5 MG/5 ML PO SOLN 2.5 mL (2.5 mg total) by Feeding Tube route every 4 hours as needed for Pain (Can take up to 5mg per dose every 4 hours as needed for pain), Disp-120 mL, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-1300,ERX-1300,"CALCIUM CARBONATE 500 MG CALCIUM (1,250 MG) PO TABS 3 Tablets (1,500 mg of elemental calcium total) by Feeding Tube route 2 times a day, Disp-120 Tablet, R-1, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-16218,ERX-16218,"CALCITRIOL 1 MCG/ML PO SOLN 0.25 mL (0.25 mcg total) by Feeding Tube route daily, Disp-15 mL, R-1, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule 1 Capsule (100 mg total) by Feeding Tube route 3 times a day, Disp-90 Capsule, R-1, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK 1 Packet (17 g total) by Feeding Tube route as needed, Disp-14 Each, R-1, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-2623,ERX-2623,"doxycycline capsule 1 Capsule (100 mg total) by Feeding Tube route 2 times a day for 7 days, Disp-14 Capsule, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-325,ERX-325,"ALPRAZolam (Xanax) tablet 1 Tablet (0.5 mg total) by Feeding Tube route every bedtime, Historical Med"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-38488,ERX-38488,"FLUOXETINE 20 MG/5 ML (4 MG/ML) PO SOLN 5 mL (20 mg total) by Feeding Tube route Morning, Historical Med"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-39136,ERX-39136,"NYSTATIN 100,000 UNIT/GRAM TP POWD by Topical route as needed, Historical Med"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-4420,ERX-4420,"levothyroxine tablet take 1 Tablet (25 mcg total) by mouth every morning before breakfast, Disp-30 Tablet, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-6434,ERX-6434,"POTASSIUM CHLORIDE 20 MEQ PO PACK 2 Packets (40 mEq total) by Feeding Tube route 2 times a day Please take 40 mEq daily until Monday 3/20. Please follow up with your primary care doctor to discuss how long you should continue taking this., Disp-14 Packet, R-1, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet 4 Tablets (40 mg total) by Feeding Tube route daily Please take 40mg once daily until the Stanford Hepatology team reaches out and instructs you to change your dose., Disp-120 Tablet, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-680,ERX-680,"ASPIRIN 81 MG PO CHEW 1 Tablet (81 mg total) by Feeding Tube route daily, Disp-30 Tablet, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-8113,ERX-8113,"TRIAMCINOLONE ACETONIDE 0.1 % TP CREA by Topical route as needed, Historical Med"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-92434,ERX-92434,"ERGOCALCIFEROL (VITAMIN D2) 1,250 MCG (50,000 UNIT) PO CAPS take 1 Capsule (50,000 Units total) by mouth every 7 days, Disp-30 Capsule, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 6 hours as needed, Disp-10 Tablet, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-9516,ERX-9516,"CHLORHEXIDINE GLUCONATE 0.12 % MM MWSH take 15 mL by mouth 2 times a day, Disp-473 mL, R-0, E-Prescribe"
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121722,EAP-121722,HX EGD
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121788,EAP-121788,HX TRACHEOSTOMY
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135044,EAP-135044,ESOPHAGOSCOPY FLEXIBLE AND RIGID
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135432,EAP-135432,CRICOPHARYNGEAL MYOTOMY
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135440,EAP-135440,LARYNGECTOMY TOTAL WITH RADICAL NECK DISSECTION
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135488,EAP-135488,NECK INCISION AND DRAINAGE / EXPLORATION; POSTOP HEMORRHAGE
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135492,EAP-135492,NECK WOUND CLOSURE
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135686,EAP-135686,FLAP ROTATIONAL
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135978,EAP-135978,PORT-A-CATHETER INSERTION
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-136357,EAP-136357,RADICAL DEFECT RECONSTRUCTION WITH RADIAL FOREARM FREE FLAP
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-136695,EAP-136695,RADICAL NECK DISSECTION MODIFIED
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-136735,EAP-136735,MICROLARYNGOSCOPY
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-137391,EAP-137391,MICROLARYNGOSCOPY; INJECTION TO VOCAL CORD
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-137395,EAP-137395,MICROLARYNGOSCOPY WITH BIOPSIES / REMOVAL OF FOREIGN BODY
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188469,EAP-188469,IR GASTROSTOMY TO GASTROJEJUNOSTOMY CONVERSION
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-3248,EAP-3248,IR ANGIOGRAPHY CEREBRAL
+E2C823D6-FD01-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1035127,1035127,Dysphagia
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1043799,1043799,History of laryngectomy
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1054114,1054114,Tracheostomy dependence (CMS-HCC)
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1071406,1071406,Dysphonia
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1514,1514,Malignant neoplasm of pyriform sinus (CMS-HCC)
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1845205,1845205,History of radiation to head and neck region
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+E2C823D6-FD01-EE11-91FC-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+E2C823D6-FD01-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1226578,EDG-1226578,Pharyngocutaneous fistula

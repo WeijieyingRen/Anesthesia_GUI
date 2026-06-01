@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+739B7E93-D7C7-ED11-91FB-005056BFF837,2023-03-16 23:16:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2023-03-16 23:16:00+00:00,2023-03-17 00:40:00+00:00,0.0,0.0,0.0,0.0,84.0
+739B7E93-D7C7-ED11-91FB-005056BFF837,2023-03-16 23:28:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-03-16 23:16:00+00:00,2023-03-17 00:40:00+00:00,12.0,12.0,12.0,12.0,72.0
+739B7E93-D7C7-ED11-91FB-005056BFF837,2023-03-17 00:01:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-03-16 23:16:00+00:00,2023-03-17 00:40:00+00:00,45.0,45.0,45.0,45.0,39.0
+739B7E93-D7C7-ED11-91FB-005056BFF837,2023-03-17 00:25:00+00:00,position,bed_position,<30 degrees,Bed Position: <30 degrees,2023-03-16 23:16:00+00:00,2023-03-17 00:40:00+00:00,69.0,69.0,69.0,69.0,15.0
+739B7E93-D7C7-ED11-91FB-005056BFF837,2023-03-17 00:30:00+00:00,position,bed_position,<30 degrees,Bed Position: <30 degrees,2023-03-16 23:16:00+00:00,2023-03-17 00:40:00+00:00,74.0,74.0,74.0,74.0,10.0

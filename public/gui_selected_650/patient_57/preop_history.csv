@@ -1,0 +1,17 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+B7737006-0FDD-ED11-91FB-005056BFF837,Allergy,Allergen ELG-11749,ELG-11749,NORCO [HYDROCODONE-ACETAMINOPHEN]
+B7737006-0FDD-ED11-91FB-005056BFF837,Allergy,Allergen ELG-2881,ELG-2881,TYLENOL [ACETAMINOPHEN]
+B7737006-0FDD-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+B7737006-0FDD-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,Yes
+B7737006-0FDD-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+B7737006-0FDD-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C64.9,C64.9,"Renal cell carcinoma, unspecified laterality (CMS-HCC)"
+B7737006-0FDD-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C79.9,C79.9,Multiple lesions of metastatic malignancy (CMS-HCC)
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 2 Tablets (1,000 mg total) by mouth every 6 hours as needed, Disp-60 Tablet, R-0, E-Prescribe"
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10856,ERX-10856,"PARoxetine tablet take 1 Tablet (30 mg total) by mouth Morning, Historical Med"
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR take by mouth 2 times a day, Historical Med"
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-33083,ERX-33083,"midodrine tablet take 1 Tablet (10 mg total) by mouth 3 times a day, Disp-90 Tablet, R-0, E-Prescribe"
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-4424,ERX-4424,"levothyroxine tablet take 1 Tablet (125 mcg total) by mouth every morning before breakfast, Disp-30 Tablet, R-0, E-Prescribe"
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-80840,ERX-80840,"ondansetron tablet take 1 Tablet (8 mg total) by mouth 2 times a day as needed, Historical Med"
+B7737006-0FDD-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 6 hours as needed, Disp-10 Tablet, R-0, E-Prescribe"
+B7737006-0FDD-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1570777,1570777,"Renal cell carcinoma, unspecified laterality (CMS-HCC)"
+B7737006-0FDD-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1668501,EDG-1668501,"Metastatic renal cell carcinoma, unspecified laterality (CMS-HCC)"

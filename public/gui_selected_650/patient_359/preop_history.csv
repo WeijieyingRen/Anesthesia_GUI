@@ -1,0 +1,18 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+8C55DE26-84BA-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+8C55DE26-84BA-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+8C55DE26-84BA-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C06.9,C06.9,Squamous cell carcinoma of oral cavity (CMS-HCC)
+8C55DE26-84BA-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 4 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+8C55DE26-84BA-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3841,ERX-3841,"ibuprofen tablet take 2 Tablets (400 mg total) by mouth every 6 hours as needed, Historical Med"
+8C55DE26-84BA-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-83177,ERX-83177,"amLODIPine tablet take 1 Tablet (2.5 mg total) by mouth PM, Historical Med"
+8C55DE26-84BA-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+8C55DE26-84BA-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+8C55DE26-84BA-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+8C55DE26-84BA-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+8C55DE26-84BA-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1234860,1234860,Squamous cell carcinoma of oral cavity (CMS-HCC)
+8C55DE26-84BA-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+8C55DE26-84BA-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+8C55DE26-84BA-ED11-91FA-005056BFF837,Problem List,Problem List Entry 198454,198454,Preop cardiovascular exam
+8C55DE26-84BA-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+8C55DE26-84BA-ED11-91FA-005056BFF837,Problem List,Problem List Entry 99483,99483,Left bundle branch block
+8C55DE26-84BA-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1234860,EDG-1234860,Squamous cell carcinoma of oral cavity (CMS-HCC)

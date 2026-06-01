@@ -1,0 +1,22 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Allergy,Allergen ELG-3541,ELG-3541,IBUPROFEN
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Allergy,Latex Allergy,Allergy,No
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Allergy,Latex allergy,allergy,No
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M48.062,M48.062,Spinal stenosis of lumbar region with neurogenic claudication
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-10450,ERX-10450,"lisinopriL tablet 1 tablet (40 mg total), Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-161688,ERX-161688,"cholecalciferol (Vitamin D3) tablet Take 1 tablet (1,000 units total) by mouth daily, Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-208602,ERX-208602,"THYROID (PORK) 90 MG [PHI] TABS 1 tablet (90 mg total), Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-28384,ERX-28384,"HYDROCODONE-ACETAMINOPHEN 10-325 MG [PHI] TABS Take 1 tablet by mouth 3 times a day as needed, Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) [PHI] TABS Take 1 tablet by mouth daily, Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet 2 tablets (10 mg total), Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Home Medication,Home Medication ERX-8658,ERX-8658,"CYANOCOBALAMIN (VITAMIN B-12) 2,000 MCG [PHI] TBSR Take 1 tablet (2,000 mcg total) by mouth, Historical Med"
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Problem List,Problem List Entry 1053087,1053087,S/P gastric bypass
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Problem List,Problem List Entry 1118887,1118887,Spinal stenosis of lumbar region with neurogenic claudication
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Problem List,Problem List Entry 1120393,1120393,Spinal stenosis of lumbar region
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1037299,EDG-1037299,Sagittal plane imbalance
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1054681,EDG-1054681,Lumbar pseudoarthrosis
+CE4DCDC1-EA5B-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2121481,EDG-2121481,"Spinal stenosis, unspecified spinal region"

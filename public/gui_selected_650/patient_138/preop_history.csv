@@ -1,0 +1,52 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+49E55B79-A155-F011-9216-005056BFF837,Allergy,Latex Allergy,Allergy,No
+49E55B79-A155-F011-9216-005056BFF837,Allergy,Latex allergy,allergy,No
+49E55B79-A155-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T81.49XA,T81.49XA,Surgical site infection
+49E55B79-A155-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z79.01,Z79.01,Anticoagulated with warfarin
+49E55B79-A155-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z95.811,Z95.811,LVAD (left ventricular assist device) present (CMS-HCC) - Chronic
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-11664,ERX-11664,"warfarin tablet Take 1 tablet (1 mg total) by mouth every morning with 3 tabs of 2 mg (6 mg) for total daily dose of 7 mg, Historical Med"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule Take 1 capsule (100 mg total) by mouth 2 times a day AND 2 capsules (200 mg total) every bedtime., Disp-360 capsule, R-3, E-Prescribe"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-19434,ERX-19434,"warfarin tablet Take 1 tablet (6 mg total) by mouth daily Take 8mg total daily. Rx 1 of 2., Disp-90 tablet, R-3, No Print"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-231549,ERX-231549,"dapagliflozin (Farxiga) oral tablet Take 1 tablet (10 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-235261,ERX-235261,"SACUBITRIL-VALSARTAN 49-51 MG [PHI] TABS Take 1 tablet by mouth 2 times a day, Disp-180 tablet, R-3, E-Prescribe"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-7437,ERX-7437,"spironolactone (Aldactone) tablet Take 1 tablet (25 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-8749,ERX-8749,"warfarin tablet Take 1 tablet (2 mg total) by mouth daily Take 8mg total daily. Rx 2 of 2., Disp-90 tablet, R-3, No Print"
+49E55B79-A155-F011-9216-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth every morning before breakfast, Disp-90 tablet, R-3, E-Prescribe"
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1061536,EDG-1061536,Non-ischemic cardiomyopathy (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1218568,EDG-1218568,Hx of smoking
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1224394,EDG-1224394,History of methamphetamine abuse (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-141700,EDG-141700,Pulmonary embolism (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-142212,EDG-142212,Cirrhosis of liver (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188383,EAP-188383,IR GALLBLADDER CHOLECYSTOSTOMY DRAIN
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188421,EAP-188421,IR VISCERAL ARTERIOGRAPHY EMBOLIZATION
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188423,EAP-188423,IR HEPATIC ARTERIOGRAPHY EMBOLIZATION
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188885,EAP-188885,CV SWAN GANZ
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188929,EAP-188929,IR LIVER TRANSJUGULAR BIOPSY
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-417915,EAP-417915,VENTRICULAR ASSIST DEVICE INSERTION WITH CARDIOPULMONARY BYPASS; HEARTMATE 3
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-472427,EAP-472427,CV CORONARY ANGIOGRAM
+49E55B79-A155-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-512327,EAP-512327,VENTRICULAR ASSIST DEVICE INSERTION OR REMOVAL; IMPELLA
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 104359,104359,Renal infarct
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 1107593,1107593,"Mobitz type 1, Wenckebach, transient, nocturnal"
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 1118340,1118340,Subcapsular liver hematoma
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 1170678,1170678,NICM (nonischemic cardiomyopathy) (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 1171027,1171027,LVAD (left ventricular assist device) present (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 1222227,1222227,Hx of valvular heart disease
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 1256114,1256114,Cholecystostomy drain infection
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 141700,141700,Pulmonary embolism (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 187136,187136,Transaminitis
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 201733,201733,DVT (deep venous thrombosis) (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 2035281,2035281,Postoperative surgical complication involving skin associated with non-dermatologic procedure
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 2183382,2183382,Anticoagulated with warfarin
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 2217137,2217137,"Rule out abscess, prior right impella access site"
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 2330373,2330373,Chronic HFrEF (heart failure with reduced ejection fraction) (CMS-HCC)
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 2341354,2341354,History of difficult venous access
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 6194,6194,Acute cholecystitis
+49E55B79-A155-F011-9216-005056BFF837,Problem List,Problem List Entry 72303,72303,Hypomagnesemia
+49E55B79-A155-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-6194,EDG-6194,Acute cholecystitis

@@ -1,0 +1,56 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+83E2A3BB-37BD-EF11-920E-005056BFF837,Allergy,Allergen ELG-1549,ELG-1549,NIASPAN [NIACIN]
+83E2A3BB-37BD-EF11-920E-005056BFF837,Allergy,Allergen ELG-3595,ELG-3595,LACTOSE
+83E2A3BB-37BD-EF11-920E-005056BFF837,Allergy,Allergen ELG-4620,ELG-4620,AMOXICILLIN
+83E2A3BB-37BD-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I60.9,I60.9,SAH (subarachnoid hemorrhage) (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-11664,ERX-11664,"warfarin tablet Take 3 tablets (3 mg total) by mouth daily with warfarin 5 mg (for a total dose of 8 mg daily), Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-208185,ERX-208185,"MULTAQ 400 MG PO TABS TAKE 1/2 TABLET TWICE DAILY WITH MEALS, Disp-90 tablet, R-3, E-Prescribe"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR Take 1 capsule (20 mg total) by mouth daily, Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-30165,ERX-30165,"tamsulosin (Flomax) 0.4 mg CAPS Take 1 capsule (0.4 mg total) by mouth daily, Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-40378,ERX-40378,"Calcium Citrate 200 mg (950 mg) TABS Take 1 tablet (200 mg total) by mouth daily, Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-4420,ERX-4420,"LEVOTHYROXINE 25 MCG PO TABS Take 1 tablet (25 mcg total) by mouth every morning, R-3, Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"ATORVASTATIN 10 MG PO TABS Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-8751,ERX-8751,"warfarin tablet Take 1 tablet (5 mg total) by mouth daily with 3 tablets of warfarin 1 mg (for a total dose of 8 mg daily), Historical Med"
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-10004,EDG-10004,Epistaxis
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-10078,EDG-10078,Nocturia
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1036996,EDG-1036996,Voiding dysfunction
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1042536,EDG-1042536,Thrombophilia
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1064761,EDG-1064761,Personal history of thromboembolic disease
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-119461,EDG-119461,Prostate disease
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-141700,EDG-141700,Pulmonary embolism (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-148666,EDG-148666,Hypothyroid
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-151644,EDG-151644,Senile macular degeneration
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-152202,EDG-152202,Thyroid disease
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-176387,EDG-176387,Atrial tachycardia
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-192135,EDG-192135,BPH
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-200588,EDG-200588,Renal insufficiency
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-201727,EDG-201727,Deep venous thrombosis (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-201733,EDG-201733,DVT (deep venous thrombosis) (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-5107,EDG-5107,Atrial fibrillation (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-93243,EDG-93243,Coronary disease
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-95512,EDG-95512,Factor V deficiency (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-99120,EDG-99120,Kidney disease
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121648,EAP-121648,HX PELVIC FRACTURE TX
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121817,EAP-121817,HX HERNIA REPAIR
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-133338,EAP-133338,BURR HOLES EVACUATION OF HEMATOMA
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-133903,EAP-133903,TRIGGER FINGER AND DUPUYTRENS CONTRACTURE RELEASE
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188187,EAP-188187,FLEXIBLE SIGMOIDOSCOPY WITH BIOPSY
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188193,EAP-188193,FLEXIBLE SIGMOIDOSCOPY WITH CONTROL OF BLEEDING
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+83E2A3BB-37BD-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 1080273,1080273,BPH (benign prostatic hyperplasia)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 114186,114186,Brady-tachy syndrome (CMS-HCC)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 118848,118848,12/9 (Ramayya): R 2 burhole hematoma evac
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 142161,142161,Abdominal pain
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 144109,144109,Calf pain
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 161444,161444,Lipids blood increased
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 191905,191905,Hypercoagulable state
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 91850,91850,Bradycardia
+83E2A3BB-37BD-EF11-920E-005056BFF837,Problem List,Problem List Entry 9926,9926,Syncope and collapse
+83E2A3BB-37BD-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-165258,EDG-165258,SAH (subarachnoid hemorrhage) (CMS-HCC)

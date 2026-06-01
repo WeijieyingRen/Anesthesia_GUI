@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+A8918534-387A-EE11-9202-005056BFF837,2023-10-29 15:36:00+00:00,note,data_artifact,data artifact,Data Artifact: data artifact,2023-10-29 15:31:00+00:00,2023-10-29 16:51:00+00:00,5.0,5.0,5.0,5.0,75.0
+A8918534-387A-EE11-9202-005056BFF837,2023-10-29 15:40:00+00:00,note,abx_not_indicated,abx not indicated,ABX Not Indicated: abx not indicated,2023-10-29 15:31:00+00:00,2023-10-29 16:51:00+00:00,9.0,9.0,9.0,9.0,71.0
+A8918534-387A-EE11-9202-005056BFF837,2023-10-29 16:27:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-10-29 15:31:00+00:00,2023-10-29 16:51:00+00:00,56.0,56.0,56.0,56.0,24.0
+A8918534-387A-EE11-9202-005056BFF837,2023-10-29 16:42:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-10-29 15:31:00+00:00,2023-10-29 16:51:00+00:00,71.0,71.0,71.0,71.0,9.0
+A8918534-387A-EE11-9202-005056BFF837,2023-10-29 16:48:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2023-10-29 15:31:00+00:00,2023-10-29 16:51:00+00:00,77.0,77.0,77.0,77.0,3.0

@@ -1,0 +1,2 @@
+mpog_dose_id,mpog_case_id,mpog_med_concept_id,dose_type,start_time,end_time,medication,med_concept_desc,dose,unit,route,aims_patient_dosing_weight,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+F484828F-A005-F011-9211-005056BFF837,8EB6B768-7CD0-ED11-91FB-005056BFF837,10354,2,2023-03-28 00:09:00+00:00,2023-03-28 02:39:00+00:00,phenylephrine,phenylephrine,0.2,mcg/kg/min,Intravenous,73.3,2023-03-27 23:06:00+00:00,2023-03-28 02:39:00+00:00,63.0,213.0,63.0,63.0,0.0

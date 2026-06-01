@@ -184,12 +184,13 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
 
 function buildChartRows(
   cv: Record<string, TimeValuePoint[]>,
-  xTicks: number[]
+  xTicks: number[],
+  visibleFeatures: CVFeatureConfig[]
 ): Array<Record<string, number | null>> {
   const tickSet = new Set<number>(xTicks);
   const allTimes = new Set<number>(xTicks);
 
-  CV_FEATURES.forEach((feature) => {
+  visibleFeatures.forEach((feature) => {
     const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
     let arr: TimeValuePoint[] = [];
 
@@ -212,7 +213,7 @@ function buildChartRows(
   const rows = sortedTimes.map((time) => {
     const row: Record<string, number | null> = { time };
 
-    CV_FEATURES.forEach((feature) => {
+    visibleFeatures.forEach((feature) => {
       const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
       let arr: TimeValuePoint[] = [];
 
@@ -235,7 +236,7 @@ function buildChartRows(
       .sort((a, b) => a - b)
       .map((time) => {
         const row: Record<string, number | null> = { time };
-        CV_FEATURES.forEach((feature) => {
+        visibleFeatures.forEach((feature) => {
           row[feature.key] = null;
         });
         return row;
@@ -243,6 +244,33 @@ function buildChartRows(
   }
 
   return rows;
+}
+
+function buildAxisTicks(domainMax: number, step: number) {
+  const ticks: number[] = [];
+  for (let tick = 0; tick <= domainMax; tick += step) {
+    ticks.push(tick);
+  }
+  if (ticks[ticks.length - 1] !== domainMax) {
+    ticks.push(domainMax);
+  }
+  return ticks;
+}
+
+function getNiceAxisStep(maxValue: number) {
+  if (!Number.isFinite(maxValue) || maxValue <= 200) return 25;
+
+  const roughStep = maxValue / 8;
+  const magnitude = 10 ** Math.floor(Math.log10(roughStep));
+  const normalized = roughStep / magnitude;
+
+  let niceStep = 10;
+  if (normalized <= 1) niceStep = 1;
+  else if (normalized <= 2) niceStep = 2;
+  else if (normalized <= 2.5) niceStep = 2.5;
+  else if (normalized <= 5) niceStep = 5;
+
+  return niceStep * magnitude;
 }
 
 function renderMarkerShape(
@@ -367,10 +395,14 @@ function LegendMarker({
   );
 }
 
-function CVLegend() {
+function CVLegend({
+  features,
+}: {
+  features: CVFeatureConfig[];
+}) {
   return (
     <div className="border-r pr-0">
-      {CV_FEATURES.map((feature) => (
+      {features.map((feature) => (
         <div
           key={feature.key}
           className="relative grid items-center gap-1.5 px-2 text-sm"
@@ -405,12 +437,14 @@ function CVLegend() {
 
 function FixedYAxis({
   height,
+  ticks,
+  domainMax,
 }: {
   height: number;
+  ticks: number[];
+  domainMax: number;
 }) {
-  const ticks = [0, 25, 50, 75, 100, 125, 150, 175, 200];
   const domainMin = 0;
-  const domainMax = 200;
   const plotHeight = Math.max(1, height);
 
   return (
@@ -441,6 +475,7 @@ function CVGridSvg({
   majorTicks,
   minorTicks,
   height,
+  rowCount,
   highlightWindow,
   plotWidth,
 }: {
@@ -448,6 +483,7 @@ function CVGridSvg({
   majorTicks: number[];
   minorTicks: number[];
   height: number;
+  rowCount: number;
   highlightWindow?: {
     startMin: number;
     endMin: number;
@@ -506,7 +542,7 @@ function CVGridSvg({
         );
       })}
 
-      {Array.from({ length: CV_FEATURES.length + 1 }, (_, i) => i).map((i) => {
+      {Array.from({ length: rowCount + 1 }, (_, i) => i).map((i) => {
         const y = i * ROW_HEIGHT;
         return (
           <line
@@ -538,6 +574,18 @@ export default function CVChart({
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: CVChartProps) {
+  const visibleFeatures = React.useMemo(
+    () =>
+      CV_FEATURES.filter((feature) => {
+        const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
+        return aliases.some((name) =>
+          (cv?.[name] ?? []).some(
+            (point) => Number.isFinite(point?.time) && Number.isFinite(point?.value)
+          )
+        );
+      }),
+    [cv]
+  );
   const majorStep = React.useMemo(() => getMajorStep(timeResolution), [timeResolution]);
   const minorStep = React.useMemo(() => getMinorStep(timeResolution), [timeResolution]);
   const pxPerMin = React.useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
@@ -551,10 +599,44 @@ export default function CVChart({
     return buildGridTicks(xEnd, minorStep);
   }, [xEnd, minorStep]);
 
-  const data = React.useMemo(() => buildChartRows(cv ?? {}, majorTicks), [cv, majorTicks]);
-  const fullContentHeight = CV_FEATURES.length * ROW_HEIGHT;
+  const data = React.useMemo(
+    () => buildChartRows(cv ?? {}, majorTicks, visibleFeatures),
+    [cv, majorTicks, visibleFeatures]
+  );
+  const yAxisConfig = React.useMemo(() => {
+    const values = Object.values(cv ?? {})
+      .flat()
+      .map((point) => point?.value)
+      .filter((value): value is number => Number.isFinite(value));
+
+    const rawMax = values.length > 0 ? Math.max(...values) : 200;
+    const domainMax = Math.max(200, rawMax);
+    const step = getNiceAxisStep(domainMax);
+    const roundedDomainMax = Math.ceil(domainMax / step) * step;
+
+    return {
+      domainMax: roundedDomainMax,
+      ticks: buildAxisTicks(roundedDomainMax, step),
+    };
+  }, [cv]);
+
+  if (!visibleFeatures.length) {
+    return (
+      <div className={embedded ? "bg-white px-4 py-3" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+        {!embedded && title ? (
+          <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+        ) : null}
+        <div className="text-sm text-gray-500">No CV data available.</div>
+      </div>
+    );
+  }
+
+  const fullContentHeight = visibleFeatures.length * ROW_HEIGHT;
   const viewHeight = Math.min(height, Math.max(120, fullContentHeight));
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = React.useRef(false);
+  const [sliderValue, setSliderValue] = React.useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
 
   React.useEffect(() => {
     if (scrollRef.current == null) return;
@@ -562,6 +644,7 @@ export default function CVChart({
 
     if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
       scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
     }
   }, [sharedScrollLeft]);
 
@@ -573,8 +656,93 @@ export default function CVChart({
   const contentWidth = contentPlotWidth + PLOT_RIGHT;
   const plotWidth = contentPlotWidth;
 
+  React.useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, fullContentHeight, viewHeight]);
+
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+      <style jsx>{`
+        .cv-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .cv-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .cv-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .cv-slider:focus {
+          outline: none;
+        }
+
+        .cv-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .cv-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .cv-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .cv-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .cv-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .cv-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
       {!embedded && title ? (
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
@@ -586,75 +754,85 @@ export default function CVChart({
         }}
       >
         <div className="border-r pr-0" style={{ height: fullContentHeight }}>
-          <CVLegend />
+          <CVLegend features={visibleFeatures} />
         </div>
 
-        <FixedYAxis height={fullContentHeight} />
+        <FixedYAxis
+          height={fullContentHeight}
+          ticks={yAxisConfig.ticks}
+          domainMax={yAxisConfig.domainMax}
+        />
 
-        <div className="overflow-y-auto overflow-x-hidden" style={{ height: viewHeight }}>
-        <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
-
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
-
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
-
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
-
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
-
-    if (tryingGoPastLeft || tryingGoPastRight) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
+        <div className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]" style={{ height: viewHeight }}>
+          <div className="overflow-x-hidden overflow-y-hidden">
             <div
-              className="relative"
-              style={{
-                width: contentWidth,
-                height: fullContentHeight,
+              ref={scrollRef}
+              className="cv-scroll-hidden"
+              style={{ overscrollBehaviorX: "none" }}
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const absX = Math.abs(e.deltaX);
+                const absY = Math.abs(e.deltaY);
+
+                // 只处理“明显以横向为主”的触摸板/滚轮手势
+                if (absX <= absY || absX < 1) return;
+
+                const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                const nextLeft = el.scrollLeft + e.deltaX;
+
+                const atLeftEdge = el.scrollLeft <= 0;
+                const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+                if (tryingGoPastLeft || tryingGoPastRight) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
+
+                e.preventDefault();
+                el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+              }}
+              onScroll={(e) => {
+                const next = e.currentTarget.scrollLeft;
+                if (!isSyncingFromSliderRef.current) {
+                  setSliderValue(next);
+                }
+                onSharedScrollLeftChange?.(next);
               }}
             >
-              <div className="absolute inset-0 z-0">
-                <CVGridSvg
-                  end={xEnd}
-                  majorTicks={majorTicks}
-                  minorTicks={minorTicks}
-                  height={fullContentHeight}
-                  highlightWindow={highlightWindow}
-                  plotWidth={plotWidth}
-                />
-              </div>
+              <div
+                className="relative"
+                style={{
+                  width: contentWidth,
+                  height: fullContentHeight,
+                }}
+              >
+                <div className="absolute inset-0 z-0">
+                  <CVGridSvg
+                    end={xEnd}
+                    majorTicks={majorTicks}
+                    minorTicks={minorTicks}
+                    height={fullContentHeight}
+                    rowCount={visibleFeatures.length}
+                    highlightWindow={highlightWindow}
+                    plotWidth={plotWidth}
+                  />
+                </div>
 
-              <div className="absolute inset-0 z-10">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
-                    data={data}
-                    margin={{
-                      top: 0,
-                      right: RECHARTS_RIGHT_MARGIN,
-                      left: 0,
-                      bottom: 0,
-                    }}
-                  >
+                <div className="absolute inset-0 z-10">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={data}
+                      margin={{
+                        top: 0,
+                        right: RECHARTS_RIGHT_MARGIN,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
                     <XAxis
                       type="number"
                       dataKey="time"
@@ -670,8 +848,8 @@ export default function CVChart({
                     />
 
                     <YAxis
-                      domain={[0, 200]}
-                      ticks={[0, 25, 50, 75, 100, 125, 150, 175, 200]}
+                      domain={[0, yAxisConfig.domainMax]}
+                      ticks={yAxisConfig.ticks}
                       interval={0}
                       width={RECHARTS_YAXIS_WIDTH}
                       tick={false}
@@ -692,12 +870,7 @@ export default function CVChart({
                       }
                     />
 
-                    {CV_FEATURES.map((feature) => {
-                      const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
-                      const hasData = aliases.some((name) => (cv?.[name] ?? []).length > 0);
-
-                      if (!hasData) return null;
-
+                    {visibleFeatures.map((feature) => {
                       return (
                         <Line
                           key={feature.key}
@@ -712,9 +885,35 @@ export default function CVChart({
                         />
                       );
                     })}
-                  </LineChart>
-                </ResponsiveContainer>
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
+            </div>
+            <div className="px-2 pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(sliderValue, maxScrollLeft)}
+                onChange={(e) => {
+                  const next = Number(e.target.value);
+                  setSliderValue(next);
+                  const el = scrollRef.current;
+                  if (!el) return;
+
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
+
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="cv-slider"
+                aria-label="CV chart horizontal scroll"
+              />
             </div>
           </div>
         </div>

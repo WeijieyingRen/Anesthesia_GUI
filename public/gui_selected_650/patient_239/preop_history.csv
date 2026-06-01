@@ -1,0 +1,53 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+BD206C4E-A320-EE11-91FC-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+BD206C4E-A320-EE11-91FC-005056BFF837,Allergy,Allergen ELG-9117,ELG-9117,DULOXETINE HCL
+BD206C4E-A320-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+BD206C4E-A320-EE11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+BD206C4E-A320-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M48.061,M48.061,Spinal stenosis of lumbar region without neurogenic claudication
+BD206C4E-A320-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M54.50,M54.50,"Acute low back pain, unspecified back pain laterality, unspecified whether sciatica present"
+BD206C4E-A320-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet take 1 Tablet (20 mg total) by mouth 2 times a day as needed, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 6 hours as needed for Pain, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 4 hours as needed moderate or severe pain, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-116358,ERX-116358,"buPROPion extended release tablet Take 1 tablet by mouth every morning, Disp-30 Tablet, R-3, E-Prescribe"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-16071,ERX-16071,"IPRATROPIUM BROMIDE 42 MCG (0.06 %) NASAL SPRY 1-2 Sprays by Nasal route every day, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-18138,ERX-18138,"SENNA 8.6 MG PO TABS take 2 Tabs by mouth 2 times a day, Disp-60 Tab, R-0, No Print"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule take 1 Capsule (300 mg total) by mouth 2 times a day as needed And 600 mg at night before bed, Disp-90 Capsule, R-0, E-Prescribe"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-207958,ERX-207958,"CHOLECALCIFEROL (VITAMIN D3) 125 MCG (5,000 UNIT) PO TABS take 1 Tablet (5,000 Units total) by mouth daily, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-24984,ERX-24984,"POLYETHYLENE GLYCOL 3350 17 GRAM/DOSE PO POWD take 17 g by mouth daily, Disp-1 Bottle, R-0, No Print"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR take 20 mg by mouth as needed, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-29748,ERX-29748,"ADVAIR DISKUS 250-50 MCG/DOSE INH DSDV 1 Puff by Inhalation route 2 times a day, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-662,ERX-662,"ASCORBIC ACID 1,000 MG PO TABS take 1 Tablet (1,000 mg total) by mouth daily, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"ATORVASTATIN 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every morning, Historical Med"
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-103892,EDG-103892,Pulmonary emphysema (CMS-HCC)
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1292451,EDG-1292451,Coronary artery calcification
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1759762,EDG-1759762,Rheumatoid arthritis (CMS-HCC)
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-198344,EDG-198344,Fibromyalgia
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-5535,EDG-5535,Asthma
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-8804,EDG-8804,Cervicalgia
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121785,EAP-121785,HX KNEE SURGERY
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-136811,EAP-136811,PAIN RADIOFREQUENCY ABLATION WITH OR WITHOUT BLOCK; THERMAL
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-138399,EAP-138399,"INTERLAMINAR EPIDURAL STEROID INJECTION BLOCK, LUMBAR; MULTIPLE LEVELS"
+BD206C4E-A320-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-452817,EAP-452817,TRANSFORAMINAL EPIDURAL STEROID INJECTION BLOCK; MULTIPLE LES
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 102443,102443,Osteopenia
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1043488,1043488,Multiple pulmonary nodules
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 105292,105292,Skin aging
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1081520,1081520,Osteoarthritis of multiple joints
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1104194,1104194,Paraspinal abscess (CMS-HCC)
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1167255,1167255,Hx of total knee arthroplasty
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1168544,1168544,Active advance directive
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 142171,142171,Anxiety state
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 151424,151424,Rheumatoid lung disease (CMS-HCC)
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1795274,1795274,Calcification of coronary artery
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1853993,1853993,Diverticulosis of large intestine
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1932280,1932280,"Closed fracture of right inferior pubic ramus, initial encounter (CMS-HCC)"
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 198344,198344,Fibromyalgia
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 198830,198830,Mild persistent asthma
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2348482,2348482,"(Desai): r/o infxn, prior R L3/4 microdiscectomy and b/l L3-S1 decompression and foraminotomies"
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 74854,74854,Atrophic vaginitis
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 86021,86021,Neck pain
+BD206C4E-A320-EE11-91FC-005056BFF837,Problem List,Problem List Entry 93282,93282,Chronic cough
+BD206C4E-A320-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2323472,EDG-2323472,"Spinal stenosis of lumbar region, unspecified whether neurogenic claudication present"

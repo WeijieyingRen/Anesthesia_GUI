@@ -1,0 +1,42 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-2685,ELG-2685,PHENOBARBITAL
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-2826,ELG-2826,CODEINE
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-3859,ELG-3859,KEFLEX [CEPHALEXIN]
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-8430,ELG-8430,BANANA
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-8602,ELG-8602,KEPPRA [LEVETIRACETAM]
+167017AD-6814-F011-9211-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+167017AD-6814-F011-9211-005056BFF837,Allergy,Latex Allergy,Allergy,Yes
+167017AD-6814-F011-9211-005056BFF837,Allergy,Latex allergy,allergy,Yes
+167017AD-6814-F011-9211-005056BFF837,Home Medication,Home Medication ERX-113345,ERX-113345,"divalproex (Depakote ER) extended release tablet Take 3 tablets (750 mg total) by mouth 2 times a day, Disp-180 tablet, R-0, E-Prescribe"
+167017AD-6814-F011-9211-005056BFF837,Home Medication,Home Medication ERX-117993,ERX-117993,"TOPIRAMATE 50 MG PO TABS take 1 tablet by mouth twice a day, Disp-180 tablet, R-3, E-Prescribe"
+167017AD-6814-F011-9211-005056BFF837,Home Medication,Home Medication ERX-4573,ERX-4573,"LORazepam tablet take 1 tablet by mouth if needed for SEIZURE CLUSTER MAXIMUM DAILY DOSE OF 2 tablets, Disp-10 tablet, R-0, E-Prescribe"
+167017AD-6814-F011-9211-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"atorvastatin tablet Take 1 tablet (20 mg total) by mouth daily in the evening, Historical Med"
+167017AD-6814-F011-9211-005056BFF837,Home Medication,Home Medication ERX-94528,ERX-94528,"sertraline tablet Take 1.5 tablets (75 mg total) by mouth daily, Disp-45 tablet, R-11, E-Prescribe"
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-123581,EDG-123581,Abnormal brain scan
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-142301,EDG-142301,Bronchitis
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-2062749,EDG-2062749,Psychogenic nonepileptic seizure
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-77315,EDG-77315,Epilepsy (CMS-HCC)
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-92391,EDG-92391,Cerebral palsy (CMS-HCC)
+167017AD-6814-F011-9211-005056BFF837,Past Medical History,Past Medical History EDG-98638,EDG-98638,Kidney infection
+167017AD-6814-F011-9211-005056BFF837,Past Surgical History,Past Surgical History EAP-121770,EAP-121770,HX TENDON RELEASE
+167017AD-6814-F011-9211-005056BFF837,Past Surgical History,Past Surgical History EAP-136727,EAP-136727,VAGAL NERVE STIMULATOR; GENERATOR CHANGE OR REPLACEMENT
+167017AD-6814-F011-9211-005056BFF837,Past Surgical History,Past Surgical History EAP-5985,EAP-5985,HC BREAST REDUCTION X 1
+167017AD-6814-F011-9211-005056BFF837,Past Surgical History,Past Surgical History EAP-8375,EAP-8375,HC VAGUS NRVE STIM ELECTRODE L76
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 1053741,1053741,H/O: depression
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 114567,114567,Seizures
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 1168512,1168512,12/8: VNS replacement
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 2062749,2062749,Psychogenic nonepileptic seizure
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 2065067,2065067,Unspecified mood (affective) disorder
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 2140471,2140471,[PHI]: L VNS replacement
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 3065,3065,Undifferentiated somatoform disorder
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 63817,63817,Suicidal ideation
+167017AD-6814-F011-9211-005056BFF837,Problem List,Problem List Entry 92391,92391,Cerebral palsy (CMS-HCC)
+167017AD-6814-F011-9211-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1136557,EDG-1136557,Refractory epilepsy (CMS-HCC)

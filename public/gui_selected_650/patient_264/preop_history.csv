@@ -1,0 +1,45 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Allergen ELG-16311,ELG-16311,TAPE [ADHESIVE]
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Allergen ELG-16559,ELG-16559,MRI (GADOLINIUM) CONTRAST DYE
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Allergen ELG-3541,ELG-3541,IBUPROFEN
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Allergen ELG-8991,ELG-8991,IODINE
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+151ADFFE-95AB-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+151ADFFE-95AB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 724.03,724.03,"Spinal stenosis, lumbar region, with neurogenic claudication"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M54.50,M54.50,"Chronic bilateral low back pain, unspecified whether sciatica present"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tabs (650 mg total) by mouth every 6 hours, Disp-30 Tab, R-0, Fax"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-183812,ERX-183812,"OMEPRAZOLE PO take by mouth, Historical Med"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-2017,ERX-2017,"CYCLOBENZAPRINE 10 MG PO TABS take 1 Tablet (10 mg total) by mouth 3 times a day as needed, Historical Med"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-204021,ERX-204021,"OXYCODONE 20 MG PO TABS take 1 Tablet (20 mg total) by mouth 3 times a day, Historical Med"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-236406,ERX-236406,"naloxone (NARCAN) 4 mg/actuation nasal spray Spray 0.1 mL (4 mg) into one nostril for suspected overdose. Repeat into other nostril after 2 to 3 minutes if no or minimal response., Disp-2 Each, R-1, Fax"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet take 0.5 Tablets (20 mg total) by mouth as needed, Historical Med"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-5009,ERX-5009,"METOPROLOL TARTRATE 50 MG PO TABS 1 Tablet (50 mg total) 2 times a day, Historical Med"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-9321,ERX-9321,"buPROPion tablet 1 Tablet (100 mg total) Per pt reported, she double checked and she took 100mg at home, Historical Med"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-90782,EDG-90782,Anxiety
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-98239,EDG-98239,Hypercholesterolemia
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121686,EAP-121686,HX HEMORRHOIDECTOMY
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121762,EAP-121762,HX SPINAL FUSION
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121785,EAP-121785,HX KNEE SURGERY
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-133770,EAP-133770,SPINAL FUSION POSTERIOR WITH INSTRUMENTATION; 1-5 LEVELS
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134462,EAP-134462,ABDOMINOPLASTY
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134478,EAP-134478,VENTRAL HERNIA REPAIR WITH MESH
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-136947,EAP-136947,SPINAL HARDWARE POSTERIOR ADJUSTMENT / REMOVAL
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-189252,EAP-189252,IR ABSCESS DRAIN PLACEMENT
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-35678,EAP-35678,APPENDECTOMY
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-394045,EAP-394045,BREAST IMPLANTS / EXPANDERS REMOVE / REPLACE; BILATERAL
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-462704,EAP-462704,O-ARM SURGICAL IMAGING; SECONDARY PROCEDURE
+151ADFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-463906,EAP-463906,PROCEDURE REVISION; SECONDARY MODIFIER
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1126418,1126418,Panniculus
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1169976,1169976,"Fatty liver disease, nonalcoholic"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 190393,190393,Gait instability
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2220945,2220945,Uses intrauterine device for birth control
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2340400,2340400,Does not have regular exercise regimen
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 3040,3040,Panic disorder without agoraphobia
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 65452,65452,"5/12: L4-S1 PSF; prior L45 L5 S1 ALIF, spinous process clamps pw pseudo"
+151ADFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 67170,67170,Mitral valve prolapse
+151ADFFE-95AB-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1183933,EDG-1183933,Spondylolisthesis of lumbar region

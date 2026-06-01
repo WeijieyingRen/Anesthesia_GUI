@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4343A83B-929E-EF11-920D-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4343A83B-929E-EF11-920D-005056BFF837,Allergy,Latex allergy,allergy,No
+4343A83B-929E-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 2 tablets (1,000 mg total) by mouth every 6 hours as needed for Pain, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-112837,ERX-112837,"escitalopram tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-123772,ERX-123772,"DULOXETINE 30 MG PO CPDR Take 1 capsule (30 mg total) by mouth 2 times a day, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-161688,ERX-161688,"CHOLECALCIFEROL (VITAMIN D3) 25 MCG (1,000 UNIT) PO TABS Take 1 tablet (1,000 units total) by mouth daily, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-168150,ERX-168150,"ADVAIR HFA INH by Inhalation route, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-17464,ERX-17464,"busPIRone tablet Take 1 tablet (15 mg total) by mouth 2 times a day, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-200453,ERX-200453,"SODIUM CHLORIDE 7 % INH NEBU 0.35 g, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-212504,ERX-212504,"LORATADINE 10 MG PO CAPS Take 1 capsule (10 mg total) by mouth Q24H PRN, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-4972,ERX-4972,"methocarbamol tablet Take 1-2 tablets (750-1,500 mg total) by mouth every 8 hours as needed, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-7555,ERX-7555,"SULFAMETHOXAZOLE-TRIMETHOPRIM 800-160 MG PO TABS Take 1 tablet by mouth every 12 hours Until gone, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"atorvastatin tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-8085,ERX-8085,"traZODone tablet Take 2 tablets (100 mg total) by mouth every bedtime, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-80965,ERX-80965,"meloxicam (Mobic) tablet Take 1 tablet (15 mg total) by mouth daily, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet Take 1 tablet (25 mg total) by mouth daily, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-94127,ERX-94127,"METHYLPREDNISOLONE 16 MG PO TABS TAKE 1 TABLET BY MOUTH EVERY DAY FOR 14 DAYS, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-95901,ERX-95901,"PHYTONADIONE (VITAMIN K1) 5 MG PO TABS Take 1 tablet (5 mg total) by mouth, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-9900,ERX-9900,"DOXYCYCLINE MONOHYDRATE 100 MG PO CAPS Take 1 capsule (100 mg total) by mouth 2 times a day, Historical Med"
+4343A83B-929E-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+4343A83B-929E-EF11-920D-005056BFF837,Problem List,Problem List Entry 1166756,1166756,CA of prostate (CMS-HCC)
+4343A83B-929E-EF11-920D-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+4343A83B-929E-EF11-920D-005056BFF837,Problem List,Problem List Entry 159498,159498,Hard of hearing
+4343A83B-929E-EF11-920D-005056BFF837,Problem List,Problem List Entry 1765382,1765382,"Asthma in adult, severe persistent, uncomplicated (CMS-HCC)"
+4343A83B-929E-EF11-920D-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+4343A83B-929E-EF11-920D-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+4343A83B-929E-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139278,EDG-2139278,"Scoliosis of lumbar spine, unspecified scoliosis type"
+4343A83B-929E-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2323472,EDG-2323472,"Spinal stenosis of lumbar region, unspecified whether neurogenic claudication present"

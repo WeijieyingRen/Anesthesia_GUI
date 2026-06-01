@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+4A6BC8DE-2DDF-F011-921B-005056BFF837,2025-11-21 17:11:00+00:00,position,temperature_control,"""upper body;forced air warming""","""R SHC OPT ANE TEMP CONTROL"": ""upper body;forced air warming""",2025-11-21 17:11:00+00:00,2025-11-21 20:25:00+00:00,0.0,0.0,0.0,0.0,194.0
+4A6BC8DE-2DDF-F011-921B-005056BFF837,2025-11-21 18:07:00+00:00,surgical,tourniquet_inflated,1,Tourniquet Inflated,2025-11-21 17:11:00+00:00,2025-11-21 20:25:00+00:00,56.0,56.0,56.0,56.0,138.0
+4A6BC8DE-2DDF-F011-921B-005056BFF837,2025-11-21 18:49:00+00:00,surgical,tourniquet_deflated,1,Tourniquet Deflated,2025-11-21 17:11:00+00:00,2025-11-21 20:25:00+00:00,98.0,98.0,98.0,98.0,96.0
+4A6BC8DE-2DDF-F011-921B-005056BFF837,2025-11-21 19:57:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-11-21 17:11:00+00:00,2025-11-21 20:25:00+00:00,166.0,166.0,166.0,166.0,28.0
+4A6BC8DE-2DDF-F011-921B-005056BFF837,2025-11-21 20:20:00+00:00,position,bed_position,45 degrees,Bed Position: 45 degrees,2025-11-21 17:11:00+00:00,2025-11-21 20:25:00+00:00,189.0,189.0,189.0,189.0,5.0

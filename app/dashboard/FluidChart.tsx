@@ -297,6 +297,9 @@ export default function FluidChart({
   const rows = useMemo(() => buildRows(fluids, xEnd), [fluids, xEnd]);
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = useRef(false);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
   const visibleRows = useMemo(
     () => rows.filter((r) => !hiddenNames.includes(r.name)),
@@ -351,8 +354,26 @@ export default function FluidChart({
 
     if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
       scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
     }
   }, [sharedScrollLeft, contentWidth]);
+
+  useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, viewHeight, visibleRowsReindexed.length]);
 
   function minuteToPixel(minute: number) {
     if (!finalXEnd || finalXEnd <= 0) return 0;
@@ -372,6 +393,74 @@ export default function FluidChart({
     <div
       className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}
     >
+      <style jsx>{`
+        .fluid-scroll-hidden {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .fluid-scroll-hidden::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .fluid-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .fluid-slider:focus {
+          outline: none;
+        }
+
+        .fluid-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .fluid-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .fluid-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .fluid-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .fluid-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .fluid-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
       {!embedded && title ? (
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
@@ -431,53 +520,58 @@ export default function FluidChart({
 
         <FixedYAxisSpacer height={viewHeight} />
 
-        <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-hidden"
-  style={{ overscrollBehaviorX: "none" }}
-  onWheel={(e) => {
-    const el = e.currentTarget;
-    const absX = Math.abs(e.deltaX);
-    const absY = Math.abs(e.deltaY);
-
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
-    if (absX <= absY || absX < 1) return;
-
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    const nextLeft = el.scrollLeft + e.deltaX;
-
-    const atLeftEdge = el.scrollLeft <= 0;
-    const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
-
-    const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-    const tryingGoPastRight = atRightEdge && e.deltaX > 0;
-
-    if (tryingGoPastLeft || tryingGoPastRight) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-
-    e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-  }}
-  onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
-  }}
->
+        <div className="overflow-x-hidden overflow-y-hidden">
           <div
-            className="relative"
-            style={{
-              width: contentWidth,
-              height: contentHeight,
+            ref={scrollRef}
+            className="fluid-scroll-hidden"
+            style={{ overscrollBehaviorX: "none" }}
+            onWheel={(e) => {
+              const el = e.currentTarget;
+              const absX = Math.abs(e.deltaX);
+              const absY = Math.abs(e.deltaY);
+
+              // 只处理“明显以横向为主”的触摸板/滚轮手势
+              if (absX <= absY || absX < 1) return;
+
+              const maxScrollLeft = el.scrollWidth - el.clientWidth;
+              const nextLeft = el.scrollLeft + e.deltaX;
+
+              const atLeftEdge = el.scrollLeft <= 0;
+              const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+              const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+              const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+              if (tryingGoPastLeft || tryingGoPastRight) {
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+              }
+
+              e.preventDefault();
+              el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+            }}
+            onScroll={(e) => {
+              const next = e.currentTarget.scrollLeft;
+              if (!isSyncingFromSliderRef.current) {
+                setSliderValue(next);
+              }
+              onSharedScrollLeftChange?.(next);
             }}
           >
-            <svg
-              width={contentWidth}
-              height={contentHeight}
-              viewBox={`0 0 ${contentWidth} ${contentHeight}`}
-              preserveAspectRatio="none"
+            <div
+              className="relative"
+              style={{
+                width: contentWidth,
+                height: contentHeight,
+              }}
             >
+              <svg
+                width={contentWidth}
+                height={contentHeight}
+                viewBox={`0 0 ${contentWidth} ${contentHeight}`}
+                preserveAspectRatio="none"
+              >
               {highlightWindow && (
                 <rect
                   x={minuteToPixel(highlightWindow.startMin)}
@@ -776,7 +870,34 @@ export default function FluidChart({
                     </text>
                   );
                 })}
-            </svg>
+              </svg>
+            </div>
+          </div>
+          <div className="px-2 pt-2">
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, Math.round(maxScrollLeft))}
+              step={1}
+              value={Math.min(sliderValue, maxScrollLeft)}
+              onChange={(e) => {
+                const next = Number(e.target.value);
+                setSliderValue(next);
+
+                const el = scrollRef.current;
+                if (!el) return;
+
+                isSyncingFromSliderRef.current = true;
+                el.scrollLeft = next;
+                onSharedScrollLeftChange?.(next);
+
+                requestAnimationFrame(() => {
+                  isSyncingFromSliderRef.current = false;
+                });
+              }}
+              className="fluid-slider"
+              aria-label="Fluid chart horizontal scroll"
+            />
           </div>
         </div>
       </div>

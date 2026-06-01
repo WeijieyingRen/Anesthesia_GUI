@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+FE0E775B-60F6-EE11-920A-005056BFF837,Allergy,Latex allergy,allergy,No
+FE0E775B-60F6-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C78.01,C78.01,"Malignant neoplasm metastatic to both lungs (CMS-HCC) [C78.01, C78.02]"
+FE0E775B-60F6-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I26.99,I26.99,Other acute pulmonary embolism without acute cor pulmonale (CMS-HCC)
+FE0E775B-60F6-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J93.9,J93.9,Bilateral pneumothoraces
+FE0E775B-60F6-EE11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis deferred
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-112403,ERX-112403,"MESNA 400 MG PO TABS take 3 Tablets (1,200 mg total) by mouth One Time for 1 dose At 6 hours after chemotherapy ifosfamide each day (day 1 to day 5)., Disp-15 Tablet, R-0, E-Prescribe15 tablets = 21-day supply"
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 2 Tablets (10 mg total) by mouth 2 times a day for 7 days, THEN 1 Tablet (5 mg total) 2 times a day., Disp-88 Tablet, R-0, E-Prescribe"
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-4572,ERX-4572,"LORazepam tablet take 1 Tablet (0.5 mg total) by mouth every 6 hours as needed (for nausea and vomiting) May repeat ONE TIME in 30 minutes if needed., Disp-30 Tablet, R-3, Fax"
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-5940,ERX-5940,OXYCODONE-ACETAMINOPHEN 5-325 MG PO TABS Historical Med
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-6582,ERX-6582,"prochlorperazine tablet take 1 Tablet (10 mg total) by mouth every 6 hours as needed for Nausea/Vomiting, Disp-30 Tablet, R-5, E-Prescribe"
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-80840,ERX-80840,"ondansetron tablet take 1 Tablet (8 mg total) by mouth every 8 hours as needed (nausea and Vomiting), Disp-30 Tablet, R-5, E-Prescribe"
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-81847,ERX-81847,"OLANZapine (ZyPREXA) tablet Take 1 tablet (5 mg total) by mouth every bedtime as needed (Nausea/vomiting), Historical Med"
+FE0E775B-60F6-EE11-920A-005056BFF837,Home Medication,Home Medication ERX-871,ERX-871,"BACTRIM DS 800-160 MG PO TABS take 1 Tablet by mouth 2 times a day, Historical Med"
+FE0E775B-60F6-EE11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-188607,EAP-188607,IR MEDIPORT DUAL LUMEN PLACEMENT
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 1228789,1228789,Bilateral pneumothoraces
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 1814593,1814593,Primary malignant neoplasm of soft tissues of right lower extremity (CMS-HCC)
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 1867373,1867373,Malignant neoplasm metastatic to both lungs (CMS-HCC)
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 186826,186826,Anemia of chronic disease
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 193314,193314,Sarcoma (CMS-HCC)
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 193316,193316,Soft tissue sarcoma (CMS-HCC)
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 2131493,2131493,Other acute pulmonary embolism without acute cor pulmonale (CMS-HCC)
+FE0E775B-60F6-EE11-920A-005056BFF837,Problem List,Problem List Entry 2353483,2353483,Malignant spindle cell neoplasm (CMS-HCC)

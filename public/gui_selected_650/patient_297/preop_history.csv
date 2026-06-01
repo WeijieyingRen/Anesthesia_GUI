@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+D0FB6EE3-887D-EF11-920D-005056BFF837,Allergy,Latex Allergy,Allergy,No
+D0FB6EE3-887D-EF11-920D-005056BFF837,Allergy,Latex allergy,allergy,No
+D0FB6EE3-887D-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 2 tablets (1,000 mg total) by mouth every 8 hours as needed for Pain, Disp-30 tablet, R-2, E-Prescribe"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet Take 1 tablet (5 mg total) by mouth every 4 hours as needed, Disp-30 tablet, R-0, E-Prescribe"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS Take 2 tablets by mouth daily, Disp-60 tablet, R-2, E-Prescribe"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-116176,ERX-116176,"rosuvastatin tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"traMADol (Ultram) tablet Take 1 tablet (50 mg total) by mouth 2 times a day as needed, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK Take 1 packet (17 g total) by mouth daily, Disp-30 each, R-2, E-Prescribe"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-2566,ERX-2566,"DOCUSATE SODIUM 100 MG PO CAPS Take 1 capsule (100 mg total) by mouth 2 times a day as needed, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR Take 1 capsule (20 mg total) by mouth daily, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-5938,ERX-5938,"oxybutynin (Ditropan) tablet Take 1 tablet (5 mg total) by mouth 3 times a day, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-78648,ERX-78648,"venlafaxine tablet Take 1 tablet (75 mg total) by mouth daily, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"amLODIPine tablet Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+D0FB6EE3-887D-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-1137923,EDG-1137923,Type 2 diabetes mellitus without complications (CMS-HCC)
+D0FB6EE3-887D-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-144379,EDG-144379,High cholesterol
+D0FB6EE3-887D-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-121841,EAP-121841,HX TURP
+D0FB6EE3-887D-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-421289,EAP-421289,BLADDER STONE REMOVAL
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 1031833,1031833,Benign prostatic hyperplasia
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 1101150,1101150,Diabetic peripheral neuropathy (CMS-HCC)
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 144144,144144,Chronic pain
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 192137,192137,Enlarged prostate
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 2025286,2025286,"Urinary tract infection without hematuria, site unspecified"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 2030141,2030141,Hyperlipidemia due to type 2 diabetes mellitus (CMS-HCC)
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 2165540,2165540,"Septic arthritis, due to unspecified organism, septic arthritis of unspecified location (CMS-HCC)"
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 2196838,2196838,Disorder of intervertebral disc of lumbar spine
+D0FB6EE3-887D-EF11-920D-005056BFF837,Problem List,Problem List Entry 90784,90784,Anxiety disorder
+D0FB6EE3-887D-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2299767,EDG-2299767,"Osteomyelitis of other site, unspecified type (CMS-HCC)"

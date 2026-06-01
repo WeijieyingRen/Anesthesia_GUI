@@ -1,0 +1,30 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+89445361-C9A8-EF11-920E-005056BFF837,Allergy,Allergen ELG-2863,ELG-2863,ASPIRIN
+89445361-C9A8-EF11-920E-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+89445361-C9A8-EF11-920E-005056BFF837,Allergy,Allergen ELG-9259,ELG-9259,MILK
+89445361-C9A8-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C16.9,C16.9,Gastric adenocarcinoma (CMS-HCC)
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-176663,ERX-176663,"FISH OIL PO take by mouth as directed., Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-180991,ERX-180991,"MAGNESIUM PO Take 1 tablet by mouth every day, Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-181566,ERX-181566,"METAMUCIL PO Take by mouth, Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO take by mouth as directed., Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take by mouth as directed., Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-191878,ERX-191878,"VITAMIN E PO take by mouth as directed., Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-70393,ERX-70393,ALPHAGAN P 0.1 % OPHT DROP Historical Med
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-77371,ERX-77371,LATANOPROST 0.005 % OPHT DROP Historical Med
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-807,ERX-807,"B-COMPLEX WITH VITAMIN C PO TABS take by mouth daily, Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-84475,ERX-84475,"CARVEDILOL 3.125 MG PO TABS take 1 Tablet (3.125 mg total) by mouth 2 times a day with meals, Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-95927,ERX-95927,"ESOMEPRAZOLE MAGNESIUM 20 MG PO CPDR Take 20 mg by mouth Q24H PRN, Historical Med"
+89445361-C9A8-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1034038,EDG-1034038,Gastric lymphoma (CMS-HCC)
+89445361-C9A8-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-71019,EDG-71019,Nonerosive nonspecific gastritis
+89445361-C9A8-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121734,EAP-121734,HX BONE MARROW BIOPSY
+89445361-C9A8-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-199017,EAP-199017,IR BIOPSY OTHER
+89445361-C9A8-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-446523,EAP-446523,GASTRECTOMY SUBTOTAL ROBOTIC ASSISTED LAPAROSCOPIC; WITH OR WITHOUT ED
+89445361-C9A8-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-487287,EAP-487287,ROBOTIC DAVINCI XI DUAL CONSOLE; SECONDARY PROCEDURE
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 1030025,1030025,Gastric adenocarcinoma (CMS-HCC)
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 1034038,1034038,Gastric lymphoma (CMS-HCC)
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 2221077,2221077,Requires assistance with activities of daily living (ADL)
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 67614,67614,TIA (transient ischemic attack)
+89445361-C9A8-EF11-920E-005056BFF837,Problem List,Problem List Entry 71019,71019,Nonerosive nonspecific gastritis
+89445361-C9A8-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1030025,EDG-1030025,Gastric adenocarcinoma (CMS-HCC)

@@ -1,0 +1,29 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+DA08958C-6D9B-EF11-920D-005056BFF837,Allergy,Latex Allergy,Allergy,No
+DA08958C-6D9B-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I67.1,I67.1,Cerebral aneurysm
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-10466,ERX-10466,"loratadine (Claritin) tablet Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"metFORMIN tablet Take 1 tablet (500 mg total) by mouth every morning, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet Take 1 tablet (81 mg total) by mouth daily Please ake 1 tablet (81 mg total) by mouth daily along with Plavix 1 tab (75 mg) daily to prepare the stenting procedure., Disp-100 tablet, R-2, E-Prescribe"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-161688,ERX-161688,"cholecalciferol (Vitamin D3) tablet Take 1 tablet (1,000 units total) by mouth daily, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-171447,ERX-171447,"CALCIUM PO Take by mouth, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-191668,ERX-191668,"VISION-VITE PRESERVE PO Take by mouth, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-4423,ERX-4423,"levothyroxine tablet Take 1 tablet (100 mcg total) by mouth daily, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-77371,ERX-77371,"LATANOPROST 0.005 % OPHT DROP Instill 1 drop to both eyes every bedtime, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet Take 1 tablet (40 mg total) by mouth every bedtime, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"clopidogrel (Plavix) 75 mg tablet (maintenance dose) Take 1 tablet (75 mg total) by mouth daily Please take 1 tab (75mg)on procedure day along with aspirin daily to prepare the stenting procedure, Disp-30 tablet, R-3, E-Prescribe"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet Take 1 tablet (25 mg total) by mouth every bedtime, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet Take 1 tablet (100 mg total) by mouth every morning, Historical Med"
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-148666,EDG-148666,Hypothyroid
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+DA08958C-6D9B-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-3248,EAP-3248,IR ANGIOGRAPHY CEREBRAL
+DA08958C-6D9B-EF11-920D-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+DA08958C-6D9B-EF11-920D-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+DA08958C-6D9B-EF11-920D-005056BFF837,Problem List,Problem List Entry 157374,157374,DM (diabetes mellitus) (CMS-HCC)
+DA08958C-6D9B-EF11-920D-005056BFF837,Problem List,Problem List Entry 159927,159927,HLD (hyperlipidemia)
+DA08958C-6D9B-EF11-920D-005056BFF837,Problem List,Problem List Entry 172136,172136,Cerebral aneurysm
+DA08958C-6D9B-EF11-920D-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+DA08958C-6D9B-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-172136,EDG-172136,Cerebral aneurysm

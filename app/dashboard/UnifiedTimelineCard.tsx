@@ -458,7 +458,7 @@ export default function UnifiedTimelineCard({
 
       {openSections.vitals && (
         <div className="space-y-0">
-          <div className="max-h-[380px] overflow-y-scroll [scrollbar-gutter:stable]">
+          <div className="max-h-[380px] overflow-x-hidden overflow-y-auto [scrollbar-gutter:stable]">
             <VitalChart
               title=""
               yDomain={[0, 220]}
@@ -643,7 +643,7 @@ export default function UnifiedTimelineCard({
               "Mean PIP": vitals?.ventilation?.["Mean PIP"] ?? [],
               "Plateau PIP": vitals?.ventilation?.["Plateau PIP"] ?? [],
             }}
-            height={190}
+            height={383}
             xEnd={timelineEnd}
             xTicks={ticks}
             showXAxis={false}

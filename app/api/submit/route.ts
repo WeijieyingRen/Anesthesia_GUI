@@ -7,6 +7,7 @@ import {
   readJsonFromDrive,
   uploadJsonToDrive,
 } from "@/lib/drive-upload";
+import { DATASET_ROOT } from "@/lib/dataset-config";
 
 type SubmitBody = {
   annotator?: { name?: string; email?: string };
@@ -83,7 +84,7 @@ async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
     const csvPath = path.join(
       process.cwd(),
       "public",
-      "data",
+      DATASET_ROOT,
       "access_code.csv"
     );
 

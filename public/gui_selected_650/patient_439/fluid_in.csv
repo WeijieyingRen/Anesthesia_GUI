@@ -1,0 +1,2 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,fluid_name,dose,unit,route,concept_name,fluid_class,fluid_direction,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+993ADE48-104D-F011-9215-005056BFF837,D3FAD359-6809-F011-9211-005056BFF837,10018,1,2025-03-20 18:30:00+00:00,2025-03-20 18:50:00+00:00,albumin 5%,250.0,mL,Intravenous,albumin 5%,crystalloid_colloid,input,2025-03-20 18:25:00+00:00,2025-03-20 20:29:00+00:00,5.0,25.0,5.0,5.0,99.0

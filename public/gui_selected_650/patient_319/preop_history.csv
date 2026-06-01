@@ -1,0 +1,40 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+1AD75D43-F0F8-EF11-9210-005056BFF837,Allergy,Latex allergy,allergy,No
+1AD75D43-F0F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M41.9,M41.9,Kyphoscoliosis and scoliosis
+1AD75D43-F0F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-116299,ERX-116299,"OMEPRAZOLE MAGNESIUM 20 MG PO TBEC Take 20 mg by mouth daily, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-125353,ERX-125353,"FISH OIL-DHA-EPA 1,200-144-216 MG PO CAPS take by mouth daily, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-127557,ERX-127557,"MAGNESIUM GLUCONATE 27 MG MAGNESIUM (500 MG) PO TABS Take 1 tablet (500 mg total) by mouth, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule Take 1 capsule (300 mg total) by mouth 3 times a day, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-28744,ERX-28744,"ETODOLAC 400 MG PO TB24 Take 400 mg by mouth every morning, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"FOLIC ACID 1 MG PO TABS Take 2 tablets (2 mg total) by mouth 2 times a day, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-37167,ERX-37167,"MULTIVITAMIN PO TABS Take 1 tablet by mouth every morning, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-3772,ERX-3772,"HYDROXYZINE HCL 10 MG PO TABS Take 0.5-1 tablets (5-10 mg total) by mouth, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-4971,ERX-4971,"methocarbamol tablet Take 1 tablet (500 mg total) by mouth 2 times a day, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-5009,ERX-5009,"metoprolol tartrate (Lopressor) tablet Take 1 tablet (50 mg total) by mouth 2 times a day, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG THC with CBD edibles - qhs for back pain, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG CBD cream for back pain, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG TUMERIC 1500mg BID, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-542785,ERX-542785,"ASPIRIN ORAL CHALLENGE Take 1 tablet (81 mg total) by mouth every bedtime, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"ATORVASTATIN 40 MG PO TABS Take 1 tablet (40 mg total) by mouth every bedtime, Historical Med"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+1AD75D43-F0F8-EF11-9210-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+1AD75D43-F0F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1168605,1168605,Hx of spinal surgery
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 141422,141422,Kyphoscoliosis and scoliosis
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 165701,165701,Snores
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 204092,204092,"CKD (chronic kidney disease) stage 3, GFR 30-59 ml/min (CMS-HCC)"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 4908,4908,"Essential hypertension, benign"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 65452,65452,Low back pain
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 65899,65899,Idiopathic scoliosis and kyphoscoliosis
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 91046,91046,Arthritis
+1AD75D43-F0F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+1AD75D43-F0F8-EF11-9210-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2121481,EDG-2121481,"Spinal stenosis, unspecified spinal region"
+1AD75D43-F0F8-EF11-9210-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139242,EDG-2139242,"Scoliosis, unspecified scoliosis type, unspecified spinal region"

@@ -1,0 +1,82 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+27F53C41-124B-EE11-9200-005056BFF837,Allergy,Allergen ELG-1016,ELG-1016,SHELLFISH CONTAINING PRODUCTS
+27F53C41-124B-EE11-9200-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PCN [PENICILLINS]
+27F53C41-124B-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+27F53C41-124B-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+27F53C41-124B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.6,N18.6,End-stage renal disease (CMS-HCC)
+27F53C41-124B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis V42.0,V42.0,Kidney replaced by transplant
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet take 1 Tablet (20 mg total) by mouth 2 times a day, Disp-60 Tablet, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 4 hours as needed, Disp-60 Tablet, R-0, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10610,ERX-10610,"midodrine tablet take 1 Tablet (5 mg total) by mouth 3 times a day, Disp-90 Tablet, R-5, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-120892,ERX-120892,"CINACALCET 60 MG PO TABS take 2 Tablets (120 mg total) by mouth daily, Historical Med"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-12930,ERX-12930,"PROGRAF 1 MG PO CAPS Take 9 capsules at 10 AM and 10 PM ON AN EMPTY STOMACH, Disp-540 Capsule, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-1300,ERX-1300,"CALCIUM CARBONATE 500 MG CALCIUM (1,250 MG) PO TABS take 2 Tablets (1,000 mg of elemental calcium total) by mouth 3 times a day with meals, Disp-30 Tablet, R-2, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth daily, Disp-100 Tablet, R-3, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-15110,ERX-15110,"CELLCEPT 250 MG PO CAPS Take 4 capsules at 10 AM and 10 PM ON AN EMPTY STOMACH, Disp-240 Capsule, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-175175,ERX-175175,"DULCOLAX (BISACODYL) PO take 10 mg by mouth daily, Historical Med"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule take 2 Capsules (200 mg total) by mouth 3 times a day, Disp-180 Capsule, R-5, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-231750,ERX-231750,"VELPHORO 500 MG PO CHEW take 2 Tablets by mouth 3 times a day, Historical Med"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-2566,ERX-2566,"docusate (Colace) capsule take 1 Capsule (100 mg total) by mouth every day, Disp-30 Capsule, R-1, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-310,ERX-310,"allopurinol (Zyloprim) tablet take 1 Tablet (100 mg total) by mouth daily, Historical Med"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet take 2 Tablets (80 mg total) by mouth daily, Disp-60 Tablet, R-3, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-37167,ERX-37167,"Multivitamin PO tablets take 1 Tablet by mouth daily, Disp-30 Tablet, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-4424,ERX-4424,"levothyroxine tablet take 0.5 Tablets (62.5 mcg total) by mouth every morning before breakfast, Disp-15 Tablet, R-5, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-4871,ERX-4871,"MEGESTROL 40 MG PO TABS take 1 Tablet (40 mg total) by mouth 2 times a day, Historical Med"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-5751,ERX-5751,"nystatin (MYCOSTATIN) 100,000 units/mL oral suspension 5 mL by Swish & Swallow route 3 times a day after meals, Disp-473 mL, R-5, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"predniSONE tablet Take 4 tablets every morning OR AS DIRECTED, Disp-120 Tablet, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"SULFAMETHOXAZOLE-TRIMETHOPRIM 400-80 MG PO TABS take 1 Tablet by mouth every Monday, Wednesday and Friday, Disp-13 Tablet, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-77371,ERX-77371,"LATANOPROST 0.005 % OPHT DROP Instill 1 drop to both eyes every bedtime, Historical Med"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"valGANciclovir (Valcyte) 450 mg tablet take 1 Tablet (450 mg total) by mouth every Monday, Wednesday and Friday, Disp-13 Tablet, R-5, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-81669,ERX-81669,"simvastatin (Zocor) tablet take 1 Tablet (10 mg total) by mouth every bedtime, Disp-30 Tablet, R-2, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"tamsulosin capsule take 1 Capsule (0.4 mg total) by mouth daily, Disp-30 Capsule, R-11, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-9351,ERX-9351,"calcitriol (Rocaltrol) capsule take 1 Capsule (0.5 mcg total) by mouth 3 times a day, Disp-30 Capsule, R-2, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94977,ERX-94977,"finasteride tablet take 1 Tablet (5 mg total) by mouth daily, Disp-30 Tablet, R-5, E-Prescribe"
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-100345,EDG-100345,Lung disease
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1137372,EDG-1137372,History of detached retina repair
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1137724,EDG-1137724,Long term current use of anticoagulant
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1167815,EDG-1167815,"TB lung, latent"
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1171021,EDG-1171021,BPH with elevated PSA
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-138151,EDG-138151,CAD (coronary artery disease)
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142325,EDG-142325,Gout
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-176787,EDG-176787,High blood cholesterol
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-201194,EDG-201194,Chronic kidney disease
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-71626,EDG-71626,Inguinal hernia
+27F53C41-124B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-90866,EDG-90866,Aortic stenosis
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121689,EAP-121689,HX RENAL BIOPSY
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121706,EAP-121706,HX CARDIAC CATHERIZATION
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-138197,EAP-138197,MITRAL VALVE REPLACEMENT / REPAIR WITH CARDIOPULMONARY BYPASS
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-148979,EAP-148979,EYE SURGERY PROCEDURE
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-397536,EAP-397536,HC INSERT URINARY CATHETER
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-429138,EAP-429138,TAVR
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-446549,EAP-446549,HX ENDOSCOPY
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-446551,EAP-446551,HX CARDIAC STRESS TEST
+27F53C41-124B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-466213,EAP-466213,HX PERITONEAL CATHETER INSERTION LAPAROSCOPIC
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 10147,10147,Elevated prostate specific antigen (PSA)
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1024753,1024753,Acute postoperative pain
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1053241,1053241,s/p bioMVR for severe mitral stenosis
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1083378,1083378,Dialysis patient (CMS-HCC)
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1121853,1121853,Congenital single kidney
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 121886,121886,Thrombocytopenia due to drugs
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1219441,1219441,H/O prosthetic heart valve
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1289423,1289423,Does not exercise
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 141700,141700,Pulmonary embolism (CMS-HCC)
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 142325,142325,Gout
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1851324,1851324,Benign prostatic hyperplasia with urinary obstruction
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 195847,195847,Hyperparathyroidism (CMS-HCC)
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 201251,201251,End-stage renal disease (CMS-HCC)
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 2029303,2029303,Anemia due to chronic kidney disease
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 63547,63547,"Chronic kidney disease, stage V (CMS-HCC)"
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 66750,66750,Benign essential hypertension
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 79231,79231,Acquired hypothyroidism
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 79462,79462,Acute blood loss anemia
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 90868,90868,Aortic valve stenosis
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+27F53C41-124B-EE11-9200-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia
+27F53C41-124B-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)

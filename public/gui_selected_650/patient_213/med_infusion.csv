@@ -1,0 +1,2 @@
+mpog_dose_id,mpog_case_id,mpog_med_concept_id,dose_type,start_time,end_time,medication,med_concept_desc,dose,unit,route,aims_patient_dosing_weight,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+68023838-3705-F011-9211-005056BFF837,22439B69-DB4B-EE11-9200-005056BFF837,10377,2,2023-08-31 16:10:00+00:00,2023-08-31 18:20:00+00:00,propofol,propofol,100.0,mcg/kg/min,Intravenous,107.1,2023-08-31 14:22:00+00:00,2023-08-31 18:47:00+00:00,108.0,238.0,108.0,108.0,27.0

@@ -1,0 +1,98 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-16311,ELG-16311,TAPE [ADHESIVE]
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-23245,ELG-23245,CAT DANDER
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-286,ELG-286,NSAIDS (NON-STEROIDAL ANTI-INFLAMMATORY DRUG)
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-3595,ELG-3595,LACTOSE
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-4593,ELG-4593,AZITHROMYCIN
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-5688,ELG-5688,VANCOMYCIN
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+A3348B00-D728-F011-9212-005056BFF837,Allergy,Latex allergy,allergy,No
+A3348B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.6,N18.6,ESRD (end stage renal disease) (CMS-HCC)
+A3348B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T82.898A,T82.898A,"Vascular graft occlusion, initial encounter"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-10373,ERX-10373,"labetalol tablet Take 1 tablet (100 mg total) by mouth 3 times a day, Disp-90 tablet, R-1, E-Prescribe"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-120891,ERX-120891,"cinacalcet (Sensipar) tablet Take 1 tablet (30 mg total) by mouth every bedtime, Historical Med"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-210445,ERX-210445,"VITAMIN D3 5,000 UNIT [PHI] TABS take 5,000 Units by mouth once a week, Disp-30 Tablet, R-1, E-Prescribe"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-228355,ERX-228355,"apixaban (Eliquis) tablet Take 1 tablet (2.5 mg total) by mouth 2 times a day, Disp-60 tablet, R-1, E-Prescribe"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM [PHI] PWPK Take 1 packet (17 g total) by mouth daily as needed (constipation), Disp-30 each, R-11, E-Prescribe"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-255390,ERX-255390,"XPHOZAH 20 MG [PHI] TABS Take 1 tablet (20 mg total) by mouth 2 times a day, [PHI], Historical Med"
+A3348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet Take 1 tablet (100 mg total) by mouth every bedtime, Historical Med"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-10151,EDG-10151,Proteinuria
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1027296,EDG-1027296,"CKD (chronic kidney disease), stage III (CMS-HCC)"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1034171,EDG-1034171,Neurogenic bladder
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1054007,EDG-1054007,"Cloaca, complex"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1083504,EDG-1083504,Vaginal septum
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1119484,EDG-1119484,Double vagina
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1240497,EDG-1240497,Positive QuantiFERON-TB Gold test
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-139779,EDG-139779,Congenital anomaly of uterus
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142114,EDG-142114,Urinary tract infection
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-144677,EDG-144677,Pregnant
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-147035,EDG-147035,Dietary counseling and surveillance
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1494821880,EDG-1494821880,COVID-19
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-15123,EDG-15123,Long term (current) use of anticoagulants
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-167265,EDG-167265,Uterus didelphus
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-167409,EDG-167409,Vesicoureteric reflux
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1766312,EDG-1766312,"CKD (chronic kidney disease), symptom management only, stage 2 (mild)"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-1866146,EDG-1866146,Cloacal disease
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-190555,EDG-190555,Kidney problem
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-197215,EDG-197215,Secondary hyperparathyroidism
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-201331,EDG-201331,"Chronic kidney disease (CKD), stage II (mild)"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-2038043,EDG-2038043,Pre-existing essential hypertension during pregnancy in first trimester
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-2062198,EDG-2062198,"Urinary tract infection in mother during pregnancy, antepartum"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-63549,EDG-63549,"Chronic kidney disease, unspecified"
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-69866,EDG-69866,Congenital duplication of vagina
+A3348B00-D728-F011-9212-005056BFF837,Past Medical History,Past Medical History EDG-94476,EDG-94476,Eczema
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121742,EAP-121742,HX C SECTION CLASSIC
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-133742,EAP-133742,VESICOSTOMY
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-134015,EAP-134015,ARTERIOVENOUS GRAFT OR FISTULA CREATION OR REVISION
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-134382,EAP-134382,PELVIC EXAMINATION UNDER ANESTHESIA
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-134480,EAP-134480,IMPERFORATE ANUS REPAIR; TRANSABDOMINAL AND SACROPERINEAL APPROACH
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-134646,EAP-134646,CHOLECYSTECTOMY LAPAROSCOPIC
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-135634,EAP-135634,BLADDER AUGMENTATION WITH CONTINENT STOMA
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-135784,EAP-135784,VAGINAL VAGINOSCOPY
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-137437,EAP-137437,VAGINAL INTROITUS REPAIR
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-18016,EAP-18016,STRAIGHT CATHETER
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-188621,EAP-188621,IR NEPHROSTOMY CATHETER CHANGE
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-188629,EAP-188629,IR NEPHROSTOMY CATHETER PLACEMENT
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-421167,EAP-421167,BLADDER SURGERY
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-442844,EAP-442844,CESAREAN SECTION PRIMARY
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-443334,EAP-443334,VAS TUNNELED CATHETER PLACEMENT
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-449821,EAP-449821,VCL AV FISTULAGRAM LEFT
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-460517,EAP-460517,IR TUNNELED DIALYSIS CATHETER EXCHANGE
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-460518,EAP-460518,IR TUNNELED DIALYSIS CATHETER PLACEMENT
+A3348B00-D728-F011-9212-005056BFF837,Past Surgical History,Past Surgical History EAP-536818,EAP-536818,BASILIC VEIN TRANSPOSITION
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1027300,1027300,"CKD (chronic kidney disease), stage V (CMS-HCC)"
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1034171,1034171,Neurogenic bladder
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1052906,1052906,Bilateral hydronephrosis
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1107831,1107831,Spina bifida of lumbar spine (CMS-HCC)
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1121994,1121994,Calculus of gallbladder without cholecystitis without obstruction
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1183608,1183608,Persistent proteinuria
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1455994,1455994,"Port or reservoir infection, subsequent encounter"
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1494915,1494915,"Vascular graft occlusion, initial encounter"
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1687825,1687825,"Clotted renal dialysis arteriovenous graft, initial encounter"
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1762989,1762989,History of tachycardia
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 186828,186828,Anemia of chronic renal failure
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 201257,201257,ESRD (end stage renal disease) (CMS-HCC)
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 201303,201303,Obstructive uropathy
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 204091,204091,"CKD (chronic kidney disease) stage 4, GFR 15-29 ml/min (CMS-HCC)"
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2056345,2056345,Dependence on intermittent renal dialysis
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2194744,2194744,Chronic hypertension affecting pregnancy
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2209737,2209737,"Spina bifida of lumbar region, unspecified hydrocephalus presence (CMS-HCC)"
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+A3348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2341354,2341354,History of difficult venous access
+A3348B00-D728-F011-9212-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-201303,EDG-201303,Obstructive uropathy

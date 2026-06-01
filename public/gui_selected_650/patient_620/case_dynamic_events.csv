@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+38C36991-04E9-EE11-9208-005056BFF837,2024-02-21 21:26:00+00:00,position,temperature_control,"""forced air warming""","""R SHC OPT ANE TEMP CONTROL"": ""forced air warming""",2024-02-21 21:26:00+00:00,2024-02-22 00:05:00+00:00,0.0,0.0,0.0,0.0,159.0
+38C36991-04E9-EE11-9208-005056BFF837,2024-02-21 21:44:00+00:00,block,spinal_block,1,Spinal Block,2024-02-21 21:26:00+00:00,2024-02-22 00:05:00+00:00,18.0,18.0,18.0,18.0,141.0
+38C36991-04E9-EE11-9208-005056BFF837,2024-02-21 21:58:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-02-21 21:26:00+00:00,2024-02-22 00:05:00+00:00,32.0,32.0,32.0,32.0,127.0
+38C36991-04E9-EE11-9208-005056BFF837,2024-02-21 22:24:32+00:00,block,neuraxial_block,1,Neuraxial Block,2024-02-21 21:26:00+00:00,2024-02-22 00:05:00+00:00,58.53333333333333,58.53333333333333,58.53333333333333,58.53333333333333,100.46666666666667
+38C36991-04E9-EE11-9208-005056BFF837,2024-02-22 00:00:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2024-02-21 21:26:00+00:00,2024-02-22 00:05:00+00:00,154.0,154.0,154.0,154.0,5.0

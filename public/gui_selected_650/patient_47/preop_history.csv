@@ -1,0 +1,51 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+6C022602-1811-EF11-920A-005056BFF837,Allergy,Allergen ELG-3595,ELG-3595,LACTOSE
+6C022602-1811-EF11-920A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J43.1,J43.1,Panlobular emphysema (CMS-HCC)
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J90,J90,"Pleural effusion, right"
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N17.9,N17.9,Acute kidney injury (nontraumatic)
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z76.82,Z76.82,Heart transplant candidate
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z76.82,Z76.82,Lung transplant candidate
+6C022602-1811-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,S/P lung transplant (CMS-HCC)
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-10578,ERX-10578,METHYLPREDNISOLONE SODIUM SUCC 125 MG INJ SOLR Historical Med
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-112836,ERX-112836,"escitalopram tablet take by mouth daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-113205,ERX-113205,"ezetimibe (Zetia) tablet take 1 Tablet (10 mg total) by mouth, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-116178,ERX-116178,"rosuvastatin tablet take 1 Tablet (20 mg total) by mouth every bedtime, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-12580,ERX-12580,"IPRATROPIUM BROMIDE 0.02 % INH SOLN Use 2.5 mL via nebulizer every 6 hours as needed for shortness of breath or wheezing For COPD. (2.5 mL = 1 vial), Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-171447,ERX-171447,"CALCIUM PO take by mouth daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-17482,ERX-17482,"AZITHROMYCIN 500 MG PO TABS take 1 Tablet (500 mg total) by mouth 3 times a week, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-184289,ERX-184289,"OXYGEN-AIR DELIVERY SYSTEMS MISC by Misc.(Non-Drug; Combo Route) route 4L at rest. 5-7L on exertion., Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-200412,ERX-200412,"budesonide-formoterol (Symbicort) 160-4.5 mcg/actuation HFAA 2 Puffs by Inhalation route daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-21818,ERX-21818,"DOXYCYCLINE MONOHYDRATE 100 MG PO TABS take by mouth 2 times a day, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-233318,ERX-233318,"SPIRIVA RESPIMAT 2.5 MCG/ACTUATION INH MIST 2 Puffs by Inhalation route daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-28736,ERX-28736,"AEROCHAMBER Z-STAT PLUS-FLW SG MISC SPCR as needed, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-33286,ERX-33286,"MUCINEX 600 MG PO TA12 take 1 Tablet (600 mg total) by mouth daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"albuterol 90 mcg/actuation HFA inhaler by Inhalation route every 6 hours as needed, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-6496,ERX-6496,"predniSONE tablet take 1 Tablet (20 mg total) by mouth 2 times a day Takes as needed. Last used 10-14 days ago, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-70536,ERX-70536,"FLUTICASONE PROPIONATE 50 MCG/ACTUATION NASAL SPSN by Nasal route, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-7327,ERX-7327,"SODIUM CHLORIDE 3 % INH NEBU 4 mL by Inhalation route, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-79786,ERX-79786,"LEVALBUTEROL HCL 0.63 MG/3 ML INH NEBU Use 3 mL via nebulizer every 6 hours as needed for shortness of breath or wheezing. For COPD., Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-807,ERX-807,"B-COMPLEX WITH VITAMIN C PO TABS take 1 Tablet by mouth daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-91619,ERX-91619,"MONTELUKAST 10 MG PO TABS take 1 Tablet (10 mg total) by mouth daily, Historical Med"
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121729,EAP-121729,HX HERNIA REPAIR INGUINAL
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-137391,EAP-137391,MICROLARYNGOSCOPY; INJECTION TO VOCAL CORD
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-446648,EAP-446648,CHES8232 BRONCHOSCOPY FLEX/ RIGID W/ BRONCH VALVE REMOVL
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+6C022602-1811-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-474123,EAP-474123,BRONCHOSCOPY WITH BRONCHIAL VALVE PLACEMENT; INITIAL LOBE
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 1077431,1077431,On home O2
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 1238273,1238273,S/P lung transplant (CMS-HCC)
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 2029244,2029244,Lung transplant candidate
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 2029246,2029246,Heart transplant candidate
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 2180073,2180073,Postoperative urinary retention
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 5534,5534,Other emphysema (CMS-HCC)
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 66230,66230,Panlobular emphysema (CMS-HCC)
+6C022602-1811-EF11-920A-005056BFF837,Problem List,Problem List Entry 66488,66488,COPD (chronic obstructive pulmonary disease) (CMS-HCC)

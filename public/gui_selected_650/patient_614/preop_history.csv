@@ -1,0 +1,27 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AA899A4D-0CD3-EE11-9204-005056BFF837,Allergy,Latex Allergy,Allergy,No
+AA899A4D-0CD3-EE11-9204-005056BFF837,Allergy,Latex allergy,allergy,No
+AA899A4D-0CD3-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C69.32,C69.32,"Choroidal malignant melanoma, left (CMS-HCC)"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G20.B2,G20.B2,Parkinson's disease with dyskinesia and fluctuating manifestations (CMS-HCC)
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-10403,ERX-10403,"LEVOTHYROXINE 88 MCG PO TABS Take 1 tablet (88 mcg total) by mouth daily, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-181395,ERX-181395,"MELATONIN PO take 12 mg by mouth every bedtime, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-1815,ERX-1815,"COLACE 100 MG PO CAPS Take 1 capsule (100 mg total) by mouth every bedtime as needed (constipation), Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-38421,ERX-38421,"MIRTAZAPINE 7.5 MG PO TABS Take 1 tablet (7.5 mg total) by mouth every bedtime, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-736,ERX-736,"ATROPINE 1 % OPHT DROP 1 drop by Ophthalmic route, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"atorvastatin tablet Take 1 tablet (10 mg total) by mouth, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-9408,ERX-9408,"CARBIDOPA-LEVODOPA 25-250 MG PO TABS Take 1 tablet by mouth 3 times a day, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-94977,ERX-94977,"finasteride tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-1051624,EDG-1051624,History of melanoma
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-127676,EDG-127676,Parkinson's disease (CMS-HCC)
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121634,EAP-121634,HX VITRECTOMY
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-463884,EAP-463884,CHOROIDAL BIOPSY
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-463888,EAP-463888,PARS PLANA VITRECTOMY WITH FOCAL LASER
+AA899A4D-0CD3-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-463904,EAP-463904,OPTHALMIC PLAQUE BRACHYTHERAPY INSERTION
+AA899A4D-0CD3-EE11-9204-005056BFF837,Problem List,Problem List Entry 127676,127676,Parkinson's disease (CMS-HCC)
+AA899A4D-0CD3-EE11-9204-005056BFF837,Problem List,Problem List Entry 1504418,1504418,"Choroidal malignant melanoma, left (CMS-HCC)"
+AA899A4D-0CD3-EE11-9204-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+AA899A4D-0CD3-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+AA899A4D-0CD3-EE11-9204-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+AA899A4D-0CD3-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1504418,EDG-1504418,"Choroidal malignant melanoma, left (CMS-HCC)"

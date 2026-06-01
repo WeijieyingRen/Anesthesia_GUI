@@ -1,0 +1,73 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AE439B69-DB4B-EE11-9200-005056BFF837,Allergy,Allergen ELG-7495,ELG-7495,NITROGLYCERIN
+AE439B69-DB4B-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+AE439B69-DB4B-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 428.43,428.43,Acute on chronic combined systolic and diastolic heart failure (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D62,D62,Acute blood loss anemia
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D68.9,D68.9,Coagulopathy (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D84.9,D84.9,Immunosuppression (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Postoperative pain
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute postoperative pain
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I27.20,I27.20,Pulmonary hypertension (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I27.21,I27.21,Pulmonary arterial hypertension (CMS-HCC) - Chronic
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I51.9,I51.9,Right ventricular dysfunction
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J96.11,J96.11,Chronic respiratory failure with hypoxia (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M32.9,M32.9,"Systemic lupus erythematosus, unspecified SLE type, unspecified [PHI] involvement status (CMS-HCC)"
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R74.01,R74.01,Transaminitis
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z76.82,Z76.82,Lung transplant candidate
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z79.899,Z79.899,High risk medication use
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z91.89,Z91.89,At risk for opportunistic infections
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,S/P lung transplant (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,"Lung transplant status, bilateral (CMS-HCC)"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 1 Tablet (500 mg total) by mouth every 6 hours as needed for Pain, Disp-100 Tablet, R-2, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10235,ERX-10235,"hydroxychloroquine (Plaquenil) tablet take 1 Tablet (200 mg total) by mouth daily, Disp-30 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-11664,ERX-11664,"warfarin tablet take 5 Tablets (5 mg total) by mouth daily in the evening Or as directed by clinic, Disp-150 Tablet, R-3, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-118023,ERX-118023,"mycophenolate (Myfortic) delayed release tablet take 4 Tablets (720 mg total) by mouth every 12 hours at 10am and 10pm, Disp-240 Tablet, R-11, E-PrescribeDiagnosis: Intolerance to mycophenolate mofetil"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-12011,ERX-12011,"REFRESH PLUS 0.5 % OPHT DPET instill 1 Drop to both eyes 3 times a day as needed, Historical Med"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-125505,ERX-125505,"SILDENAFIL (PULM.HYPERTENSION) 20 MG PO TABS take 2 Tablets (40 mg total) by mouth every 8 hours, Disp-180 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-19483,ERX-19483,"CALCIUM CARBONATE-VITAMIN D3 500 MG-5 MCG (200 UNIT) PO TABS 1 Tablet by Feeding Tube route 2 times a day with meals, Disp-60 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-207294,ERX-207294,"CALCIUM CITRATE-VITAMIN D3 200 MG CALCIUM -250 UNIT PO TABS take 1 Tab by mouth daily, Historical Med"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-208441,ERX-208441,"TREPROSTINIL-NEB ACCESSORIES 1.74 MG/2.9 ML (0.6 MG/ML) INH NEBU 12 puffs by inhalation route 4 times a day, Disp-1 Kit, R-1, Historical Med"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-21373,ERX-21373,"CELLCEPT 500 MG PO TABS take 3 Tablets (1,500 mg total) by mouth 2 times a day, Historical Med"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-231412,ERX-231412,"POSACONAZOLE 100 MG PO TBEC take 3 Tablets (300 mg total) by mouth every morning with breakfast, Disp-270 Tablet, R-3, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-233453,ERX-233453,"NINTEDANIB 150 MG PO CAPS take 150 mg by mouth 2 times a day with meals, Disp-60 Capsule, R-2, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK take 1 Packet (17 g total) by mouth daily as needed, Disp-30 Each, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-29676,ERX-29676,"SODIUM CHLORIDE 0.65 % NASAL SPRA 1 Spray by Nasal route as needed (nasal bleeding), Disp-44 mL, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"FERROUS SULFATE 325 MG (65 MG IRON) PO TABS take 1 Tablet (325 mg total) by mouth every Monday, Wednesday and Friday, Disp-100 Tablet, R-3, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet take 1 Tablet (1 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet take 1 Tablet (20 mg total) by mouth daily, Disp-30 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet take 1 Tablet (40 mg total) by mouth 2 times a day Or as directed by clinic, Disp-60 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"albuterol (PROVENTIL) 90mcg/ACTUATION INHALER 2 Puffs by Inhalation route every 6 hours as needed (Please use prior to every Tyvaso inhalation treatment), Disp-1 Each, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet take 1 Tablet (10 mg total) by mouth daily, Disp-180 Tablet, R-3, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"VALGANCICLOVIR 450 MG PO TABS take 1 Tablet (450 mg total) by mouth daily, Disp-30 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-78559,ERX-78559,"carvediloL tablet take 1 Tablet (12.5 mg total) by mouth 2 times a day with meals, Disp-60 Tablet, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-79078,ERX-79078,"SYRINGE WITH NEEDLE 5 ML 20 X 1 1/2"" MISC SYRG Use to draw up 4 mL of sterile water for reconstitution of colistin powder for inhalation., Disp-56 Each, R-5, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-85141,ERX-85141,"sterile water for injection (SWFI) 4 mL by Injection route 2 times a day Individual vials preferred. 4 ml each dose for reconstitution of colistin solution for inhalation., Disp-224 mL, R-5, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth every morning before breakfast, Disp-90 Tablet, R-3, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-89476,ERX-89476,"losartan tablet take 0.5 Tablets (12.5 mg total) by mouth daily, Historical Med"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-92434,ERX-92434,"ERGOCALCIFEROL (VITAMIN D2) 1,250 MCG (50,000 UNIT) PO CAPS take 1 Capsule (50,000 Units total) by mouth every 7 days, Disp-4 Capsule, R-2, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule take 3 Capsules (3 mg total) by mouth 2 times a day, Disp-180 Capsule, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-95354,ERX-95354,"ATOVAQUONE 750 MG/5 ML PO SUSP take 10 mL (1,500 mg total) by mouth every morning with breakfast, Disp-300 mL, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-95803,ERX-95803,"tacrolimus (Prograf) capsule take 1 Capsule (0.5 mg total) by mouth 2 times a day, Disp-60 Capsule, R-11, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-9681,ERX-9681,"colistin solution 150 mg (for inhalation) 150 mg by Inhalation route 2 times a day Using syringe, add 4 mL of sterile water to colistin vial. Allow solution to dissolve by gently rolling vial between hands. Using same syringe, withdraw 4 mL (150mg) of reconstituted solution and place in nebulizer cup. Solution must be nebulized immediately. Patient to take IH Colistin 28 days on and 28 days off., Disp-56 Each, R-5, E-Prescribe"
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1027289,EDG-1027289,CKD (chronic kidney disease)
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-144516,EDG-144516,Lupus (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-160396,EDG-160396,ILD (interstitial lung disease) (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135656,EAP-135656,EXTRACORPOREAL CIRCULATION MEMBRANE OXYGENATION PLACEMENT OR REPOSITIONING
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188373,EAP-188373,RIGHT HEART CATH
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188391,EAP-188391,CV COMB RIGHT LEFT HEART CATH
+AE439B69-DB4B-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1036680,1036680,"Lung transplant status, bilateral (CMS-HCC)"
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1099997,1099997,At risk for opportunistic infections
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1121668,1121668,Pulmonary arterial hypertension (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1125204,1125204,High risk medication use
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1134393,1134393,Immunosuppression (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1141914,1141914,Chronic respiratory failure with hypoxia (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1169145,1169145,OSA on CPAP
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 1238273,1238273,S/P lung transplant (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 15471,15471,Acute on chronic combined systolic and diastolic heart failure (CMS-HCC)
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 187136,187136,Transaminitis
+AE439B69-DB4B-EE11-9200-005056BFF837,Problem List,Problem List Entry 8173,8173,Systemic lupus erythematosus (CMS-HCC)

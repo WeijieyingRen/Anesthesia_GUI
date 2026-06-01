@@ -1,0 +1,14 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+2EED16F0-1953-EF11-920C-005056BFF837,Allergy,Latex allergy,allergy,No
+2EED16F0-1953-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K56.2,K56.2,Volvulus of sigmoid colon (CMS-HCC)
+2EED16F0-1953-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 [PHI] Take 1 tablet by mouth DAILY, Historical Med"
+2EED16F0-1953-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-229370,ERX-229370,"ESTARYLLA 0.25-35 MG-MCG [PHI] TABS TAKE 1 TABLET BY MOUTH EVERY DAY, Disp-84 Tablet, R-0, E-Prescribe"
+2EED16F0-1953-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-144379,EDG-144379,High cholesterol
+2EED16F0-1953-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1636431,EDG-1636431,"Dry eye syndrome, unspecified laterality"
+2EED16F0-1953-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121716,EAP-121716,HX SKIN CANCER REMOVAL
+2EED16F0-1953-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+2EED16F0-1953-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-198992,EAP-198992,HX [PHI]
+2EED16F0-1953-EF11-920C-005056BFF837,Problem List,Problem List Entry 1293253,1293253,Patellofemoral arthrosis
+2EED16F0-1953-EF11-920C-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+2EED16F0-1953-EF11-920C-005056BFF837,Problem List,Problem List Entry 98239,98239,Hypercholesterolemia
+2EED16F0-1953-EF11-920C-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1053434,EDG-1053434,Sigmoid volvulus (CMS-HCC)

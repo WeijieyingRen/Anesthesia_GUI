@@ -7,6 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 type CsvRow = Record<string, any>;
+type WorkflowMode = "annotation" | "review";
+type AccessCodeLookupResult = {
+  doctorId: string;
+  workflowMode: WorkflowMode;
+  annotationCode: string;
+};
 
 type CaseStatus = "not_started" | "in_progress" | "completed";
 
@@ -37,8 +43,6 @@ type CaseStatusIndexEntry = {
   updated_at?: string;
 };
 
-const CSV_BASE = "/data";
-
 function getStatusLabel(status: CaseStatus): string {
   if (status === "completed") return "Completed";
   if (status === "in_progress") return "In Progress";
@@ -66,19 +70,23 @@ export default function PatientList() {
   const [cases, setCases] = useState<CaseMeta[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [loginWorkflowMode, setLoginWorkflowMode] =
+    useState<WorkflowMode>("annotation");
 
-  const loadDoctorIdFromAccessCode = async (
+  const loadAccessCodeInfo = async (
     accessCode: string
-  ): Promise<string> => {
-    const res = await fetch(`${CSV_BASE}/access_code.csv`, {
+  ): Promise<AccessCodeLookupResult> => {
+    const reviewLookupRes = await fetch(`/assigned_code/access_review_code.csv`, {
       cache: "no-store",
     });
 
-    if (!res.ok) {
-      throw new Error(`access_code.csv ${res.status} ${res.statusText}`);
+    if (!reviewLookupRes.ok) {
+      throw new Error(
+        `access_review_code.csv ${reviewLookupRes.status} ${reviewLookupRes.statusText}`
+      );
     }
 
-    const text = await res.text();
+    const text = await reviewLookupRes.text();
     const rows = Papa.parse<CsvRow>(text, {
       header: true,
       dynamicTyping: false,
@@ -86,34 +94,42 @@ export default function PatientList() {
     }).data;
 
     const matched = rows.find(
-      (row) => String(row["access_code"] ?? "").trim() === accessCode.trim()
+      (row) =>
+        String(row["annotation_code"] ?? "").trim() === accessCode.trim() ||
+        String(row["review_code"] ?? "").trim() === accessCode.trim()
     );
 
     if (!matched) {
-      throw new Error("Invalid access code. No matching doctor was found.");
+      throw new Error("Invalid access code. No matching annotation/review assignment was found.");
     }
 
     const doctorId = String(matched["doctor_id"] ?? "").trim();
-    if (!doctorId) {
-      throw new Error("Matched doctor_id is empty in access_code.csv.");
+    const annotationCode = String(matched["annotation_code"] ?? "").trim();
+    const reviewCode = String(matched["review_code"] ?? "").trim();
+    const workflowMode: WorkflowMode =
+      accessCode.trim() === reviewCode ? "review" : "annotation";
+
+    if (!annotationCode) {
+      throw new Error("Matched annotation code is empty in access_review_code.csv.");
     }
 
-    return doctorId;
+    return {
+      doctorId,
+      workflowMode,
+      annotationCode,
+    };
   };
 
   const loadAssignedPatientFolders = async (
-    doctorId: string
+    accessInfo: AccessCodeLookupResult
   ): Promise<string[]> => {
-    const res = await fetch(
-      `${CSV_BASE}/assignments_by_doctor/${doctorId}.csv`,
-      {
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`/assigned_code/assigned_650_cases_by_access_code.csv`, {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error(
-        `assignments_by_doctor/${doctorId}.csv ${res.status} ${res.statusText}`
+        `assigned_650_cases_by_access_code.csv ${res.status} ${res.statusText}`
       );
     }
 
@@ -125,11 +141,17 @@ export default function PatientList() {
     }).data;
 
     const folders = rows
+      .filter(
+        (row) =>
+          String(row["annotation_code"] ?? "").trim() === accessInfo.annotationCode
+      )
       .map((row) => String(row["patient_folder"] ?? "").trim())
       .filter(Boolean);
 
     if (!folders.length) {
-      throw new Error(`No patient_folder found for doctor_id=${doctorId}`);
+      throw new Error(
+        `No patient_folder found for annotation_code=${accessInfo.annotationCode}`
+      );
     }
 
     return folders;
@@ -216,10 +238,11 @@ export default function PatientList() {
           );
         }
 
-        const doctorId = await loadDoctorIdFromAccessCode(accessCode);
+        const accessInfo = await loadAccessCodeInfo(accessCode);
+        setLoginWorkflowMode(accessInfo.workflowMode);
         const doctorName = String(parsedParticipantInfo?.name ?? "").trim();
         const [folders, statusMap] = await Promise.all([
-          loadAssignedPatientFolders(doctorId),
+          loadAssignedPatientFolders(accessInfo),
           loadAllCaseStatuses(accessCode, doctorName),
         ]);
 
@@ -275,7 +298,11 @@ export default function PatientList() {
         folder: c.folder,
         status: c.status,
         workflowMode:
-          c.status === "completed" ? "review" : "annotation",
+          loginWorkflowMode === "review"
+            ? "review"
+            : c.status === "completed"
+            ? "review"
+            : "annotation",
         displayCaseId: c.displayCaseId,
       })),
       diagnoses: Array(selectedCases.length).fill(null),
@@ -286,7 +313,11 @@ export default function PatientList() {
   const handleStartSingleCase = (caseItem: CaseMeta) => {
     const startIndex = cases.findIndex((c) => c.folder === caseItem.folder);
     const workflowMode =
-      caseItem.status === "completed" ? "review" : "annotation";
+      loginWorkflowMode === "review"
+        ? "review"
+        : caseItem.status === "completed"
+        ? "review"
+        : "annotation";
   
     const gameData: GameData = {
       currentPatientIndex: startIndex >= 0 ? startIndex : 0,
@@ -295,7 +326,13 @@ export default function PatientList() {
         folder: c.folder,
         status: c.status,
         workflowMode:
-          c.folder === caseItem.folder ? workflowMode : c.status === "completed" ? "review" : "annotation",
+          c.folder === caseItem.folder
+            ? workflowMode
+            : loginWorkflowMode === "review"
+            ? "review"
+            : c.status === "completed"
+            ? "review"
+            : "annotation",
         displayCaseId: c.displayCaseId,
       })),
       diagnoses: Array(cases.length).fill(null),

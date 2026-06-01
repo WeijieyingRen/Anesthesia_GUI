@@ -1,0 +1,10 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 19:27:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,0.0,0.0,0.0,0.0,72.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 19:44:00+00:00,airway,lma_inserted,1,LMA Inserted,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,17.0,17.0,17.0,17.0,55.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:17:00+00:00,airway,lma_removed,1,LMA Removed,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,50.0,50.0,50.0,50.0,22.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:17:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,50.0,50.0,50.0,50.0,22.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:30:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,63.0,63.0,63.0,63.0,9.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:30:00+00:00,position,lul_breath_sounds,coarse,LUL Breath Sounds: coarse,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,63.0,63.0,63.0,63.0,9.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:30:00+00:00,position,rll_breath_sounds,coarse,RLL Breath Sounds: coarse,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,63.0,63.0,63.0,63.0,9.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:30:00+00:00,position,rml_breath_sounds,coarse,RML Breath Sounds: coarse,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,63.0,63.0,63.0,63.0,9.0
+6C7AB8B2-A3A2-F011-9218-005056BFF837,2025-10-01 20:30:00+00:00,position,rul_breath_sounds,coarse,RUL Breath Sounds: coarse,2025-10-01 19:27:00+00:00,2025-10-01 20:39:00+00:00,63.0,63.0,63.0,63.0,9.0

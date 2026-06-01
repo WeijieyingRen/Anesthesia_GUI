@@ -1,0 +1,57 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+ADE4017D-A034-F011-9214-005056BFF837,Allergy,Allergen ELG-7598,ELG-7598,RED BLOOD CELLS
+ADE4017D-A034-F011-9214-005056BFF837,Allergy,Latex allergy,allergy,No
+ADE4017D-A034-F011-9214-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Q61.2,Q61.2,Autosomal dominant polycystic kidney disease
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet Take 2 tablets (650 mg total) by mouth every 6 hours as needed for Pain, Disp-30 tablet, R-0, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-191461,ERX-191461,"VENOFER IV 200 mg by Intravenous route every month At Wellbound Mountain View, Historical Med"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-248343,ERX-248343,"epoetin alfa-epbx (Retacrit) injection Inject 2 mL (40,000 units total) subcutaneous (under the skin) 2 times per week From Satellite, Historical Med"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-310,ERX-310,"allopurinol (Zyloprim) tablet Take 1.5 tablets (150 mg total) by mouth daily, Disp-45 tablet, R-11, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-3296,ERX-3296,"furosemide tablet Take 1 tablet (80 mg total) by mouth 2 times a day, Disp-180 tablet, R-3, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"THERAPEUTIC MULTIVITAMIN (GENERIC) [PHI] TABS Take 1 tablet by mouth daily, Historical Med"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-78033,ERX-78033,"carvediloL tablet Take 1 tablet (25 mg total) by mouth 2 times a day with meals, Disp-60 tablet, R-11, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-80504,ERX-80504,"sevelamer hydrochloride (Renagel) tablet Take 2 tablets (1,600 mg total) by mouth 3 times a day, Disp-540 tablet, R-3, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-83555,ERX-83555,"levoFLOXacin tablet Take 1 tablet (250 mg total) by mouth daily As needed for cyst infection, Disp-14 tablet, R-6, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"AMLODIPINE 10 MG [PHI] TABS Take 1 tablet by mouth daily., Disp-30 tablet, R-11, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-89476,ERX-89476,"losartan tablet Take 1 tablet (25 mg total) by mouth every bedtime, Disp-90 tablet, R-3, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-9350,ERX-9350,"calcitriol (Rocaltrol) capsule Take 1 capsule (0.25 mcg total) by mouth daily, Disp-90 capsule, R-3, E-Prescribe"
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-100250,EDG-100250,Liver disease
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-100345,EDG-100345,Lung disease
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-139894,EDG-139894,Sleep apnea
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-145886,EDG-145886,Blood transfusion without reported diagnosis
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-160364,EDG-160364,Idiopathic gout
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-176391,EDG-176391,Autosomal dominant polycystic kidney disease
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+ADE4017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-63549,EDG-63549,"Chronic kidney disease, unspecified"
+ADE4017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-134015,EAP-134015,ARTERIOVENOUS GRAFT OR FISTULA CREATION OR REVISION
+ADE4017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-188083,EAP-188083,EGD WITH OR WITHOUT BRUSHING
+ADE4017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-439029,EAP-439029,CYSTOSCOPY WITH URETERAL CATHETER PLACEMENT
+ADE4017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-449261,EAP-449261,RENAL CYST ABLATION/ EXCISION ROBOTIC ASSISTED LAPAROSCOPIC
+ADE4017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-449821,EAP-449821,VCL AV FISTULAGRAM LEFT
+ADE4017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-487287,EAP-487287,ROBOTIC DAVINCI [PHI] DUAL CONSOLE; SECONDARY PROCEDURE
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 1027297,1027297,"CKD (chronic kidney disease), stage IV (CMS-HCC)"
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 103045,103045,Pericardial effusion
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 1048299,1048299,Gross hematuria
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 1119857,1119857,Nonsustained ventricular tachycardia (CMS-HCC)
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 121728,121728,Metabolic acidosis
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 160364,160364,Idiopathic gout
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 176391,176391,Autosomal dominant polycystic kidney disease
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 186828,186828,Anemia of chronic renal failure
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 1898734,1898734,Hypertension secondary to other renal disorders
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 197215,197215,Secondary hyperparathyroidism
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 200329,200329,Obstructive sleep apnea
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 2025205,2025205,"Fever, unspecified fever cause"
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 2041502,2041502,"CKD stage G3a/A2, GFR 45-59 and albumin creatinine ratio 30-299 mg/g (CMS-HCC)"
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 2051848,2051848,Acute kidney injury superimposed on CKD
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 2052838,2052838,Free fluid in pelvis
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 2196047,2196047,Anemia due to stage 4 chronic kidney disease (CMS-HCC)
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 67202,67202,Sinus tachycardia
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 79461,79461,Blood loss anemia
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 86085,86085,Abdominal distention
+ADE4017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+ADE4017D-A034-F011-9214-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-167163,EDG-167163,"Umbilical hernia with obstruction, without gangrene"
+ADE4017D-A034-F011-9214-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-9474,EDG-9474,"Polycystic kidney, autosomal dominant"

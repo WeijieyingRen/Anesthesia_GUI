@@ -1,0 +1,9 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 14:20:00+00:00,position,temperature_control,"""forced air warming""","""R SHC OPT ANE TEMP CONTROL"": ""forced air warming""",2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,20.0,20.0,20.0,20.0,212.0
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 14:26:10+00:00,line,arterial_line,1,Arterial Line,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,26.166666666666668,26.166666666666668,26.166666666666668,26.166666666666668,205.83333333333334
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 14:44:00+00:00,note,data_artifact,data artifact,Data Artifact: data artifact,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,44.0,44.0,44.0,44.0,188.0
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 15:49:00+00:00,position,local_by_surgeons,local by surgeons,Local by Surgeons: local by surgeons,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,109.0,109.0,109.0,109.0,123.0
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 16:33:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,153.0,153.0,153.0,153.0,79.0
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 17:02:00+00:00,note,quick_note,quick note,Quick Note: quick note,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,182.0,182.0,182.0,182.0,50.0
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 17:41:00+00:00,position,bed_position,flat,Bed Position: flat,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,221.0,221.0,221.0,221.0,11.0
+1771364A-A441-EE11-9200-005056BFF837,2023-08-18 17:45:00+00:00,position,bed_position,flat,Bed Position: flat,2023-08-18 14:00:00+00:00,2023-08-18 17:52:00+00:00,225.0,225.0,225.0,225.0,7.0

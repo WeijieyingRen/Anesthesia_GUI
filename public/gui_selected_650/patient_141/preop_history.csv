@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+674806BA-9DB3-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+674806BA-9DB3-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+674806BA-9DB3-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N83.8,N83.8,Ovarian mass
+674806BA-9DB3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-18138,ERX-18138,"SENNA 8.6 MG PO TABS take 1-2 Tablets (8.6-17.2 mg total) by mouth every bedtime, Disp-60 Tablet, R-6, E-Prescribe"
+674806BA-9DB3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-24984,ERX-24984,"POLYETHYLENE GLYCOL 3350 17 GRAM/DOSE PO POWD take 17 g by mouth daily, Disp-510 g, R-6, E-Prescribe"
+674806BA-9DB3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROCODONE-ACETAMINOPHEN 5-325 MG PO TABS take 1 Tablet by mouth every 6 hours as needed, Historical Med"
+674806BA-9DB3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-5005,ERX-5005,"metoclopramide tablet take 0.5 Tablets (5 mg total) by mouth 3 times a day before meals As needed for nausea, Disp-120 Tablet, R-4, E-Prescribe"
+674806BA-9DB3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-84520,ERX-84520,"ondansetron orally disintegrating tablet DISSOLVE 1 TABLET ON THE TONGUE EVERY 8 TO 12 HOURS AS NEEDED FOR NAUSEA OR VOMITING, Historical Med"
+674806BA-9DB3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-1042465,EDG-1042465,Prediabetes
+674806BA-9DB3-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-449044,EAP-449044,HX DENTAL EXTRACTION
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 10031,10031,Cough
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 102568,102568,Ovarian cancer (CMS-HCC)
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 104344,104344,Renal cyst
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1178846,1178846,Other nonspecific abnormal finding of lung field
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 149239,149239,Left lower quadrant pain
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1885921,1885921,Not immune to hepatitis B virus
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2103218,2103218,"Constipation, unspecified"
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2103405,2103405,Unspecified abdominal pain
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2335573,2335573,"Myalgia, unspecified site"
+674806BA-9DB3-EE11-9203-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+674806BA-9DB3-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1290194,EDG-1290194,Malignant neoplasm of both ovaries (CMS-HCC)

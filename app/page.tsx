@@ -11,23 +11,16 @@ import Papa from "papaparse";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type CsvRow = Record<string, any>;
+type WorkflowMode = "annotation" | "review";
+type AccessCodeLookupResult = {
+  doctorId: string;
+  workflowMode: WorkflowMode;
+  annotationCode: string;
+};
 
-const CSV_BASE = "/data";
 
-const PRACTICE_AREA_OPTIONS = [
-  "General anesthesiology",
-  "Pediatric anesthesiology",
-  "Cardiac anesthesiology",
-  "Obstetric anesthesiology",
-  "Regional anesthesia / pain",
-  "Critical care",
-  "Other",
-] as const;
-
-type PracticeAreaOption = (typeof PRACTICE_AREA_OPTIONS)[number];
 
 export default function Home() {
   const router = useRouter();
@@ -41,9 +34,6 @@ export default function Home() {
 
   const [clinicalRole, setClinicalRole] = useState("");
   const [clinicalRoleOther, setClinicalRoleOther] = useState("");
-
-  const [practiceArea, setPracticeArea] = useState<PracticeAreaOption | "">("");
-  const [practiceAreaOther, setPracticeAreaOther] = useState("");
 
   const [experienceYears, setExperienceYears] = useState("");
   const [accessCode, setAccessCode] = useState("");
@@ -70,8 +60,7 @@ export default function Home() {
       if (saved?.trainingCountry) setTrainingCountry(saved.trainingCountry);
       if (saved?.clinicalRole) setClinicalRole(saved.clinicalRole);
       if (saved?.clinicalRoleOther) setClinicalRoleOther(saved.clinicalRoleOther);
-      if (saved?.practiceArea) setPracticeArea(saved.practiceArea);
-      if (saved?.practiceAreaOther) setPracticeAreaOther(saved.practiceAreaOther);
+
       if (saved?.experienceYears) setExperienceYears(saved.experienceYears);
       if (saved?.accessCode) setAccessCode(saved.accessCode);
     } catch {
@@ -79,20 +68,20 @@ export default function Home() {
     }
   }, []);
 
-  async function resolveDoctorIdFromAccessCode(
+  async function resolveAccessCodeInfo(
     code: string
-  ): Promise<string | null> {
-    const res = await fetch(`${CSV_BASE}/access_code.csv`, {
+  ): Promise<AccessCodeLookupResult | null> {
+    const reviewLookupRes = await fetch(`/assigned_code/access_review_code.csv`, {
       cache: "no-store",
     });
 
-    if (!res.ok) {
+    if (!reviewLookupRes.ok) {
       throw new Error(
-        `Failed to load access_code.csv: ${res.status} ${res.statusText}`
+        `Failed to load access_review_code.csv: ${reviewLookupRes.status} ${reviewLookupRes.statusText}`
       );
     }
 
-    const text = await res.text();
+    const text = await reviewLookupRes.text();
     const rows = Papa.parse<CsvRow>(text, {
       header: true,
       dynamicTyping: false,
@@ -100,13 +89,26 @@ export default function Home() {
     }).data;
 
     const matched = rows.find(
-      (row) => String(row["access_code"] ?? "").trim() === code.trim()
+      (row) =>
+        String(row["annotation_code"] ?? "").trim() === code.trim() ||
+        String(row["review_code"] ?? "").trim() === code.trim()
     );
 
     if (!matched) return null;
 
     const doctorId = String(rowOrEmpty(matched, "doctor_id")).trim();
-    return doctorId || null;
+    const annotationCode = String(rowOrEmpty(matched, "annotation_code")).trim();
+    const reviewCode = String(rowOrEmpty(matched, "review_code")).trim();
+    const workflowMode: WorkflowMode =
+      code.trim() === reviewCode ? "review" : "annotation";
+
+    if (!doctorId || !annotationCode) return null;
+
+    return {
+      doctorId,
+      workflowMode,
+      annotationCode,
+    };
   }
 
   function rowOrEmpty(row: CsvRow, key: string) {
@@ -114,7 +116,6 @@ export default function Home() {
   }
 
   const hasOtherClinicalRole = clinicalRole === "Other";
-  const hasOtherPracticeArea = practiceArea === "Other";
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -126,7 +127,6 @@ export default function Home() {
     const trimmedDegree = degree.trim();
     const trimmedTrainingCountry = trainingCountry.trim();
     const trimmedClinicalRoleOther = clinicalRoleOther.trim();
-    const trimmedPracticeAreaOther = practiceAreaOther.trim();
     const trimmedExperienceYears = experienceYears.trim();
     const trimmedAccessCode = accessCode.trim();
 
@@ -154,10 +154,7 @@ export default function Home() {
       setError("Please specify your professional degree(s).");
       return;
     }
-    if (hasOtherPracticeArea && !trimmedPracticeAreaOther) {
-      setError("Please specify your primary area of anesthesia practice.");
-      return;
-    }
+ 
 
     if (!trimmedExperienceYears) {
       setError(
@@ -174,10 +171,10 @@ export default function Home() {
     try {
       setSubmitting(true);
 
-      const doctorId = await resolveDoctorIdFromAccessCode(trimmedAccessCode);
+      const accessInfo = await resolveAccessCodeInfo(trimmedAccessCode);
 
-      if (!doctorId) {
-        setError("Invalid access code. No matching doctor ID was found.");
+      if (!accessInfo) {
+        setError("Invalid access code. No matching annotation/review assignment was found.");
         return;
       }
 
@@ -190,17 +187,19 @@ export default function Home() {
         trainingCountry: trimmedTrainingCountry,
         clinicalRole,
         clinicalRoleOther: trimmedClinicalRoleOther,
-        practiceArea,
-        practiceAreaOther: trimmedPracticeAreaOther,
+
         experienceYears: trimmedExperienceYears,
         accessCode: trimmedAccessCode,
-        doctorId,
+        doctorId: accessInfo.doctorId,
+        workflowMode: accessInfo.workflowMode,
+        annotationCode: accessInfo.annotationCode,
         timestamp: new Date().toISOString(),
       };
 
       localStorage.setItem("participantInfo", JSON.stringify(participantInfo));
       localStorage.setItem("doctorAccessCode", trimmedAccessCode);
-      localStorage.setItem("doctorId", doctorId);
+      localStorage.setItem("doctorId", accessInfo.doctorId);
+      localStorage.setItem("loginWorkflowMode", accessInfo.workflowMode);
 
       router.push("/consent");
     } catch (err: any) {
@@ -279,30 +278,27 @@ export default function Home() {
 
             <div className="space-y-2">
               <Label htmlFor="clinicalRole">Current Clinical Role</Label>
-              <Select
+              <select
+                id="clinicalRole"
                 value={clinicalRole}
-                onValueChange={(value) => {
+                onChange={(e) => {
+                  const value = e.target.value;
                   setClinicalRole(value);
                   if (value !== "Other") {
                     setClinicalRoleOther("");
                   }
                 }}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
               >
-                <SelectTrigger id="clinicalRole">
-                  <SelectValue placeholder="Select your current role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Resident">Resident</SelectItem>
-                  <SelectItem value="Fellow">Fellow</SelectItem>
-                  <SelectItem value="Attending physician">
-                    Attending physician
-                  </SelectItem>
-                  <SelectItem value="Nurse anesthetist">
-                    Nurse anesthetist
-                  </SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="" disabled>
+                  Select your current role
+                </option>
+                <option value="Resident">Resident</option>
+                <option value="Fellow">Fellow</option>
+                <option value="Attending physician">Attending physician</option>
+                <option value="Nurse anesthetist">Nurse anesthetist</option>
+                <option value="Other">Other</option>
+              </select>
 
               {hasOtherClinicalRole && (
                 <div className="space-y-2">

@@ -1,0 +1,70 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+C347A5D3-2210-EE11-91FC-005056BFF837,Allergy,Allergen ELG-21817,ELG-21817,HEPARIN
+C347A5D3-2210-EE11-91FC-005056BFF837,Allergy,Allergen ELG-327,ELG-327,CEPHALOSPORINS
+C347A5D3-2210-EE11-91FC-005056BFF837,Allergy,Allergen ELG-513,ELG-513,CT [IODINATED CONTRAST MEDIA]
+C347A5D3-2210-EE11-91FC-005056BFF837,Allergy,Allergen ELG-5688,ELG-5688,VANCOMYCIN
+C347A5D3-2210-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+C347A5D3-2210-EE11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+C347A5D3-2210-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-1080,ERX-1080,"BISACODYL 10 MG PR SUPP 1 Suppository (10 mg total) every 72 hours as needed for constipation, Disp-30 Suppository, R-0, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 6 hours as needed (moderate to severe pain), Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS take 2 Tablets by mouth every morning (Hold if loose stool), Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth daily, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-16830,ERX-16830,"melatonin tablet take 1 Tablet (3 mg total) by mouth every bedtime, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-201776,ERX-201776,"CALAMINE-ZINC OXIDE 8-8 % TP LOTN by Topical route 2 times a day as needed Apply topically to irritated skin, Disp-177 mL, R-0, No Print"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-203804,ERX-203804,"OMEPRAZOLE 20 MG PO TBEC take 1 Tablet (20 mg total) by mouth every morning on a empty stomach 30 mins before breakfast, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-233322,ERX-233322,"suvorexant (Belsomra) tablet take 1 Tablet (10 mg total) by mouth as needed for Insomnia, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-2509,ERX-2509,"diphenhydrAMINE capsule take 1 Capsule (25 mg total) by mouth every 12 hours as needed (Skin rash), Disp-30 Capsule, R-0, No Print"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"Polyethylene Glycol (Miralax) 3350 17 Gram (100 %) PO Packet take 1 Packet (17 g total) by mouth 2 times a day Hold for loose stools, Disp-14 Each, R-0, No Print"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-30080,ERX-30080,"LANTUS U-100 INSULIN 100 UNIT/ML SC SOLN inject 5 Units subcutaneous (under the skin) every bedtime, Disp-10 mL, R-0, No Print"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-38245,ERX-38245,"LACTULOSE 10 GRAM/15 ML PO SOLN take 30 mL (20 g total) by mouth 2 times a day, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-541458,ERX-541458,"INSULIN LISPRO 100 UNIT/ML SC HIGH SCALE NPO Inject as per sliding scale subcutaneously before meals and at bedtime.If 70 - 150 = 0 units;151-200 = 2 units;201-250 = 4 units;251-300 = 6 units;301-350 = 8 units; 351-400 = 10 units;For FSBG > 400, give 12 units and CALL MD, Disp-10 mL, R-0, No Print"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-7327,ERX-7327,"SODIUM CHLORIDE 3 % INH NEBU 3 mL by RT Inhalation route 2 times a day as needed, Disp-240 mL, R-0, No Print"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-80840,ERX-80840,"ondansetron tablet take 0.5 Tablets (4 mg total) by mouth every 6 hours as needed for Nausea or Vomiting, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-86533,ERX-86533,"MAGNESIUM HYDROXIDE 400 MG/5 ML PO SUSP Give 30 mL by mouth every 72 hours as needed for constipation if no bowel movement, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-90206,ERX-90206,"Sodium Phosphates (Fleet Enema) 19-7 Gram/118 ML PR Enema insert 1 Enema into the rectum every 96 hours as needed for constipation every 4th day if dulcolax suppository ineffective., Disp-133 mL, R-0, Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-9894,ERX-9894,"doxazosin (Cardura) tablet take 1 Tablet (1 mg total) by mouth daily (Hold if SBP <110), Historical Med"
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-102636,EDG-102636,Pancreatic cyst
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1137923,EDG-1137923,Type 2 diabetes mellitus without complications (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-142991,EDG-142991,Osteomyelitis (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-1071375,EAP-1071375,PELVIS/ SACRUM PERCUTANEOUS PINNING
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-134662,EAP-134662,PERCUTANEOUS ENDOSCOPIC GASTROSTOMY TUBE PLACEMENT
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-134848,EAP-134848,THORACOSCOPY WITH/ WITHOUT BRONCHOSCOPY
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135224,EAP-135224,KNEE SKELETAL TRACTION PINS INSERTION / REMOVAL
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135452,EAP-135452,TRACHEOSTOMY
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-136795,EAP-136795,FEMUR INTRAMEDULLARY RETROGRADE NAIL INSERTION
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-138221,EAP-138221,THORACIC AORTIC ANEURYSM STENT GRAFT PLACEMENT; ENDOVASCULAR
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188129,EAP-188129,ERCP WITH SPHINCTEROTOMY
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188133,EAP-188133,ERCP WITH STONE REMOVAL
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188383,EAP-188383,IR GALLBLADDER CHOLECYSTOSTOMY DRAIN
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-449818,EAP-449818,VCL TEVAR
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+C347A5D3-2210-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-658231,EAP-658231,RIB OPEN REDUCTION INTERNAL FIXATION
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 104726,104726,Rib fractures
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1055296,1055296,Wheelchair dependence
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1056415,1056415,Frailty
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 108870,108870,Pelvic fracture (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1118036,1118036,Current smoker
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1170675,1170675,VAP (ventilator-associated pneumonia) (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1171503,1171503,"Dissecting aneurysm of thoracic aorta, Stanford type B (CMS-HCC)"
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 117324,117324,Dysrhythmia
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1218419,1218419,H/O extracorporeal membrane oxygenation treatment
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1225419,1225419,10/17 (JFM c/s): biopsy
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 125822,125822,Chest pain
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1409243,1409243,"Motor vehicle accident (victim), initial encounter"
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 142249,142249,Tachycardia
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 189918,189918,Constipation
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 199835,199835,"Thrombocytopenia, primary (CMS-HCC)"
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 200461,200461,"BMI 34.0-34.9,adult"
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2341125,2341125,Gangrene of toe of both feet (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 5626,5626,Acute respiratory failure (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Problem List,Problem List Entry 95713,95713,Femur fracture (CMS-HCC)
+C347A5D3-2210-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2162941,EDG-2162941,"Closed displaced transverse fracture of shaft of right femur with nonunion, subsequent encounter"

@@ -90,13 +90,17 @@ function getMinorStep(timeResolution: TimeResolution) {
 
 function buildGridTicks(end: number, step: number) {
   if (!Number.isFinite(end) || end <= 0) return [];
+
   const ticks: number[] = [];
+
   for (let t = 0; t <= end; t += step) {
     ticks.push(t);
   }
+
   if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
     ticks.push(end);
   }
+
   return ticks;
 }
 
@@ -106,7 +110,9 @@ function sortGasNames(names: string[]) {
     const ib = DEFAULT_GAS_ORDER.indexOf(b);
     const va = ia === -1 ? Number.MAX_SAFE_INTEGER : ia;
     const vb = ib === -1 ? Number.MAX_SAFE_INTEGER : ib;
+
     if (va !== vb) return va - vb;
+
     return a.localeCompare(b);
   });
 }
@@ -127,6 +133,7 @@ function inferGasColor(name: string) {
   if (name === "PIP") return "#f59e0b";
   if (name === "Mean PIP") return "#22c55e";
   if (name === "Plateau PIP") return "#a855f7";
+
   return "#14b8a6";
 }
 
@@ -204,6 +211,7 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const dt = new Date(base.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
+
   return `${hh}:${mm}`;
 }
 
@@ -268,7 +276,10 @@ function normalizeManagementRowName(name: string | null | undefined) {
   return String(name ?? "").trim().toLowerCase();
 }
 
-function isMatchingGasRow(rowName: string, managementEvent?: ManagementEvent | null) {
+function isMatchingGasRow(
+  rowName: string,
+  managementEvent?: ManagementEvent | null
+) {
   if (!managementEvent) return false;
   if (managementEvent.chart_type !== "gas") return false;
 
@@ -338,7 +349,8 @@ function GasGridSvg({
           y={TOP_PAD}
           width={Math.max(
             2,
-            ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth
+            ((highlightWindow.endMin - highlightWindow.startMin) / end) *
+              plotWidth
           )}
           height={rows.length * ROW_HEIGHT}
           fill="lightblue"
@@ -349,6 +361,7 @@ function GasGridSvg({
 
       {minorTicks.map((tick) => {
         const x = (tick / end) * plotWidth;
+
         return (
           <line
             key={`grid-x-minor-${tick}`}
@@ -364,6 +377,7 @@ function GasGridSvg({
 
       {majorTicks.map((tick) => {
         const x = (tick / end) * plotWidth;
+
         return (
           <line
             key={`grid-x-major-${tick}`}
@@ -379,6 +393,7 @@ function GasGridSvg({
 
       {rows.map((row, idx) => {
         const yTop = TOP_PAD + idx * ROW_HEIGHT;
+
         return (
           <rect
             key={`row-${row.name}`}
@@ -395,6 +410,7 @@ function GasGridSvg({
 
       {Array.from({ length: rows.length + 1 }, (_, i) => i).map((i) => {
         const y = TOP_PAD + i * ROW_HEIGHT;
+
         return (
           <line
             key={`grid-y-${i}`}
@@ -429,8 +445,10 @@ export default function GasChart({
 }: GasChartProps) {
   const safeGas = gas ?? {};
   const rows = useMemo(() => buildRows(safeGas), [safeGas]);
+
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const isSyncingFromSliderRef = useRef(false);
 
@@ -441,33 +459,40 @@ export default function GasChart({
     () => getMajorStep(timeResolution),
     [timeResolution]
   );
+
   const minorStep = useMemo(
     () => getMinorStep(timeResolution),
     [timeResolution]
   );
+
   const effectiveWindowSize = windowSize ?? majorStep;
+
   const pxPerMin = useMemo(
     () => getPxPerMinute(timeResolution),
     [timeResolution]
   );
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
+
   const visibleRowsReindexed = visibleRows.map((row, idx) => ({
     ...row,
     rowIndex: idx,
   }));
 
   const allMaxTime = maxTimeOfRows(visibleRowsReindexed);
+
   const computedXEnd = Math.max(
     effectiveWindowSize,
     Math.ceil(allMaxTime / effectiveWindowSize) * effectiveWindowSize
   );
+
   const finalXEnd = xEnd ?? computedXEnd;
 
   const majorTicks = useMemo(() => {
     if (xTicks && xTicks.length > 0 && timeResolution === 15) {
       return xTicks;
     }
+
     return buildGridTicks(finalXEnd, majorStep);
   }, [xTicks, finalXEnd, majorStep, timeResolution]);
 
@@ -516,17 +541,19 @@ export default function GasChart({
 
   useEffect(() => {
     function updateScrollMetrics() {
-      const el = scrollRef.current;
-      if (!el) return;
+      const xEl = scrollRef.current;
 
-      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
-      setMaxScrollLeft(nextMax);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+      if (xEl) {
+        const nextMaxLeft = Math.max(0, xEl.scrollWidth - xEl.clientWidth);
+        setMaxScrollLeft(nextMaxLeft);
+        setSliderValue(Math.min(xEl.scrollLeft, nextMaxLeft));
+      }
     }
 
     updateScrollMetrics();
 
     window.addEventListener("resize", updateScrollMetrics);
+
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
@@ -536,13 +563,19 @@ export default function GasChart({
     return embedded ? null : (
       <div className="rounded-2xl border bg-white p-4 shadow-sm">
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
-        <div className="text-sm text-gray-500">No gas / vent data available.</div>
+        <div className="text-sm text-gray-500">
+          No gas / vent data available.
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+    <div
+      className={
+        embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
+      }
+    >
       <style jsx>{`
         .gas-scroll-hidden {
           overflow-x: auto;
@@ -650,6 +683,7 @@ export default function GasChart({
                     <div className="min-w-0 flex-1 truncate text-gray-900">
                       {row.name}
                     </div>
+
                     <button
                       type="button"
                       onClick={() => {
@@ -699,15 +733,18 @@ export default function GasChart({
                 }
 
                 e.preventDefault();
+
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
               }}
               onScroll={(e) => {
                 const next = e.currentTarget.scrollLeft;
+
                 if (!isSyncingFromSliderRef.current) {
                   setSliderValue(next);
                 }
+
                 onSharedScrollLeftChange?.(next);
               }}
             >
@@ -771,6 +808,7 @@ export default function GasChart({
                             onMouseDown={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
+
                               setZoomTarget({
                                 rowName: seg.rowName,
                                 x0: seg.x0,
@@ -840,6 +878,7 @@ export default function GasChart({
                       {showXAxis &&
                         majorTicks.map((tick) => {
                           const x = (tick / finalXEnd) * plotWidth;
+
                           return (
                             <text
                               key={`tick-label-${tick}`}
@@ -897,9 +936,7 @@ export default function GasChart({
               />
             </div>
 
-            <div className="px-2 py-1 text-[11px] text-gray-500">
-              Drag the bar to move left or right across the gas timeline.
-            </div>
+          
           </div>
         </div>
       </div>
@@ -950,6 +987,7 @@ export default function GasChart({
               stroke="#d1d5db"
               strokeWidth={1}
             />
+
             <line
               x1={40}
               y1={14}
@@ -962,6 +1000,7 @@ export default function GasChart({
             <text x={8} y={22} fontSize={10} fill="#6b7280">
               {roundSmart(detailInfo.maxV)}
             </text>
+
             <text x={8} y={detailHeight - 28} fontSize={10} fill="#6b7280">
               {roundSmart(detailInfo.minV)}
             </text>
@@ -969,6 +1008,7 @@ export default function GasChart({
             <text x={40} y={detailHeight - 8} fontSize={10} fill="#6b7280">
               {formatClockTime(detailInfo.minT, timeZero)}
             </text>
+
             <text
               x={detailWidth - 14}
               y={detailHeight - 8}
@@ -995,6 +1035,7 @@ export default function GasChart({
               const rx =
                 (p.time - detailInfo.minT) /
                 Math.max(1e-6, detailInfo.maxT - detailInfo.minT || 1);
+
               const ry =
                 (p.value - detailInfo.minV) /
                 Math.max(1e-6, detailInfo.maxV - detailInfo.minV);

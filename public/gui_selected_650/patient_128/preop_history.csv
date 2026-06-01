@@ -1,0 +1,26 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+D000F4E4-D178-EF11-920D-005056BFF837,Allergy,Latex allergy,allergy,No
+D000F4E4-D178-EF11-920D-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K26.9,K26.9,Duodenal ulcer
+D000F4E4-D178-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule Take 1 capsule (300 mg total) by mouth 3 times a day, Disp-90 capsule, R-11, E-Prescribe"
+D000F4E4-D178-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-204020,ERX-204020,"oxyCODONE (Roxicodone) tablet Take 1 tablet (10 mg total) by mouth every 4 hours as needed for Pain, Disp-30 tablet, R-0, E-Prescribe"
+D000F4E4-D178-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-209037,ERX-209037,"ACETAMINOPHEN 650 MG/20.3 ML PO SOLN Take 20.3 mL (650 mg total) by mouth every 6 hours, Disp-2436 mL, R-0, E-Prescribe"
+D000F4E4-D178-EF11-920D-005056BFF837,Home Medication,Home Medication ERX-25122,ERX-25122,"OCTREOTIDE ACETATE 100 MCG/ML INJ SOLN Inject 1 mL (100 mcg total) subcutaneous (under the skin) every 8 hours, Disp-270 mL, R-3, E-Prescribe"
+D000F4E4-D178-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+D000F4E4-D178-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+D000F4E4-D178-EF11-920D-005056BFF837,Past Medical History,Past Medical History EDG-2237031,EDG-2237031,Multiple endocrine neoplasia type 2 (MEN2) (CMS-HCC)
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-135798,EAP-135798,PARATHYROIDECTOMY
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-188077,EAP-188077,UPPER DOUBLE BALLOON ENTEROSCOPY
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-188083,EAP-188083,EGD WITH OR WITHOUT BRUSHING
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-188113,EAP-188113,EGD WITH CONTROL OF BLEEDING ANY METHOD
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-188269,EAP-188269,IR ABSCESS DRAIN REVISION
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-188271,EAP-188271,IR ABSCESSOGRAM
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-405495,EAP-405495,PANCREATODUODENECTOMY LAPAROSCOPIC
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-418605,EAP-418605,LAPAROSCOPIC TOTAL HYSTERECTOMY
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-486623,EAP-486623,"PR ANAST PANC CYST-BOWEL,ROUX-EN-Y"
+D000F4E4-D178-EF11-920D-005056BFF837,Past Surgical History,Past Surgical History EAP-536433,EAP-536433,LAPAROSCOPIC ANTRECTOMY
+D000F4E4-D178-EF11-920D-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+D000F4E4-D178-EF11-920D-005056BFF837,Problem List,Problem List Entry 1192943,1192943,Duodenal ulcer
+D000F4E4-D178-EF11-920D-005056BFF837,Problem List,Problem List Entry 147608,147608,Essential (primary) hypertension
+D000F4E4-D178-EF11-920D-005056BFF837,Problem List,Problem List Entry 2237031,2237031,Multiple endocrine neoplasia type 2 (MEN2) (CMS-HCC)
+D000F4E4-D178-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1192943,EDG-1192943,Duodenal ulcer
+D000F4E4-D178-EF11-920D-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-71703,EDG-71703,Ventral hernia without obstruction or gangrene

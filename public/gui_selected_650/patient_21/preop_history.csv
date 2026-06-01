@@ -1,0 +1,35 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+05B6E817-7CC5-ED11-91FA-005056BFF837,Allergy,Allergen ELG-16311,ELG-16311,ADHESIVE
+05B6E817-7CC5-ED11-91FA-005056BFF837,Allergy,Allergen ELG-5365,ELG-5365,AMIODARONE
+05B6E817-7CC5-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+05B6E817-7CC5-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-110891,ERX-110891,"enoxaparin (Lovenox) 100 mg syringe inject 1 mL (100 mg total) subcutaneous (under the skin) 2 times a day . Take in place of Eliquis starting 3/9 for 4 days. NO Lovenox day of procedure., Disp-8 Each, R-0, E-Prescribe"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-11442,ERX-11442,"SUCRALFATE 1 GRAM PO TABS take 1 Tablet (1 g total) by mouth 4 times a day .Start 3/9 and continue for 1 month after procedure., Disp-140 Tablet, R-0, E-Prescribe"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-208182,ERX-208182,"DRONEDARONE 400 MG PO TABS take 1 Tablet (400 mg total) by mouth 2 times a day with meals Start after cardioversion procedure., Disp-180 Tablet, R-0, E-PrescribeIf pt requests or if insurance prefers, ok to dispense 30-day supply for 3 months."
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Disp-60 Tablet, R-6, E-Prescribe"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-28188,ERX-28188,"Hibiclens Use as directed to shower the night before and morning of ablation procedure., Disp-240 mL, R-0, E-Prescribe"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-37404,ERX-37404,"CIALIS 5 MG PO TABS take 1 Tablet (5 mg total) by mouth daily, Historical Med"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,TAMSULOSIN 0.4 MG PO CAPS Historical Med
+05B6E817-7CC5-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily .Start 3/9 and continue for 1 month after procedure., Disp-40 Tablet, R-0, E-Prescribe"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142679,EDG-142679,Measles
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-5108,EDG-5108,Atrial flutter (CMS-HCC)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121631,EAP-121631,HX REFRACTIVE SURGERY
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3283,EAP-3283,EP ABLATION
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3400,EAP-3400,EP ATRIAL FIBRILLATION ABLATION
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-445007,EAP-445007,TRANSESOPHAGEAL ECHOCARDIOGRAPHY
+05B6E817-7CC5-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1080273,1080273,BPH (benign prostatic hyperplasia)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1240871,1240871,Hemochromatosis carrier
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Problem List,Problem List Entry 5108,5108,Atrial flutter (CMS-HCC)
+05B6E817-7CC5-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"
+05B6E817-7CC5-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139290,EDG-2139290,"Atrial flutter, unspecified type (CMS-HCC)"

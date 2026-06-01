@@ -1,0 +1,64 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+A55EF3C5-E248-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 423.2,423.2,Constrictive pericarditis
+A55EF3C5-E248-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C64.2,C64.2,Renal cell carcinoma of left kidney (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-113074,ERX-113074,"eplerenone (Inspra) tablet Take 1 tablet (25 mg total) by mouth, Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-11441,ERX-11441,"SUCRALFATE 100 MG/ML [PHI] SUSP Take 10 mL (1 g total) by mouth 4 times a day as needed, Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-172039,ERX-172039,"CENTRUM [PHI] Take 1 tablet by mouth daily (Centrum silver mens 50+), Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-180827,ERX-180827,"LUTEIN-ZEAXANTHIN [PHI] Take 1 tablet by mouth every day (Costco), Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-198604,ERX-198604,"COREG CR 20 mg CM24 Take 1 capsule (20 mg total) by mouth daily, Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-204022,ERX-204022,"Pantoprazole 40 mg GrPS Take 1 packet (40 mg total) by mouth daily, Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-232958,ERX-232958,"JARDIANCE 10 MG [PHI] TABS Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"polyethylene glycol (Miralax) 17 gram PwPk Take 1 packet (17 g total) by mouth daily as needed (constipation), Disp-10 each, R-0, Fax"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet Take 1 tablet (20 mg total) by mouth daily, Disp-60 tablet, R-0, E-Prescribe"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-6194,ERX-6194,"phenazopyridine tablet Take 1 tablet (200 mg total) by mouth 3 times a day as needed (burning with urination), Disp-15 tablet, R-0, E-Prescribe"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"atorvastatin tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+A55EF3C5-E248-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"clopidogrel (Plavix) 75 mg tablet (maintenance dose) take 1 Tablet (75 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-100250,EDG-100250,Liver disease
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1028009,EDG-1028009,Chemotherapy
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-143937,EDG-143937,Hodgkin's disease (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-144379,EDG-144379,High cholesterol
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-192513,EDG-192513,Pre-diabetes
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-5124,EDG-5124,"Heart failure, unspecified (CMS-HCC)"
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-66850,EDG-66850,Coronary artery disease
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-90240,EDG-90240,Hair thinning
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-92982,EDG-92982,Colon polyp
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-93854,EDG-93854,Contact dermatitis
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-95418,EDG-95418,Eye disease
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121722,EAP-121722,HX EGD
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121738,EAP-121738,HX LYMPH NODE BIOPSY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121803,EAP-121803,HX ANGIOPLASTY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121814,EAP-121814,HX CORONARY STENT PLACEMENT
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188391,EAP-188391,CV COMB RIGHT LEFT HEART CATH
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188861,EAP-188861,STENT PLACEMENT
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188929,EAP-188929,IR LIVER TRANSJUGULAR BIOPSY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-439029,EAP-439029,CYSTOSCOPY WITH URETERAL CATHETER PLACEMENT
+A55EF3C5-E248-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-446549,EAP-446549,HX ENDOSCOPY
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 103045,103045,Pericardial effusion
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 1044212,1044212,S/P angioplasty with stent
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 1121644,1121644,Hodgkin lymphoma (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 125754,125754,Renal cell carcinoma (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 138385,138385,"Hodgkin's disease, of lymph nodes of axilla and upper limb"
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 138981,138981,Chronic liver disease
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 143937,143937,"Hodgkin's disease, unspecified(201.90)"
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 1843049,1843049,Renal cell carcinoma of left kidney (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 190787,190787,Diastolic heart failure (CMS-HCC)
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 2032092,2032092,Coronary artery disease involving native coronary artery of native heart without angina pectoris
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 2032618,2032618,Coronary artery disease involving native heart without angina pectoris
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 2176002,2176002,"Coronary artery disease involving native heart without angina pectoris, unspecified vessel or lesion type"
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 2217544,2217544,Acquired cyst of kidney without neoplastic change
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 2350730,2350730,Abdominal ascites
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 5058,5058,Constrictive pericarditis
+A55EF3C5-E248-EF11-920C-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+A55EF3C5-E248-EF11-920C-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1843049,EDG-1843049,Renal cell carcinoma of left kidney (CMS-HCC)

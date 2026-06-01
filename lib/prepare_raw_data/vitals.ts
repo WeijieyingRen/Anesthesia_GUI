@@ -2,6 +2,14 @@ import type { TimeValuePoint, VitalPanelData } from "@/lib/types";
 
 type CsvRow = Record<string, any>;
 
+type PhysiologyPanelRows = {
+  vitalRows?: CsvRow[];
+  gasRows?: CsvRow[];
+  ventilationRows?: CsvRow[];
+  cvRows?: CsvRow[];
+  temperatureRows?: CsvRow[];
+};
+
 function toNum(v: any): number | undefined {
   if (v === null || v === undefined || v === "") return undefined;
   const n = Number(v);
@@ -33,6 +41,30 @@ function pushPoint(
 
 function hasAnyNonNanColumn(phyRows: CsvRow[], columnName: string): boolean {
   return phyRows.some((row) => Number.isFinite(toNum(row[columnName])));
+}
+
+export function buildPhysiologyRowsFromPanelFiles({
+  vitalRows = [],
+  gasRows = [],
+  ventilationRows = [],
+  cvRows = [],
+  temperatureRows = [],
+}: PhysiologyPanelRows): CsvRow[] {
+  return [
+    ...vitalRows,
+    ...gasRows,
+    ...ventilationRows,
+    ...cvRows,
+    ...temperatureRows,
+  ].sort((a, b) => {
+    const timeA = toNum(a["relative_anesthesia_time"]) ?? Number.POSITIVE_INFINITY;
+    const timeB = toNum(b["relative_anesthesia_time"]) ?? Number.POSITIVE_INFINITY;
+    if (timeA !== timeB) return timeA - timeB;
+
+    const obsA = String(a["observation_time"] ?? "");
+    const obsB = String(b["observation_time"] ?? "");
+    return obsA.localeCompare(obsB);
+  });
 }
 
 export function prepareVitalsDataRaw(phyRows: CsvRow[]): VitalPanelData {

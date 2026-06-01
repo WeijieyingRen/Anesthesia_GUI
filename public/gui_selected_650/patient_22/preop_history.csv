@@ -1,0 +1,40 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4ACCD779-8CD8-EE11-9204-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+4ACCD779-8CD8-EE11-9204-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4ACCD779-8CD8-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-10043,ERX-10043,"flecainide tablet TAKE 1 TABLET BY MOUTH EVERY 12 HOURS, Disp-180 Tablet, R-0, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-11442,ERX-11442,"sucralfate tablet take 1 Tablet (1 g total) by mouth every 6 hours .Start 4 days prior to procedure and continue for 1 month after., Disp-140 Tablet, R-0, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin 81 mg enteric coated tablet Take 1 tablet (81 mg total) by mouth every morning, Historical Med"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-228452,ERX-228452,"ELIQUIS 5 MG PO TABS TAKE 1 TABLET BY MOUTH TWICE A DAY, Disp-180 Tablet, R-0, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL tablet TAKE 1 TABLET BY MOUTH TWICE A DAY, Disp-180 Tablet, R-1, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet TAKE 1 TABLET (40 MG TOTAL) BY MOUTH EVERY BEDTIME AT BEDTIME., Disp-90 Tablet, R-0, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-80208,ERX-80208,"metoprolol succinate (Toprol XL) extended release tablet TAKE 2 TABLETS (100 MG) BY MOUTH ONCE DAILY. STRENGTH: 50 MG, Disp-180 Tablet, R-0, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-83926,ERX-83926,"PEG 3350 newest order created 2020 Take 2L by mouth night before and 2L morning of procedure. Stop fluids 4hr before procedure. Instructions are forwarded to patient., Disp-4000 mL, R-0, E-PrescribeCan substitute with Gavilyte (C,G,or N), Golytely, Nulytely, or Trilyte. Call 650.736.5555 opt 2 then opt 2 for questions. PAs? Fax to 650.498.5477"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily Start 4 days prior to ablation and continue for 1 month after., Disp-40 Tablet, R-0, E-Prescribe"
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121729,EAP-121729,HX HERNIA REPAIR INGUINAL
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121802,EAP-121802,HX CAROTID ENDARDECTOMY
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+4ACCD779-8CD8-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-514387,EAP-514387,CARDIAC PACEMAKER PLACEMENT
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 103474,103474,Postherpetic neuralgia
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1079001,1079001,Colon cancer screening
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1098254,1098254,Amaurosis fugax of right eye
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 118812,118812,Paroxysmal atrial fibrillation (CMS-HCC)
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 118860,118860,Tachy-[PHI] syndrome (CMS-HCC)
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 14957,14957,Cardiac pacemaker in situ
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1759882,1759882,Overweight
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1839687,1839687,Stenosis of right internal carotid artery
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 1866295,1866295,Right-sided thoracic back pain
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 201475,201475,Erectile dysfunction
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 2629,2629,Pure hypercholesterolemia
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 6027,6027,Hernia of other specified sites of abdominal cavity without mention of obstruction or gangrene
+4ACCD779-8CD8-EE11-9204-005056BFF837,Problem List,Problem List Entry 98706,98706,Insomnia
+4ACCD779-8CD8-EE11-9204-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

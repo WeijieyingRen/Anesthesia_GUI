@@ -1,0 +1,105 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E34707B4-12AF-EF11-920E-005056BFF837,Allergy,Allergen ELG-16558,ELG-16558,CONTRAST [CT CONTRAST (IODINE) DYE]
+E34707B4-12AF-EF11-920E-005056BFF837,Allergy,Allergen ELG-5549,ELG-5549,COLESTIPOL
+E34707B4-12AF-EF11-920E-005056BFF837,Allergy,Allergen ELG-614,ELG-614,STATINS-HMG-COA REDUCTASE INHIBITORS
+E34707B4-12AF-EF11-920E-005056BFF837,Allergy,Allergen ELG-8481,ELG-8481,AVELOX [MOXIFLOXACIN]
+E34707B4-12AF-EF11-920E-005056BFF837,Allergy,Latex allergy,allergy,No
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J84.9,J84.9,ILD (interstitial lung disease) (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J90,J90,Pleural effusion
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J94.0,J94.0,Chylothorax
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J96.10,J96.10,"Chronic respiratory failure, unspecified whether with hypoxia or hypercapnia (CMS-HCC)"
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N17.9,N17.9,Acute kidney injury (nontraumatic)
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R56.9,R56.9,"Convulsions, unspecified convulsion type (CMS-HCC)"
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R61,R61,"Excess, secretion, sweat"
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z76.82,Z76.82,Lung transplant candidate
+E34707B4-12AF-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,S/P lung transplant (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-10117,ERX-10117,"glipiZIDE tablet Take 1 tablet (5 mg total) by mouth 2 times a day, Disp-180 tablet, R-0, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed for Pain, Disp-30 tablet, R-0, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-111468,ERX-111468,"INSULIN LISPRO 100 UNIT/ML SC INPN Inject 0-12 units subcutaneous (under the skin) 4 times a day before meals and bedtime Per sliding scale., Disp-15 mL, R-5, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-113205,ERX-113205,"EZETIMIBE 10 MG PO TABS Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS Take 2 tablets by mouth 2 times a day as needed for Constipation, Disp-120 tablet, R-3, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-13089,ERX-13089,"lisinopriL tablet Take 1 tablet (2.5 mg total) by mouth daily, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet Take 1 tablet (81 mg total) by mouth daily, Disp-30 tablet, R-3, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-16027,ERX-16027,"SHARPS CONTAINER MISC MISC Use as directed., Disp-1 each, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO Take 1 tablet by mouth every day, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-19483,ERX-19483,"CALCIUM CARBONATE-VITAMIN D3 500 MG-5 MCG (200 UNIT) PO TABS Take 1 tablet by mouth 2 times a day with meals, Disp-60 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-204706,ERX-204706,"melatonin tablet Take 1 tablet (5 mg total) by mouth every bedtime as needed (insomnia), Disp-30 tablet, R-3, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-208479,ERX-208479,"MAGNESIUM OXIDE-MG AA CHELATE 133 MG PO TABS Take 1 tablet (133 mg total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-209763,ERX-209763,"CETIRIZINE 10 MG PO CAPS Take 1 capsule (10 mg total) by mouth every day, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-231561,ERX-231561,"HUMULIN N NPH INSULIN KWIKPEN 100 UNIT/ML (3 ML) SC INPN Inject 20 units subcutaneous (under the skin) 2 times a day Or as directed., Disp-15 mL, R-5, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-232954,ERX-232954,"EMPAGLIFLOZIN 25 MG PO TABS Take 1 tablet (25 mg total) by mouth, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-234548,ERX-234548,"ISAVUCONAZONIUM SULFATE 186 MG PO CAPS Take 2 capsules (372 mg total) by mouth daily, Disp-60 capsule, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-250,ERX-250,"ALBUTEROL SULFATE 2.5 MG /3 ML (0.083 %) INH NEBU 3 mL (2.5 mg total) by Nebulization route every 6 hours as needed for Shortness of breath or Bronchospasm/Wheezing (Can use nebulizer instead of inhaler), Disp-90 mL, R-0, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK Take 1 packet (17 g total) by mouth 2 times a day as needed (constipation), Disp-30 each, R-3, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-28995,ERX-28995,"METFORMIN 500 MG PO TB24 Take 1,000 mg by mouth daily in the evening, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-30047,ERX-30047,"BLOOD-GLUCOSE METER MISC KIT 1 Device by Misc.(Non-Drug; Combo Route) route as needed, Disp-1 kit, R-1, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3077,ERX-3077,"FERROUS SULFATE 325 MG (65 MG IRON) PO TBEC Take 1 tablet (325 mg total) by mouth every Monday, Wednesday and Friday, Disp-13 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet Take 1 tablet (1 mg total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"FUROSEMIDE 20 MG PO TABS TAKE 1 TABLET BY MOUTH EVERY DAY, Disp-30 tablet, R-5, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3378,ERX-3378,"GEMFIBROZIL 600 MG PO TABS Take 1 tablet (600 mg total) by mouth daily in the evening As of 10/10/24: hold this medication., Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-37637,ERX-37637,"metoprolol tartrate (Lopressor) tablet Take 1 tablet (25 mg total) by mouth 2 times a day, Disp-60 tablet, R-3, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-38104,ERX-38104,"PEN NEEDLE, DIABETIC 31 GAUGE X 5/16"" MISC NDLE Use as directed., Disp-200 each, R-5, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 6 hours as needed, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS Take 1 tablet by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet Take 2 tablets (20 mg total) by mouth 2 times a day Or as directed per prednisone taper card., Disp-80 tablet, R-5, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"predniSONE tablet Take 1 tablet (5 mg total) by mouth 2 times a day Or as directed per prednisone taper card., Disp-60 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-70536,ERX-70536,"FLUTICASONE PROPIONATE 50 MCG/ACTUATION NASAL SPSN 2 sprays by Nasal route as needed, Disp-6 g, R-2, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"SULFAMETHOXAZOLE-TRIMETHOPRIM 400-80 MG PO TABS Take 1 tablet by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"VALGANCICLOVIR 450 MG PO TABS Take 2 tablets (900 mg total) by mouth daily, Disp-60 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-80562,ERX-80562,"mycophenolate (CellCept) capsule Take 3 capsules (750 mg total) by mouth 2 times a day Or as directed., Disp-180 capsule, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"clopidogrel (Plavix) 75 mg tablet (maintenance dose) Take 1 tablet (75 mg total) by mouth daily, Disp-30 tablet, R-3, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-85078,ERX-85078,"MYCOPHENOLATE MOFETIL 500 MG PO TABS take 1,000 mg by mouth 2 times a day , Historical Med"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule Take 3 capsules (3 mg total) by mouth 2 times a day Or as directed., Disp-180 capsule, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-9516,ERX-9516,"CHLORHEXIDINE GLUCONATE 0.12 % MM MWSH Take 15 mL by mouth 2 times a day, Disp-900 mL, R-0, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-95803,ERX-95803,"tacrolimus (Prograf) capsule Take 1 capsule (0.5 mg total) by mouth 2 times a day Or as directed., Disp-60 capsule, R-11, E-Prescribe"
+E34707B4-12AF-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-129253,EDG-129253,Interstitial lung disease (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121772,EAP-121772,HX LUNG BIOPSY
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134949,EAP-134949,DENTAL / TOOTH EXTRACTIONS
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-3758,EAP-3758,CV PCI
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+E34707B4-12AF-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 102374,102374,Osteoarthritis
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1102993,1102993,Tobacco user
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1119862,1119862,"Goals of care, counseling/discussion"
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1169143,1169143,NSVT (nonsustained ventricular tachycardia) (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1174588,1174588,Respiratory bronchiolitis interstitial lung disease (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1220085,1220085,Hx of lung transplant (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1228487,1228487,Pneumonitis due to inhalation of oil (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1238273,1238273,S/P lung transplant (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1256752,1256752,Herpes zoster without complication
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 127941,127941,Diffuse interstitial pulmonary fibrosis (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 138516,138516,Severe protein-calorie malnutrition
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 141880,141880,SOB (shortness of breath)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1494811674,1494811674,Pneumonia due to COVID-19 virus
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 160396,160396,ILD (interstitial lung disease) (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 1853990,1853990,Diverticulosis of large intestine with hemorrhage
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 189749,189749,Dental caries
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 190765,190765,Hypertensive heart disease without heart failure
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 200808,200808,Hypoxia
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 2029244,2029244,Lung transplant candidate
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 2054636,2054636,"Type 2 diabetes mellitus with stage 2 chronic kidney disease, without long-term current use of insulin (CMS-HCC)"
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 2108140,2108140,Pneumonia due to hemophilus influenzae
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 2322797,2322797,Other dermatomyositis with respiratory involvement (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 2387379,2387379,Acute hypoxic respiratory failure (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 2629,2629,Pure hypercholesterolemia
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 5628,5628,Chronic respiratory failure (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 66619,66619,Chylothorax
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 66850,66850,Coronary artery disease
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 93165,93165,Convulsions (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 93525,93525,Cytomegalovirus infection (CMS-HCC)
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 94116,94116,Diverticulosis
+E34707B4-12AF-EF11-920E-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+E34707B4-12AF-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1794392,EDG-1794392,"Excess, secretion, sweat"

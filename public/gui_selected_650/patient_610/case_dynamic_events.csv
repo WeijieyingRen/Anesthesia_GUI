@@ -1,0 +1,2 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+F392F348-D041-EF11-920B-005056BFF837,2024-07-09 20:38:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2024-07-09 20:38:00+00:00,2024-07-09 23:38:00+00:00,0.0,0.0,0.0,0.0,180.0

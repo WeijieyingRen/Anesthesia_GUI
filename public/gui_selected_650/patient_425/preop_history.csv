@@ -1,0 +1,90 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CB4E270E-3FBA-F011-9219-005056BFF837,Allergy,Allergen ELG-16558,ELG-16558,CONTRAST [CT CONTRAST (IODINE) DYE]
+CB4E270E-3FBA-F011-9219-005056BFF837,Allergy,Allergen ELG-513,ELG-513,CT [IODINATED CONTRAST MEDIA]
+CB4E270E-3FBA-F011-9219-005056BFF837,Allergy,Latex allergy,allergy,No
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 710.3,710.3,Dermatomyositis (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C64.9,C64.9,"Renal cell carcinoma, unspecified laterality (CMS-HCC)"
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C78.00,C78.00,"Renal cell carcinoma metastatic to lung, unspecified laterality (CMS-HCC)"
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D72.829,D72.829,"Leukocytosis, unspecified type"
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J90,J90,Pleural effusion
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K21.9,K21.9,"Gastroesophageal reflux disease, unspecified whether esophagitis present"
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R05.3,R05.3,Chronic cough
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R13.10,R13.10,"Dysphagia, unspecified type [R13.10]"
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R50.9,R50.9,"Fever, unspecified fever cause"
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R53.81,R53.81,Physical deconditioning
+CB4E270E-3FBA-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z71.89,Z71.89,"Goals of care, counseling/discussion"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-10521,ERX-10521,"MEGESTROL 400 MG/10 ML (40 MG/ML) [PHI] SUSP Take 5 mL (200 mg total) by mouth daily, Disp-480 mL, R-3, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-11620,ERX-11620,"UREA 40 % TP [PHI] APPLY TO CALLUSED AREAS TO HANDS AND FEET ONCE DAILY Strength: 40 %, Disp-198.45 g, R-1, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-2319,ERX-2319,"DEXAMETHASONE 0.5 MG/5 ML [PHI] ELIX 10 mL (1 mg total) by Swish & Spit route 4 times a day as needed (mouth sore), Disp-237 mL, R-3, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-236402,ERX-236402,"NALOXONE 4 MG/ACTUATION NASAL SPRY 0.5-1 sprays (2-4 mg total) by Nasal route as needed (Respiratory depression from opioid overdose.), Disp-1 each, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-249205,ERX-249205,"tivozanib (Fotivda) chemo capsule Take 1 capsule (1.34 mg total) by mouth daily with or without food for 21 days followed by 7 days off. Swallow capsule whole with water., Disp-21 capsule, R-11, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-2510,ERX-2510,"diphenhydrAMINE capsule Take one capsule (50 mg) by mouth 1 hour prior to your radiology exam., Disp-1 capsule, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM [PHI] PWPK Take 1 packet (17 g total) by mouth daily, Disp-15 each, R-3, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-28899,ERX-28899,"oxyCODONE tablet Take 1 tablet (15 mg total) by mouth every 4 hours as needed, Disp-60 tablet, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet Take 1 tablet (10 mg total) by mouth every morning, Disp-90 tablet, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"predniSONE tablet Take 1 tablet (5 mg total) by mouth daily Take with 10 mg to make it 15 mg daily., Disp-30 tablet, R-6, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-6498,ERX-6498,"predniSONE tablet Take 1 tablet (50 mg total) by mouth as directed As 13 hours, 7 hours and 1 hour prior to scan., Disp-3 tablet, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-77012,ERX-77012,"losartan tablet Take 1 tablet (50 mg total) by mouth daily, Historical Med"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-80840,ERX-80840,"ondansetron tablet Take 1 tablet (8 mg total) by mouth every 8 hours as needed, Disp-30 tablet, R-11, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG [PHI] CAPS Take 1 capsule (0.4 mg total) by mouth daily, Disp-30 capsule, R-3, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Disp-90 tablet, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-89065,ERX-89065,"lidocaine (LIDODERM) 5 % patch Apply 1 patch to skin daily Apply for 12 hours and take off, change daily., Disp-30 patch, R-3, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-9178,ERX-9178,"BETAMETHASONE, AUGMENTED 0.05 % TP OINT Apply to affected areas on the hands and feet once daily, Disp-50 g, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-93900,ERX-93900,"ARTIFICIAL TEARS(HYPROMELLOSE) 0.3 % OPHT DROP 1 drop by Ophthalmic route every 4 hours as needed, Disp-30 mL, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Home Medication,Home Medication ERX-988,ERX-988,"benzonatate (Tessalon) capsule Take 1 capsule (100 mg total) by mouth 3 times a day, Disp-60 capsule, R-0, E-Prescribe"
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-1035127,EDG-1035127,Dysphagia
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-160396,EDG-160396,ILD (interstitial lung disease) (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-8176,EDG-8176,Dermatomyositis (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-95781,EDG-95781,FUO (fever of unknown origin)
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-133690,EAP-133690,COLONOSCOPY
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-135420,EAP-135420,LOWER EXTREMITY SOFT TISSUE BIOPSY
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-135928,EAP-135928,SMALL BOWEL RESECTION
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-188083,EAP-188083,EGD WITH OR WITHOUT BRUSHING
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH OR WITHOUT BIOPSY
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-188373,EAP-188373,RIGHT HEART CATH
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-188929,EAP-188929,IR LIVER TRANSJUGULAR BIOPSY
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-2385,EAP-2385,IR CT KIDNEY BIOPSY
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-3564,EAP-3564,OTHER
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-474089,EAP-474089,BRONCHOSCOPY WITH NAVIGATION
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-474095,EAP-474095,BRONCHOSCOPY WITH NEEDLE ASPIRATION BIOPSY; SINGLE LOBE
+CB4E270E-3FBA-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-474097,EAP-474097,BRONCHOSCOPY WITH NEEDLE ASPIRATION BIOPSY; ADDITIONAL LOBE
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1024798,1024798,Cancer associated pain
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1096332,1096332,SIRS (systemic inflammatory response syndrome) (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1106852,1106852,Healthcare maintenance
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1117749,1117749,"Abdominal pain, acute, epigastric"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1119323,1119323,Cavitary lesion of lung
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1119862,1119862,"Goals of care, counseling/discussion"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1121640,1121640,History of GI bleed
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 123473,123473,Fever of unknown origin (FUO)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1258166,1258166,Clear cell renal cell carcinoma (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 127785,127785,Pneumonia
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1280643,1280643,Bulbar weakness (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 142159,142159,Osteoporosis
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 142249,142249,Tachycardia
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 142820,142820,Pain in joint
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 146077,146077,[PHI] esophagitis (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 1570777,1570777,"Renal cell carcinoma, unspecified laterality (CMS-HCC)"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 160396,160396,ILD (interstitial lung disease) (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 186826,186826,Anemia of chronic disease
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 187136,187136,Transaminitis
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 195775,195775,Dyspnea and respiratory abnormalities
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 200808,200808,Hypoxia
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 201175,201175,Generalized weakness
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 2025205,2025205,"Fever, unspecified fever cause"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 203050,203050,Physical deconditioning
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 2139143,2139143,"Leukocytosis, unspecified type"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 2139850,2139850,"Dysphagia, unspecified type"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 2422937,2422937,"Renal cell carcinoma metastatic to lung, unspecified laterality (CMS-HCC)"
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 6054,6054,Intussusception (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 6222,6222,Hematemesis
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 8176,8176,Dermatomyositis (CMS-HCC)
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 93282,93282,Chronic cough
+CB4E270E-3FBA-F011-9219-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia
+CB4E270E-3FBA-F011-9219-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2157345,EDG-2157345,"Pneumonia due to infectious organism, unspecified laterality, unspecified part of lung"

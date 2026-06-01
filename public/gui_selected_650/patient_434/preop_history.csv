@@ -1,0 +1,20 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AB09F8D0-0757-EF11-920C-005056BFF837,Allergy,Latex Allergy,Allergy,No
+AB09F8D0-0757-EF11-920C-005056BFF837,Allergy,Latex allergy,allergy,No
+AB09F8D0-0757-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D49.6,D49.6,Brain tumor (CMS-HCC)
+AB09F8D0-0757-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis deferred
+AB09F8D0-0757-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R91.1,R91.1,Lung nodule
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet Take 2 tablets (650 mg total) by mouth every 6 hours as needed, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet Take 1 tablet (5 mg total) by mouth every 4 hours as needed for Pain, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"traMADol (Ultram) tablet Take 1 tablet (50 mg total) by mouth every bedtime for 14 days, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"GABAPENTIN 300 MG [PHI] CAPS Take 1 capsule (300 mg total) by mouth 4 times a day, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-228452,ERX-228452,"ELIQUIS 5 MG [PHI] TABS Take 1 tablet (5 mg total) by mouth 2 times a day, [PHI], Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-4422,ERX-4422,"levothyroxine tablet Take 1 tablet (75 mcg total) by mouth every morning, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-77890,ERX-77890,"anastrozole (Arimidex) tablet Take 1 tablet (1 mg total) by mouth daily, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-90638,ERX-90638,"PRAMIPEXOLE 0.25 MG [PHI] TABS Take 1 tablet (0.25 mg total) by mouth every bedtime, Historical Med"
+AB09F8D0-0757-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-134105,EAP-134105,ENDOSCOPIC ENDONASAL APPROACH FOR SKULLBASE AND/ OR SINONASAL TUMOR WITH OR WITHOUT FAT GRAFT
+AB09F8D0-0757-EF11-920C-005056BFF837,Problem List,Problem List Entry 1053813,1053813,7/29 (JFM) EEA for Pituitary Mass Biopsy
+AB09F8D0-0757-EF11-920C-005056BFF837,Problem List,Problem List Entry 118938,118938,Brain tumor (CMS-HCC)
+AB09F8D0-0757-EF11-920C-005056BFF837,Problem List,Problem List Entry 192855,192855,Lung nodule
+AB09F8D0-0757-EF11-920C-005056BFF837,Problem List,Problem List Entry 2056459,2056459,Mass of upper lobe of right lung
+AB09F8D0-0757-EF11-920C-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-192855,EDG-192855,Lung nodule

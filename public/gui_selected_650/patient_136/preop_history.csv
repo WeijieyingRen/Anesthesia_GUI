@@ -1,0 +1,76 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+051650B2-11AC-F011-9218-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+051650B2-11AC-F011-9218-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+051650B2-11AC-F011-9218-005056BFF837,Allergy,Latex allergy,allergy,No
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 566,566,Abscess of anal and rectal regions
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis F05,F05,"Delirium due to multiple etiologies, acute, mixed level of activity"
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis F05,F05,"Delirium due to multiple etiologies, acute, hypoactive"
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.3,G89.3,Cancer related pain
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.3,G89.3,Cancer associated pain
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N82.3,N82.3,Rectovaginal fistula
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R52,R52,Acute pain
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R62.7,R62.7,Failure to thrive in adult
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+051650B2-11AC-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis V66.7,V66.7,Encounter for palliative care
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-123771,ERX-123771,"DULoxetine (Cymbalta) delayed release capsule Take 1 capsule (20 mg total) by mouth daily, Historical Med"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-125756,ERX-125756,"pregabalin (Lyrica) capsule Take 1 capsule (25 mg total) by mouth 3 times a day, Disp-90 capsule, R-0, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-13410,ERX-13410,"acetaminophen (Tylenol) tablet Take 1 tablet (650 mg total) by mouth every 6 hours as needed, Disp-28 tablet, R-0, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-17466,ERX-17466,"mirtazapine (Remeron) tablet Take 0.5 tablets (7.5 mg total) by mouth every bedtime, Historical MedPaused since Fri 10/31/2025 until manually resumed"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-204021,ERX-204021,"OXYCODONE 20 MG [PHI] TABS Take 1 tablet (20 mg total) by mouth Q3H PRN for Pain, Disp-112 tablet, R-0, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-222816,ERX-222816,"LIDOCAINE 5 % TP OINT by Topical route, Disp-50 g, R-0, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-236402,ERX-236402,"naloxone (NARCAN) 4 mg/actuation nasal spray Spray 0.1 mL (4 mg) into one nostril for suspected overdose. Repeat into other nostril after 2 to 3 minutes if no or minimal response., Disp-2 each, R-1, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-236402,ERX-236402,"naloxone (Narcan) 4 mg/actuation nasal spray Spray as single dose into one nostril. Repeat every 2-3 minutes as needed alternating nostrils., Disp-2 each, R-11, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-2444,ERX-2444,"DIGOXIN 125 MCG (0.125 MG) [PHI] TABS Take 1 tablet (0.125 mg total) by mouth daily Contact PCP for refills, Disp-30 tablet, R-0, E-PrescribePaused since Fri 10/31/2025 until manually resumed"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-4420,ERX-4420,"levothyroxine tablet Take 1 tablet (25 mcg total) by mouth every morning before breakfast, Historical Med"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-4448,ERX-4448,"lidocaine (Xylocaine) 2% jelly Place 3cc on fistula for comfort, Disp-45 mL, R-0, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-4953,ERX-4953,"methadone tablet Take 1 tablet (10 mg total) by mouth 2 times a day, Historical Med"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) [PHI] TABS Take 1 tablet by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-84520,ERX-84520,"ondansetron orally disintegrating tablet Take 1 tablet (8 mg total) by mouth every 8 hours as needed for Nausea, Historical Med"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet Take 3 tablets (75 mg total) by mouth 2 times a day, Historical MedPaused since Fri 10/31/2025 until manually resumed"
+051650B2-11AC-F011-9218-005056BFF837,Home Medication,Home Medication ERX-95927,ERX-95927,"ESOMEPRAZOLE MAGNESIUM 20 MG [PHI] CPDR Take 1 tablet by mouth daily, Historical Med"
+051650B2-11AC-F011-9218-005056BFF837,Past Medical History,Past Medical History EDG-1031885,EDG-1031885,Cytopenia
+051650B2-11AC-F011-9218-005056BFF837,Past Medical History,Past Medical History EDG-1052841,EDG-1052841,Anal squamous cell carcinoma (CMS-HCC)
+051650B2-11AC-F011-9218-005056BFF837,Past Medical History,Past Medical History EDG-3510,EDG-3510,Multiple sclerosis
+051650B2-11AC-F011-9218-005056BFF837,Past Medical History,Past Medical History EDG-66803,EDG-66803,Postural hypotension
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-121733,EAP-121733,HX LUMPECTOMY
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-121840,EAP-121840,HX BLADDER SUSPENSION
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-133326,EAP-133326,ANAL DILATION/ ANOPLASTY
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-133905,EAP-133905,TRIGGER FINGER RELEASE
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-134326,EAP-134326,CYSTOSCOPY WITH INSERTION OF URETERAL / DOUBLE J STENT WITH / WITHOUT RETROGRADE PYELOGRAM
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-134590,EAP-134590,COLOSTOMY DIVERTING
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-134592,EAP-134592,COLOSTOMY TAKEDOWN
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-134656,EAP-134656,EXPLORATORY LAPAROSCOPY
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-135240,EAP-135240,KNEE TOTAL JOINT REPLACEMENT
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-135502,EAP-135502,ANAL AND/ OR RECTAL EXAMINATION UNDER ANESTHESIA WITH OR WITHOUT FOREIGN BODY REMOVAL OR BIOPSY
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-136100,EAP-136100,HIGH RESOLUTION ANOSCOPY WITH DESTRUCTION/ REMOVAL OF TUMOR/ LESION/ POLYP
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-188269,EAP-188269,IR ABSCESS DRAIN REVISION
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-247436,EAP-247436,ENDOSCOPIC PLANTAR FASCIOTOMY
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-399637,EAP-399637,STOMA REVISION
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-399667,EAP-399667,COLOSTOMY DIVERTING? LAPAROSCOPIC
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-536676,EAP-536676,BASILIC VEIN LIGATION
+051650B2-11AC-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-649389,EAP-649389,HX TOTAL VAG HYSTERECTOMY (OVARIES INTACT/NO CERVIX)
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1024732,1024732,Acute pain
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1024798,1024798,Cancer associated pain
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1044150,1044150,Rectal discharge
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1088117,1088117,Colostomy in place (CMS-HCC)
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 109235,109235,PVC's (premature ventricular contractions)
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1095677,1095677,Chemotherapy-induced neutropenia
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1105480,1105480,Cancer related pain
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 119114,119114,Rectal cancer (CMS-HCC)
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 15225,15225,Encounter for palliative care
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 152847,152847,"Abscess, anorectal"
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 176565,176565,Decreased appetite
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 1853232,1853232,"Delirium due to multiple etiologies, acute, hypoactive"
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 189168,189168,"Sacral fracture, closed (CMS-HCC)"
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 2065245,2065245,"Bradycardia, unspecified"
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 2092381,2092381,"Adverse effect of antineoplastic and immunosuppressive drugs, initial encounter"
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 3510,3510,Multiple sclerosis
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 6096,6096,Abscess of anal and rectal regions
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 71402,71402,Rectal pain
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 74693,74693,Rectovaginal fistula
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 85985,85985,Debility
+051650B2-11AC-F011-9218-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia
+051650B2-11AC-F011-9218-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-119125,EDG-119125,Anal cancer (CMS-HCC)

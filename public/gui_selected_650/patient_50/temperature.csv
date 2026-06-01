@@ -1,0 +1,4 @@
+mpog_case_id,observation_time,TMP,TMP2,TMP Esophageal,TMP Skin,TMP Nasopharyngeal,TMP Bladder,TMP Blood,TMP Rectal,anesthesia_start,anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+C769D40B-5BB2-F011-9219-005056BFF837,2025-10-21 18:20:00+00:00,,,,96.8,,,,,2025-10-21 17:32:00+00:00,2025-10-21 18:57:00+00:00,48.0,48.0,37.0
+C769D40B-5BB2-F011-9219-005056BFF837,2025-10-21 18:35:00+00:00,,,,96.8,,,,,2025-10-21 17:32:00+00:00,2025-10-21 18:57:00+00:00,63.0,63.0,22.0
+C769D40B-5BB2-F011-9219-005056BFF837,2025-10-21 18:50:00+00:00,96.2,,,,,,,,2025-10-21 17:32:00+00:00,2025-10-21 18:57:00+00:00,78.0,78.0,7.0

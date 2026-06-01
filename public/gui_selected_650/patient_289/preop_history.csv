@@ -1,0 +1,24 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4A23A375-DC6C-EE11-9202-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4A23A375-DC6C-EE11-9202-005056BFF837,Allergy,Latex allergy,allergy,No
+4A23A375-DC6C-EE11-9202-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+4A23A375-DC6C-EE11-9202-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z01.818,Z01.818,Preop testing
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-11498,ERX-11498,"tamoxifen 20 mg tablet Take 1 tablet (20 mg total) by mouth, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-171349,ERX-171349,"CALCIUM + D PO take by mouth, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule Take 1 capsule (300 mg total) by mouth daily, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-204020,ERX-204020,"oxyCODONE (Roxicodone) tablet take 1 Tablet (10 mg total) by mouth every 6 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-248162,ERX-248162,"TRELEGY ELLIPTA 200-62.5-25 MCG INH DSDV 1 Puff by Inhalation route daily, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-3843,ERX-3843,"IBUPROFEN 400 MG PO TABS Take 1 tablet (400 mg total) by mouth every 6 hours as needed, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 6 hours as needed, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-4573,ERX-4573,"LORazepam tablet Take 0.5-1 tablets (0.5-1 mg total) by mouth every bedtime as needed, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Autologous eye drops, Historical Med"
+4A23A375-DC6C-EE11-9202-005056BFF837,Past Medical History,Past Medical History EDG-122781,EDG-122781,Chronic obstructive pulmonary disease (COPD) (CMS-HCC)
+4A23A375-DC6C-EE11-9202-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+4A23A375-DC6C-EE11-9202-005056BFF837,Problem List,Problem List Entry 1033526,1033526,Post-menopausal
+4A23A375-DC6C-EE11-9202-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+4A23A375-DC6C-EE11-9202-005056BFF837,Problem List,Problem List Entry 105032,105032,Scoliosis
+4A23A375-DC6C-EE11-9202-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+4A23A375-DC6C-EE11-9202-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+4A23A375-DC6C-EE11-9202-005056BFF837,Problem List,Problem List Entry 66488,66488,COPD (chronic obstructive pulmonary disease) (CMS-HCC)
+4A23A375-DC6C-EE11-9202-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2121481,EDG-2121481,"Spinal stenosis, unspecified spinal region"
+4A23A375-DC6C-EE11-9202-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2221528,EDG-2221528,Degenerative scoliosis

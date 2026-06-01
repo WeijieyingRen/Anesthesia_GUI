@@ -1,0 +1,130 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Allergy,Allergen ELG-17262,ELG-17262,RED BLOOD CELL ANTIBODY
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Allergy,Allergen ELG-18254,ELG-18254,OTHER NON-MEDS (SPECIFY IN COMMENTS)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I25.10,I25.10,"Coronary artery disease without angina pectoris, unspecified vessel or lesion type, unspecified whether native or transplanted heart"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I25.10,I25.10,Coronary artery disease involving native coronary artery of native heart without angina pectoris
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I25.10,I25.10,"Coronary artery disease involving native heart, unspecified vessel or lesion type, unspecified whether angina present"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z01.810,Z01.810,Preprocedural cardiovascular examination
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10674,ERX-10674,"MUPIROCIN 2 % TP OINT 1 g by Topical route daily as needed, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-118024,ERX-118024,"mycophenolate (Myfortic) delayed release tablet TAKE 1 TABLET EVERY 12 HOURS AT 10 A.M. AND 10 P.M., Disp-360 Tablet, R-3, E-Prescribe"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-125161,ERX-125161,"entecavir (Baraclude) tablet take 1 Tablet (0.5 mg total) by mouth every Monday, Wednesday and Friday, Disp-12 Tablet, R-11, E-Prescribe"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-1392,ERX-1392,"CARDURA 4 MG PO TABS take 4 mg by mouth every bedtime, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"TRAMADOL 50 MG PO TABS take 100 mg by mouth every day Occ a second dose of the day, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-219988,ERX-219988,"RENATABS PO take 1 Tablet by mouth every day, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-22966,ERX-22966,"BD INSULIN PEN NEEDLE UF SHORT 31 X 5/16 "" MISC NDLE Use as directed up to 5 times daily, Disp-150 Each, R-11, E-Prescribe"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231666,ERX-231666,"LULICONAZOLE 1 % TP CREA 1 Applic, TOP, DAILY, as needed, 0 Refill(s), Maintenance, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-30080,ERX-30080,"LANTUS 100 UNIT/ML SC SOLN inject 10-16 Units subcutaneous (under the skin) every day based on sliding scale, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-324,ERX-324,"ALPRAZOLAM 0.25 MG PO TABS take 0.25 mg by mouth as needed , R-0, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"FUROSEMIDE 40 MG PO TABS take 1 Tablet by mouth daily as needed (for water retention), Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3700,ERX-3700,"HYDRALAZINE 25 MG PO TABS take 25 mg by mouth 2 times a day, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-37637,ERX-37637,"METOPROLOL TARTRATE 25 MG PO TABS take 25 mg by mouth 2 times a day, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-4424,ERX-4424,"levothyroxine (SYNTHROID) tablet take 1 Tab by mouth daily., Disp-30 Tab, R-1, No Print"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-540133,ERX-540133,"cycloSPORINE modified (Gengraf) capsule take 1 Capsule (100 mg total) by mouth 2 times a day, Disp-180 Capsule, R-3, E-PrescribeLiver replaced by transplant -Z94.4 on 1/2/2013"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-5674,ERX-5674,"NORTRIPTYLINE 10 MG PO CAPS take 1 Capsule (10 mg total) by mouth every bedtime, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"AMLODIPINE 10 MG PO TABS take 10 mg by mouth daily Started by dialysis MD if BP is high, but he is unclear what the parameter is, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole (PROTONIX) delayed release tablet take 1 Tab (40 mg total) by mouth daily, Disp-30 Tab, R-6, E-Prescribe"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-8898,ERX-8898,"ZOFRAN 4 MG PO TABS take 1 Tablet (4 mg total) by mouth every 8 hours as needed (nausea), Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-93295,ERX-93295,"ZOLPIDEM 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every bedtime as needed for Insomnia, Historical Med"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1020036,EDG-1020036,Chronic pain syndrome
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1070637,EDG-1070637,NSTEMI (non-ST elevated myocardial infarction) (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-107392,EDG-107392,Vomiting
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1094232,EDG-1094232,ESRD (end stage renal disease) on dialysis (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1099432,EDG-1099432,"Liver lesion, right lobe"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1118884,EDG-1118884,Spinal stenosis of lumbar region without neurogenic claudication
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1125693,EDG-1125693,Lumbar radiculitis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118933,EDG-118933,Basal cell carcinoma
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1218435,EDG-1218435,H/O liver cancer
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142114,EDG-142114,Urinary tract infection
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142205,EDG-142205,Hypothyroidism
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-145261,EDG-145261,AK (actinic keratosis)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-149321,EDG-149321,Liver transplanted (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1494811674,EDG-1494811674,Pneumonia due to COVID-19 virus
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1588614,EDG-1588614,"SCC (squamous cell carcinoma), arm, left"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-159712,EDG-159712,"Hepatitis C, chronic (CMS-HCC)"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-191958,EDG-191958,Encephalopathy
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-98706,EDG-98706,Insomnia
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121747,EAP-121747,HX WISDOM TEETH EXTRACTION
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134015,EAP-134015,ARTERIOVENOUS GRAFT OR FISTULA CREATION OR REVISION
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134552,EAP-134552,LIVER TRANSPLANT WITH VENO-VENO BYPASS
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134560,EAP-134560,LIVER WASHOUT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134562,EAP-134562,LIVER WEDGE BIOPSY
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-134890,EAP-134890,RHINOPLASTY
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-136561,EAP-136561,CORONARY ARTERY BYPASS GRAFT WITH/ WITHOUT INTERNAL MAMMARY ARTERY; WITH CARDIOPULMONARY BYPASS
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-1591,EAP-1591,IR PARACENTESIS
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188065,EAP-188065,ERCP
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188125,EAP-188125,ERCP WITH OR WITHOUT BRUSHING
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188129,EAP-188129,ERCP WITH SPHINCTEROTOMY
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188133,EAP-188133,ERCP WITH STONE REMOVAL
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188139,EAP-188139,ERCP WITH STENT PLACEMENT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188141,EAP-188141,ERCP WITH STENT EXCHANGE
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188143,EAP-188143,ERCP WITH BALLOON DILATATION
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188377,EAP-188377,IR CHEMO EMBOLIZATION
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188381,EAP-188381,CHEST TUBE PCMT W-FLUORO RIGHT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188397,EAP-188397,DIALYSIS CATH DUAL LUMEN RIGHT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188929,EAP-188929,IR LIVER TRANSJUGULAR BIOPSY
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-189263,EAP-189263,IR NON-TUNNELED PERITONEAL DRAINAGE CATHETER PLACEMENT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-196225,EAP-196225,CV PARACENTESIS-ATP
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-198140,EAP-198140,HX LIVER TRANSPLANT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-449821,EAP-449821,VCL AV FISTULAGRAM LEFT
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-465522,EAP-465522,MAZE PROCEDURE; ATRICURE; SECONDARY PROCEDURE
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-488523,EAP-488523,SAPHENOUS VEIN HARVEST; ENDOSCOPIC; SECONDARY PROCEDURE
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-843,EAP-843,ENDOSCOPY PROCEDURE
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 100207,100207,Hepatic cirrhosis (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 10060,10060,Dysuria
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1020036,1020036,Chronic pain syndrome
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 102376,102376,Osteoarthrosis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1028522,1028522,End-stage liver disease (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1039037,1039037,GERD without esophagitis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1044258,1044258,Herpes simplex type 1 infection
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1051624,1051624,History of melanoma
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1051994,1051994,History of liver cancer
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1052988,1052988,Degenerative lumbar spinal stenosis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1053541,1053541,Hepatitis C virus infection
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1076165,1076165,Immunocompromised state (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1080861,1080861,History of liver transplant (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 108253,108253,Rigors
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 111698,111698,Degeneration of intervertebral disc
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1121942,1121942,Acute hepatitis B with delta-agent without hepatic coma
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1125270,1125270,Immunosuppressed status (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 121728,121728,Metabolic acidosis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1227411,1227411,RBBB
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 126111,126111,Depressive disorder
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1288948,1288948,Anemia in chronic kidney disease
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138129,138129,ARF (acute renal failure) (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 138326,138326,Malignant neoplasm of liver (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 141880,141880,SOB (shortness of breath)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142250,142250,Thrombocytopenia (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1494811646,1494811646,COVID-19 virus infection
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1764812,1764812,"Chronic kidney disease, stage 5 (CMS-HCC)"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1814943,1814943,Squamous cell carcinoma of skin of left upper arm
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1865548,1865548,Coronary artery disease without angina pectoris
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 192846,192846,Cat bite
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 197215,197215,Secondary hyperparathyroidism (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 201257,201257,ESRD (end stage renal disease) (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 201544,201544,History of hepatitis C
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2054804,2054804,"Type 2 diabetes mellitus without complication, with long-term current use of insulin (CMS-HCC)"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2064851,2064851,Body mass index (BMI) of 20 to 24
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2325465,2325465,Presence of transplanted liver (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2370433,2370433,"Coronary artery disease involving native heart, unspecified vessel or lesion type, unspecified whether angina present"
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2376,2376,Neoplasm of uncertain behavior of skin
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2631,2631,Mixed hyperlipidemia
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 62944,62944,Aftercare following organ transplant
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 63941,63941,Folliculitis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 72302,72302,Disorder of magnesium metabolism
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 76759,76759,Primary insomnia
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 79232,79232,Primary hypothyroidism
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 8104,8104,Actinic keratosis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 8106,8106,Inflamed seborrheic keratosis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 84731,84731,Chronic type B viral hepatitis (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 85044,85044,Onychomycosis
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 95782,95782,Fever of unknown origin
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 97303,97303,Heart murmur
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 97784,97784,Hepatocellular carcinoma (CMS-HCC)
+C9842B5A-4C9A-ED11-91FA-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia

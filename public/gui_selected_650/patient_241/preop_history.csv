@@ -1,0 +1,35 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E530D410-A38C-F011-9217-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PCN [PENICILLINS]
+E530D410-A38C-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+E530D410-A38C-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-168338,ERX-168338,"ALBUTEROL INH by Inhalation route as needed, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-219089,ERX-219089,"OREGANO OIL [PHI] Take by mouth, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-251766,ERX-251766,"MOUNJARO 2.5 MG/0.5 ML SC PNIJ Inject 1 prefilled pen syringe (2.5 mg total) subcutaneous (under the skin) once a week, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-3774,ERX-3774,"hydrOXYzine tablet Take 1 tablet (25 mg total) by mouth every 6 hours as needed, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-78217,ERX-78217,"venlafaxine (Effexor XR) extended release capsule Take 1 capsule (75 mg total) by mouth daily, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-80965,ERX-80965,"meloxicam (Mobic) tablet Take 1 tablet (15 mg total) by mouth, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-84953,ERX-84953,"pantoprazole delayed release tablet Take 1 tablet (20 mg total) by mouth every morning, Historical Med"
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-10048,EDG-10048,Heartburn
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1053234,EDG-1053234,Mild asthma
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+E530D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-90782,EDG-90782,Anxiety
+E530D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+E530D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134250,EAP-134250,DILATION AND CURETTAGE
+E530D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134962,EAP-134962,MANDIBULAR OSTEOTOMY
+E530D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-199021,EAP-199021,IR PETROSAL SINUS SAMPLING
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1053741,1053741,H/O: depression
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 2341354,2341354,History of difficult venous access
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 79097,79097,[PHI] disease (CMS-HCC)
+E530D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+E530D410-A38C-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1130321,EDG-1130321,Suprasellar mass

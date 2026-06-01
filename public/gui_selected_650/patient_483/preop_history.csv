@@ -1,0 +1,30 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+19E5017D-A034-F011-9214-005056BFF837,Allergy,Latex Allergy,Allergy,No
+19E5017D-A034-F011-9214-005056BFF837,Allergy,Latex allergy,allergy,No
+19E5017D-A034-F011-9214-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.6,N18.6,ESRD (end stage renal disease) (CMS-HCC)
+19E5017D-A034-F011-9214-005056BFF837,Encounter Diagnosis,Encounter Diagnosis V42.0,V42.0,Kidney replaced by transplant
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet Take 1 tablet (20 mg total) by mouth 2 times a day, Disp-60 tablet, R-0, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-10044,ERX-10044,"fluconazole tablet Take 1 tablet (100 mg total) by mouth every Friday for 6 doses, Disp-6 tablet, R-0, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet Take 2 tablets (650 mg total) by mouth every 4 hours as needed, Disp-60 tablet, R-0, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-2566,ERX-2566,"docusate (Colace) capsule Take 1 capsule (100 mg total) by mouth every day, Disp-30 capsule, R-1, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"FERROUS SULFATE 325 MG (65 MG IRON) [PHI] TABS take 1 Tablet (325 mg total) by mouth daily, Historical Med"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet Take 2 tablets (80 mg total) by mouth 2 times a day, Disp-120 tablet, R-2, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-37167,ERX-37167,"Multivitamin [PHI] tablets Take 1 tablet by mouth daily, Disp-30 tablet, R-2, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"predniSONE tablet Take 1 tablet (5 mg total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"SULFAMETHOXAZOLE-TRIMETHOPRIM 400-80 MG [PHI] TABS Take 1 tablet by mouth every Monday, Wednesday and Friday, Disp-13 tablet, R-11, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"valGANciclovir (Valcyte) 450 mg tablet Take 1 tablet (450 mg total) by mouth every Monday, Wednesday and Friday, Disp-13 tablet, R-2, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-78559,ERX-78559,"carvediloL (Coreg) tablet Take 1 tablet (12.5 mg total) by mouth 2 times a day, Disp-60 tablet, R-2, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-80562,ERX-80562,"mycophenolate (CellCept) capsule Take 4 capsules at 10 AM and 10 PM ON AN EMPTY STOMACH, Disp-240 capsule, R-11, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily, Disp-30 tablet, R-2, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule Take 9 capsules at 10 AM and 10 PM ON AN EMPTY STOMACH, Disp-540 capsule, R-11, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Home Medication,Home Medication ERX-95803,ERX-95803,"tacrolimus (Prograf) capsule Take 1 capsule at 10 AM and 10 PM ON AN EMPTY STOMACH, Disp-60 capsule, R-11, E-Prescribe"
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-142114,EDG-142114,Urinary tract infection
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-150917,EDG-150917,PKD (polycystic kidney disease)
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-176787,EDG-176787,High blood cholesterol
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-201194,EDG-201194,Chronic kidney disease
+19E5017D-A034-F011-9214-005056BFF837,Past Medical History,Past Medical History EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)
+19E5017D-A034-F011-9214-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+19E5017D-A034-F011-9214-005056BFF837,Problem List,Problem List Entry 201257,201257,ESRD (end stage renal disease) (CMS-HCC)
+19E5017D-A034-F011-9214-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-144666,EDG-144666,Polycystic kidney disease

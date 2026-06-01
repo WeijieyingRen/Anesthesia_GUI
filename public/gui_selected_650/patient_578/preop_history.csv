@@ -1,0 +1,104 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CEA7A2A0-8F64-F011-9216-005056BFF837,Allergy,Allergen ELG-2863,ELG-2863,ASPIRIN
+CEA7A2A0-8F64-F011-9216-005056BFF837,Allergy,Allergen ELG-3541,ELG-3541,IBUPROFEN
+CEA7A2A0-8F64-F011-9216-005056BFF837,Allergy,Latex allergy,allergy,No
+CEA7A2A0-8F64-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,"Lung transplant status, bilateral (CMS-HCC)"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth 4 times a day as needed for Pain, Disp-100 tablet, R-1, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-112594,ERX-112594,"filgrastim (Neupogen) 300 mcg injection (prefilled syringe) Inject 0.5 mL (300 mcg total) subcutaneous (under the skin) once as needed (for ANC less than 1.5 or as directed by lung transplant), Disp-5 each, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-112594,ERX-112594,"Neupogen 300 mcg/0.5 mL Inj Syrg Inject 0.5 mL (300 mcg total) subcutaneous (under the skin) One Time for 1 dose, Disp-0.5 mL, R-0, In Clinic"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG [PHI] TABS 2 tablets by Feeding Tube route daily as needed for Constipation, Historical Med"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-116179,ERX-116179,"rosuvastatin tablet 1 tablet (40 mg total) by Feeding Tube route daily, Historical Med"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-16027,ERX-16027,"Sharps container 1 each by Misc.(Non-Drug; Combo Route) route as directed, Disp-1 each, R-0, OTC"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-19483,ERX-19483,"CALCIUM CARBONATE-VITAMIN D3 500 MG-5 MCG (200 UNIT) [PHI] TABS 1 tablet by Feeding Tube route 2 times a day, Disp-180 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-209016,ERX-209016,"BLOOD-GLUCOSE SENSOR MISC DEVI Replace every 14 days or as needed for sensor failure. Typical 90 day supply = 7 sensor kits., Disp-7 each, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-210450,ERX-210450,"pen needle 32 x 5/32"" 1 each by Misc.(Non-Drug; Combo Route) route 6 times a day, Disp-200 each, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-224926,ERX-224926,"MELATONIN 10 MG [PHI] TABS 1 tablet (10 mg total) by Feeding Tube route every bedtime as needed, Disp-90 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-227164,ERX-227164,"TruePlus lancets 1 each by Misc.(Non-Drug; Combo Route) route 4 times a day before meals and bedtime, Disp-200 each, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-231561,ERX-231561,"HUMULIN N NPH INSULIN KWIKPEN 100 UNIT/ML (3 ML) SC INPN Inject 2 units subcutaneous (under the skin) 2 times a day, Disp-15 mL, R-3, No Print"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-233001,ERX-233001,"TrueMetrix test strip 1 strip by Misc.(Non-Drug; Combo Route) route 4 times a day before meals and bedtime, Disp-200 strip, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-234548,ERX-234548,"ISAVUCONAZONIUM SULFATE 186 MG [PHI] CAPS Take 2 capsules (372 mg total) by mouth daily By feeding tube, Disp-180 capsule, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-246551,ERX-246551,"NOVOLIN R FLEXPEN 100 UNIT/ML (3 ML) SC INPN Inject 2 units subcutaneous (under the skin) 2 times a day Plus 0-8 units 3 times daily as directed by sliding scale, Disp-15 mL, R-3, No Print"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-24984,ERX-24984,"POLYETHYLENE GLYCOL 3350 17 GRAM/DOSE [PHI] POWD 17 g by Feeding Tube route 2 times a day as needed (Constipation), Historical Med"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-28844,ERX-28844,"CYCLOSPORINE MODIFIED 100 MG/ML [PHI] SOLN Take 150 mg in the morning and 150 mg in the evening, Disp-900 mL, R-3, E-PrescribeLung replaced by transplant - Z94.2 on 11/17/2024"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-30049,ERX-30049,"TrueDraw lancing device 1 each by Misc.(Non-Drug; Combo Route) route 3 times a day, Disp-1 each, R-0, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"FERROUS SULFATE 325 MG (65 MG IRON) [PHI] TABS 1 tablet (325 mg total) by Feeding Tube route every Monday, Wednesday and Friday, Disp-36 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet 1 tablet (1 mg total) by Feeding Tube route daily, Disp-90 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-32410,ERX-32410,"Alcohol swabs 1 each by Misc.(Non-Drug; Combo Route) route 3 times a day, Disp-100 each, R-0, OTC"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet Take 10 mg in AM and 5 mg in PM or as directed., Disp-135 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-7356,ERX-7356,"SODIUM POLYSTYRENE SULFONATE [PHI] POWD 15 g by Feeding Tube route as directed Take 15 grams only when directed to do so by the lung transplant team., Historical Med"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"SULFAMETHOXAZOLE-TRIMETHOPRIM 400-80 MG [PHI] TABS 1 tablet by Feeding Tube route daily, Disp-90 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"VALGANCICLOVIR 450 MG [PHI] TABS Take 1 tablet by mouth daily into feeding tube., Disp-90 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-7857,ERX-7857,"THERAPEUTIC MULTIVITAMIN [PHI] TABS 1 tablet by Feeding Tube route daily, Historical Med"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-81141,ERX-81141,"ondansetron tablet 1 tablet (4 mg total) by Feeding Tube route every 8 hours as needed, Historical Med"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"clopidogrel (Plavix) 75 mg tablet (maintenance dose) 1 tablet (75 mg total) by Feeding Tube route daily 1 tablet (75 mg total) by Feeding Tube route daily. HOLD for FIVE DAYS prior to bronch., Disp-90 tablet, R-3, No Print"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1121310,EDG-1121310,Interstitial pulmonary fibrosis (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-156229,EDG-156229,Connective tissue disease overlap syndrome
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-161971,EDG-161971,MCTD (mixed connective tissue disease)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1759762,EDG-1759762,Rheumatoid arthritis (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-200333,EDG-200333,OSA (obstructive sleep apnea)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-121743,EAP-121743,HX C SECTION LOW TRANSVERSE
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-121845,EAP-121845,HX TUBAL LIGATION
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH OR WITHOUT BIOPSY
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188101,EAP-188101,EGD WITH PLACEMENT OF PERCUTANEOUS GASTROSTOMY TUBE
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188159,EAP-188159,SMALL BOWEL ENDOSCOPY WITH PLACEMENT OR EXCHANGE OF PERCUTANEOUS JEJUNOSTOMY TUBE
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188161,EAP-188161,SM BOWEL ENDOSCOPY WITH CONVERSION OF GASTROSTOMY TUBE TO JEJUNOSTOMY
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188391,EAP-188391,CV COMB RIGHT LEFT HEART CATH
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+CEA7A2A0-8F64-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-474091,EAP-474091,BRONCHOSCOPY WITH TRANSBRONCHIAL BIOPSY; SINGLE LOBE
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1030532,1030532,Rib pain
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1033526,1033526,Post-menopausal
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1036680,1036680,"Lung transplant status, bilateral (CMS-HCC)"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 103905,103905,Pulmonary heart disease (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1085193,1085193,Esophageal dysfunction
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1099997,1099997,At risk for opportunistic infections
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1121838,1121838,Vitamin D insufficiency
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1129747,1129747,Neoplasm of skin of finger
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1133112,1133112,Mixed anxiety depressive disorder
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1139385,1139385,Acute cystitis with hematuria
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1141774,1141774,Acute respiratory failure with hypoxia (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1169645,1169645,Idiopathic pulmonary hypertensive arterial disease (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1171032,1171032,Pulmonary hypertension due to lung disease (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1192948,1192948,Viral infection
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1238273,1238273,S/P lung transplant (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 129253,129253,Interstitial lung disease (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 142094,142094,Dyspnea on exertion
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 142294,142294,Allergic rhinitis
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 142336,142336,Hypotension
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1494811674,1494811674,Pneumonia due to COVID-19 virus
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1494811738,1494811738,Exposure to COVID-19 virus
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 156229,156229,Connective tissue disease overlap syndrome
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 165871,165871,Steatosis of liver
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1865823,1865823,Gets no exercise
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 1886913,1886913,Paresthesia of upper extremity
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 200359,200359,"BMI 26.0-26.9,adult"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2025552,2025552,"Nonintractable headache, unspecified chronicity pattern, unspecified headache type"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2029244,2029244,Lung transplant candidate
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2051748,2051748,Long term current use of immunosuppressive drug
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2065321,2065321,"Rheumatoid arthritis, unspecified (CMS-HCC)"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2112616,2112616,"Chronic fatigue, unspecified"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2117775,2117775,Other forms of systemic lupus erythematosus (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2117776,2117776,Other systemic sclerosis (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2119219,2119219,"Pulmonary fibrosis, unspecified (CMS-HCC)"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2139132,2139132,"Leukopenia, unspecified type"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2180069,2180069,Pre-transplant evaluation for lung transplant
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2220110,2220110,Lung transplant recipient (CMS-HCC)
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2237092,2237092,Sjogren's syndrome with keratoconjunctivitis sicca
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2239006,2239006,Long term systemic steroid user
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2330402,2330402,Tenderness of left temporomandibular joint
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2389469,2389469,"Chronic hypoxic respiratory failure, on home oxygen therapy (CMS-HCC)"
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 2664,2664,Hypocalcemia
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 3635,3635,Bell's palsy
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 65053,65053,Mixed connective tissue disease
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 67303,67303,Raynaud's disease
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 76640,76640,Recurrent major depressive disorder
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 91320,91320,Back pain
+CEA7A2A0-8F64-F011-9216-005056BFF837,Problem List,Problem List Entry 98428,98428,Hypersomnia
+CEA7A2A0-8F64-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139850,EDG-2139850,"Dysphagia, unspecified type"

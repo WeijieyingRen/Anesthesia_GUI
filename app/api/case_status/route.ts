@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { readJsonFromDrive } from "@/lib/drive-upload";
-
-type AccessCodeRow = {
-  doctor_id?: string;
-  access_code?: string;
+type AccessCodeLookupEntry = {
+  doctorId: string;
+  workflowMode: "annotation" | "review";
+  annotationCode: string;
+  reviewCode: string | null;
 };
 
 function sanitizePathPart(value: unknown): string {
@@ -13,63 +14,73 @@ function sanitizePathPart(value: unknown): string {
   return String(value).trim().replace(/[^\w.-]/g, "_") || "unknown";
 }
 
-let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
+let accessCodeLookupPromise: Promise<Map<string, AccessCodeLookupEntry>> | null = null;
 
-async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
-  if (accessCodeDoctorMapPromise) return accessCodeDoctorMapPromise;
+async function loadAccessCodeLookup(): Promise<Map<string, AccessCodeLookupEntry>> {
+  if (accessCodeLookupPromise) return accessCodeLookupPromise;
 
-  accessCodeDoctorMapPromise = (async () => {
-    const csvPath = path.join(
+  accessCodeLookupPromise = (async () => {
+    const map = new Map<string, AccessCodeLookupEntry>();
+    const reviewCsvPath = path.join(
       process.cwd(),
       "public",
-      "data",
-      "access_code.csv"
+      "assigned_code",
+      "access_review_code.csv"
     );
 
-    const raw = await fs.readFile(csvPath, "utf-8");
-    const lines = raw.split(/\r?\n/).filter(Boolean);
+    try {
+      const raw = await fs.readFile(reviewCsvPath, "utf-8");
+      const lines = raw.split(/\r?\n/).filter(Boolean);
+      const header = lines[0]?.split(",") ?? [];
+      const doctorIdx = header.indexOf("doctor_id");
+      const annotationIdx = header.indexOf("annotation_code");
+      const reviewIdx = header.indexOf("review_code");
 
-    const map = new Map<string, string>();
-    if (lines.length < 2) return map;
+      if (doctorIdx >= 0 && annotationIdx >= 0 && reviewIdx >= 0) {
+        for (const line of lines.slice(1)) {
+          const cols = line.split(",");
+          const doctorId = String(cols[doctorIdx] ?? "").trim();
+          const annotationCode = String(cols[annotationIdx] ?? "").trim();
+          const reviewCode = String(cols[reviewIdx] ?? "").trim();
+          if (!doctorId || !annotationCode) continue;
 
-    const header = lines[0].split(",");
-    const doctorIdx = header.indexOf("doctor_id");
-    const codeIdx = header.indexOf("access_code");
+          map.set(annotationCode, {
+            doctorId,
+            workflowMode: "annotation",
+            annotationCode,
+            reviewCode: reviewCode || null,
+          });
 
-    if (doctorIdx < 0 || codeIdx < 0) return map;
-
-    for (const line of lines.slice(1)) {
-      const cols = line.split(",");
-
-      const row: AccessCodeRow = {
-        doctor_id: cols[doctorIdx],
-        access_code: cols[codeIdx],
-      };
-
-      const code = String(row.access_code ?? "").trim();
-      const doctor = String(row.doctor_id ?? "").trim();
-
-      if (code && doctor) {
-        map.set(code, doctor);
+          if (reviewCode) {
+            map.set(reviewCode, {
+              doctorId,
+              workflowMode: "review",
+              annotationCode,
+              reviewCode,
+            });
+          }
+        }
       }
+    } catch (error) {
+      console.error("Failed to load access_review_code.csv:", error);
     }
 
     return map;
   })();
 
-  return accessCodeDoctorMapPromise;
+  return accessCodeLookupPromise;
 }
 
-async function resolveDoctorIdFromAccessCode(
+async function resolveAccessCodeEntry(
   accessCode: string | null | undefined
-): Promise<string | null> {
+): Promise<AccessCodeLookupEntry | null> {
   if (!accessCode) return null;
 
   try {
-    const map = await loadAccessCodeDoctorMap();
+    const map = await loadAccessCodeLookup();
     return map.get(String(accessCode).trim()) ?? null;
   } catch (error) {
-    console.error("Failed to resolve doctor_id from access_code.csv:", error);
+    console.error("Failed to resolve access code from access_review_code.csv:", error);
     return null;
   }
 }
@@ -150,16 +161,24 @@ export async function GET(req: Request) {
       );
     }
 
-    const doctorId = await resolveDoctorIdFromAccessCode(accessCode);
+    const accessEntry = await resolveAccessCodeEntry(accessCode);
 
-    if (!doctorId) {
+    if (!accessEntry) {
       return NextResponse.json(
         { ok: false, error: "Invalid accessCode or doctor not found." },
         { status: 404 }
       );
     }
 
-    const sanitizedAccessCode = sanitizePathPart(accessCode);
+    if (!accessEntry.annotationCode) {
+      return NextResponse.json(
+        { ok: false, error: "Matched access code does not have an annotation assignment root." },
+        { status: 404 }
+      );
+    }
+
+    const sourceAccessCode = accessEntry.annotationCode;
+    const sanitizedAccessCode = sanitizePathPart(sourceAccessCode);
     const indexPath = `${sanitizedAccessCode}/case_status_index.json`;
 
     const found = await readJsonFromDrive({ objectPath: indexPath }).catch(
@@ -175,8 +194,10 @@ export async function GET(req: Request) {
       ok: true,
       found: Boolean(found),
       source: found ? "google_drive_index" : "none",
-      doctorId,
+      doctorId: accessEntry.doctorId,
       accessCode,
+      workflowMode: accessEntry.workflowMode,
+      sourceAccessCode,
       indexPath,
       patients,
       rawIndex: found?.data ?? null,

@@ -1,0 +1,8 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-03 21:47:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,0.0,0.0,0.0,0.0,147.0
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-03 22:22:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,35.0,35.0,35.0,35.0,112.0
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-03 22:47:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,60.0,60.0,60.0,60.0,87.0
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-04 00:07:00+00:00,position,lul_breath_sounds,clear,LUL Breath Sounds: clear,2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,140.0,140.0,140.0,140.0,7.0
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-04 00:07:00+00:00,position,rll_breath_sounds,diminished,RLL Breath Sounds: diminished,2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,140.0,140.0,140.0,140.0,7.0
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-04 00:07:00+00:00,position,rml_breath_sounds,clear,RML Breath Sounds: clear,2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,140.0,140.0,140.0,140.0,7.0
+E669E90F-C99D-EF11-920D-005056BFF837,2024-11-04 00:07:00+00:00,position,rul_breath_sounds,clear,RUL Breath Sounds: clear,2024-11-03 21:47:00+00:00,2024-11-04 00:14:00+00:00,140.0,140.0,140.0,140.0,7.0

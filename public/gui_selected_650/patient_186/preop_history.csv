@@ -1,0 +1,26 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E08.9,E08.9,"Diabetes mellitus due to underlying condition without complication, unspecified whether long term insulin use (CMS-HCC)"
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K86.89,K86.89,Pancreatic mass
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R18.8,R18.8,Abdominal fluid collection
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"METFORMIN 500 MG PO TABS take 1 Tablet (500 mg total) by mouth 2 times a day, R-5, Historical Med"
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-176663,ERX-176663,"FISH OIL PO take by mouth, Historical Med"
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-82187,ERX-82187,"ACARBOSE 50 MG PO TABS take 1 Tablet (50 mg total) by mouth 3 times a day, R-3, Historical Med"
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-134532,EAP-134532,WHIPPLE PROCEDURE
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135520,EAP-135520,TYMPANOPLASTY
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135928,EAP-135928,SMALL BOWEL RESECTION
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188269,EAP-188269,IR ABSCESS DRAIN REVISION
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-189252,EAP-189252,IR ABSCESS DRAIN PLACEMENT
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1033449,1033449,Pancreatic mass
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1071898,1071898,Peripheral neuropathy
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1077247,1077247,Pain with urination
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1099366,1099366,Abdominal fluid collection
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1159593,1159593,Uncomplicated asthma
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1827899,1827899,Healed perforation of right ear drum
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+094A3B5C-EBFA-ED11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1033449,EDG-1033449,Pancreatic mass

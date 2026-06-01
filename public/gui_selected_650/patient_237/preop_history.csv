@@ -1,0 +1,45 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+A0928A28-16B1-ED11-91FA-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+A0928A28-16B1-ED11-91FA-005056BFF837,Allergy,Allergen ELG-3898,ELG-3898,ERYTHROMYCIN BASE
+A0928A28-16B1-ED11-91FA-005056BFF837,Allergy,Allergen ELG-9116,ELG-9116,CYMBALTA [DULOXETINE]
+A0928A28-16B1-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+A0928A28-16B1-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+A0928A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M41.20,M41.20,Idiopathic scoliosis and kyphoscoliosis
+A0928A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M48.062,M48.062,"Spinal stenosis, lumbar region with neurogenic claudication"
+A0928A28-16B1-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 1 Tablet (500 mg total) by mouth every 6 hours as needed, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-31864,ERX-31864,"OXYCODONE-ACETAMINOPHEN 10-325 MG PO TABS take 1 Tablet by mouth 2 times a day as needed for Pain (2-3 tab/day), Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,folic acid 1 mg tablet Historical Med
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-4426,ERX-4426,"levothyroxine (Synthroid) 200 mcg tablet take 1 Tablet (200 mcg total) by mouth every morning, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-4573,ERX-4573,"LORazepam tablet take 1 Tablet (1 mg total) by mouth daily as needed, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"atorvastatin tablet take 1 Tablet (10 mg total) by mouth daily afternoon, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-8084,ERX-8084,"traZODone tablet take 1-2 Tablets (150-300 mg total) by mouth every bedtime as needed, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-8653,ERX-8653,"VITAMIN B-12 100 MCG PO TABS take 1 Tablet (100 mcg total) by mouth daily, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily afternoon, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-90638,ERX-90638,"PRAMIPEXOLE 0.25 MG PO TABS take 1 Tablet (0.25 mg total) by mouth 3 times a day, Historical Med"
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118885,EDG-118885,Cervical cancer (CMS-HCC)
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121672,EAP-121672,HX BACK SURGERY
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121758,EAP-121758,HX CYST REMOVAL
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135730,EAP-135730,TRANSFORAMINAL EPIDURAL BLOCK
+A0928A28-16B1-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-843,EAP-843,ENDOSCOPY PROCEDURE
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 104456,104456,Restless legs syndrome
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1120393,1120393,"2/14 (Veeravagu): s/p L3-4 L4-5 L5-S1 ALIF, plan PSF 2/15"
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142190,142190,Diverticulosis of colon
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142300,142300,Ptosis of eyelid
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 144140,144140,Chronic low back pain
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 161974,161974,MDS (myelodysplastic syndrome) (CMS-HCC)
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1886216,1886216,Degeneration of intervertebral disc of lumbar region
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2323036,2323036,"Spinal stenosis, lumbar region with neurogenic claudication"
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 4049,4049,Regular astigmatism
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 76491,76491,Opioid dependence (CMS-HCC)
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 76759,76759,Primary insomnia
+A0928A28-16B1-ED11-91FA-005056BFF837,Problem List,Problem List Entry 98239,98239,Hypercholesterolemia
+A0928A28-16B1-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2323472,EDG-2323472,"Spinal stenosis of lumbar region, unspecified whether neurogenic claudication present"

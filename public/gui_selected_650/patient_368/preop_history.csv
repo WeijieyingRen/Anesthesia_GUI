@@ -1,0 +1,50 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AACF6B8E-E3B7-F011-9219-005056BFF837,Allergy,Latex Allergy,Allergy,No
+AACF6B8E-E3B7-F011-9219-005056BFF837,Allergy,Latex allergy,allergy,No
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours, Disp-30 tablet, R-0, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-110892,ERX-110892,"ENOXAPARIN 40 MG/0.4 ML SC SYRG Inject 0.4 mL (40 mg total) subcutaneous (under the skin) every 24 hours, Disp-12 mL, R-0, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-16123,ERX-16123,"OXYCODONE 5 MG [PHI] CAPS Take 1 capsule (5 mg total) by mouth every 4 hours as needed, Disp-30 capsule, R-0, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-204720,ERX-204720,"NUT.TX.COMP. IMMUNE SYSTM,REG 0.08-1.4 GRAM-KCAL/ML [PHI] LIQD Take 1 packet by mouth daily to support major wound healing and repair., Disp-3555 mL, R-2, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-204720,ERX-204720,"NUT.TX.COMP. IMMUNE SYSTM,REG 0.08-1.4 GRAM-KCAL/ML [PHI] LIQD Take 1 units by mouth 2 times a day For major wound healing, Disp-7110 mL, R-2, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-237657,ERX-237657,"CABOZANTINIB 20 MG [PHI] TABS Take 1 tablet (20 mg total) by mouth daily Administer on an empty stomach (1 hour before or 2 hours after eating). Swallow whole; do not crush tablets., Disp-30 tablet, R-11, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-241645,ERX-241645,"JUVEN (WITH COLLAGEN) 7-7-1.5 GRAM [PHI] PWPK 1 packet by Feeding Tube route 2 times a day to support major wound healing and repair., Disp-60 packet, R-2, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM [PHI] PWPK Take 1 packet (17 g total) by mouth daily as needed, Disp-14 each, R-0, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-4423,ERX-4423,"levothyroxine tablet Take 1 tablet (100 mcg total) by mouth every morning before breakfast, Historical Med"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet Take 1 tablet (4 mg total) by mouth every 6 hours as needed, Disp-10 tablet, R-0, E-Prescribe"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-1026047,EDG-1026047,Myxoliposarcoma (CMS-HCC)
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-125707,EDG-125707,Malignant neoplasm without specification of site (CMS-HCC)
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-142378,EDG-142378,Vitamin D deficiency
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-133794,EAP-133794,BACK INCISION AND DRAINAGE
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-133796,EAP-133796,BACK LESION / MASS EXCISION
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-133808,EAP-133808,SPINAL INCISION AND DRAINAGE
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-136889,EAP-136889,LIVER CYST/ LESION PART/ TOTAL RESECT +/ - CHOLE LAPAROSCOPIC
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-463906,EAP-463906,PROCEDURE REVISION; SECONDARY MODIFIER
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-464213,EAP-464213,IR CT SOFT TISSUE PEF ABLATION
+AACF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1060634,1060634,Sepsis (CMS-HCC)
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1066296,1066296,Liver lesion
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 108908,108908,Neck mass
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1104483,1104483,Soft tissue mass
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1109270,1109270,Neutropenic fever
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1127015,1127015,Soft tissue sarcoma of chest wall (CMS-HCC)
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1219014,1219014,Hx of sarcoma of soft tissue
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1240610,1240610,Pancytopenia due to chemotherapy
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1510731,1510731,"Metastatic sarcoma to lung, left (CMS-HCC)"
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 192855,192855,Lung nodule
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 2239649,2239649,Primary myxofibrosarcoma (CMS-HCC)
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 2341354,2341354,History of difficult venous access
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 72224,72224,Lactic acidosis
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 84875,84875,Thrush
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 90361,90361,Anaphylactic syndrome
+AACF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+AACF6B8E-E3B7-F011-9219-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-108908,EDG-108908,Neck mass
+AACF6B8E-E3B7-F011-9219-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2239649,EDG-2239649,Primary myxofibrosarcoma (CMS-HCC)

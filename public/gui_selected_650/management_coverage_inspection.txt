@@ -1,0 +1,444 @@
+MANAGEMENT COVERAGE INSPECTION
+====================================================================================================
+n_cases: 650
+case_static_shape: (650, 25)
+case_info_shape: (650, 24)
+med_bolus_shape: (16550, 18)
+med_infusion_shape: (9764, 19)
+gas_shape: (227660, 17)
+
+====================================================================================================
+OVERALL SELECTED MANAGEMENT DISTRIBUTION
+====================================================================================================
+       selection_type             target_policy             actual_policy   n
+     medication_bolus          medication_bolus          medication_bolus 208
+large_infusion_change     large_infusion_change     large_infusion_change 172
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change  82
+     large_gas_change            gas_mac_change            gas_mac_change  58
+     large_gas_change       gas_volatile_change       gas_volatile_change  58
+     medication_bolus     large_infusion_change          medication_bolus  30
+     large_gas_change            gas_mac_change gas_oxygen_carrier_change  17
+     large_gas_change       gas_volatile_change gas_oxygen_carrier_change  17
+     large_gas_change       gas_volatile_change            gas_mac_change   7
+     medication_bolus       gas_volatile_change          medication_bolus   1
+
+Selected subtype distribution:
+       selection_type                                 selection_subtype   n
+large_infusion_change                  largest_abs_infusion_rate_change 172
+     medication_bolus                                      scored_bolus 135
+     large_gas_change gas_oxygen_carrier_change_largest_abs_rate_change 116
+     medication_bolus                               workflow_near_bolus 104
+     large_gas_change            gas_mac_change_largest_abs_rate_change  65
+     large_gas_change       gas_volatile_change_largest_abs_rate_change  58
+
+Selected row_name distribution:
+       selection_type             target_policy             actual_policy chart_type          row_name             unit       route   n
+large_infusion_change     large_infusion_change     large_infusion_change medication          propofol       mcg/kg/min             116
+     large_gas_change       gas_volatile_change       gas_volatile_change        gas   inSevoflurane % abs_rate_per_min              57
+     large_gas_change            gas_mac_change            gas_mac_change        gas     etMAC exhaled abs_rate_per_min              48
+     medication_bolus          medication_bolus          medication_bolus medication     phenylephrine              mcg Intravenous  43
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change        gas            inO2 % abs_rate_per_min              39
+large_infusion_change     large_infusion_change     large_infusion_change medication     phenylephrine       mcg/kg/min              38
+     medication_bolus          medication_bolus          medication_bolus medication          fentanyl              mcg Intravenous  37
+     medication_bolus          medication_bolus          medication_bolus medication        rocuronium               mg Intravenous  26
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change        gas        O2 (L/Min) abs_rate_per_min              22
+     medication_bolus          medication_bolus          medication_bolus medication          propofol               mg Intravenous  18
+     medication_bolus          medication_bolus          medication_bolus medication         ephedrine               mg Intravenous  18
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change        gas       Air (L/min) abs_rate_per_min              17
+     medication_bolus          medication_bolus          medication_bolus medication          propofol              mcg Intravenous  16
+     large_gas_change            gas_mac_change            gas_mac_change        gas       MAC inhaled abs_rate_per_min              10
+     large_gas_change            gas_mac_change gas_oxygen_carrier_change        gas            inO2 % abs_rate_per_min              10
+     large_gas_change       gas_volatile_change gas_oxygen_carrier_change        gas        O2 (L/Min) abs_rate_per_min               8
+large_infusion_change     large_infusion_change     large_infusion_change medication      remifentanil       mcg/kg/min               7
+     large_gas_change       gas_volatile_change gas_oxygen_carrier_change        gas            inO2 % abs_rate_per_min               7
+     medication_bolus     large_infusion_change          medication_bolus medication        rocuronium               mg Intravenous   7
+     medication_bolus          medication_bolus          medication_bolus medication           esmolol               mg Intravenous   6
+     medication_bolus          medication_bolus          medication_bolus medication        sugammadex               mg Intravenous   6
+     medication_bolus          medication_bolus          medication_bolus medication      remifentanil              mcg Intravenous   5
+     medication_bolus          medication_bolus          medication_bolus medication          ketamine               mg Intravenous   5
+     medication_bolus     large_infusion_change          medication_bolus medication          propofol              mcg Intravenous   5
+     medication_bolus     large_infusion_change          medication_bolus medication     phenylephrine              mcg Intravenous   4
+     large_gas_change            gas_mac_change gas_oxygen_carrier_change        gas        O2 (L/Min) abs_rate_per_min               4
+     large_gas_change       gas_volatile_change            gas_mac_change        gas     etMAC exhaled abs_rate_per_min               4
+     medication_bolus          medication_bolus          medication_bolus medication         labetalol               mg Intravenous   3
+large_infusion_change     large_infusion_change     large_infusion_change medication       clevidipine            mg/hr               3
+large_infusion_change     large_infusion_change     large_infusion_change medication       vasopressin        Units/min               3
+     large_gas_change       gas_volatile_change            gas_mac_change        gas       MAC inhaled abs_rate_per_min               3
+     large_gas_change            gas_mac_change gas_oxygen_carrier_change        gas       Air (L/min) abs_rate_per_min               3
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change        gas           inN2O % abs_rate_per_min               3
+     medication_bolus          medication_bolus          medication_bolus medication     hydromorphone               mg Intravenous   3
+     medication_bolus          medication_bolus          medication_bolus medication       vasopressin            Units Intravenous   3
+     medication_bolus          medication_bolus          medication_bolus medication         midazolam               mg Intravenous   3
+     medication_bolus     large_infusion_change          medication_bolus medication          propofol               mg Intravenous   3
+     medication_bolus          medication_bolus          medication_bolus medication       epinephrine              mcg Intravenous   3
+     large_gas_change       gas_volatile_change gas_oxygen_carrier_change        gas       Air (L/min) abs_rate_per_min               2
+     medication_bolus          medication_bolus          medication_bolus medication       vasopressin            units Intravenous   2
+     medication_bolus          medication_bolus          medication_bolus medication         methadone               mg Intravenous   2
+large_infusion_change     large_infusion_change     large_infusion_change medication    norepinephrine       mcg/kg/min               2
+     medication_bolus     large_infusion_change          medication_bolus medication         ephedrine               mg Intravenous   2
+     medication_bolus     large_infusion_change          medication_bolus medication          ketamine               mg Intravenous   2
+     medication_bolus     large_infusion_change          medication_bolus medication     hydromorphone               mg Intravenous   2
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change        gas       N2O (L/min) abs_rate_per_min               1
+large_infusion_change     large_infusion_change     large_infusion_change medication       epinephrine       mcg/kg/min               1
+large_infusion_change     large_infusion_change     large_infusion_change medication          dopamine       mcg/kg/min               1
+     large_gas_change       gas_volatile_change       gas_volatile_change        gas      inIsoflurane abs_rate_per_min               1
+     medication_bolus     large_infusion_change          medication_bolus medication         midazolam               mg Intravenous   1
+     medication_bolus     large_infusion_change          medication_bolus medication    glycopyrrolate               mg Intravenous   1
+     medication_bolus       gas_volatile_change          medication_bolus medication calcium gluconate               mg Intravenous   1
+     medication_bolus     large_infusion_change          medication_bolus medication  calcium chloride               mg Intravenous   1
+large_infusion_change     large_infusion_change     large_infusion_change medication   dexmedetomidine        mcg/kg/hr               1
+     medication_bolus     large_infusion_change          medication_bolus medication       vasopressin            units Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication  calcium chloride               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication       clevidipine               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication       hydralazine               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication         etomidate               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication   dexmedetomidine              mcg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication     dexamethasone               mg Intravenous   1
+     medication_bolus     large_infusion_change          medication_bolus medication        sugammadex               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication          naloxone               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication       ondansetron               mg Intravenous   1
+     medication_bolus          medication_bolus          medication_bolus medication   succinylcholine               mg Intravenous   1
+
+Fallback distribution:
+            target_policy             actual_policy        selection_type fallback_used   n
+         medication_bolus          medication_bolus      medication_bolus         False 208
+    large_infusion_change     large_infusion_change large_infusion_change         False 172
+gas_oxygen_carrier_change gas_oxygen_carrier_change      large_gas_change         False  82
+           gas_mac_change            gas_mac_change      large_gas_change         False  58
+      gas_volatile_change       gas_volatile_change      large_gas_change         False  58
+    large_infusion_change          medication_bolus      medication_bolus          True  30
+           gas_mac_change gas_oxygen_carrier_change      large_gas_change          True  17
+      gas_volatile_change gas_oxygen_carrier_change      large_gas_change          True  17
+      gas_volatile_change            gas_mac_change      large_gas_change          True   7
+      gas_volatile_change          medication_bolus      medication_bolus          True   1
+
+Threshold source distribution:
+       selection_type             target_policy             actual_policy        threshold_source   n
+     medication_bolus          medication_bolus          medication_bolus                         208
+large_infusion_change     large_infusion_change     large_infusion_change        manual_drug_unit 168
+     large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change feature_specific_manual  82
+     large_gas_change       gas_volatile_change       gas_volatile_change feature_specific_manual  58
+     large_gas_change            gas_mac_change            gas_mac_change feature_specific_manual  58
+     medication_bolus     large_infusion_change          medication_bolus                          30
+     large_gas_change            gas_mac_change gas_oxygen_carrier_change feature_specific_manual  17
+     large_gas_change       gas_volatile_change gas_oxygen_carrier_change feature_specific_manual  17
+     large_gas_change       gas_volatile_change            gas_mac_change feature_specific_manual   7
+large_infusion_change     large_infusion_change     large_infusion_change  adaptive_drug_unit_p90   4
+     medication_bolus       gas_volatile_change          medication_bolus                           1
+
+====================================================================================================
+GAS SELECTED DISTRIBUTION
+====================================================================================================
+            target_policy             actual_policy        row_name             unit  n
+      gas_volatile_change       gas_volatile_change inSevoflurane % abs_rate_per_min 57
+           gas_mac_change            gas_mac_change   etMAC exhaled abs_rate_per_min 48
+gas_oxygen_carrier_change gas_oxygen_carrier_change          inO2 % abs_rate_per_min 39
+gas_oxygen_carrier_change gas_oxygen_carrier_change      O2 (L/Min) abs_rate_per_min 22
+gas_oxygen_carrier_change gas_oxygen_carrier_change     Air (L/min) abs_rate_per_min 17
+           gas_mac_change            gas_mac_change     MAC inhaled abs_rate_per_min 10
+           gas_mac_change gas_oxygen_carrier_change          inO2 % abs_rate_per_min 10
+      gas_volatile_change gas_oxygen_carrier_change      O2 (L/Min) abs_rate_per_min  8
+      gas_volatile_change gas_oxygen_carrier_change          inO2 % abs_rate_per_min  7
+      gas_volatile_change            gas_mac_change   etMAC exhaled abs_rate_per_min  4
+           gas_mac_change gas_oxygen_carrier_change      O2 (L/Min) abs_rate_per_min  4
+           gas_mac_change gas_oxygen_carrier_change     Air (L/min) abs_rate_per_min  3
+gas_oxygen_carrier_change gas_oxygen_carrier_change         inN2O % abs_rate_per_min  3
+      gas_volatile_change            gas_mac_change     MAC inhaled abs_rate_per_min  3
+      gas_volatile_change gas_oxygen_carrier_change     Air (L/min) abs_rate_per_min  2
+gas_oxygen_carrier_change gas_oxygen_carrier_change     N2O (L/min) abs_rate_per_min  1
+      gas_volatile_change       gas_volatile_change    inIsoflurane abs_rate_per_min  1
+
+====================================================================================================
+BOLUS OVERALL DISTRIBUTION AFTER MINIMAL ROUTE FILTERING
+====================================================================================================
+              _med _unit               _route    n
+     phenylephrine   mcg          intravenous 3115
+        rocuronium    mg          intravenous 2187
+          fentanyl   mcg          intravenous 1747
+         ephedrine    mg          intravenous 1087
+     hydromorphone    mg          intravenous  743
+          ketamine    mg          intravenous  742
+          propofol    mg          intravenous  734
+          propofol   mcg          intravenous  697
+       ondansetron    mg          intravenous  668
+       vasopressin units          intravenous  637
+ calcium gluconate    mg          intravenous  564
+        sugammadex    mg          intravenous  560
+     dexamethasone    mg          intravenous  488
+         midazolam    mg          intravenous  386
+      remifentanil   mcg          intravenous  275
+  calcium chloride    mg          intravenous  197
+    glycopyrrolate    mg          intravenous  140
+         labetalol    mg          intravenous  140
+           esmolol    mg          intravenous  129
+         methadone    mg          intravenous  124
+   dexmedetomidine   mcg          intravenous  111
+   tranexamic acid    mg          intravenous  110
+       epinephrine   mcg          intravenous   89
+       clevidipine    mg          intravenous   79
+   succinylcholine    mg          intravenous   44
+    norepinephrine   mcg          intravenous   43
+sodium bicarbonate   meq          intravenous   38
+          fentanyl   mcg             epidural   35
+     hydromorphone    mg             epidural   29
+     fosaprepitant    mg          intravenous   26
+       hydralazine    mg          intravenous   23
+     nitroprusside   mcg          intravenous   20
+          naloxone    mg          intravenous   15
+        sufentanil   mcg          intravenous   13
+        vecuronium    mg          intravenous   10
+          naloxone   mcg          intravenous    9
+       epinephrine   mcg          nerve block    7
+       nicardipine   mcg          intravenous    7
+          propofol    mg     intravenous push    6
+     nitroglycerin   mcg          intravenous    5
+     cisatracurium    mg          intravenous    5
+   dexmedetomidine   mcg          nerve block    4
+     dexamethasone    ml            injection    4
+         etomidate    mg          intravenous    4
+       neostigmine    mg          intravenous    4
+         ephedrine    mg        intramuscular    3
+        amiodarone    mg          intravenous    3
+    metoclopramide    mg          intravenous    2
+           esmolol   mcg          intravenous    2
+       epinephrine    mg submucosal injection    1
+        meperidine    mg          intravenous    1
+  prochlorperazine    mg          intravenous    1
+       vasopressin    ml            injection    1
+
+====================================================================================================
+INFUSION THRESHOLD MAPS
+====================================================================================================
+Manual overrides:
+     medication       unit  threshold
+dexmedetomidine  mcg/kg/hr       0.20
+    epinephrine mcg/kg/min       0.03
+ norepinephrine mcg/kg/min       0.04
+  phenylephrine mcg/kg/min       0.20
+       propofol mcg/kg/min      25.00
+   remifentanil mcg/kg/min       0.05
+    vasopressin  units/min       0.02
+
+Adaptive drug-unit thresholds:
+     medication       unit  threshold
+    clevidipine      mg/hr      5.300
+dexmedetomidine  mcg/kg/hr      0.400
+       dopamine mcg/kg/min      3.000
+    epinephrine mcg/kg/min      0.031
+ norepinephrine mcg/kg/min      0.055
+  phenylephrine mcg/kg/min      0.300
+       propofol mcg/kg/min     40.500
+   remifentanil mcg/kg/min      0.070
+    vasopressin  units/min      0.020
+
+Adaptive unit fallback thresholds:
+      unit  threshold
+ mcg/kg/hr       0.48
+mcg/kg/min      25.00
+     mg/hr       5.20
+ units/min       0.02
+
+====================================================================================================
+PROCEDURE SERVICE LEVEL SELECTED MANAGEMENT
+====================================================================================================
+     aims_primary_procedural_service        selection_type             target_policy             actual_policy         row_name  n
+                             General large_infusion_change     large_infusion_change     large_infusion_change         propofol 15
+                        Neurosurgery large_infusion_change     large_infusion_change     large_infusion_change         propofol 14
+                             General large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine 11
+Otolaryngology Head and Neck Surgery      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane % 11
+                         Orthopedics large_infusion_change     large_infusion_change     large_infusion_change         propofol 11
+                            Plastics large_infusion_change     large_infusion_change     large_infusion_change         propofol 10
+                             General      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  9
+                           Pulmonary large_infusion_change     large_infusion_change     large_infusion_change         propofol  9
+                             General      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  9
+Otolaryngology Head and Neck Surgery large_infusion_change     large_infusion_change     large_infusion_change         propofol  9
+                             General      medication_bolus          medication_bolus          medication_bolus         propofol  8
+                             General      medication_bolus          medication_bolus          medication_bolus    phenylephrine  8
+                          Gynecology large_infusion_change     large_infusion_change     large_infusion_change         propofol  8
+                        Neurosurgery      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  7
+                         Orthopedics      medication_bolus          medication_bolus          medication_bolus    phenylephrine  6
+                    Gastroenterology large_infusion_change     large_infusion_change     large_infusion_change         propofol  6
+                            Plastics      large_gas_change            gas_mac_change            gas_mac_change      MAC inhaled  5
+            Interventional Radiology      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  5
+                            Plastics      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  5
+                            Plastics      medication_bolus          medication_bolus          medication_bolus         fentanyl  5
+                      Neuroradiology large_infusion_change     large_infusion_change     large_infusion_change         propofol  5
+                              Dental large_infusion_change     large_infusion_change     large_infusion_change         propofol  5
+                            Thoracic      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  5
+                            Vascular      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  5
+                       Ophthalmology large_infusion_change     large_infusion_change     large_infusion_change         propofol  5
+                        Neurosurgery      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  5
+                        Neurosurgery      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  5
+                    Gastroenterology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  5
+                             General      medication_bolus          medication_bolus          medication_bolus         fentanyl  5
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus        ephedrine  4
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus    phenylephrine  4
+                         Orthopedics large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  4
+                             Urology      medication_bolus          medication_bolus          medication_bolus    phenylephrine  4
+                             Urology large_infusion_change     large_infusion_change     large_infusion_change         propofol  4
+            Interventional Radiology large_infusion_change     large_infusion_change     large_infusion_change         propofol  4
+                            Vascular      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  4
+                        Neurosurgery      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  4
+                   Electrophysiology large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  4
+            Interventional Radiology      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  4
+                   Electrophysiology      medication_bolus          medication_bolus          medication_bolus    phenylephrine  4
+                          Gynecology      medication_bolus          medication_bolus          medication_bolus         fentanyl  4
+                             General      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  4
+                    Gastroenterology      medication_bolus          medication_bolus          medication_bolus         propofol  4
+                             Urology      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  4
+                            Plastics      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  4
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus         fentanyl  4
+                             General      medication_bolus          medication_bolus          medication_bolus       rocuronium  3
+                      Neuroradiology      medication_bolus          medication_bolus          medication_bolus         propofol  3
+                             General      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  3
+                            Plastics large_infusion_change     large_infusion_change     large_infusion_change     remifentanil  3
+                        Neurosurgery      medication_bolus          medication_bolus          medication_bolus        ephedrine  3
+                       Ophthalmology      medication_bolus          medication_bolus          medication_bolus         fentanyl  3
+                        Neurosurgery      medication_bolus          medication_bolus          medication_bolus       rocuronium  3
+                         Orthopedics      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  3
+                       Ophthalmology      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  3
+                          Transplant      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  3
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus         fentanyl  3
+                      Neuroradiology large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  3
+                            Thoracic large_infusion_change     large_infusion_change     large_infusion_change         propofol  3
+                             Urology      medication_bolus          medication_bolus          medication_bolus       rocuronium  3
+                          Transplant      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  3
+                             Urology      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  3
+                          Transplant      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  3
+                            Vascular      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  3
+                           Pulmonary      medication_bolus          medication_bolus          medication_bolus      vasopressin  3
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus         propofol  3
+                   Electrophysiology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  3
+                   Electrophysiology large_infusion_change     large_infusion_change     large_infusion_change         propofol  3
+                             Urology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  3
+                    Gastroenterology      large_gas_change            gas_mac_change gas_oxygen_carrier_change           inO2 %  3
+                         Orthopedics      medication_bolus          medication_bolus          medication_bolus         ketamine  3
+                            Plastics      medication_bolus          medication_bolus          medication_bolus    phenylephrine  3
+                            Plastics      medication_bolus          medication_bolus          medication_bolus         propofol  3
+            Interventional Radiology large_infusion_change     large_infusion_change     large_infusion_change      vasopressin  3
+                           Pulmonary      medication_bolus          medication_bolus          medication_bolus    phenylephrine  3
+                           Pulmonary large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  3
+                          Gynecology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  3
+                          Gynecology      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  3
+                           Pulmonary      medication_bolus          medication_bolus          medication_bolus        ephedrine  3
+                          Gynecology      medication_bolus          medication_bolus          medication_bolus       rocuronium  3
+                          Transplant large_infusion_change     large_infusion_change     large_infusion_change         propofol  3
+                          Gynecology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  2
+                             Urology      medication_bolus          medication_bolus          medication_bolus         fentanyl  2
+                            Vascular      medication_bolus          medication_bolus          medication_bolus         fentanyl  2
+                            Vascular      medication_bolus          medication_bolus          medication_bolus         propofol  2
+                            Vascular      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  2
+                            Thoracic      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  2
+                            Thoracic      large_gas_change       gas_volatile_change       gas_volatile_change  inSevoflurane %  2
+                          Gynecology      medication_bolus          medication_bolus          medication_bolus    phenylephrine  2
+                   Electrophysiology      medication_bolus          medication_bolus          medication_bolus       rocuronium  2
+                   Electrophysiology      large_gas_change            gas_mac_change            gas_mac_change      MAC inhaled  2
+                   Electrophysiology      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  2
+                   Electrophysiology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  2
+                           Pulmonary      large_gas_change       gas_volatile_change gas_oxygen_carrier_change       O2 (L/Min)  2
+                            Thoracic large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  2
+                           Pulmonary      medication_bolus          medication_bolus          medication_bolus         propofol  2
+                   Electrophysiology      medication_bolus     large_infusion_change          medication_bolus         propofol  2
+                              Dental      medication_bolus          medication_bolus          medication_bolus       rocuronium  2
+                              Dental      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  2
+                            Plastics      medication_bolus          medication_bolus          medication_bolus     remifentanil  2
+                            Vascular large_infusion_change     large_infusion_change     large_infusion_change         propofol  2
+                             General      medication_bolus     large_infusion_change          medication_bolus    hydromorphone  2
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus         propofol  2
+                            Plastics      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  2
+                      Neuroradiology      medication_bolus          medication_bolus          medication_bolus    phenylephrine  2
+Otolaryngology Head and Neck Surgery      large_gas_change       gas_volatile_change gas_oxygen_carrier_change      Air (L/min)  2
+                      Neuroradiology      large_gas_change       gas_volatile_change gas_oxygen_carrier_change       O2 (L/Min)  2
+Otolaryngology Head and Neck Surgery      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  2
+                        Neurosurgery      large_gas_change       gas_volatile_change gas_oxygen_carrier_change           inO2 %  2
+                             General      medication_bolus     large_infusion_change          medication_bolus         ketamine  2
+                      Neuroradiology      medication_bolus          medication_bolus          medication_bolus        ephedrine  2
+                        Neurosurgery      medication_bolus          medication_bolus          medication_bolus        labetalol  2
+                    Gastroenterology      medication_bolus     large_infusion_change          medication_bolus    phenylephrine  2
+                        Neurosurgery      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  2
+                          Transplant      medication_bolus          medication_bolus          medication_bolus    phenylephrine  2
+                              Dental      medication_bolus          medication_bolus          medication_bolus         propofol  2
+                        Neurosurgery large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  2
+                            Plastics      medication_bolus          medication_bolus          medication_bolus       rocuronium  2
+                            Plastics      medication_bolus          medication_bolus          medication_bolus       sugammadex  2
+                    Gastroenterology      medication_bolus          medication_bolus          medication_bolus         fentanyl  2
+                    Gastroenterology      medication_bolus          medication_bolus          medication_bolus      epinephrine  2
+                         Orthopedics      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  2
+            Interventional Radiology large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  2
+                            Plastics      large_gas_change       gas_volatile_change            gas_mac_change      MAC inhaled  2
+            Interventional Radiology      large_gas_change            gas_mac_change gas_oxygen_carrier_change           inO2 %  2
+                         Orthopedics      medication_bolus          medication_bolus          medication_bolus         fentanyl  2
+                         Orthopedics      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  2
+                      Neuroradiology large_infusion_change     large_infusion_change     large_infusion_change      clevidipine  2
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus       rocuronium  2
+Otolaryngology Head and Neck Surgery      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  2
+                          Gynecology large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  1
+                          Gynecology      medication_bolus          medication_bolus          medication_bolus          esmolol  1
+                          Gynecology      medication_bolus          medication_bolus          medication_bolus    hydromorphone  1
+                                Hand      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  1
+                          Gynecology      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  1
+                          Gynecology      large_gas_change       gas_volatile_change gas_oxygen_carrier_change       O2 (L/Min)  1
+Otolaryngology Head and Neck Surgery      large_gas_change            gas_mac_change gas_oxygen_carrier_change      Air (L/min)  1
+Otolaryngology Head and Neck Surgery      large_gas_change            gas_mac_change gas_oxygen_carrier_change       O2 (L/Min)  1
+Otolaryngology Head and Neck Surgery      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  1
+                    Gastroenterology large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  1
+                           Pulmonary      medication_bolus     large_infusion_change          medication_bolus       rocuronium  1
+                           Pulmonary      medication_bolus     large_infusion_change          medication_bolus       sugammadex  1
+                           Pulmonary      medication_bolus          medication_bolus          medication_bolus      ondansetron  1
+                           Pulmonary      medication_bolus          medication_bolus          medication_bolus     remifentanil  1
+                           Pulmonary      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  1
+                           Pulmonary      large_gas_change            gas_mac_change gas_oxygen_carrier_change       O2 (L/Min)  1
+                           Pulmonary      large_gas_change            gas_mac_change gas_oxygen_carrier_change           inO2 %  1
+                           Pulmonary      large_gas_change       gas_volatile_change gas_oxygen_carrier_change           inO2 %  1
+                           Pulmonary large_infusion_change     large_infusion_change     large_infusion_change     remifentanil  1
+                           Pulmonary      medication_bolus     large_infusion_change          medication_bolus    phenylephrine  1
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus        labetalol  1
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus        methadone  1
+Otolaryngology Head and Neck Surgery      medication_bolus          medication_bolus          medication_bolus        midazolam  1
+Otolaryngology Head and Neck Surgery      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  1
+Otolaryngology Head and Neck Surgery      large_gas_change       gas_volatile_change            gas_mac_change    etMAC exhaled  1
+Otolaryngology Head and Neck Surgery      large_gas_change       gas_volatile_change gas_oxygen_carrier_change       O2 (L/Min)  1
+Otolaryngology Head and Neck Surgery large_infusion_change     large_infusion_change     large_infusion_change     remifentanil  1
+                         Orthopedics      medication_bolus          medication_bolus          medication_bolus         propofol  1
+                         Orthopedics      medication_bolus          medication_bolus          medication_bolus       rocuronium  1
+            Interventional Radiology      medication_bolus     large_infusion_change          medication_bolus       rocuronium  1
+                    Gastroenterology      medication_bolus          medication_bolus          medication_bolus    phenylephrine  1
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus calcium chloride  1
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus  dexmedetomidine  1
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus         fentanyl  1
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus    phenylephrine  1
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus         propofol  1
+            Interventional Radiology      medication_bolus          medication_bolus          medication_bolus       sugammadex  1
+                      Neuroradiology      large_gas_change            gas_mac_change            gas_mac_change    etMAC exhaled  1
+            Interventional Radiology      medication_bolus     large_infusion_change          medication_bolus         propofol  1
+Otolaryngology Head and Neck Surgery      large_gas_change            gas_mac_change            gas_mac_change      MAC inhaled  1
+                          Transplant      medication_bolus     large_infusion_change          medication_bolus         propofol  1
+                          Transplant      medication_bolus     large_infusion_change          medication_bolus       rocuronium  1
+                          Transplant      medication_bolus     large_infusion_change          medication_bolus      vasopressin  1
+                          Transplant      medication_bolus          medication_bolus          medication_bolus         fentanyl  1
+                              Dental      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  1
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus       sugammadex  1
+                          Transplant      large_gas_change            gas_mac_change gas_oxygen_carrier_change           inO2 %  1
+                          Transplant      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  1
+                          Transplant      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      N2O (L/min)  1
+                            Plastics      medication_bolus          medication_bolus          medication_bolus    hydromorphone  1
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus        ephedrine  1
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus        methadone  1
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus    phenylephrine  1
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus       rocuronium  1
+                            Thoracic      medication_bolus          medication_bolus          medication_bolus  succinylcholine  1
+                            Thoracic      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change      Air (L/min)  1
+                            Thoracic      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change       O2 (L/Min)  1
+                             Urology      large_gas_change       gas_volatile_change            gas_mac_change    etMAC exhaled  1
+                             Urology large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  1
+                          Transplant large_infusion_change     large_infusion_change     large_infusion_change         dopamine  1
+                            Plastics      medication_bolus          medication_bolus          medication_bolus      vasopressin  1
+                            Plastics large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  1
+                              Dental      medication_bolus          medication_bolus          medication_bolus         fentanyl  1
+                              Dental      large_gas_change gas_oxygen_carrier_change gas_oxygen_carrier_change           inO2 %  1
+                             General      medication_bolus          medication_bolus          medication_bolus      hydralazine  1
+                             General      medication_bolus          medication_bolus          medication_bolus    hydromorphone  1
+                             General      medication_bolus          medication_bolus          medication_bolus         ketamine  1
+                             General      medication_bolus          medication_bolus          medication_bolus         naloxone  1
+                             General      medication_bolus          medication_bolus          medication_bolus     remifentanil  1
+                          Transplant large_infusion_change     large_infusion_change     large_infusion_change    phenylephrine  1

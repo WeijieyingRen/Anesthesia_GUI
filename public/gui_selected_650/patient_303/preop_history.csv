@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4A81B233-6C8D-F011-9217-005056BFF837,Allergy,Allergen ELG-23260,ELG-23260,WOOL
+4A81B233-6C8D-F011-9217-005056BFF837,Allergy,Allergen ELG-4236,ELG-4236,POLLEN EXTRACTS
+4A81B233-6C8D-F011-9217-005056BFF837,Allergy,Allergen ELG-7008,ELG-7008,SILVER
+4A81B233-6C8D-F011-9217-005056BFF837,Allergy,Allergen ELG-7010,ELG-7010,NICKEL
+4A81B233-6C8D-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4A81B233-6C8D-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+4A81B233-6C8D-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 724.02,724.02,"Spinal stenosis, lumbar region, without neurogenic claudication"
+4A81B233-6C8D-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M41.9,M41.9,"Scoliosis, unspecified scoliosis type, unspecified spinal region"
+4A81B233-6C8D-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M81.0,M81.0,"Osteoporosis, unspecified osteoporosis type, unspecified pathological fracture presence"
+4A81B233-6C8D-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine (Pepcid) 20 mg tablet Take 1 tablet (20 mg total) by mouth every day, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-116176,ERX-116176,"rosuvastatin tablet Take 1 tablet (5 mg total) by mouth every bedtime, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-161688,ERX-161688,"cholecalciferol (Vitamin D3) 25 mcg (1,000 unit) tablet Take 1 tablet (1,000 units total) by mouth every day, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-172660,ERX-172660,"CLARITIN [PHI] Take by mouth, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule Take 1 capsule (100 mg total) by mouth 3 times a day, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-191831,ERX-191831,"VITAMIN B-12 [PHI] Take by mouth, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-205933,ERX-205933,"teriparatide (Forteo) subcutaneous prefilled pen injector Inject 1 Dose (20 mcg total) subcutaneous (under the skin) daily, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-3841,ERX-3841,"ibuprofen tablet 2 tablets with food or milk as needed, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-40378,ERX-40378,"CALCIUM CITRATE 200 MG (950 MG) [PHI] TABS Take 4.75 tablets (950 mg total) by mouth 2 times a day, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG Vitamin B, Ocuvite, Antacid drops, Historical Med"
+4A81B233-6C8D-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121659,EAP-121659,HX BUNIONECTOMY
+4A81B233-6C8D-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135802,EAP-135802,CATARACT EXTRACTION
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 1039036,1039036,Gastroesophageal reflux disease without esophagitis
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 1054504,1054504,S/P lumbar fusion
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 67614,67614,TIA (transient ischemic attack)
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 8817,8817,"Spinal stenosis, lumbar region, without neurogenic claudication"
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 90907,90907,Expressive aphasia
+4A81B233-6C8D-F011-9217-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+4A81B233-6C8D-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139242,EDG-2139242,"Scoliosis, unspecified scoliosis type, unspecified spinal region"

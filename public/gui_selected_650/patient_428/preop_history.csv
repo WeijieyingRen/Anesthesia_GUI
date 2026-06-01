@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J84.10,J84.10,Pulmonary fibrosis (CMS-HCC)
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R52,R52,Acute pain
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z94.2,Z94.2,Lung transplant recipient (CMS-HCC)
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth 4 times a day as needed for Pain, Disp-100 tablet, R-1, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"senna (Senokot) 8.6 mg tablet Take 2 tablets by mouth daily as needed for Constipation, Disp-100 tablet, R-2, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-116177,ERX-116177,"rosuvastatin tablet Take 1 tablet (10 mg total) by mouth daily, Disp-30 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-184289,ERX-184289,"OXYGEN-AIR DELIVERY SYSTEMS MISC 2 L by Misc.(Non-Drug; Combo Route) route Continuous With exertion, Historical Med"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-19483,ERX-19483,"calcium carbonate-vitamin D (OS-CAL500 +D) 500 mg-200 unit tablet Take 1 tablet by mouth 2 times a day, Disp-180 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-231412,ERX-231412,"posaconazole (Noxafil) 100 mg enteric coated tablet Take 3 tablets (300 mg total) by mouth daily, Disp-270 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-234622,ERX-234622,"CRESEMBA 186 MG PO CAPS Take 2 capsules (372 mg total) by mouth daily, Disp-60 capsule, R-11, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-24984,ERX-24984,"polyethylene glycol 3350 (Miralax) 17 gram/dose powder Take 17 g by mouth 2 times a day as needed (Constipation), Disp-510 g, R-2, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-3074,ERX-3074,"ferrous sulfate (Feosol) 325 mg (65 mg iron) tablet Take 1 tablet (325 mg total) by mouth every Monday, Wednesday and Friday, Disp-36 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid (Vitamin B9) 1 mg tablet Take 1 tablet (1 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs every 6 hours as needed, Historical Med"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-4027,ERX-4027,"isoniazid tablet Take 1 tablet (300 mg total) by mouth daily, Disp-30 tablet, R-8, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet Take 1 tablet (10 mg total) by mouth 2 times a day or as directed., Disp-180 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-6748,ERX-6748,"pyridoxine (Vitamin B6) tablet Take 1 tablet (50 mg total) by mouth daily, Disp-30 tablet, R-8, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"trimethoprim-sulfamethoxazole (Bactrim) 80-400 mg tablet Take 1 tablet by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"valGANciclovir (Valcyte) 450 mg tablet Take 2 tablets (900 mg total) by mouth 2 times a day, Disp-360 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-7857,ERX-7857,"multivitamin tablet Take 1 tablet by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-80562,ERX-80562,"mycophenolate (CellCept) capsule Take 3 capsules (750 mg total) by mouth 2 times a day or as directed., Disp-540 capsule, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Disp-30 tablet, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule Take 3 capsules (3 mg total) by mouth 2 times a day or as directed., Disp-540 capsule, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Home Medication,Home Medication ERX-95803,ERX-95803,"tacrolimus (Prograf) capsule Take 1 capsule (0.5 mg total) by mouth 2 times a day or as directed., Disp-180 capsule, R-3, E-Prescribe"
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-188391,EAP-188391,CV COMB RIGHT LEFT HEART CATH
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Past Surgical History,Past Surgical History EAP-413805,EAP-413805,BRONCHOSCOPY
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Problem List,Problem List Entry 1024732,1024732,Acute pain
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Problem List,Problem List Entry 1292939,1292939,Encounter for pre-transplant evaluation for lung transplant
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Problem List,Problem List Entry 2220110,2220110,Lung transplant recipient (CMS-HCC)
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Problem List,Problem List Entry 66569,66569,Pulmonary fibrosis (CMS-HCC)
+6C7AB8B2-A3A2-F011-9218-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1238273,EDG-1238273,S/P lung transplant (CMS-HCC)

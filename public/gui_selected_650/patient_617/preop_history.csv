@@ -1,0 +1,42 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Allergy,Allergen ELG-4022,ELG-4022,CIPROFLOXACIN
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Allergy,Allergen ELG-8306,ELG-8306,CELEBREX [CELECOXIB]
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Allergy,Latex Allergy,Allergy,No
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Allergy,Latex allergy,allergy,No
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 2 tablets (1,000 mg total) by mouth every 8 hours as needed for Pain, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-191860,ERX-191860,"VITAMIN D2 PO Take 1 tablet by mouth every morning, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 6 hours as needed for Bronchospasm/Wheezing or Shortness of breath, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS Take 1 tablet by mouth every morning, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-81239,ERX-81239,"alendronate (Fosamax) tablet (weekly regimen) Take 1 tablet (70 mg total) by mouth every 7 days Fridays, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily in the evening, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth every morning before breakfast, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet Take 1 tablet (100 mg total) by mouth every morning, Historical Med"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121630,EAP-121630,HX CATARACT REMOVAL
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121822,EAP-121822,HX LAP CHOLECYSTECTOMY
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121845,EAP-121845,HX TUBAL LIGATION
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135148,EAP-135148,KNEE TOTAL JOINT REVISION
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-247114,EAP-247114,OPEN TREATMENT METATARSAL FRACTURE EACH
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-536628,EAP-536628,KNEE LATERAL COLLATERAL LIGAMENT REPAIR
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 200329,200329,Obstructive sleep apnea
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 2053758,2053758,"Sensorineural hearing loss (SNHL), bilateral"
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 2182499,2182499,Nonrheumatic mitral valve regurgitation
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 2696,2696,Morbid obesity (CMS-HCC)
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 3041,3041,Generalized anxiety disorder
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 5547,5547,Chronic obstructive asthma with exacerbation (CMS-HCC)
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 5796,5796,Esophageal reflux
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Problem List,Problem List Entry 77497,77497,Lumbar radiculopathy
+62BB6E5A-A5BB-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1482247,EDG-1482247,"Infection of prosthetic knee joint, subsequent encounter"

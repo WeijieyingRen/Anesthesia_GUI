@@ -1,0 +1,65 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+051BDFFE-95AB-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+051BDFFE-95AB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C83.32,C83.32,Diffuse large B-cell lymphoma of intrathoracic lymph nodes (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C85.89,C85.89,CNS lymphoma (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z51.11,Z51.11,Admission for antineoplastic chemotherapy
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet take 1 Tablet (20 mg total) by mouth 2 times a day, Disp-60 Tablet, R-0, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"METFORMIN 500 MG PO TABS take 1 Tablet (500 mg total) by mouth 2 times a day with meals, Historical Med"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-114358,ERX-114358,"VITAMIN D3 1,000 UNIT PO TABS 1 Cap Cap, PO, qDay, Qty: 100 Cap, 0, Maintenance, Historical Med"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-124823,ERX-124823,"MESALAMINE 1,000 MG PR SUPP insert 1 Suppository (1,000 mg total) into the rectum every bedtime, Disp-30 Suppository, R-6, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule take 1 Capsule (300 mg total) by mouth 3 times a day, Disp-90 Capsule, R-0, No Print"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231412,ERX-231412,"POSACONAZOLE 100 MG PO TBEC take 3 Tablets (300 mg total) by mouth daily, Disp-270 Tablet, R-2, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-2326,ERX-2326,"dexAMETHasone tablet take 2 Tablets (4 mg total) by mouth every day As instructed, Disp-30 Tablet, R-5, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-234536,ERX-234536,"filgrastim-SNDZ (Zarxio) injection inject 0.8 mL (480 mcg total) subcutaneous (under the skin) daily starting 24 hours after chemotherapy as instructed by your doctor, Disp-10 Each, R-3, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet TAKE 1 TABLET(1 MG) BY MOUTH DAILY, Disp-90 Tablet, R-4, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-36206,ERX-36206,"TRUETRACK TEST MISC STRP daily , R-11, Historical Med"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-4397,ERX-4397,"leucovorin tablet take 1 Tablet (25 mg total) by mouth every 6 hours, Disp-30 Tablet, R-5, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-7562,ERX-7562,"SULFASALAZINE 500 MG PO TABS take 3 Tablets (1,500 mg total) by mouth 2 times a day, Disp-180 Tablet, R-11, Historical Med"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-78198,ERX-78198,"CARVEDILOL 6.25 MG PO TABS take 1 Tablet (6.25 mg total) by mouth 2 times a day with meals, Historical Med"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-80257,ERX-80257,"levETIRAcetam (Keppra) tablet take 2 Tablets (1,000 mg total) by mouth 2 times a day, Disp-60 Tablet, R-3, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-8971,ERX-8971,"acyclovir (Zovirax) tablet take 1 Tablet (400 mg total) by mouth 2 times a day, Disp-60 Tablet, R-1, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-90913,ERX-90913,"budesonide (Pulmicort) nebulizer suspension USE 1 VIAL VIA NEBULIZER TWICE DAILY AS DIRECTED, Disp-360 mL, R-3, E-Prescribe**Patient requests 90 days supply**"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-9350,ERX-9350,"CALCITRIOL 0.25 MCG PO CAPS take 1 Capsule (0.25 mcg total) by mouth every morning, Historical Med"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-95354,ERX-95354,"ATOVAQUONE 750 MG/5 ML PO SUSP take 10 mL (1,500 mg total) by mouth every morning with breakfast, Disp-210 mL, R-0, E-Prescribe"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-100488,EDG-100488,Lymphoma (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-103097,EDG-103097,Neuropathy
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-118826,EDG-118826,Peptic ulcer disease
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-1844696,EDG-1844696,History of irregular heartbeat
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-90966,EDG-90966,Arrhythmia
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Medical History,Past Medical History EDG-93382,EDG-93382,Crohn disease (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121817,EAP-121817,HX HERNIA REPAIR
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-133356,EAP-133356,STEREOTACTIC BRAIN BIOPSY
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135928,EAP-135928,SMALL BOWEL RESECTION
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-135978,EAP-135978,PORT-A-CATHETER INSERTION
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188215,EAP-188215,COLONOSCOPY WITH BIOPSY
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-188227,EAP-188227,COLONOSCOPY WITH BALLOON DILATION
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-189261,EAP-189261,IR MEDIPORT SINGLE LUMEN REMOVAL
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-393814,EAP-393814,REPAIR ANORECTAL FIST W/PLUG
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-459211,EAP-459211,CAR-T CELL INFUSION
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-465504,EAP-465504,RECTAL LIGATION OF INTERSPHINCTERIC FISTULA TRACT
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-537976,EAP-537976,IR TUNNELED CENTRAL VENOUS CATHETER DOUBLE LUMEN PLACEMENT
+051BDFFE-95AB-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-648768,EAP-648768,HX PARTIAL COLECTOMY
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1054571,1054571,Numbness and tingling in left hand
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1131343,1131343,"Hypogammaglobulinemia, acquired (CMS-HCC)"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1131440,1131440,DLBCL (diffuse large B cell lymphoma) (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1145553,1145553,Diffuse large B-cell lymphoma of intrathoracic lymph nodes (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1214499,1214499,Atherosclerotic heart disease of native coronary artery without angina pectoris
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1230589,1230589,Pseudomonas respiratory infection
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142424,142424,Obesity
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 147608,147608,Essential (primary) hypertension
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1494821880,1494821880,COVID-19
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 154713,154713,1/6 (Li): sp Rt temporal biopsy
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 157374,157374,DM (diabetes mellitus) (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 192843,192843,CNS lymphoma (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 201733,201733,DVT (deep venous thrombosis) (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 203532,203532,Pulmonary nodule
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2103320,2103320,"Hyperlipidemia, unspecified"
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 2358001,2358001,S/P chimeric antigen receptor T-cell therapy
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+051BDFFE-95AB-ED11-91FA-005056BFF837,Problem List,Problem List Entry 93383,93383,Crohn's disease (CMS-HCC)

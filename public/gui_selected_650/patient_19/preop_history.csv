@@ -1,0 +1,33 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+5DF98885-D4B2-EE11-9203-005056BFF837,Allergy,Allergen ELG-4586,ELG-4586,METOPROLOL
+5DF98885-D4B2-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+5DF98885-D4B2-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I47.20,I47.20,VT (ventricular tachycardia) (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-117460,ERX-117460,"amiodarone tablet take 4 Tablets (400 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-19805,ERX-19805,"METRONIDAZOLE 0.75 % TP [PHI] by Topical route, Historical Med"
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"APIXABAN 5 MG PO TABS Take 1 tablet (5 mg total) by mouth 2 times a day, Historical Med"
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-232955,ERX-232955,"EMPAGLIFLOZIN 10 MG PO TABS Take 1 tablet (10 mg total) by mouth every morning, Historical Med"
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-235260,ERX-235260,"SACUBITRIL-VALSARTAN 24-26 MG PO TABS Take 1 tablet by mouth 2 times a day, Historical Med"
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-7437,ERX-7437,"spironolactone (Aldactone) tablet Take 0.5 tablets (12.5 mg total) by mouth daily, Historical Med"
+5DF98885-D4B2-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-84475,ERX-84475,"carvediloL tablet Take 1 tablet (3.125 mg total) by mouth 2 times a day with meals, Historical Med"
+5DF98885-D4B2-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+5DF98885-D4B2-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-118908,EDG-118908,Skin cancer
+5DF98885-D4B2-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-1759998,EDG-1759998,Heart problem
+5DF98885-D4B2-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121716,EAP-121716,HX SKIN CANCER REMOVAL
+5DF98885-D4B2-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 1171489,1171489,Acute on chronic congestive heart failure (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 118860,118860,Tachy-[PHI] syndrome (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 1223777,1223777,Episodic atrial flutter (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 1860126,1860126,Acute respiratory failure with hypoxia and hypercapnia (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 190479,190479,Flash pulmonary edema (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 200808,200808,Hypoxia
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 2186663,2186663,Paroxysmal atrial fibrillation with rapid ventricular response (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 2219982,2219982,Age-related cataract of both eyes
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 2327285,2327285,Arthritis of carpometacarpal (CMC) joint of both thumbs
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 5104,5104,Paroxysmal ventricular tachycardia (CMS-HCC)
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 8066,8066,Rosacea
+5DF98885-D4B2-EE11-9203-005056BFF837,Problem List,Problem List Entry 9926,9926,Syncope and collapse
+5DF98885-D4B2-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-107246,EDG-107246,VT (ventricular tachycardia) (CMS-HCC)

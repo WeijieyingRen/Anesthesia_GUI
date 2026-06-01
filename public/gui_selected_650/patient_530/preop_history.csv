@@ -1,0 +1,62 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+53DE0FEE-8F6F-F011-9217-005056BFF837,Allergy,Allergen ELG-16311,ELG-16311,ADHESIVE
+53DE0FEE-8F6F-F011-9217-005056BFF837,Allergy,Allergen ELG-4306,ELG-4306,BACTOSHIELD CHG [CHLORHEXIDINE GLUCONATE]
+53DE0FEE-8F6F-F011-9217-005056BFF837,Allergy,Allergen ELG-5688,ELG-5688,VANCOMYCIN
+53DE0FEE-8F6F-F011-9217-005056BFF837,Allergy,Allergen ELG-8768,ELG-8768,LINEZOLID
+53DE0FEE-8F6F-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+53DE0FEE-8F6F-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+53DE0FEE-8F6F-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G45.3,G45.3,Amaurosis fugax
+53DE0FEE-8F6F-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I50.20,I50.20,Heart failure with reduced ejection fraction (CMS-HCC)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.30,N18.30,"Stage 3 chronic kidney disease, unspecified whether stage 3a or 3b CKD (CMS-HCC) [N18.30]"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z95.810,Z95.810,ICD (implantable cardioverter-defibrillator) in place [Z95.810]
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed for Pain, Disp-30 tablet, R-0, No Print"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-116177,ERX-116177,"rosuvastatin tablet Take 1 tablet (10 mg total) by mouth Daily at night, Disp-30 tablet, R-11, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-11664,ERX-11664,"warfarin tablet Take 2 tablets (2 mg total) by mouth every Monday, Wednesday and Friday And take 1 tablet (1 mg Total) by mouth on Tuesday, Thursday, Saturday and Sunday, Historical Med"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-161688,ERX-161688,"cholecalciferol (Vitamin D3) tablet Take 1 tablet (1,000 units total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-170390,ERX-170390,"BENADRYL [PHI] Take 1 capsule by mouth every bedtime as needed (itching), Historical Med"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-3699,ERX-3699,"hydrALAZINE tablet Take 1 tablet (100 mg total) by mouth every 8 hours, Disp-90 tablet, R-11, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-3772,ERX-3772,"hydrOXYzine tablet Take 1 tablet (10 mg total) by mouth every 6 hours as needed for Itching, Disp-30 tablet, R-0, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-7877,ERX-7877,"THIAMINE HCL (VITAMIN B1) 100 MG [PHI] TABS Take 4 tablets (400 mg total) by mouth every 8 hours for 42 doses, Disp-168 tablet, R-0, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-80185,ERX-80185,"RIBOFLAVIN (VITAMIN B2) 100 MG [PHI] TABS Take 1 tablet (100 mg total) by mouth DAILY for 14 doses, Disp-14 tablet, R-0, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-89476,ERX-89476,"losartan tablet Take 1 tablet (25 mg total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet Take 0.5 tablets (12.5 mg total) by mouth daily, Disp-45 tablet, R-3, E-Prescribe"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-101555,EDG-101555,Heart attack (CMS-HCC)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1494821880,EDG-1494821880,COVID-19
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-15123,EDG-15123,Long term (current) use of anticoagulants
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1759998,EDG-1759998,Heart problem
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121808,EAP-121808,HX PACEMAKER PLACEMENT
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121814,EAP-121814,HX CORONARY STENT PLACEMENT
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134822,EAP-134822,TRICUSPID VALVE REPLACEMENT / REPAIR ANNULOPLASTY WITH CARDIOPULMONARY BYPASS
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-3758,EAP-3758,CV PCI
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-417915,EAP-417915,VENTRICULAR ASSIST DEVICE INSERTION WITH CARDIOPULMONARY BYPASS; HEARTMATE 3
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+53DE0FEE-8F6F-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-473510,EAP-473510,EP DUAL CHAMBER ICD IMPLANT
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 101049,101049,Mitral valve regurgitation
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1027296,1027296,"CKD (chronic kidney disease), stage III (CMS-HCC)"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 106723,106723,Tricuspid regurgitation
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1103494,1103494,Linezolid-induced thrombocytopenia
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1107593,1107593,"Atrioventricular block, Mobitz type 1, Wenckebach"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 113315,113315,Iron deficiency anemia
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1168806,1168806,CAD S/P percutaneous coronary angioplasty
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1171027,1171027,LVAD (left ventricular assist device) present (CMS-HCC)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1219930,1219930,H/O heart artery stent
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1230680,1230680,Anticoagulated on Coumadin
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 127434,127434,Cardiomyopathy (CMS-HCC)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 141808,141808,Asthenia
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1760437,1760437,Heart failure with reduced ejection fraction (CMS-HCC)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 1760694,1760694,ICD (implantable cardioverter-defibrillator) in place
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 178945,178945,Linezolid toxicity with mitochondrial poisoning
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 2139101,2139101,"Anemia, unspecified type"
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 2341822,2341822,Infection associated with driveline of left ventricular assist device (LVAD)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 63299,63299,Dehydration
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 72224,72224,Lactic acidosis
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 77817,77817,Amaurosis fugax
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 90847,90847,Aortic regurgitation
+53DE0FEE-8F6F-F011-9217-005056BFF837,Problem List,Problem List Entry 9975,9975,Anorexia
+53DE0FEE-8F6F-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1099874,EDG-1099874,"Carotid stenosis, left"

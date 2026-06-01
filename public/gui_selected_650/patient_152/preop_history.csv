@@ -1,0 +1,20 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E8F4519F-AB3E-EF11-920B-005056BFF837,Allergy,Allergen ELG-16643,ELG-16643,OTHER MEDICATION [UNKNOWN MEDICATION (SPECIFY IN COMMENTS)]
+E8F4519F-AB3E-EF11-920B-005056BFF837,Allergy,Latex Allergy,Allergy,No
+E8F4519F-AB3E-EF11-920B-005056BFF837,Allergy,Latex allergy,allergy,No
+E8F4519F-AB3E-EF11-920B-005056BFF837,Genetic / Congenital / Hereditary,SHC ANE ANESTHESIA PLAN COMMENTS,COMMENTS,"44 yo F with hx of pelvic mass and associated ascites and pleural effusion (possibly Meigs syndrome, s/p thoracentesis without significant relief and quick reaccumulation), anemia (pre-op Hgb 11.5), and pre-DM. Per patient, no recent SOB I/s/o hx of pleural effusion. Able to walk 1 mile, lay flat without respiratory distress or SOB. TTE 5/2024 with normal Bi-V function, EF 61%, nor significant valvular disease. Plan for GETA, additional IV access and arterial line discussed with patient, as well as risks including sore throat, dental damage, PONV, positioning/nerve injury, and more serious but rare cardiopulmonary and neurologic complications, allergic reaction, and possibility of bleeding requiring transfusion. Patient consents to blood transfusion if necessary during surgery. All questions answered and patient agrees to proceed."
+E8F4519F-AB3E-EF11-920B-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet Take 1 tablet (5 mg total) by mouth every 4 hours as needed, Disp-20 tablet, R-0, E-Prescribe"
+E8F4519F-AB3E-EF11-920B-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"senna tablet Take 1 tablet by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+E8F4519F-AB3E-EF11-920B-005056BFF837,Home Medication,Home Medication ERX-13410,ERX-13410,"acetaminophen (Tylenol) tablet Take 1 tablet (650 mg total) by mouth every 4 to 6 hours as needed, Disp-30 tablet, R-0, E-Prescribe"
+E8F4519F-AB3E-EF11-920B-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"polyethylene glycol 3350 (MIRAlax) packet Take 1 packet (17 g total) by mouth daily, Disp-30 each, R-0, E-Prescribe"
+E8F4519F-AB3E-EF11-920B-005056BFF837,Home Medication,Home Medication ERX-3844,ERX-3844,"ibuprofen tablet Take 1 tablet (600 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-0, E-Prescribe"
+E8F4519F-AB3E-EF11-920B-005056BFF837,Home Medication,Home Medication ERX-80840,ERX-80840,"ondansetron tablet Take 1 tablet (8 mg total) by mouth every 8 hours as needed, Disp-15 tablet, R-0, E-Prescribe"
+E8F4519F-AB3E-EF11-920B-005056BFF837,Past Medical History,Past Medical History EDG-192513,EDG-192513,Pre-diabetes
+E8F4519F-AB3E-EF11-920B-005056BFF837,Past Surgical History,Past Surgical History EAP-421265,EAP-421265,CESAREAN SECTION
+E8F4519F-AB3E-EF11-920B-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+E8F4519F-AB3E-EF11-920B-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+E8F4519F-AB3E-EF11-920B-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+E8F4519F-AB3E-EF11-920B-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+E8F4519F-AB3E-EF11-920B-005056BFF837,Problem List,Problem List Entry 2341354,2341354,History of difficult venous access
+E8F4519F-AB3E-EF11-920B-005056BFF837,Problem List,Problem List Entry 89688,89688,Abdominal mass
+E8F4519F-AB3E-EF11-920B-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-102955,EDG-102955,Pelvic mass

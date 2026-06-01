@@ -1,0 +1,20 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+87FA6309-A2F4-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+87FA6309-A2F4-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+87FA6309-A2F4-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C17.0,C17.0,Duodenal adenocarcinoma (CMS-HCC)
+87FA6309-A2F4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-110892,ERX-110892,"ENOXAPARIN 40 MG/0.4 ML SC SYRG inject 0.4 mL (40 mg total) subcutaneous (under the skin) daily, Disp-28 Each, R-0, E-Prescribe"
+87FA6309-A2F4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-93263,ERX-93263,"LEVOFLOXACIN 750 MG PO TABS take 1 Tablet (750 mg total) by mouth every morning before breakfast, Historical Med"
+87FA6309-A2F4-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94528,ERX-94528,"SERTRALINE 50 MG PO TABS take 1 Tablet (50 mg total) by mouth every bedtime, Historical Med"
+87FA6309-A2F4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+87FA6309-A2F4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134656,EAP-134656,EXPLORATORY LAPAROSCOPY
+87FA6309-A2F4-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134670,EAP-134670,LIVER BIOPSY LAPAROSCOPIC
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 100172,100172,Liver abscess
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 10142,10142,Bacteremia
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1027289,1027289,CKD (chronic kidney disease)
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1036316,1036316,Homeless
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1118036,1118036,Current smoker
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1132094,1132094,Duodenal adenocarcinoma (CMS-HCC)
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression & PTSD
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+87FA6309-A2F4-ED11-91FB-005056BFF837,Problem List,Problem List Entry 203590,203590,Methamphetamine use (CMS-HCC)
+87FA6309-A2F4-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1132094,EDG-1132094,Duodenal adenocarcinoma (CMS-HCC)

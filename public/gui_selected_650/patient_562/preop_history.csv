@@ -1,0 +1,63 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+863BA379-26E2-EF11-920F-005056BFF837,Allergy,Allergen ELG-11749,ELG-11749,HYDROCODONE-ACETAMINOPHEN
+863BA379-26E2-EF11-920F-005056BFF837,Allergy,Latex Allergy,Allergy,No
+863BA379-26E2-EF11-920F-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D69.49,D69.49,"Thrombocytopenia, primary (CMS-HCC)"
+863BA379-26E2-EF11-920F-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I50.9,I50.9,"Congestive heart failure, unspecified HF chronicity, unspecified heart failure type (CMS-HCC)"
+863BA379-26E2-EF11-920F-005056BFF837,Encounter Diagnosis,Encounter Diagnosis V53.31,V53.31,Fitting and adjustment of cardiac pacemaker
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) 325 mg tablet Take 1 tablet (325 mg total) by mouth every 4 to 6 hours as needed, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-115155,ERX-115155,"MOXIFLOXACIN 0.5 % OPHT DROP 4 drops daily Apply to affected eye daily after surgery, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"traMADol (Ultram) tablet Take 1 tablet (50 mg total) by mouth every 6 hours as needed for Pain, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-179299,ERX-179299,"IRON PO Take 1 tablet by mouth daily, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-18293,ERX-18293,"torsemide tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-191831,ERX-191831,"VITAMIN B-12 PO take 1 Tab by mouth every day, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-199699,ERX-199699,"CHOLECALCIFEROL (VITAMIN D3) 1,250 MCG (50,000 UNIT) PO CAPS Take 1 capsule (50,000 units total) by mouth 2 times per month (on the 1st and 15th of each month), Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-208479,ERX-208479,"MAGNESIUM OXIDE-MG AA CHELATE 133 MG PO TABS Take 1 tablet (133 mg total) by mouth every day, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-248162,ERX-248162,"TRELEGY ELLIPTA 200-62.5-25 MCG INH DSDV 1 puff by Inhalation route daily, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-310,ERX-310,"allopurinol (Zyloprim) tablet Take 0.5 tablets (50 mg total) by mouth daily, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-3700,ERX-3700,"hydrALAZINE tablet Take 1 tablet (25 mg total) by mouth 3 times a day, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-3700,ERX-3700,"hydrALAZINE tablet take 1 Tablet (25 mg total) by mouth 3 times a day, Disp-270 Tablet, R-3, E-Prescribe"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-37637,ERX-37637,"metoprolol tartrate (Lopressor) tablet Take 0.5 tablets (12.5 mg total) by mouth 2 times a day, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-6487,ERX-6487,"PREDNISOLONE ACETATE 1 % OPHT DRPS 4 drops every day Instill to affected eye daily after surgery, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-78005,ERX-78005,"atorvastatin (Lipitor) tablet TAKE ONE TABLET BY MOUTH ONE TIME DAILY, Disp-90 Tablet, R-3, E-Prescribe"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG PO CP24 Take 1 capsule (0.4 mg total) by mouth 2 times a day, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-8749,ERX-8749,"WARFARIN 2 MG PO TABS Take 1.5 tablets (3 mg total) by mouth daily, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+863BA379-26E2-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-92758,ERX-92758,"AZELASTINE 137 MCG (0.1 %) NASAL SPRY 2 sprays by Nasal route daily as needed, Historical Med"
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-101568,EDG-101568,Myocardial infarction (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-1027744,EDG-1027744,CRI (chronic renal insufficiency)
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-1033951,EDG-1033951,Old MI (myocardial infarction)
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-138151,EDG-138151,CAD (coronary artery disease)
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-200588,EDG-200588,Renal insufficiency
+863BA379-26E2-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+863BA379-26E2-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+863BA379-26E2-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-433961,EAP-433961,OTHER
+863BA379-26E2-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-473510,EAP-473510,EP DUAL CHAMBER ICD IMPLANT
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 101046,101046,Mitral regurgitation
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 10151,10151,Proteinuria
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 101568,101568,Myocardial infarction (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1027744,1027744,CRI (chronic renal insufficiency)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1035077,1035077,Congestive heart failure (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1088932,1088932,"Pulmonary edema, acute (CMS-HCC)"
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1108719,1108719,COPD with acute exacerbation (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 127434,127434,Cardiomyopathy (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 132694,132694,Mitral valve disorder
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1411848,1411848,"Cardiac device, implant, or graft infection or inflammation, initial encounter (CMS-HCC)"
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 142325,142325,Gout
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 15069,15069,Fitting and adjustment of cardiac pacemaker
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 15469,15469,Chronic combined systolic and diastolic heart failure (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 1883540,1883540,Acute on chronic systolic ACC/AHA stage C congestive heart failure (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 196392,196392,DVT of leg (deep venous thrombosis) (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 198304,198304,Stroke/cerebrovascular accident (CMS-HCC)
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 2025305,2025305,"Acute renal failure, unspecified acute renal failure type (CMS-HCC)"
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 2032092,2032092,Coronary artery disease involving native coronary artery of native heart without angina pectoris
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 63695,63695,Hypoxemia
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+863BA379-26E2-EF11-920F-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+863BA379-26E2-EF11-920F-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2338038,EDG-2338038,"Congestive heart failure, unspecified HF chronicity, unspecified heart failure type (CMS-HCC)"

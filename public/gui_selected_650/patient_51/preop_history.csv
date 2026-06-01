@@ -1,0 +1,75 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+959A3F7F-7C47-F011-9215-005056BFF837,Allergy,Allergen ELG-7247,ELG-7247,LISINOPRIL
+959A3F7F-7C47-F011-9215-005056BFF837,Allergy,Allergen ELG-7598,ELG-7598,RBC [RED BLOOD CELLS]
+959A3F7F-7C47-F011-9215-005056BFF837,Allergy,Latex Allergy,Allergy,No
+959A3F7F-7C47-F011-9215-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D62,D62,Acute blood loss anemia
+959A3F7F-7C47-F011-9215-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E03.9,E03.9,"Hypothyroidism, unspecified type [E03.9]"
+959A3F7F-7C47-F011-9215-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K64.9,K64.9,"Hemorrhoids, unspecified hemorrhoid type [K64.9]"
+959A3F7F-7C47-F011-9215-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K92.1,K92.1,Melena [K92.1]
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-10404,ERX-10404,"levothyroxine tablet Take 1 tablet (112 mcg total) by mouth every morning before breakfast, Disp-90 tablet, R-3, E-Prescribe"
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-11664,ERX-11664,"warfarin tablet Rx 1/2: Take 1mg daily for total dose of 4mg until further notice., Disp-30 tablet, R-11, E-Prescribe"
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-12184,ERX-12184,"potassium chloride SA (K-DUR, KLOR-CON M10) 10 MEQ [PHI] tablet take 20 mEq by mouth Every Day., Disp-180 Tab, R-4, No Print"
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-19433,ERX-19433,"warfarin tablet Rx 2/2: Take 3mg daily for total dose of 4mg until further notice., Disp-30 tablet, R-11, E-Prescribe"
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet Take 1 tablet (20 mg total) by mouth daily as needed (volume retention, > 3lbs in a day or > 5lbs in a week), Disp-90 tablet, R-3, E-Prescribe"
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-8750,ERX-8750,"warfarin (COUMADIN) tablet take 1 Tab by mouth daily, Disp-60 Tab, R-3, E-Prescribe"
+959A3F7F-7C47-F011-9215-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole (PROTONIX) delayed release tablet take 1 Tab by mouth daily., Disp-90 Tab, R-3, E-Prescribe"
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-1108639,EDG-1108639,Medication intolerance
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-118870,EDG-118870,Breast cancer (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-127434,EDG-127434,Cardiomyopathy s/p Heartware LVAD
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-148157,EDG-148157,GI bleed
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-148666,EDG-148666,Hypothyroid
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-15449,EDG-15449,Chronic systolic heart failure (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-198226,EDG-198226,CVA (cerebral vascular accident) (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-31026,EDG-31026,Heart replaced by heart assist device (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-4830,EDG-4830,Unspecified tinnitus
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-5368,EDG-5368,"Hypotension, unspecified"
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-84468,EDG-84468,Parainfluenza
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-92238,EDG-92238,Dilated cardiomyopathy (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-9307,EDG-9307,Ventricular septal defect
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-93925,EDG-93925,"Diabetes mellitus, type II (CMS-HCC)"
+959A3F7F-7C47-F011-9215-005056BFF837,Past Medical History,Past Medical History EDG-96721,EDG-96721,Glucose intolerance
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-121706,EAP-121706,HX CARDIAC CATHERIZATION
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-121733,EAP-121733,HX LUMPECTOMY
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-134756,EAP-134756,CHEST EXPLORATION AND/ OR WASHOUT; WITH OR WITHOUT STERNAL CLOSURE; INSIDE THE OPERATING ROOM
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-137627,EAP-137627,VENTRICULAR ASSIST DEVICE INSERTION WITH VENTRICULAR ASSIST DEVICE INSERTION; HEARTWARE; POSSIBLE IABP PLACEMENT
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188073,EAP-188073,SMALL BOWEL CAPSULE ENDOSCOPY
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188113,EAP-188113,EGD WITH CONTROL OF BLEEDING ANY METHOD
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188147,EAP-188147,SMALL BOWEL ENDOSCOPY WITH OR WITHOUT BRUSHING
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188421,EAP-188421,IR VISCERAL ARTERIOGRAPHY EMBOLIZATION
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188501,EAP-188501,ICD GENERATOR AND LEAD INS/REP SINGLE
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188825,EAP-188825,CV RIGHT HEART NIPRIDE STUDY
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-188827,EAP-188827,CV RIGHT AND LEFT HEART CATH
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-3307,EAP-3307,EP DUAL CHAMBER ICD GENERATOR REPLACEMENT
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-445007,EAP-445007,TRANSESOPHAGEAL ECHOCARDIOGRAPHY
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-459957,EAP-459957,TRICUSPID VALVE REPLACEMENT; TRANSFEMORAL TRANSCATHETER; WITH OR WITHOUT CARDIOPULMONARY BYPASS
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-473063,EAP-473063,CV OTHER
+959A3F7F-7C47-F011-9215-005056BFF837,Past Surgical History,Past Surgical History EAP-511315,EAP-511315,ECHOCARDIOGRAPHY TRANSESOPHAGEAL
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 1108639,1108639,Medication intolerance
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 1127248,1127248,Subtherapeutic international normalized ratio (INR)
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 1132225,1132225,PFD (pelvic floor dysfunction)
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 1133400,1133400,Anticoagulated on warfarin
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 1171027,1171027,LVAD (left ventricular assist device) present (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 127434,127434,Cardiomyopathy s/p Heartware LVAD
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 142250,142250,Thrombocytopenia
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 142328,142328,Hemorrhoids
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 144503,144503,Low iron
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 153168,153168,Acute GI bleeding
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 15447,15447,Acute systolic heart failure (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 1760710,1760710,"ICD (implantable cardioverter-defibrillator), dual, in situ"
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 189918,189918,Constipation
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 2139045,2139045,"Iron deficiency anemia, unspecified iron deficiency anemia type"
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 2139976,2139976,"Hypothyroidism, unspecified type"
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 31026,31026,Heart replaced by heart assist device
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 6114,6114,Hemorrhage of rectum and anus
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 67615,67615,Transient ischemic attack
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 79462,79462,Acute blood loss anemia
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 90850,90850,Aortic valve regurgitation
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 90966,90966,Arrhythmia
+959A3F7F-7C47-F011-9215-005056BFF837,Problem List,Problem List Entry 92238,92238,Dilated cardiomyopathy (CMS-HCC)
+959A3F7F-7C47-F011-9215-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139101,EDG-2139101,"Anemia, unspecified type"

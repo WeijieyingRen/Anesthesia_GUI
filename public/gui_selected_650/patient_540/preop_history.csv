@@ -1,0 +1,44 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CF7A80AE-850F-EF11-920A-005056BFF837,Allergy,Latex allergy,allergy,No
+CF7A80AE-850F-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I73.9,I73.9,PVD (peripheral vascular disease) (CMS-HCC)
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-110890,ERX-110890,"ENOXAPARIN 80 MG/0.8 ML SC SYRG inject 0.8 mL (80 mg total) subcutaneous (under the skin) every 12 hours, Disp-7 Each, R-0, E-Prescribe"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"traMADol (Ultram) tablet take 1 Tablet (50 mg total) by mouth as needed for Pain Takes 1 tablet PO in the AM, 2 tablets in the mid-day, and 1 tablet PO qHS, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-16070,ERX-16070,"IPRATROPIUM BROMIDE 21 MCG (0.03 %) NASAL SPRY 2 sprays by Nasal route 2 times a day, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-172810,ERX-172810,"CLOPIDOGREL PO take 75 mg by mouth daily, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-187412,ERX-187412,"ROSUVASTATIN PO take 10 mg by mouth Morning, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO take 650 mg by mouth every 4 hours as needed (pain), Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-242454,ERX-242454,"METOPROLOL SUCCINATE 25 MG PO CSPX take 25 mg by mouth Morning, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-250208,ERX-250208,"ASPIRIN 81 MG PO CAPS Take 1 capsule (81 mg total) by mouth daily, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-80257,ERX-80257,"levETIRAcetam (Keppra) tablet Take 1 tablet (500 mg total) by mouth Evening, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-83297,ERX-83297,"phenytoin extended release capsule Take 2 capsules (200 mg total) by mouth 2 times a day, Historical Med"
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-2105627,EDG-2105627,"Alcohol dependence with withdrawal, unspecified (CMS-HCC)"
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Medical History,Past Medical History EDG-3002,EDG-3002,"Bipolar disorder, unspecified (CMS-HCC)"
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121630,EAP-121630,HX CATARACT REMOVAL
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121654,EAP-121654,HX HIP REPLACEMENT
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121673,EAP-121673,HX CORONARY ARTERY BYPASS GRAFT
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121785,EAP-121785,HX KNEE SURGERY
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121803,EAP-121803,HX ANGIOPLASTY
+CF7A80AE-850F-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 102443,102443,Osteopenia
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1052946,1052946,Chronic back pain
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1056415,1056415,Frailty
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1059855,1059855,Hx of CABG
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1070381,1070381,History of colon cancer
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 107999,107999,Peripheral vascular disease
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 118832,118832,PVD (peripheral vascular disease) (CMS-HCC)
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 155166,155166,Carotid stenosis
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 1882980,1882980,History of alcohol use disorder
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 192513,192513,Pre-diabetes
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 2065268,2065268,"Emphysema, unspecified (CMS-HCC)"
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 2109175,2109175,Other seizures (CMS-HCC)
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 21731,21731,[PHI]'s esophagus
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 76491,76491,Opioid dependence (CMS-HCC)
+CF7A80AE-850F-EF11-920A-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+CF7A80AE-850F-EF11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-118832,EDG-118832,PVD (peripheral vascular disease) (CMS-HCC)

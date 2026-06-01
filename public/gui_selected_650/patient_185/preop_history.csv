@@ -1,0 +1,94 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-1117,ELG-1117,TOMATO FRUIT EXTRACT
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-1694,ELG-1694,[PHI] [PHI]
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-23220,ELG-23220,PAPRIKA
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-23238,ELG-23238,POTATO
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-24453,ELG-24453,EGGPLANT
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-28451,ELG-28451,SOLANUM- NIGHTSHADE VEGETABLES
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-3541,ELG-3541,IBUPROFEN
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-3731,ELG-3731,GARLIC
+5EF95D68-EB71-F011-9217-005056BFF837,Allergy,Allergen ELG-5804,ELG-5804,CELLCEPT [MYCOPHENOLATE MOFETIL]
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 452,452,Portal vein thrombosis
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 572.3,572.3,Portal hypertension (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 788.1,788.1,Dysuria
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 789.51,789.51,Malignant ascites (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 789.59,789.59,Other ascites
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D72.829,D72.829,"Leukocytosis, unspecified type"
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E87.1,E87.1,Hyponatremia
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E87.70,E87.70,"Hypervolemia, unspecified hypervolemia type"
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I85.10,I85.10,Secondary esophageal varices without bleeding (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I89.8,I89.8,Chylous ascites
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J96.01,J96.01,Acute respiratory failure with hypoxia (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K62.5,K62.5,Rectal bleeding
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M32.13,M32.13,"Systemic lupus erythematosus with lung involvement, unspecified SLE type (CMS-HCC)"
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M32.14,M32.14,SLE glomerulonephritis syndrome (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M32.9,M32.9,"Systemic lupus erythematosus, unspecified SLE type, unspecified [PHI] involvement status (CMS-HCC)"
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M35.00,M35.00,"Sjogren's syndrome, with unspecified [PHI] involvement"
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N17.9,N17.9,Acute kidney injury (nontraumatic)
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z95.828,Z95.828,Status post transjugular intrahepatic portosystemic shunt
+5EF95D68-EB71-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z98.890,Z98.890,S/P thoracentesis
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-110889,ERX-110889,"ENOXAPARIN 60 MG/0.6 ML SC SYRG Inject 0.6 mL (60 mg total) subcutaneous (under the skin) 2 times a day, Disp-36 mL, R-0, E-Prescribe"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-110892,ERX-110892,"ENOXAPARIN 40 MG/0.4 ML SC SYRG Inject 0.4 mL (40 mg total) subcutaneous (under the skin) every 24 hours, Disp-0.4 mL, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG [PHI] TABS Take 1 tablet by mouth daily as needed, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-118024,ERX-118024,"MYCOPHENOLATE SODIUM 360 MG [PHI] TBEC Take 3 tablets (1,080 mg total) by mouth 2 times a day, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-1300,ERX-1300,"CALCIUM CARBONATE 500 MG CALCIUM (1,250 MG) [PHI] TABS Take 1 tablet (500 mg of elemental calcium total) by mouth 2 times a day with meals, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-1767,ERX-1767,"CLOTRIMAZOLE 1 % TP [PHI] 1 Application by Topical route 2 times a day as needed, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-201285,ERX-201285,"INSULIN SYRINGE-NEEDLE U-100 1 ML 31 X 3/8"" MISC SYRG 1 Syringe by Misc.(Non-Drug; Combo Route) route 3 times a day (to be used for SQ octreotide injections), Disp-100 each, R-0, E-Prescribe"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-204231,ERX-204231,"DICLOFENAC SODIUM 1 % TP GEL 2 g by Topical route as needed, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-204706,ERX-204706,"melatonin tablet Take 1 tablet (5 mg total) by mouth every bedtime as needed, Disp-10 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-215567,ERX-215567,"BENLYSTA IV by Intravenous route every month, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-222102,ERX-222102,"rivaroxaban (Xarelto) tablet Take 1 tablet (20 mg total) by mouth daily, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-250,ERX-250,"ALBUTEROL SULFATE 2.5 MG /3 ML (0.083 %) INH NEBU 3 mL (2.5 mg total) by Nebulization route every 6 hours as needed for Bronchospasm/Wheezing, Disp-90 mL, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-250376,ERX-250376,"HYDROXYCHLOROQUINE 100 MG [PHI] TABS Take 3 tablets (300 mg total) by mouth daily, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-25122,ERX-25122,"OCTREOTIDE ACETATE 100 MCG/ML INJ SOLN Inject 1 mL (100 mcg total) subcutaneous (under the skin) every 8 hours, Disp-90 mL, R-0, E-Prescribe"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM [PHI] PWPK Take 1 packet (17 g total) by mouth daily as needed, Disp-14 each, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-33083,ERX-33083,"midodrine tablet Take 1 tablet (10 mg total) by mouth every 8 hours, Disp-10 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-38285,ERX-38285,"ALUM-MAG HYDROXIDE-SIMETH 200-200-20 MG/5 ML [PHI] SUSP Take 30 mL by mouth every 4 hours as needed, Disp-354 mL, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-6494,ERX-6494,"predniSONE tablet Take 1 tablet (10 mg total) by mouth daily, Historical Med"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-6583,ERX-6583,"prochlorperazine tablet Take 1 tablet (5 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet Take 1 tablet (40 mg total) by mouth Daily at night, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-7877,ERX-7877,"THIAMINE HCL (VITAMIN B1) 100 MG [PHI] TABS Take 2 tablets (200 mg total) by mouth daily, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-84475,ERX-84475,"carvediloL (Coreg) tablet Take 1 tablet (3.125 mg total) by mouth 2 times a day with meals HOLD for systolic blood pressure less than 100, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth 2 times a day, Disp-30 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-90841,ERX-90841,"CAMPHOR-MENTHOL 0.5-0.5 % TP LOTN by Topical route 2 times a day, Disp-222 mL, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-92434,ERX-92434,"ERGOCALCIFEROL (VITAMIN D2) 1,250 MCG (50,000 UNIT) [PHI] CAPS Take 1 capsule (50,000 units total) by mouth every 7 days, Disp-30 capsule, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-9310,ERX-9310,"bumetanide tablet Take 3 tablets (3 mg total) by mouth 2 times a day, Disp-30 tablet, R-0, E-Prescribe"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet Take 1 tablet (4 mg total) by mouth every 6 hours as needed, Disp-10 tablet, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Home Medication,Home Medication ERX-94296,ERX-94296,"MEDIUM CHAIN TRIGLYCERIDES 7.7 KCAL/ML [PHI] OIL Take 15 mL by mouth 3 times a day with meals, Disp-500 mL, R-0, No Print"
+5EF95D68-EB71-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188069,EAP-188069,PARACENTESIS
+5EF95D68-EB71-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188097,EAP-188097,EGD WITH BANDING OF VARICES
+5EF95D68-EB71-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188891,EAP-188891,IR THORACENTESIS
+5EF95D68-EB71-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188921,EAP-188921,IR TRANSJUGULAR INTRAHEPATIC PORTO-SYSTEMIC SHUNT (TIPSS)
+5EF95D68-EB71-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188923,EAP-188923,IR TRANSJUGULAR INTRAHEPATIC PORTO-SYSTEMIC SHUNT (TIPSS) REVISION
+5EF95D68-EB71-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188973,EAP-188973,IR VENOGRAPHY THROMBOLYSIS
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 100030,100030,Leukocytosis
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 100390,100390,Lupus nephritis (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 10060,10060,Dysuria
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1035150,1035150,Malignant ascites (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1037511,1037511,Other ascites
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1053670,1053670,S/P thoracentesis
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1053694,1053694,Status post transjugular intrahepatic portosystemic shunt
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1054481,1054481,Bilateral leg edema
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1100472,1100472,"Pleural effusion, right"
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1141062,1141062,Secondary esophageal varices without bleeding (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1141774,1141774,Acute respiratory failure with hypoxia (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 116037,116037,Hypoalbuminemia
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 117577,117577,Rectal bleeding
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 127212,127212,SLE glomerulonephritis syndrome (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 142161,142161,Abdominal pain
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 1838551,1838551,Thrombosis of right internal jugular vein (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 2140053,2140053,"Dyspnea, unspecified type"
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 2220010,2220010,Systemic lupus erythematosus with lung involvement (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 5322,5322,Portal vein thrombosis
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 6151,6151,Portal hypertension (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 65066,65066,Sjogren's syndrome
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 71097,71097,Gastric varices
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 71797,71797,Chylous ascites
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 72154,72154,Hypervolemia
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 8173,8173,Systemic lupus erythematosus (CMS-HCC)
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia
+5EF95D68-EB71-F011-9217-005056BFF837,Problem List,Problem List Entry 9926,9926,Syncope and collapse
+5EF95D68-EB71-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1100472,EDG-1100472,"Pleural effusion, right"

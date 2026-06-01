@@ -1,0 +1,7 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+F1461B2A-9816-EF11-920B-005056BFF837,2024-05-15 21:48:00+00:00,position,temperature_control,"""blankets;upper body""","""R SHC OPT ANE TEMP CONTROL"": ""blankets;upper body""",2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,0.0,0.0,0.0,0.0,94.0
+F1461B2A-9816-EF11-920B-005056BFF837,2024-05-15 22:08:00+00:00,airway,lma_inserted,1,LMA Inserted,2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,20.0,20.0,20.0,20.0,74.0
+F1461B2A-9816-EF11-920B-005056BFF837,2024-05-15 22:11:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,23.0,23.0,23.0,23.0,71.0
+F1461B2A-9816-EF11-920B-005056BFF837,2024-05-15 22:13:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,25.0,25.0,25.0,25.0,69.0
+F1461B2A-9816-EF11-920B-005056BFF837,2024-05-15 22:14:00+00:00,airway,intubation,1,Intubation,2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,26.0,26.0,26.0,26.0,68.0
+F1461B2A-9816-EF11-920B-005056BFF837,2024-05-15 23:17:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2024-05-15 21:48:00+00:00,2024-05-15 23:22:00+00:00,89.0,89.0,89.0,89.0,5.0

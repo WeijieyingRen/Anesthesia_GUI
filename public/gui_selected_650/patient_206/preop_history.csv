@@ -1,0 +1,60 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+3AB40FF0-C844-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet take 2 Tablets (650 mg total) by mouth every 6 hours as needed for Pain, Disp-60 Tablet, R-0, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"METFORMIN 500 MG PO TABS Take 1 tablet (500 mg total) by mouth every morning with breakfast, Historical Med"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS take 1 Tablet by mouth daily, Disp-30 Tablet, R-0, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-13654,ERX-13654,"aspirin enteric coated tablet take 1 Tablet (325 mg total) by mouth daily, Disp-90 Tablet, R-2, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-198588,ERX-198588,"CALCIUM CARBONATE-VITAMIN D3 600 MG(1,500MG) -400 UNIT PO TABS take 1 Tablet by mouth daily Takes around noon time., Historical Med"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-210844,ERX-210844,"DULERA 100-5 MCG/ACTUATION INH HFAA 2 Puffs by Inhalation route as needed, Historical Med"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-244512,ERX-244512,"TIROSINT 175 MCG PO CAPS take 175 mcg by mouth every day, Disp-90 Capsule, R-3, [PHI], E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK take 1 Packet (17 g total) by mouth daily, Disp-30 Each, R-0, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROCODONE-ACETAMINOPHEN 5-325 MG PO TABS take 1 Tablet by mouth every 4 hours as needed for Pain, Disp-10 Tablet, R-0, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 Puffs by Inhalation route every 4 hours as needed for Bronchospasm/Wheezing, Disp-1 Each, R-2, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-4591,ERX-4591,"LOTRIMIN AF (CLOTRIMAZOLE) 1 % TP [PHI] 1 Application. by Topical route 2 times a day On palm of hand, Disp-85 g, R-0, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"ATORVASTATIN 10 MG PO TABS Take 1 tablet (10 mg total) by mouth every morning with breakfast, Historical Med"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-81239,ERX-81239,"ALENDRONATE 70 MG PO TABS take 1 Tablet (70 mg total) by mouth every 7 days, Historical Med"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"clopidogrel (Plavix) 75 mg tablet (maintenance dose) take 1 Tablet (75 mg total) by mouth daily, Disp-90 Tablet, R-2, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 6 hours as needed, Disp-10 Tablet, R-0, E-Prescribe"
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1022210,EDG-1022210,Seizure disorder (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-102568,EDG-102568,Ovarian cancer (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1105928,EDG-1105928,"DM II (diabetes mellitus, type II), controlled (CMS-HCC)"
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-118888,EDG-118888,Lung cancer (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-122781,EDG-122781,Chronic obstructive pulmonary disease (COPD) (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142159,EDG-142159,Osteoporosis
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142301,EDG-142301,Bronchitis
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142314,EDG-142314,Cystitis
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-172149,EDG-172149,Brain aneurysm
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-198284,EDG-198284,Stroke (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-134844,EAP-134844,MEDIASTINOSCOPY WITH OR WITHOUT BIOPSY
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135028,EAP-135028,BRONCHOSCOPY FLEXIBLE WITH/ WITHOUT BIOPSIES
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-3248,EAP-3248,IR ANGIOGRAPHY CEREBRAL
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-412621,EAP-412621,IR CEREBRAL ANGIOGRAPHY COILING
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-429666,EAP-429666,CRANIOTOMY ANEURYSM
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-433961,EAP-433961,OTHER
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-474077,EAP-474077,BRONCHOSCOPY WITH ENDOBRONCHIAL ULTRASOUND
+3AB40FF0-C844-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-649389,EAP-649389,HX TOTAL VAG HYSTERECTOMY (OVARIES INTACT/NO CERVIX)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 102568,102568,Ovarian cancer (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 108215,108215,Restrictive lung disease
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1082965,1082965,Antiplatelet or antithrombotic long-term use
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 108903,108903,Lung mass
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1118036,1118036,Current smoker
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1129534,1129534,Lung consolidation (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1139412,1139412,Age-related osteoporosis without current pathological fracture
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1152448,1152448,Cigarette nicotine dependence with nicotine-induced disorder
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1166933,1166933,Troponin I above reference range
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1215272,1215272,Clinical trial participant
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 1259303,1259303,Primary malignant neoplasm of right upper lobe of lung (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 137960,137960,Preop examination
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 172149,172149,81/ ([PHI]): s/p flow diversion for L paraclinoid aneurysm
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 199160,199160,"Malignant neoplasm of trachea, bronchus, and lung (CMS-HCC)"
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 2030009,2030009,Abnormal mammogram of left breast
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 5112,5112,Cardiac arrest (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 66037,66037,Seasonal allergic rhinitis
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 66488,66488,COPD (chronic obstructive pulmonary disease) (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 93282,93282,Chronic cough
+3AB40FF0-C844-EE11-9200-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia

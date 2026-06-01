@@ -1,0 +1,2 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+2504DCB5-9C92-EE11-9203-005056BFF837,2023-11-29 22:09:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2023-11-29 22:06:00+00:00,2023-11-29 23:25:00+00:00,3.0,3.0,3.0,3.0,76.0

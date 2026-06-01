@@ -1,0 +1,30 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+2B3938EF-D86A-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+2B3938EF-D86A-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 728.86,728.86,Necrotizing fasciitis (CMS-HCC)
+2B3938EF-D86A-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R78.81,R78.81,Bacteremia due to Clostridium species
+2B3938EF-D86A-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T14.8XXA,T14.8XXA,Hematoma
+2B3938EF-D86A-F011-9217-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 2 tablets (1,000 mg total) by mouth every 6 hours, Disp-56 tablet, R-0, E-Prescribe"
+2B3938EF-D86A-F011-9217-005056BFF837,Home Medication,Home Medication ERX-110892,ERX-110892,"ENOXAPARIN 40 MG/0.4 ML SC SYRG Inject 0.4 mL (40 mg total) subcutaneous (under the skin) every 24 hours, Disp-12 mL, R-0, E-Prescribe"
+2B3938EF-D86A-F011-9217-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) [PHI] TABS Take 1 tablet by mouth daily, Historical Med"
+2B3938EF-D86A-F011-9217-005056BFF837,Home Medication,Home Medication ERX-84226,ERX-84226,"sildenafil (Viagra) tablet Take 1 tablet (100 mg total) by mouth as needed for Erectile dysfunction, Historical Med"
+2B3938EF-D86A-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-118951,EDG-118951,Colorectal cancer (CMS-HCC)
+2B3938EF-D86A-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-144317,EDG-144317,Gallstones
+2B3938EF-D86A-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-145914,EDG-145914,Bowel disease
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121731,EAP-121731,HX HERNIA REPAIR UMBILICAL
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121822,EAP-121822,HX LAP CHOLECYSTECTOMY
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134700,EAP-134700,INGUINAL GROIN INCISION & DRAINAGE
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135212,EAP-135212,KNEE / LOWER EXTREMITY DEBRIDEMENT
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135686,EAP-135686,FLAP ROTATIONAL
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-399633,EAP-399633,ABDOMINOPERINEAL RESECTION LAPAROSCOPIC
+2B3938EF-D86A-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-536604,EAP-536604,PERINEUM INCISION AND DRAINAGE
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 1060634,1060634,Sepsis (CMS-HCC)
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 1128384,1128384,Adenocarcinoma of rectum (CMS-HCC)
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 113315,113315,Iron deficiency anemia
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 1234918,1234918,Chemotherapy-induced neuropathy
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 2238484,2238484,Urothelial carcinoma of bladder (CMS-HCC)
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 2371395,2371395,Bacteremia due to Clostridium species
+2B3938EF-D86A-F011-9217-005056BFF837,Problem List,Problem List Entry 8928,8928,Necrotizing fasciitis (CMS-HCC)
+2B3938EF-D86A-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-8928,EDG-8928,Necrotizing fasciitis (CMS-HCC)

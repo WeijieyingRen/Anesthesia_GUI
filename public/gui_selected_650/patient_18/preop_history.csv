@@ -1,0 +1,18 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+50803E77-94EB-EF11-920F-005056BFF837,Allergy,Latex Allergy,Allergy,No
+50803E77-94EB-EF11-920F-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+50803E77-94EB-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-110890,ERX-110890,"enoxaparin (Lovenox) 80 mg syringe Inject 0.8 mL (80 mg total) subcutaneous (under the skin) every 12 hours . Take in place of Eliqius for 4 days prior to ablation., Disp-8 each, R-0, E-Prescribe"
+50803E77-94EB-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-113205,ERX-113205,"ezetimibe (Zetia) tablet Take 1 tablet (10 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+50803E77-94EB-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet Take 1 tablet (5 mg total) by mouth 2 times a day LABS NEEDED FOR ADDITIONAL REFILLS, Disp-180 tablet, R-0, E-Prescribe"
+50803E77-94EB-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily . Start 4 days prior to ablation and continue for 1 month after., Disp-40 tablet, R-0, E-Prescribe"
+50803E77-94EB-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-2220775,EDG-2220775,Moderate exercise
+50803E77-94EB-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121747,EAP-121747,HX WISDOM TEETH EXTRACTION
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 1032154,1032154,FH: hypertension
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 1045032,1045032,Overweight (BMI 25.0-29.9)
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 142294,142294,Allergic rhinitis
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 67121,67121,Hypertrophic cardiomyopathy (CMS-HCC)
+50803E77-94EB-EF11-920F-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+50803E77-94EB-EF11-920F-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

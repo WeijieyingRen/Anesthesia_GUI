@@ -1,0 +1,55 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+63A689C6-A160-F011-9216-005056BFF837,Allergy,Latex Allergy,Allergy,No
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 286.4,286.4,[PHI] Willebrand's disease (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D62,D62,Acute blood loss anemia
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D69.6,D69.6,Thrombocytopenia
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I35.0,I35.0,Severe aortic stenosis
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K92.2,K92.2,Acute GI bleeding
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K92.2,K92.2,"Gastrointestinal hemorrhage, unspecified gastrointestinal hemorrhage type"
+63A689C6-A160-F011-9216-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.6,N18.6,End-stage renal disease (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet = 1 Tab, ORAL, Q4H, PRN PRN for pain, # 42 Tab, 0 Refill(s), Maintenance, Pharmacy: Walmart Pharmacy 5394, 154.94, cm, 06/15/24 15:08:00 PDT, Height/Length (cm), 64, kg, 06/15/24 15:08:00 PDT, Dose calculation weight (kg), Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-10610,ERX-10610,"midodrine tablet Take 0.5 tablets (2.5 mg total) by mouth as needed, Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"traMADol (Ultram) tablet TAKE 1 TABLET BY MOUTH ONCE DAILY AS NEEDED FOR PAIN, Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-243738,ERX-243738,"ZTLIDO 1.8 % TP PTMD 0 Refill(s), Maintenance, Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-3077,ERX-3077,"FERROUS SULFATE 325 MG (65 MG IRON) [PHI] TBEC = 1 Tab, ORAL, DAILY, # 90 Tab, 2 Refill(s), Maintenance, Pharmacy: Walmart Pharmacy 5394, 154, cm, 10/24/24 20:34:00 PDT, Height/Length (cm), 64, kg, 10/24/24 20:34:00 PDT, Dose calculation weight (kg), Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"atorvastatin tablet = 1 Tab, ORAL, DAILY, # 90 Tab, 3 Refill(s), Maintenance, Pharmacy: Walmart Pharmacy 5394, 154, cm, 10/24/24 20:34:00 PDT, Height/Length (cm), 64, kg, 10/24/24 20:34:00 PDT, Dose calculation weight (kg), Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet = 1 Tab, ORAL, DAILY, # 30 Tab, 0 Refill(s), Maintenance, Pharmacy: Walmart Pharmacy 5394, 154, cm, 10/24/24 20:34:00 PDT, Height/Length (cm), 64, kg, 10/24/24 20:34:00 PDT, Dose calculation weight (kg), Historical Med"
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1027383,EDG-1027383,Compression fracture of lumbar vertebra (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1031772,EDG-1031772,"CHF (congestive heart failure), NYHA class II (CMS-HCC)"
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1080753,EDG-1080753,History of breast cancer
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1099290,EDG-1099290,Severe aortic stenosis
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1100132,EDG-1100132,Pseudoaneurysm of left femoral artery
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1288948,EDG-1288948,Anemia in chronic kidney disease
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-1847265,EDG-1847265,Diverticulitis of large intestine with perforation with bleeding
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-2242126,EDG-2242126,"Chronic respiratory failure with hypoxia, on home oxygen therapy (CMS-HCC)"
+63A689C6-A160-F011-9216-005056BFF837,Past Medical History,Past Medical History EDG-71913,EDG-71913,Acute gangrenous cholecystitis
+63A689C6-A160-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-121709,EAP-121709,HX SIGMOIDECTOMY
+63A689C6-A160-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+63A689C6-A160-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-134734,EAP-134734,BREAST LUMPECTOMY WITH AXILLARY AND SENTINAL NODE DISSECTION
+63A689C6-A160-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188073,EAP-188073,SMALL BOWEL CAPSULE ENDOSCOPY
+63A689C6-A160-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188147,EAP-188147,SMALL BOWEL ENDOSCOPY WITH OR WITHOUT BRUSHING
+63A689C6-A160-F011-9216-005056BFF837,Past Surgical History,Past Surgical History EAP-188163,EAP-188163,SMALL BOWEL ENDOSCOPY INCLUDING ILEUM DIAGNOSTIC
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1027383,1027383,Compression fracture of lumbar vertebra (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 103045,103045,Pericardial effusion
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1031772,1031772,"CHF (congestive heart failure), NYHA class II (CMS-HCC)"
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1059849,1059849,Wheelchair dependent
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1066050,1066050,History of sepsis
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1077431,1077431,On home O2
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1080753,1080753,History of breast cancer
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1083378,1083378,Dialysis patient
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1099290,1099290,Severe aortic stenosis
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1100415,1100415,"Mitral valve stenosis, severe"
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1119667,1119667,Moderate protein-calorie malnutrition
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 127434,127434,Cardiomyopathy (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 1288948,1288948,Anemia in chronic kidney disease
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 142250,142250,Thrombocytopenia
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 142336,142336,Hypotension
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 153168,153168,Acute GI bleeding
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 157374,157374,DM (diabetes mellitus) (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 201251,201251,End-stage renal disease (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 2242126,2242126,"Chronic respiratory failure with hypoxia, on home oxygen therapy (CMS-HCC)"
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 2778,2778,[PHI] Willebrand's disease (CMS-HCC)
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 72194,72194,Hyperkalemia
+63A689C6-A160-F011-9216-005056BFF837,Problem List,Problem List Entry 79462,79462,Acute blood loss anemia
+63A689C6-A160-F011-9216-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2025341,EDG-2025341,"Gastrointestinal hemorrhage, unspecified gastrointestinal hemorrhage type"

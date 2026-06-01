@@ -30,12 +30,16 @@ import { prepareSurgeryContextData } from "@/lib/prepare_raw_data/surgery_contex
 import { preparePreopData } from "@/lib/prepare_raw_data/preop";
 import { prepareLabData } from "@/lib/prepare_raw_data/lab";
 import { prepareTimelineContextData } from "@/lib/prepare_raw_data/timeline_context";
-import { prepareVitalsDataRaw } from "@/lib/prepare_raw_data/vitals";
+import {
+  buildPhysiologyRowsFromPanelFiles,
+  prepareVitalsDataRaw,
+} from "@/lib/prepare_raw_data/vitals";
 import { prepareMedicationData } from "@/lib/prepare_raw_data/medications";
 import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
 import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
+import { DATASET_BASE } from "@/lib/dataset-config";
 
 type CsvRow = Record<string, any>;
 
@@ -877,11 +881,11 @@ function FieldGrid({
   const visibleItems = items.filter((item) => hasVisibleValue(item.value));
 
   if (!visibleItems.length) {
-    return <div className="text-sm text-gray-500">No available data.</div>;
+    return <div className="text-sm text-gray-500">No available more data.</div>;
   }
 
   return (
-    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-800 md:grid-cols-3 xl:grid-cols-6">
+    <div className="grid grid-cols-1 gap-x-6 gap-y-1 text-sm text-gray-800 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {visibleItems.map((item) => (
         <div key={item.label} className="min-w-0 break-words leading-6">
           <span className="font-semibold text-gray-600">{item.label}:</span>{" "}
@@ -893,9 +897,86 @@ function FieldGrid({
     </div>
   );
 }
+function groupPreopHistoryRows(rows: CsvRow[]) {
+  const grouped: Record<string, string[]> = {};
+
+  const hiddenCategories = new Set(["Home Medication"]);
+
+  const cleanText = (value: unknown) => {
+    const text = String(value ?? "").trim();
+
+    if (
+      !text ||
+      text === "-" ||
+      text.toLowerCase() === "nan" ||
+      text.toLowerCase() === "null" ||
+      text.toLowerCase() === "undefined"
+    ) {
+      return "";
+    }
+
+    return text;
+  };
+
+  for (const row of rows) {
+    const category = cleanText(
+      row["history_category"] ?? row["category"] ?? "Other"
+    );
+
+    if (!category || hiddenCategories.has(category)) {
+      continue;
+    }
+
+    const feature = cleanText(row["feature_name"] ?? row["feature"]);
+
+    const value = cleanText(
+      row["value"] ??
+        row["value_combined"] ??
+        row["aims_value_text"] ??
+        row["aims_value_numeric"]
+    );
+
+    if (!value) continue;
+
+    if (!grouped[category]) {
+      grouped[category] = [];
+    }
+
+    if (category === "Allergy") {
+      const lowerValue = value.toLowerCase();
+
+      if (["no", "none", "negative", "false", "0"].includes(lowerValue)) {
+        if (!grouped[category].includes("No known allergy")) {
+          grouped[category].push("No known allergy");
+        }
+        continue;
+      }
+
+      if (["yes", "positive", "true", "1"].includes(lowerValue)) {
+        const allergyName = feature || "Allergy";
+        if (!grouped[category].includes(allergyName)) {
+          grouped[category].push(allergyName);
+        }
+        continue;
+      }
+
+      const allergyText = feature ? `${feature}: ${value}` : value;
+      if (!grouped[category].includes(allergyText)) {
+        grouped[category].push(allergyText);
+      }
+      continue;
+    }
+
+    if (!grouped[category].includes(value)) {
+      grouped[category].push(value);
+    }
+  }
+
+  return grouped;
+}
 
 async function fetchCsvRows(folder: string, filename: string): Promise<CsvRow[]> {
-  const url = `/data/${folder}/${filename}`;
+  const url = `${DATASET_BASE}/${folder}/${filename}`;
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
@@ -910,15 +991,24 @@ async function fetchCsvRows(folder: string, filename: string): Promise<CsvRow[]>
   }).data;
 }
 
-async function fetchTextFile(folder: string, filename: string): Promise<string> {
-  const url = `/data/${folder}/${filename}`;
+async function fetchOptionalCsvRows(
+  folder: string,
+  filename: string
+): Promise<CsvRow[]> {
+  const url = `${DATASET_BASE}/${folder}/${filename}`;
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
-    throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
+    return [];
   }
 
-  return (await res.text()).trim();
+  const text = await res.text();
+
+  return Papa.parse<CsvRow>(text, {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+  }).data;
 }
 
 function useVoiceNote() {
@@ -1158,6 +1248,7 @@ export default function DashboardPage() {
   const [demographic, setDemographic] = useState<PatientDemographic | null>(null);
   const [surgeryContext, setSurgeryContext] = useState<SurgeryContext | null>(null);
   const [preop, setPreop] = useState<PreopAssessment | null>(null);
+  const [preopHistoryRows, setPreopHistoryRows] = useState<CsvRow[]>([]);
   const [lab, setLab] = useState<LabData | null>(null);
   const [vitals, setVitals] = useState<VitalPanelData | null>(null);
   const [medications, setMedications] = useState<MedicationPanelData | null>(null);
@@ -1846,65 +1937,19 @@ export default function DashboardPage() {
       setEpisodeTaskCompletion({});
       setReviewHydrationVersion(0);
 
-      const caseIdFromFile = await fetchTextFile(folder, "case_id.txt");
-      setCaseId(caseIdFromFile);
-
-      try {
-        let participantInfo: any = {};
-        try {
-          const raw = localStorage.getItem("participantInfo");
-          participantInfo = raw ? JSON.parse(raw) : {};
-        } catch {
-          participantInfo = {};
-        }
-
-        const accessCode =
-          String(
-            participantInfo?.accessCode ??
-              localStorage.getItem("doctorAccessCode") ??
-              ""
-          ).trim() || "";
-        const doctorName = String(participantInfo?.name ?? "").trim();
-        const displayCaseId =
-          String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
-
-        clearCaseLocalDrafts(folder, caseIdFromFile);
-
-        if (accessCode && displayCaseId) {
-          const params = new URLSearchParams({
-            accessCode,
-            doctorName,
-            patientId: folder,
-            displayCaseId,
-            caseId: String(caseIdFromFile).trim(),
-          });
-
-          reviewPayloadPromise = fetch(
-            `/api/case_review_data?${params.toString()}`,
-            { cache: "no-store" }
-          )
-            .then(async (reviewRes) => {
-              if (!reviewRes.ok) return null;
-              return (await reviewRes.json()) as DriveReviewPayload;
-            })
-            .catch((error) => {
-              console.error("Failed to load review content from Drive:", error);
-              return null;
-            });
-        }
-      } catch (error) {
-        console.error("Failed to load review content from Drive:", error);
-      }
-
-   
       const [
         caseInfoRows,
         patientAttrRows,
         caseStaticRows,
         caseDynamicRows,
         preopRows,
+        preopHistoryRowsLoaded,
         labRows,
-        phyRows,
+        vitalRows,
+        gasRows,
+        ventilationRows,
+        cvRows,
+        temperatureRows,
         medBolusRows,
         medInfusionRows,
         fluidInRows,
@@ -1916,8 +1961,13 @@ export default function DashboardPage() {
         fetchCsvRows(folder, "case_static.csv"),
         fetchCsvRows(folder, "case_dynamic_events.csv"),
         fetchCsvRows(folder, "preop.csv"),
+        fetchOptionalCsvRows(folder, "preop_history.csv"),
         fetchCsvRows(folder, "lab.csv"),
-        fetchCsvRows(folder, "phy_data.csv"),
+        fetchCsvRows(folder, "vital.csv"),
+        fetchCsvRows(folder, "gas.csv"),
+        fetchCsvRows(folder, "ventilation.csv"),
+        fetchCsvRows(folder, "cv.csv"),
+        fetchCsvRows(folder, "temperature.csv"),
         fetchCsvRows(folder, "med_bolus.csv"),
         fetchCsvRows(folder, "med_infusion.csv"),
         fetchCsvRows(folder, "fluid_in.csv"),
@@ -1929,6 +1979,18 @@ export default function DashboardPage() {
       const caseStatic = caseStaticRows[0] ?? {};
       const preopRow = preopRows[0] ?? {};
       const labRow = labRows[0] ?? {};
+      const phyRows = buildPhysiologyRowsFromPanelFiles({
+        vitalRows,
+        gasRows,
+        ventilationRows,
+        cvRows,
+        temperatureRows,
+      });
+      const resolvedCaseId =
+        String(caseInfo["mpog_case_id"] ?? "").trim() ||
+        String(caseStatic["mpog_case_id"] ?? "").trim() ||
+        folder;
+      setCaseId(resolvedCaseId);
       const rawAnesthesiaStart = caseStatic["anesthesia_start"] ?? null;
       const visualizationStart =
         roundDownToQuarterHourIso(rawAnesthesiaStart) ?? rawAnesthesiaStart;
@@ -1977,11 +2039,12 @@ export default function DashboardPage() {
       setAnesthesiaStop(caseStatic["anesthesia_stop"] ?? null);
 
       setDemographic(
-        prepareDemographicData(caseInfo, patientAttr, preopRow, caseIdFromFile)
+        prepareDemographicData(caseInfo, patientAttr, preopRow, resolvedCaseId)
       );
 
       setSurgeryContext(prepareSurgeryContextData(caseInfo, caseStatic, preopRow));
       setPreop(preparePreopData(preopRow));
+      setPreopHistoryRows(preopHistoryRowsLoaded);
       setLab(prepareLabData(labRow));
       setVitals(prepareVitalsDataRaw(shiftedPhyRows));
 
@@ -2001,24 +2064,71 @@ setManagementEvents(parsedManagementEvents);
 setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
       try {
+        let participantInfo: any = {};
+        try {
+          const raw = localStorage.getItem("participantInfo");
+          participantInfo = raw ? JSON.parse(raw) : {};
+        } catch {
+          participantInfo = {};
+        }
+
+        const accessCode =
+          String(
+            participantInfo?.accessCode ??
+              localStorage.getItem("doctorAccessCode") ??
+              ""
+          ).trim() || "";
+        const doctorName = String(participantInfo?.name ?? "").trim();
+        const displayCaseId =
+          String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
+
+        clearCaseLocalDrafts(folder, resolvedCaseId);
+
+        if (accessCode && displayCaseId) {
+          const params = new URLSearchParams({
+            accessCode,
+            doctorName,
+            patientId: folder,
+            displayCaseId,
+            caseId: resolvedCaseId,
+          });
+
+          reviewPayloadPromise = fetch(
+            `/api/case_review_data?${params.toString()}`,
+            { cache: "no-store" }
+          )
+            .then(async (reviewRes) => {
+              if (!reviewRes.ok) return null;
+              return (await reviewRes.json()) as DriveReviewPayload;
+            })
+            .catch((error) => {
+              console.error("Failed to load review content from Drive:", error);
+              return null;
+            });
+        }
+      } catch (error) {
+        console.error("Failed to load review content from Drive:", error);
+      }
+
+      try {
         const reviewPayload = await reviewPayloadPromise;
 
         if (reviewPayload && hasAnyDriveReviewContent(reviewPayload)) {
           const remoteCaseId = extractPayloadCaseId(reviewPayload);
           const caseIdsMatch =
-            !remoteCaseId || remoteCaseId === String(caseIdFromFile).trim();
+            !remoteCaseId || remoteCaseId === resolvedCaseId;
 
           if (caseIdsMatch) {
             hydrateReviewDraftFromDrive({
               patientFolder: folder,
-              caseId: caseIdFromFile,
+              caseId: resolvedCaseId,
               payload: reviewPayload,
             });
             setReviewHydrationVersion((value) => value + 1);
           } else {
             console.warn("Skipping Drive hydrate due to caseId mismatch.", {
               patientFolder: folder,
-              localCaseId: caseIdFromFile,
+              localCaseId: resolvedCaseId,
               remoteCaseId,
             });
           }
@@ -2028,11 +2138,11 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       }
 
       const savedDraft = readStoredJson<DashboardCaseDraft>(
-        dashboardDraftKey(folder, caseIdFromFile)
+        dashboardDraftKey(folder, resolvedCaseId)
       );
       const storedAbnormalityResult =
         readStoredJson<Record<string, unknown>>(
-          `annotationResult:abnormality_reasoning:${folder}:${caseIdFromFile}`
+          `annotationResult:abnormality_reasoning:${folder}:${resolvedCaseId}`
         );
       const fallbackEpisodeState = buildEpisodeStateFromStoredAbnormalityResult({
         abnormalityResult: storedAbnormalityResult,
@@ -2557,112 +2667,248 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         )}
 
         <div className="grid gap-4">
-          <SectionCard
-            title="Patient Pre-operative Information"
-            collapsible
-            open={preopInfoOpen}
-            onToggle={() => setPreopInfoOpen((value) => !value)}
-          >
-            <div className="space-y-3">
-              {demographic && (
-                <div>
-                  <h4 className="mb-1 text-sm font-bold text-gray-800">Demographic</h4>
-                  <FieldGrid
-                    items={[
-                      { label: "Age", value: demographic.age },
-                      { label: "Sex", value: demographic.sex },
-                      { label: "Race", value: demographic.race },
-                      { label: "Height", value: formatHeightCm(demographic.height) },
-                      { label: "Weight", value: formatWeightKg(demographic.weight) },
-                      { label: "BMI", value: formatBmi(demographic.height, demographic.weight) },
-                    ]}
-                  />
-                </div>
-              )}
+  
+        <SectionCard
+  title="Patient Pre-operative Information"
+  collapsible
+  open={preopInfoOpen}
+  onToggle={() => setPreopInfoOpen((value) => !value)}
+>
+  <div className="space-y-4">
+    {/* 1. Patient & Surgery */}
+    {(demographic || surgeryContext) && (
+      <div>
+        <h4 className="mb-1 text-sm font-bold text-gray-800">
+          Patient & Surgery
+        </h4>
 
-              {surgeryContext && (
-                <div>
-                  <h4 className="mb-1 text-sm font-bold text-gray-800">Surgery Context</h4>
-                  <FieldGrid
-                    items={[
-                      { label: "Procedure Room", value: surgeryContext.procedure_room },
-                      { label: "Procedure Service", value: surgeryContext.procedure_service },
-                      { label: "Admission Type", value: surgeryContext.admission_type },
-                      {
-                        label: "Preoperative Diagnosis",
-                        value: surgeryContext.preoperative_diagnosis,
-                      },
-                      { label: "Actual Procedure", value: surgeryContext.actual_procedure },
-                      { label: "Airway Type", value: surgeryContext.airway_type },
-                      { label: "Anesthesia Type", value: surgeryContext.anesthesia_type },
-                      { label: "Airway", value: surgeryContext.airway },
-                      {
-                        label: "Emergent",
-                        value:
-                          surgeryContext.emergent === 1
-                            ? "Yes"
-                            : surgeryContext.emergent === 0
-                              ? "No"
-                              : undefined,
-                      },
-                    ]}
-                  />
-                </div>
-              )}
+        <FieldGrid
+          items={[
+            { label: "Age", value: demographic?.age },
+            { label: "Sex", value: demographic?.sex },
+            { label: "Race", value: demographic?.race },
+            {
+              label: "Height",
+              value: formatHeightCm(demographic?.height),
+            },
+            {
+              label: "Weight",
+              value: formatWeightKg(demographic?.weight),
+            },
+            {
+              label: "BMI",
+              value: formatBmi(demographic?.height, demographic?.weight),
+            },
+         
+            {
+              label: "Procedure Service",
+              value: surgeryContext?.procedure_service,
+            },
+            {
+              label: "Admission Type",
+              value: surgeryContext?.admission_type,
+            },
+            {
+              label: "Preoperative Diagnosis",
+              value: surgeryContext?.preoperative_diagnosis,
+            },
+            {
+              label: "Actual Procedure",
+              value: surgeryContext?.actual_procedure,
+            },
+            {
+              label: "Anesthesia Type",
+              value: surgeryContext?.anesthesia_type,
+            },
+            {
+              label: "Airway Type",
+              value: surgeryContext?.airway_type,
+            },
+            {
+              label: "Airway",
+              value: surgeryContext?.airway,
+            },
+            {
+              label: "Emergent",
+              value:
+                surgeryContext?.emergent === 1
+                  ? "Yes"
+                  : surgeryContext?.emergent === 0
+                    ? "No"
+                    : undefined,
+            },
+          ]}
+        />
+      </div>
+    )}
 
-              {preop && (
-                <div>
-                  <h4 className="mb-1 text-sm font-bold text-gray-800">
-                    Preoperative Assessment
-                  </h4>
-                  <FieldGrid
-                    items={[
-                      { label: "ASA Status", value: preop.asa_status },
-                      { label: "Mallampati Score", value: preop.mallampati_score },
-                      { label: "NPO Since", value: preop.npo_since },
-                      { label: "Limited Cervical ROM", value: preop.limited_cervical_rom },
-                      { label: "TM Distance", value: preop.tm_distance },
-                      {
-                        label: "Abnormal Oropharynx Anatomy",
-                        value: preop.abnormal_oropharynx_anatomy,
-                      },
-                    ]}
-                  />
-                </div>
-              )}
+    {/* 2. Airway / Anesthesia Risk */}
+    {preop && (
+      <div>
+        <h4 className="mb-1 text-sm font-bold text-gray-800">
+          Airway / Anesthesia Risk
+        </h4>
 
-              {lab && (
-                <div>
-                  <h4 className="mb-1 text-sm font-bold text-gray-800">Lab</h4>
-                  <FieldGrid
-                    items={[
-                      { label: "Sodium", value: lab.sodium },
-                      { label: "Potassium", value: lab.potassium },
-                      { label: "Chloride", value: lab.chloride },
-                      { label: "CO₂", value: lab.co2 },
-                      { label: "Glucose", value: lab.glucose },
-                      { label: "Creatinine", value: lab.creatinine },
-                      { label: "BUN", value: lab.blood_urea_nitrogen },
-                      { label: "Hemoglobin", value: lab.hemoglobin },
-                      { label: "Platelet Count", value: lab.platelet_count },
-                      { label: "PT", value: lab.prothrombin_time },
-                      { label: "aPTT", value: lab.partial_thromboplastin_time },
-                      { label: "Albumin", value: lab.albumin },
-                      { label: "AST", value: lab.ast },
-                      { label: "ALT", value: lab.alt },
-                      { label: "pH", value: lab.ph },
-                      { label: "PCO₂", value: lab.pco2 },
-                      { label: "PO₂", value: lab.po2 },
-                      { label: "HCO₃", value: lab.hco3 },
-                      { label: "Base Excess", value: lab.base_excess },
-                      { label: "Oxygen Saturation", value: lab.oxygen_saturation },
-                    ]}
-                  />
-                </div>
-              )}
-            </div>
-          </SectionCard>
+        <FieldGrid
+          items={[
+            { label: "ASA Status", value: preop.asa_status },
+            { label: "NPO Since", value: preop.npo_since },
+            { label: "Mallampati Score", value: preop.mallampati_score },
+            { label: "TM Distance", value: preop.tm_distance },
+            { label: "Thick Neck", value: preop.thick_neck },
+            {
+              label: "Limited Cervical ROM",
+              value: preop.limited_cervical_rom,
+            },
+            {
+              label: "Abnormal Oropharynx Anatomy",
+              value: preop.abnormal_oropharynx_anatomy,
+            },
+            {
+              label: "No Notable Dental Hx",
+              value: preop.no_notable_dental_hx,
+            },
+            { label: "Chipped Teeth", value: preop.chipped_teeth },
+            { label: "Loose Teeth", value: preop.loose_teeth },
+            {
+              label: "Dental Hx Comments",
+              value: preop.dental_hx_comments,
+            },
+            { label: "Beard", value: preop.beard },
+            {
+              label: "Tracheostomy Present",
+              value: preop.tracheostomy_present,
+            },
+            {
+              label: "Airway Comments",
+              value: preop.airway_comments,
+            },
+          ]}
+        />
+      </div>
+    )}
 
+    {/* 3. Cardiopulmonary & Other Findings */}
+    {preop && (
+      <div>
+        <h4 className="mb-1 text-sm font-bold text-gray-800">
+          Cardiopulmonary & Other Findings
+        </h4>
+
+        <FieldGrid
+          items={[
+            {
+              label: "Cardiovascular Exam Normal",
+              value: preop.cardiovascular_exam_normal,
+            },
+            { label: "Irregular Rhythm", value: preop.irregular_rhythm },
+            { label: "Murmur", value: preop.murmur },
+            { label: "Carotid Bruit", value: preop.carotid_bruit },
+            { label: "Peripheral Edema", value: preop.peripheral_edema },
+            { label: "Heart Sounds", value: preop.heart_sounds },
+            {
+              label: "Cardiovascular Comments",
+              value: preop.cardiovascular_exam_comments,
+            },
+            {
+              label: "Pulmonary Exam Normal",
+              value: preop.pulmonary_exam_normal,
+            },
+            { label: "Breath Sounds", value: preop.breath_sounds },
+            { label: "Wheezes", value: preop.wheezes },
+            { label: "Rales", value: preop.rales },
+            {
+              label: "Decreased Breath Sounds",
+              value: preop.decreased_breath_sounds,
+            },
+            { label: "Wheezing", value: preop.wheezing },
+            {
+              label: "Pulmonary Comments",
+              value: preop.pulmonary_exam_comments,
+            },
+            {
+              label: "IV Access Difficult",
+              value: preop.iv_access_difficult,
+            },
+            {
+              label: "Difficult IV Placement",
+              value: preop.difficult_iv_placement,
+            },
+            {
+              label: "Level of Consciousness",
+              value: preop.level_of_consciousness,
+            },
+            {
+              label: "Orientation Level",
+              value: preop.orientation_level,
+            },
+            { label: "EKG", value: preop.ekg },
+       
+           
+          ]}
+        />
+      </div>
+    )}
+
+    {/* 4. Relevant History / Labs */}
+    {(preopHistoryRows.length > 0 || lab) && (
+      <div>
+        <h4 className="mb-1 text-sm font-bold text-gray-800">
+          Relevant History / Labs
+        </h4>
+
+        {preopHistoryRows.length > 0 && (
+  <div className="mb-2 grid grid-cols-1 gap-x-8 gap-y-1 text-sm text-gray-800 md:grid-cols-2 xl:grid-cols-3">
+    {Object.entries(groupPreopHistoryRows(preopHistoryRows)).map(
+      ([category, values]) => (
+        <div key={category} className="min-w-0 leading-6">
+          <span className="font-semibold text-gray-600">
+            {category}:
+          </span>{" "}
+          <span className="break-words text-gray-900">
+            {values.join(", ")}
+          </span>
+        </div>
+      )
+    )}
+  </div>
+)}
+
+        {lab ? (
+          <FieldGrid
+            items={[
+              { label: "Sodium", value: lab.sodium },
+              { label: "Potassium", value: lab.potassium },
+              { label: "Chloride", value: lab.chloride },
+              { label: "CO₂", value: lab.co2 },
+              { label: "Glucose", value: lab.glucose },
+              { label: "Creatinine", value: lab.creatinine },
+              { label: "BUN", value: lab.blood_urea_nitrogen },
+              { label: "Hemoglobin", value: lab.hemoglobin },
+              { label: "Platelet Count", value: lab.platelet_count },
+              { label: "PT", value: lab.prothrombin_time },
+              { label: "aPTT", value: lab.partial_thromboplastin_time },
+              { label: "Albumin", value: lab.albumin },
+              { label: "AST", value: lab.ast },
+              { label: "ALT", value: lab.alt },
+              { label: "pH", value: lab.ph },
+              { label: "PCO₂", value: lab.pco2 },
+              { label: "PO₂", value: lab.po2 },
+              { label: "HCO₃", value: lab.hco3 },
+              { label: "Base Excess", value: lab.base_excess },
+              {
+                label: "Oxygen Saturation",
+                value: lab.oxygen_saturation,
+              },
+            ]}
+          />
+        ) : (
+          <div className="text-sm text-gray-500">No available lab data.</div>
+        )}
+      </div>
+    )}
+  </div>
+</SectionCard>
           <SectionCard title="Annotation Tasks">
             {!vitals || !hasAnyVitalData(vitals) ? (
               <div className="text-sm text-gray-500">No intraoperative data available.</div>

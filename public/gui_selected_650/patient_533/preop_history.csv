@@ -1,0 +1,64 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+C71A2209-F6BE-F011-9219-005056BFF837,Allergy,Allergen ELG-2834,ELG-2834,OXYCODONE
+C71A2209-F6BE-F011-9219-005056BFF837,Allergy,Allergen ELG-4540,ELG-4540,FENTANYL
+C71A2209-F6BE-F011-9219-005056BFF837,Allergy,Allergen ELG-5486,ELG-5486,DILAUDID [HYDROMORPHONE]
+C71A2209-F6BE-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I73.9,I73.9,PAD (peripheral artery disease)
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS Take 1 tablet by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-11442,ERX-11442,"SUCRALFATE 1 GRAM PO TABS Take 1 tablet (1 g total) by mouth 2 times a day, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-125161,ERX-125161,"entecavir (Baraclude) tablet Take 1 tablet (0.5 mg total) by mouth daily, Disp-90 tablet, R-3, E-Prescribe"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-210838,ERX-210838,"mometasone-formoterol 100-5 mcg/actuation HFAA 2 puffs by Inhalation route as needed (for shortness of breath), DAW, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-224926,ERX-224926,"melatonin 10 mg TABS Take 0.3 tablets (3 mg total) by mouth every bedtime, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-228360,ERX-228360,"ELIQUIS 2.5 MG PO TABS Take 1 tablet (2.5 mg total) by mouth 2 times a day, DAW, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-310,ERX-310,"allopurinoL (Zyloprim) 100 mg tablet Take 1 tablet (100 mg total) by mouth daily in the evening, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet Take 1 tablet (20 mg total) by mouth daily as needed (for swelling) Every other day, Historical MedPaused since Tue 11/11/2025 until manually resumed"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL tablet Take 1 tablet (20 mg total) by mouth 2 times a day, Historical MedPaused since Tue 11/11/2025 until manually resumed"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-7437,ERX-7437,"spironolactone (Aldactone) tablet Take 0.5 tablets (12.5 mg total) by mouth daily, Disp-45 tablet, R-3, E-Prescribe"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin (Lipitor) 40 mg tablet Take 1 tablet (40 mg total) by mouth daily in the evening, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-78668,ERX-78668,"IPRATROPIUM-ALBUTEROL 0.5 MG-3 MG(2.5 MG BASE)/3 ML INH NEBU 3 mL by Nebulization route 3 times a day as needed (for shortness of breath), Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-83177,ERX-83177,"amLODIPine tablet Take 2 tablets (5 mg total) by mouth 2 times a day Pt started taking Amlodipine 5 mg bid a month ago, Historical MedPaused since Tue 11/11/2025 until manually resumed"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-83926,ERX-83926,"PEG 3350 newest order created 2020 Take 2L by mouth night before and 2L morning of procedure. Stop fluids 4hr before procedure. Instructions are forwarded to patient., Disp-4000 mL, R-0, E-PrescribeCan substitute with Gavilyte (C,G,or N), Golytely, Nulytely, or Trilyte. Call 650.736.5555 opt 2 then opt 2 for questions. PAs? Fax to 650.498.5477"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Disp-30 tablet, R-11, E-Prescribe"
+C71A2209-F6BE-F011-9219-005056BFF837,Home Medication,Home Medication ERX-95354,ERX-95354,"ATOVAQUONE 750 MG/5 ML PO SUSP Take 10 mL (1,500 mg total) by mouth daily in the evening, Historical Med"
+C71A2209-F6BE-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-118878,EDG-118878,Prostate cancer (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-90782,EDG-90782,Anxiety
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-121836,EAP-121836,HX PROSTATECTOMY
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-134926,EAP-134926,TONGUE / EPIGLOTTIS BIOPSY
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-136020,EAP-136020,CRANIOTOMY EVACUATION OF HEMATOMA
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-136703,EAP-136703,LARYNGOSCOPY
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-188225,EAP-188225,COLONOSCOPY WITH REMOVAL OF LESION BY SNARE
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-412623,EAP-412623,IR CEREBRAL ANGIOGRAPHY EMBOLIZATION
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-423804,EAP-423804,CATH ANGIO IMAGING ADD-ON (TECH-ONLY)
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-463040,EAP-463040,BRONCHOSCOPY WITH OR WITHOUT CRYOBIOPSY AND/ OR NAVIGATION; CT GUIDED
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-470817,EAP-470817,COLONOSCOPY WITH ENDOSCOPIC SUBMUCOSAL DISSECTION
+C71A2209-F6BE-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-474077,EAP-474077,BRONCHOSCOPY WITH ENDOBRONCHIAL ULTRASOUND
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 100494,100494,Malignant lymphoma (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1027289,1027289,CKD (chronic kidney disease)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1055035,1055035,PAD (peripheral artery disease)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1128371,1128371,3/18 (Li): s/p R crani for SDH evac
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1135852,1135852,"Sinusitis, bacterial"
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 118628,118628,AAA (abdominal aortic aneurysm)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 118848,118848,Subdural hematoma (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 118878,118878,Prostate cancer (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1234931,1234931,Bacteremia due to Pseudomonas
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 1394915,1394915,"Diffuse large b-cell lymphoma, lymph nodes of axilla and upper limb (CMS-HCC)"
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 142325,142325,Gout
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 163254,163254,Organizing pneumonia (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 165390,165390,"4/18 (Li) L MMA embo, R SDH"
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 201494,201494,Diastolic dysfunction
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 2158280,2158280,"Hypervolemia, unspecified hypervolemia type"
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 2186609,2186609,Multifocal pneumonia
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 2375272,2375272,Juxtarenal abdominal aortic aneurysm (AAA) without rupture
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 5108,5108,Atrial flutter (CMS-HCC)
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 92986,92986,"Polyp, colonic"
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 93617,93617,Delirium
+C71A2209-F6BE-F011-9219-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+C71A2209-F6BE-F011-9219-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1055035,EDG-1055035,PAD (peripheral artery disease)
+C71A2209-F6BE-F011-9219-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2375272,EDG-2375272,Juxtarenal abdominal aortic aneurysm (AAA) without rupture

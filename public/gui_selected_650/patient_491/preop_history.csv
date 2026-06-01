@@ -1,0 +1,72 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Allergen ELG-4027,ELG-4027,AMPHOTERICIN B
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Allergen ELG-4948,ELG-4948,PAROXETINE
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Allergen ELG-5088,ELG-5088,CARVEDILOL
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Allergen ELG-7590,ELG-7590,QUETIAPINE
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+FB7514EC-4674-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+FB7514EC-4674-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z99.2,Z99.2,Hemodialysis patient
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-101,ERX-101,"acetaminophen (Tylenol) tablet Take 2 tablets (650 mg total) by mouth every 6 hours as needed, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-116177,ERX-116177,"rosuvastatin tablet Take 1 tablet (10 mg total) by mouth every bedtime, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-123771,ERX-123771,"DULoxetine (Cymbalta) delayed release capsule take 1 Capsule (20 mg total) by mouth daily, Disp-30 Capsule, R-0, Print RX"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-18294,ERX-18294,"torsemide tablet Take 1 tablet (100 mg total) by mouth daily *non dialysis days MWFSun, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-203624,ERX-203624,"sevelamer carbonate (Renvela) tablet Take 2 tablets (1,600 mg total) by mouth 3 times a day, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-209553,ERX-209553,"VALGANCICLOVIR 50 MG/ML [PHI] SOLR Take 2 mL (100 mg total) by mouth as directed (on dialysis days) [PHI] THURS SAT, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-248047,ERX-248047,"XYWAV 0.5 GRAM/ML [PHI] SOLN Take 3 g by mouth every bedtime Take one at bedtime, second dose 2.5-4 hours later, [PHI], Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-26688,ERX-26688,"[PHI]-VITE RX 1-60-300 MG-MG-MCG [PHI] TABS Take 1 capsule by mouth daily, [PHI], Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-29867,ERX-29867,"TOPROL XL 25 MG [PHI] TB24 Take 1 tablet (25 mg total) by mouth every bedtime, [PHI], Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-36773,ERX-36773,"WELLBUTRIN XL 150 MG [PHI] TB24 Take 1 tablet (150 mg total) by mouth daily, [PHI], Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-38068,ERX-38068,"MYFORTIC 180 MG [PHI] TBEC Take 1 tablet (180 mg total) by mouth 2 times a day 3 tablets each, [PHI], Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"SULFAMETHOXAZOLE-TRIMETHOPRIM 400-80 MG [PHI] TABS Take 1 tablet by mouth as directed (on dialysis days) [PHI] TH SAT, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-79000,ERX-79000,"LIDOCAINE 4 % TP PTMD Apply 1 patch to skin as needed (every 12h as needed to back), Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet Take 1 tablet (4 mg total) by mouth every 8 hours as needed for Nausea, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule Take 3 capsules (3 mg total) by mouth 2 times a day, Historical Med"
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1036424,EDG-1036424,AICD (automatic cardioverter/defibrillator) present
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-107999,EDG-107999,Peripheral vascular disease
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-108919,EDG-108919,Psychiatric problem
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1220140,EDG-1220140,Hx of wisdom tooth extraction
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-138151,EDG-138151,CAD (coronary artery disease)
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-145886,EDG-145886,Blood transfusion without reported diagnosis
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-201194,EDG-201194,Chronic kidney disease
+FB7514EC-4674-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-67062,EDG-67062,Primary familial dilated cardiomyopathy (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121706,EAP-121706,HX CARDIAC CATHERIZATION
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134756,EAP-134756,CHEST EXPLORATION AND/ OR WASHOUT; WITH OR WITHOUT STERNAL CLOSURE; INSIDE THE OPERATING ROOM
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-134838,EAP-134838,HEART TRANSPLANT WITH CARDIOPULMONARY BYPASS WITH OR WITHOUT AICD REMOVAL
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-135328,EAP-135328,FEMORAL ARTERY EXPLORATION / REPAIR
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-188617,EAP-188617,CV MYOCARDIAL BIOPSY
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-3776,EAP-3776,CV IMPELLA INSERTION
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-421589,EAP-421589,CV RIGHT HEART CATH
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-434903,EAP-434903,EXTRACORPOREAL CIRCULATION MEMBRANE OXYGENATION RAMP STUDY WITH OR WITHOUT REMOVAL
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-443334,EAP-443334,VAS TUNNELED CATHETER PLACEMENT
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-446548,EAP-446548,HX DIALYSIS CATHETER
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-446549,EAP-446549,HX ENDOSCOPY
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-446551,EAP-446551,HX CARDIAC STRESS TEST
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-466213,EAP-466213,HX PERITONEAL CATHETER INSERTION LAPAROSCOPIC
+FB7514EC-4674-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-466214,EAP-466214,HX HEART TRANSPLANT
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 10015,10015,Cardiogenic shock (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1020793,1020793,Cardiogenic pulmonary edema (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1056657,1056657,Hemodialysis patient
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1061536,1061536,Non-ischemic cardiomyopathy (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 107246,107246,VT (ventricular tachycardia) (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1134393,1134393,Immunosuppression
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1141774,1141774,Acute respiratory failure with hypoxia (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1168489,1168489,S/P orthotopic heart transplant (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1170657,1170657,Left pulmonary infiltrate on CXR
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 117324,117324,Dysrhythmia
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1218419,1218419,H/O extracorporeal membrane oxygenation treatment
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1250543,1250543,Encounter for management of intra-aortic balloon pump
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1288948,1288948,Anemia in chronic kidney disease
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 142467,142467,Cardiac device in situ
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 142929,142929,Asthma
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1764124,1764124,Endotracheally intubated
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1860171,1860171,On mechanically assisted ventilation (CMS-HCC)
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 1884125,1884125,On intra-aortic balloon pump assist
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 2032810,2032810,Narcolepsy due to underlying condition without cataplexy
+FB7514EC-4674-F011-9217-005056BFF837,Problem List,Problem List Entry 98349,98349,Hypernatremia
+FB7514EC-4674-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)

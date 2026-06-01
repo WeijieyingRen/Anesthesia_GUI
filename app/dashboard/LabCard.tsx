@@ -6,6 +6,7 @@ import { useAbnormalAnnotations } from "@/lib/useAbnormalAnnotations";
 import { useEffect, useRef, useState, useMemo, memo } from "react";
 import { useRouter } from "next/navigation";
 import { prepareVitalsData } from "@/lib/transform-data";
+import { DATASET_BASE } from "@/lib/dataset-config";
 import type {
   PatientDemographic,
   SurgeryContext,
@@ -461,7 +462,7 @@ function TimeSeriesChart({
 }
 
 async function fetchCsvRows(folder: string, filename: string) {
-  const url = `/data/${folder}/${filename}`;
+  const url = `${DATASET_BASE}/${folder}/${filename}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
@@ -475,7 +476,7 @@ async function fetchCsvRows(folder: string, filename: string) {
 }
 
 async function fetchTextFile(folder: string, filename: string) {
-  const url = `/data/${folder}/${filename}`;
+  const url = `${DATASET_BASE}/${folder}/${filename}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);

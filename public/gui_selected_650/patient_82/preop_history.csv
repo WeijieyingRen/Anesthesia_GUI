@@ -1,0 +1,25 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CEA50B02-28A2-ED11-91FA-005056BFF837,Allergy,Latex Allergy,Allergy,No
+CEA50B02-28A2-ED11-91FA-005056BFF837,Allergy,Latex allergy,allergy,No
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-116178,ERX-116178,"rosuvastatin tablet take 1 Tablet (20 mg total) by mouth daily, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-198422,ERX-198422,"JANUVIA 100 MG PO TABS take 1 Tablet (100 mg total) by mouth daily, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-228452,ERX-228452,"ELIQUIS 5 MG PO TABS take 2 Tablets by mouth 2 times a day, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-231551,ERX-231551,"FARXIGA 10 MG PO TABS take 1 Tablet by mouth every day, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-2608,ERX-2608,"DOXEPIN 10 MG PO CAPS take 1 Capsule (10 mg total) by mouth every bedtime, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-28995,ERX-28995,"METFORMIN 500 MG PO TB24 take 1,000 mg by mouth 2 times a day, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet take by mouth daily as needed (for CHF symptoms (increased weight)) Last taken 9/2022, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"LOSARTAN 100 MG PO TABS take 1 Tablet (100 mg total) by mouth daily, Historical Med"
+CEA50B02-28A2-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+CEA50B02-28A2-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121670,EAP-121670,HX ROTATOR CUFF REPAIR
+CEA50B02-28A2-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121673,EAP-121673,HX CORONARY ARTERY BYPASS GRAFT
+CEA50B02-28A2-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-121836,EAP-121836,HX PROSTATECTOMY
+CEA50B02-28A2-ED11-91FA-005056BFF837,Past Surgical History,Past Surgical History EAP-3400,EAP-3400,EP ATRIAL FIBRILLATION ABLATION
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1077871,1077871,Anticoagulated
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 1081581,1081581,History of coronary artery bypass surgery
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 119067,119067,Esophageal adenocarcinoma (CMS-HCC)
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 200329,200329,Obstructive sleep apnea
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 66850,66850,Coronary artery disease
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 66905,66905,Acute congestive heart failure (CMS-HCC)
+CEA50B02-28A2-ED11-91FA-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+CEA50B02-28A2-ED11-91FA-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-119067,EDG-119067,Esophageal adenocarcinoma (CMS-HCC)

@@ -1,0 +1,20 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+B830D410-A38C-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+B830D410-A38C-F011-9217-005056BFF837,Allergy,Latex allergy,allergy,No
+B830D410-A38C-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C80.1,C80.1,Mucoepidermoid carcinoma (CMS-HCC)
+B830D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-14887,ERX-14887,"methylPREDNISolone (Medrol) dosepak Use As Directed. Start the day after surgery or the day after hospital admission (if applicable), Disp-21 tablet, R-0, Normal"
+B830D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-181579,ERX-181579,"METFORMIN [PHI] Take 500 mg by mouth, Historical Med"
+B830D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-19546,ERX-19546,"neomycin-polymyxin-dexamethasone (Maxitrol) ophthalmic ointment Instill to left eye 3 times a day Apply left eye after patch is removed, Disp-3.5 g, R-1, E-Prescribe"
+B830D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-232959,ERX-232959,"JARDIANCE 25 MG [PHI] TABS 3 weeks on, 1 week off, Historical Med"
+B830D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-34505,ERX-34505,"HYDROcodone-acetaminophen (Norco) 5-325 mg tablet Take 1 tablet by mouth every 4 hours as needed for Pain (for moderate-severe pain 6-10/10 in severity) After surgery, Disp-24 tablet, R-0, E-Prescribe"
+B830D410-A38C-F011-9217-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet Take 1 tablet (4 mg total) by mouth every 8 hours as needed for Nausea, Disp-10 tablet, R-0, E-Prescribe"
+B830D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+B830D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+B830D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142167,EDG-142167,Amblyopia
+B830D410-A38C-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-144379,EDG-144379,High cholesterol
+B830D410-A38C-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+B830D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+B830D410-A38C-F011-9217-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+B830D410-A38C-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1026036,EDG-1026036,Mucoepidermoid carcinoma (CMS-HCC)
+B830D410-A38C-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1545667,EDG-1545667,"Ptosis of eyelid, unspecified laterality"
+B830D410-A38C-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-95337,EDG-95337,Proptosis

@@ -1,0 +1,19 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+DDB26D2F-E4CD-F011-921A-005056BFF837,Allergy,Allergen ELG-4620,ELG-4620,AMOXICILLIN
+DDB26D2F-E4CD-F011-921A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+DDB26D2F-E4CD-F011-921A-005056BFF837,Allergy,Latex allergy,allergy,No
+DDB26D2F-E4CD-F011-921A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N28.89,N28.89,Renal mass
+DDB26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-173545,ERX-173545,"CRANBERRY EXTRACT PO Take by mouth, Historical Med"
+DDB26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-189113,ERX-189113,"SUMATRIPTAN SUCCINATE PO Take by mouth as needed, Historical Med"
+DDB26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO Take by mouth, Historical Med"
+DDB26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO Take by mouth, Historical Med"
+DDB26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-82452,ERX-82452,"venlafaxine (Effexor XR) extended release capsule Take 1 capsule (150 mg total) by mouth daily, Historical Med"
+DDB26D2F-E4CD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet Take 1 tablet (5 mg total) by mouth daily, Historical Med"
+DDB26D2F-E4CD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+DDB26D2F-E4CD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-90784,EDG-90784,Anxiety disorder
+DDB26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 108212,108212,Primary hypertension
+DDB26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 1121851,1121851,Common migraine without aura
+DDB26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 187137,187137,Renal mass
+DDB26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+DDB26D2F-E4CD-F011-921A-005056BFF837,Problem List,Problem List Entry 90784,90784,Anxiety disorder
+DDB26D2F-E4CD-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-187137,EDG-187137,Renal mass

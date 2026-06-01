@@ -1,0 +1,12 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 19:05:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,18.0,18.0,18.0,18.0,162.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 19:14:00+00:00,airway,intubation,1,Intubation,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,27.0,27.0,27.0,27.0,153.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 19:14:00+00:00,airway,lma_inserted,1,LMA Inserted,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,27.0,27.0,27.0,27.0,153.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 19:18:00+00:00,position,temperature_control,"""forced air warming""","""R SHC OPT ANE TEMP CONTROL"": ""forced air warming""",2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,31.0,31.0,31.0,31.0,149.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:26:00+00:00,airway,lma_removed,1,LMA Removed,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,159.0,159.0,159.0,159.0,21.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:26:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,159.0,159.0,159.0,159.0,21.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:41:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,174.0,174.0,174.0,174.0,6.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:41:00+00:00,position,lul_breath_sounds,clear,LUL Breath Sounds: clear,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,174.0,174.0,174.0,174.0,6.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:41:00+00:00,position,rll_breath_sounds,diminished,RLL Breath Sounds: diminished,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,174.0,174.0,174.0,174.0,6.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:41:00+00:00,position,rml_breath_sounds,clear,RML Breath Sounds: clear,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,174.0,174.0,174.0,174.0,6.0
+02643260-9B84-EF11-920D-005056BFF837,2024-10-02 21:41:00+00:00,position,rul_breath_sounds,clear,RUL Breath Sounds: clear,2024-10-02 18:47:00+00:00,2024-10-02 21:47:00+00:00,174.0,174.0,174.0,174.0,6.0

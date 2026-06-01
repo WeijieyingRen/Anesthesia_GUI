@@ -1,0 +1,32 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+23F2D313-D607-F011-9211-005056BFF837,Allergy,Latex allergy,allergy,No
+23F2D313-D607-F011-9211-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R91.1,R91.1,Lung nodule
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-10450,ERX-10450,"lisinopriL tablet Take 1 tablet (40 mg total) by mouth every morning, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-161688,ERX-161688,"cholecalciferol (Vitamin D3) tablet Take 1 tablet (25 mcg total) by mouth daily, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-235024,ERX-235024,"TIOTROPIUM-OLODATEROL 2.5-2.5 MCG/ACTUATION INH MIST 1 Inhalation by Inhalation route daily, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-3294,ERX-3294,"furosemide tablet Take 1 tablet (20 mg total) by mouth every morning, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route every 4 hours as needed, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-4953,ERX-4953,"methadone tablet Take 1 tablet (10 mg total) by mouth 2 times a day, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-5178,ERX-5178,"MORPHINE 15 MG PO TABS Take 1 tablet (15 mg total) by mouth 2 times a day as needed, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"metoprolol succinate (Toprol XL) extended release tablet 1.5 tablets (37.5 mg total), Historical Med"
+23F2D313-D607-F011-9211-005056BFF837,Past Surgical History,Past Surgical History EAP-121701,EAP-121701,HX LOBECTOMY
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 100657,100657,Malignant neoplasm of bronchus and lung (CMS-HCC)
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1045032,1045032,Overweight (BMI 25.0-29.9)
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1077430,1077430,On home oxygen therapy
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 108212,108212,Primary hypertension
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1130163,1130163,Sedentary lifestyle
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1140948,1140948,Psoriatic arthritis mutilans (CMS-HCC)
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 122780,122780,Chronic obstructive lung disease (CMS-HCC)
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1230399,1230399,Use of cane as ambulatory aid
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1252766,1252766,"Chronic, continuous use of opioids"
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 158104,158104,Exertional dyspnea
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 159927,159927,HLD (hyperlipidemia)
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 1826193,1826193,Malignant neoplasm of lower lobe of right lung (CMS-HCC)
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 2032263,2032263,Constipation due to opioid therapy
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 203532,203532,Pulmonary nodule
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 2112457,2112457,Carcinoma in situ of unspecified bronchus and lung
+23F2D313-D607-F011-9211-005056BFF837,Problem List,Problem List Entry 98519,98519,Hyponatremia
+23F2D313-D607-F011-9211-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-192855,EDG-192855,Lung nodule

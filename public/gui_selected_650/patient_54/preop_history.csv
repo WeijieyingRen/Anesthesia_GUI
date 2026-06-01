@@ -1,0 +1,67 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N18.6,N18.6,ESRD (end stage renal disease) (CMS-HCC) - Chronic
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-13410,ERX-13410,"acetaminophen (Tylenol) tablet take 1 Tablet (650 mg total) by mouth every 6 hours as needed for Pain or Fever, Disp-30 Tablet, R-0, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth daily, Historical Med"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Disp-60 Tablet, R-12, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-5008,ERX-5008,"metoprolol tartrate (Lopressor) tablet take 1 Tablet (100 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-5115,ERX-5115,"minoxidil tablet TAKE 1 TABLET(2.5 MG) BY MOUTH TWICE DAILY, Disp-180 Tablet, R-1, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-5558,ERX-5558,"NIFEdipine (Procardia) capsule take 1 Capsule (10 mg total) by mouth daily as needed, Disp-90 Capsule, R-1, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet take 1 Tablet (40 mg total) by mouth daily, Disp-90 Tablet, R-0, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet TAKE 1 TABLET(40 MG) BY MOUTH DAILY AS NEEDED, Disp-90 Tablet, R-2, E-Prescribe**Patient requests 90 days supply**"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-94528,ERX-94528,"sertraline tablet take 1 Tablet (50 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1071898,EDG-1071898,Peripheral neuropathy
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-107999,EDG-107999,Peripheral vascular disease (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-108919,EDG-108919,Psychiatric problem
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-138151,EDG-138151,CAD (coronary artery disease)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142114,EDG-142114,Urinary tract infection
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142172,EDG-142172,Aortic aneurysm (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-145886,EDG-145886,Blood transfusion without reported diagnosis
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-176787,EDG-176787,High blood cholesterol
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-195848,EDG-195848,HPTH (hyperparathyroidism) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-200960,EDG-200960,Non-ST elevation myocardial infarction (NSTEMI) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-201257,EDG-201257,ESRD (end stage renal disease) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-2180028,EDG-2180028,Abdominal aortic aneurysm (AAA) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-66488,EDG-66488,COPD (chronic obstructive pulmonary disease) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-133500,EAP-133500,THORACO-ABDOMINAL AORTIC ANEURYSM REPAIR WITH CARDIOPULMONARY BYPASS
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-134015,EAP-134015,ARTERIOVENOUS GRAFT OR FISTULA CREATION OR REVISION
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-134622,EAP-134622,FEMORAL-FEMORAL BYPASS
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135348,EAP-135348,LEG FASCIOTOMY
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188083,EAP-188083,EGD WITH OR WITHOUT BRUSHING
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188121,EAP-188121,EGD WITH ENDOSCOPIC ULTRASOUND
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188253,EAP-188253,IR ABDOMEN AORTA STENT GRAFT
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-418512,EAP-418512,VCL RENAL ANGIOGRAM
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-443334,EAP-443334,VAS TUNNELED CATHETER PLACEMENT
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-446548,EAP-446548,HX DIALYSIS CATHETER
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-463906,EAP-463906,PROCEDURE REVISION; SECONDARY MODIFIER
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-475857,EAP-475857,LUMBAR DRAIN PLACEMENT
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1027289,1027289,CKD (chronic kidney disease)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1034816,1034816,Single kidney
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1071898,1071898,Peripheral neuropathy
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1119667,1119667,Moderate protein-calorie malnutrition (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1125606,1125606,Pancreatic lesion
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1139441,1139441,Alcohol dependence with withdrawal delirium (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 118948,118948,Chronic obstructive pulmonary disease (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1233799,1233799,Full code status
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 138151,138151,CAD (coronary artery disease)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1854297,1854297,Thoracoabdominal aortic dissection (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 197149,197149,Secondary hyperparathyroidism of renal origin (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 200960,200960,Non-ST elevation myocardial infarction (NSTEMI) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 201257,201257,ESRD (end stage renal disease) (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 201448,201448,Dependence on renal dialysis (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2051592,2051592,History of thoracoabdominal aortic aneurysm (TAAA)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2322254,2322254,"Hypertension, unspecified type"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2370433,2370433,"Coronary artery disease involving native heart, unspecified vessel or lesion type, unspecified whether angina present"
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 6218,6218,Cyst and pseudocyst of pancreas
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 72257,72257,Iron overload
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 87010,87010,Dissection of aorta (CMS-HCC)
+9FF7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 92631,92631,Cholecystitis

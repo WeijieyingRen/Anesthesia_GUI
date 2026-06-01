@@ -1,0 +1,47 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+51BD7E1D-27F8-EF11-9210-005056BFF837,Allergy,Latex Allergy,Allergy,No
+51BD7E1D-27F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C25.9,C25.9,"Malignant neoplasm of pancreas, unspecified location of malignancy (CMS-HCC) [C25.9]"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K92.2,K92.2,Acute GI bleeding
+51BD7E1D-27F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N17.9,N17.9,Acute kidney injury (nontraumatic) (CMS-HCC) [N17.9]
+51BD7E1D-27F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R18.8,R18.8,Abdominal fluid collection [R18.8]
+51BD7E1D-27F8-EF11-9210-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R18.8,R18.8,Intraabdominal fluid collection
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-0, No Print"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed (mild pain or tem>100) NTE 3 grams/24 hours, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-1080,ERX-1080,"BISACODYL 10 MG PR SUPP Insert 1 suppository (10 mg total) into the rectum daily as needed (constipation) Give if milk of magnesia is ineffective, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS Take 2 tablets by mouth 2 times a day, Disp-30 tablet, R-0, E-Prescribe"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-180073,ERX-180073,"LACTOBACILLUS ACIDOPH-PECTIN PO Take 2 capsules by mouth every bedtime For the use of antibiotic therapy until 03/28/25, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-181864,ERX-181864,"MILK OF MAGNESIA PO Take 30 mL by mouth as needed (constipation) Give if no BM for 2 days, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-182396,ERX-182396,"MULTIVITAMIN AND MINERALS PO Take 1 tablet by mouth daily at noon, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO Take 500 mg by mouth every day, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"apixaban (Eliquis) tablet Take 1 tablet (5 mg total) by mouth 2 times a day, Disp-60 tablet, R-2, No Print"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK Take 1 packet (17 g total) by mouth 2 times a day, Disp-720 each, R-0, E-Prescribe"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-543159,ERX-543159,"DEXTROSE 5 % IN WATER (D5W) INTRAVENTRICULAR SYRINGE by Intraventricular route One Time Use 60 cc intravenously every shift for IV Hydration, discontinue at beginning of new tpn dose 02/21 7pm, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-89377,ERX-89377,"vancomycin oral capsule Take 1 capsule (250 mg total) by mouth Q6H, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Home Medication,Home Medication ERX-90206,ERX-90206,"SODIUM PHOSPHATES 19-7 GRAM/118 ML PR ENEM Insert 1 enema into the rectum as needed (constipation) follow package directions, Historical Med"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Medical History,Past Medical History EDG-1135403,EDG-1135403,Mass of pancreas
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188083,EAP-188083,EGD WITH OR WITHOUT BRUSHING
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH OR WITHOUT BIOPSY
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188091,EAP-188091,EGD WITH INSERTION OF INTRALUMINAL TUBE OR CATHETER
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188093,EAP-188093,EGD WITH ENDOSCOPIC ULTRASOUND AND [PHI] NEEDLE ASPIRATION
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188113,EAP-188113,EGD WITH CONTROL OF BLEEDING ANY METHOD
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188115,EAP-188115,EGD WITH STENT PLACEMENT
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188327,EAP-188327,IR BILIARY DRAIN PLACEMENT
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-188611,EAP-188611,IR MEDIPORT SINGLE LUMEN PLACEMENT
+51BD7E1D-27F8-EF11-9210-005056BFF837,Past Surgical History,Past Surgical History EAP-189252,EAP-189252,IR ABSCESS DRAIN PLACEMENT
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1033449,1033449,Pancreatic mass
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic)
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1099366,1099366,Abdominal fluid collection
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1133552,1133552,Acute lower respiratory infection
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 113414,113414,Gastric outlet obstruction
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 153168,153168,Acute GI bleeding
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1854820,1854820,"Chemotherapy management, encounter for"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 1967415,1967415,"Malignant neoplasm of pancreas, unspecified location of malignancy (CMS-HCC)"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 2157345,2157345,"Pneumonia due to infectious organism, unspecified laterality, unspecified part of lung"
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 6208,6208,Cholangitis (CMS-HCC)
+51BD7E1D-27F8-EF11-9210-005056BFF837,Problem List,Problem List Entry 73059,73059,Hyperbilirubinemia
+51BD7E1D-27F8-EF11-9210-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-153168,EDG-153168,Acute GI bleeding

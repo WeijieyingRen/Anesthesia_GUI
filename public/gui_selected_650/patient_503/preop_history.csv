@@ -1,0 +1,36 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+6353F64A-112A-EE11-9200-005056BFF837,Allergy,Allergen ELG-614,ELG-614,STATINS-HMG-COA REDUCTASE INHIBITORS
+6353F64A-112A-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+6353F64A-112A-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+6353F64A-112A-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C64.1,C64.1,"Malignant neoplasm of kidney, right (CMS-HCC)"
+6353F64A-112A-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N28.89,N28.89,Renal mass
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-126562,ERX-126562,"INSULIN LISPRO PROTAMIN-LISPRO 100 UNIT/ML (50-50) SC INPN inject 10 Units subcutaneous (under the skin) In the evening, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-232357,ERX-232357,"LEVEMIR FLEXTOUCH U-100 INSULN 100 UNIT/ML (3 ML) SC INPN 15 units 17 units in the morning, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-235725,ERX-235725,"REPATHA SYRINGE 140 MG/ML SC SYRG Inject 1 mL (140 mg total) subcutaneous (under the skin) every 2 weeks, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-24398,ERX-24398,"METFORMIN 1,000 MG PO TABS Take 1 tablet (1,000 mg total) by mouth 2 times a day, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-37649,ERX-37649,"glipiZIDE (Glucotrol XL) sustained release tablet Take 1 tablet (5 mg total) by mouth every morning, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS Take 1 tablet by mouth daily, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-77012,ERX-77012,"LOSARTAN 50 MG PO TABS 2 tablets (100 mg total) daily, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-77371,ERX-77371,"LATANOPROST 0.005 % OPHT DROP Instill 1 drop to right eye every bedtime, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-92371,ERX-92371,"METOPROLOL SUCCINATE 25 MG PO TB24 take 1 Tablet (25 mg total) by mouth daily, Historical Med"
+6353F64A-112A-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-125398,EDG-125398,Angina pectoris (CMS-HCC)
+6353F64A-112A-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-125754,EDG-125754,Renal cell carcinoma (CMS-HCC)
+6353F64A-112A-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+6353F64A-112A-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+6353F64A-112A-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+6353F64A-112A-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+6353F64A-112A-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+6353F64A-112A-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121864,EAP-121864,HX CERVICAL LAMINECTOMY
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 10009,10009,Palpitations
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 1053536,1053536,History of spinal surgery: Cervical
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity BMI=33
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 137960,137960,Preop examination
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 138145,138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 187137,187137,Renal mass
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 200329,200329,Obstructive sleep apnea
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 71872,71872,Fatty liver
+6353F64A-112A-EE11-9200-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+6353F64A-112A-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1066306,EDG-1066306,Right renal mass

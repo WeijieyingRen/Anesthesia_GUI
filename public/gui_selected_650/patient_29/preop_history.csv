@@ -1,0 +1,47 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+F7E37869-0EC7-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+F7E37869-0EC7-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I48.91,I48.91,"Atrial fibrillation, unspecified type (CMS-HCC)"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-188685,ERX-188685,"SPIRONOLACTONE PO take 12.5 mg by mouth daily, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-206918,ERX-206918,"ULORIC 40 MG PO TABS take 1 Tablet (40 mg total) by mouth every morning, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-21053,ERX-21053,"carvediloL (Coreg) 25 mg TABS take 1.5 Tablets (37.5 mg total) by mouth, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-228451,ERX-228451,"APIXABAN 5 MG PO TABS take 1 Tablet (5 mg total) by mouth 2 times a day, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-231551,ERX-231551,"FARXIGA 10 MG PO TABS 10 mg every morning, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-235265,ERX-235265,"ENTRESTO 49-51 MG PO TABS take 1 Tablet by mouth 2 times a day, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-248889,ERX-248889,"vericiguat (Verquvo) 2.5 mg TABS take 2.5 mg by mouth daily with lunch After lunch, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-32302,ERX-32302,"CALCIUM CITRATE + D 315 MG-5 MCG (200 UNIT) PO TABS take 1 Tablet by mouth every morning, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-3295,ERX-3295,"furosemide tablet take 1 Tablet (40 mg total) by mouth daily, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-36606,ERX-36606,"CRESTOR 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every bedtime, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-8657,ERX-8657,"VITAMIN B-12 500 MCG PO TABS take 1 Tablet (500 mcg total) by mouth every morning, Historical Med"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Disp-35 Tablet, R-0, E-Prescribe"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94682,ERX-94682,"dofetilide (Tikosyn) capsule take 1 Capsule (500 mcg total) by mouth 2 times a day, Disp-180 Capsule, R-3, E-Prescribe"
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1128565,EDG-1128565,Biatrial enlargement
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1760438,EDG-1760438,HFrEF (heart failure with reduced ejection fraction) (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1760694,EDG-1760694,ICD (implantable cardioverter-defibrillator) in place
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-5107,EDG-5107,Atrial fibrillation (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-92238,EDG-92238,Dilated cardiomyopathy (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188369,EAP-188369,CV CATH CORS POSSIBLE
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-426653,EAP-426653,ICD IMPLANT
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-445007,EAP-445007,TRANSESOPHAGEAL ECHOCARDIOGRAPHY
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+F7E37869-0EC7-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-545403,EAP-545403,MAZE PROCEDURE THORACOSCOPIC; STANDBY CARDIOPULMONARY BYPASS
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1033341,1033341,Persistent atrial fibrillation (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1118036,1118036,Current smoker
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 127434,127434,Cardiomyopathy (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142095,142095,DOE (dyspnea on exertion)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142325,142325,Gout
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142467,142467,Cardiac device in situ
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1760438,1760438,HFrEF (heart failure with reduced ejection fraction) (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1865551,1865551,Coronary artery disease involving native coronary artery without angina pectoris
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1865823,1865823,Gets no exercise
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+F7E37869-0EC7-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+F7E37869-0EC7-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139161,EDG-2139161,"Atrial fibrillation, unspecified type (CMS-HCC)"

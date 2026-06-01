@@ -1,0 +1,48 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+4FF4B820-94E0-EF11-920F-005056BFF837,Allergy,Latex Allergy,Allergy,No
+4FF4B820-94E0-EF11-920F-005056BFF837,Allergy,Latex allergy,allergy,No
+4FF4B820-94E0-EF11-920F-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C17.0,C17.0,Carcinoma of duodenum (CMS-HCC) - Chronic
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed for Pain or Fever, Disp-30 tablet, R-0, E-Prescribe"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"metFORMIN tablet Take 1 tablet (500 mg total) by mouth 2 times a day with meals, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-17466,ERX-17466,"mirtazapine (Remeron) tablet Take 1 tablet (15 mg total) by mouth every bedtime, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-226355,ERX-226355,"BUPROPION HCL 450 MG PO TB24 Take 1 tablet (450 mg total) by mouth daily, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-235026,ERX-235026,"STIOLTO RESPIMAT 2.5-2.5 MCG/ACTUATION INH MIST 2 puffs by Inhalation route daily, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-24984,ERX-24984,"POLYETHYLENE GLYCOL 3350 17 GRAM/DOSE PO POWD Take 17 g by mouth Q24H PRN, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-3843,ERX-3843,"ibuprofen tablet Take 1 tablet (400 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-0, E-Prescribe"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-77545,ERX-77545,"atorvastatin tablet Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-78668,ERX-78668,"IPRATROPIUM-ALBUTEROL 0.5 MG-3 MG(2.5 MG BASE)/3 ML INH NEBU 3 mL by Nebulization route 2 times a day as needed, Disp-90 mL, R-0, E-Prescribe"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-8084,ERX-8084,"traZODone tablet Take 2 tablets (300 mg total) by mouth every bedtime, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-1170683,EDG-1170683,"DM2 (diabetes mellitus, type 2) (CMS-HCC)"
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-118948,EDG-118948,Chronic obstructive pulmonary disease (CMS-HCC)
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-141700,EDG-141700,Pulmonary embolism (CMS-HCC)
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-142107,EDG-142107,Esophagitis
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-200588,EDG-200588,Renal insufficiency
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-201733,EDG-201733,LUE/IJ DVT on Eliquis
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-134326,EAP-134326,CYSTOSCOPY WITH INSERTION OF URETERAL / DOUBLE J STENT WITH / WITHOUT RETROGRADE PYELOGRAM
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-134570,EAP-134570,GASTROJEJUNOSTOMY
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-136471,EAP-136471,VENTRAL HERNIA REPAIR
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-149513,EAP-149513,LAPAROSCOPIC CHOLECYSTECTOMY
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-188077,EAP-188077,UPPER DOUBLE BALLOON ENTEROSCOPY
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-188083,EAP-188083,EGD WITH OR WITHOUT BRUSHING
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-188091,EAP-188091,EGD WITH INSERTION OF INTRALUMINAL TUBE OR CATHETER
+4FF4B820-94E0-EF11-920F-005056BFF837,Past Surgical History,Past Surgical History EAP-188115,EAP-188115,EGD WITH STENT PLACEMENT
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 1070512,1070512,Failure to thrive in adult
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 1104730,1104730,"Type 2 diabetes mellitus with renal manifestations, controlled (CMS-HCC)"
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 118948,118948,Chronic obstructive pulmonary disease (CMS-HCC)
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 120966,120966,Carcinoma of duodenum (CMS-HCC)
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 126092,126092,Depression
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 147608,147608,Essential (primary) hypertension
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 1967351,1967351,"Abdominal pain, unspecified abdominal location"
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 200328,200328,Obstructive sleep apnea syndrome
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 204092,204092,"CKD (chronic kidney disease) stage 3, GFR 30-59 ml/min (CMS-HCC)"
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 2220961,2220961,Resides in subacute facility
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 94236,94236,Duodenal obstruction
+4FF4B820-94E0-EF11-920F-005056BFF837,Problem List,Problem List Entry 99102,99102,Nephrolithiasis
+4FF4B820-94E0-EF11-920F-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1132094,EDG-1132094,Duodenal adenocarcinoma (CMS-HCC)

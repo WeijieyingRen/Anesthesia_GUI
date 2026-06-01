@@ -1,0 +1,28 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+55CC6994-FCD5-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3375,ELG-3375,METHIMAZOLE
+55CC6994-FCD5-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+55CC6994-FCD5-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+55CC6994-FCD5-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis H57.89,H57.89,Thyroid eye disease
+55CC6994-FCD5-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-14887,ERX-14887,"methylPREDNISolone (Medrol) dosepak Follow packaging instructions. Begin the following day after surgery, Disp-21 Tablet, R-0, E-Prescribe"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-19546,ERX-19546,"NEOMYCIN-POLYMYXIN B-DEXAMETH 3.5 MG/G-10,000 UNIT/G-0.1 % OPHT OINT Apply over right eyelid incision and inside of eye 3 times a day for 7 days after surgery., Disp-3.5 g, R-1, E-Prescribe"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-209868,ERX-209868,"TIROSINT 100 MCG PO CAPS take 1 Capsule (100 mcg total) by mouth every day, Disp-90 Capsule, R-3, DAW, E-Prescribe"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-26953,ERX-26953,"BENZONATATE 200 MG PO CAPS take 1 Capsule (200 mg total) by mouth 3 times a day as needed for Cough, Disp-40 Capsule, R-0, E-Prescribe"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"Albuterol 90 mcg (Proair) inhaler 1 Puff by Inhalation route every 4 hours as needed, Disp-18 g, R-0, E-Prescribe"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed, Disp-10 Tablet, R-0, E-Prescribe"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1027331,EDG-1027331,Medication refill
+55CC6994-FCD5-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1288100,EDG-1288100,Graves disease
+55CC6994-FCD5-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-98452,EDG-98452,Hyperthyroidism
+55CC6994-FCD5-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121856,EAP-121856,HX CESAREAN SECTION
+55CC6994-FCD5-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-136705,EAP-136705,THYROIDECTOMY TOTAL
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1060789,1060789,Thyroid eye disease
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1077691,1077691,"Thyroid nodule, cold"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1288100,1288100,Graves disease
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1289428,1289428,Ophthalmic manifestation of Graves disease
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1739420,1739420,"Retraction of eyelid, left"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 200358,200358,"BMI less than 19,adult"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+55CC6994-FCD5-ED11-91FB-005056BFF837,Problem List,Problem List Entry 95337,95337,Proptosis
+55CC6994-FCD5-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1060789,EDG-1060789,Thyroid eye disease
+55CC6994-FCD5-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1729107,EDG-1729107,"Retraction of eyelid, unspecified laterality"
+55CC6994-FCD5-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-95337,EDG-95337,Proptosis

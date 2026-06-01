@@ -1,0 +1,22 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+E544F888-9700-EF11-920A-005056BFF837,Allergy,Latex allergy,allergy,No
+E544F888-9700-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Acute post-operative pain
+E544F888-9700-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M86.461,M86.461,Chronic osteomyelitis of right tibia with draining sinus (CMS-HCC)
+E544F888-9700-EF11-920A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+E544F888-9700-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-18309,ERX-18309,"gabapentin (Neurontin) capsule take 1 Capsule (100 mg total) by mouth 2 times a day, Historical Med"
+E544F888-9700-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-28995,ERX-28995,"METFORMIN 500 MG PO TB24 take 500 mg by mouth every morning, Historical Med"
+E544F888-9700-EF11-920A-005056BFF837,Home Medication,Home Medication ERX-5393,ERX-5393,"naproxen tablet take 1 Tablet (500 mg total) by mouth 2 times a day as needed, Historical Med"
+E544F888-9700-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-135162,EAP-135162,TIBIAL INTRAMEDULLARY NAIL INSERTION
+E544F888-9700-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-135166,EAP-135166,TIBIA / FIBULA INCISION AND DRAINAGE
+E544F888-9700-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-196522,EAP-196522,HX ORTHOPEDIC SURGERY
+E544F888-9700-EF11-920A-005056BFF837,Past Surgical History,Past Surgical History EAP-429596,EAP-429596,BONE CEMENTING; SECONDARY PROCEDURE
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 1135616,1135616,Visit for pre-operative examination
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 167038,167038,Type 2 diabetes mellitus (CMS-HCC)
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 1832942,1832942,Chronic osteomyelitis of right lower leg (CMS-HCC)
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 2221077,2221077,Requires assistance with activities of daily living (ADL)
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 2233254,2233254,Chronic osteomyelitis of right tibia with draining sinus (CMS-HCC)
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 86021,86021,Neck pain
+E544F888-9700-EF11-920A-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+E544F888-9700-EF11-920A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2233254,EDG-2233254,Chronic osteomyelitis of right tibia with draining sinus (CMS-HCC)

@@ -1,0 +1,24 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AA548DBA-5397-EE11-9203-005056BFF837,Allergy,Allergen ELG-513,ELG-513,CONTRAST [IODINATED CONTRAST MEDIA]
+AA548DBA-5397-EE11-9203-005056BFF837,Allergy,Allergen ELG-8991,ELG-8991,IODINE
+AA548DBA-5397-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+AA548DBA-5397-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+AA548DBA-5397-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R19.00,R19.00,Pelvic mass
+AA548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-10012,ERX-10012,"famotidine tablet take 1 Tablet (40 mg total) by mouth daily, Disp-60 Tablet, R-3, E-Prescribe"
+AA548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-2418,ERX-2418,"dicyclomine (Bentyl) capsule take 1 Capsule (10 mg total) by mouth 2 times a day before meals, Disp-60 Capsule, R-0, E-Prescribe"
+AA548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Disp-30 Tablet, R-3, E-Prescribe"
+AA548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+AA548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+AA548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121722,EAP-121722,HX EGD
+AA548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121736,EAP-121736,HX BREAST BIOPSY
+AA548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+AA548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+AA548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-413800,EAP-413800,ED VAGINAL DELIVERY
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 102955,102955,Pelvic mass
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 1138380,1138380,Encounter for screening for malignant neoplasm of colon
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 1152292,1152292,Primary osteoarthritis of left knee
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 2340400,2340400,Does not have regular exercise regimen
+AA548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+AA548DBA-5397-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-102955,EDG-102955,Pelvic mass

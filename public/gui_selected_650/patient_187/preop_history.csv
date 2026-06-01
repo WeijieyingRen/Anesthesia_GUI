@@ -1,0 +1,20 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CF6141C6-5865-F011-9217-005056BFF837,Allergy,Allergen ELG-27607,ELG-27607,TEBENTAFUSP-TEBN
+CF6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C69.40,C69.40,Melanoma of uvea metastatic to liver (CMS-HCC)
+CF6141C6-5865-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z51.11,Z51.11,Admission for chemotherapy
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-10466,ERX-10466,"loratadine (Claritin) tablet Take 1 tablet (10 mg total) by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-243721,ERX-243721,"filgrastim-aafi (Nivestym) 300 mcg injection (prefilled syringe) Inject 0.5 mL (300 mcg total) subcutaneous (under the skin) daily for 5 doses, Disp-2.5 mL, R-0, E-Prescribe"
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-2888,ERX-2888,"ERYTHROMYCIN 5 MG/GRAM (0.5 %) OPHT OINT Right Eye, 4 TIMES DAILY, Disp-3.5 g, R-0, E-Prescribe"
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-324,ERX-324,"ALPRAZolam (Xanax) tablet Take 1 tablet (0.25 mg total) by mouth as needed PRN, Historical Med"
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-5940,ERX-5940,"OXYCODONE-ACETAMINOPHEN 5-325 MG [PHI] TABS Take 1 tablet by mouth every 4 hours as needed, Historical Med"
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-6583,ERX-6583,"prochlorperazine tablet Take 1 tablet (5 mg total) by mouth every 6 hours as needed for nausea, Disp-30 tablet, R-0, E-Prescribe"
+CF6141C6-5865-F011-9217-005056BFF837,Home Medication,Home Medication ERX-6583,ERX-6583,"prochlorperazine tablet Take 1 tablet (5 mg total) by mouth every 6 hours as needed, Historical Med"
+CF6141C6-5865-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-1896086,EDG-1896086,Ductal carcinoma in situ (DCIS) of breast
+CF6141C6-5865-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-466802,EAP-466802,IR ARTERIOGRAPHY PERCUTANEOUS HEPATIC PERFUSION
+CF6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1080753,1080753,History of breast cancer
+CF6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1088408,1088408,"Neutropenia, drug-induced"
+CF6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 1418247,1418247,"Abrasion of right cornea, initial encounter"
+CF6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 2325043,2325043,Admission for chemotherapy
+CF6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 2353372,2353372,Melanoma of uvea metastatic to liver (CMS-HCC)
+CF6141C6-5865-F011-9217-005056BFF837,Problem List,Problem List Entry 2394866,2394866,Cancer treatment started (CMS-HCC)
+CF6141C6-5865-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2353372,EDG-2353372,Melanoma of uvea metastatic to liver (CMS-HCC)

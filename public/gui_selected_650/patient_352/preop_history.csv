@@ -1,0 +1,31 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+0E504E25-6FD2-EF11-920E-005056BFF837,Allergy,Latex Allergy,Allergy,No
+0E504E25-6FD2-EF11-920E-005056BFF837,Allergy,Latex allergy,allergy,No
+0E504E25-6FD2-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-167847,ERX-167847,"ACETAMINOPHEN PO Take by mouth as needed, Historical Med"
+0E504E25-6FD2-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-199686,ERX-199686,"SODIUM HYPOCHLORITE 0.0125 % TP SOLN by Topical route 2 times a day, Disp-473 mL, R-1, E-Prescribe"
+0E504E25-6FD2-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-228733,ERX-228733,"CABOZANTINIB 60 MG/DAY (20 MG X 3/DAY) PO CAPS Take 3 capsules (60 mg) by mouth daily on an empty stomach (1 hour before or 2 hours after eating). Swallow whole; do not open capsules., Disp-84 Capsule, R-10, E-Prescribe"
+0E504E25-6FD2-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-33228,ERX-33228,"AMOXICILLIN-POT CLAVULANATE 875-125 MG PO TABS Take 1 tablet by mouth every 12 hours, Disp-60 tablet, R-2, E-Prescribe"
+0E504E25-6FD2-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-4421,ERX-4421,"levothyroxine tablet Take 1 tablet (50 mcg total) by mouth every morning before breakfast, Disp-30 tablet, R-3, E-Prescribe"
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1117984,EDG-1117984,Head and neck cancer (CMS-HCC)
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1494821880,EDG-1494821880,COVID-19
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134949,EAP-134949,DENTAL / TOOTH EXTRACTIONS
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-134982,EAP-134982,SUBMANDIBULAR GLAND / MASS EXCISION
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135452,EAP-135452,TRACHEOSTOMY
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135486,EAP-135486,NECK LESION / MASS / LYMPH NODES BIOPSY
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-136703,EAP-136703,LARYNGOSCOPY
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-188607,EAP-188607,IR MEDIPORT DUAL LUMEN PLACEMENT
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-394033,EAP-394033,RADICAL NECK DISSECTION MODIFIED; BILATERAL
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+0E504E25-6FD2-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-465516,EAP-465516,DENTAL ALVEOLOPLASTY
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 1092558,1092558,Elevated LFTs
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 1125865,1125865,Submandibular gland mass
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 1230661,1230661,Osteoradionecrosis (CMS-HCC)
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 1233770,1233770,Difficult airway
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 193314,193314,Sarcoma (CMS-HCC)
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 2053763,2053763,Malignant neoplasm metastatic to submental region (CMS-HCC)
+0E504E25-6FD2-EF11-920E-005056BFF837,Problem List,Problem List Entry 2325043,2325043,Admission for chemotherapy
+0E504E25-6FD2-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1230661,EDG-1230661,Osteoradionecrosis (CMS-HCC)
+0E504E25-6FD2-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-193314,EDG-193314,Sarcoma (CMS-HCC)

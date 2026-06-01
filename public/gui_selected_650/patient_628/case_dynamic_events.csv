@@ -1,0 +1,5 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+2B3938EF-D86A-F011-9217-005056BFF837,2025-07-22 17:40:00+00:00,position,temperature_control,"""blankets;ambient warming;forced air warming""","""R SHC OPT ANE TEMP CONTROL"": ""blankets;ambient warming;forced air warming""",2025-07-22 17:27:00+00:00,2025-07-22 19:49:00+00:00,13.0,13.0,13.0,13.0,129.0
+2B3938EF-D86A-F011-9217-005056BFF837,2025-07-22 17:51:00+00:00,airway,lma_inserted,1,LMA Inserted,2025-07-22 17:27:00+00:00,2025-07-22 19:49:00+00:00,24.0,24.0,24.0,24.0,118.0
+2B3938EF-D86A-F011-9217-005056BFF837,2025-07-22 19:35:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2025-07-22 17:27:00+00:00,2025-07-22 19:49:00+00:00,128.0,128.0,128.0,128.0,14.0
+2B3938EF-D86A-F011-9217-005056BFF837,2025-07-22 19:35:00+00:00,airway,lma_removed,1,LMA Removed,2025-07-22 17:27:00+00:00,2025-07-22 19:49:00+00:00,128.0,128.0,128.0,128.0,14.0

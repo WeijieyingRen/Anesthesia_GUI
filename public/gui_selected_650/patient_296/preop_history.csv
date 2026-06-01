@@ -1,0 +1,63 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CDD6107A-DCC5-EF11-920E-005056BFF837,Allergy,Allergen ELG-5316,ELG-5316,VENLAFAXINE
+CDD6107A-DCC5-EF11-920E-005056BFF837,Allergy,Latex Allergy,Allergy,No
+CDD6107A-DCC5-EF11-920E-005056BFF837,Allergy,Latex allergy,allergy,No
+CDD6107A-DCC5-EF11-920E-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet Take 1 tablet (500 mg total) by mouth every 6 hours as needed, Disp-30 tablet, R-1, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-10450,ERX-10450,"LISINOPRIL 40 MG PO TABS Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-123772,ERX-123772,"DULoxetine (Cymbalta) delayed release capsule Take 1 capsule (30 mg total) by mouth every morning, Disp-90 capsule, R-0, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-125123,ERX-125123,"TIZANIDINE 4 MG PO CAPS Take 4 mg by mouth after meals, Disp-120 capsule, R-1, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-125760,ERX-125760,"pregabalin (Lyrica) capsule Take 2 capsules by mouth in the morning, 1 capsule in the afternoon, and 1 capsule in the evening, Disp-120 capsule, R-1, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-125874,ERX-125874,"zolpidem (Ambien CR) controlled release tablet Take 1 tablet (12.5 mg total) by mouth every bedtime, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet Take 1 tablet (81 mg total) by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-176665,ERX-176665,"OMEGA-3 FATTY ACIDS-FISH OIL PO Take 1 capsule by mouth every day, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule Take 1 capsule (300 mg total) by mouth 3 times a day, Disp-270 capsule, R-3, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-204020,ERX-204020,"oxyCODONE (Roxicodone) tablet Take 0.5 tablets (5 mg total) by mouth every 4 to 6 hours as needed for Pain, Disp-20 tablet, R-0, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-204231,ERX-204231,"DICLOFENAC SODIUM 1 % TP GEL 2 g by Topical route 4 times a day as needed (pain), Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-228452,ERX-228452,"ELIQUIS 5 MG PO TABS Take 1 tablet (5 mg total) by mouth 2 times a day, DAW, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-236402,ERX-236402,"NALOXONE 4 MG/ACTUATION NASAL SPRY Spray 0.1 mL (4 mg) into one nostril for suspected overdose. Repeat into other nostril after 2 to 3 minutes if no or minimal response., Disp-2 each, R-1, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-24984,ERX-24984,"POLYETHYLENE GLYCOL 3350 17 GRAM/DOSE PO POWD Take 17 g by mouth daily as needed, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-27971,ERX-27971,"PROTONIX 40 MG PO TBEC Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3720,ERX-3720,"HYDROCHLOROTHIAZIDE 25 MG PO TABS Take 1 tablet (25 mg total) by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-3844,ERX-3844,"ibuprofen tablet Take 1 tablet (600 mg total) by mouth 3 times a day, Disp-30 tablet, R-1, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-435,ERX-435,"amitriptyline tablet Take 1-2 tablets (25-50 mg total) by mouth every bedtime, Disp-60 tablet, R-1, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-5206,ERX-5206,"MULTIVITAMIN WITH MINERALS PO TABS Take 1 tablet by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-5675,ERX-5675,"nortriptyline capsule Take 1-2 capsules (25-50 mg total) by mouth every bedtime, Disp-60 capsule, R-1, E-PrescribeGeneric ok"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-8085,ERX-8085,"traZODone tablet Take 1 tablet (50 mg total) by mouth every bedtime, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-84465,ERX-84465,"SIMVASTATIN 40 MG PO TABS Take 1 tablet (40 mg total) by mouth every morning, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG PO CAPS Take 1 capsule (0.4 mg total) by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-89065,ERX-89065,"LIDOCAINE 5 % TP PTMD Apply 1 patch to skin daily as needed, Disp-30 patch, R-0, E-Prescribe"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Home Medication,Home Medication ERX-94825,ERX-94825,"CHOLECALCIFEROL (VITAMIN D3) 125 MCG (5,000 UNIT) PO CAPS Take 1 capsule (5,000 units total) by mouth daily, Historical Med"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-1121520,EDG-1121520,Degenerative disk disease
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-172007,EDG-172007,Dyslipidemia
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121661,EAP-121661,HX HAMMER TOE REPAIR
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121747,EAP-121747,HX WISDOM TEETH EXTRACTION
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-121869,EAP-121869,HX LUMBAR DISKECTOMY
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135522,EAP-135522,BUNIONECTOMY
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-135562,EAP-135562,FOOT TARSAL TUNNEL DECOMPRESSION
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-462704,EAP-462704,O-ARM SURGICAL IMAGING; SECONDARY PROCEDURE
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-508190,EAP-508190,SPINAL FUSION DISCECTOMY ANTERIOR AND POSTERIOR WITH INSTRUMENTATION; 3-5 LEVELS
+CDD6107A-DCC5-EF11-920E-005056BFF837,Past Surgical History,Past Surgical History EAP-578294,EAP-578294,ANTERIOR SPINE EXPOSURE; THORACO/ ABDOMINAL APPROACH; ADJUNCT
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1035844,1035844,Former smoker
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1052946,1052946,Chronic back pain
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1071898,1071898,Peripheral neuropathy
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1118734,1118734,"Spinal stenosis, lumbar region, with neurogenic claudication"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1167635,1167635,Hx of deep venous thrombosis
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1494821880,1494821880,hx of COVID-19
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1794452,1794452,Acute post-operative pain
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 1857831,1857831,Pain of left lower extremity
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 192513,192513,Pre-diabetes
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 2062168,2062168,Acute left-sided low back pain
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 2386324,2386324,"hx of Opioid use disorder, moderate (CMS-HCC)"
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 65431,65431,Brachial neuritis
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 8782,8782,Degeneration of cervical intervertebral disc
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 8804,8804,Cervicalgia
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 9169,9169,Acquired spondylolisthesis
+CDD6107A-DCC5-EF11-920E-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+CDD6107A-DCC5-EF11-920E-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1054681,EDG-1054681,Lumbar pseudoarthrosis

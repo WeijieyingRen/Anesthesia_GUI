@@ -1,0 +1,70 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+03F7CFC3-FF43-EE11-9200-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+03F7CFC3-FF43-EE11-9200-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PCN [PENICILLINS]
+03F7CFC3-FF43-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+03F7CFC3-FF43-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E11.65,E11.65,"Type 2 diabetes mellitus with hyperglycemia, without long-term current use of insulin (CMS-HCC)"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I10,I10,"Hypertension, unspecified type"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I26.99,I26.99,Other acute pulmonary embolism without acute cor pulmonale (CMS-HCC)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I26.99,I26.99,"Acute pulmonary embolism, unspecified pulmonary embolism type, unspecified whether acute cor pulmonale present (CMS-HCC)"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M25.561,M25.561,Acute pain of right knee
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T84.50XA,T84.50XA,"Infection or inflammatory reaction due to internal joint prosthesis, initial encounter (CMS-HCC)"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z86.711,Z86.711,History of pulmonary embolism
+03F7CFC3-FF43-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z96.651,Z96.651,Status post right knee replacement
+03F7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-10450,ERX-10450,"LISINOPRIL 40 MG PO TABS take 1 Tablet (40 mg total) by mouth every morning, Historical Med"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-3720,ERX-3720,"HYDROCHLOROTHIAZIDE 25 MG PO TABS take 1 Tablet (25 mg total) by mouth every morning, Historical Med"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"AMLODIPINE 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every morning, R-1, Historical Med"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1020770,EDG-1020770,Hard to intubate
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1027301,EDG-1027301,Infected prosthetic knee joint (CMS-HCC)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1031905,EDG-1031905,DJD (degenerative joint disease) of knee
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-163633,EDG-163633,Patellar tendon rupture
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-200333,EDG-200333,OSA (obstructive sleep apnea)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-203776,EDG-203776,Difficult intubation
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121653,EAP-121653,HX MENISCECTOMY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121655,EAP-121655,HX KNEE REPLACMENT
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121670,EAP-121670,HX ROTATOR CUFF REPAIR
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121672,EAP-121672,HX BACK SURGERY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121790,EAP-121790,HX TONSILLECTOMY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121801,EAP-121801,HX SEPTOPLASTY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121817,EAP-121817,HX HERNIA REPAIR
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135124,EAP-135124,KNEE ARTHROTOMY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135144,EAP-135144,KNEE TOTAL JOINT REPLACEMENT; BILATERAL
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135148,EAP-135148,KNEE TOTAL JOINT REVISION
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135186,EAP-135186,KNEE ARTHROSCOPY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135200,EAP-135200,KNEE ARTHROSCOPY PARTIAL MENISCECTOMY MEDIAL AND/ OR LATERAL
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135210,EAP-135210,KNEE ARTHROSCOPY WITH SYNOVECTOMY
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135216,EAP-135216,KNEE INCISION AND DRAINAGE
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135240,EAP-135240,KNEE TOTAL JOINT REPLACEMENT
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-135604,EAP-135604,KNEE REPAIR EXTENSOR MECHANISM WITH ALLOGRAFT OR MESH
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-136324,EAP-136324,SHOULDER ARTHROSCOPY WITH ROTATOR CUFF REPAIR
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-136673,EAP-136673,KNEE TOTAL ARTHROPLASTY PROSTHESIS REMOVAL
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-137837,EAP-137837,SHOULDER ARTHROSCOPY WITH DECOMPRESSION
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-425228,EAP-425228,KNEE TOTAL ARTHROPLASTY REVISION SPACER EXCHANGE; SIMPLE
+03F7CFC3-FF43-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-460064,EAP-460064,ARM BICEPS TENODESIS
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 102370,102370,DJD (degenerative joint disease)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1075726,1075726,Bilateral impacted cerumen
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1081547,1081547,History of pulmonary embolism
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1151919,1151919,Complex tear of medial meniscus of left knee as current injury
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1166878,1166878,History of thromboembolism of vein
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1233770,1233770,Difficult airway
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1258185,1258185,Complete tear of right rotator cuff
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 13103,13103,Infection and inflammatory reaction due to internal joint prosthesis (CMS-HCC)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 141686,141686,Pulmonary embolus (CMS-HCC)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1762632,1762632,Long term current use of anticoagulant therapy
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1841160,1841160,Acute pain of right knee
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 1856617,1856617,Arthrofibrosis of knee joint
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 189219,189219,LVH (left ventricular hypertrophy)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 200328,200328,Obstructive sleep apnea syndrome
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 200465,200465,"BMI 36.0-36.9,adult"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 201725,201725,Deep vein thrombosis (DVT) (CMS-HCC)
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2054705,2054705,"Type 2 diabetes mellitus without complication, without long-term current use of insulin (CMS-HCC)"
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 2245110,2245110,S/P right rotator cuff repair
+03F7CFC3-FF43-EE11-9200-005056BFF837,Problem List,Problem List Entry 87984,87984,Knee joint replacement status
+03F7CFC3-FF43-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2016399,EDG-2016399,"Infection associated with internal right knee prosthesis, sequela"

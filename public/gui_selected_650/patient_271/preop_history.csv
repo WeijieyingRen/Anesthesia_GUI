@@ -1,0 +1,23 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+27935088-8FED-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+27935088-8FED-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C69.62,C69.62,"Liposarcoma of orbit, left (CMS-HCC)"
+27935088-8FED-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-14887,ERX-14887,"methylPREDNISolone (Medrol) dosepak Follow instructions on packaging. Begin the following day after surgery, Disp-21 Tablet, R-0, E-Prescribe"
+27935088-8FED-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-19546,ERX-19546,"NEOMYCIN-POLYMYXIN B-DEXAMETH 3.5 MG/G-10,000 UNIT/G-0.1 % OPHT OINT instill to left eye 3 times a day For 7 days after surgery, Disp-3.5 g, R-1, E-Prescribe"
+27935088-8FED-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-4423,ERX-4423,"LEVOTHYROXINE 100 MCG PO TABS take 1 Tablet (100 mcg total) by mouth every morning before breakfast, Historical Med"
+27935088-8FED-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed After surgery, Disp-10 Tablet, R-0, E-Prescribe"
+27935088-8FED-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-9500,ERX-9500,"cephalexin (Keflex) capsule take 1 Capsule (500 mg total) by mouth 4 times a day for 7 days After surgery, Disp-28 Capsule, R-0, E-Prescribe"
+27935088-8FED-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1042931,EDG-1042931,Refusal of blood transfusions as patient is Jehovah's Witness
+27935088-8FED-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-105387,EDG-105387,Snoring
+27935088-8FED-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-119413,EDG-119413,Orbital tumor
+27935088-8FED-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142205,EDG-142205,Hypothyroidism
+27935088-8FED-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-200472,EDG-200472,"BMI 38.0-38.9,adult"
+27935088-8FED-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-136775,EAP-136775,ORBITOTOMY WITH BONE REMOVAL/ LATERAL WALL DECOMPRESSION
+27935088-8FED-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-138447,EAP-138447,VARICOSE VEINS STAB PHLEBECTOMY (LESS THAN 20 STAB INCISIONS)
+27935088-8FED-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-507896,EAP-507896,MANAGEMENT COMPLEX; SECONDARY MODIFIER
+27935088-8FED-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1042931,1042931,Refusal of blood transfusions as patient is Jehovah's Witness
+27935088-8FED-ED11-91FB-005056BFF837,Problem List,Problem List Entry 119413,119413,Orbital tumor
+27935088-8FED-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+27935088-8FED-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+27935088-8FED-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1747101,1747101,"Liposarcoma of orbit, left (CMS-HCC)"
+27935088-8FED-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+27935088-8FED-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2354115,EDG-2354115,Atypical lipomatous tumor (CMS-HCC)

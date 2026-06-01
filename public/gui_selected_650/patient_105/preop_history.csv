@@ -1,0 +1,30 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+BA632339-9BD2-F011-921A-005056BFF837,Allergy,Allergen ELG-13417,ELG-13417,ADHESIVE TAPE-SILICONES
+BA632339-9BD2-F011-921A-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+BA632339-9BD2-F011-921A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+BA632339-9BD2-F011-921A-005056BFF837,Allergy,Latex allergy,allergy,No
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-10012,ERX-10012,"famotidine tablet Take 1 tablet (40 mg total) by mouth daily, Historical Med"
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-13632,ERX-13632,"BISACODYL 5 MG PO TBEC Take 2 tablets (10 mg total) by mouth Q24H PRN, Historical Med"
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-3774,ERX-3774,"hydrOXYzine tablet Take 1-2 tablets (25-50 mg total) by mouth every bedtime, Historical Med"
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-77890,ERX-77890,"anastrozole (Arimidex) tablet SMARTSIG:1 Tablet(s) By Mouth Every Evening, Historical MedPaused since Wed 12/3/2025 until manually resumed"
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-80840,ERX-80840,"ondansetron tablet Take 1 tablet (8 mg total) by mouth every 8 hours as needed, Historical Med"
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-88444,ERX-88444,"ESOMEPRAZOLE MAGNESIUM 40 MG PO CPDR Take 40 mg by mouth 2 times a day, Historical Med"
+BA632339-9BD2-F011-921A-005056BFF837,Home Medication,Home Medication ERX-92437,ERX-92437,"hydrocortisone tablet Take 1 tablet (10 mg total) by mouth every morning, Historical Med"
+BA632339-9BD2-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-118870,EDG-118870,Breast cancer (CMS-HCC)
+BA632339-9BD2-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-2224603,EDG-2224603,BRCA gene mutation positive
+BA632339-9BD2-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-90020,EDG-90020,Adrenal insufficiency
+BA632339-9BD2-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121736,EAP-121736,HX BREAST BIOPSY
+BA632339-9BD2-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+BA632339-9BD2-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121846,EAP-121846,HX DILATION AND CURETTAGE
+BA632339-9BD2-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-459899,EAP-459899,HX BREAST SURGERY
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 142336,142336,Hypotension
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 1862260,1862260,Local recurrence of cancer of right breast (CMS-HCC)
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 2181791,2181791,Invasive carcinoma of breast (CMS-HCC)
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 2217076,2217076,BRCA1 gene mutation positive
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,regular walking
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 2357506,2357506,Encounter for preoperative assessment
+BA632339-9BD2-F011-921A-005056BFF837,Problem List,Problem List Entry 90020,90020,possible adrenal insufficiency
+BA632339-9BD2-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1862260,EDG-1862260,Local recurrence of cancer of right breast (CMS-HCC)
+BA632339-9BD2-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2181791,EDG-2181791,Invasive carcinoma of breast (CMS-HCC)
+BA632339-9BD2-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2217076,EDG-2217076,BRCA1 gene mutation positive

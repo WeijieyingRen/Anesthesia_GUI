@@ -1,0 +1,81 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+9961F4D4-1DB9-EE11-9204-005056BFF837,Allergy,Allergen ELG-23328,ELG-23328,SHRIMP
+9961F4D4-1DB9-EE11-9204-005056BFF837,Allergy,Allergen ELG-2834,ELG-2834,OXYCODONE
+9961F4D4-1DB9-EE11-9204-005056BFF837,Allergy,Allergen ELG-8768,ELG-8768,LINEZOLID
+9961F4D4-1DB9-EE11-9204-005056BFF837,Allergy,Latex allergy,allergy,No
+9961F4D4-1DB9-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E84.0,E84.0,Cystic fibrosis of the lung (CMS-HCC)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J18.9,J18.9,Pneumonia of both lower lobes due to infectious organism
+9961F4D4-1DB9-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+9961F4D4-1DB9-EE11-9204-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z91.89,Z91.89,At risk for opportunistic infections
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-184289,ERX-184289,"OXYGEN-AIR DELIVERY SYSTEMS MISC 1 L/min by Inhalation route Continuous, Historical Med"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-200453,ERX-200453,"SODIUM CHLORIDE 7 % INH NEBU Use 4ml (1 ampule) by inhalation route three times daily *Note change in frequency*, Disp-360 mL, R-11, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-208479,ERX-208479,"MAGNESIUM OXIDE-MG AA CHELATE 133 MG PO TABS take 1 Tablet (133 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-209761,ERX-209761,"AZTREONAM LYSINE 75 MG/ML INH NEBU 1 mL (75 mg total) by Inhalation route 3 times a day . Use for 28days, then alternate with IH colistin., Disp-84 mL, R-5, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-229996,ERX-229996,"LACTOBACILLUS RHAMNOSUS GG 15 BILLION CELL PO CPSP take 2 Capsules by mouth daily, Disp-60 Capsule, R-2, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-231412,ERX-231412,"POSACONAZOLE 100 MG PO TBEC Take 3 tablets by mouth every morning, Disp-270 Tablet, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-237379,ERX-237379,"ENTERAL PUMP ACCESS.HYDROLYSIS MISC CRTG 2 Cartridges by Feeding Tube route daily in the evening, Disp-60 Each, R-11, No Print"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-242022,ERX-242022,"ZENPEP 20,000-63,000- 84,000 UNIT PO CPDR Take 4-5 capsules by mouth three times daily with meals and take 3-4 capsules three times daily with snacks as needed, Disp-810 Capsule, R-11, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"polyethylene glycol (MIRAlax) 17 gram packet Mix 1 packet with 8 oz of water and drink twice daily as needed for constipation., Disp-60 Each, R-11, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-3233,ERX-3233,"folic acid 1 mg tablet take 1 Tablet (1 mg total) by mouth daily, Disp-90 Tablet, R-11, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-37637,ERX-37637,"metoprolol tartrate (Lopressor) tablet take 1 Tablet (25 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-38068,ERX-38068,"MYFORTIC 180 MG PO TBEC take 2 Tablets (360 mg total) by mouth 2 times a day in the morning and evening, Historical Med"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-451,ERX-451,"amoxicillin capsule Take 2000 mg (4 capsules) once one hour prior to dental cleaning, Disp-4 Capsule, R-1, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS Take 1 tablet by mouth daily, Historical Med"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-541745,ERX-541745,"ciprofloxacin 125 mg xylox capsule (compounded medication) Add contents of 1 capsule to 240ml saline.? Irrigate each nostril with 120ml twice a day for 30 days., Disp-60 Capsule, R-11, Fax"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-6497,ERX-6497,"predniSONE tablet take 1 Tablet (5 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-7356,ERX-7356,"SODIUM POLYSTYRENE SULFONATE PO POWD Take 15gm daily as directed by the transplant team, Disp-456.3 g, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-7557,ERX-7557,"SULFAMETHOXAZOLE-TRIMETHOPRIM 400-80 MG PO TABS take 1 Tablet by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-77883,ERX-77883,"VALGANCICLOVIR 450 MG PO TABS take 1 Tablet (450 mg total) by mouth daily, Disp-90 Tablet, R-3, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-85141,ERX-85141,"WATER FOR INJECTION, STERILE INJ SOLN 4 mL by Injection route 2 times a day Individual vials preferred. 4 ml each dose for reconstitution of colistin solution for inhalation., Disp-224 mL, R-5, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-88967,ERX-88967,"lansoprazole (Prevacid) delayed release capsule take 1 Capsule (30 mg total) by mouth daily, Disp-30 Capsule, R-11, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-89239,ERX-89239,"NEBULIZERS MISC MISC 1 Each by Misc.(Non-Drug; Combo Route) route One Time for 1 dose Alterna nebulizer to be used with Cayston, Disp-1 Each, R-0, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-90913,ERX-90913,"budesonide (Pulmicort) nebulizer suspension 2 mL (0.5 mg total) by sinus irrigation route 2 times a day (sinus rinse), Historical Med"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-94670,ERX-94670,"tacrolimus (Prograf) capsule take 1 Capsule (1 mg total) by mouth daily in the evening, Historical Med"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-95803,ERX-95803,"tacrolimus (Prograf) capsule take 1 Capsule (0.5 mg total) by mouth every morning, Historical Med"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Home Medication,Home Medication ERX-9681,ERX-9681,"COLISTIN (COLISTIMETHATE NA) 150 MG INJ SOLR 150 mg by Inhalation route 2 times a day Reconstitute with 4 mL of sterile water to colistin vial. Allow solution to dissolve by gently rolling vial between hands. Using same syringe, withdraw 4mL (150mg) of reconstituted solution and place in nebulizer cup. Solution must be nebulized immediately. Use for 28days then use IH aztreonam for 28days., Disp-56 Each, R-5, E-Prescribe"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-102653,EDG-102653,Pancreatic insufficiency
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-1056746,EDG-1056746,Pneumonia due to methicillin resistant Staphylococcus aureus (CMS-HCC)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-1100190,EDG-1100190,Hemothorax on left
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-1234880,EDG-1234880,Bacteremia due to Staphylococcus
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-190673,EDG-190673,Cystic fibrosis of the lung (CMS-HCC)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-2107579,EDG-2107579,Long term (current) use of inhaled steroids
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Medical History,Past Medical History EDG-9979,EDG-9979,Underweight
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121721,EAP-121721,HX SINUS SURGERY
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-121774,EAP-121774,HX LUNG TRANSPLANT
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-134756,EAP-134756,CHEST EXPLORATION AND/ OR WASHOUT; WITH OR WITHOUT STERNAL CLOSURE; INSIDE THE OPERATING ROOM
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-134842,EAP-134842,LUNG TRANSPLANT DOUBLE WITH CARDIOPULMONARY BYPASS
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-135028,EAP-135028,BRONCHOSCOPY FLEXIBLE WITH/ WITHOUT BIOPSIES
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-135978,EAP-135978,PORT-A-CATHETER INSERTION
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-137615,EAP-137615,THORACOSCOPY WITH DECORTICATION WITH/ WITHOUT BRONCHOSCOPY
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-188101,EAP-188101,EGD WITH PLACEMENT OF PERCUTANEOUS GASTROSTOMY TUBE
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-188161,EAP-188161,SM BOWEL ENDOSCOPY WITH CONVERSION OF GASTROSTOMY TUBE TO JEJUNOSTOMY
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-189261,EAP-189261,IR MEDIPORT SINGLE LUMEN REMOVAL
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-414446,EAP-414446,EGD WITH BOTOX
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-474083,EAP-474083,BRONCHOSCOPY WITH BRONCHIAL ALVEOLAR LAVAGE
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-474091,EAP-474091,BRONCHOSCOPY WITH TRANSBRONCHIAL BIOPSY; SINGLE LOBE
+9961F4D4-1DB9-EE11-9204-005056BFF837,Past Surgical History,Past Surgical History EAP-537311,EAP-537311,FUNCTIONAL ENDOSCOPIC SINUS SURGERY (A)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 102653,102653,Pancreatic insufficiency
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 1056746,1056746,Pneumonia due to methicillin resistant Staphylococcus aureus (CMS-HCC)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 1077431,1077431,On home O2
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 1099997,1099997,At risk for opportunistic infections
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 1230819,1230819,History of anesthesia complications
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 137960,137960,Preop examination
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 142378,142378,Vitamin D deficiency
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 186931,186931,Weight loss
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 190673,190673,Cystic fibrosis of the lung (CMS-HCC)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 192486,192486,Hyperglycemia
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 200808,200808,Hypoxia
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 2035561,2035561,Pneumonia of both lower lobes due to infectious organism
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 2107579,2107579,Long term (current) use of inhaled steroids
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 2139101,2139101,"Anemia, unspecified type"
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220110,2220110,Lung transplant recipient (CMS-HCC)
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 66000,66000,Chronic pansinusitis
+9961F4D4-1DB9-EE11-9204-005056BFF837,Problem List,Problem List Entry 9979,9979,Underweight

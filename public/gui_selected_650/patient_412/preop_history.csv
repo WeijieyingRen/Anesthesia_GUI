@@ -1,0 +1,20 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Allergy,Allergen ELG-10359,ELG-10359,ERYTHROMYCIN
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Allergy,Allergen ELG-3731,ELG-3731,GARLIC
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D05.10,D05.10,"Ductal carcinoma in situ (DCIS) of breast, unspecified laterality"
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-124677,ERX-124677,"eszopiclone (Lunesta) tablet take 1 Tablet (2 mg total) by mouth every bedtime as needed, Historical Med"
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-190896,ERX-190896,"TYLENOL PM PO take by mouth, Historical Med"
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-951,ERX-951,"BENADRYL 25 MG PO CAPS take by mouth every bedtime as needed, Historical Med"
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-96321,ERX-96321,"MISCELLANEOUS MEDICAL SUPPLY MISC MISC Non-compressive Post operative camisole with front zipper and drain pockets, product code L8000/L8015., Disp-2 Each, R-0, No Print"
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-118870,EDG-118870,Breast cancer (CMS-HCC)
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121846,EAP-121846,HX DILATION AND CURETTAGE
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-418605,EAP-418605,LAPAROSCOPIC TOTAL HYSTERECTOMY
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Problem List,Problem List Entry 1035483,1035483,Left hip pain
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Problem List,Problem List Entry 1385952,1385952,Other insomnia
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Problem List,Problem List Entry 76481,76481,Nicotine dependence
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Problem List,Problem List Entry 77389,77389,Migraine
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Problem List,Problem List Entry 90782,90782,Anxiety
+0A2D84B8-0A9C-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1896088,EDG-1896088,Ductal carcinoma in situ (DCIS) of left breast

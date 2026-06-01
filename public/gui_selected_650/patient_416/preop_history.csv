@@ -1,0 +1,120 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Allergen ELG-11749,ELG-11749,VICODIN [HYDROCODONE-ACETAMINOPHEN]
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Allergen ELG-4350,ELG-4350,BENADRYL [DIPHENHYDRAMINE HCL]
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Allergen ELG-4586,ELG-4586,METOPROLOL
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Allergen ELG-5365,ELG-5365,AMIODARONE
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Allergen ELG-5871,ELG-5871,POISON OAK EXTRACT
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Allergen ELG-7746,ELG-7746,CARDIZEM [DILTIAZEM HCL]
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Latex Allergy,Allergy,No
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Allergy,Latex allergy,allergy,No
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis A41.9,A41.9,Septic shock (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C49.9,C49.9,Pleomorphic liposarcoma (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E87.5,E87.5,Hyperkalemia
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis G89.18,G89.18,Postoperative pain
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I10,I10,Essential hypertension
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K56.609,K56.609,Small bowel obstruction (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M25.812,M25.812,Mass of joint of left shoulder
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis M79.89,M79.89,Soft tissue mass
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Q67.0,Q67.0,Facial asymmetry
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Encounter Diagnosis,Encounter Diagnosis S41.002A,S41.002A,"Open wound of left shoulder, initial encounter"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-18288,ERX-18288,"BISOPROLOL FUMARATE 5 MG [PHI] TABS Take 1 tablet (5 mg total) by mouth daily, Disp-30 tablet, R-0, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-203804,ERX-203804,"Omeprazole 20 mg TBEC Take 2 tablets (40 mg total) by mouth daily, Historical Med"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-204256,ERX-204256,"DESVENLAFAXINE SUCCINATE 100 MG [PHI] TB24 Take 1 tablet (100 mg total) by mouth daily in the morning, Disp-30 tablet, R-0, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-228360,ERX-228360,"ELIQUIS 2.5 MG [PHI] TABS take 2.5 mg by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-235288,ERX-235288,"BREXPIPRAZOLE 2 MG [PHI] TABS Take 1 tablet (2 mg total) by mouth every Tuesday, Thursday, Saturday and Sunday, Disp-30 tablet, R-0, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-4420,ERX-4420,"levothyroxine (SYNTHROID) tablet take 1 Tab by mouth every morning before breakfast, Disp-60 Tab, R-1, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-5675,ERX-5675,"nortriptyline (Pamelor) 25 mg capsule Take 3 capsules (75 mg total) by mouth every bedtime, Historical Med"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-7313,ERX-7313,"sodium bicarbonate tablet take 2 Tablets (1,300 mg total) by mouth 2 times a day, Disp-180 Tablet, R-11, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-7665,ERX-7665,"SYNTHROID 50 MCG [PHI] TABS take 1 Tablet (50 mcg total) by mouth every day, Disp-90 Tablet, R-11, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-7857,ERX-7857,"THERAPEUTIC MULTIVITAMIN [PHI] TABS Take 1 tablet by mouth 2 times a day, Historical Med"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-78610,ERX-78610,"lamoTRIgine (LAMICTAL) 200 mg tablet Take 1 tablet (200 mg total) by mouth daily, Historical Med"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"atorvastatin tablet TAKE 1 TABLET (10 MG TOTAL) BY MOUTH EVERY NIGHT, Disp-90 Tablet, R-3, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"amLODIPine tablet take 1 Tablet (5 mg total) by mouth 2 times a day, Disp-180 Tablet, R-3, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-8971,ERX-8971,"acyclovir (ZOVIRAX) 400 mg tablet Take 1 tablet (400 mg total) by mouth every day, Historical Med"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet take 1 Tablet (100 mg total) by mouth every bedtime, Disp-90 Tablet, R-11, E-Prescribe"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet Take 1 tablet (100 mg total) by mouth every bedtime, Historical Med"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-100345,EDG-100345,Lung disease
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1025173,EDG-1025173,History of bladder cancer
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1077303,EDG-1077303,Bladder neck contracture
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1080273,EDG-1080273,BPH (benign prostatic hyperplasia)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-108919,EDG-108919,Psychiatric problem
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1167638,EDG-1167638,Bipolar 1 disorder (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1169146,EDG-1169146,Perforated appendicitis
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-118876,EDG-118876,Bladder cancer (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-118927,EDG-118927,Appendicitis
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-1233770,EDG-1233770,Difficult airway
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-138118,EDG-138118,HTN (hypertension)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-140224,EDG-140224,Ureter injury
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142114,EDG-142114,Urinary tract infection
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142199,EDG-142199,Heart disease
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142205,EDG-142205,Hypothyroidism
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-200333,EDG-200333,OSA (obstructive sleep apnea)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-201194,EDG-201194,Chronic kidney disease
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-201723,EDG-201723,Deep vein thrombosis (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-201733,EDG-201733,DVT (deep venous thrombosis) (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-2188818,EDG-2188818,Infection associated with nephrostomy catheter
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-5108,EDG-5108,Atrial flutter (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-5535,EDG-5535,Asthma
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-63545,EDG-63545,"Chronic kidney disease, stage III (moderate) (CMS-HCC)"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-66596,EDG-66596,Hemothorax
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-90966,EDG-90966,Arrhythmia
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-97887,EDG-97887,Herpes genital
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Medical History,Past Medical History EDG-98239,EDG-98239,Hypercholesterolemia
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-133608,EAP-133608,SHOULDER LESION/ MASS WIDE EXCISION
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-133660,EAP-133660,SHOULDER INCISION AND DRAINAGE
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-134378,EAP-134378,URETEROSCOPY WITH OR WITHOUT STENT PLACEMENT; THROUGH ILEAL CONDUIT
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-134426,EAP-134426,URETERAL IMPLANTATION / URETERONEOCYSTOSTOMY
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-134494,EAP-134494,LAPAROTOMY LYSIS OF ADHESIONS
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-135686,EAP-135686,FLAP ROTATIONAL
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-136823,EAP-136823,TRANSURETHRAL RESECTION BLADDER NECK
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-138145,EAP-138145,CYSTECTOMY RADICAL WITH CONTINENT DIVERSION AND CONSTRUCTION OF NEOBLADDER; MALE
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-138153,EAP-138153,CRYO TREATMENT WITH LIQUID NITROGEN;SECONDARY PROCEDURE
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188621,EAP-188621,IR NEPHROSTOMY CATHETER CHANGE
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188631,EAP-188631,NEPHROSTOMY CATH-PLACEMENT RIGHT
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188637,EAP-188637,IR NEPHROSTOMY URINARY TRACT INTERVENTION
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-188641,EAP-188641,IR NEPHROURETERAL STENT PLACEMENT
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-198033,EAP-198033,CYSTECTOMY RADICAL ROBOTIC ASSISTED LAPAROSCOPIC
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-243186,EAP-243186,ANES TRANSURETHRAL RESECTION OF BLADDER TUMOR
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-3162,EAP-3162,IR RENAL PTA BILAT
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-439615,EAP-439615,BONE CEMENT BEAD PLACEMENT; SECONDARY PROCEDURE
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-445007,EAP-445007,TRANSESOPHAGEAL ECHOCARDIOGRAPHY
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1024746,1024746,Postoperative pain
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1026446,1026446,Pleomorphic liposarcoma (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 106069,106069,Supraventricular tachycardia
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1099633,1099633,"Hydronephrosis, left"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1104483,1104483,Soft tissue mass
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1117819,1117819,Bladder carcinoma (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1141655,1141655,Open wound of left shoulder
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1167638,1167638,Bipolar 1 disorder (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 118844,118844,Small bowel obstruction (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1230819,1230819,History of anesthesia complications
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1233770,1233770,Difficult airway
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 1251137,1251137,Septic shock (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 140224,140224,Ureter injury
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 142336,142336,Hypotension
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 158176,158176,Facial asymmetry
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 200333,200333,OSA (obstructive sleep apnea)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 201333,201333,"Chronic kidney disease (CKD), stage IV (severe) (CMS-HCC)"
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 201733,201733,DVT (deep venous thrombosis) (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 2183030,2183030,Mass of joint of left shoulder
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 2340400,2340400,Does not have regular exercise regimen
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 5107,5107,Atrial fibrillation (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 5108,5108,Atrial flutter (CMS-HCC)
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Problem List,Problem List Entry 72194,72194,Hyperkalemia
+F1D5EF6C-2C5A-EF11-920C-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1481595,EDG-1481595,"Open wound of left shoulder, initial encounter"

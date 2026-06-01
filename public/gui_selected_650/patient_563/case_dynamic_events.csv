@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+515A385F-A397-F011-9218-005056BFF837,2025-09-17 21:40:00+00:00,position,temperature_control,"""forced air warming;full body""","""R SHC OPT ANE TEMP CONTROL"": ""forced air warming;full body""",2025-09-17 21:40:00+00:00,2025-09-18 00:06:00+00:00,0.0,0.0,0.0,0.0,146.0
+515A385F-A397-F011-9218-005056BFF837,2025-09-17 22:00:00+00:00,airway,lma_inserted,1,LMA Inserted,2025-09-17 21:40:00+00:00,2025-09-18 00:06:00+00:00,20.0,20.0,20.0,20.0,126.0
+515A385F-A397-F011-9218-005056BFF837,2025-09-17 23:43:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2025-09-17 21:40:00+00:00,2025-09-18 00:06:00+00:00,123.0,123.0,123.0,123.0,23.0
+515A385F-A397-F011-9218-005056BFF837,2025-09-17 23:43:00+00:00,airway,lma_removed,1,LMA Removed,2025-09-17 21:40:00+00:00,2025-09-18 00:06:00+00:00,123.0,123.0,123.0,123.0,23.0
+515A385F-A397-F011-9218-005056BFF837,2025-09-18 00:02:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2025-09-17 21:40:00+00:00,2025-09-18 00:06:00+00:00,142.0,142.0,142.0,142.0,4.0

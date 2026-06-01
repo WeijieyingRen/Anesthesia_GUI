@@ -1,0 +1,18 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+43CF6B8E-E3B7-F011-9219-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+43CF6B8E-E3B7-F011-9219-005056BFF837,Allergy,Allergen ELG-2863,ELG-2863,ASPIRIN
+43CF6B8E-E3B7-F011-9219-005056BFF837,Allergy,Latex Allergy,Allergy,No
+43CF6B8E-E3B7-F011-9219-005056BFF837,Allergy,Latex allergy,allergy,No
+43CF6B8E-E3B7-F011-9219-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N28.89,N28.89,Renal mass
+43CF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-1821,ERX-1821,"COLCHICINE 0.6 MG [PHI] TABS Take 1 tablet (0.6 mg total) by mouth as needed (gout attacks), Historical Med"
+43CF6B8E-E3B7-F011-9219-005056BFF837,Home Medication,Home Medication ERX-77012,ERX-77012,"losartan tablet Take 1 tablet (50 mg total) by mouth daily, Historical Med"
+43CF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+43CF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-125704,EDG-125704,Cancer (CMS-HCC)
+43CF6B8E-E3B7-F011-9219-005056BFF837,Past Medical History,Past Medical History EDG-92982,EDG-92982,Colon polyp
+43CF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+43CF6B8E-E3B7-F011-9219-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+43CF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 1066304,1066304,Left renal mass
+43CF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 128670,128670,Essential hypertension
+43CF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 132779,132779,mild Atherosclerosis
+43CF6B8E-E3B7-F011-9219-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+43CF6B8E-E3B7-F011-9219-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1066304,EDG-1066304,Left renal mass

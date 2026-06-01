@@ -1,0 +1,65 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+F9128662-A1DE-ED11-91FB-005056BFF837,Allergy,Allergen ELG-16311,ELG-16311,TAPE [ADHESIVE]
+F9128662-A1DE-ED11-91FB-005056BFF837,Allergy,Allergen ELG-4022,ELG-4022,CIPROFLOXACIN
+F9128662-A1DE-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+F9128662-A1DE-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+F9128662-A1DE-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C78.01,C78.01,Secondary malignant neoplasm of right lower lobe of lung (CMS-HCC)
+F9128662-A1DE-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K29.90,K29.90,Gastritis and duodenitis
+F9128662-A1DE-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R26.2,R26.2,Difficulty walking
+F9128662-A1DE-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis U07.1,U07.1,COVID
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"aspirin enteric coated tablet take 1 Tablet (81 mg total) by mouth every morning with breakfast, Disp-100 Tablet, R-4, E-Prescribe"
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-171447,ERX-171447,"CALCIUM PO take by mouth , Historical Med"
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-1718,ERX-1718,"loratadine (Claritin) 10 mg TABS take by mouth as needed, Historical Med"
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-213124,ERX-213124,"OMEGA 3-DHA-EPA-FISH OIL 100-160-1,000 MG PO CAPS take by mouth , Historical Med"
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-219728,ERX-219728,"PROBIOTIC PO take by mouth , Historical Med"
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-234538,ERX-234538,"filgrastim-SNDZ (Zarxio) injection inject 0.5 mL (300 mcg total) subcutaneous (under the skin) daily 24 hours after chemotherapy ends daily x 5 days. Every 3 weeks., Disp-5 Each, R-5, E-Prescribe"
+F9128662-A1DE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-37167,ERX-37167,"MULTIVITAMIN PO TABS take 1 Tablet by mouth daily , Historical Med"
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1071690,EDG-1071690,Lung metastases
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1896094,EDG-1896094,History of ductal carcinoma in situ (DCIS) of breast
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-193314,EDG-193314,Sarcoma (CMS-HCC)
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134628,EAP-134628,FEMORAL POPLITEAL BYPASS
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134726,EAP-134726,BREAST BIOPSY / LUMPECTOMY
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135404,EAP-135404,HIP LESION / MASS EXCISION
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135424,EAP-135424,THIGH WOUND CLOSURE
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-136723,EAP-136723,THIGH LESION / MASS WIDE EXCISION
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-137329,EAP-137329,LEG NEUROPLASTY / NEUROLYSIS DECOMPRESSION
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-17830,EAP-17830,MEDIPORT CARE
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188087,EAP-188087,EGD WITH BIOPSY
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188379,EAP-188379,IR CHEST TUBE PLACEMENT
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188607,EAP-188607,IR MEDIPORT DUAL LUMEN PLACEMENT
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-222923,EAP-222923,HC SRS CYBERKNIFE 1 SESSION-BODY
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-411621,EAP-411621,IR CT LUNG CRYOABLATION
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-460569,EAP-460569,IR CHEST TUBE REVISION
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-474131,EAP-474131,PLEURAL CATHETER INSERTION; TUNNELED
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-474135,EAP-474135,TUNNELED PLEURAL CATHETER REMOVAL
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-480626,EAP-480626,EXCISION / BIOPSY BREAST / NIPPLE / DUCT
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-658239,EAP-658239,"HYSTERECTOMY, BILATERAL SALPINGO-OOPHORECTOMY, LYMPH NODE DISSECTION ROBOTIC ASSISTED LAPAROSCOPIC SINGLE SITE"
+F9128662-A1DE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-66586,EAP-66586,"REMOVAL OF LUNG, OTHER THAN TOTAL PNEUMONECTOMY; WEDGE RESECTION, SINGLE OR MULTIPLE"
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1077781,1077781,"Pleural effusion, malignant"
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1131102,1131102,Status post TAH-BSO
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1145455,1145455,Carcinoma in situ of right breast
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1280756,1280756,Secondary malignant neoplasm of right lower lobe of lung (CMS-HCC)
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 139664,139664,"Disorders of bursae and tendons in shoulder region, unspecified"
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142230,142230,Pleural effusion
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142249,142249,Tachycardia
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142294,142294,Allergic rhinitis
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142718,142718,Pneumothorax
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 144618,144618,"Pain in joint, shoulder region"
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1603931,1603931,"Sarcoma of thigh, left (CMS-HCC)"
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1760184,1760184,Partial tear of rotator cuff
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1864002,1864002,Venous insufficiency of both lower extremities
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 195732,195732,Gastritis and duodenitis
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 198105,198105,Difficulty walking
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 203532,203532,Pulmonary nodule
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2340484,2340484,Undifferentiated pleomorphic sarcoma (CMS-HCC)
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2368498,2368498,COVID
+F9128662-A1DE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 94814,94814,"Uterus, adenomyosis"
+F9128662-A1DE-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1228623,EDG-1228623,Right lower lobe lung mass
+F9128662-A1DE-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1531575,EDG-1531575,"Secondary sarcoma of lung, unspecified laterality (CMS-HCC)"

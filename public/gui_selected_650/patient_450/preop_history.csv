@@ -1,0 +1,21 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+A5348B00-D728-F011-9212-005056BFF837,Allergy,Allergen ELG-23279,ELG-23279,PENICILLIN
+A5348B00-D728-F011-9212-005056BFF837,Allergy,Latex Allergy,Allergy,No
+A5348B00-D728-F011-9212-005056BFF837,Allergy,Latex allergy,allergy,No
+A5348B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J93.9,J93.9,"Pneumothorax, unspecified type [J93.9]"
+A5348B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J93.9,J93.9,"Pneumothorax, right"
+A5348B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis J93.9,J93.9,"Pneumothorax, unspecified type"
+A5348B00-D728-F011-9212-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R06.00,R06.00,Dyspnea and respiratory abnormalities
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-200407,ERX-200407,"BUDESONIDE-FORMOTEROL 80-4.5 MCG/ACTUATION INH HFAA 2 puffs by Inhalation route daily, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-224926,ERX-224926,"MELATONIN 10 MG [PHI] TABS Take 1 tablet (10 mg total) by mouth every bedtime, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-250,ERX-250,"ALBUTEROL SULFATE 2.5 MG /3 ML (0.083 %) INH NEBU 3 mL (2.5 mg total) by Nebulization route 2 times a day, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-3774,ERX-3774,"hydrOXYzine tablet Take 1 tablet (25 mg total) by mouth every bedtime, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"ALBUTEROL SULFATE 90 MCG/ACTUATION INH HFAA 1 puff by Inhalation route every 4 hours as needed for Shortness of breath, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-4529,ERX-4529,"lithium 300 mg capsule Take 2 capsules (600 mg total) by mouth every bedtime, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-4573,ERX-4573,"LORazepam tablet Take 1 tablet (1 mg total) by mouth every bedtime, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Home Medication,Home Medication ERX-93295,ERX-93295,"zolpidem tablet Take 1 tablet (10 mg total) by mouth every bedtime, Historical Med"
+A5348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 1100477,1100477,"Pneumothorax, right"
+A5348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 142718,142718,Pneumothorax
+A5348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 195775,195775,Dyspnea and respiratory abnormalities
+A5348B00-D728-F011-9212-005056BFF837,Problem List,Problem List Entry 2386589,2386589,Unspecified schizophrenia spectrum and other psychotic disorder (CMS-HCC)
+A5348B00-D728-F011-9212-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2139313,EDG-2139313,"Pneumothorax, unspecified type"

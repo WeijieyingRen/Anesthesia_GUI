@@ -1,0 +1,32 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+30990E39-AF99-EE11-9203-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+30990E39-AF99-EE11-9203-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+30990E39-AF99-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+30990E39-AF99-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+30990E39-AF99-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 428.22,428.22,Chronic systolic heart failure (CMS-HCC)
+30990E39-AF99-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E11.59,E11.59,"Type 2 diabetes mellitus with other circulatory complication, with long-term current use of insulin (CMS-HCC)"
+30990E39-AF99-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I67.5,I67.5,Moyamoya
+30990E39-AF99-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I67.5,I67.5,Moya moya disease
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-116178,ERX-116178,"ROSUVASTATIN 20 MG PO TABS take 1 Tablet (20 mg total) by mouth daily in the evening, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-124673,ERX-124673,"OMEGA-3 ACID ETHYL ESTERS 1 GRAM PO CAPS take 2 Capsules (2 g total) by mouth 2 times a day, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"ASPIRIN 81 MG PO TBEC take 1 Tablet (81 mg total) by mouth daily in the evening, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-200410,ERX-200410,"FREESTYLE LITE STRIPS MISC STRP Use 1 test strip to check BG before meals, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-242678,ERX-242678,"TOUJEO MAX U-300 SOLOSTAR 300 UNIT/ML (3 ML) SC INPN inject 75 Units subcutaneous (under the skin) every bedtime, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-245174,ERX-245174,"BD NANO 2ND GEN PEN NEEDLE 32 GAUGE X 5/32"" MISC NDLE Use 1 pen needle to inject insulin subcutaneously four times a day, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-27694,ERX-27694,"OMEPRAZOLE 20 MG PO CPDR take 20 mg by mouth every morning, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-28314,ERX-28314,"FREESTYLE LANCETS 28 GAUGE MISC MISC 1 Device by Misc.(Non-Drug; Combo Route) route as directed, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-28995,ERX-28995,"METFORMIN 500 MG PO TB24 take 1,000 mg by mouth 2 times a day, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-37637,ERX-37637,"METOPROLOL TARTRATE 25 MG PO TABS take 1 Tablet (25 mg total) by mouth 2 times a day, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-5542,ERX-5542,"niacin tablet take 1 Tablet (500 mg total) by mouth 2 times a day, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-81657,ERX-81657,"sertraline tablet Take 0.5 tablets (50 mg total) by mouth every morning, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-83398,ERX-83398,"CLOPIDOGREL 75 MG PO TABS take 1 Tablet (75 mg total) by mouth every morning, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-9221,ERX-9221,"benazepril tablet take 1 Tablet (20 mg total) by mouth Every Morning, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-92835,ERX-92835,"INSULIN LISPRO 100 UNIT/ML SC SOLN inject 30 Units subcutaneous (under the skin) 3 times a day with meals plus sliding scale, Historical Med"
+30990E39-AF99-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-133352,EAP-133352,CRANIOTOMY BYPASS SUPERFICIAL TEMPORAL ARTERY TO MIDDLE CEREBRAL ARTERY
+30990E39-AF99-EE11-9203-005056BFF837,Problem List,Problem List Entry 101222,101222,12/5 (GKS): R ECIC
+30990E39-AF99-EE11-9203-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+30990E39-AF99-EE11-9203-005056BFF837,Problem List,Problem List Entry 15449,15449,Chronic systolic heart failure (CMS-HCC)
+30990E39-AF99-EE11-9203-005056BFF837,Problem List,Problem List Entry 2032630,2032630,Coronary artery disease involving native heart
+30990E39-AF99-EE11-9203-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+30990E39-AF99-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-103006,EDG-103006,Periapical abscess
+30990E39-AF99-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-189749,EDG-189749,Dental caries

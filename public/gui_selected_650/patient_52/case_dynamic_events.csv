@@ -1,0 +1,12 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 14:20:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,0.0,0.0,0.0,0.0,110.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 14:32:00+00:00,line,arterial_line,1,Arterial Line,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,12.0,12.0,12.0,12.0,98.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 14:32:00+00:00,position,temperature_control,"""blankets""","""R SHC OPT ANE TEMP CONTROL"": ""blankets""",2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,12.0,12.0,12.0,12.0,98.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 14:44:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,24.0,24.0,24.0,24.0,86.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 14:51:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,31.0,31.0,31.0,31.0,79.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 15:14:00+00:00,note,quick_note,quick note,Quick Note: quick note,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,54.0,54.0,54.0,54.0,56.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 16:05:00+00:00,position,bed_position,30 degrees,Bed Position: 30 degrees,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,105.0,105.0,105.0,105.0,5.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 16:05:00+00:00,position,breath_sounds_lul,clear,Breath Sounds LUL: clear,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,105.0,105.0,105.0,105.0,5.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 16:05:00+00:00,position,breath_sounds_rll,clear,Breath Sounds RLL: clear,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,105.0,105.0,105.0,105.0,5.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 16:05:00+00:00,position,breath_sounds_rml,clear,Breath Sounds RML: clear,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,105.0,105.0,105.0,105.0,5.0
+BDC70AE4-AC6A-EF11-920C-005056BFF837,2024-08-30 16:05:00+00:00,position,breath_sounds_rul,clear,Breath Sounds RUL: clear,2024-08-30 14:20:00+00:00,2024-08-30 16:10:00+00:00,105.0,105.0,105.0,105.0,5.0

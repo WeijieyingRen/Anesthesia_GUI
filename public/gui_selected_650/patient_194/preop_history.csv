@@ -1,0 +1,29 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+122057DF-5986-F011-9217-005056BFF837,Allergy,Latex Allergy,Allergy,No
+122057DF-5986-F011-9217-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D32.9,D32.9,Meningioma (CMS-HCC)
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-215006,ERX-215006,"ADVIL PM [PHI] take by mouth, Historical Med"
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-2326,ERX-2326,"dexAMETHasone tablet Take one tablet by mouth daily for 7-10 days then stop, Disp-15 tablet, R-0, E-Prescribe"
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-33502,ERX-33502,"LEXAPRO 20 MG [PHI] TABS Take 1 tablet (20 mg total) by mouth daily in the evening, Historical Med"
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-4420,ERX-4420,"LEVOTHYROXINE 25 MCG [PHI] TABS Take 1 tablet (25 mcg total) by mouth every morning before breakfast, R-0, Historical Med"
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-681,ERX-681,"ASPIRIN 325 MG [PHI] TABS Take 1 tablet (325 mg total) by mouth every morning with breakfast Prn, Historical Med"
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"ATORVASTATIN 20 MG [PHI] TABS Take 1 tablet (20 mg total) by mouth daily in the evening, R-1, Historical Med"
+122057DF-5986-F011-9217-005056BFF837,Home Medication,Home Medication ERX-89476,ERX-89476,"LOSARTAN 25 MG [PHI] TABS Take 1 tablet (25 mg total) by mouth daily in the evening, R-1, Historical Med"
+122057DF-5986-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-105090,EDG-105090,Seizure (CMS-HCC)
+122057DF-5986-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-139894,EDG-139894,Sleep apnea
+122057DF-5986-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+122057DF-5986-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-97491,EDG-97491,Migraine headache
+122057DF-5986-F011-9217-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+122057DF-5986-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+122057DF-5986-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-137735,EAP-137735,CRANIOTOMY MIDDLE FOSSA ORBITOZYGOMATIC APPROACH WITH MRI GUIDED NAVIGATION
+122057DF-5986-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-3564,EAP-3564,OTHER
+122057DF-5986-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-447132,EAP-447132,ORBITOTOMY WITH OR WITHOUT BIOPSY
+122057DF-5986-F011-9217-005056BFF837,Past Surgical History,Past Surgical History EAP-649388,EAP-649388,HX TOTAL ABD HYSTERECTOMY (OVARIES STATUS UNKNOWN/NO CE)
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 1167575,1167575,Obesity (BMI 30-39.9)
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 126111,126111,Depressive disorder
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 142205,142205,Hypothyroidism
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 189425,189425,2/22: L OZ for sphenoid wing meningioma
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 200328,200328,Obstructive sleep apnea syndrome
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 86129,86129,Urinary retention
+122057DF-5986-F011-9217-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia
+122057DF-5986-F011-9217-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-189425,EDG-189425,Meningioma (CMS-HCC)

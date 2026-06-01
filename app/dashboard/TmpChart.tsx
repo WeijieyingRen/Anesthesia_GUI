@@ -568,9 +568,9 @@ export default function TmpChart({
   const chartMarginTop = 10;
   const chartMarginBottom = showXAxis ? 24 : 10;
 
-  const domainMin = 32;
+  const domainMin = 28;
   const domainMax = 40;
-  const yTicks = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+  const yTicks = [28, 30, 32, 34, 36, 38, 40];
 
   const effectiveXEnd = xEnd ?? 0;
 

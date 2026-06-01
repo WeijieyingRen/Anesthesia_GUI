@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { Button } from "@/components/ui/button";
+import { DATASET_BASE } from "@/lib/dataset-config";
 import {
   Card,
   CardContent,
@@ -28,7 +29,7 @@ type GameData = {
 };
 
 // ------------ Config ------------
-const CSV_BASE = "/data";
+const CSV_BASE = DATASET_BASE;
 
 export default function PatientList() {
   const router = useRouter();

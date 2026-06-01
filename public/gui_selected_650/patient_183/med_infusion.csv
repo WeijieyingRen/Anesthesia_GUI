@@ -1,0 +1,2 @@
+mpog_dose_id,mpog_case_id,mpog_med_concept_id,dose_type,start_time,end_time,medication,med_concept_desc,dose,unit,route,aims_patient_dosing_weight,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+8FF01286-B0D2-F011-921A-005056BFF837,95D2BE5A-EEB6-EF11-920E-005056BFF837,10445,2,2024-12-05 18:15:00+00:00,2024-12-05 20:05:00+00:00,vasopressin,vasopressin,0.04,Units/min,Intravenous,,2024-12-05 15:41:00+00:00,2024-12-05 21:20:00+00:00,154.0,264.0,154.0,154.0,75.0

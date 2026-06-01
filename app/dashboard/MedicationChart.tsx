@@ -1592,9 +1592,7 @@ export default function MedicationChart({
               />
             </div>
 
-            <div className="px-2 py-1 text-[11px] text-gray-500">
-              Drag the bar to move left or right across the medication timeline.
-            </div>
+          
           </div>
         </div>
       </div>

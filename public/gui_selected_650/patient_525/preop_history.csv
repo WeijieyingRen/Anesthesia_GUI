@@ -1,0 +1,46 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-14773,ELG-14773,PIPERACILLIN-TAZOBACTAM-DEXTRS
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-23125,ELG-23125,CEFTAZIDIME-AVIBACTAM
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-5671,ELG-5671,CEFTRIAXONE
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-5688,ELG-5688,VANCOMYCIN
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-7000,ELG-7000,LEVOFLOXACIN
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-8229,ELG-8229,INFLIXIMAB
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Allergen ELG-8991,ELG-8991,IODINE
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Latex Allergy,Allergy,No
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-207958,ERX-207958,"CHOLECALCIFEROL (VITAMIN D3) 125 MCG (5,000 UNIT) PO TABS take 1 Tablet (5,000 Units total) by mouth, Historical Med"
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK take 1 Packet (17 g total) by mouth One Time, Historical Med"
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-2625,ERX-2625,"DOXYCYCLINE HYCLATE 100 MG PO TABS take 1 Tablet (100 mg total) by mouth 2 times a day for 7 days, Disp-14 Tablet, R-0, E-Prescribe"
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-100172,EDG-100172,Liver abscess
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-10099,EDG-10099,Splenomegaly
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-141700,EDG-141700,Pulmonary embolism (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-159694,EDG-159694,Hepatic steatosis
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-1845734,EDG-1845734,Multiple drug resistant organism (MDRO) culture positive
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-192855,EDG-192855,Lung nodule
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-201066,EDG-201066,Intra-abdominal abscess (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-203479,EDG-203479,Spinal abscess (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-3549,EDG-3549,Paraplegia (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-91858,EDG-91858,Brain abscess
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121777,EAP-121777,HX CYSTOSCOPY
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-477910,EAP-477910,EUSTACHIAN TUBE BALLOON DEVICE
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1034171,1034171,Neurogenic bladder
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 105500,105500,Myelopathy (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1120980,1120980,Spinal cord abscess
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1121973,1121973,History of pulmonary embolus (PE)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 142107,142107,Esophagitis
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 142212,142212,Cirrhosis of liver (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 142250,142250,Thrombocytopenia (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1495848480,1495848480,History of COVID-19
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1760864,1760864,Chronic paraplegia (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1857257,1857257,Crohn's disease involving terminal ileum (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 1868425,1868425,Paraplegia at T4 level (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 200570,200570,Elevated serum creatinine
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 201066,201066,Intra-abdominal abscess (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2042285,2042285,Fistula of small intestine due to Crohn's disease (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2060552,2060552,History of deep vein thrombosis (DVT) of lower extremity
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2110866,2110866,Crohn's disease of large intestine without complications (CMS-HCC)
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 65988,65988,Acute upper respiratory infection
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Problem List,Problem List Entry 74264,74264,Enterovesical fistula
+3CD4B35C-E6A3-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-70454,EDG-70454,Urachal cyst

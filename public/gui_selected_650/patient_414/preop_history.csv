@@ -1,0 +1,68 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-328,ELG-328,TETRACYCLINES
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3469,ELG-3469,HYDROCHLOROTHIAZIDE
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-3937,ELG-3937,CLINDAMYCIN
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-4537,ELG-4537,ONDANSETRON HCL
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-5101,ELG-5101,TRAMADOL
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-7000,ELG-7000,LEVOFLOXACIN
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Allergen ELG-9258,ELG-9258,LATEX
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,Yes
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,Yes
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 2 Tablets (1,000 mg total) by mouth every 6 hours as needed for Pain, Disp-60 Tablet, R-0, E-Prescribe"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10226,ERX-10226,"HYDROMORPHONE 8 MG PO TABS take 1 Tablet (8 mg total) by mouth every 4 hours as needed, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-10646,ERX-10646,"MOMETASONE 0.1 % TP CREA by Topical route, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-1661,ERX-1661,"CHLORTHALIDONE 25 MG PO TABS take 1 Tablet (25 mg total) by mouth daily as needed Taking Rx if BP > 100/70, takes Rx at night, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-183802,ERX-183802,"OMEGA-3 FATTY ACIDS PO take by mouth, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-212562,ERX-212562,"BUPRENORPHINE 20 MCG/HOUR TD PTWK APPLY 1 PATCH TOPICALLY TO THE SKIN EVERY 7 DAYS. GENERIC FOR BUTRANS., Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-236402,ERX-236402,NALOXONE 4 MG/ACTUATION NASAL SPRY Historical Med
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-24571,ERX-24571,"LISINOPRIL 30 MG PO TABS take 1 Tablet (30 mg total) by mouth every bedtime, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-2509,ERX-2509,"DIPHENHYDRAMINE HCL 25 MG PO CAPS take 1 Capsule (25 mg total) by mouth every 4 hours as needed as needed for migraine symptoms, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-28408,ERX-28408,"ESTRADIOL 0.05 MG/24 HR TD PTWK every 7 days, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-31578,ERX-31578,"ALBUTEROL SULFATE 1.25 MG/3 ML INH NEBU by Inhalation route, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-35216,ERX-35216,"RESTASIS 0.05 % OPHT DPET once as needed, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-37167,ERX-37167,"MULTIVITAMIN PO TABS take 1 Tablet by mouth, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-40196,ERX-40196,"albuterol 90 mcg/actuation HFA inhaler 2 Puffs by Inhalation route every 6 hours as needed Premeds for exercise, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-5005,ERX-5005,"metoclopramide tablet take 1 Tablet (10 mg total) by mouth 4 times a day as needed for Nausea/Vomiting use if Zofran not working well enough, Disp-20 Tablet, R-0, E-Prescribe"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"other drug juice plus, Historical Med"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-6582,ERX-6582,"prochlorperazine tablet take 1 Tablet (10 mg total) by mouth every 6 hours as needed for Nausea/Vomiting Use if zofran and reglan not working well enough, Disp-20 Tablet, R-0, E-Prescribe"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-664,ERX-664,"ascorbic acid tablet take 1 Tablet (500 mg total) by mouth 2 times a day, Disp-30 Tablet, R-0, E-Prescribe"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-860,ERX-860,"baclofen tablet take 1 Tablet (10 mg total) by mouth every 6 to 8 hours as needed, Disp-20 Tablet, R-0, E-Prescribe"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1079603,EDG-1079603,PONV (postoperative nausea and vomiting)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1253572,EDG-1253572,Difficult intravenous access
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-138118,EDG-138118,HTN (hypertension)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142929,EDG-142929,Asthma
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-93383,EDG-93383,Crohn's disease (CMS-HCC)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-1071884,EAP-1071884,"MASTECTOMY SIMPLE COMPLETE, NIPPLE SPARING; BILATERAL"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121851,EAP-121851,HX SALPINGO-OOPHORECTOMY
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121856,EAP-121856,HX CESAREAN SECTION
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-133554,EAP-133554,TUBAL LIGATION LAPAROSCOPIC
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135904,EAP-135904,BREAST RECONSTRUCTION WITH TISSUE EXPANDERS; BILATERAL
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-394006,EAP-394006,MASTECTOMY PARTIAL; BILATERAL
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-394028,EAP-394028,BREAST BIOPSY; BILATERAL
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-418605,EAP-418605,LAPAROSCOPIC TOTAL HYSTERECTOMY
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-538390,EAP-538390,ACELLULAR DERMAL MATRIX ALLOGRAFT PLACEMENT; SECONDARY PROCEDURE
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1032388,1032388,Family history of breast cancer in mother
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1032405,1032405,Family history of uterine cancer
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1035913,1035913,Myofascial pain
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 103785,103785,Psoriasis
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1044358,1044358,S/P bilateral mastectomy
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1079603,1079603,PONV (postoperative nausea and vomiting)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 113315,113315,Iron deficiency anemia
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1239143,1239143,Port-A-Cath in place
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1252766,1252766,"Chronic, continuous use of opioids"
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142161,142161,Abdominal pain
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 144144,144144,Chronic pain
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 164010,164010,PID (acute pelvic inflammatory disease)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 203610,203610,Exercise-induced asthma
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2239799,2239799,Class 1 obesity with body mass index (BMI) of 31.0 to 31.9 in adult
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 77389,77389,Migraine
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 91283,91283,Autoimmune disease (CMS-HCC)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Problem List,Problem List Entry 93383,93383,Crohn's disease (CMS-HCC)
+AAB01BB9-0ED2-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-189671,EDG-189671,Personal history of breast cancer

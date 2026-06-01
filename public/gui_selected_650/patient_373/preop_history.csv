@@ -1,0 +1,63 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+BDECE18B-9BDD-F011-921A-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+BDECE18B-9BDD-F011-921A-005056BFF837,Allergy,Allergen ELG-3891,ELG-3891,DOXYCYCLINE
+BDECE18B-9BDD-F011-921A-005056BFF837,Allergy,Latex Allergy,Allergy,No
+BDECE18B-9BDD-F011-921A-005056BFF837,Allergy,Latex allergy,allergy,No
+BDECE18B-9BDD-F011-921A-005056BFF837,Encounter Diagnosis,Encounter Diagnosis C50.411,C50.411,"Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive (CMS-HCC)"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-10544,ERX-10544,"metFORMIN tablet Take 1 tablet (500 mg total) by mouth every bedtime, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-190897,ERX-190897,"TYLENOL PO Take 1,000 mg by mouth as needed (pain), Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-191847,ERX-191847,"VITAMIN C PO Take 500 mg by mouth daily, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-204020,ERX-204020,"oxyCODONE (Roxicodone) tablet Take 0.5 tablets (5 mg total) by mouth every 6 hours as needed, Disp-15 tablet, R-0, E-Prescribe"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK Take 1 packet (17 g total) by mouth One Time, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-2566,ERX-2566,"docusate (Colace) capsule Take 1 capsule (100 mg total) by mouth 2 times a day, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-35184,ERX-35184,"cyclobenzaprine tablet Take 1 tablet (5 mg total) by mouth 3 times a day, Disp-30 tablet, R-0, E-Prescribe"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-4717,ERX-4717,"MAGNESIUM OXIDE 500 MG MAGNESIUM PO TABS Take by mouth, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-5393,ERX-5393,"naproxen tablet TAKE 1 TABLET BY MOUTH TWICE A DAY AS NEEDED FOR PAIN WITH MEALS, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"amLODIPine tablet Take 1 tablet (10 mg total) by mouth every morning, Historical Med"
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet Take 1 tablet (100 mg total) by mouth every morning, Historical MedPaused since yesterday. Resumes tomorrow."
+BDECE18B-9BDD-F011-921A-005056BFF837,Home Medication,Home Medication ERX-96321,ERX-96321,"Post op camisole Non-compressive Post operative camisole with front zipper and drain pockets, product code L8000/L8015., Disp-2 each, R-0, No Print"
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-10048,EDG-10048,Heartburn
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-115379,EDG-115379,Bladder infection
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-1166983,EDG-1166983,Menopause present
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-118870,EDG-118870,Breast cancer (CMS-HCC)
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-118987,EDG-118987,GERD (gastroesophageal reflux disease)
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-126318,EDG-126318,Endometriosis
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-139894,EDG-139894,Sleep apnea
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-144317,EDG-144317,Gallstones
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-187977,EDG-187977,Obese
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-200329,EDG-200329,Obstructive sleep apnea
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-92982,EDG-92982,Colon polyp
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-97158,EDG-97158,Seasonal allergies
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Medical History,Past Medical History EDG-98657,EDG-98657,Female infertility
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-1071884,EAP-1071884,"MASTECTOMY SIMPLE COMPLETE, NIPPLE SPARING; BILATERAL"
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121708,EAP-121708,HX COLONOSCOPY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121732,EAP-121732,HX LAPAROSCOPY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121736,EAP-121736,HX BREAST BIOPSY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121817,EAP-121817,HX HERNIA REPAIR
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121854,EAP-121854,HX MYOMECTOMY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-121855,EAP-121855,HX OOPHORECTOMY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-134540,EAP-134540,CHOLECYSTECTOMY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-135904,EAP-135904,BREAST RECONSTRUCTION WITH TISSUE EXPANDERS; BILATERAL
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-138281,EAP-138281,AXILLARY LYMPH NODE AND/ OR SENTINEL NODE BIOPSY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-449043,EAP-449043,HX JOINT SURGERY
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-538390,EAP-538390,ACELLULAR DERMAL MATRIX ALLOGRAFT PLACEMENT; SECONDARY PROCEDURE
+BDECE18B-9BDD-F011-921A-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 1031214,1031214,Well woman exam
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 1080963,1080963,Screening for colon cancer
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 1219598,1219598,Hx of gynecological procedure
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 1230819,1230819,History of anesthesia complications
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 139894,139894,Sleep apnea
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 187977,187977,Obese
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 2236452,2236452,"Malignant neoplasm of upper-outer quadrant of right breast in female, estrogen receptor positive (CMS-HCC)"
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 2237129,2237129,Edema of left ankle
+BDECE18B-9BDD-F011-921A-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+BDECE18B-9BDD-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2034041,EDG-2034041,Infiltrating ductal carcinoma of right breast (CMS-HCC)
+BDECE18B-9BDD-F011-921A-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2305691,EDG-2305691,"Malignant neoplasm of right female breast, unspecified estrogen receptor status, unspecified site of breast (CMS-HCC)"

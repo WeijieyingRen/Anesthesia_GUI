@@ -1,0 +1,24 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+D61F5478-2326-EE11-9200-005056BFF837,Allergy,Latex Allergy,Allergy,No
+D61F5478-2326-EE11-9200-005056BFF837,Allergy,Latex allergy,allergy,No
+D61F5478-2326-EE11-9200-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z01.818,Z01.818,Preop examination
+D61F5478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-110892,ERX-110892,"enoxaparin (LOVENOX) 40 mg syringe inject 0.4 mL (40 mg total) subcutaneous (under the skin) daily START AFTER SURGERY, Disp-12 mL, R-0, E-Prescribe"
+D61F5478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-235149,ERX-235149,"HUMALOG KWIKPEN INSULIN 200 UNIT/ML (3 ML) SC INPN inject 10 Units subcutaneous (under the skin) 2 times a day, Historical Med"
+D61F5478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-242049,ERX-242049,"OZEMPIC 0.25 MG OR 0.5 MG(2 MG/1.5 ML) SC PNIJ inject subcutaneous (under the skin) daily afternoon, Historical Med"
+D61F5478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-31261,ERX-31261,"NOVOLOG U-100 INSULIN ASPART 100 UNIT/ML SC SOLN every bedtime 20 units, Historical Med"
+D61F5478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-4526,ERX-4526,"lisinopriL tablet every bedtime, Historical Med"
+D61F5478-2326-EE11-9200-005056BFF837,Home Medication,Home Medication ERX-88045,ERX-88045,"SIMVASTATIN 20 MG PO TABS take 1 Tablet (20 mg total) by mouth every bedtime, Historical Med"
+D61F5478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-108530,EDG-108530,High blood pressure
+D61F5478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-1288084,EDG-1288084,Diabetes (CMS-HCC)
+D61F5478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-128918,EDG-128918,Malignant neoplasm of bladder (CMS-HCC)
+D61F5478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+D61F5478-2326-EE11-9200-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+D61F5478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+D61F5478-2326-EE11-9200-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+D61F5478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+D61F5478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+D61F5478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 1494821577,1494821577,History of 2019 novel coronavirus disease (COVID-19)
+D61F5478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 149533,149533,Malignant neoplasm of urinary bladder (CMS-HCC)
+D61F5478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+D61F5478-2326-EE11-9200-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+D61F5478-2326-EE11-9200-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1969637,EDG-1969637,"Malignant neoplasm of urinary bladder, unspecified site (CMS-HCC)"

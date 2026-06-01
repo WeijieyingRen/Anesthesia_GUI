@@ -1,0 +1,30 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+61A2BD11-EACE-ED11-91FB-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+61A2BD11-EACE-ED11-91FB-005056BFF837,Allergy,Allergen ELG-4620,ELG-4620,AMOXICILLIN
+61A2BD11-EACE-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+61A2BD11-EACE-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+61A2BD11-EACE-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis K63.2,K63.2,Enterocutaneous fistula
+61A2BD11-EACE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-1080,ERX-1080,"BISACODYL 10 MG PR SUPP insert 1 Suppository (10 mg total) into the rectum as needed (if no bowel movement for 5 days), Disp-5 Suppository, R-1, E-Prescribe"
+61A2BD11-EACE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-116815,ERX-116815,"ALFUZOSIN 10 MG PO TB24 daily in the evening, Historical Med"
+61A2BD11-EACE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-25123,ERX-25123,OCTREOTIDE ACETATE 200 MCG/ML INJ SOLN Historical Med
+61A2BD11-EACE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-29947,ERX-29947,"CPM-PSEUDOEPHED-ACETAMINOPHEN 2-30-500 MG PO TABS 1 tablet EVERY 6 HOURS (route: oral), Historical Med"
+61A2BD11-EACE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-540597,ERX-540597,"MULTIVITAMIN (GENERIC) PO TABS take 1 Tablet by mouth daily, Historical Med"
+61A2BD11-EACE-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-83930,ERX-83930,"OMEPRAZOLE 40 MG PO CPDR take 40 mg by mouth daily in the evening, Historical Med"
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-1131596,EDG-1131596,Hx of prostatic malignancy
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-138145,EDG-138145,"Diabetes mellitus, type 2 (CMS-HCC)"
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-147608,EDG-147608,Essential (primary) hypertension
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121728,EAP-121728,HX HERNIA REPAIR INCISIONAL
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188269,EAP-188269,IR ABSCESS DRAIN REVISION
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-188271,EAP-188271,IR ABSCESSOGRAM
+61A2BD11-EACE-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-189252,EAP-189252,IR ABSCESS DRAIN PLACEMENT
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 10026,10026,Shortness of breath
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1097276,1097276,Enterocutaneous fistula
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1122635,1122635,Ventral hernia with obstruction and without gangrene
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1253572,1253572,Difficult intravenous access
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 201066,201066,Intra-abdominal abscess (CMS-HCC)
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 70859,70859,Gastroesophageal reflux disease
+61A2BD11-EACE-ED11-91FB-005056BFF837,Problem List,Problem List Entry 78949,78949,Diabetes mellitus (CMS-HCC)
+61A2BD11-EACE-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1097276,EDG-1097276,Enterocutaneous fistula
+61A2BD11-EACE-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1122635,EDG-1122635,Ventral hernia with obstruction and without gangrene

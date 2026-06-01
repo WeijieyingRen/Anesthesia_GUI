@@ -1,0 +1,2 @@
+mpog_io_id,mpog_case_id,mpog_io_concept_id,io_type,start_time,end_time,output_name,dose,unit,route,concept_name,fluid_class,fluid_direction,anesthesia_start,anesthesia_end,relative_anesthesia_start,relative_anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+A334549E-8205-F011-9211-005056BFF837,E19368B0-7DFC-ED11-91FC-005056BFF837,10497,2,2023-05-22 19:42:00+00:00,,Urine,1000.0,ML,Unknown Route,urine output,urine_output,output,2023-05-22 15:06:00+00:00,2023-05-22 20:40:00+00:00,276.0,276.0,276.0,276.0,58.0

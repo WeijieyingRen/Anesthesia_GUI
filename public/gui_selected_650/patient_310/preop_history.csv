@@ -1,0 +1,18 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+34AD3CA7-1014-EE11-91FC-005056BFF837,Allergy,Allergen ELG-5477,ELG-5477,FLUOXETINE
+34AD3CA7-1014-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+34AD3CA7-1014-EE11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+34AD3CA7-1014-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R22.40,R22.40,"Mass of thigh, unspecified laterality"
+34AD3CA7-1014-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+34AD3CA7-1014-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 2 Tablets (1,000 mg total) by mouth 3 times a day, Disp-30 Tablet, R-0, E-Prescribe"
+34AD3CA7-1014-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1 Tablet (5 mg total) by mouth every 4 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+34AD3CA7-1014-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-24497,ERX-24497,"CELEBREX 100 MG PO CAPS take 1 Capsule (100 mg total) by mouth 2 times a day, Disp-120 Capsule, R-2, E-Prescribe"
+34AD3CA7-1014-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-29486,ERX-29486,"NORCO 5-325 MG PO TABS take 1 Tablet by mouth every 6 hours as needed, Disp-20 Tablet, R-0, E-Prescribe"
+34AD3CA7-1014-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-3844,ERX-3844,"ibuprofen tablet take 1 Tablet (600 mg total) by mouth every 6 hours as needed, Historical Med"
+34AD3CA7-1014-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121821,EAP-121821,HX CHOLECYSTECTOMY
+34AD3CA7-1014-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-135338,EAP-135338,FEMUR BONE BIOPSY
+34AD3CA7-1014-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-453589,EAP-453589,CLEAN CLOSURE; SECONDARY PROCEDURE
+34AD3CA7-1014-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1054551,1054551,Left thigh pain
+34AD3CA7-1014-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1228756,1228756,Lytic bone lesion of left femur
+34AD3CA7-1014-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2220775,2220775,Moderate exercise
+34AD3CA7-1014-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1228756,EDG-1228756,Lytic bone lesion of left femur

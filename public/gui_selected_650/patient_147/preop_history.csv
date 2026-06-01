@@ -1,0 +1,11 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+CB78915E-C6EC-ED11-91FB-005056BFF837,Allergy,Allergen ELG-326,ELG-326,PENICILLINS
+CB78915E-C6EC-ED11-91FB-005056BFF837,Allergy,Allergen ELG-343,ELG-343,SULFA (SULFONAMIDE ANTIBIOTICS)
+CB78915E-C6EC-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+CB78915E-C6EC-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+CB78915E-C6EC-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R19.00,R19.00,Pelvic mass
+CB78915E-C6EC-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-1718,ERX-1718,"CLARITIN 10 MG PO TABS take 1 Tablet (10 mg total) by mouth as needed (ALLERGY) PER PATIENT REPORT; PRN WITH ALLERGY EXACERBATION, Historical Med"
+CB78915E-C6EC-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-3841,ERX-3841,"ibuprofen tablet take 1 Tablet (200 mg total) by mouth every 6 hours as needed for Pain PER PATIENT REPORT, Historical Med"
+CB78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 102955,102955,Pelvic mass
+CB78915E-C6EC-ED11-91FB-005056BFF837,Problem List,Problem List Entry 142168,142168,Anemia
+CB78915E-C6EC-ED11-91FB-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-102955,EDG-102955,Pelvic mass

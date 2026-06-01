@@ -240,10 +240,6 @@ function buildDetailPolyline(
   };
 }
 
-function isZeroValue(v: number) {
-  return Math.abs(v) < 1e-9;
-}
-
 function estimateTextWidth(text: string, fontSize = 10) {
   return Math.max(10, text.length * (fontSize * 0.62));
 }
@@ -473,9 +469,11 @@ export default function VentilationChart({
   }, [sharedScrollLeft]);
 
   if (!rows.length) {
-    return embedded ? null : (
-      <div className="rounded-2xl border bg-white p-4 shadow-sm">
-        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+    return (
+      <div className={embedded ? "bg-white px-4 py-3" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+        {!embedded && title ? (
+          <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+        ) : null}
         <div className="text-sm text-gray-500">No ventilation data available.</div>
       </div>
     );
@@ -679,7 +677,6 @@ export default function VentilationChart({
                     const segRight = (seg.x1 / finalXEnd) * plotWidth;
 
                     const label = String(roundSmart(seg.firstValue));
-                    const hideVisual = isZeroValue(seg.firstValue);
                     const textWidth = estimateTextWidth(label, 10);
 
                     const textX = segLeft + 6;
@@ -687,7 +684,10 @@ export default function VentilationChart({
 
                     const lineStartX = textX + textWidth + 6;
                     const lineEndX = segRight - 6;
-                    const canDrawLine = !hideVisual && lineEndX > lineStartX + 2;
+                    const canDrawLine = lineEndX > lineStartX + 2;
+                    const markerX = canDrawLine
+                      ? segLeft + 4
+                      : Math.min(segRight - 4, Math.max(segLeft + 4, segLeft + (segRight - segLeft) / 2));
 
                     const isSelected =
                       zoomTarget &&
@@ -709,35 +709,40 @@ export default function VentilationChart({
                             points: seg.points,
                           });
                         }}
-                      >
-                        <rect
-                          x={segLeft}
+                        >
+                          <rect
+                            x={segLeft}
                           y={rowTop}
                           width={Math.max(2, segRight - segLeft)}
                           height={ROW_HEIGHT}
                           fill={isSelected ? "#FFF7ED" : "transparent"}
                           stroke={isSelected ? "#FB923C" : "transparent"}
-                          strokeWidth={isSelected ? 1.5 : 0}
+                            strokeWidth={isSelected ? 1.5 : 0}
+                          />
+
+                        <circle
+                          cx={markerX}
+                          cy={centerY}
+                          r={3.5}
+                          fill={color}
+                          stroke="white"
+                          strokeWidth={1}
                         />
 
-                        {!hideVisual && (
-                          <>
-                            <text x={textX} y={textY} fontSize={10} fill="#111827">
-                              {label}
-                            </text>
+                        <text x={textX} y={textY} fontSize={10} fill="#111827">
+                          {label}
+                        </text>
 
-                            {canDrawLine && (
-                              <line
-                                x1={lineStartX}
-                                y1={centerY}
-                                x2={lineEndX}
-                                y2={centerY}
-                                stroke={color}
-                                strokeWidth={5}
-                                strokeLinecap="butt"
-                              />
-                            )}
-                          </>
+                        {canDrawLine && (
+                          <line
+                            x1={lineStartX}
+                            y1={centerY}
+                            x2={lineEndX}
+                            y2={centerY}
+                            stroke={color}
+                            strokeWidth={5}
+                            strokeLinecap="butt"
+                          />
                         )}
 
                         <rect
@@ -807,10 +812,6 @@ export default function VentilationChart({
                 className="vent-slider"
                 aria-label="Ventilation chart horizontal scroll"
               />
-            </div>
-
-            <div className="px-2 py-1 text-[11px] text-gray-500">
-              Drag the bar to move left or right across the ventilation timeline.
             </div>
           </div>
         </div>

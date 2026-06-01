@@ -1,0 +1,6 @@
+mpog_case_id,observation_time,event_group,event_name,event_value,event_label,anesthesia_start,anesthesia_end,relative_anesthesia_time,relative_anesthesia_start,relative_anesthesia_end,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+167017AD-6814-F011-9211-005056BFF837,2025-04-04 00:16:00+00:00,airway,lma_inserted,1,LMA Inserted,2025-04-03 23:49:00+00:00,2025-04-04 01:17:00+00:00,27.0,27.0,27.0,27.0,61.0
+167017AD-6814-F011-9211-005056BFF837,2025-04-04 00:27:00+00:00,position,local_by_surgeons,local by surgeons,Local by Surgeons: local by surgeons,2025-04-03 23:49:00+00:00,2025-04-04 01:17:00+00:00,38.0,38.0,38.0,38.0,50.0
+167017AD-6814-F011-9211-005056BFF837,2025-04-04 00:40:00+00:00,note,quick_note,quick note,Quick Note: quick note,2025-04-03 23:49:00+00:00,2025-04-04 01:17:00+00:00,51.0,51.0,51.0,51.0,37.0
+167017AD-6814-F011-9211-005056BFF837,2025-04-04 01:05:00+00:00,airway,lma_removed,1,LMA Removed,2025-04-03 23:49:00+00:00,2025-04-04 01:17:00+00:00,76.0,76.0,76.0,76.0,12.0
+167017AD-6814-F011-9211-005056BFF837,2025-04-04 01:05:00+00:00,airway,lma_removed,-suctioned-atraumatic removal of lma,LMA Removed: -suctioned-atraumatic removal of lma,2025-04-03 23:49:00+00:00,2025-04-04 01:17:00+00:00,76.0,76.0,76.0,76.0,12.0

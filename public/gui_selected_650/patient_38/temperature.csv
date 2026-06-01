@@ -1,0 +1,4 @@
+mpog_case_id,observation_time,TMP,TMP2,TMP Esophageal,TMP Skin,TMP Nasopharyngeal,TMP Bladder,TMP Blood,TMP Rectal,anesthesia_start,anesthesia_end,relative_anesthesia_time,minutes_from_anesthesia_start,minutes_to_anesthesia_end
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-17 22:20:00+00:00,97.7,,,,,,,,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,28.0,28.0,109.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-17 22:35:00+00:00,97.9,,,,,,,,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,43.0,43.0,94.0
+C9842B5A-4C9A-ED11-91FA-005056BFF837,2023-01-18 00:00:00+00:00,96.8,,,,,,,,2023-01-17 21:52:00+00:00,2023-01-18 00:09:00+00:00,128.0,128.0,9.0

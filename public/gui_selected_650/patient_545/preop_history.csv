@@ -1,0 +1,34 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+62ECB851-EC1B-EE11-91FC-005056BFF837,Allergy,Allergen ELG-1121,ELG-1121,VITAMIN B
+62ECB851-EC1B-EE11-91FC-005056BFF837,Allergy,Allergen ELG-2821,ELG-2821,MORPHINE
+62ECB851-EC1B-EE11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+62ECB851-EC1B-EE11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+62ECB851-EC1B-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I71.011,I71.011,Aortic arch dissection (CMS-HCC)
+62ECB851-EC1B-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I71.012,I71.012,Dissection of descending thoracic aorta (CMS-HCC)
+62ECB851-EC1B-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I71.019,I71.019,"Dissection of thoracic aorta, unspecified part (CMS-HCC)"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis I71.23,I71.23,"Aneurysm of descending thoracic aorta, unspecified whether ruptured (CMS-HCC)"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Z98.890,Z98.890,History of repair of Stanford type A dissecting aneurysm of thoracic aorta
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-14113,ERX-14113,"ASPIRIN 81 MG PO TBEC take 1 Tablet (81 mg total) by mouth daily, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-177009,ERX-177009,"FOLIC ACID PO take 800 mg by mouth, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take by mouth, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-324,ERX-324,"ALPRAZolam (Xanax) tablet take 1 Tablet (0.25 mg total) by mouth 2 times a day as needed, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-3845,ERX-3845,"IBUPROFEN 800 MG PO TABS take 1 Tablet (800 mg total) by mouth every 6 hours as needed, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-79507,ERX-79507,"ATORVASTATIN 10 MG PO TABS take 1 Tablet (10 mg total) by mouth daily, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-80208,ERX-80208,"metoprolol succinate (Toprol XL) extended release tablet take 1 Tablet (50 mg total) by mouth daily, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-83628,ERX-83628,"AMLODIPINE 5 MG PO TABS take 5 mg by mouth daily, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Home Medication,Home Medication ERX-94279,ERX-94279,"losartan tablet take 1 Tablet (100 mg total) by mouth daily, Historical Med"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-125778,EDG-125778,Cataract
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-126092,EDG-126092,Depression
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-142988,EDG-142988,Arthropathy
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-151644,EDG-151644,Senile macular degeneration
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121654,EAP-121654,HX HIP REPLACEMENT
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+62ECB851-EC1B-EE11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-198139,EAP-198139,HX CATARACT SURGERY
+62ECB851-EC1B-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1118036,1118036,Current smoker
+62ECB851-EC1B-EE11-91FC-005056BFF837,Problem List,Problem List Entry 1124780,1124780,Dissection of descending thoracic aorta (CMS-HCC)
+62ECB851-EC1B-EE11-91FC-005056BFF837,Problem List,Problem List Entry 142335,142335,Hypertension
+62ECB851-EC1B-EE11-91FC-005056BFF837,Problem List,Problem List Entry 2377127,2377127,"Dissection of thoracic aorta, unspecified (CMS-HCC)"
+62ECB851-EC1B-EE11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-2334751,EDG-2334751,History of repair of Stanford type A dissecting aneurysm of thoracic aorta

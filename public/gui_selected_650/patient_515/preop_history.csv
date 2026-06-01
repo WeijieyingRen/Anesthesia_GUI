@@ -1,0 +1,53 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+B6548DBA-5397-EE11-9203-005056BFF837,Allergy,Allergen ELG-7598,ELG-7598,RED BLOOD CELLS
+B6548DBA-5397-EE11-9203-005056BFF837,Allergy,Latex allergy,allergy,No
+B6548DBA-5397-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 585.6,585.6,End stage renal disease (CMS-HCC)
+B6548DBA-5397-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 599.71,599.71,Gross hematuria
+B6548DBA-5397-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis E83.39,E83.39,Hyperphosphatemia
+B6548DBA-5397-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis N17.9,N17.9,Acute kidney injury (nontraumatic) (CMS-HCC)
+B6548DBA-5397-EE11-9203-005056BFF837,Encounter Diagnosis,Encounter Diagnosis Q61.2,Q61.2,ADPKD (autosomal dominant polycystic kidney disease)
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-102,ERX-102,"acetaminophen (Tylenol) tablet take 2 Tablets (1,000 mg total) by mouth every 6 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-1080,ERX-1080,"BISACODYL 10 MG PR SUPP insert 1 Suppository (10 mg total) into the rectum daily as needed (As needed if Mirilax and Senna do not help), Disp-5 Suppository, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-10814,ERX-10814,"oxyCODONE tablet take 1-2 Tablets (5-10 mg total) by mouth every 4 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-11349,ERX-11349,"SENNOSIDES 8.6 MG PO TABS take 2 Tablets by mouth 2 times a day, Disp-30 Tablet, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-14132,ERX-14132,"KETOCONAZOLE 2 % TP SHAM Use topically on affected area(s) three times a week., Disp-120 mL, R-11, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-14632,ERX-14632,"traMADol (Ultram) tablet take 1 Tablet (50 mg total) by mouth every 8 hours as needed, Disp-30 Tablet, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-18308,ERX-18308,"gabapentin (Neurontin) capsule take 1 Capsule (300 mg total) by mouth every day Take this medication as needed and do not exceed 300 mg in a day, Disp-90 Capsule, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-200273,ERX-200273,"PEG 3350-ELECTROLYTES 236-22.74-6.74 -5.86 GRAM PO SOLR take 4,000 mL by mouth One Time for 1 dose, Disp-4000 mL, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-236406,ERX-236406,"NARCAN 4 MG/ACTUATION NASAL SPRY 1 Spray by Nasal route as needed (opioid overdose), Disp-2 Each, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-243098,ERX-243098,"Retacrit 10k inject 1 mL subcutaneous (under the skin) every 7 days, Disp-4 mL, R-3, In Clinic"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-243098,ERX-243098,"RETACRIT 10,000 UNIT/ML INJ SOLN inject 10,000 Units subcutaneous (under the skin) every 7 days, Disp-4 mL, R-3, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-25119,ERX-25119,"ciprofloxacin tablet take 1 Tablet (500 mg total) by mouth 2 times a day for 11 days, Disp-22 Tablet, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-25424,ERX-25424,"POLYETHYLENE GLYCOL 3350 17 GRAM PO PWPK take 1 Packet (17 g total) by mouth 2 times a day, Disp-30 Each, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-7313,ERX-7313,"sodium bicarbonate tablet take 2 Tablets (1,300 mg total) by mouth 2 times a day, Disp-120 Tablet, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-80562,ERX-80562,"mycophenolate (CellCept) capsule take 1 Capsule (250 mg total) by mouth 2 times a day, Disp-60 Capsule, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-8112,ERX-8112,"TRIAMCINOLONE ACETONIDE 0.025 % TP [PHI] Apply topically as directed twice daily., Disp-80 g, R-11, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-89065,ERX-89065,"LIDOCAINE 5 % TP PTMD apply 1 Patch to skin daily, Disp-15 Patch, R-0, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-94176,ERX-94176,"ondansetron orally disintegrating tablet take 1 Tablet (4 mg total) by mouth every 8 hours as needed, Disp-30 Tablet, R-1, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Home Medication,Home Medication ERX-9632,ERX-9632,"CLOBETASOL 0.05 % SCLP SOLN Use as directed twice daily, as needed for itch on scalp, Disp-50 mL, R-11, E-Prescribe"
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-103785,EDG-103785,Psoriasis
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-1095510,EDG-1095510,ADPKD (autosomal dominant polycystic kidney disease)
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-142168,EDG-142168,Anemia
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-142424,EDG-142424,Obesity
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-144666,EDG-144666,Polycystic kidney disease
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-145886,EDG-145886,Blood transfusion without reported diagnosis
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-160386,EDG-160386,IgA nephropathy
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-201194,EDG-201194,Chronic kidney disease
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-63548,EDG-63548,End stage renal disease (CMS-HCC)
+B6548DBA-5397-EE11-9203-005056BFF837,Past Medical History,Past Medical History EDG-66753,EDG-66753,Secondary hypertension
+B6548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121689,EAP-121689,HX RENAL BIOPSY
+B6548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-121703,EAP-121703,HX OTHER SURGICAL HISTORY
+B6548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-134412,EAP-134412,NEPHRECTOMY
+B6548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-189268,EAP-189268,IR RENAL ARTERIOGRAPHY EMBOLIZATION
+B6548DBA-5397-EE11-9203-005056BFF837,Past Surgical History,Past Surgical History EAP-460518,EAP-460518,IR TUNNELED DIALYSIS CATHETER PLACEMENT
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 100030,100030,Leukocytosis
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 103785,103785,Psoriasis
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 1048299,1048299,Gross hematuria
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 1056209,1056209,Acute kidney injury (nontraumatic) (CMS-HCC)
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 1095510,1095510,ADPKD (autosomal dominant polycystic kidney disease)
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 121728,121728,Metabolic acidosis
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 160386,160386,IgA nephropathy
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 201246,201246,End stage kidney disease (CMS-HCC)
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 63548,63548,End stage renal disease (CMS-HCC)
+B6548DBA-5397-EE11-9203-005056BFF837,Problem List,Problem List Entry 72320,72320,Hyperphosphatemia
+B6548DBA-5397-EE11-9203-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-9474,EDG-9474,"Polycystic kidney, autosomal dominant"

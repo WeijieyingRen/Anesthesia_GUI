@@ -1,0 +1,47 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+8A75F286-FDF6-ED11-91FB-005056BFF837,Allergy,Allergen ELG-11749,ELG-11749,HYDROCODONE-ACETAMINOPHEN
+8A75F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex Allergy,Allergy,No
+8A75F286-FDF6-ED11-91FB-005056BFF837,Allergy,Latex allergy,allergy,No
+8A75F286-FDF6-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 686.01,686.01,Pyoderma gangrenosum
+8A75F286-FDF6-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+8A75F286-FDF6-ED11-91FB-005056BFF837,Encounter Diagnosis,Encounter Diagnosis T84.53XA,T84.53XA,"Infection associated with internal right knee prosthesis, initial encounter (CMS-HCC)"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-127061,ERX-127061,"VALSARTAN-HYDROCHLOROTHIAZIDE 320-25 MG PO TABS take 1 Tablet by mouth every morning, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-19256,ERX-19256,"LIPITOR 10 MG PO TABS take 1 Tablet (10 mg total) by mouth every bedtime, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-229996,ERX-229996,"LACTOBACILLUS RHAMNOSUS GG 15 BILLION CELL PO CPSP take 1 Cap by mouth daily, Disp-30 Cap, R-0, E-Prescribe"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-2566,ERX-2566,"DOCUSATE SODIUM 100 MG PO CAPS take 1 Capsule (100 mg total) by mouth 2 times a day, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-2623,ERX-2623,"doxycycline capsule take 1 Capsule (100 mg total) by mouth 2 times a day Started 5/8, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-681,ERX-681,"aspirin 325 mg tablet take 1 Tablet (325 mg total) by mouth every morning with breakfast, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-716,ERX-716,"atenolol tablet take 1 Tablet (100 mg total) by mouth daily, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-87650,ERX-87650,"amLODIPine tablet take 1 Tablet (10 mg total) by mouth every morning, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Home Medication,Home Medication ERX-88043,ERX-88043,"pantoprazole delayed release tablet take 1 Tablet (40 mg total) by mouth daily, Historical Med"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-118930,EDG-118930,A-fib (CMS-HCC)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-142335,EDG-142335,Hypertension
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-8006,EDG-8006,Pyoderma gangrenosum
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Medical History,Past Medical History EDG-98299,EDG-98299,Hyperlipidemia
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121672,EAP-121672,HX BACK SURGERY
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121791,EAP-121791,HX TONSIL AND ADENOIDECTOMY
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-121820,EAP-121820,HX APPENDECTOMY
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-134646,EAP-134646,CHOLECYSTECTOMY LAPAROSCOPIC
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135676,EAP-135676,SPLIT THICKNESS SKIN GRAFT; SECONDARY PROCEDURE
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-135678,EAP-135678,WOUND DEBRIDMENT
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-3291,EAP-3291,EP CARDIOVERSION
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-426661,EAP-426661,ABLATION
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-459904,EAP-459904,INGUINAL HERNIA REPAIR LAPAROSCOPIC
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-463903,EAP-463903,BILATERAL PROCEDURE; SECONDARY MODIFIER
+8A75F286-FDF6-ED11-91FB-005056BFF837,Past Surgical History,Past Surgical History EAP-538390,EAP-538390,ACELLULAR DERMAL MATRIX ALLOGRAFT PLACEMENT; SECONDARY PROCEDURE
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1055957,1055957,Fever
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1099216,1099216,"Anemia, chronic disease"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1136476,1136476,Paroxysmal A-fib (CMS-HCC)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118848,118848,Subdural hematoma (CMS-HCC)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 118987,118987,GERD (gastroesophageal reflux disease)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 125822,125822,Chest pain
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1412841,1412841,"Joint prosthesis infection or inflammation, initial encounter (CMS-HCC)"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 141700,141700,Pulmonary embolism (CMS-HCC)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 155166,155166,Carotid stenosis
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1836926,1836926,"Open wound of right knee, leg and ankle with tendon involvement"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 1863228,1863228,Infection of prosthetic right knee joint (CMS-HCC)
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 2010884,2010884,"Infection associated with internal right knee prosthesis, initial encounter (CMS-HCC)"
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 71909,71909,Acalculous cholecystitis
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 8006,8006,Pyoderma gangrenosum
+8A75F286-FDF6-ED11-91FB-005056BFF837,Problem List,Problem List Entry 98299,98299,Hyperlipidemia

@@ -1,0 +1,57 @@
+mpog_case_id,history_category,feature_name,feature_code,value
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Allergy,Latex Allergy,Allergy,No
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Allergy,Latex allergy,allergy,No
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis 723.0,723.0,Spinal stenosis in cervical region
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis D32.1,D32.1,Spinal meningioma (CMS-HCC)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Encounter Diagnosis,Encounter Diagnosis R69,R69,Diagnosis unknown
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-10011,ERX-10011,"famotidine tablet TAKE 1 TABLET (20 MG TOTAL) BY MOUTH 2 TIMES A DAY AS NEEDED, Disp-60 Tablet, R-0, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-10449,ERX-10449,"lisinopriL tablet 1 tablet by mouth once daily, Disp-90 Tablet, R-1, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-12025,ERX-12025,"meclizine tablet take 1 Tablet (25 mg total) by mouth 4 times a day as needed, Disp-30 Tablet, R-0, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-15734,ERX-15734,"Glucometer test strips (generic) 100/RF11 - eRx Use to check blood sugar every day before breakfast and as needed, Disp-100 Strip, R-11, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-169636,ERX-169636,"ASTRAGALUS PO take by mouth every 3 days , Historical Med"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-176663,ERX-176663,"FISH OIL PO take 1,200 mg by mouth every morning With 360 mg of Omega-3, Historical Med"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-181566,ERX-181566,"METAMUCIL PO take by mouth every morning after breakfast, Historical Med"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-191861,ERX-191861,"VITAMIN D3 PO take 50 mcg by mouth every morning, Historical Med"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-204596,ERX-204596,"TdaP (Adacel) printed Rx (Medicare, Caremore, StanfordMedAdv) - q 10 yrs - CPE65 0.5 ml (single dose) injected intramuscularly, Disp-0.5 mL, R-0, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-229481,ERX-229481,"PROBIOTIC 20 BILLION CELL PO CAPS take 1 Capsule by mouth daily at noon, Historical Med"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-30047,ERX-30047,"Glucometer (generic) - eRx Use as directed to check blood sugar before breakfast daily and as needed, Disp-1 Kit, R-0, E-PrescribeOK to offer patient option of any covered glucometer"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-35587,ERX-35587,"Lancets, super thin 100/RF11 - eRx Use as directed for blood sugar monitoring, Disp-30 Each, R-1, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-540151,ERX-540151,"OTHER DRUG take 1 Each by mouth every morning Calcium citrate, Magnesium, Zinc, Vitamin D3, Historical Med"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-78531,ERX-78531,"atorvastatin tablet TAKE 1 TABLET BY MOUTH EVERY DAY, Disp-90 Tablet, R-3, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-83930,ERX-83930,"OMEPRAZOLE 40 MG PO CPDR take 40 mg by mouth daily, Disp-90 Capsule, R-2, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-86943,ERX-86943,"TAMSULOSIN 0.4 MG PO CAPS take 1 Capsule (0.4 mg total) by mouth daily, Disp-90 Capsule, R-3, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Home Medication,Home Medication ERX-94977,ERX-94977,"finasteride tablet 1/4 tablet by mouth once daily for hair loss, Disp-90 Tablet, R-1, E-Prescribe"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1025759,EDG-1025759,Angiomyolipoma
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1048282,EDG-1048282,Microscopic hematuria
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-1072462,EDG-1072462,Spinal meningioma (CMS-HCC)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-107257,EDG-107257,Vertigo
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-138118,EDG-138118,HTN (hypertension)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-144365,EDG-144365,Hepatitis B
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-176791,EDG-176791,High triglycerides
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-189565,EDG-189565,Pacemaker
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-192001,EDG-192001,Myasthenia gravis (CMS-HCC)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Medical History,Past Medical History EDG-192003,EDG-192003,"Myasthenic, gravis"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-121808,EAP-121808,HX PACEMAKER PLACEMENT
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188211,EAP-188211,COLONOSCOPY WITH OR WITHOUT BRUSHING
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188215,EAP-188215,COLONOSCOPY WITH BIOPSY
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-188225,EAP-188225,COLONOSCOPY WITH REMOVAL OF LESION BY SNARE
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-2249,EAP-2249,UPPER GI ENDOSCOPY
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Past Surgical History,Past Surgical History EAP-583,EAP-583,COLONOSCOPY DIAGNOSTIC
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 10147,10147,Elevated prostate specific antigen (PSA)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1025759,1025759,Angiomyolipoma
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1042465,1042465,Prediabetes
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1072462,1072462,Spinal meningioma (CMS-HCC)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1089426,1089426,"Hearing loss, sensorineural, asymmetrical"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1292451,1292451,Coronary artery calcification
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 138118,138118,HTN (hypertension)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 142467,142467,Cardiac device in situ
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 148337,148337,Heart block AV third degree (CMS-HCC)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1866236,1866236,Change in stool caliber
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1870610,1870610,"Viral hepatitis B without mention of hepatic coma, chronic, without mention of hepatitis delta"
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 1880668,1880668,Benign paroxysmal positional vertigo of right ear
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 189918,189918,Constipation
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 2220782,2220782,Exercise involving walking
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 2363902,2363902,Small intestinal bacterial overgrowth (SIBO)
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 2631,2631,Mixed hyperlipidemia
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Problem List,Problem List Entry 71730,71730,Hiatal hernia
+AB4448D8-8FF8-ED11-91FC-005056BFF837,Surgical Diagnosis,Surgical Diagnosis EDG-1126039,EDG-1126039,Intradural tumor
