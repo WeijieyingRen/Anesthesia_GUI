@@ -209,8 +209,23 @@ function buildAccessCodeRoot(accessCode: string) {
 
 function buildPatientCaseFolderName(body: SubmitBody): string {
   const patientId = normalizePatientId(body);
-  const caseId = normalizeRealCaseId(body);
-  return `patient_${patientId}_${caseId}`;
+  const caseRawId = normalizeRealCaseId(body);
+
+  const displayCaseIdRaw =
+    body.displayCaseId ??
+    (body as any).caseNumber ??
+    (body as any).caseIndex ??
+    null;
+
+  const caseNumber = sanitizePathPart(
+    displayCaseIdRaw !== null &&
+      displayCaseIdRaw !== undefined &&
+      String(displayCaseIdRaw).trim() !== ""
+      ? displayCaseIdRaw
+      : "unknown"
+  );
+
+  return `${patientId}__case_${caseNumber}_${caseRawId}`;
 }
 
 function buildCaseKey(patientId: string, caseId: string | number | null) {
@@ -305,8 +320,7 @@ function buildParticipantMetadata(body: SubmitBody) {
       null,
 
     gender:
-      info.gender ??
-      null,
+      info.gender ?? null,
 
     professional_degree:
       info.professionalDegree ??
@@ -459,10 +473,6 @@ function detectStorageTarget(body: SubmitBody): StorageTarget {
   const action = String(body.action ?? "").toLowerCase();
   const combined = `${panel} ${task} ${action}`;
 
-  // IMPORTANT:
-  // Final case-level submit uses panel = "case_summary".
-  // It must be saved to case_submission/case_summary.json,
-  // not summary/summary.json.
   if (
     panel === "case_summary" ||
     panel === "case_submission" ||
@@ -607,8 +617,9 @@ async function updateCaseStatusIndex({
   };
 
   const taskKey = getTaskKey(target);
+  const isFinalCaseSubmission = isCaseSubmissionTarget(target);
 
-  if (!isCaseSubmissionTarget(target)) {
+  if (!isFinalCaseSubmission) {
     const panelTaskKey = taskKey as
       | "summary"
       | "abnormality_reasoning"
@@ -626,45 +637,49 @@ async function updateCaseStatusIndex({
     tasks.abnormality_reasoning.completed &&
     tasks.management_reasoning.completed;
 
-  const isFinalCaseSubmission = isCaseSubmissionTarget(target);
+  const previousCaseSubmission =
+    previous.case_submission &&
+    typeof previous.case_submission === "object" &&
+    !Array.isArray(previous.case_submission)
+      ? previous.case_submission
+      : null;
+
+  const caseSubmission = isFinalCaseSubmission
+    ? {
+        completed: true,
+        latest_path: driveObjectPath,
+        updated_at: now,
+      }
+    : previousCaseSubmission;
+
+  const completed = Boolean(caseSubmission?.completed);
+  const status = completed ? "completed" : "in_progress";
 
   oldCases[caseKey] = removeNullFields({
     ...previous,
+
     patient_id: normalizedPatientId,
     case_id: normalizedCaseId,
     display_case_id: displayCaseId ?? previous.display_case_id ?? null,
     full_name: fullName,
     workflow: workflowMode,
 
-    status:
-      isFinalCaseSubmission || allPanelTasksCompleted
-        ? "completed"
-        : "in_progress",
+    status,
+    completed,
+    inProgress: !completed,
 
-    completed:
-      isFinalCaseSubmission || allPanelTasksCompleted,
-
-    inProgress:
-      !(isFinalCaseSubmission || allPanelTasksCompleted),
+    panel_tasks_completed: allPanelTasksCompleted,
 
     updated_at: now,
-
-    completed_at:
-      isFinalCaseSubmission || allPanelTasksCompleted
-        ? previous.completed_at ?? now
-        : null,
+    completed_at: completed
+      ? previous.completed_at ?? now
+      : previous.completed_at ?? null,
 
     last_panel: panel,
 
     tasks,
 
-    case_submission: isFinalCaseSubmission
-      ? {
-          completed: true,
-          latest_path: driveObjectPath,
-          updated_at: now,
-        }
-      : previous.case_submission ?? null,
+    case_submission: caseSubmission,
   });
 
   await uploadJsonToDrive({
@@ -782,8 +797,6 @@ export async function POST(req: Request) {
       saved_at_utc: savedAtUtc,
       saved_at_local: body.submittedAtLocal ?? null,
 
-      // Only final case-level submission keeps participant metadata.
-      // Individual summary / abnormality / management files do not keep it.
       participant_metadata: isCaseSubmissionTarget(target)
         ? buildParticipantMetadata(body)
         : null,
@@ -870,7 +883,7 @@ export async function POST(req: Request) {
         objectPath: uploaded.objectPath,
         data: driveRecord,
       },
-      debug_version: "access-code-index-submit-route-v5-case-submission",
+      debug_version: "access-code-index-submit-route-v6-final-submit-only-completion",
     });
   } catch (error) {
     console.error("Submit route error:", error);
