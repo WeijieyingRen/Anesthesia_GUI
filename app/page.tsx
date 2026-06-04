@@ -14,26 +14,26 @@ import { Label } from "@/components/ui/label";
 
 type CsvRow = Record<string, any>;
 type WorkflowMode = "annotation" | "review";
+
 type AccessCodeLookupResult = {
   doctorId: string;
   workflowMode: WorkflowMode;
   annotationCode: string;
 };
 
-
-
 export default function Home() {
   const router = useRouter();
 
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
-
   const [degree, setDegree] = useState("");
-
   const [trainingCountry, setTrainingCountry] = useState("");
 
   const [clinicalRole, setClinicalRole] = useState("");
   const [clinicalRoleOther, setClinicalRoleOther] = useState("");
+
+  const [boardCertified, setBoardCertified] = useState("");
+  const [clinicalSubspecialty, setClinicalSubspecialty] = useState("");
 
   const [experienceYears, setExperienceYears] = useState("");
   const [accessCode, setAccessCode] = useState("");
@@ -50,6 +50,7 @@ export default function Home() {
 
       if (saved?.name) setName(saved.name);
       if (saved?.gender) setGender(saved.gender);
+
       if (typeof saved?.degree === "string") {
         setDegree(saved.degree);
       } else if (Array.isArray(saved?.degrees)) {
@@ -57,21 +58,38 @@ export default function Home() {
         const fallbackOther = String(saved?.degreeOther ?? "").trim();
         setDegree(firstDegree === "Other" ? fallbackOther : firstDegree);
       }
+
       if (saved?.trainingCountry) setTrainingCountry(saved.trainingCountry);
       if (saved?.clinicalRole) setClinicalRole(saved.clinicalRole);
-      if (saved?.clinicalRoleOther) setClinicalRoleOther(saved.clinicalRoleOther);
+      if (saved?.clinicalRoleOther) {
+        setClinicalRoleOther(saved.clinicalRoleOther);
+      }
 
-      if (saved?.experienceYears) setExperienceYears(saved.experienceYears);
-      if (saved?.accessCode) setAccessCode(saved.accessCode);
+      if (saved?.boardCertified) setBoardCertified(saved.boardCertified);
+      if (saved?.clinicalSubspecialty) {
+        setClinicalSubspecialty(saved.clinicalSubspecialty);
+      }
+
+      if (saved?.experienceYears) {
+        setExperienceYears(saved.experienceYears);
+      }
+
+      if (saved?.accessCode) {
+        setAccessCode(saved.accessCode);
+      }
     } catch {
       // ignore corrupted localStorage
     }
   }, []);
 
+  function rowOrEmpty(row: CsvRow, key: string) {
+    return row?.[key] ?? "";
+  }
+
   async function resolveAccessCodeInfo(
     code: string
   ): Promise<AccessCodeLookupResult | null> {
-    const reviewLookupRes = await fetch(`/assigned_code/access_review_code.csv`, {
+    const reviewLookupRes = await fetch("/assigned_code/access_review_code.csv", {
       cache: "no-store",
     });
 
@@ -82,16 +100,19 @@ export default function Home() {
     }
 
     const text = await reviewLookupRes.text();
+
     const rows = Papa.parse<CsvRow>(text, {
       header: true,
       dynamicTyping: false,
       skipEmptyLines: true,
     }).data;
 
+    const trimmedCode = code.trim();
+
     const matched = rows.find(
       (row) =>
-        String(row["annotation_code"] ?? "").trim() === code.trim() ||
-        String(row["review_code"] ?? "").trim() === code.trim()
+        String(row["annotation_code"] ?? "").trim() === trimmedCode ||
+        String(row["review_code"] ?? "").trim() === trimmedCode
     );
 
     if (!matched) return null;
@@ -99,8 +120,9 @@ export default function Home() {
     const doctorId = String(rowOrEmpty(matched, "doctor_id")).trim();
     const annotationCode = String(rowOrEmpty(matched, "annotation_code")).trim();
     const reviewCode = String(rowOrEmpty(matched, "review_code")).trim();
+
     const workflowMode: WorkflowMode =
-      code.trim() === reviewCode ? "review" : "annotation";
+      trimmedCode === reviewCode ? "review" : "annotation";
 
     if (!doctorId || !annotationCode) return null;
 
@@ -111,12 +133,7 @@ export default function Home() {
     };
   }
 
-  function rowOrEmpty(row: CsvRow, key: string) {
-    return row?.[key] ?? "";
-  }
-
   const hasOtherClinicalRole = clinicalRole === "Other";
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,6 +144,8 @@ export default function Home() {
     const trimmedDegree = degree.trim();
     const trimmedTrainingCountry = trainingCountry.trim();
     const trimmedClinicalRoleOther = clinicalRoleOther.trim();
+    const trimmedBoardCertified = boardCertified.trim();
+    const trimmedClinicalSubspecialty = clinicalSubspecialty.trim();
     const trimmedExperienceYears = experienceYears.trim();
     const trimmedAccessCode = accessCode.trim();
 
@@ -154,7 +173,18 @@ export default function Home() {
       setError("Please specify your professional degree(s).");
       return;
     }
- 
+
+    if (!trimmedBoardCertified) {
+      setError("Please indicate whether you have board certification.");
+      return;
+    }
+
+    if (!trimmedClinicalSubspecialty) {
+      setError(
+        "Please enter your clinical subspecialty, or enter None if not applicable."
+      );
+      return;
+    }
 
     if (!trimmedExperienceYears) {
       setError(
@@ -174,25 +204,35 @@ export default function Home() {
       const accessInfo = await resolveAccessCodeInfo(trimmedAccessCode);
 
       if (!accessInfo) {
-        setError("Invalid access code. No matching annotation/review assignment was found.");
+        setError(
+          "Invalid access code. No matching annotation/review assignment was found."
+        );
         return;
       }
 
       const participantInfo = {
         name: trimmedName,
         gender: trimmedGender,
+
         degree: trimmedDegree,
         degrees: [trimmedDegree],
         degreeOther: "",
+
         trainingCountry: trimmedTrainingCountry,
+
         clinicalRole,
         clinicalRoleOther: trimmedClinicalRoleOther,
 
+        boardCertified: trimmedBoardCertified,
+        clinicalSubspecialty: trimmedClinicalSubspecialty,
+
         experienceYears: trimmedExperienceYears,
+
         accessCode: trimmedAccessCode,
         doctorId: accessInfo.doctorId,
         workflowMode: accessInfo.workflowMode,
         annotationCode: accessInfo.annotationCode,
+
         timestamp: new Date().toISOString(),
       };
 
@@ -216,6 +256,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-center mb-2">
           Welcome to the AnesthesiaGPT Project
         </h1>
+
         <p className="text-gray-600 text-center mb-8">
           Interpret intraoperative vital signs, annotate abnormalities, and
           provide clinical reasoning.
@@ -247,8 +288,8 @@ export default function Home() {
                 onChange={(e) => setGender(e.target.value)}
               />
               <p className="text-xs text-gray-500">
-                This field will be used only for analysis of
-                annotation behavior across participants.
+                This field will be used only for analysis of annotation behavior
+                across participants.
               </p>
             </div>
 
@@ -284,11 +325,13 @@ export default function Home() {
                 onChange={(e) => {
                   const value = e.target.value;
                   setClinicalRole(value);
+
                   if (value !== "Other") {
                     setClinicalRoleOther("");
                   }
                 }}
                 className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
+                required
               >
                 <option value="" disabled>
                   Select your current role
@@ -310,12 +353,52 @@ export default function Home() {
                     placeholder="Enter your clinical role"
                     value={clinicalRoleOther}
                     onChange={(e) => setClinicalRoleOther(e.target.value)}
+                    required={hasOtherClinicalRole}
                   />
                 </div>
               )}
             </div>
 
-    
+            <div className="space-y-2">
+              <Label htmlFor="boardCertified">Board Certification</Label>
+              <select
+                id="boardCertified"
+                value={boardCertified}
+                onChange={(e) => setBoardCertified(e.target.value)}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
+                required
+              >
+                <option value="" disabled>
+                  Select your board certification status
+                </option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="In progress">In progress</option>
+                <option value="Not applicable">Not applicable</option>
+              </select>
+
+              <p className="text-xs text-gray-500">
+                Please indicate whether you currently hold board certification.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="clinicalSubspecialty">
+                Clinical Subspecialty
+              </Label>
+              <Input
+                id="clinicalSubspecialty"
+                placeholder="e.g., Pediatric anesthesia, Cardiac anesthesia, Critical care, Pain medicine, None"
+                value={clinicalSubspecialty}
+                onChange={(e) => setClinicalSubspecialty(e.target.value)}
+                required
+              />
+
+              <p className="text-xs text-gray-500">
+                Please enter your clinical subspecialty, or enter None if not
+                applicable.
+              </p>
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="experienceYears">
@@ -328,6 +411,7 @@ export default function Home() {
                 onChange={(e) => setExperienceYears(e.target.value)}
                 required
               />
+
               <p className="text-xs text-gray-500">
                 Please include both supervised training and independent practice.
               </p>
@@ -348,6 +432,7 @@ export default function Home() {
                 }}
                 required
               />
+
               <p className="text-xs text-gray-500">
                 Please enter the 4-digit code provided to you.
               </p>
@@ -374,6 +459,7 @@ export default function Home() {
               className="object-contain"
             />
           </div>
+
           <div className="relative w-32 h-24">
             <Image
               src="/images/medicine-logo.png"

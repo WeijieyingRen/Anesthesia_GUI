@@ -12,6 +12,7 @@ import { DATASET_ROOT } from "@/lib/dataset-config";
 type SubmitBody = {
   annotator?: { name?: string; email?: string };
   participant?: { name?: string; email?: string };
+
   participantInfo?: {
     name?: string | null;
     email?: string | null;
@@ -19,14 +20,30 @@ type SubmitBody = {
     doctorId?: string | null;
 
     gender?: string | null;
+
     professionalDegree?: string | null;
     degree?: string | null;
+    degrees?: unknown;
+    degreeOther?: string | null;
+
     countryOfPrimaryClinicalTraining?: string | null;
     trainingCountry?: string | null;
+
     currentClinicalRole?: string | null;
     clinicalRole?: string | null;
+    clinicalRoleOther?: string | null;
+
     yearsHandsOnAnesthesiaClinicalCare?: string | number | null;
     yearsExperience?: string | number | null;
+    experienceYears?: string | number | null;
+
+    boardCertified?: string | null;
+    clinicalSubspecialty?: string | null;
+
+    workflowMode?: "annotation" | "review" | string | null;
+    annotationCode?: string | null;
+    loginTimestamp?: string | null;
+    timestamp?: string | null;
 
     [key: string]: unknown;
   };
@@ -327,6 +344,12 @@ function buildParticipantMetadata(body: SubmitBody) {
       info.degree ??
       null,
 
+    degrees:
+      info.degrees ?? null,
+
+    degree_other:
+      info.degreeOther ?? null,
+
     country_of_primary_clinical_training:
       info.countryOfPrimaryClinicalTraining ??
       info.trainingCountry ??
@@ -337,9 +360,32 @@ function buildParticipantMetadata(body: SubmitBody) {
       info.clinicalRole ??
       null,
 
+    clinical_role_other:
+      info.clinicalRoleOther ?? null,
+
     years_hands_on_anesthesia_clinical_care:
       info.yearsHandsOnAnesthesiaClinicalCare ??
       info.yearsExperience ??
+      info.experienceYears ??
+      null,
+
+    board_certified:
+      info.boardCertified ?? null,
+
+    clinical_subspecialty:
+      info.clinicalSubspecialty ?? null,
+
+    workflow_mode:
+      body.workflowMode ??
+      info.workflowMode ??
+      null,
+
+    annotation_code:
+      info.annotationCode ?? null,
+
+    login_timestamp:
+      info.loginTimestamp ??
+      info.timestamp ??
       null,
   });
 }
@@ -463,7 +509,12 @@ async function resolveRevisionedFileName(
 }
 
 function resolveWorkflowMode(body: SubmitBody): "annotation" | "review" {
-  if (body.workflowMode === "review") return "review";
+  const mode =
+    body.workflowMode ??
+    body.participantInfo?.workflowMode ??
+    null;
+
+  if (mode === "review") return "review";
   return "annotation";
 }
 
@@ -797,9 +848,7 @@ export async function POST(req: Request) {
       saved_at_utc: savedAtUtc,
       saved_at_local: body.submittedAtLocal ?? null,
 
-      participant_metadata: isCaseSubmissionTarget(target)
-        ? buildParticipantMetadata(body)
-        : null,
+      participant_metadata: buildParticipantMetadata(body),
 
       answers,
       annotation_state: cleanedAnnotationState,
@@ -883,7 +932,8 @@ export async function POST(req: Request) {
         objectPath: uploaded.objectPath,
         data: driveRecord,
       },
-      debug_version: "access-code-index-submit-route-v6-final-submit-only-completion",
+      debug_version:
+        "access-code-index-submit-route-v7-full-participant-metadata",
     });
   } catch (error) {
     console.error("Submit route error:", error);

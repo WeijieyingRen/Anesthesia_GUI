@@ -2283,8 +2283,25 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       participantInfo: {
         name: participantInfo?.name ?? null,
         email: participantInfo?.email ?? null,
+      
+        gender: participantInfo?.gender ?? null,
+        degree: participantInfo?.degree ?? null,
+        degrees: participantInfo?.degrees ?? null,
+        degreeOther: participantInfo?.degreeOther ?? null,
+      
+        trainingCountry: participantInfo?.trainingCountry ?? null,
+        clinicalRole: participantInfo?.clinicalRole ?? null,
+        clinicalRoleOther: participantInfo?.clinicalRoleOther ?? null,
+        experienceYears: participantInfo?.experienceYears ?? null,
+      
+        boardCertified: participantInfo?.boardCertified ?? null,
+        clinicalSubspecialty: participantInfo?.clinicalSubspecialty ?? null,
+      
         accessCode,
         doctorId,
+        workflowMode: participantInfo?.workflowMode ?? (isReviewMode ? "review" : "annotation"),
+        annotationCode: participantInfo?.annotationCode ?? null,
+        loginTimestamp: participantInfo?.timestamp ?? null,
       },
 
       annotationState: {
@@ -2356,11 +2373,23 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             access_code: payload.accessCode ?? "unknown_code",
             patient_id:
               payload.patientId ?? payload.patientFolder ?? "unknown_patient",
+            patient_folder: payload.patientFolder ?? null,
+            display_case_id: payload.displayCaseId ?? null,
+            workflow_mode: payload.workflowMode ?? null,
+        
             case_id: payload.caseId ?? null,
+            folder: payload.folder ?? null,
             panel: payload.panel,
+        
             saved_at_utc: payload.submittedAt,
             saved_at_local: payload.submittedAtLocal,
+        
+            participant_info: payload.participantInfo ?? null,
+        
+            annotation_state: payload.annotationState ?? null,
+        
             answers: payload.answers,
+        
             timing: {
               page_opened_at_utc: payload.pageOpenedAt,
               page_opened_at_local: payload.pageOpenedAtLocal,
