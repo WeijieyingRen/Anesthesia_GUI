@@ -2,13 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { TimeValuePoint } from "@/lib/types";
-
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
-
-/** 和 Vital 保持一致 */
-const PX_PER_15_MIN = 64;
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getSharedChartGeometry,
+  minuteToX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type HighlightWindow = {
   startMin: number;
@@ -66,30 +69,6 @@ const DEFAULT_VENT_ORDER = [
 const ROW_HEIGHT = 20;
 const TOP_PAD = 0;
 const BOTTOM_PAD = 0;
-
-function getPxPerMinute(timeResolution: 15 | 5) {
-  return timeResolution === 15 ? PX_PER_15_MIN / 15 : PX_PER_15_MIN / 5;
-}
-
-function getMajorStep(timeResolution: 15 | 5) {
-  return timeResolution === 15 ? 15 : 5;
-}
-
-function getMinorStep(timeResolution: 15 | 5) {
-  return timeResolution === 15 ? 5 : 1;
-}
-
-function buildGridTicks(end: number, step: number) {
-  if (!Number.isFinite(end) || end <= 0) return [];
-  const ticks: number[] = [];
-  for (let t = 0; t <= end; t += step) {
-    ticks.push(t);
-  }
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
-    ticks.push(end);
-  }
-  return ticks;
-}
 
 function sortVentNames(names: string[]) {
   return [...names].sort((a, b) => {
@@ -384,9 +363,8 @@ export default function VentilationChart({
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
-  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
-  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
+  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
   const visibleRowsReindexed = visibleRows.map((row, idx) => ({ ...row, rowIndex: idx }));
@@ -397,16 +375,16 @@ export default function VentilationChart({
     majorStep,
     Math.ceil(allMaxTime / majorStep) * majorStep
   );
-  const finalXEnd = xEnd ?? computedXEnd;
+  const effectiveXEnd = xEnd ?? computedXEnd;
 
   const majorTicks = useMemo(() => {
     if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
-    return buildGridTicks(finalXEnd, majorStep);
-  }, [timeResolution, xTicks, finalXEnd, majorStep]);
+    return buildChartTicks(effectiveXEnd, majorStep);
+  }, [timeResolution, xTicks, effectiveXEnd, majorStep]);
 
   const minorTicks = useMemo(() => {
-    return buildGridTicks(finalXEnd, minorStep);
-  }, [finalXEnd, minorStep]);
+    return buildChartTicks(effectiveXEnd, minorStep);
+  }, [effectiveXEnd, minorStep]);
 
   const segments = useMemo(
     () => buildWindowSegments(visibleRowsReindexed, effectiveWindowSize),
@@ -416,13 +394,10 @@ export default function VentilationChart({
   const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
   const viewHeight = Math.min(height, Math.max(120, contentHeight));
 
-  const contentPlotWidth = useMemo(() => {
-    if (finalXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(finalXEnd * pxPerMin));
-  }, [finalXEnd, pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentPlotWidth;
+  const { contentWidth, plotWidth } = useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
 
   const detailWidth = 760;
   const detailHeight = 220;
@@ -553,16 +528,12 @@ export default function VentilationChart({
       {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
-        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-        style={{ height: viewHeight }}
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
+        }}
       >
-        <div
-          className="grid gap-0"
-          style={{
-            gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
-            minHeight: contentHeight,
-          }}
-        >
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
           <div className="border-r pr-0" style={{ height: contentHeight }}>
             <div>
               {visibleRowsReindexed.map((row) => {
@@ -601,10 +572,17 @@ export default function VentilationChart({
               })}
             </div>
           </div>
+        </div>
 
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
           <FixedYAxisSpacer height={contentHeight} />
+        </div>
 
-          <div className="min-w-0">
+        <div className="min-w-0">
+          <div
+            className="overflow-x-hidden overflow-y-hidden"
+            style={{ height: viewHeight }}
+          >
             <div
               ref={scrollRef}
               className="vent-scroll-hidden"
@@ -635,6 +613,7 @@ export default function VentilationChart({
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
+                onSharedScrollLeftChange?.(clamped);
               }}
               onScroll={(e) => {
                 const next = e.currentTarget.scrollLeft;
@@ -652,7 +631,7 @@ export default function VentilationChart({
                 }}
               >
                 <VentilationGridSvg
-                  end={finalXEnd}
+                  end={effectiveXEnd}
                   majorTicks={majorTicks}
                   minorTicks={minorTicks}
                   rows={visibleRowsReindexed}
@@ -673,8 +652,8 @@ export default function VentilationChart({
                     const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
                     const centerY = rowTop + ROW_HEIGHT / 2;
 
-                    const segLeft = (seg.x0 / finalXEnd) * plotWidth;
-                    const segRight = (seg.x1 / finalXEnd) * plotWidth;
+                    const segLeft = minuteToX(seg.x0, effectiveXEnd, plotWidth);
+                    const segRight = minuteToX(seg.x1, effectiveXEnd, plotWidth);
 
                     const label = String(roundSmart(seg.firstValue));
                     const textWidth = estimateTextWidth(label, 10);
@@ -758,7 +737,7 @@ export default function VentilationChart({
 
                   {showXAxis &&
                     majorTicks.map((tick) => {
-                      const x = (tick / finalXEnd) * plotWidth;
+                      const x = minuteToX(tick, effectiveXEnd, plotWidth);
                       return (
                         <text
                           key={`tick-label-${tick}`}
@@ -786,33 +765,33 @@ export default function VentilationChart({
                 </svg>
               </div>
             </div>
+          </div>
 
-            <div className="px-2 pt-2">
-              <input
-                type="range"
-                min={0}
-                max={Math.max(0, Math.round(maxScrollLeft))}
-                step={1}
-                value={Math.min(sliderValue, maxScrollLeft)}
-                onChange={(e) => {
-                  const next = Number(e.target.value);
-                  setSliderValue(next);
+          <div className="pt-2">
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, Math.round(maxScrollLeft))}
+              step={1}
+              value={Math.min(sliderValue, maxScrollLeft)}
+              onChange={(e) => {
+                const next = Number(e.target.value);
+                setSliderValue(next);
 
-                  const el = scrollRef.current;
-                  if (!el) return;
+                const el = scrollRef.current;
+                if (!el) return;
 
-                  isSyncingFromSliderRef.current = true;
-                  el.scrollLeft = next;
-                  onSharedScrollLeftChange?.(next);
+                isSyncingFromSliderRef.current = true;
+                el.scrollLeft = next;
+                onSharedScrollLeftChange?.(next);
 
-                  requestAnimationFrame(() => {
-                    isSyncingFromSliderRef.current = false;
-                  });
-                }}
-                className="vent-slider"
-                aria-label="Ventilation chart horizontal scroll"
-              />
-            </div>
+                requestAnimationFrame(() => {
+                  isSyncingFromSliderRef.current = false;
+                });
+              }}
+              className="vent-slider"
+              aria-label="Ventilation chart horizontal scroll"
+            />
           </div>
         </div>
       </div>

@@ -3,12 +3,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { TimeValuePoint } from "@/lib/types";
 import type { ManagementEvent } from "@/lib/types_management";
-
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
-
-type TimeResolution = 15 | 5;
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getSharedChartGeometry,
+  minuteToX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type HighlightWindow = {
   startMin: number;
@@ -75,34 +79,6 @@ const DEFAULT_GAS_ORDER = [
 const ROW_HEIGHT = 20;
 const TOP_PAD = 6;
 const BOTTOM_PAD = 4;
-
-function getPxPerMinute(timeResolution: TimeResolution) {
-  return timeResolution === 15 ? 64 / 15 : 64 / 5;
-}
-
-function getMajorStep(timeResolution: TimeResolution) {
-  return timeResolution === 15 ? 15 : 5;
-}
-
-function getMinorStep(timeResolution: TimeResolution) {
-  return timeResolution === 15 ? 5 : 1;
-}
-
-function buildGridTicks(end: number, step: number) {
-  if (!Number.isFinite(end) || end <= 0) return [];
-
-  const ticks: number[] = [];
-
-  for (let t = 0; t <= end; t += step) {
-    ticks.push(t);
-  }
-
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
-    ticks.push(end);
-  }
-
-  return ticks;
-}
 
 function sortGasNames(names: string[]) {
   return [...names].sort((a, b) => {
@@ -455,22 +431,10 @@ export default function GasChart({
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
-  const majorStep = useMemo(
-    () => getMajorStep(timeResolution),
-    [timeResolution]
-  );
-
-  const minorStep = useMemo(
-    () => getMinorStep(timeResolution),
-    [timeResolution]
-  );
+  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
 
   const effectiveWindowSize = windowSize ?? majorStep;
-
-  const pxPerMin = useMemo(
-    () => getPxPerMinute(timeResolution),
-    [timeResolution]
-  );
 
   const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
 
@@ -486,19 +450,19 @@ export default function GasChart({
     Math.ceil(allMaxTime / effectiveWindowSize) * effectiveWindowSize
   );
 
-  const finalXEnd = xEnd ?? computedXEnd;
+  const effectiveXEnd = xEnd ?? computedXEnd;
 
   const majorTicks = useMemo(() => {
     if (xTicks && xTicks.length > 0 && timeResolution === 15) {
       return xTicks;
     }
 
-    return buildGridTicks(finalXEnd, majorStep);
-  }, [xTicks, finalXEnd, majorStep, timeResolution]);
+    return buildChartTicks(effectiveXEnd, majorStep);
+  }, [xTicks, effectiveXEnd, majorStep, timeResolution]);
 
   const minorTicks = useMemo(() => {
-    return buildGridTicks(finalXEnd, minorStep);
-  }, [finalXEnd, minorStep]);
+    return buildChartTicks(effectiveXEnd, minorStep);
+  }, [effectiveXEnd, minorStep]);
 
   const segments = useMemo(
     () => buildWindowSegments(visibleRowsReindexed, effectiveWindowSize),
@@ -513,13 +477,10 @@ export default function GasChart({
     Math.max(160, fullContentHeight + 40)
   );
 
-  const contentPlotWidth = useMemo(() => {
-    if (finalXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(finalXEnd * pxPerMin));
-  }, [finalXEnd, pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentPlotWidth;
+  const { contentWidth, plotWidth } = useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
 
   const detailWidth = 760;
   const detailHeight = 220;
@@ -650,16 +611,12 @@ export default function GasChart({
       ) : null}
 
       <div
-        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-        style={{ height: viewHeight }}
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
+        }}
       >
-        <div
-          className="grid gap-0"
-          style={{
-            gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
-            minHeight: fullContentHeight,
-          }}
-        >
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
           <div className="border-r pr-0" style={{ height: fullContentHeight }}>
             <div>
               {rows.map((row) => {
@@ -702,10 +659,17 @@ export default function GasChart({
               })}
             </div>
           </div>
+        </div>
 
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
           <FixedAxisSpacer height={fullContentHeight} />
+        </div>
 
-          <div className="overflow-x-hidden overflow-y-hidden">
+        <div className="min-w-0">
+          <div
+            className="overflow-x-hidden overflow-y-hidden"
+            style={{ height: viewHeight }}
+          >
             <div
               ref={scrollRef}
               className="gas-scroll-hidden"
@@ -737,6 +701,7 @@ export default function GasChart({
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
+                onSharedScrollLeftChange?.(clamped);
               }}
               onScroll={(e) => {
                 const next = e.currentTarget.scrollLeft;
@@ -754,7 +719,7 @@ export default function GasChart({
                   style={{ width: contentWidth, height: fullContentHeight }}
                 >
                   <GasGridSvg
-                    end={finalXEnd}
+                    end={effectiveXEnd}
                     majorTicks={majorTicks}
                     minorTicks={minorTicks}
                     rows={visibleRowsReindexed}
@@ -776,8 +741,8 @@ export default function GasChart({
                         const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
                         const centerY = rowTop + ROW_HEIGHT / 2;
 
-                        const segLeft = (seg.x0 / finalXEnd) * plotWidth;
-                        const segRight = (seg.x1 / finalXEnd) * plotWidth;
+                        const segLeft = minuteToX(seg.x0, effectiveXEnd, plotWidth);
+                        const segRight = minuteToX(seg.x1, effectiveXEnd, plotWidth);
 
                         const label = String(roundSmart(seg.firstValue));
                         const hideVisual = isZeroValue(seg.firstValue);
@@ -877,7 +842,7 @@ export default function GasChart({
 
                       {showXAxis &&
                         majorTicks.map((tick) => {
-                          const x = (tick / finalXEnd) * plotWidth;
+                          const x = minuteToX(tick, effectiveXEnd, plotWidth);
 
                           return (
                             <text
@@ -909,34 +874,32 @@ export default function GasChart({
               </div>
             </div>
 
-            <div className="px-2 pt-2">
-              <input
-                type="range"
-                min={0}
-                max={Math.max(0, Math.round(maxScrollLeft))}
-                step={1}
-                value={Math.min(sliderValue, maxScrollLeft)}
-                onChange={(e) => {
-                  const next = Number(e.target.value);
-                  setSliderValue(next);
+          </div>
+          <div className="pt-2">
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, Math.round(maxScrollLeft))}
+              step={1}
+              value={Math.min(sliderValue, maxScrollLeft)}
+              onChange={(e) => {
+                const next = Number(e.target.value);
+                setSliderValue(next);
 
-                  const el = scrollRef.current;
-                  if (!el) return;
+                const el = scrollRef.current;
+                if (!el) return;
 
-                  isSyncingFromSliderRef.current = true;
-                  el.scrollLeft = next;
-                  onSharedScrollLeftChange?.(next);
+                isSyncingFromSliderRef.current = true;
+                el.scrollLeft = next;
+                onSharedScrollLeftChange?.(next);
 
-                  requestAnimationFrame(() => {
-                    isSyncingFromSliderRef.current = false;
-                  });
-                }}
-                className="gas-slider"
-                aria-label="Gas chart horizontal scroll"
-              />
-            </div>
-
-          
+                requestAnimationFrame(() => {
+                  isSyncingFromSliderRef.current = false;
+                });
+              }}
+              className="gas-slider"
+              aria-label="Gas chart horizontal scroll"
+            />
           </div>
         </div>
       </div>

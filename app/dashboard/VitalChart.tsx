@@ -13,8 +13,18 @@ import {
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
 import type { DetectVital } from "./annotation/types";
-
-type TimeResolution = 15 | 5;
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  CHART_RIGHT_MARGIN as PLOT_RIGHT,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getChartPxPerMinute,
+  getSharedChartGeometry,
+  minuteToX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type SelectedWindow = {
   vital: DetectVital;
@@ -86,10 +96,6 @@ type HoverStats = {
   etco2: number | null;
   temp: number | null;
 };
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
-const BASE_PX_PER_15_MIN = 64;
 const EDGE_HANDLE_PX = 16;
 const HANDLE_BORDER_PX = 4;
 const MIN_PREVIEW_BOX_PX = 18;
@@ -454,18 +460,10 @@ export default function VitalChart({
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
   const [scrollViewportWidth, setScrollViewportWidth] = useState(0);
   const viewConfig = useMemo(() => {
-    if (timeResolution === 5) {
-      return {
-        majorStep: 5,
-        minorStep: 1,
-        pxPerMin: BASE_PX_PER_15_MIN / 5,
-      };
-    }
-
     return {
-      majorStep: 15,
-      minorStep: 5,
-      pxPerMin: BASE_PX_PER_15_MIN / 15,
+      majorStep: getChartMajorStep(timeResolution),
+      minorStep: getChartMinorStep(timeResolution),
+      pxPerMin: getChartPxPerMinute(timeResolution),
     };
   }, [timeResolution]);
 
@@ -480,6 +478,17 @@ export default function VitalChart({
   }, [sharedScrollLeft]);
 
   const visibleKeys = keys.filter((key) => !hiddenKeys.includes(key));
+  const keysSignature = keys.join("|");
+
+  const scatterDataByKey = useMemo(() => {
+    const out: Record<string, ScatterPoint[]> = {};
+  
+    for (const key of keys) {
+      out[key] = buildScatterData(series[key]);
+    }
+  
+    return out;
+  }, [series, keysSignature]);
   const effectiveXEnd = xEnd ?? 0;
   const domain = yDomain ?? [0, 200];
   const domainMin = domain[0];
@@ -489,13 +498,10 @@ export default function VitalChart({
   const chartMarginBottom = showXAxis ? 15 : 10;
   const leftLegendTopSpacer = showTopTimeAxis ? 50 : 0;
 
-  const contentPlotWidth = useMemo(() => {
-    if (effectiveXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(effectiveXEnd * viewConfig.pxPerMin));
-  }, [effectiveXEnd, viewConfig.pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentWidth - PLOT_RIGHT;
+  const { contentWidth, plotWidth } = useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
   useEffect(() => {
     function updateScrollMetrics() {
       const el = scrollRef.current;
@@ -516,8 +522,7 @@ export default function VitalChart({
   }, [contentWidth, height, hiddenKeys.length, keys.length]);
 
   function minuteToPixel(minute: number) {
-    if (!effectiveXEnd || effectiveXEnd <= 0 || plotWidth <= 0) return 0;
-    return (minute / effectiveXEnd) * plotWidth;
+    return minuteToX(minute, effectiveXEnd, plotWidth);
   }
 
   function clampY(y: number) {
@@ -870,7 +875,7 @@ const activeEndMin =
       left,
       width: Math.max(2, right - left),
     };
-  }, [highlightWindow]);
+  }, [highlightWindow, plotWidth, effectiveXEnd]);
 
   const statsWindow = useMemo(() => {
     if (isDragging && dragMode === "create" && dragStartMin != null && dragCurrentMin != null) {
@@ -1031,65 +1036,17 @@ const activeEndMin =
     };
   }, [hoverMinute, series]);
 
+  
+
   const hoverPanelPosition = useMemo(() => {
     const viewportWidth =
       scrollViewportWidth || scrollRef.current?.clientWidth || HOVER_PANEL_WIDTH + 24;
-    const top = showTopTimeAxis ? 28 : chartMarginTop + 8;
-    const bottom = Math.max(top, height - chartMarginBottom - HOVER_PANEL_HEIGHT - 8);
-    const right = Math.max(8, viewportWidth - HOVER_PANEL_WIDTH - 8);
-
-    const candidates = [
-      { left: 8, top },
-      { left: 8, top: bottom },
-      { left: right, top },
-      { left: right, top: bottom },
-      { left: 8, top: Math.max(top, Math.round((height - HOVER_PANEL_HEIGHT) / 2)) },
-    ];
-
-    function scoreCandidate(candidate: { left: number; top: number }) {
-      const rect = {
-        left: candidate.left - 8,
-        right: candidate.left + HOVER_PANEL_WIDTH + 8,
-        top: candidate.top - 8,
-        bottom: candidate.top + HOVER_PANEL_HEIGHT + 8,
-      };
-
-      let coveredPoints = 0;
-
-      for (const key of visibleKeys) {
-        for (const point of series[key] ?? []) {
-          if (!Number.isFinite(point.time) || !Number.isFinite(point.value)) continue;
-
-          const x = minuteToPixel(point.time) - sliderValue;
-          if (x < rect.left || x > rect.right) continue;
-
-          const y = valueToPixel(point.value);
-          if (y >= rect.top && y <= rect.bottom) {
-            coveredPoints += 1;
-          }
-        }
-      }
-
-      return coveredPoints;
-    }
-
-    return candidates
-      .map((candidate, index) => ({
-        ...candidate,
-        score: scoreCandidate(candidate),
-        index,
-      }))
-      .sort((a, b) => a.score - b.score || a.index - b.index)[0];
-  }, [
-    chartMarginBottom,
-    chartMarginTop,
-    height,
-    scrollViewportWidth,
-    showTopTimeAxis,
-    sliderValue,
-    series,
-    visibleKeys,
-  ]);
+  
+    return {
+      left: Math.max(8, viewportWidth - HOVER_PANEL_WIDTH - 8),
+      top: showTopTimeAxis ? 28 : chartMarginTop + 8,
+    };
+  }, [scrollViewportWidth, showTopTimeAxis, chartMarginTop]);
 
   const overlayBox = useMemo(() => {
     if (!displayWindow) return null;
@@ -1105,7 +1062,7 @@ const activeEndMin =
       width: Math.max(1, right - left),
       height: Math.max(1, bottom - top),
     };
-  }, [displayWindow]);
+  }, [displayWindow, plotWidth, effectiveXEnd, chartMarginTop, chartMarginBottom, domainMin, domainMax]);
 
   const interactionCursor = useMemo(() => {
     if (isDragging) {
@@ -1170,10 +1127,7 @@ const activeEndMin =
 
   const minorGridTicks = useMemo(() => {
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
-    const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += viewConfig.minorStep) ticks.push(t);
-    if (ticks[ticks.length - 1] !== effectiveXEnd) ticks.push(effectiveXEnd);
-    return ticks;
+    return buildChartTicks(effectiveXEnd, viewConfig.minorStep);
   }, [effectiveXEnd, viewConfig.minorStep]);
 
   const majorGridTicks = useMemo(() => {
@@ -1183,10 +1137,7 @@ const activeEndMin =
       return xTicks;
     }
 
-    const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += viewConfig.majorStep) ticks.push(t);
-    if (ticks[ticks.length - 1] !== effectiveXEnd) ticks.push(effectiveXEnd);
-    return ticks;
+    return buildChartTicks(effectiveXEnd, viewConfig.majorStep);
   }, [timeResolution, xTicks, effectiveXEnd, viewConfig.majorStep]);
 
   const yTicks = useMemo(
@@ -1368,6 +1319,7 @@ const activeEndMin =
       const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
       el.scrollLeft = clamped;
       setSliderValue(clamped);
+      onSharedScrollLeftChange?.(clamped);
     }}
     onScroll={(e) => {
       const next = e.currentTarget.scrollLeft;
@@ -1424,7 +1376,7 @@ const activeEndMin =
             <Scatter
               key={key}
               name={lineLabels[key] ?? key}
-              data={buildScatterData(series[key])}
+              data={scatterDataByKey[key] ?? []}
               fill={lineColors[key] ?? "#000000"}
               shape={(props: any) => (
                 <EpicMarker
@@ -1725,7 +1677,7 @@ const activeEndMin =
     </div>
   )}
 
-  <div className="px-2 pt-2">
+<div className="pt-2">
     <input
       type="range"
       min={0}

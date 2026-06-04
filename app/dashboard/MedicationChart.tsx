@@ -17,8 +17,17 @@ import type {
   MedicationBolusPoint,
   MedicationInfusionSegment,
 } from "@/lib/types";
-
 import type { ManagementEvent } from "@/lib/types_management";
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  CHART_RIGHT_MARGIN as RECHARTS_RIGHT_MARGIN,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getSharedChartGeometry,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type MedicationChartProps = {
   title?: string;
@@ -31,7 +40,7 @@ type MedicationChartProps = {
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
   managementEvent?: ManagementEvent | null;
-  timeResolution?: 15 | 5;
+  timeResolution?: TimeResolution;
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -68,10 +77,6 @@ type MedicationClickInfo = {
   x: number;
   y: number;
 };
-
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
 
 const MEDICATION_DISPLAY_ORDER = [
   "propofol",
@@ -139,38 +144,6 @@ const MEDICATION_DISPLAY_ORDER = [
 const ROW_HEIGHT = 25;
 const PLOT_TOP_PAD = 0;
 const PLOT_BOTTOM_PAD = 0;
-
-const RECHARTS_RIGHT_MARGIN = 20;
-const BASE_PX_PER_15_MIN = 64;
-
-function getPxPerMinute(timeResolution: 15 | 5) {
-  return timeResolution === 15
-    ? BASE_PX_PER_15_MIN / 15
-    : BASE_PX_PER_15_MIN / 5;
-}
-
-function getMajorStep(timeResolution: 15 | 5) {
-  return timeResolution === 15 ? 15 : 5;
-}
-
-function getMinorStep(timeResolution: 15 | 5) {
-  return timeResolution === 15 ? 5 : 1;
-}
-
-function buildGridTicks(end: number, step: number) {
-  if (!Number.isFinite(end) || end <= 0) return [];
-
-  const ticks: number[] = [];
-  for (let t = 0; t <= end; t += step) {
-    ticks.push(t);
-  }
-
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
-    ticks.push(end);
-  }
-
-  return ticks;
-}
 
 function normalizeName(name: string) {
   return String(name ?? "").trim().toLowerCase();
@@ -1154,9 +1127,8 @@ export default function MedicationChart({
   const [selectedMedicationInfo, setSelectedMedicationInfo] =
     useState<MedicationClickInfo | null>(null);
 
-  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
-  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
+  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
 
   useEffect(() => {
     if (scrollRef.current == null) return;
@@ -1187,23 +1159,20 @@ export default function MedicationChart({
 
   const majorTicks = useMemo(() => {
     if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
-    return buildGridTicks(end, majorStep);
+    return buildChartTicks(end, majorStep);
   }, [timeResolution, xTicks, end, majorStep]);
 
   const minorTicks = useMemo(() => {
-    return buildGridTicks(end, minorStep);
+    return buildChartTicks(end, minorStep);
   }, [end, minorStep]);
 
   const fullContentHeight =
     rows.length * ROW_HEIGHT + PLOT_TOP_PAD + PLOT_BOTTOM_PAD;
 
-  const contentPlotWidth = useMemo(() => {
-    if (end <= 0) return 800;
-    return Math.max(800, Math.ceil(end * pxPerMin));
-  }, [end, pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentPlotWidth;
+  const { contentWidth, plotWidth } = useMemo(
+    () => getSharedChartGeometry(end, timeResolution),
+    [end, timeResolution]
+  );
 
   useEffect(() => {
     function updateScrollMetrics() {
@@ -1313,16 +1282,12 @@ export default function MedicationChart({
       ) : null}
 
       <div
-        className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-        style={{ height }}
+        className="grid gap-0"
+        style={{
+          gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
+        }}
       >
-        <div
-          className="grid gap-0"
-          style={{
-            gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
-            minHeight: fullContentHeight,
-          }}
-        >
+        <div className="overflow-hidden" style={{ height }}>
           <div className="border-r pr-0" style={{ height: fullContentHeight }}>
             <div>
               {rows.map((row) => {
@@ -1380,10 +1345,17 @@ export default function MedicationChart({
               })}
             </div>
           </div>
+        </div>
 
+        <div className="overflow-hidden" style={{ height }}>
           <FixedAxisSpacer height={fullContentHeight} />
+        </div>
 
-          <div className="overflow-x-hidden overflow-y-hidden">
+        <div className="min-w-0">
+          <div
+            className="overflow-x-hidden overflow-y-hidden"
+            style={{ height }}
+          >
             <div
               ref={scrollRef}
               className="med-scroll-hidden"
@@ -1414,6 +1386,7 @@ export default function MedicationChart({
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
+                onSharedScrollLeftChange?.(clamped);
                 setSelectedMedicationInfo(null);
               }}
               onScroll={(e) => {
@@ -1565,34 +1538,32 @@ export default function MedicationChart({
               </div>
             </div>
 
-            <div className="px-2 pt-2">
-              <input
-                type="range"
-                min={0}
-                max={Math.max(0, Math.round(maxScrollLeft))}
-                step={1}
-                value={Math.min(sliderValue, maxScrollLeft)}
-                onChange={(e) => {
-                  const next = Number(e.target.value);
-                  setSliderValue(next);
+          </div>
+          <div className="pt-2">
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, Math.round(maxScrollLeft))}
+              step={1}
+              value={Math.min(sliderValue, maxScrollLeft)}
+              onChange={(e) => {
+                const next = Number(e.target.value);
+                setSliderValue(next);
 
-                  const el = scrollRef.current;
-                  if (!el) return;
+                const el = scrollRef.current;
+                if (!el) return;
 
-                  isSyncingFromSliderRef.current = true;
-                  el.scrollLeft = next;
-                  onSharedScrollLeftChange?.(next);
+                isSyncingFromSliderRef.current = true;
+                el.scrollLeft = next;
+                onSharedScrollLeftChange?.(next);
 
-                  requestAnimationFrame(() => {
-                    isSyncingFromSliderRef.current = false;
-                  });
-                }}
-                className="med-slider"
-                aria-label="Medication chart horizontal scroll"
-              />
-            </div>
-
-          
+                requestAnimationFrame(() => {
+                  isSyncingFromSliderRef.current = false;
+                });
+              }}
+              className="med-slider"
+              aria-label="Medication chart horizontal scroll"
+            />
           </div>
         </div>
       </div>

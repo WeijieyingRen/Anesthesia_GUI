@@ -458,7 +458,7 @@ export default function UnifiedTimelineCard({
 
       {openSections.vitals && (
         <div className="space-y-0">
-          <div className="max-h-[380px] overflow-x-hidden overflow-y-auto [scrollbar-gutter:stable]">
+          <div className="overflow-visible">
             <VitalChart
               title=""
               yDomain={[0, 220]}

@@ -2,8 +2,15 @@
 
 import * as React from "react";
 import type { TimelineContextData, TimelineContextEvent } from "@/lib/types";
-
-type TimeResolution = 15 | 5;
+import {
+  CHART_AXIS_WIDTH as YAXIS_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_WIDTH,
+  buildChartTicks,
+  getChartMajorStep,
+  getSharedChartGeometry,
+  minuteToX as minuteToChartX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type TimelineContextPanelProps = {
   title?: string;
@@ -25,12 +32,6 @@ type PackedEvent = TimelineContextEvent & {
   level: number;
   clusterRank: number;
 };
-
-const LEGEND_WIDTH = 220;
-const YAXIS_WIDTH = 35;
-const CHART_RIGHT_MARGIN = 20;
-
-const PX_PER_15_MIN = 64;
 
 const TOP_PAD = 4;
 const BOTTOM_PAD = 4;
@@ -72,6 +73,9 @@ function shouldShowTextLabel(event: TimelineContextEvent) {
     "induction",
     "intubation",
     "extubation",
+    "block_start",
+    "block_stop",
+    "block_complete",
   ]);
 
   return textEvents.has(event.event_type);
@@ -541,26 +545,6 @@ function AxisSpacer({ height }: { height: number }) {
   );
 }
 
-function getPxPerMinute(timeResolution: TimeResolution) {
-  return timeResolution === 5 ? PX_PER_15_MIN / 5 : PX_PER_15_MIN / 15;
-}
-
-function getMajorStep(timeResolution: TimeResolution) {
-  return timeResolution === 5 ? 5 : 15;
-}
-
-function buildTicks(end: number, step: number) {
-  if (!Number.isFinite(end) || end <= 0) return [];
-  const ticks: number[] = [];
-  for (let t = 0; t <= end; t += step) {
-    ticks.push(t);
-  }
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
-    ticks.push(end);
-  }
-  return ticks;
-}
-
 export default function TimelineContextPanel({
   title = "Timeline and Events",
   context,
@@ -579,6 +563,7 @@ export default function TimelineContextPanel({
   const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
 
   const packedEvents = React.useMemo(() => packEvents(context), [context]);
+  const effectiveXEnd = xEnd ?? 0;
 
   const legendEvents = React.useMemo(() => {
     const items = packedEvents.filter((event) => shouldShowHeaderLabel(event));
@@ -592,14 +577,16 @@ export default function TimelineContextPanel({
     });
   }, [packedEvents]);
 
-  const majorStep = React.useMemo(() => getMajorStep(timeResolution), [timeResolution]);
-  const pxPerMin = React.useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
+  const majorStep = React.useMemo(
+    () => getChartMajorStep(timeResolution),
+    [timeResolution]
+  );
 
   const majorTicks = React.useMemo(() => {
-    if (!Number.isFinite(xEnd) || xEnd <= 0) return [];
+    if (!Number.isFinite(effectiveXEnd) || effectiveXEnd <= 0) return [];
     if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
-    return buildTicks(xEnd, majorStep);
-  }, [xEnd, xTicks, timeResolution, majorStep]);
+    return buildChartTicks(effectiveXEnd, majorStep);
+  }, [effectiveXEnd, xTicks, timeResolution, majorStep]);
 
   const topTimeSlots = React.useMemo(() => {
     if (majorTicks.length === 0) return [];
@@ -610,20 +597,16 @@ export default function TimelineContextPanel({
     }));
   }, [majorTicks, timeZero]);
 
-  const contentPlotWidth = React.useMemo(() => {
-    if (!xEnd || xEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(xEnd * pxPerMin));
-  }, [xEnd, pxPerMin]);
-
-  const contentWidth = contentPlotWidth + CHART_RIGHT_MARGIN;
-  const plotWidth = contentPlotWidth;
+  const { contentWidth, plotWidth } = React.useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
 
   const minuteToX = React.useCallback(
     (minute: number) => {
-      if (!Number.isFinite(xEnd) || xEnd <= 0) return 0;
-      return (minute / xEnd) * plotWidth;
+      return minuteToChartX(minute, effectiveXEnd, plotWidth);
     },
-    [xEnd, plotWidth]
+    [effectiveXEnd, plotWidth]
   );
 
   React.useEffect(() => {
@@ -655,10 +638,10 @@ export default function TimelineContextPanel({
 
   if (!context) return null;
   if (!packedEvents.length) return null;
-  if (!Number.isFinite(xEnd) || xEnd <= 0) return null;
+  if (!Number.isFinite(effectiveXEnd) || effectiveXEnd <= 0) return null;
 
   return (
-    <div className="rounded-lg border bg-white px-2 py-1 shadow-sm">
+    <div className="border bg-white p-0 shadow-sm">
       <style jsx>{`
         .timeline-scroll-hidden {
           overflow-x: auto;
@@ -727,7 +710,7 @@ export default function TimelineContextPanel({
           background: #475569;
         }
       `}</style>
-      <div className="mb-1 flex items-center justify-between">
+      <div className="mb-1 flex items-center justify-between px-2 py-1">
         <button
           type="button"
           onClick={() => setIsExpanded((v) => !v)}
@@ -760,48 +743,55 @@ export default function TimelineContextPanel({
             gridTemplateColumns: `${LEGEND_WIDTH}px ${YAXIS_WIDTH}px minmax(0,1fr)`,
           }}
         >
-          <div />
+          <div className="border-r bg-white" style={{ height: SVG_HEIGHT }} />
           <AxisSpacer height={SVG_HEIGHT} />
 
-          <div className="overflow-x-hidden overflow-y-hidden">
+          <div className="min-w-0">
             <div
-              ref={scrollRef}
-              className="timeline-scroll-hidden"
-              style={{ overscrollBehaviorX: "none" }}
-              onWheel={(e) => {
-                const el = e.currentTarget;
-                const absX = Math.abs(e.deltaX);
-                const absY = Math.abs(e.deltaY);
-
-                if (absX <= absY || absX < 1) return;
-
-                const maxScrollLeft = el.scrollWidth - el.clientWidth;
-                const nextLeft = el.scrollLeft + e.deltaX;
-
-                const atLeftEdge = el.scrollLeft <= 0;
-                const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
-
-                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
-
-                if (tryingGoPastLeft || tryingGoPastRight) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  return;
-                }
-
-                e.preventDefault();
-                el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-              }}
-              onScroll={(e) => {
-                const next = e.currentTarget.scrollLeft;
-                if (!isSyncingFromSliderRef.current) {
-                  setSliderValue(next);
-                }
-                onSharedScrollLeftChange?.(next);
-              }}
+              className="overflow-x-hidden overflow-y-hidden"
+              style={{ height: SVG_HEIGHT }}
             >
-              <div style={{ width: contentWidth, height: SVG_HEIGHT }}>
+              <div
+                ref={scrollRef}
+                className="timeline-scroll-hidden"
+                style={{ overscrollBehaviorX: "none" }}
+                onWheel={(e) => {
+                  const el = e.currentTarget;
+                  const absX = Math.abs(e.deltaX);
+                  const absY = Math.abs(e.deltaY);
+
+                  if (absX <= absY || absX < 1) return;
+
+                  const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                  const nextLeft = el.scrollLeft + e.deltaX;
+
+                  const atLeftEdge = el.scrollLeft <= 0;
+                  const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+                  const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                  const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+                  if (tryingGoPastLeft || tryingGoPastRight) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                  }
+
+                  e.preventDefault();
+                  const clamped = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+                  el.scrollLeft = clamped;
+                  setSliderValue(clamped);
+                  onSharedScrollLeftChange?.(clamped);
+                }}
+                onScroll={(e) => {
+                  const next = e.currentTarget.scrollLeft;
+                  if (!isSyncingFromSliderRef.current) {
+                    setSliderValue(next);
+                  }
+                  onSharedScrollLeftChange?.(next);
+                }}
+              >
+                <div style={{ width: contentWidth, height: SVG_HEIGHT }}>
                 <svg
                   width={contentWidth}
                   height={SVG_HEIGHT}
@@ -864,13 +854,13 @@ export default function TimelineContextPanel({
                 <line
                   x1={0}
                   y1={AXIS_Y}
-                  x2={minuteToX(xEnd)}
+                  x2={minuteToX(effectiveXEnd)}
                   y2={AXIS_Y}
                   stroke="#7C8EA3"
                   strokeWidth={2.1}
                 />
                 <polygon
-                  points={`${minuteToX(xEnd)},${AXIS_Y} ${minuteToX(xEnd) - 8},${AXIS_Y - 5} ${minuteToX(xEnd) - 8},${AXIS_Y + 5}`}
+                  points={`${minuteToX(effectiveXEnd)},${AXIS_Y} ${minuteToX(effectiveXEnd) - 8},${AXIS_Y - 5} ${minuteToX(effectiveXEnd) - 8},${AXIS_Y + 5}`}
                   fill="#7C8EA3"
                 />
 
@@ -969,9 +959,10 @@ export default function TimelineContextPanel({
                   );
                 })}
                 </svg>
+                </div>
               </div>
             </div>
-            <div className="px-2 pt-2">
+            <div className="pt-2">
               <input
                 type="range"
                 min={0}

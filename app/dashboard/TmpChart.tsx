@@ -11,10 +11,18 @@ import {
   ReferenceLine,
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
-
 import type { DetectVital } from "./annotation/types";
-
-type TimeResolution = 15 | 5;
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  CHART_RIGHT_MARGIN as PLOT_RIGHT,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getSharedChartGeometry,
+  minuteToX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type SelectedWindow = {
   vital: DetectVital;
@@ -83,11 +91,6 @@ type TmpProbeRange = {
   min: number | null;
   max: number | null;
 };
-
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
-const BASE_PX_PER_15_MIN = 64;
 
 const TMP_FEATURES: TmpFeatureConfig[] = [
   {
@@ -549,21 +552,13 @@ export default function TmpChart({
     return buildChartRowsForActiveFeature(tmp, activeFeatureKey);
   }, [tmp, activeFeatureKey]);
 
-  const viewConfig = React.useMemo(() => {
-    if (timeResolution === 5) {
-      return {
-        majorStep: 5,
-        minorStep: 1,
-        pxPerMin: BASE_PX_PER_15_MIN / 5,
-      };
-    }
-
-    return {
-      majorStep: 15,
-      minorStep: 5,
-      pxPerMin: BASE_PX_PER_15_MIN / 15,
-    };
-  }, [timeResolution]);
+  const viewConfig = React.useMemo(
+    () => ({
+      majorStep: getChartMajorStep(timeResolution),
+      minorStep: getChartMinorStep(timeResolution),
+    }),
+    [timeResolution]
+  );
 
   const chartMarginTop = 10;
   const chartMarginBottom = showXAxis ? 24 : 10;
@@ -574,13 +569,10 @@ export default function TmpChart({
 
   const effectiveXEnd = xEnd ?? 0;
 
-  const contentPlotWidth = React.useMemo(() => {
-    if (effectiveXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(effectiveXEnd * viewConfig.pxPerMin));
-  }, [effectiveXEnd, viewConfig.pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentWidth - PLOT_RIGHT;
+  const { contentWidth, plotWidth } = React.useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
 
   const majorGridTicks = React.useMemo(() => {
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
@@ -589,32 +581,21 @@ export default function TmpChart({
       return xTicks;
     }
 
-    const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += viewConfig.majorStep) {
-      ticks.push(t);
-    }
-    if (ticks[ticks.length - 1] !== effectiveXEnd) {
-      ticks.push(effectiveXEnd);
-    }
-    return ticks;
+    return buildChartTicks(effectiveXEnd, viewConfig.majorStep);
   }, [timeResolution, xTicks, effectiveXEnd, viewConfig.majorStep]);
 
   const minorGridTicks = React.useMemo(() => {
     if (!effectiveXEnd || effectiveXEnd <= 0) return [];
-    const ticks: number[] = [];
-    for (let t = 0; t <= effectiveXEnd; t += viewConfig.minorStep) {
-      ticks.push(t);
-    }
-    if (ticks[ticks.length - 1] !== effectiveXEnd) {
-      ticks.push(effectiveXEnd);
-    }
-    return ticks;
+    return buildChartTicks(effectiveXEnd, viewConfig.minorStep);
   }, [effectiveXEnd, viewConfig.minorStep]);
 
   const tmpWindow = selectedWindow?.vital === "TEMP" ? selectedWindow : null;
 
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const chartOverlayRef = React.useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = React.useRef(false);
+  const [sliderValue, setSliderValue] = React.useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
 
   React.useEffect(() => {
     if (scrollRef.current == null) return;
@@ -622,8 +603,26 @@ export default function TmpChart({
 
     if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
       scrollRef.current.scrollLeft = sharedScrollLeft;
+      setSliderValue(sharedScrollLeft);
     }
   }, [sharedScrollLeft]);
+
+  React.useEffect(() => {
+    function updateScrollMetrics() {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+      setSliderValue(Math.min(el.scrollLeft, nextMax));
+    }
+
+    updateScrollMetrics();
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
+  }, [contentWidth, height, activeFeatureKey]);
 
   const [isDragging, setIsDragging] = React.useState(false);
   const [dragMode, setDragMode] = React.useState<DragMode>(null);
@@ -644,8 +643,7 @@ export default function TmpChart({
   }
 
   function minuteToPixel(minute: number) {
-    if (!effectiveXEnd || effectiveXEnd <= 0) return 0;
-    return (minute / effectiveXEnd) * plotWidth;
+    return minuteToX(minute, effectiveXEnd, plotWidth);
   }
 
   function valueToPixel(value: number) {
@@ -664,7 +662,8 @@ export default function TmpChart({
 
     const rect = el.getBoundingClientRect();
     const xInPlot = clientX - rect.left;
-    const minute = xInPlot / viewConfig.pxPerMin;
+    const clampedX = Math.max(0, Math.min(xInPlot, plotWidth));
+    const minute = effectiveXEnd > 0 ? (clampedX / plotWidth) * effectiveXEnd : 0;
 
     return Math.max(0, Math.min(effectiveXEnd, minute));
   }
@@ -684,7 +683,8 @@ export default function TmpChart({
   }
 
   function pixelToMinute(px: number) {
-    return px / viewConfig.pxPerMin;
+    if (!effectiveXEnd || effectiveXEnd <= 0 || plotWidth <= 0) return 0;
+    return (px / plotWidth) * effectiveXEnd;
   }
 
   function pixelToValue(py: number) {
@@ -969,6 +969,61 @@ export default function TmpChart({
 
   return (
     <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+      <style jsx>{`
+        .tmp-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .tmp-slider:focus {
+          outline: none;
+        }
+
+        .tmp-slider::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .tmp-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          margin-top: -5px;
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .tmp-slider:hover::-webkit-slider-thumb {
+          background: #475569;
+        }
+
+        .tmp-slider::-moz-range-track {
+          height: 8px;
+          background: #d1d5db;
+          border-radius: 9999px;
+        }
+
+        .tmp-slider::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 9999px;
+          background: #64748b;
+          border: 2px solid white;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .tmp-slider:hover::-moz-range-thumb {
+          background: #475569;
+        }
+      `}</style>
       {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
 
       <div
@@ -990,6 +1045,11 @@ export default function TmpChart({
           chartMarginBottom={chartMarginBottom}
         />
 
+        <div className="min-w-0">
+          <div
+            className="overflow-x-hidden overflow-y-hidden"
+            style={{ height }}
+          >
 <div
   ref={scrollRef}
   className="overflow-x-auto overflow-y-hidden"
@@ -999,7 +1059,6 @@ export default function TmpChart({
     const absX = Math.abs(e.deltaX);
     const absY = Math.abs(e.deltaY);
 
-    // 只处理“明显以横向为主”的触摸板/滚轮手势
     if (absX <= absY || absX < 1) return;
 
     const maxScrollLeft = el.scrollWidth - el.clientWidth;
@@ -1018,10 +1077,17 @@ export default function TmpChart({
     }
 
     e.preventDefault();
-    el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+    const clamped = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+    el.scrollLeft = clamped;
+    setSliderValue(clamped);
+    onSharedScrollLeftChange?.(clamped);
   }}
   onScroll={(e) => {
-    onSharedScrollLeftChange?.(e.currentTarget.scrollLeft);
+    const next = e.currentTarget.scrollLeft;
+    if (!isSyncingFromSliderRef.current) {
+      setSliderValue(next);
+    }
+    onSharedScrollLeftChange?.(next);
   }}
 >
           <div className="relative" style={{ width: contentWidth, height }}>
@@ -1038,7 +1104,7 @@ export default function TmpChart({
                 <XAxis
                   type="number"
                   dataKey="time"
-                  domain={[0, xEnd ?? "dataMax"]}
+                  domain={[0, effectiveXEnd]}
                   ticks={majorGridTicks}
                   interval={0}
                   allowDecimals={false}
@@ -1453,6 +1519,34 @@ export default function TmpChart({
                 </div>
               )}
             </div>
+          </div>
+          </div>
+          </div>
+          <div className="pt-2">
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, Math.round(maxScrollLeft))}
+              step={1}
+              value={Math.min(sliderValue, maxScrollLeft)}
+              onChange={(e) => {
+                const next = Number(e.target.value);
+                setSliderValue(next);
+
+                const el = scrollRef.current;
+                if (!el) return;
+
+                isSyncingFromSliderRef.current = true;
+                el.scrollLeft = next;
+                onSharedScrollLeftChange?.(next);
+
+                requestAnimationFrame(() => {
+                  isSyncingFromSliderRef.current = false;
+                });
+              }}
+              aria-label="Temperature chart horizontal scroll"
+              className="tmp-slider"
+            />
           </div>
         </div>
       </div>

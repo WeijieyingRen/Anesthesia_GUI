@@ -7,15 +7,16 @@ import type {
   FluidInfusionSegment,
   FluidOutputPoint,
 } from "@/lib/types";
-
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
-
-/** 和 VitalChart 保持一致 */
-const PX_PER_15_MIN = 64;
-
-type TimeResolution = 15 | 5;
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getSharedChartGeometry,
+  minuteToX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type HighlightWindow = {
   startMin: number;
@@ -256,30 +257,6 @@ function FixedYAxisSpacer({ height }: { height: number }) {
   );
 }
 
-function getPxPerMinute(timeResolution: TimeResolution) {
-  return timeResolution === 5 ? PX_PER_15_MIN / 5 : PX_PER_15_MIN / 15;
-}
-
-function getMajorStep(timeResolution: TimeResolution) {
-  return timeResolution === 5 ? 5 : 15;
-}
-
-function getMinorStep(timeResolution: TimeResolution) {
-  return timeResolution === 5 ? 1 : 5;
-}
-
-function buildGridTicks(end: number, step: number) {
-  if (!Number.isFinite(end) || end <= 0) return [];
-  const ticks: number[] = [];
-  for (let t = 0; t <= end; t += step) {
-    ticks.push(t);
-  }
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
-    ticks.push(end);
-  }
-  return ticks;
-}
-
 export default function FluidChart({
   title = "Fluid Events",
   fluids,
@@ -312,23 +289,23 @@ export default function FluidChart({
   );
 
   const allMaxTime = useMemo(() => getMaxTime(rows), [rows]);
-  const majorStep = useMemo(() => getMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getMinorStep(timeResolution), [timeResolution]);
-  const pxPerMin = useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
+  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
+  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
 
-  const finalXEnd = useMemo(() => {
+  const computedXEnd = useMemo(() => {
     const computed = Math.max(majorStep, Math.ceil(allMaxTime / majorStep) * majorStep);
-    return xEnd ?? computed;
-  }, [xEnd, allMaxTime, majorStep]);
+    return computed;
+  }, [allMaxTime, majorStep]);
+  const effectiveXEnd = xEnd ?? computedXEnd;
 
   const majorTicks = useMemo(() => {
     if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
-    return buildGridTicks(finalXEnd, majorStep);
-  }, [timeResolution, xTicks, finalXEnd, majorStep]);
+    return buildChartTicks(effectiveXEnd, majorStep);
+  }, [timeResolution, xTicks, effectiveXEnd, majorStep]);
 
   const minorTicks = useMemo(() => {
-    return buildGridTicks(finalXEnd, minorStep);
-  }, [finalXEnd, minorStep]);
+    return buildChartTicks(effectiveXEnd, minorStep);
+  }, [effectiveXEnd, minorStep]);
 
   const axisHeight = showXAxis ? 22 : 0;
   const contentHeight = Math.max(visibleRowsReindexed.length * ROW_HEIGHT, ROW_HEIGHT);
@@ -340,13 +317,10 @@ export default function FluidChart({
   const viewHeight = Math.min(dynamicHeight, 220);
 
 
-  const contentPlotWidth = useMemo(() => {
-    if (finalXEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(finalXEnd * pxPerMin));
-  }, [finalXEnd, pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentWidth - PLOT_RIGHT;
+  const { contentWidth, plotWidth } = useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
 
   useEffect(() => {
     if (scrollRef.current == null) return;
@@ -376,8 +350,7 @@ export default function FluidChart({
   }, [contentWidth, viewHeight, visibleRowsReindexed.length]);
 
   function minuteToPixel(minute: number) {
-    if (!finalXEnd || finalXEnd <= 0) return 0;
-    return (minute / finalXEnd) * plotWidth;
+    return minuteToX(minute, effectiveXEnd, plotWidth);
   }
 
   if (!rows.length) {
@@ -520,52 +493,58 @@ export default function FluidChart({
 
         <FixedYAxisSpacer height={viewHeight} />
 
-        <div className="overflow-x-hidden overflow-y-hidden">
+        <div className="min-w-0">
           <div
-            ref={scrollRef}
-            className="fluid-scroll-hidden"
-            style={{ overscrollBehaviorX: "none" }}
-            onWheel={(e) => {
-              const el = e.currentTarget;
-              const absX = Math.abs(e.deltaX);
-              const absY = Math.abs(e.deltaY);
-
-              // 只处理“明显以横向为主”的触摸板/滚轮手势
-              if (absX <= absY || absX < 1) return;
-
-              const maxScrollLeft = el.scrollWidth - el.clientWidth;
-              const nextLeft = el.scrollLeft + e.deltaX;
-
-              const atLeftEdge = el.scrollLeft <= 0;
-              const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
-
-              const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-              const tryingGoPastRight = atRightEdge && e.deltaX > 0;
-
-              if (tryingGoPastLeft || tryingGoPastRight) {
-                e.preventDefault();
-                e.stopPropagation();
-                return;
-              }
-
-              e.preventDefault();
-              el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
-            }}
-            onScroll={(e) => {
-              const next = e.currentTarget.scrollLeft;
-              if (!isSyncingFromSliderRef.current) {
-                setSliderValue(next);
-              }
-              onSharedScrollLeftChange?.(next);
-            }}
+            className="overflow-x-hidden overflow-y-hidden"
+            style={{ height: viewHeight }}
           >
             <div
-              className="relative"
-              style={{
-                width: contentWidth,
-                height: contentHeight,
+              ref={scrollRef}
+              className="fluid-scroll-hidden"
+              style={{ overscrollBehaviorX: "none" }}
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const absX = Math.abs(e.deltaX);
+                const absY = Math.abs(e.deltaY);
+
+                if (absX <= absY || absX < 1) return;
+
+                const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                const nextLeft = el.scrollLeft + e.deltaX;
+
+                const atLeftEdge = el.scrollLeft <= 0;
+                const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+
+                const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+                if (tryingGoPastLeft || tryingGoPastRight) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
+
+                e.preventDefault();
+                const clamped = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+                el.scrollLeft = clamped;
+                setSliderValue(clamped);
+                onSharedScrollLeftChange?.(clamped);
+              }}
+              onScroll={(e) => {
+                const next = e.currentTarget.scrollLeft;
+                if (!isSyncingFromSliderRef.current) {
+                  setSliderValue(next);
+                }
+                onSharedScrollLeftChange?.(next);
               }}
             >
+              <div
+                className="relative"
+                style={{
+                  width: contentWidth,
+                  height: contentHeight,
+                }}
+              >
               <svg
                 width={contentWidth}
                 height={contentHeight}
@@ -871,9 +850,10 @@ export default function FluidChart({
                   );
                 })}
               </svg>
+              </div>
             </div>
           </div>
-          <div className="px-2 pt-2">
+          <div className="pt-2">
             <input
               type="range"
               min={0}
