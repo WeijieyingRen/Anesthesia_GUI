@@ -9,7 +9,6 @@ import type {
   AnnotationTaskKey,
 } from "./types";
 import type { TimeValuePoint } from "@/lib/types";
-import PreventedEpisodePanel from "./panels/PreventedEpisodePanel";
 import Episode3TextPanel from "./panels/Episode3TextPanel";
 
 type SelectedWindow = {
@@ -173,22 +172,6 @@ export default function TaskWorkspace({
       y2: selectedWindow?.y2 ?? selectedEvent?.y2 ?? 0,
     };
   }, [selectedEvent, selectedWindow, selectedDetectVital]);
-
-  if (task === "preventedEpisode") {
-    return (
-      <PreventedEpisodePanel
-        caseId={caseId}
-        eventId="patient-prevented-episode"
-        eventTitle="Prevented Episode"
-        episodeLabel="Patient-level prevented episode"
-        anesthesiaStart={anesthesiaStart}
-        selectedVital={selectedDetectVital}
-        onChangeSelectedVital={onChangeSelectedDetectVital}
-        selectedWindow={selectedWindow}
-        onSaveAndNextStep={() => onSaveAndNextStep("preventedEpisode")}
-      />
-    );
-  }
 
   if (workflowEnabled && episodeState) {
     if (episodeState.stage === "annotate" && activeDetectedEpisode) {

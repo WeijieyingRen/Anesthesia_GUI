@@ -30,18 +30,6 @@ const EXAMPLE_MANAGEMENT_SUMMARY_1 = `This phenylephrine bolus was most likely g
 
 const EXAMPLE_MANAGEMENT_SUMMARY_2 = `This propofol decrease was most likely part of emergence planning near the end of the case. The supporting context is that it occurred toward the end of the procedure, when the provider was likely lightening the anesthetic to prepare the patient for wake-up and extubation. The expected effect would be for the patient to become less deeply anesthetized and wake up more quickly once the case was over. An alternative would have been to wait until later to reduce the propofol, depending on the expected remaining surgical time and the patient’s anesthetic depth.`;
 
-const MANAGEMENT_REASONING_PROMPT = {
-  instruction:
-    "Interpret the highlighted medication/gas event in the context of the surrounding intraoperative course. Focus on its likely clinical purpose, supporting evidence, expected effect, observed patient response, counterfactual implication, and uncertainty if the indication is unclear.",
-  requestedElements: [
-    "1. Clinical purpose: What was the most likely clinical purpose of this medication/gas event at this moment?",
-    "2. Supporting context: What surrounding evidence supports your interpretation, including vital-sign trends, medication timing, nearby medications, fluids, gas or ventilation changes, surgical stimulus, procedural workflow, or transitions in anesthetic state?",
-    "3. Expected effect and observed response: What effect was expected, and did the patient appear to respond as expected?",
-    "4. Counterfactual: If clinically relevant, what might have happened if this medication/gas event had not occurred?",
-    "5. Uncertainty and alternatives: If the purpose is unclear, what alternative explanations, missing information, or reasonable alternative management possibilities should be considered?",
-  ],
-};
-
 function makeEmptyQuestionTiming(nowIso?: string): QuestionTiming {
   return {
     startedAt: nowIso ?? null,
@@ -122,15 +110,21 @@ function getLocalTimestamp() {
 }
 
 function draftKey(patientId: string | undefined, caseId: string) {
-  return `annotationDraft:management_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+  return `annotationDraft:management_reasoning:${
+    patientId ?? "unknown_patient"
+  }:${caseId}`;
 }
 
 function revisionKey(patientId: string | undefined, caseId: string) {
-  return `annotationRevision:management_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+  return `annotationRevision:management_reasoning:${
+    patientId ?? "unknown_patient"
+  }:${caseId}`;
 }
 
 function saveNoticeKey(patientId: string | undefined, caseId: string) {
-  return `annotationSaveNotice:management_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+  return `annotationSaveNotice:management_reasoning:${
+    patientId ?? "unknown_patient"
+  }:${caseId}`;
 }
 
 function successSaveMessage() {
@@ -140,7 +134,14 @@ function successSaveMessage() {
 function nextRevisionNumber(patientId: string | undefined, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
-    const next = Number(localStorage.getItem(key) ?? "0") + 1;
+
+    // Revision starts from 0:
+    // first save  -> management_reasoning_0.json
+    // second save -> management_reasoning_1.json
+    // third save  -> management_reasoning_2.json
+    const current = Number(localStorage.getItem(key) ?? "-1");
+    const next = Number.isFinite(current) ? current + 1 : 0;
+
     localStorage.setItem(key, String(next));
     return next;
   } catch {
@@ -202,7 +203,36 @@ function buildDoseOrChangeLabel(managementEvent: ManagementEvent) {
     return null;
   }
 
-  return `${managementEvent.dose}${managementEvent.unit ? ` ${managementEvent.unit}` : ""}`;
+  return `${managementEvent.dose}${
+    managementEvent.unit ? ` ${managementEvent.unit}` : ""
+  }`;
+}
+
+function buildManagementEventMetadata(
+  managementEvent: ManagementEvent,
+  anesthesiaStart?: string | null
+) {
+  return {
+    focusEvent: buildFocusEventLabel(managementEvent, anesthesiaStart),
+    rowName: managementEvent.row_name ?? null,
+    eventType: managementEvent.event_type ?? null,
+    chartType: managementEvent.chart_type ?? null,
+
+    displayTime: getDisplayTime(managementEvent, anesthesiaStart),
+    timeMin: managementEvent.time_min ?? null,
+    endTimeMin: managementEvent.end_time_min ?? null,
+    startTime: managementEvent.start_time ?? null,
+
+    dose: managementEvent.dose ?? null,
+    unit: managementEvent.unit ?? null,
+    route: managementEvent.route ?? null,
+
+    changeFrom: managementEvent.change_from ?? null,
+    changeTo: managementEvent.change_to ?? null,
+    changeUnit: managementEvent.change_unit ?? null,
+
+    doseOrChange: buildDoseOrChangeLabel(managementEvent),
+  };
 }
 
 function InstructionPanel({
@@ -284,12 +314,17 @@ export default function ManagementReasoningPanel({
 
   useEffect(() => {
     const resolvedPatientId = patientId ?? patientFolder;
+
     try {
       const draftText =
         localStorage.getItem(draftKey(resolvedPatientId, caseId)) ?? "";
+
       const savedResult = localStorage.getItem(
-        `annotationResult:management_reasoning:${resolvedPatientId ?? "unknown_patient"}:${caseId}`
+        `annotationResult:management_reasoning:${
+          resolvedPatientId ?? "unknown_patient"
+        }:${caseId}`
       );
+
       let fallbackText = "";
       if (savedResult) {
         try {
@@ -303,10 +338,13 @@ export default function ManagementReasoningPanel({
           fallbackText = "";
         }
       }
+
       setAnswer(draftText || fallbackText);
+
       const savedNotice = localStorage.getItem(
         saveNoticeKey(resolvedPatientId, caseId)
       );
+
       if (savedResult || savedNotice) {
         setSaveStatus("success");
         setSaveMessage(savedNotice || successSaveMessage());
@@ -319,6 +357,7 @@ export default function ManagementReasoningPanel({
       setSaveStatus("idle");
       setSaveMessage("");
     }
+
     setRecording(false);
     voiceBaseTextRef.current = "";
     recognitionRef.current?.stop?.();
@@ -333,6 +372,7 @@ export default function ManagementReasoningPanel({
 
   function markTyping() {
     const nowIso = new Date().toISOString();
+
     if (typingStartedAtMsRef.current === null) {
       typingStartedAtMsRef.current = performance.now();
     }
@@ -356,6 +396,7 @@ export default function ManagementReasoningPanel({
 
   function markVoiceStart() {
     const nowIso = new Date().toISOString();
+
     if (voiceStartedAtMsRef.current === null) {
       voiceStartedAtMsRef.current = performance.now();
     }
@@ -395,6 +436,7 @@ export default function ManagementReasoningPanel({
 
   async function startVoiceNote() {
     if (readOnly) return;
+
     const SpeechRecognition =
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
@@ -519,24 +561,33 @@ export default function ManagementReasoningPanel({
             localStorage.getItem("doctorAccessCode") ??
             ""
         ).trim() || null;
+
       const doctorName = String(participantInfo?.name ?? "").trim() || null;
 
       const submittedAt = new Date().toISOString();
       const submittedAtLocal = getLocalTimestamp();
+
       taskTimingRef.current.submittedAt = submittedAt;
+
       stopVoiceNote();
       finalizeTypingDuration();
+
       const resolvedPatientId = patientId ?? patientFolder ?? undefined;
+      const resolvedPatientFolder = patientFolder ?? patientId ?? undefined;
       const revisionNumber = nextRevisionNumber(resolvedPatientId, caseId);
-      const focusEvent = buildFocusEventLabel(managementEvent, anesthesiaStart);
+
+      const managementEventMetadata = buildManagementEventMetadata(
+        managementEvent,
+        anesthesiaStart
+      );
 
       await submitAnnotation({
         doctorId,
         accessCode,
 
         caseId,
-        patientId: patientId ?? patientFolder ?? null,
-        patientFolder: patientFolder ?? patientId ?? null,
+        patientId: resolvedPatientId ?? null,
+        patientFolder: resolvedPatientFolder ?? null,
 
         panel: "management_reasoning_panel",
         participantInfo: {
@@ -569,17 +620,25 @@ export default function ManagementReasoningPanel({
         revisionNumber,
 
         answers: {
-          focusEvent,
+          focusEvent: managementEventMetadata.focusEvent,
+          managementEvent: managementEventMetadata,
           managementReasoningText: answer.trim(),
         },
       });
 
       try {
-        localStorage.setItem(draftKey(resolvedPatientId, caseId), answer.trim());
         localStorage.setItem(
-          `annotationResult:management_reasoning:${resolvedPatientId ?? "unknown_patient"}:${caseId}`,
+          draftKey(resolvedPatientId, caseId),
+          answer.trim()
+        );
+
+        localStorage.setItem(
+          `annotationResult:management_reasoning:${
+            resolvedPatientId ?? "unknown_patient"
+          }:${caseId}`,
           JSON.stringify({
-            focusEvent,
+            focusEvent: managementEventMetadata.focusEvent,
+            managementEvent: managementEventMetadata,
             managementReasoningText: answer.trim(),
             revisionNumber,
           })
@@ -589,6 +648,7 @@ export default function ManagementReasoningPanel({
       }
 
       const successMessage = successSaveMessage();
+
       try {
         localStorage.setItem(
           saveNoticeKey(resolvedPatientId, caseId),
@@ -625,47 +685,46 @@ export default function ManagementReasoningPanel({
 
   return (
     <div className="rounded-2xl border bg-white p-6">
-          <div className="mb-3 text-sm font-semibold text-gray-900">
-          Task 3: Reasoning on a given medication/gas event on the right medication/gas event panel
-        </div>
+      <div className="mb-3 text-sm font-semibold text-gray-900">
+        Task 3: Reasoning on a given medication/gas event on the right
+        medication/gas event panel
+      </div>
 
       <InstructionPanel title="Annotation Instructions" defaultOpen={false}>
         <div className="space-y-4 text-sm leading-6 text-blue-900">
           <p className="font-semibold text-blue-950">
             Please briefly explain the highlighted medication/gas event in the
             surrounding intraoperative context. If the purpose is unclear, state
-            the uncertainty explicitly. Please include these checklist items in your response:
+            the uncertainty explicitly. Please include these checklist items in
+            your response:
           </p>
 
           <div>
             <p className="font-semibold text-blue-950">
-              1.  What was the most likely clinical purpose of this medication/gas
-              event? And what makes you infer this?
+              1. What was the most likely clinical purpose of this
+              medication/gas event? And what makes you infer this?
             </p>
-           
           </div>
-
-       
 
           <div>
             <p className="font-semibold text-blue-950">
-              2.  What effect would be expected from this event, and was the
+              2. What effect would be expected from this event, and was the
               subsequent patient response consistent with that expectation?
             </p>
-           
-          </div>
-
-          <div>
-            <p className="font-semibold text-blue-950">3.  What might have happened if this
-            medication/gas event had not occurred?</p>
-          
           </div>
 
           <div>
             <p className="font-semibold text-blue-950">
-              4. Is there reasonable alternative management possibilities based on your clinical practice?
+              3. What might have happened if this medication/gas event had not
+              occurred?
             </p>
-          
+          </div>
+
+          <div>
+            <p className="font-semibold text-blue-950">
+              4. Is there reasonable alternative management possibilities based
+              on your clinical practice?
+            </p>
           </div>
         </div>
       </InstructionPanel>
@@ -689,102 +748,104 @@ export default function ManagementReasoningPanel({
       </InstructionPanel>
 
       <InstructionPanel title="FAQ / Common Questions" defaultOpen={false}>
-  <div className="space-y-4 text-sm leading-6 text-blue-900">
-    <div>
-      <p className="font-semibold text-blue-950">
-        1. Do I need to answer each checklist item separately?
-      </p>
-      <p>
-        No. You may write a short integrated clinical explanation. However, your
-        answer should still make clear the likely clinical purpose of the
-        highlighted medication/gas event, the surrounding evidence, the expected
-        effect, the observed patient response if visible, and any uncertainty or
-        reasonable alternative management.
-      </p>
-    </div>
+        <div className="space-y-4 text-sm leading-6 text-blue-900">
+          <div>
+            <p className="font-semibold text-blue-950">
+              1. Do I need to answer each checklist item separately?
+            </p>
+            <p>
+              No. You may write a short integrated clinical explanation.
+              However, your answer should still make clear the likely clinical
+              purpose of the highlighted medication/gas event, the surrounding
+              evidence, the expected effect, the observed patient response if
+              visible, and any uncertainty or reasonable alternative management.
+            </p>
+          </div>
 
-    <div>
-      <p className="font-semibold text-blue-950">
-        2. What if the medication/gas event appears routine?
-      </p>
-      <p>
-        Please state that it appears routine or background care, and briefly
-        explain why. For example, the event may reflect anesthetic maintenance,
-        emergence planning, analgesia, prophylaxis, neuromuscular
-        blockade/reversal, or ventilation management rather than treatment of an
-        abnormal event.
-      </p>
-    </div>
+          <div>
+            <p className="font-semibold text-blue-950">
+              2. What if the medication/gas event appears routine?
+            </p>
+            <p>
+              Please state that it appears routine or background care, and
+              briefly explain why. For example, the event may reflect anesthetic
+              maintenance, emergence planning, analgesia, prophylaxis,
+              neuromuscular blockade/reversal, or ventilation management rather
+              than treatment of an abnormal event.
+            </p>
+          </div>
 
-    <div>
-      <p className="font-semibold text-blue-950">
-        3. What if the purpose of the event is unclear?
-      </p>
-      <p>
-        Please describe the uncertainty rather than forcing one explanation. You
-        may mention multiple plausible purposes and explain which one seems most
-        likely based on timing, vital-sign trends, nearby medications, surgical
-        context, anesthetic phase, and patient response.
-      </p>
-    </div>
+          <div>
+            <p className="font-semibold text-blue-950">
+              3. What if the purpose of the event is unclear?
+            </p>
+            <p>
+              Please describe the uncertainty rather than forcing one
+              explanation. You may mention multiple plausible purposes and
+              explain which one seems most likely based on timing, vital-sign
+              trends, nearby medications, surgical context, anesthetic phase,
+              and patient response.
+            </p>
+          </div>
 
-    <div>
-      <p className="font-semibold text-blue-950">
-        4. What if I cannot see a clear patient response afterward?
-      </p>
-      <p>
-        It is fine to say that no clear response is visible in the available
-        window. If possible, briefly state what response would normally be
-        expected and whether the available data are consistent, inconsistent, or
-        insufficient to judge.
-      </p>
-    </div>
+          <div>
+            <p className="font-semibold text-blue-950">
+              4. What if I cannot see a clear patient response afterward?
+            </p>
+            <p>
+              It is fine to say that no clear response is visible in the
+              available window. If possible, briefly state what response would
+              normally be expected and whether the available data are
+              consistent, inconsistent, or insufficient to judge.
+            </p>
+          </div>
 
-    <div>
-      <p className="font-semibold text-blue-950">
-        5. Do I always need to provide a counterfactual?
-      </p>
-      <p>
-        No. Include a counterfactual only when clinically meaningful. For
-        example, if a vasopressor was given for hypotension, you may comment that
-        blood pressure might have remained low or continued to drift downward
-        without it. If the event is routine or the effect is unclear, you may
-        state that no clear counterfactual consequence can be determined from the
-        available data.
-      </p>
-    </div>
+          <div>
+            <p className="font-semibold text-blue-950">
+              5. Do I always need to provide a counterfactual?
+            </p>
+            <p>
+              No. Include a counterfactual only when clinically meaningful. For
+              example, if a vasopressor was given for hypotension, you may
+              comment that blood pressure might have remained low or continued
+              to drift downward without it. If the event is routine or the
+              effect is unclear, you may state that no clear counterfactual
+              consequence can be determined from the available data.
+            </p>
+          </div>
 
-    <div>
-      <p className="font-semibold text-blue-950">
-        6. What counts as alternative management?
-      </p>
-      <p>
-        Alternative management means another reasonable clinical option that
-        could have been considered in the same context. For example, another
-        vasopressor, fluid administration, adjusting anesthetic depth, changing
-        ventilation, or waiting longer may be reasonable depending on the
-        patient&apos;s physiology. If no clear alternative is needed, you may say
-        the observed management was appropriate.
-      </p>
-    </div>
+          <div>
+            <p className="font-semibold text-blue-950">
+              6. What counts as alternative management?
+            </p>
+            <p>
+              Alternative management means another reasonable clinical option
+              that could have been considered in the same context. For example,
+              another vasopressor, fluid administration, adjusting anesthetic
+              depth, changing ventilation, or waiting longer may be reasonable
+              depending on the patient&apos;s physiology. If no clear alternative
+              is needed, you may say the observed management was appropriate.
+            </p>
+          </div>
 
-    <div>
-      <p className="font-semibold text-blue-950">
-        7. How detailed should my answer be?
-      </p>
-      <p>
-        A concise clinical explanation is enough. In most cases, five to six
-        sentences or one short dictated paragraph is sufficient, as long as it
-        explains why the event likely occurred and how it relates to the
-        surrounding intraoperative context.
-      </p>
-    </div>
-  </div>
-</InstructionPanel>
+          <div>
+            <p className="font-semibold text-blue-950">
+              7. How detailed should my answer be?
+            </p>
+            <p>
+              A concise clinical explanation is enough. In most cases, five to
+              six sentences or one short dictated paragraph is sufficient, as
+              long as it explains why the event likely occurred and how it
+              relates to the surrounding intraoperative context.
+            </p>
+          </div>
+        </div>
+      </InstructionPanel>
+
       <div className="mt-6 rounded-2xl border p-5">
-      <div className="text-lg font-semibold text-gray-900">
-  Focused medication event
-</div>
+        <div className="text-lg font-semibold text-gray-900">
+          Focused medication event
+        </div>
 
         <div className="mt-3 space-y-2 text-sm text-gray-800">
           <div>
@@ -830,6 +891,7 @@ export default function ManagementReasoningPanel({
         onChange={(e) => {
           if (readOnly) return;
           markTyping();
+
           try {
             localStorage.setItem(
               draftKey(patientId ?? patientFolder, caseId),
@@ -838,6 +900,7 @@ export default function ManagementReasoningPanel({
           } catch {
             // ignore
           }
+
           setAnswer(e.target.value);
         }}
         disabled={readOnly || saveStatus === "saving"}
@@ -863,6 +926,7 @@ export default function ManagementReasoningPanel({
           type="button"
           onClick={() => {
             if (readOnly) return;
+
             setAnswer("");
             voiceBaseTextRef.current = "";
             setRecording(false);
@@ -887,7 +951,9 @@ export default function ManagementReasoningPanel({
                 saveNoticeKey(patientId ?? patientFolder, caseId)
               );
               localStorage.removeItem(
-                `annotationResult:management_reasoning:${patientId ?? patientFolder ?? "unknown_patient"}:${caseId}`
+                `annotationResult:management_reasoning:${
+                  patientId ?? patientFolder ?? "unknown_patient"
+                }:${caseId}`
               );
             } catch {
               // ignore
@@ -918,8 +984,8 @@ export default function ManagementReasoningPanel({
               saveStatus === "success"
                 ? "text-green-700"
                 : saveStatus === "error"
-                ? "text-red-700"
-                : "text-gray-500"
+                  ? "text-red-700"
+                  : "text-gray-500"
             }`}
           >
             {saveMessage}

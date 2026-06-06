@@ -210,6 +210,10 @@ export default function Home() {
         return;
       }
 
+      localStorage.removeItem("gameData");
+      localStorage.removeItem("currentDisplayCaseId");
+      localStorage.removeItem("consentInfo");
+
       const participantInfo = {
         name: trimmedName,
         gender: trimmedGender,
@@ -240,6 +244,7 @@ export default function Home() {
       localStorage.setItem("doctorAccessCode", trimmedAccessCode);
       localStorage.setItem("doctorId", accessInfo.doctorId);
       localStorage.setItem("loginWorkflowMode", accessInfo.workflowMode);
+      localStorage.setItem("currentWorkflowMode", accessInfo.workflowMode);
 
       router.push("/consent");
     } catch (err: any) {
@@ -456,6 +461,7 @@ export default function Home() {
               src="/images/university-logo.png"
               alt="University Logo"
               fill
+              sizes="144px"
               className="object-contain"
             />
           </div>
@@ -465,6 +471,7 @@ export default function Home() {
               src="/images/medicine-logo.png"
               alt="School of Medicine Logo"
               fill
+              sizes="128px"
               className="object-contain"
             />
           </div>

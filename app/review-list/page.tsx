@@ -7,21 +7,33 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 type CsvRow = Record<string, any>;
+
 type WorkflowMode = "annotation" | "review";
 
 type AccessCodeLookupResult = {
   doctorId: string;
   workflowMode: WorkflowMode;
   annotationCode: string;
+  reviewCode: string | null;
 };
 
-type CaseStatus = "not_started" | "in_progress" | "completed";
+type ReviewCaseStatus =
+  | "not_ready"
+  | "ready_for_review"
+  | "review_in_progress"
+  | "reviewed";
 
-interface CaseMeta {
+interface ReviewCaseMeta {
   id: string;
   folder: string;
-  status: CaseStatus;
   displayCaseId: number;
+  annotationCompleted: boolean;
+  reviewCompleted: boolean;
+  reviewInProgress: boolean;
+  status: ReviewCaseStatus;
+  annotationUpdatedAt?: string | null;
+  reviewUpdatedAt?: string | null;
+  caseId?: string | number | null;
 }
 
 type GameData = {
@@ -29,8 +41,8 @@ type GameData = {
   selectedPatients: Array<{
     id: string;
     folder: string;
-    status?: CaseStatus;
-    workflowMode?: WorkflowMode;
+    status?: "not_started" | "in_progress" | "completed";
+    workflowMode?: "annotation" | "review";
     displayCaseId?: number;
   }>;
   diagnoses: Array<string | null>;
@@ -41,85 +53,44 @@ type CaseStatusIndexEntry = {
   completed?: boolean;
   inProgress?: boolean;
   case_id?: string | number | null;
-  updated_at?: string;
+  updated_at?: string | null;
+
+  reviewCompleted?: boolean;
+  reviewInProgress?: boolean;
+  reviewUpdatedAt?: string | null;
+
+  annotationCompleted?: boolean;
+  annotationInProgress?: boolean;
+  annotationUpdatedAt?: string | null;
 };
 
-function getStatusLabel(status: CaseStatus, workflowMode: WorkflowMode): string {
-  if (workflowMode === "review") {
-    if (status === "completed") return "Reviewed";
-    if (status === "in_progress") return "Review In Progress";
-    return "Ready for Review";
-  }
-
-  if (status === "completed") return "Completed";
-  if (status === "in_progress") return "In Progress";
-  return "Not Started";
+function getButtonLabel(status: ReviewCaseStatus): string {
+  if (status === "reviewed") return "Review and Revise";
+  if (status === "review_in_progress") return "Continue Review";
+  if (status === "ready_for_review") return "Start Review";
+  return "Not Ready";
 }
 
-function getStatusBadgeClass(status: CaseStatus): string {
-  if (status === "completed") {
-    return "bg-green-100 text-green-700";
-  }
-
-  if (status === "in_progress") {
-    return "bg-amber-100 text-amber-700";
-  }
-
-  return "bg-gray-100 text-gray-600";
+function resolveStoredWorkflowMode(parsedParticipantInfo: any): WorkflowMode {
+  return parsedParticipantInfo?.workflowMode === "review" ||
+    localStorage.getItem("currentWorkflowMode") === "review" ||
+    localStorage.getItem("loginWorkflowMode") === "review"
+    ? "review"
+    : "annotation";
 }
 
-function getButtonLabel(status: CaseStatus, workflowMode: WorkflowMode): string {
-  if (workflowMode === "review") {
-    if (status === "completed") return "Review Submitted";
-    if (status === "in_progress") return "Continue Review";
-    return "Start Review";
-  }
-
-  if (status === "completed") return "Review and Revise";
-  if (status === "in_progress") return "Continue";
-  return "Start";
-}
-
-function resolveStoredWorkflowMode(
-  parsedParticipantInfo: any
-): WorkflowMode {
-  const participantMode = String(
-    parsedParticipantInfo?.workflowMode ?? ""
-  ).trim();
-
-  const currentMode = String(
-    localStorage.getItem("currentWorkflowMode") ?? ""
-  ).trim();
-
-  const loginMode = String(
-    localStorage.getItem("loginWorkflowMode") ?? ""
-  ).trim();
-
-  if (
-    participantMode === "review" ||
-    currentMode === "review" ||
-    loginMode === "review"
-  ) {
-    return "review";
-  }
-
-  return "annotation";
-}
-
-export default function PatientList() {
+export default function ReviewList() {
   const router = useRouter();
 
-  const [cases, setCases] = useState<CaseMeta[]>([]);
+  const [cases, setCases] = useState<ReviewCaseMeta[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [loginWorkflowMode, setLoginWorkflowMode] =
-    useState<WorkflowMode>("annotation");
 
   const loadAccessCodeInfo = async (
     accessCode: string
   ): Promise<AccessCodeLookupResult> => {
     const reviewLookupRes = await fetch(
-      `/assigned_code/access_review_code.csv`,
+      "/assigned_code/access_review_code.csv",
       {
         cache: "no-store",
       }
@@ -132,7 +103,6 @@ export default function PatientList() {
     }
 
     const text = await reviewLookupRes.text();
-
     const rows = Papa.parse<CsvRow>(text, {
       header: true,
       dynamicTyping: false,
@@ -155,10 +125,12 @@ export default function PatientList() {
 
     const doctorId = String(matched["doctor_id"] ?? "").trim();
     const annotationCode = String(matched["annotation_code"] ?? "").trim();
-    const reviewCode = String(matched["review_code"] ?? "").trim();
+    const reviewCode = String(matched["review_code"] ?? "").trim() || null;
 
     const workflowMode: WorkflowMode =
-      normalizedAccessCode === reviewCode ? "review" : "annotation";
+      reviewCode && normalizedAccessCode === reviewCode
+        ? "review"
+        : "annotation";
 
     if (!doctorId) {
       throw new Error("Matched doctor_id is empty in access_review_code.csv.");
@@ -166,7 +138,13 @@ export default function PatientList() {
 
     if (!annotationCode) {
       throw new Error(
-        "Matched annotation code is empty in access_review_code.csv."
+        "Matched annotation_code is empty in access_review_code.csv."
+      );
+    }
+
+    if (workflowMode !== "review") {
+      throw new Error(
+        "This page is for review codes only. Please use the annotation case list for annotation codes."
       );
     }
 
@@ -174,6 +152,7 @@ export default function PatientList() {
       doctorId,
       workflowMode,
       annotationCode,
+      reviewCode,
     };
   };
 
@@ -181,7 +160,7 @@ export default function PatientList() {
     accessInfo: AccessCodeLookupResult
   ): Promise<string[]> => {
     const res = await fetch(
-      `/assigned_code/assigned_650_cases_by_access_code.csv`,
+      "/assigned_code/assigned_650_cases_by_access_code.csv",
       {
         cache: "no-store",
       }
@@ -194,7 +173,6 @@ export default function PatientList() {
     }
 
     const text = await res.text();
-
     const rows = Papa.parse<CsvRow>(text, {
       header: true,
       dynamicTyping: false,
@@ -219,7 +197,7 @@ export default function PatientList() {
     return folders;
   };
 
-  const loadAllCaseStatuses = async (
+  const loadCaseStatuses = async (
     accessCode: string,
     doctorName?: string
   ): Promise<Record<string, CaseStatusIndexEntry>> => {
@@ -291,14 +269,16 @@ export default function PatientList() {
 
     const storedWorkflowMode = resolveStoredWorkflowMode(parsedParticipantInfo);
 
-    if (storedWorkflowMode === "review") {
-      localStorage.setItem("currentWorkflowMode", "review");
-      router.replace("/review-list");
+    if (storedWorkflowMode !== "review") {
+      router.replace("/patient-list");
       return;
     }
 
     (async () => {
       try {
+        setLoading(true);
+        setError(null);
+
         const accessCode =
           String(parsedParticipantInfo?.accessCode ?? "").trim() ||
           String(localStorage.getItem("doctorAccessCode") ?? "").trim();
@@ -309,49 +289,59 @@ export default function PatientList() {
           );
         }
 
+        const doctorName = String(parsedParticipantInfo?.name ?? "").trim();
         const accessInfo = await loadAccessCodeInfo(accessCode);
 
-        localStorage.setItem("currentWorkflowMode", accessInfo.workflowMode);
-        localStorage.setItem("loginWorkflowMode", accessInfo.workflowMode);
+        localStorage.setItem("currentWorkflowMode", "review");
+        localStorage.setItem("loginWorkflowMode", "review");
+        localStorage.setItem("doctorAccessCode", accessCode);
         localStorage.setItem("doctorId", accessInfo.doctorId);
-
-        if (accessInfo.workflowMode === "review") {
-          router.replace("/review-list");
-          return;
-        }
-
-        setLoginWorkflowMode(accessInfo.workflowMode);
-
-        const doctorName = String(parsedParticipantInfo?.name ?? "").trim();
 
         const [folders, statusMap] = await Promise.all([
           loadAssignedPatientFolders(accessInfo),
-          loadAllCaseStatuses(accessCode, doctorName),
+          loadCaseStatuses(accessCode, doctorName),
         ]);
 
-        const metas: CaseMeta[] = folders.map((folder, index) => {
+        const metas: ReviewCaseMeta[] = folders.map((folder, index) => {
           const item = statusMap[folder];
 
-          let status: CaseStatus = "not_started";
+          const annotationCompleted =
+            item?.annotationCompleted === true || item?.completed === true;
 
-          if (item?.completed === true) {
-            status = "completed";
-          } else if (item?.inProgress === true) {
-            status = "in_progress";
+          const reviewCompleted = item?.reviewCompleted === true;
+
+          const reviewInProgress =
+            !reviewCompleted && item?.reviewInProgress === true;
+
+          let status: ReviewCaseStatus = "not_ready";
+
+          if (reviewCompleted) {
+            status = "reviewed";
+          } else if (reviewInProgress) {
+            status = "review_in_progress";
+          } else if (annotationCompleted) {
+            status = "ready_for_review";
           }
 
           return {
             id: folder,
             folder,
-            status,
             displayCaseId: index + 1,
+            annotationCompleted,
+            reviewCompleted,
+            reviewInProgress,
+            status,
+            caseId: item?.case_id ?? null,
+            annotationUpdatedAt:
+              item?.annotationUpdatedAt ?? item?.updated_at ?? null,
+            reviewUpdatedAt: item?.reviewUpdatedAt ?? null,
           };
         });
 
         setCases(metas);
       } catch (e: any) {
-        console.error("Error building case list:", e);
-        setError(e?.message ?? "Failed to load assigned cases");
+        console.error("Error building review case list:", e);
+        setError(e?.message ?? "Failed to load review cases.");
       } finally {
         setLoading(false);
       }
@@ -360,56 +350,62 @@ export default function PatientList() {
 
   const progress = useMemo(() => {
     const total = cases.length;
-    const completed = cases.filter((c) => c.status === "completed").length;
-    const inProgress = cases.filter((c) => c.status === "in_progress").length;
-    const remaining = total - completed;
-    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+    const annotationCompleted = cases.filter(
+      (c) => c.annotationCompleted
+    ).length;
+    const readyForReview = cases.filter(
+      (c) => c.status === "ready_for_review"
+    ).length;
+    const reviewInProgress = cases.filter(
+      (c) => c.status === "review_in_progress"
+    ).length;
+    const reviewed = cases.filter((c) => c.status === "reviewed").length;
+    const notReady = cases.filter((c) => c.status === "not_ready").length;
+    const percent = total > 0 ? Math.round((reviewed / total) * 100) : 0;
 
     return {
       total,
-      completed,
-      inProgress,
-      remaining,
+      annotationCompleted,
+      readyForReview,
+      reviewInProgress,
+      reviewed,
+      notReady,
       percent,
     };
   }, [cases]);
 
-  const buildGameData = (selectedCases: CaseMeta[]): GameData => {
-    return {
-      currentPatientIndex: 0,
-      selectedPatients: selectedCases.map((c) => ({
-        id: c.id,
-        folder: c.folder,
-        status: c.status,
-        workflowMode: loginWorkflowMode === "review" ? "review" : "annotation",
-        displayCaseId: c.displayCaseId,
-      })),
-      diagnoses: Array(selectedCases.length).fill(null),
-      startTime: new Date().toISOString(),
-    };
-  };
+  const handleStartReviewCase = (caseItem: ReviewCaseMeta) => {
+    if (caseItem.status === "not_ready") {
+      return;
+    }
 
-  const handleStartSingleCase = (caseItem: CaseMeta) => {
-    const startIndex = cases.findIndex((c) => c.folder === caseItem.folder);
+    const reviewableCases = cases.filter((c) => c.annotationCompleted);
 
-    const workflowMode: WorkflowMode =
-      loginWorkflowMode === "review" ? "review" : "annotation";
+    const filteredStartIndex = reviewableCases.findIndex(
+      (c) => c.folder === caseItem.folder
+    );
 
     const gameData: GameData = {
-      currentPatientIndex: startIndex >= 0 ? startIndex : 0,
-      selectedPatients: cases.map((c) => ({
+      currentPatientIndex: filteredStartIndex >= 0 ? filteredStartIndex : 0,
+      selectedPatients: reviewableCases.map((c) => ({
         id: c.id,
         folder: c.folder,
-        status: c.status,
-        workflowMode,
+        status: c.reviewCompleted
+          ? "completed"
+          : c.reviewInProgress
+            ? "in_progress"
+            : "not_started",
+        workflowMode: "review",
         displayCaseId: c.displayCaseId,
       })),
-      diagnoses: Array(cases.length).fill(null),
+      diagnoses: Array(reviewableCases.length).fill(null),
       startTime: new Date().toISOString(),
     };
 
     localStorage.setItem("gameData", JSON.stringify(gameData));
-    localStorage.setItem("currentWorkflowMode", workflowMode);
+    localStorage.setItem("currentWorkflowMode", "review");
+    localStorage.setItem("loginWorkflowMode", "review");
+    localStorage.setItem("currentDisplayCaseId", String(caseItem.displayCaseId));
 
     router.push("/dashboard");
   };
@@ -419,7 +415,7 @@ export default function PatientList() {
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-700" />
-          <p className="text-lg">Loading cases…</p>
+          <p className="text-lg">Loading review cases…</p>
         </div>
       </div>
     );
@@ -430,7 +426,9 @@ export default function PatientList() {
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <div className="max-w-md rounded-2xl border bg-white p-6 text-center shadow-sm">
           <div className="mb-4 text-5xl text-red-500">⚠️</div>
-          <h2 className="mb-2 text-2xl font-bold">Error Loading Cases</h2>
+          <h2 className="mb-2 text-2xl font-bold">
+            Error Loading Review Cases
+          </h2>
           <p className="mb-4 text-gray-600">{error}</p>
 
           <div className="flex justify-center gap-3">
@@ -445,57 +443,46 @@ export default function PatientList() {
     );
   }
 
-  const pageTitle =
-    loginWorkflowMode === "review"
-      ? "Review Overview & Case List"
-      : "Annotation Overview & Case List";
-
-  const pageSubtitle =
-    loginWorkflowMode === "review"
-      ? "Here are cases ready for review."
-      : "Here are your assigned cases for annotation.";
-
-  const completedLabel =
-    loginWorkflowMode === "review" ? "cases reviewed" : "cases completed";
-
-  const percentLabel =
-    loginWorkflowMode === "review"
-      ? `${progress.percent}% reviewed`
-      : `${progress.percent}% completed`;
-
-  const availableLabel =
-    loginWorkflowMode === "review" ? "review" : "annotation";
-
-  const completedCardLabel =
-    loginWorkflowMode === "review" ? "Reviewed" : "Completed";
-
   return (
     <main className="min-h-screen bg-gray-50 p-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">{pageTitle}</h1>
-            <p className="mt-2 text-lg text-gray-600">{pageSubtitle}</p>
+            <h1 className="text-4xl font-bold text-gray-900">
+              Review Overview & Case List
+            </h1>
+
+
           </div>
+
+          <Button
+            variant="outline"
+            onClick={() => {
+              localStorage.removeItem("gameData");
+              router.push("/");
+            }}
+          >
+            Back to Home
+          </Button>
         </div>
 
         <div className="mb-8 rounded-3xl border bg-white p-6 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
             <div>
               <p className="mb-2 text-lg font-semibold text-blue-700">
-                Your Progress
+                Review Progress
               </p>
 
               <div className="mb-3 flex items-end gap-3">
                 <span className="text-5xl font-bold text-gray-900">
-                  {progress.completed}
+                  {progress.reviewed}
                 </span>
                 <span className="mb-1 text-3xl font-semibold text-gray-400">
                   / {progress.total}
                 </span>
               </div>
 
-              <p className="mb-4 text-gray-600">{completedLabel}</p>
+              <p className="mb-4 text-gray-600">cases reviewed</p>
 
               <div className="mb-2 h-4 w-full overflow-hidden rounded-full bg-gray-200">
                 <div
@@ -505,12 +492,12 @@ export default function PatientList() {
               </div>
 
               <div className="flex items-center justify-between text-sm text-gray-600">
-                <span>{percentLabel}</span>
-                <span>{progress.remaining} cases remaining</span>
+                <span>{progress.percent}% reviewed</span>
+                <span>{progress.readyForReview} ready for review</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-2">
               <div className="rounded-2xl bg-gray-50 p-4 text-center">
                 <p className="text-sm text-gray-500">Total</p>
                 <p className="mt-1 text-3xl font-bold text-gray-900">
@@ -518,17 +505,24 @@ export default function PatientList() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-green-50 p-4 text-center">
-                <p className="text-sm text-green-700">{completedCardLabel}</p>
-                <p className="mt-1 text-3xl font-bold text-green-700">
-                  {progress.completed}
+              <div className="rounded-2xl bg-blue-50 p-4 text-center">
+                <p className="text-sm text-blue-700">Ready</p>
+                <p className="mt-1 text-3xl font-bold text-blue-700">
+                  {progress.readyForReview}
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-amber-50 p-4 text-center">
-                <p className="text-sm text-amber-700">In Progress</p>
-                <p className="mt-1 text-3xl font-bold text-amber-700">
-                  {progress.inProgress}
+              <div className="rounded-2xl bg-green-50 p-4 text-center">
+                <p className="text-sm text-green-700">Reviewed</p>
+                <p className="mt-1 text-3xl font-bold text-green-700">
+                  {progress.reviewed}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-gray-50 p-4 text-center">
+                <p className="text-sm text-gray-500">Not Ready</p>
+                <p className="mt-1 text-3xl font-bold text-gray-700">
+                  {progress.notReady}
                 </p>
               </div>
             </div>
@@ -536,43 +530,73 @@ export default function PatientList() {
         </div>
 
         <div className="mb-4 text-lg text-gray-700">
-          You have {cases.length} case{cases.length !== 1 ? "s" : ""} available
-          for {availableLabel}.
+          You have {cases.length} assigned case{cases.length !== 1 ? "s" : ""}.
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {cases.map((c, i) => (
-            <Card
-              key={c.id}
-              className="rounded-2xl border bg-white shadow-sm transition-shadow hover:shadow-md"
-            >
-              <CardContent className="p-5">
-                <div className="mb-4 flex items-start justify-between gap-3">
-                  <div>
+          {cases.map((c, i) => {
+            const disabled = c.status === "not_ready";
+
+            return (
+              <Card
+                key={c.id}
+                className={`rounded-2xl border bg-white shadow-sm transition-shadow ${
+                  disabled ? "opacity-70" : "hover:shadow-md"
+                }`}
+              >
+                <CardContent className="p-5">
+                  <div className="mb-4">
                     <h2 className="text-2xl font-bold text-gray-900">
                       Case {i + 1}
                     </h2>
                   </div>
 
-                  <div
-                    className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusBadgeClass(
-                      c.status
-                    )}`}
-                  >
-                    {getStatusLabel(c.status, loginWorkflowMode)}
-                  </div>
-                </div>
+                  <div className="mb-4 space-y-1 text-sm text-gray-600">
+                    <div>
+                      Annotation:{" "}
+                      <span
+                        className={
+                          c.annotationCompleted
+                            ? "font-semibold text-green-700"
+                            : "font-semibold text-gray-500"
+                        }
+                      >
+                        {c.annotationCompleted ? "Completed" : "Not Completed"}
+                      </span>
+                    </div>
 
-                <Button
-                  onClick={() => handleStartSingleCase(c)}
-                  className="w-full rounded-xl text-base"
-                  variant={c.status === "completed" ? "outline" : "default"}
-                >
-                  {getButtonLabel(c.status, loginWorkflowMode)}
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                    <div>
+                      Review:{" "}
+                      <span
+                        className={
+                          c.reviewCompleted
+                            ? "font-semibold text-green-700"
+                            : c.reviewInProgress
+                              ? "font-semibold text-amber-700"
+                              : "font-semibold text-gray-500"
+                        }
+                      >
+                        {c.reviewCompleted
+                          ? "Completed"
+                          : c.reviewInProgress
+                            ? "In Progress"
+                            : "Not Started"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={() => handleStartReviewCase(c)}
+                    className="w-full rounded-xl text-base"
+                    variant={c.status === "reviewed" ? "outline" : "default"}
+                    disabled={disabled}
+                  >
+                    {getButtonLabel(c.status)}
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </main>

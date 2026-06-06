@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { submitAnnotation } from "@/lib/submit";
+import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
 
 type SummaryPanelProps = {
   eventId?: string;
@@ -86,7 +87,14 @@ function successSaveMessage() {
 function nextRevisionNumber(patientId: string, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
-    const next = Number(localStorage.getItem(key) ?? "0") + 1;
+
+    // Revision starts from 0:
+    // first save  -> summary_0.json
+    // second save -> summary_1.json
+    // third save  -> summary_2.json
+    const current = Number(localStorage.getItem(key) ?? "-1");
+    const next = Number.isFinite(current) ? current + 1 : 0;
+
     localStorage.setItem(key, String(next));
     return next;
   } catch {
@@ -172,20 +180,21 @@ export default function SummaryPanel({
       const savedResult = localStorage.getItem(
         `annotationResult:summary:${patientId}:${caseId}`
       );
+
       let fallbackText = "";
       if (savedResult) {
         try {
           const parsed = JSON.parse(savedResult);
           fallbackText = String(
-            parsed?.summaryText ??
-              parsed?.answers?.summaryText ??
-              ""
+            parsed?.summaryText ?? parsed?.answers?.summaryText ?? ""
           );
         } catch {
           fallbackText = "";
         }
       }
+
       setSummaryText(draftText || fallbackText);
+
       const savedNotice = localStorage.getItem(saveNoticeKey(patientId, caseId));
       if (savedResult || savedNotice) {
         setSaveStatus("success");
@@ -256,7 +265,8 @@ export default function SummaryPanel({
 
     try {
       const recognition = new SpeechRecognition();
-      recognition.lang = ((typeof localStorage !== "undefined" && localStorage.getItem("speechRecognitionLanguage")) || (typeof navigator !== "undefined" && navigator.language?.toLowerCase().startsWith("zh") ? "zh-CN" : typeof navigator !== "undefined" && navigator.language?.toLowerCase().startsWith("hi") ? "hi-IN" : "en-US"));
+
+      recognition.lang = getSpeechRecognitionLanguage();
       recognition.interimResults = true;
       recognition.continuous = true;
 

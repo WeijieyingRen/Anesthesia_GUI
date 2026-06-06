@@ -112,7 +112,92 @@ type TaskKey =
   | "management_reasoning"
   | "case_submission";
 
+type AccessCodeLookupEntry = {
+  doctorId: string;
+  workflowMode: "annotation" | "review";
+  annotationCode: string;
+  reviewCode: string | null;
+};
+
 let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
+
+let accessCodeLookupPromise: Promise<Map<string, AccessCodeLookupEntry>> | null =
+  null;
+
+async function loadAccessCodeLookup(): Promise<
+  Map<string, AccessCodeLookupEntry>
+> {
+  if (accessCodeLookupPromise) return accessCodeLookupPromise;
+
+  accessCodeLookupPromise = (async () => {
+    const map = new Map<string, AccessCodeLookupEntry>();
+
+    const reviewCsvPath = path.join(
+      process.cwd(),
+      "public",
+      "assigned_code",
+      "access_review_code.csv"
+    );
+
+    try {
+      const raw = await fs.readFile(reviewCsvPath, "utf-8");
+      const lines = raw.split(/\r?\n/).filter(Boolean);
+      const header = lines[0]?.split(",") ?? [];
+
+      const doctorIdx = header.indexOf("doctor_id");
+      const annotationIdx = header.indexOf("annotation_code");
+      const reviewIdx = header.indexOf("review_code");
+
+      if (doctorIdx >= 0 && annotationIdx >= 0 && reviewIdx >= 0) {
+        for (const line of lines.slice(1)) {
+          const cols = line.split(",");
+
+          const doctorId = String(cols[doctorIdx] ?? "").trim();
+          const annotationCode = String(cols[annotationIdx] ?? "").trim();
+          const reviewCode = String(cols[reviewIdx] ?? "").trim();
+
+          if (!doctorId || !annotationCode) continue;
+
+          map.set(annotationCode, {
+            doctorId,
+            workflowMode: "annotation",
+            annotationCode,
+            reviewCode: reviewCode || null,
+          });
+
+          if (reviewCode) {
+            map.set(reviewCode, {
+              doctorId,
+              workflowMode: "review",
+              annotationCode,
+              reviewCode,
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load access_review_code.csv:", error);
+    }
+
+    return map;
+  })();
+
+  return accessCodeLookupPromise;
+}
+
+async function resolveAccessCodeEntry(
+  accessCode: string | null | undefined
+): Promise<AccessCodeLookupEntry | null> {
+  if (!accessCode) return null;
+
+  try {
+    const map = await loadAccessCodeLookup();
+    return map.get(String(accessCode).trim()) ?? null;
+  } catch (error) {
+    console.error("Failed to resolve access code from access_review_code.csv:", error);
+    return null;
+  }
+}
 
 async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
   if (accessCodeDoctorMapPromise) return accessCodeDoctorMapPromise;
@@ -172,12 +257,19 @@ async function resolveDoctorIdFromAccessCode(
   }
 }
 
-async function normalizeDoctorId(body: SubmitBody): Promise<string> {
+async function normalizeDoctorId(
+  body: SubmitBody,
+  accessEntry?: AccessCodeLookupEntry | null
+): Promise<string> {
   const explicitDoctorId =
     body.doctorId ?? body.participantInfo?.doctorId ?? null;
 
   if (explicitDoctorId) {
     return sanitizePathPart(explicitDoctorId);
+  }
+
+  if (accessEntry?.doctorId) {
+    return sanitizePathPart(accessEntry.doctorId);
   }
 
   const accessCode =
@@ -198,6 +290,17 @@ function normalizeAccessCode(body: SubmitBody): string {
   return sanitizePathPart(
     body.accessCode ?? body.participantInfo?.accessCode ?? "unknown_code"
   );
+}
+
+function normalizeStorageRootAccessCode(
+  body: SubmitBody,
+  accessEntry?: AccessCodeLookupEntry | null
+): string {
+  if (accessEntry?.annotationCode) {
+    return sanitizePathPart(accessEntry.annotationCode);
+  }
+
+  return normalizeAccessCode(body);
 }
 
 function normalizePatientId(body: SubmitBody): string {
@@ -310,7 +413,10 @@ function removeNullFields<T>(value: T): T {
   return value;
 }
 
-function buildParticipantMetadata(body: SubmitBody) {
+function buildParticipantMetadata(
+  body: SubmitBody,
+  workflowMode: "annotation" | "review"
+) {
   const info = body.participantInfo ?? {};
 
   return removeNullFields({
@@ -375,10 +481,7 @@ function buildParticipantMetadata(body: SubmitBody) {
     clinical_subspecialty:
       info.clinicalSubspecialty ?? null,
 
-    workflow_mode:
-      body.workflowMode ??
-      info.workflowMode ??
-      null,
+    workflow_mode: workflowMode,
 
     annotation_code:
       info.annotationCode ?? null,
@@ -467,19 +570,26 @@ function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
 
 function parseRevision(fileName: string, baseName: string) {
   const escaped = baseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = fileName.match(new RegExp(`^${escaped}(?:_(\\d+))?\\.json$`));
+  const match = fileName.match(new RegExp(`^${escaped}_(\\d+)\\.json$`));
+
   if (!match) return null;
-  return match[1] ? Number(match[1]) : 1;
+
+  const revision = Number(match[1]);
+  return Number.isFinite(revision) ? revision : null;
 }
 
 function withRevisionSuffix(fileName: string, revisionNumber: unknown) {
   const revision = numericOrNull(revisionNumber);
-  if (revision === null || revision <= 1) return fileName;
+  const safeRevision =
+    revision === null || revision < 0 ? 0 : Math.floor(revision);
 
   const dotIndex = fileName.lastIndexOf(".");
-  if (dotIndex < 0) return `${fileName}_${Math.floor(revision)}`;
 
-  return `${fileName.slice(0, dotIndex)}_${Math.floor(revision)}${fileName.slice(
+  if (dotIndex < 0) {
+    return `${fileName}_${safeRevision}`;
+  }
+
+  return `${fileName.slice(0, dotIndex)}_${safeRevision}${fileName.slice(
     dotIndex
   )}`;
 }
@@ -490,31 +600,44 @@ async function resolveRevisionedFileName(
   revisionNumber: unknown
 ) {
   const explicitRevision = numericOrNull(revisionNumber);
-  if (explicitRevision !== null && explicitRevision > 0) {
+
+  if (explicitRevision !== null && explicitRevision >= 0) {
     return withRevisionSuffix(baseFileName, explicitRevision);
   }
 
   try {
     const baseName = baseFileName.replace(/\.json$/i, "");
     const entries = await listDriveEntries({ objectPath: sectionPath });
+
     const latestRevision = entries.reduce((max, entry) => {
       const revision = entry.name ? parseRevision(entry.name, baseName) : null;
-      return revision && revision > max ? revision : max;
-    }, 0);
+      return revision !== null && revision > max ? revision : max;
+    }, -1);
 
     return withRevisionSuffix(baseFileName, latestRevision + 1);
   } catch {
-    return withRevisionSuffix(baseFileName, 1);
+    return withRevisionSuffix(baseFileName, 0);
   }
 }
 
-function resolveWorkflowMode(body: SubmitBody): "annotation" | "review" {
-  const mode =
-    body.workflowMode ??
-    body.participantInfo?.workflowMode ??
-    null;
+function resolveWorkflowMode(
+  body: SubmitBody,
+  accessEntry?: AccessCodeLookupEntry | null
+): "annotation" | "review" {
+  /*
+   * Important:
+   * The submitted access code is the only source of truth.
+   *
+   * annotation_code -> annotation
+   * review_code     -> review
+   *
+   * Do NOT trust body.workflowMode or participantInfo.workflowMode here,
+   * because the frontend may temporarily switch a completed annotation case
+   * into review view for display/revision purposes.
+   */
+  if (accessEntry?.workflowMode === "review") return "review";
+  if (accessEntry?.workflowMode === "annotation") return "annotation";
 
-  if (mode === "review") return "review";
   return "annotation";
 }
 
@@ -623,7 +746,7 @@ async function updateCaseStatusIndex({
   driveObjectPath: string;
 }) {
   const rootFolder = buildAccessCodeRoot(accessCode);
-  const objectPath = `${rootFolder}/case_status_index.json`;
+  const objectPath = `${rootFolder}/${workflowMode}/case_status_index.json`;
 
   const existing = await readJsonFromDrive({ objectPath }).catch(() => null);
 
@@ -812,11 +935,17 @@ export async function POST(req: Request) {
         : null;
 
     const answers = buildAnswers(body);
-    const doctorId = await normalizeDoctorId(body);
-    const accessCode = normalizeAccessCode(body);
+
+    const submittedAccessCode = normalizeAccessCode(body);
+    const accessEntry = await resolveAccessCodeEntry(submittedAccessCode);
+
+    const doctorId = await normalizeDoctorId(body, accessEntry);
+
+    const accessCode = normalizeStorageRootAccessCode(body, accessEntry);
+
     const patientId = normalizePatientId(body);
     const target = detectStorageTarget(body);
-    const workflowMode = resolveWorkflowMode(body);
+    const workflowMode = resolveWorkflowMode(body, accessEntry);
     const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
 
     const savedAtUtc = new Date().toISOString();
@@ -831,6 +960,7 @@ export async function POST(req: Request) {
     const driveRecord = removeNullFields({
       doctor_id: doctorId,
       access_code: accessCode,
+      submitted_access_code: submittedAccessCode,
       full_name: resolveFullName(body, doctorId),
       patient_id: patientId,
       case_id: caseId ?? null,
@@ -848,7 +978,7 @@ export async function POST(req: Request) {
       saved_at_utc: savedAtUtc,
       saved_at_local: body.submittedAtLocal ?? null,
 
-      participant_metadata: buildParticipantMetadata(body),
+      participant_metadata: buildParticipantMetadata(body, workflowMode),
 
       answers,
       annotation_state: cleanedAnnotationState,
@@ -904,6 +1034,7 @@ export async function POST(req: Request) {
       saved: removeNullFields({
         doctorId,
         accessCode,
+        submittedAccessCode,
         patientId,
         caseId,
         eventId,
@@ -933,7 +1064,7 @@ export async function POST(req: Request) {
         data: driveRecord,
       },
       debug_version:
-        "access-code-index-submit-route-v7-full-participant-metadata",
+        "access-code-index-submit-route-v10-workflow-mode-from-access-code-only",
     });
   } catch (error) {
     console.error("Submit route error:", error);

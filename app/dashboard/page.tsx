@@ -1748,7 +1748,12 @@ export default function DashboardPage() {
   useEffect(() => {
     const raw = localStorage.getItem("gameData");
     if (!raw) {
-      router.push("/patient-list");
+      const currentWorkflowMode =
+        localStorage.getItem("currentWorkflowMode") === "review"
+          ? "review"
+          : "annotation";
+    
+      router.push(currentWorkflowMode === "review" ? "/review-list" : "/patient-list");
       return;
     }
 
@@ -1844,7 +1849,7 @@ export default function DashboardPage() {
       return;
     }
 
-    router.push("/patient-list");
+    router.push(isReviewMode ? "/review-list" : "/patient-list");
   }
 
   async function handleNextNavigation() {
@@ -1900,8 +1905,7 @@ export default function DashboardPage() {
         patientMetaOverride ??
         selectedPatients.find((patient) => patient.folder === folder);
       const reviewMode =
-        patientMeta?.workflowMode === "review" ||
-        patientMeta?.status === "completed";
+        patientMeta?.workflowMode === "review";
       let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
         Promise.resolve(null);
       setHasSubmitted(false);
@@ -2591,16 +2595,16 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 </h1>
 
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                logAction("home_to_patient_list");
-                router.push("/patient-list");
-              }}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Home
-            </button>
+          <button
+            type="button"
+            onClick={() => {
+              logAction(isReviewMode ? "home_to_review_list" : "home_to_patient_list");
+              router.push(isReviewMode ? "/review-list" : "/patient-list");
+            }}
+            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Home
+          </button>
 
             <button
               type="button"
@@ -2612,11 +2616,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
               Back
             </button>
 
-            {isReviewMode ? (
-              <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-700">
-                Review Mode
-              </span>
-            ) : hasSubmitted ? (
+            {hasSubmitted && !isReviewMode ? (
               <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
                 ✅ Submitted
               </span>
@@ -2632,7 +2632,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   return;
                 }
 
-                logAction(isReviewMode ? "submit_review_session" : "submit_session");
+                logAction(isReviewMode ? "submit_in_review_mode" : "submit_session");
                 await submitCurrentSession();
               }}
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
@@ -2647,11 +2647,9 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             >
               {submitting
                 ? "Submitting..."
-                : isReviewMode
-                  ? "Submit Review"
-                  : hasSubmitted
-                    ? "Submitted"
-                    : "Submit"}
+                : hasSubmitted && !isReviewMode
+                  ? "Submitted"
+                  : "Submit"}
             </button>
 
             <button

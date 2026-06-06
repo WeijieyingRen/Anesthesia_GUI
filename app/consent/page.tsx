@@ -47,7 +47,32 @@ export default function ConsentPage() {
       })
     );
 
-    router.push("/patient-list");
+    const participantRaw = localStorage.getItem("participantInfo");
+
+    let workflowMode: "annotation" | "review" = "annotation";
+
+    try {
+      const participantInfo = participantRaw
+        ? JSON.parse(participantRaw)
+        : null;
+
+      workflowMode =
+        participantInfo?.workflowMode === "review" ||
+        localStorage.getItem("loginWorkflowMode") === "review"
+          ? "review"
+          : "annotation";
+    } catch {
+      workflowMode =
+        localStorage.getItem("loginWorkflowMode") === "review"
+          ? "review"
+          : "annotation";
+    }
+
+    localStorage.setItem("currentWorkflowMode", workflowMode);
+
+    console.log("[Consent] continue with workflowMode:", workflowMode);
+
+    router.push(workflowMode === "review" ? "/review-list" : "/patient-list");
   };
 
   return (
@@ -215,7 +240,7 @@ export default function ConsentPage() {
           <p>
             <span className="font-semibold">Injury Notification:</span> If you
             feel you have been hurt by being a part of this study, please
-            contact the Protocol Director, Weijieying Ren.at at
+            contact the Protocol Director, Weijieying Ren at
             wjyren@stanford.edu.
           </p>
 
@@ -245,7 +270,10 @@ export default function ConsentPage() {
               ✓ You have reached the end of the consent letter.
             </span>
           ) : (
-            <span>Please scroll to the bottom of the consent letter before continuing.</span>
+            <span>
+              Please scroll to the bottom of the consent letter before
+              continuing.
+            </span>
           )}
         </div>
 
@@ -265,7 +293,8 @@ export default function ConsentPage() {
 
         {!hasScrolledToBottom && (
           <p className="mt-2 text-xs text-amber-700">
-            You must scroll to the bottom of the consent letter before checking the box.
+            You must scroll to the bottom of the consent letter before checking
+            the box.
           </p>
         )}
 

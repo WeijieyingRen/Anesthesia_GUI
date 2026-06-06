@@ -49,6 +49,8 @@ type GasWindowSegment = {
   x1: number;
   points: TimeValuePoint[];
   firstValue: number;
+  displayValue: number;
+  hasNonZeroValue: boolean;
 };
 
 type ZoomTarget = {
@@ -140,6 +142,16 @@ function maxTimeOfRows(rows: GasRow[]) {
   return vals.length ? Math.max(...vals) : 0;
 }
 
+function roundSmart(v: number) {
+  if (Math.abs(v) >= 10) return Math.round(v);
+  if (Math.abs(v) >= 1) return Math.round(v * 10) / 10;
+  return Math.round(v * 100) / 100;
+}
+
+function isZeroValue(v: number) {
+  return Math.abs(v) < 1e-9;
+}
+
 function buildWindowSegments(
   rows: GasRow[],
   windowSize: number
@@ -158,24 +170,25 @@ function buildWindowSegments(
       const points = row.values.filter((p) => p.time >= start && p.time < stop);
       if (!points.length) continue;
 
+      const firstValue = points[0].value;
+      const firstNonZeroPoint = points.find((p) => !isZeroValue(p.value));
+      const displayValue = firstNonZeroPoint?.value ?? firstValue;
+      const hasNonZeroValue = points.some((p) => !isZeroValue(p.value));
+
       segments.push({
         rowName: row.name,
         rowIndex: row.rowIndex,
         x0: start,
         x1: stop,
         points,
-        firstValue: points[0].value,
+        firstValue,
+        displayValue,
+        hasNonZeroValue,
       });
     }
   });
 
   return segments;
-}
-
-function roundSmart(v: number) {
-  if (Math.abs(v) >= 10) return Math.round(v);
-  if (Math.abs(v) >= 1) return Math.round(v * 10) / 10;
-  return Math.round(v * 100) / 100;
 }
 
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
@@ -238,10 +251,6 @@ function buildDetailPolyline(
     minT,
     maxT,
   };
-}
-
-function isZeroValue(v: number) {
-  return Math.abs(v) < 1e-9;
 }
 
 function estimateTextWidth(text: string, fontSize = 10) {
@@ -744,8 +753,8 @@ export default function GasChart({
                         const segLeft = minuteToX(seg.x0, effectiveXEnd, plotWidth);
                         const segRight = minuteToX(seg.x1, effectiveXEnd, plotWidth);
 
-                        const label = String(roundSmart(seg.firstValue));
-                        const hideVisual = isZeroValue(seg.firstValue);
+                        const label = String(roundSmart(seg.displayValue));
+                        const hideVisual = !seg.hasNonZeroValue;
                         const textWidth = estimateTextWidth(label, 10);
                         const shouldHighlight = isHighlightedGasSegment(
                           seg,
@@ -873,8 +882,8 @@ export default function GasChart({
                 </div>
               </div>
             </div>
-
           </div>
+
           <div className="pt-2">
             <input
               type="range"

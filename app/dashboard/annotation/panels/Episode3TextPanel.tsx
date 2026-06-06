@@ -90,12 +90,13 @@ function addMinutesToAnesthesiaStart(
 function formatHHmm(date: Date | null, zone: "local" | "utc") {
   if (!date) return null;
 
-  const hours =
-    zone === "utc" ? date.getUTCHours() : date.getHours();
-  const minutes =
-    zone === "utc" ? date.getUTCMinutes() : date.getMinutes();
+  const hours = zone === "utc" ? date.getUTCHours() : date.getHours();
+  const minutes = zone === "utc" ? date.getUTCMinutes() : date.getMinutes();
 
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+    2,
+    "0"
+  )}`;
 }
 
 function buildEpisodeTimingFields(
@@ -114,11 +115,15 @@ function buildEpisodeTimingFields(
 }
 
 function draftKey(patientId: string | undefined, caseId: string, eventId: string) {
-  return `annotationDraft:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}:${eventId}`;
+  return `annotationDraft:abnormality_reasoning:${
+    patientId ?? "unknown_patient"
+  }:${caseId}:${eventId}`;
 }
 
 function revisionKey(patientId: string | undefined, caseId: string) {
-  return `annotationRevision:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}`;
+  return `annotationRevision:abnormality_reasoning:${
+    patientId ?? "unknown_patient"
+  }:${caseId}`;
 }
 
 function saveNoticeKey(
@@ -126,7 +131,9 @@ function saveNoticeKey(
   caseId: string,
   eventId: string
 ) {
-  return `annotationSaveNotice:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}:${eventId}`;
+  return `annotationSaveNotice:abnormality_reasoning:${
+    patientId ?? "unknown_patient"
+  }:${caseId}:${eventId}`;
 }
 
 function successSaveMessage() {
@@ -136,7 +143,14 @@ function successSaveMessage() {
 function nextRevisionNumber(patientId: string | undefined, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
-    const next = Number(localStorage.getItem(key) ?? "0") + 1;
+
+    // Revision starts from 0:
+    // first save  -> abnormality_reasoning_0.json
+    // second save -> abnormality_reasoning_1.json
+    // third save  -> abnormality_reasoning_2.json
+    const current = Number(localStorage.getItem(key) ?? "-1");
+    const next = Number.isFinite(current) ? current + 1 : 0;
+
     localStorage.setItem(key, String(next));
     return next;
   } catch {
@@ -283,7 +297,8 @@ export default function Episode3TextPanel({
       let savedDraft = "";
 
       try {
-        savedDraft = localStorage.getItem(draftKey(patientId, caseId, eventId)) ?? "";
+        savedDraft =
+          localStorage.getItem(draftKey(patientId, caseId, eventId)) ?? "";
       } catch {
         savedDraft = "";
       }
@@ -291,7 +306,9 @@ export default function Episode3TextPanel({
       if (!savedDraft) {
         try {
           const savedResult = localStorage.getItem(
-            `annotationResult:abnormality_reasoning:${patientId ?? "unknown_patient"}:${caseId}`
+            `annotationResult:abnormality_reasoning:${
+              patientId ?? "unknown_patient"
+            }:${caseId}`
           );
           if (savedResult) {
             const parsed = JSON.parse(savedResult);
@@ -345,7 +362,8 @@ export default function Episode3TextPanel({
   function finalizeVoiceDuration() {
     if (voiceStartedAtMsRef.current === null) return;
 
-    voiceDurationMsRef.current += performance.now() - voiceStartedAtMsRef.current;
+    voiceDurationMsRef.current +=
+      performance.now() - voiceStartedAtMsRef.current;
     voiceStartedAtMsRef.current = null;
   }
 
@@ -506,7 +524,9 @@ export default function Episode3TextPanel({
       const responseTimeSec =
         openedAtMsRef.current === null
           ? null
-          : Number(((performance.now() - openedAtMsRef.current) / 1000).toFixed(3));
+          : Number(
+              ((performance.now() - openedAtMsRef.current) / 1000).toFixed(3)
+            );
 
       const voiceRecordingDurationSec = roundSec(voiceDurationMsRef.current);
       const typingDurationSec = roundSec(typingDurationMsRef.current);
@@ -530,11 +550,13 @@ export default function Episode3TextPanel({
         String(
           participantInfo?.doctorId ?? localStorage.getItem("doctorId") ?? ""
         ).trim() || null;
+
       const doctorName = String(participantInfo?.name ?? "").trim() || null;
 
       const resolvedPatientId = patientId ?? patientFolder ?? "unknown_patient";
       const resolvedPatientFolder =
         patientFolder ?? patientId ?? "unknown_patient";
+
       const selectedEpisodes = episodeList.map((episode) => ({
         episodeIndex: episode.episodeIndex ?? null,
         selected: Boolean(episode.selected),
@@ -546,13 +568,16 @@ export default function Episode3TextPanel({
         updatedAtUtc: episode.updatedAtUtc ?? null,
         updatedAtLocal: toLocalTimestamp(episode.updatedAtUtc),
       }));
+
       const activeEpisodeForSave =
         episodeList.find((episode) => episode.id === activeEpisodeId) ??
         selectedEvent ??
         null;
+
       const annotatedEpisodeBase =
         episodeList.find((episode) => episode.id === activeEpisodeId) ??
         activeEpisodeForSave;
+
       const revisionNumber = nextRevisionNumber(resolvedPatientId, caseId);
 
       await submitAnnotation({
@@ -608,13 +633,20 @@ export default function Episode3TextPanel({
             annotatedEpisode: {
               episodeIndex: annotatedEpisodeBase?.episodeIndex ?? null,
               selected: true,
-              ...buildEpisodeTimingFields(activeEpisodeForSave, anesthesiaStart),
+              ...buildEpisodeTimingFields(
+                activeEpisodeForSave,
+                anesthesiaStart
+              ),
               y1: activeEpisodeForSave?.y1 ?? null,
               y2: activeEpisodeForSave?.y2 ?? null,
               createdAtUtc: activeEpisodeForSave?.createdAtUtc ?? null,
-              createdAtLocal: toLocalTimestamp(activeEpisodeForSave?.createdAtUtc),
+              createdAtLocal: toLocalTimestamp(
+                activeEpisodeForSave?.createdAtUtc
+              ),
               updatedAtUtc: activeEpisodeForSave?.updatedAtUtc ?? null,
-              updatedAtLocal: toLocalTimestamp(activeEpisodeForSave?.updatedAtUtc),
+              updatedAtLocal: toLocalTimestamp(
+                activeEpisodeForSave?.updatedAtUtc
+              ),
             },
             abnormalityReasoningText: currentText,
             revisionNumber,

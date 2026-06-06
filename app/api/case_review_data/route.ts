@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { readJsonFromDrive } from "@/lib/drive-upload";
+
+type WorkflowMode = "annotation" | "review";
+
 type AccessCodeLookupEntry = {
   doctorId: string;
-  workflowMode: "annotation" | "review";
+  workflowMode: WorkflowMode;
   annotationCode: string;
   reviewCode: string | null;
 };
@@ -12,27 +15,8 @@ type AccessCodeLookupEntry = {
 type LoadedSection = {
   data: Record<string, unknown>;
   objectPath: string;
-  workflow: "annotation" | "review";
+  workflow: WorkflowMode;
   fileName: string;
-};
-
-type ManifestSectionKey =
-  | "summary"
-  | "managementReasoning"
-  | "abnormalityReasoning"
-  | "caseSubmission";
-
-type ManifestCaseEntry = {
-  patientFolder?: string;
-  realCaseId?: string;
-  fullName?: string | null;
-  workflow?: "annotation" | "review";
-  updatedAt?: string;
-  paths?: Partial<Record<ManifestSectionKey, string>>;
-};
-
-type CaseManifest = {
-  cases?: Record<string, ManifestCaseEntry>;
 };
 
 type CaseStatusTaskEntry = {
@@ -43,7 +27,8 @@ type CaseStatusTaskEntry = {
 
 type CaseStatusIndexEntry = {
   patient_id?: string;
-  case_id?: string;
+  case_id?: string | number | null;
+  display_case_id?: string | number | null;
   tasks?: {
     summary?: CaseStatusTaskEntry;
     abnormality_reasoning?: CaseStatusTaskEntry;
@@ -51,18 +36,26 @@ type CaseStatusIndexEntry = {
   };
 };
 
-let accessCodeLookupPromise: Promise<Map<string, AccessCodeLookupEntry>> | null = null;
+let accessCodeLookupPromise: Promise<Map<string, AccessCodeLookupEntry>> | null =
+  null;
 
 function sanitizePathPart(value: unknown): string {
   if (value === null || value === undefined) return "unknown";
   return String(value).trim().replace(/[^\w.-]/g, "_") || "unknown";
 }
 
-async function loadAccessCodeLookup(): Promise<Map<string, AccessCodeLookupEntry>> {
+function normalizeString(value: unknown) {
+  return String(value ?? "").trim();
+}
+
+async function loadAccessCodeLookup(): Promise<
+  Map<string, AccessCodeLookupEntry>
+> {
   if (accessCodeLookupPromise) return accessCodeLookupPromise;
 
   accessCodeLookupPromise = (async () => {
     const map = new Map<string, AccessCodeLookupEntry>();
+
     const reviewCsvPath = path.join(
       process.cwd(),
       "public",
@@ -74,6 +67,7 @@ async function loadAccessCodeLookup(): Promise<Map<string, AccessCodeLookupEntry
       const raw = await fs.readFile(reviewCsvPath, "utf-8");
       const lines = raw.split(/\r?\n/).filter(Boolean);
       const header = lines[0]?.split(",") ?? [];
+
       const doctorIdx = header.indexOf("doctor_id");
       const annotationIdx = header.indexOf("annotation_code");
       const reviewIdx = header.indexOf("review_code");
@@ -81,9 +75,11 @@ async function loadAccessCodeLookup(): Promise<Map<string, AccessCodeLookupEntry
       if (doctorIdx >= 0 && annotationIdx >= 0 && reviewIdx >= 0) {
         for (const line of lines.slice(1)) {
           const cols = line.split(",");
-          const doctorId = String(cols[doctorIdx] ?? "").trim();
-          const annotationCode = String(cols[annotationIdx] ?? "").trim();
-          const reviewCode = String(cols[reviewIdx] ?? "").trim();
+
+          const doctorId = normalizeString(cols[doctorIdx]);
+          const annotationCode = normalizeString(cols[annotationIdx]);
+          const reviewCode = normalizeString(cols[reviewIdx]);
+
           if (!doctorId || !annotationCode) continue;
 
           map.set(annotationCode, {
@@ -113,21 +109,25 @@ async function loadAccessCodeLookup(): Promise<Map<string, AccessCodeLookupEntry
   return accessCodeLookupPromise;
 }
 
-async function resolveAccessCodeEntry(accessCode: string) {
+async function resolveAccessCodeEntry(
+  accessCode: string
+): Promise<AccessCodeLookupEntry | null> {
   const map = await loadAccessCodeLookup();
-  return map.get(accessCode) ?? null;
+  return map.get(accessCode.trim()) ?? null;
 }
 
-function buildManifestCaseKey(patientId: string, caseId: string) {
+function buildCaseKey(patientId: string, caseId: string) {
   return `${sanitizePathPart(patientId)}::${sanitizePathPart(caseId)}`;
 }
 
 function extractCaseId(value: Record<string, unknown> | null | undefined) {
-  const normalized = String(value?.case_id ?? value?.caseId ?? "").trim();
+  const normalized = normalizeString(value?.case_id ?? value?.caseId);
   return normalized || null;
 }
 
-function extractMatchedCaseIdFromSections(sections: Array<LoadedSection | null>) {
+function extractMatchedCaseIdFromSections(
+  sections: Array<LoadedSection | null>
+) {
   for (const section of sections) {
     const caseId = extractCaseId(section?.data);
     if (caseId) return caseId;
@@ -136,74 +136,228 @@ function extractMatchedCaseIdFromSections(sections: Array<LoadedSection | null>)
   return null;
 }
 
+function getCasesObject(indexData: any): Record<string, unknown> | null {
+  if (
+    indexData?.cases &&
+    typeof indexData.cases === "object" &&
+    !Array.isArray(indexData.cases)
+  ) {
+    return indexData.cases as Record<string, unknown>;
+  }
+
+  return null;
+}
+
+function getPatientsObject(indexData: any): Record<string, unknown> | null {
+  if (
+    indexData?.patients &&
+    typeof indexData.patients === "object" &&
+    !Array.isArray(indexData.patients)
+  ) {
+    return indexData.patients as Record<string, unknown>;
+  }
+
+  return null;
+}
+
+function isCaseStatusEntry(value: unknown): value is CaseStatusIndexEntry {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function entryMatchesPatientAndCase({
+  entry,
+  fallbackPatientId,
+  patientId,
+  caseId,
+}: {
+  entry: any;
+  fallbackPatientId?: string;
+  patientId: string;
+  caseId: string;
+}) {
+  const entryPatientId = normalizeString(entry?.patient_id ?? fallbackPatientId);
+  const entryCaseId = normalizeString(entry?.case_id ?? entry?.caseId);
+
+  if (!entryPatientId || !entryCaseId) return false;
+
+  return entryPatientId === patientId && entryCaseId === caseId;
+}
+
 function extractCaseStatusEntry(
   indexData: Record<string, unknown> | null | undefined,
   patientId: string,
   caseId: string
 ): CaseStatusIndexEntry | null {
-  const cases =
-    indexData?.cases &&
-    typeof indexData.cases === "object" &&
-    !Array.isArray(indexData.cases)
-      ? (indexData.cases as Record<string, unknown>)
-      : null;
+  if (!indexData || typeof indexData !== "object") return null;
 
-  if (!cases) return null;
+  const caseKey = buildCaseKey(patientId, caseId);
 
-  const caseKey = buildManifestCaseKey(patientId, caseId);
-  const entry = cases[caseKey];
+  const cases = getCasesObject(indexData);
 
-  if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
-    return null;
+  if (cases) {
+    const exactEntry = cases[caseKey];
+
+    if (isCaseStatusEntry(exactEntry)) {
+      return exactEntry;
+    }
+
+    for (const entry of Object.values(cases)) {
+      if (!isCaseStatusEntry(entry)) continue;
+
+      if (
+        entryMatchesPatientAndCase({
+          entry,
+          patientId,
+          caseId,
+        })
+      ) {
+        return entry;
+      }
+    }
   }
 
-  return entry as CaseStatusIndexEntry;
+  const patients = getPatientsObject(indexData);
+
+  if (patients) {
+    const exactPatientEntry = patients[patientId];
+
+    if (
+      isCaseStatusEntry(exactPatientEntry) &&
+      entryMatchesPatientAndCase({
+        entry: exactPatientEntry,
+        fallbackPatientId: patientId,
+        patientId,
+        caseId,
+      })
+    ) {
+      return exactPatientEntry;
+    }
+
+    for (const [patientIdRaw, entry] of Object.entries(patients)) {
+      if (!isCaseStatusEntry(entry)) continue;
+
+      if (
+        entryMatchesPatientAndCase({
+          entry,
+          fallbackPatientId: patientIdRaw,
+          patientId,
+          caseId,
+        })
+      ) {
+        return entry;
+      }
+    }
+  }
+
+  return null;
 }
 
-async function loadSectionsFromCaseStatusEntry(
-  entry: CaseStatusIndexEntry | null
-) {
-  const summaryPath = String(entry?.tasks?.summary?.latest_path ?? "").trim();
-  const managementPath = String(
-    entry?.tasks?.management_reasoning?.latest_path ?? ""
-  ).trim();
-  const abnormalityPath = String(
-    entry?.tasks?.abnormality_reasoning?.latest_path ?? ""
-  ).trim();
-
-  const [summary, managementReasoning, abnormalityReasoning] =
-    await Promise.all([
-      summaryPath
-        ? loadSectionFromManifestPath({ objectPath: summaryPath })
-        : Promise.resolve(null),
-      managementPath
-        ? loadSectionFromManifestPath({ objectPath: managementPath })
-        : Promise.resolve(null),
-      abnormalityPath
-        ? loadSectionFromManifestPath({ objectPath: abnormalityPath })
-        : Promise.resolve(null),
-    ]);
-
-  return { summary, managementReasoning, abnormalityReasoning };
+function inferWorkflowFromObjectPath(objectPath: string): WorkflowMode {
+  return objectPath.includes("/review/") ? "review" : "annotation";
 }
 
-async function loadSectionFromManifestPath({
+async function loadSectionFromPath({
   objectPath,
-  workflow,
 }: {
   objectPath: string;
-  workflow?: "annotation" | "review";
 }): Promise<LoadedSection | null> {
   const found = await readJsonFromDrive({ objectPath }).catch(() => null);
-  if (!found?.data || typeof found.data !== "object" || Array.isArray(found.data)) {
+
+  if (
+    !found?.data ||
+    typeof found.data !== "object" ||
+    Array.isArray(found.data)
+  ) {
     return null;
   }
 
   return {
     data: found.data as Record<string, unknown>,
     objectPath,
-    workflow: workflow === "review" ? "review" : "annotation",
+    workflow: inferWorkflowFromObjectPath(objectPath),
     fileName: objectPath.split("/").pop() ?? "unknown.json",
+  };
+}
+
+async function loadSectionsFromCaseStatusEntry(
+  entry: CaseStatusIndexEntry | null
+) {
+  const summaryPath = normalizeString(entry?.tasks?.summary?.latest_path);
+
+  const abnormalityPath = normalizeString(
+    entry?.tasks?.abnormality_reasoning?.latest_path
+  );
+
+  const managementPath = normalizeString(
+    entry?.tasks?.management_reasoning?.latest_path
+  );
+
+  const [summary, abnormalityReasoning, managementReasoning] =
+    await Promise.all([
+      summaryPath
+        ? loadSectionFromPath({
+            objectPath: summaryPath,
+          })
+        : Promise.resolve(null),
+
+      abnormalityPath
+        ? loadSectionFromPath({
+            objectPath: abnormalityPath,
+          })
+        : Promise.resolve(null),
+
+      managementPath
+        ? loadSectionFromPath({
+            objectPath: managementPath,
+          })
+        : Promise.resolve(null),
+    ]);
+
+  return {
+    summary,
+    abnormalityReasoning,
+    managementReasoning,
+  };
+}
+
+async function readAnnotationCaseStatusIndex(sourceAccessCode: string) {
+  const sanitizedAccessCode = sanitizePathPart(sourceAccessCode);
+
+  const annotationIndexPath = `${sanitizedAccessCode}/annotation/case_status_index.json`;
+
+  const annotationFound = await readJsonFromDrive({
+    objectPath: annotationIndexPath,
+  }).catch(() => null);
+
+  if (annotationFound?.data) {
+    return {
+      found: annotationFound,
+      indexPath: annotationIndexPath,
+      source: "google_drive_annotation_index",
+      usedLegacyFallback: false,
+    };
+  }
+
+  const legacyIndexPath = `${sanitizedAccessCode}/case_status_index.json`;
+
+  const legacyFound = await readJsonFromDrive({
+    objectPath: legacyIndexPath,
+  }).catch(() => null);
+
+  if (legacyFound?.data) {
+    return {
+      found: legacyFound,
+      indexPath: legacyIndexPath,
+      source: "google_drive_legacy_annotation_index",
+      usedLegacyFallback: true,
+    };
+  }
+
+  return {
+    found: null,
+    indexPath: annotationIndexPath,
+    source: "none",
+    usedLegacyFallback: false,
   };
 }
 
@@ -211,9 +365,10 @@ export async function GET(req: Request) {
   try {
     const t0 = Date.now();
     const { searchParams } = new URL(req.url);
-    const accessCode = String(searchParams.get("accessCode") ?? "").trim();
-    const patientId = String(searchParams.get("patientId") ?? "").trim();
-    const caseId = String(searchParams.get("caseId") ?? "").trim();
+
+    const accessCode = normalizeString(searchParams.get("accessCode"));
+    const patientId = normalizeString(searchParams.get("patientId"));
+    const caseId = normalizeString(searchParams.get("caseId"));
 
     if (!accessCode || !patientId || !caseId) {
       return NextResponse.json(
@@ -226,6 +381,7 @@ export async function GET(req: Request) {
     }
 
     const accessEntry = await resolveAccessCodeEntry(accessCode);
+
     if (!accessEntry) {
       return NextResponse.json(
         { ok: false, error: "Invalid accessCode or doctor not found." },
@@ -233,57 +389,113 @@ export async function GET(req: Request) {
       );
     }
 
+    // Important:
+    // review_code 也要回到对应 annotation_code 的根目录读取原始 annotation 内容。
+    // 例如 review code 登录时，也读取 2413/annotation/case_status_index.json。
     const sourceAccessCode = accessEntry.annotationCode;
-    const indexPath = `${sanitizePathPart(sourceAccessCode)}/case_status_index.json`;
-    const indexFound = await readJsonFromDrive({ objectPath: indexPath }).catch(
-      () => null
-    );
+
+    const {
+      found: indexFound,
+      indexPath,
+      source,
+      usedLegacyFallback,
+    } = await readAnnotationCaseStatusIndex(sourceAccessCode);
+
     const caseStatusEntry = extractCaseStatusEntry(
       indexFound?.data,
       patientId,
       caseId
     );
 
-    const {
-      summary,
-      managementReasoning,
-      abnormalityReasoning,
-    } = await loadSectionsFromCaseStatusEntry(caseStatusEntry);
+    const { summary, abnormalityReasoning, managementReasoning } =
+      await loadSectionsFromCaseStatusEntry(caseStatusEntry);
 
-    const matchedCaseId = extractMatchedCaseIdFromSections([
+    const loadedSections = [
       summary,
-      managementReasoning,
       abnormalityReasoning,
-    ]);
+      managementReasoning,
+    ];
 
-    if (!matchedCaseId || matchedCaseId !== caseId) {
+    const matchedCaseId = extractMatchedCaseIdFromSections(loadedSections);
+    const hasAnySection = loadedSections.some(Boolean);
+
+    if (!caseStatusEntry || !hasAnySection) {
       return NextResponse.json({
         ok: true,
         matched: false,
+        reason: !caseStatusEntry
+          ? "case_not_found_in_annotation_index"
+          : "case_found_but_no_panel_sections_loaded",
+
         accessCode,
+        workflowMode: accessEntry.workflowMode,
         sourceAccessCode,
+
         patientId,
         caseId,
+
+        indexPath,
+        source,
+        usedLegacyFallback,
+        fastPathHit: Boolean(caseStatusEntry),
+
         summary: null,
-        managementReasoning: null,
         abnormalityReasoning: null,
+        managementReasoning: null,
+
+        elapsedMs: Date.now() - t0,
+      });
+    }
+
+    if (matchedCaseId && matchedCaseId !== caseId) {
+      return NextResponse.json({
+        ok: true,
+        matched: false,
+        reason: "case_id_mismatch",
+
+        accessCode,
+        workflowMode: accessEntry.workflowMode,
+        sourceAccessCode,
+
+        patientId,
+        caseId,
+        matchedCaseId,
+
+        indexPath,
+        source,
+        usedLegacyFallback,
+        fastPathHit: Boolean(caseStatusEntry),
+
+        summary: null,
+        abnormalityReasoning: null,
+        managementReasoning: null,
+
+        elapsedMs: Date.now() - t0,
       });
     }
 
     return NextResponse.json({
       ok: true,
       matched: true,
+
       accessCode,
       workflowMode: accessEntry.workflowMode,
       sourceAccessCode,
+
       patientId,
       caseId,
+      matchedCaseId: matchedCaseId ?? caseId,
+
       indexPath,
+      source,
+      usedLegacyFallback,
       fastPathHit: Boolean(caseStatusEntry),
+
       elapsedMs: Date.now() - t0,
+
       summary,
-      managementReasoning,
       abnormalityReasoning,
+      managementReasoning,
     });
   } catch (error) {
     console.error("case_review_data GET error:", error);
