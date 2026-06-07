@@ -3,6 +3,7 @@
 import * as React from "react";
 import { submitAnnotation } from "@/lib/submit";
 import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
+import SpeechLanguageSelector from "@/components/SpeechLanguageSelector";
 
 type SummaryPanelProps = {
   eventId?: string;
@@ -88,10 +89,6 @@ function nextRevisionNumber(patientId: string, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
 
-    // Revision starts from 0:
-    // first save  -> summary_0.json
-    // second save -> summary_1.json
-    // third save  -> summary_2.json
     const current = Number(localStorage.getItem(key) ?? "-1");
     const next = Number.isFinite(current) ? current + 1 : 0;
 
@@ -196,6 +193,7 @@ export default function SummaryPanel({
       setSummaryText(draftText || fallbackText);
 
       const savedNotice = localStorage.getItem(saveNoticeKey(patientId, caseId));
+
       if (savedResult || savedNotice) {
         setSaveStatus("success");
         setSaveMessage(savedNotice || successSaveMessage());
@@ -218,6 +216,7 @@ export default function SummaryPanel({
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
@@ -264,6 +263,8 @@ export default function SummaryPanel({
     }
 
     try {
+      recognitionRef.current?.stop?.();
+
       const recognition = new SpeechRecognition();
 
       recognition.lang = getSpeechRecognitionLanguage();
@@ -282,7 +283,14 @@ export default function SummaryPanel({
 
         const base = voiceBaseTextRef.current;
         const nextText = base ? `${base} ${transcript}` : transcript;
+
         setSummaryText(nextText);
+
+        try {
+          localStorage.setItem(draftKey(patientId, caseId), nextText);
+        } catch {
+          // ignore
+        }
       };
 
       recognition.onerror = () => {
@@ -413,6 +421,7 @@ export default function SummaryPanel({
 
       try {
         localStorage.setItem(draftKey(patientId, caseId), summaryText.trim());
+
         localStorage.setItem(
           `annotationResult:summary:${patientId}:${caseId}`,
           JSON.stringify({
@@ -425,6 +434,7 @@ export default function SummaryPanel({
       }
 
       const successMessage = successSaveMessage();
+
       try {
         localStorage.setItem(saveNoticeKey(patientId, caseId), successMessage);
       } catch {
@@ -440,35 +450,6 @@ export default function SummaryPanel({
         error?.message ||
           "Failed to save summary to cloud storage. Please click Save again."
       );
-    }
-  }
-
-  function handleReset() {
-    if (readOnly) return;
-    if (saveStatus === "saving") return;
-
-    setSummaryText("");
-    setRecording(false);
-    recognitionRef.current?.stop?.();
-    voiceBaseTextRef.current = "";
-
-    setSaveStatus("idle");
-    setSaveMessage("");
-
-    startedAtUtcRef.current = new Date().toISOString();
-    startedAtLocalRef.current = getLocalTimestamp();
-
-    typingStartMsRef.current = null;
-    typingDurationMsRef.current = 0;
-
-    voiceStartMsRef.current = null;
-    voiceDurationMsRef.current = 0;
-
-    try {
-      localStorage.removeItem(saveNoticeKey(patientId, caseId));
-      localStorage.removeItem(`annotationResult:summary:${patientId}:${caseId}`);
-    } catch {
-      // ignore
     }
   }
 
@@ -565,73 +546,72 @@ export default function SummaryPanel({
           onChange={(e) => {
             if (readOnly) return;
             startTypingTimer();
+
             try {
               localStorage.setItem(draftKey(patientId, caseId), e.target.value);
             } catch {
               // ignore
             }
+
             setSummaryText(e.target.value);
           }}
           className="min-h-[260px] w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 outline-none focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-gray-100"
           placeholder="Write the overall patient-level intraoperative summary here..."
         />
 
-        <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
-          <button
-            type="button"
-            disabled={readOnly || saveStatus === "saving"}
-            onClick={recording ? stopVoiceNote : startVoiceNote}
-            className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
-              readOnly || saveStatus === "saving"
-                ? "cursor-not-allowed bg-gray-400"
-                : recording
-                ? "bg-red-500 hover:bg-red-600"
-                : "bg-orange-400 hover:bg-orange-500"
-            }`}
-          >
-            {recording ? "Stop Recording" : "Start Recording"}
-          </button>
+        <div className="mt-5 border-t pt-5">
+          <div className="flex w-full flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <SpeechLanguageSelector />
 
-          <button
-            type="button"
-            onClick={handleReset}
-            disabled={readOnly || saveStatus === "saving"}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
-              readOnly || saveStatus === "saving"
-                ? "cursor-not-allowed bg-gray-400"
-                : "border border-gray-700 bg-gray-700 hover:bg-gray-800"
-            }`}
-          >
-            Reset All
-          </button>
+              <button
+                type="button"
+                disabled={readOnly || saveStatus === "saving"}
+                onClick={recording ? stopVoiceNote : startVoiceNote}
+                className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
+                  readOnly || saveStatus === "saving"
+                    ? "cursor-not-allowed bg-gray-400"
+                    : recording
+                      ? "bg-red-500 hover:bg-red-600"
+                      : "bg-orange-400 hover:bg-orange-500"
+                }`}
+              >
+                {recording ? "Stop Recording" : "Start Recording"}
+              </button>
+            </div>
 
-          <button
-            type="button"
-            onClick={handleSaveSummary}
-            disabled={readOnly || saveStatus === "saving"}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
-              readOnly || saveStatus === "saving"
-                ? "cursor-wait bg-blue-300"
-                : "bg-blue-600 hover:bg-blue-700"
-            }`}
-          >
-            {saveStatus === "saving" ? "Saving..." : "Save and Next"}
-          </button>
-        </div>
-
-        {saveMessage && (
-          <div
-            className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
-              saveStatus === "success"
-                ? "bg-green-50 text-green-700"
-                : saveStatus === "saving"
-                ? "bg-blue-50 text-blue-700"
-                : "bg-red-50 text-red-700"
-            }`}
-          >
-            {saveMessage}
+            <button
+              type="button"
+              onClick={handleSaveSummary}
+              disabled={
+                readOnly || saveStatus === "saving" || !summaryText.trim()
+              }
+              className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
+                readOnly || saveStatus === "saving" || !summaryText.trim()
+                  ? saveStatus === "saving"
+                    ? "cursor-wait bg-blue-300"
+                    : "cursor-not-allowed bg-blue-300"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
+            >
+              {saveStatus === "saving" ? "Saving..." : "Save and Next"}
+            </button>
           </div>
-        )}
+
+          {saveMessage && (
+            <div
+              className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
+                saveStatus === "success"
+                  ? "bg-green-50 text-green-700"
+                  : saveStatus === "saving"
+                    ? "bg-blue-50 text-blue-700"
+                    : "bg-red-50 text-red-700"
+              }`}
+            >
+              {saveMessage}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

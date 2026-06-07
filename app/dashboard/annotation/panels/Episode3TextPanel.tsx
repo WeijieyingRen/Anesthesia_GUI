@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { submitAnnotation } from "@/lib/submit";
 import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
+import SpeechLanguageSelector from "@/components/SpeechLanguageSelector";
 
 type EpisodeButtonItem = {
   id: string;
@@ -144,10 +145,6 @@ function nextRevisionNumber(patientId: string | undefined, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
 
-    // Revision starts from 0:
-    // first save  -> abnormality_reasoning_0.json
-    // second save -> abnormality_reasoning_1.json
-    // third save  -> abnormality_reasoning_2.json
     const current = Number(localStorage.getItem(key) ?? "-1");
     const next = Number.isFinite(current) ? current + 1 : 0;
 
@@ -157,17 +154,6 @@ function nextRevisionNumber(patientId: string | undefined, caseId: string) {
     return null;
   }
 }
-
-const ABNORMAL_EVENT_PROMPT = {
-  instruction:
-    "The goal here is to learn the clinically grounded temporal reasoning chain among: precursor events, the selected abnormal episode, downstream patient responses or consequences, and any preventive or alternative management considerations.",
-  requestedElements: [
-    "1. Selected Abnormal Episode: Describe what happened during the selected episode, including timing, key abnormal pattern, raw data, clinical significance, and uncertainty.",
-    "2. Precursor Events: Describe any preceding events, physiologic trends, medications, anesthetic changes, or surgical context that may have contributed to the abnormal episode. If none are apparent, state that no clear precursor is identified.",
-    "3. Downstream Response and Management Evaluation: Describe what happened after the episode, including related interventions, patient response, improvement, worsening, return to baseline, or no clear downstream consequence. Briefly comment on whether the observed management appeared appropriate in this context.",
-    "4. Preventability / Alternative Management: If clinically relevant, briefly comment on whether any preventive measure, earlier intervention, or alternative management could have been considered. If no clear preventive or alternative action was needed, state that.",
-  ],
-};
 
 function InstructionPanel({
   title,
@@ -262,6 +248,7 @@ export default function Episode3TextPanel({
 
   const [recording, setRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const voiceBaseTextRef = useRef("");
 
   const openedAtUtcRef = useRef<string | null>(null);
   const openedAtLocalRef = useRef<string | null>(null);
@@ -291,9 +278,11 @@ export default function Episode3TextPanel({
     }
 
     setRecording(false);
+    voiceBaseTextRef.current = "";
 
     setFreeTextMap((prev) => {
       if (prev[eventId] !== undefined) return prev;
+
       let savedDraft = "";
 
       try {
@@ -310,6 +299,7 @@ export default function Episode3TextPanel({
               patientId ?? "unknown_patient"
             }:${caseId}`
           );
+
           if (savedResult) {
             const parsed = JSON.parse(savedResult);
             savedDraft = String(
@@ -334,6 +324,7 @@ export default function Episode3TextPanel({
       const savedNotice = localStorage.getItem(
         saveNoticeKey(resolvedPatientId, caseId, eventId)
       );
+
       if (savedNotice) {
         setSaveStatus("success");
         setSaveMessage(savedNotice);
@@ -352,6 +343,7 @@ export default function Episode3TextPanel({
       ...prev,
       [eventId]: nextText,
     }));
+
     try {
       localStorage.setItem(draftKey(patientId, caseId, eventId), nextText);
     } catch {
@@ -382,20 +374,36 @@ export default function Episode3TextPanel({
 
   async function startVoiceNote() {
     if (readOnly) return;
+    if (saving) return;
+
     try {
       const SpeechRecognition =
         (window as any).SpeechRecognition ||
         (window as any).webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        alert("Speech recognition is not supported. Please use Chrome or Edge.");
+        const message =
+          "Speech recognition is not supported. Please use Chrome or Edge.";
+
+        setError(message);
+        setSaveStatus("error");
+        setSaveMessage(message);
         return;
       }
 
+      try {
+        recognitionRef.current?.stop();
+      } catch {
+        // ignore
+      }
+
       const recognition = new SpeechRecognition();
+
       recognition.lang = getSpeechRecognitionLanguage();
       recognition.interimResults = true;
       recognition.continuous = true;
+
+      voiceBaseTextRef.current = freeText.trim();
 
       let finalTranscript = "";
 
@@ -414,25 +422,28 @@ export default function Episode3TextPanel({
 
         const combined = `${finalTranscript} ${interimTranscript}`.trim();
 
-        if (combined) {
-          setFreeTextMap((prev) => {
-            const marker = "\n\n[Voice note in progress]\n";
-            const current = prev[eventId] ?? ABNORMAL_REASONING_TEMPLATE;
-            const base = current.includes(marker)
-              ? current.split(marker)[0].trim()
-              : current.trim();
+        if (!combined) return;
 
-            return {
-              ...prev,
-              [eventId]: `${base}${marker}${combined}`.trim(),
-            };
-          });
+        const marker = "\n\n[Voice note in progress]\n";
+        const base = voiceBaseTextRef.current;
+        const nextText = `${base}${base ? marker : ""}${combined}`.trim();
+
+        setFreeTextMap((prev) => ({
+          ...prev,
+          [eventId]: nextText,
+        }));
+
+        try {
+          localStorage.setItem(draftKey(patientId, caseId, eventId), nextText);
+        } catch {
+          // ignore
         }
       };
 
       recognition.onerror = (event: any) => {
         console.error("Speech recognition error:", event);
         finalizeVoiceDuration();
+
         setError("Speech recognition error. Please try again or type directly.");
         setSaveStatus("error");
         setSaveMessage("Speech recognition failed.");
@@ -443,23 +454,30 @@ export default function Episode3TextPanel({
         finalizeVoiceDuration();
         setRecording(false);
 
-        if (finalTranscript.trim()) {
-          setFreeTextMap((prev) => {
-            const marker = "\n\n[Voice note in progress]\n";
-            const current = prev[eventId] ?? ABNORMAL_REASONING_TEMPLATE;
+        const cleanedTranscript = finalTranscript.trim();
 
-            if (current.includes(marker)) {
-              const base = current.split(marker)[0].trim();
+        if (cleanedTranscript) {
+          const base = voiceBaseTextRef.current;
+          const finalText = base
+            ? `${base}\n\n${cleanedTranscript}`.trim()
+            : cleanedTranscript;
 
-              return {
-                ...prev,
-                [eventId]: `${base}\n\n${finalTranscript.trim()}`.trim(),
-              };
-            }
+          setFreeTextMap((prev) => ({
+            ...prev,
+            [eventId]: finalText,
+          }));
 
-            return prev;
-          });
+          try {
+            localStorage.setItem(
+              draftKey(patientId, caseId, eventId),
+              finalText
+            );
+          } catch {
+            // ignore
+          }
         }
+
+        voiceBaseTextRef.current = "";
       };
 
       recognitionRef.current = recognition;
@@ -468,12 +486,18 @@ export default function Episode3TextPanel({
       voiceStartedAtMsRef.current = performance.now();
       setRecording(true);
       setError(null);
+      setSaveStatus("idle");
+      setSaveMessage("");
     } catch (e: any) {
       finalizeVoiceDuration();
+
       console.error("Failed to start voice note:", e);
-      setError(e?.message ?? "Failed to start voice note.");
+
+      const message = e?.message ?? "Failed to start voice note.";
+
+      setError(message);
       setSaveStatus("error");
-      setSaveMessage(e?.message ?? "Failed to start voice note.");
+      setSaveMessage(message);
       setRecording(false);
     }
   }
@@ -500,6 +524,7 @@ export default function Episode3TextPanel({
 
     if (!currentText) {
       const message = "Please provide a free-text annotation before saving.";
+
       setError(message);
       setSaveStatus("error");
       setSaveMessage(message);
@@ -532,6 +557,7 @@ export default function Episode3TextPanel({
       const typingDurationSec = roundSec(typingDurationMsRef.current);
 
       let participantInfo: any = {};
+
       try {
         const raw = localStorage.getItem("participantInfo");
         participantInfo = raw ? JSON.parse(raw) : {};
@@ -625,7 +651,11 @@ export default function Episode3TextPanel({
       });
 
       try {
-        localStorage.setItem(draftKey(patientId, caseId, eventId), currentText);
+        localStorage.setItem(
+          draftKey(resolvedPatientId, caseId, eventId),
+          currentText
+        );
+
         localStorage.setItem(
           `annotationResult:abnormality_reasoning:${resolvedPatientId}:${caseId}`,
           JSON.stringify({
@@ -657,6 +687,7 @@ export default function Episode3TextPanel({
       }
 
       const successMessage = successSaveMessage();
+
       try {
         localStorage.setItem(
           saveNoticeKey(resolvedPatientId, caseId, eventId),
@@ -671,7 +702,9 @@ export default function Episode3TextPanel({
       onSaveAndNextStep();
     } catch (e: any) {
       console.error("Failed to save abnormality reasoning:", e);
+
       const message = e?.message ?? "Failed to save annotation.";
+
       setError(message);
       setSaveStatus("error");
       setSaveMessage(message);
@@ -889,82 +922,55 @@ export default function Episode3TextPanel({
         placeholder="write or dictate your response here..."
       />
 
-      <div className="mt-5 flex w-full flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={recording ? stopVoiceNote : startVoiceNote}
-          disabled={readOnly || saving}
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            recording
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-orange-500 hover:bg-orange-600"
-          }`}
-        >
-          {recording ? "Stop Recording" : "Start Recording"}
-        </button>
+      <div className="mt-5 border-t pt-5">
+        <div className="flex w-full flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <SpeechLanguageSelector />
 
-        <button
-          type="button"
-          onClick={() => {
-            if (readOnly) return;
-            setCurrentFreeText(ABNORMAL_REASONING_TEMPLATE);
-            stopVoiceNote();
-            setError(null);
-            setSaveStatus("idle");
-            setSaveMessage("");
+            <button
+              type="button"
+              onClick={recording ? stopVoiceNote : startVoiceNote}
+              disabled={readOnly || saving}
+              className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
+                readOnly || saving
+                  ? "cursor-not-allowed bg-gray-400"
+                  : recording
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-orange-400 hover:bg-orange-500"
+              }`}
+            >
+              {recording ? "Stop Recording" : "Start Recording"}
+            </button>
+          </div>
 
-            openedAtUtcRef.current = new Date().toISOString();
-            openedAtLocalRef.current = getLocalTimestamp();
-            openedAtMsRef.current = performance.now();
-            voiceStartedAtMsRef.current = null;
-            voiceDurationMsRef.current = 0;
-            typingStartedAtMsRef.current = null;
-            typingDurationMsRef.current = 0;
-
-            try {
-              const resolvedPatientId = patientId ?? patientFolder;
-              localStorage.removeItem(
-                saveNoticeKey(resolvedPatientId, caseId, eventId)
-              );
-            } catch {
-              // ignore
-            }
-          }}
-          disabled={readOnly || saving}
-          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-        >
-          Reset
-        </button>
-
-        <button
-          type="button"
-          onClick={handleSave}
-          disabled={readOnly || saving || !freeText.trim()}
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            readOnly || saving || !freeText.trim()
-              ? "cursor-not-allowed bg-blue-300"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {saving ? "Saving..." : "Save and Next"}
-        </button>
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={readOnly || saving || !freeText.trim()}
+            className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
+              readOnly || saving || !freeText.trim()
+                ? saving
+                  ? "cursor-wait bg-blue-300"
+                  : "cursor-not-allowed bg-blue-300"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {saving ? "Saving..." : "Save and Next"}
+          </button>
+        </div>
 
         {saveStatus !== "idle" && saveMessage && (
           <div
-            className={`ml-2 text-sm font-medium ${
+            className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
               saveStatus === "success"
-                ? "text-green-700"
-                : saveStatus === "error"
-                ? "text-red-700"
-                : "text-gray-500"
+                ? "bg-green-50 text-green-700"
+                : saveStatus === "saving"
+                  ? "bg-blue-50 text-blue-700"
+                  : "bg-red-50 text-red-700"
             }`}
           >
             {saveMessage}
           </div>
-        )}
-
-        {error && saveStatus === "error" && !saveMessage && (
-          <div className="ml-2 text-sm font-medium text-red-700">{error}</div>
         )}
       </div>
     </div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ManagementEvent } from "@/lib/types_management";
 import { submitAnnotation } from "@/lib/submit";
 import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
+import SpeechLanguageSelector from "@/components/SpeechLanguageSelector";
 
 type Props = {
   caseId: string;
@@ -135,10 +136,6 @@ function nextRevisionNumber(patientId: string | undefined, caseId: string) {
   try {
     const key = revisionKey(patientId, caseId);
 
-    // Revision starts from 0:
-    // first save  -> management_reasoning_0.json
-    // second save -> management_reasoning_1.json
-    // third save  -> management_reasoning_2.json
     const current = Number(localStorage.getItem(key) ?? "-1");
     const next = Number.isFinite(current) ? current + 1 : 0;
 
@@ -189,7 +186,11 @@ function buildChangeLabel(managementEvent: ManagementEvent) {
   const unit = managementEvent.change_unit ?? managementEvent.unit ?? "";
   const suffix = unit ? ` ${unit}` : "";
 
-  return `${formatClinicalNumber(Number(managementEvent.change_from))}${suffix} -> ${formatClinicalNumber(Number(managementEvent.change_to))}${suffix}`;
+  return `${formatClinicalNumber(
+    Number(managementEvent.change_from)
+  )}${suffix} -> ${formatClinicalNumber(
+    Number(managementEvent.change_to)
+  )}${suffix}`;
 }
 
 function buildDoseOrChangeLabel(managementEvent: ManagementEvent) {
@@ -436,6 +437,7 @@ export default function ManagementReasoningPanel({
 
   async function startVoiceNote() {
     if (readOnly) return;
+    if (saveStatus === "saving") return;
 
     const SpeechRecognition =
       (window as any).SpeechRecognition ||
@@ -456,6 +458,7 @@ export default function ManagementReasoningPanel({
       voiceBaseTextRef.current = answer.trim();
 
       const recognition = new SpeechRecognition();
+
       recognition.lang = getSpeechRecognitionLanguage();
       recognition.interimResults = true;
       recognition.continuous = true;
@@ -468,8 +471,17 @@ export default function ManagementReasoningPanel({
 
         if (!transcript) return;
 
+        const resolvedPatientId = patientId ?? patientFolder;
         const base = voiceBaseTextRef.current;
-        setAnswer(base ? `${base}\n\n${transcript}` : transcript);
+        const nextText = base ? `${base}\n\n${transcript}` : transcript;
+
+        setAnswer(nextText);
+
+        try {
+          localStorage.setItem(draftKey(resolvedPatientId, caseId), nextText);
+        } catch {
+          // ignore
+        }
       };
 
       recognition.onerror = () => {
@@ -908,84 +920,53 @@ export default function ManagementReasoningPanel({
         placeholder="Write or dictate your management reasoning here..."
       />
 
-      <div className="mt-5 flex w-full flex-wrap items-center gap-3 border-t pt-5">
-        <button
-          type="button"
-          onClick={recording ? stopVoiceNote : startVoiceNote}
-          disabled={readOnly || saveStatus === "saving"}
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            recording
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-orange-500 hover:bg-orange-600"
-          }`}
-        >
-          {recording ? "Stop Recording" : "Start Recording"}
-        </button>
+      <div className="mt-5 border-t pt-5">
+        <div className="flex w-full flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <SpeechLanguageSelector />
 
-        <button
-          type="button"
-          onClick={() => {
-            if (readOnly) return;
+            <button
+              type="button"
+              onClick={recording ? stopVoiceNote : startVoiceNote}
+              disabled={readOnly || saveStatus === "saving"}
+              className={`rounded-md px-3 py-1.5 text-xs font-semibold text-white ${
+                readOnly || saveStatus === "saving"
+                  ? "cursor-not-allowed bg-gray-400"
+                  : recording
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-orange-400 hover:bg-orange-500"
+              }`}
+            >
+              {recording ? "Stop Recording" : "Start Recording"}
+            </button>
+          </div>
 
-            setAnswer("");
-            voiceBaseTextRef.current = "";
-            setRecording(false);
-            recognitionRef.current?.stop?.();
-            setSaveStatus("idle");
-            setSaveMessage("");
-
-            const nowIso = new Date().toISOString();
-            pageOpenedAtRef.current = nowIso;
-            pageOpenedAtLocalRef.current = getLocalTimestamp();
-            firstInteractionAtRef.current = null;
-            firstTypingAtRef.current = null;
-            firstVoiceStartAtRef.current = null;
-            typingStartedAtMsRef.current = null;
-            typingDurationMsRef.current = 0;
-            voiceStartedAtMsRef.current = null;
-            voiceDurationMsRef.current = 0;
-            taskTimingRef.current = makeEmptyQuestionTiming(nowIso);
-
-            try {
-              localStorage.removeItem(
-                saveNoticeKey(patientId ?? patientFolder, caseId)
-              );
-              localStorage.removeItem(
-                `annotationResult:management_reasoning:${
-                  patientId ?? patientFolder ?? "unknown_patient"
-                }:${caseId}`
-              );
-            } catch {
-              // ignore
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={
+              readOnly || saveStatus === "saving" || !answer.trim()
             }
-          }}
-          disabled={readOnly || saveStatus === "saving"}
-          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-        >
-          Reset
-        </button>
-
-        <button
-          type="button"
-          onClick={handleSave}
-          disabled={readOnly || saveStatus === "saving"}
-          className={`rounded-md px-4 py-2 text-sm font-semibold text-white ${
-            readOnly || saveStatus === "saving"
-              ? "cursor-wait bg-blue-300"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {saveStatus === "saving" ? "Saving..." : "Save and Next"}
-        </button>
+            className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
+              readOnly || saveStatus === "saving" || !answer.trim()
+                ? saveStatus === "saving"
+                  ? "cursor-wait bg-blue-300"
+                  : "cursor-not-allowed bg-blue-300"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {saveStatus === "saving" ? "Saving..." : "Save and Next"}
+          </button>
+        </div>
 
         {saveMessage && (
           <div
-            className={`ml-2 text-sm font-medium ${
+            className={`mt-3 rounded-md px-3 py-2 text-sm font-medium ${
               saveStatus === "success"
-                ? "text-green-700"
-                : saveStatus === "error"
-                  ? "text-red-700"
-                  : "text-gray-500"
+                ? "bg-green-50 text-green-700"
+                : saveStatus === "saving"
+                  ? "bg-blue-50 text-blue-700"
+                  : "bg-red-50 text-red-700"
             }`}
           >
             {saveMessage}
