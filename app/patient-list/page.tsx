@@ -410,8 +410,38 @@ export default function PatientList() {
 
     localStorage.setItem("gameData", JSON.stringify(gameData));
     localStorage.setItem("currentWorkflowMode", workflowMode);
-
+    localStorage.removeItem("isUserGuideMode");
+    
     router.push("/dashboard");
+  };
+
+  const handleStartUserGuide = () => {
+    const firstCase = cases[0];
+  
+    if (!firstCase) {
+      return;
+    }
+  
+    const workflowMode: WorkflowMode = "annotation";
+  
+    const gameData: GameData = {
+      currentPatientIndex: 0,
+      selectedPatients: cases.map((c) => ({
+        id: c.id,
+        folder: c.folder,
+        status: c.status,
+        workflowMode,
+        displayCaseId: c.displayCaseId,
+      })),
+      diagnoses: Array(cases.length).fill(null),
+      startTime: new Date().toISOString(),
+    };
+  
+    localStorage.setItem("gameData", JSON.stringify(gameData));
+    localStorage.setItem("currentWorkflowMode", workflowMode);
+    localStorage.setItem("isUserGuideMode", "true");
+  
+    router.push("/dashboard?guide=1");
   };
 
   if (loading) {
@@ -534,6 +564,29 @@ export default function PatientList() {
             </div>
           </div>
         </div>
+
+        {loginWorkflowMode === "annotation" && (
+  <div className="mb-6 rounded-3xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
+    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div>
+     
+
+        <h2 className="text-2xl font-bold text-gray-900">
+          Practice with a guided example to be familiar with the annotation workflow.
+        </h2>
+
+      </div>
+
+      <Button
+        type="button"
+        onClick={handleStartUserGuide}
+        className="rounded-xl bg-[#ff6f61] px-6 py-2 text-base font-semibold text-white shadow-sm hover:bg-[#e85f54]"
+      >
+        Start User Guide
+      </Button>
+    </div>
+  </div>
+)}
 
         <div className="mb-4 text-lg text-gray-700">
           You have {cases.length} case{cases.length !== 1 ? "s" : ""} available

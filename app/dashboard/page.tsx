@@ -3,7 +3,7 @@ import ManagementReasoningPanel from "./annotation/panels/ManagementReasoningPan
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
-
+import UserGuideOverlay from "@/components/UserGuideOverlay";
 import ObservationSelectionGuide from "./annotation/panels/ObservationSelectionGuide";
 import type {
   AnnotationTaskKey,
@@ -1291,8 +1291,9 @@ export default function DashboardPage() {
   const [reviewHydrationVersion, setReviewHydrationVersion] = useState(0);
 
   const [preopInfoOpen, setPreopInfoOpen] = useState(false);
+  const [showUserGuide, setShowUserGuide] = useState(false);
+  const [isUserGuideMode, setIsUserGuideMode] = useState(false);
   const isCaseLocked = hasSubmitted && !isReviewMode;
-
   const voiceNote = useVoiceNote();
 
   const sessionStartRef = useRef<number>(performance.now());
@@ -1752,23 +1753,38 @@ export default function DashboardPage() {
         localStorage.getItem("currentWorkflowMode") === "review"
           ? "review"
           : "annotation";
-    
-      router.push(currentWorkflowMode === "review" ? "/review-list" : "/patient-list");
+  
+      router.push(
+        currentWorkflowMode === "review" ? "/review-list" : "/patient-list"
+      );
       return;
     }
-
+  
+    const params = new URLSearchParams(window.location.search);
+    const guideFromUrl = params.get("guide") === "1";
+    const guideFromStorage = localStorage.getItem("isUserGuideMode") === "true";
+    const nextIsUserGuideMode = guideFromUrl || guideFromStorage;
+  
+    setIsUserGuideMode(nextIsUserGuideMode);
+  
     const gameData = JSON.parse(raw) as GameData;
     const idx = gameData.currentPatientIndex ?? 0;
-
+  
     setCurrentPatientIndex(idx);
     setSelectedPatients(gameData.selectedPatients || []);
     setDashboardBackStack([]);
-
+  
     if (gameData.selectedPatients?.length) {
       void loadPatient(
         gameData.selectedPatients[idx].folder,
         gameData.selectedPatients[idx]
       );
+  
+      if (nextIsUserGuideMode) {
+        window.setTimeout(() => {
+          setShowUserGuide(true);
+        }, 500);
+      }
     } else {
       setLoading(false);
       setLoadError("No selected patients found.");
@@ -2585,7 +2601,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <div className="mx-auto flex min-h-0 w-full max-w-[1800px] flex-col px-4 py-4 lg:px-6">
+      <div
+        data-guide="dashboard-overview"
+        className="mx-auto flex min-h-0 w-full max-w-[1800px] flex-col px-4 py-4 lg:px-6"
+      >
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
         <h1 className="flex items-center gap-4 text-2xl font-bold">
         <span>{currentCaseLabel.replace("_", " ")}</span>
@@ -2594,17 +2613,30 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         </span>
 </h1>
 
-          <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => {
-              logAction(isReviewMode ? "home_to_review_list" : "home_to_patient_list");
-              router.push(isReviewMode ? "/review-list" : "/patient-list");
-            }}
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-          >
-            Home
-          </button>
+<div data-guide="submit-area" className="flex items-center gap-3">
+{!isUserGuideMode && (
+  <button
+    type="button"
+    onClick={() => {
+      logAction("open_user_guide");
+      setShowUserGuide(true);
+    }}
+    className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+  >
+    User Guide
+  </button>
+)}
+
+            <button
+              type="button"
+              onClick={() => {
+                logAction(isReviewMode ? "home_to_review_list" : "home_to_patient_list");
+                router.push(isReviewMode ? "/review-list" : "/patient-list");
+              }}
+              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Home
+            </button>
 
             <button
               type="button"
@@ -2695,6 +2727,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
         <div className="grid gap-4">
   
+        <div data-guide="preop-info">
         <SectionCard
   title="Patient Pre-operative Information"
   collapsible
@@ -2936,15 +2969,22 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     )}
   </div>
 </SectionCard>
+</div>
           <SectionCard title="Annotation Tasks">
             {!vitals || !hasAnyVitalData(vitals) ? (
               <div className="text-sm text-gray-500">No intraoperative data available.</div>
             ) : (
               <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(420px,0.66fr)_minmax(0,1.34fr)]">
-                <div className="sticky top-2 z-30 min-w-0 xl:max-w-[560px]">
+<div
+  data-guide="annotation-tasks"
+  className="sticky top-2 z-30 min-w-0 xl:max-w-[560px]"
+>
                   <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-                    <div className="border-b bg-white px-4 py-2">
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                  <div className="border-b bg-white px-4 py-2">
+                    <div
+                      data-guide="task-tabs"
+                      className="flex items-center gap-2 overflow-x-auto pb-1"
+                    >
     <button
       type="button"
       onClick={() => {
@@ -3000,7 +3040,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     </div>
 
                     {annotationLevel === "summary" && (
-                      <div className="bg-white">
+                      <div data-guide="instructions" className="bg-white">
                       <SummaryPanel
   key={`summary:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}`}
   caseId={caseId}
@@ -3020,7 +3060,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
                     
 {annotationLevel === "otherEvents" && (
-  <div className="bg-white">
+  <div data-guide="instructions" className="bg-white">
     <ManagementReasoningPanel
       key={`management:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}:${getManagementEventId(selectedManagementEvent) ?? "none"}`}
       caseId={caseId}
@@ -3376,9 +3416,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 </div>
   </div>
 )}
-
 {annotationLevel === "episode" && episodeState.stage === "annotate" && (
-  <div className="space-y-4 bg-white p-4">
+  <div data-guide="instructions" className="space-y-4 bg-white p-4">
     {selectedEvent ? (
       <TaskWorkspace
         key={`episode:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}:${selectedEvent.id}`}
@@ -3433,6 +3472,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
                 <div
                   ref={visualizationPanelRef}
+                  data-guide="visualization-panel"
                   className="min-w-0 space-y-3 rounded-xl border bg-white p-3 shadow-sm"
                 >
                   <div className="px-1 text-sm font-bold text-gray-900">
@@ -3480,7 +3520,20 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             )}
           </SectionCard>
         </div>
-      </div>
-    </main>
-  );
+
+        </div>
+        <UserGuideOverlay
+  open={showUserGuide}
+  onClose={() => {
+    setShowUserGuide(false);
+
+    if (isUserGuideMode) {
+      localStorage.removeItem("isUserGuideMode");
+      setIsUserGuideMode(false);
+      router.push("/patient-list");
+    }
+  }}
+/>
+</main>
+);
 }
