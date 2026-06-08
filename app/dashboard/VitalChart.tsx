@@ -824,7 +824,7 @@ const activeEndMin =
             ? Math.max(dragStartY, dragCurrentY)
             : selectedWindow?.y2 ?? null;
 
-  const minCreateWidthMin = Math.max(pixelToMinute(10), 2);
+  const minCreateWidthMin = 0.5;
 
   const displayWindow = useMemo(() => {
     if (
@@ -1287,7 +1287,6 @@ const activeEndMin =
           chartMarginTop={chartMarginTop}
           chartMarginBottom={chartMarginBottom}
         />
-
 <div className="relative min-w-0">
   <div
     ref={scrollRef}
@@ -1295,28 +1294,25 @@ const activeEndMin =
     style={{ overscrollBehaviorX: "none" }}
     onWheel={(e) => {
       const el = e.currentTarget;
+
       const absX = Math.abs(e.deltaX);
       const absY = Math.abs(e.deltaY);
 
-      if (absX <= absY || absX < 1) return;
-
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      const nextLeft = el.scrollLeft + e.deltaX;
-
-      const atLeftEdge = el.scrollLeft <= 0;
-      const atRightEdge = el.scrollLeft >= maxScroll - 1;
-
-      const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-      const tryingGoPastRight = atRightEdge && e.deltaX > 0;
-
-      if (tryingGoPastLeft || tryingGoPastRight) {
-        e.preventDefault();
-        e.stopPropagation();
+      // 上下滚动页面时，不要改变横向时间轴
+      if (absY >= absX) {
         return;
       }
 
-      e.preventDefault();
+      const delta = e.deltaX;
+      if (Math.abs(delta) < 1) return;
+
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const nextLeft = el.scrollLeft + delta;
       const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+
+      e.preventDefault();
+      e.stopPropagation();
+
       el.scrollLeft = clamped;
       setSliderValue(clamped);
       onSharedScrollLeftChange?.(clamped);

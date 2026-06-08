@@ -1294,7 +1294,6 @@ export default function DashboardPage() {
   const [showUserGuide, setShowUserGuide] = useState(false);
   const [isUserGuideMode, setIsUserGuideMode] = useState(false);
   const isCaseLocked = hasSubmitted && !isReviewMode;
-  const voiceNote = useVoiceNote();
 
   const sessionStartRef = useRef<number>(performance.now());
   const sessionStartUtcRef = useRef<string>(new Date().toISOString());
@@ -1951,6 +1950,7 @@ export default function DashboardPage() {
       setAnnotationLevel("summary");
       setTimeResolution(15);
       setViewStartMin(0);
+      setSharedScrollLeft(0);
       setManagementEvents([]);
       setSelectedManagementEvent(null);
       setEpisodeState(buildEmptyEpisodeState());
@@ -2504,11 +2504,15 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
   useEffect(() => {
     const maxStart = Math.max(0, sharedTimelineEnd - viewWindowWidthMin);
-    if (viewStartMin > maxStart) {
-      setViewStartMin(maxStart);
+    const nextViewStartMin = Math.min(viewStartMin, maxStart);
+  
+    if (nextViewStartMin !== viewStartMin) {
+      setViewStartMin(nextViewStartMin);
     }
-  }, [sharedTimelineEnd, viewWindowWidthMin, viewStartMin]);
-
+  
+    const pxPerMin = timeResolution === 5 ? 64 / 5 : 64 / 15;
+    setSharedScrollLeft(Math.max(0, nextViewStartMin * pxPerMin));
+  }, [sharedTimelineEnd, viewWindowWidthMin, viewStartMin, timeResolution]);
   useEffect(() => {
     if (annotationLevel !== "otherEvents") return;
   
@@ -2565,6 +2569,21 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     annotationLevel,
     selectedManagementEvent,
   ]);
+
+  function handleChangeTimeResolution(nextResolution: 15 | 5) {
+    setTimeResolution(nextResolution);
+  
+    const nextViewWindowWidthMin =
+      nextResolution === 15 ? sharedTimelineEnd : 120;
+  
+    const maxStart = Math.max(0, sharedTimelineEnd - nextViewWindowWidthMin);
+    const nextViewStartMin = Math.min(viewStartMin, maxStart);
+  
+    const pxPerMin = nextResolution === 5 ? 64 / 5 : 64 / 15;
+  
+    setViewStartMin(nextViewStartMin);
+    setSharedScrollLeft(Math.max(0, nextViewStartMin * pxPerMin));
+  }
   const activeManagementEvent = useMemo(() => {
     if (annotationLevel !== "otherEvents") return null;
     return selectedManagementEvent;
@@ -2614,116 +2633,116 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 </h1>
 
 <div data-guide="submit-area" className="flex items-center gap-3">
-{!isUserGuideMode && (
+  {hasSubmitted && !isReviewMode ? (
+    <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
+      ✅ Submitted
+    </span>
+  ) : null}
+
+  <button
+    type="button"
+    disabled={submitting || (!isReviewMode && (hasSubmitted || !canSubmitFinal))}
+    onClick={async () => {
+      const validationError = validateBeforeFinalSubmit();
+      if (validationError) {
+        setSubmitError(validationError);
+        return;
+      }
+
+      logAction(isReviewMode ? "submit_in_review_mode" : "submit_session");
+      await submitCurrentSession();
+    }}
+    className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+      submitting
+        ? "cursor-wait bg-blue-300 text-white"
+        : !isReviewMode && hasSubmitted
+          ? "cursor-not-allowed bg-green-200 text-green-800"
+          : !canSubmitFinal
+            ? "cursor-not-allowed bg-blue-300 text-white"
+            : "bg-blue-600 text-white hover:bg-blue-700"
+    }`}
+  >
+    {submitting
+      ? "Submitting..."
+      : hasSubmitted && !isReviewMode
+        ? "Submitted"
+        : "Submit"}
+  </button>
+
   <button
     type="button"
     onClick={() => {
-      logAction("open_user_guide");
-      setShowUserGuide(true);
+      void handleBackNavigation();
     }}
-    className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+    className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
   >
-    User Guide
+    Back
   </button>
+
+  <button
+    type="button"
+    disabled={
+      submitting || currentPatientIndex >= selectedPatients.length - 1
+    }
+    onClick={() => {
+      void handleNextNavigation();
+    }}
+    className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+      submitting || currentPatientIndex >= selectedPatients.length - 1
+        ? "cursor-not-allowed bg-blue-300 text-white"
+        : "bg-blue-600 text-white hover:bg-blue-700"
+    }`}
+  >
+    Next
+  </button>
+
+  <button
+    type="button"
+    onClick={() => {
+      logAction("logout");
+      localStorage.removeItem("gameData");
+      localStorage.removeItem("participantInfo");
+      localStorage.removeItem("doctorAccessCode");
+      localStorage.removeItem("doctorId");
+      localStorage.removeItem("consentInfo");
+      router.push("/");
+    }}
+    className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+  >
+    Logout
+  </button>
+
+  <button
+    type="button"
+    onClick={() => {
+      logAction(isReviewMode ? "home_to_review_list" : "home_to_patient_list");
+      router.push(isReviewMode ? "/review-list" : "/patient-list");
+    }}
+    className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+  >
+    Home
+  </button>
+
+  {!isUserGuideMode && (
+    <button
+      type="button"
+      onClick={() => {
+        logAction("open_user_guide");
+        setShowUserGuide(true);
+      }}
+      className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+    >
+      User Guide
+    </button>
+  )}
+</div>
+</div>
+
+{submitError && (
+  <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+    {submitError}
+  </div>
 )}
-
-            <button
-              type="button"
-              onClick={() => {
-                logAction(isReviewMode ? "home_to_review_list" : "home_to_patient_list");
-                router.push(isReviewMode ? "/review-list" : "/patient-list");
-              }}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Home
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                void handleBackNavigation();
-              }}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Back
-            </button>
-
-            {hasSubmitted && !isReviewMode ? (
-              <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
-                ✅ Submitted
-              </span>
-            ) : null}
-
-            <button
-              type="button"
-              disabled={submitting || (!isReviewMode && (hasSubmitted || !canSubmitFinal))}
-              onClick={async () => {
-                const validationError = validateBeforeFinalSubmit();
-                if (validationError) {
-                  setSubmitError(validationError);
-                  return;
-                }
-
-                logAction(isReviewMode ? "submit_in_review_mode" : "submit_session");
-                await submitCurrentSession();
-              }}
-              className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                submitting
-                  ? "cursor-wait bg-blue-300 text-white"
-                  : !isReviewMode && hasSubmitted
-                    ? "cursor-not-allowed bg-green-200 text-green-800"
-                    : !canSubmitFinal
-                      ? "cursor-not-allowed bg-blue-300 text-white"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
-              }`}
-            >
-              {submitting
-                ? "Submitting..."
-                : hasSubmitted && !isReviewMode
-                  ? "Submitted"
-                  : "Submit"}
-            </button>
-
-            <button
-              type="button"
-              disabled={
-                submitting || currentPatientIndex >= selectedPatients.length - 1
-              }
-              onClick={() => {
-                void handleNextNavigation();
-              }}
-              className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                submitting || currentPatientIndex >= selectedPatients.length - 1
-                  ? "cursor-not-allowed bg-blue-300 text-white"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
-              }`}
-            >
-              Next
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                logAction("logout");
-                localStorage.removeItem("gameData");
-                localStorage.removeItem("participantInfo");
-                localStorage.removeItem("doctorAccessCode");
-                localStorage.removeItem("doctorId");
-                localStorage.removeItem("consentInfo");
-                router.push("/");
-              }}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-
-        {submitError && (
-          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
-            {submitError}
-          </div>
-        )}
 
         <div className="grid gap-4">
   
@@ -3488,7 +3507,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     timelineEnd={sharedTimelineEnd}
                     ticks={sharedXTicks}
                     timeResolution={timeResolution}
-                    onChangeTimeResolution={setTimeResolution}
+                    onChangeTimeResolution={handleChangeTimeResolution}
                     viewStartMin={viewStartMin}
                     onChangeViewStartMin={setViewStartMin}
                     viewWindowWidthMin={viewWindowWidthMin}

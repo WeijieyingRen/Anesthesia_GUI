@@ -15,7 +15,6 @@ import type { ManagementEvent } from "@/lib/types_management";
 import FluidChart from "./FluidChart";
 import VentilationChart from "./VentilationChart";
 import TimelineContextPanel from "./TimelineContextPanel";
-
 import type { DetectVital } from "./annotation/types";
 
 type TimeResolution = 15 | 5;
@@ -106,6 +105,7 @@ function hasAnyMedicationData(medications: MedicationPanelData | null) {
   const hasBolus = Object.values(medications.bolus ?? {}).some(
     (arr) => Array.isArray(arr) && arr.length > 0
   );
+
   const hasInfusion = Object.values(medications.infusion ?? {}).some(
     (arr) => Array.isArray(arr) && arr.length > 0
   );
@@ -119,9 +119,11 @@ function hasAnyFluidData(fluids: FluidPanelData | null) {
   const hasBolus = Object.values(fluids.bolus ?? {}).some(
     (arr) => Array.isArray(arr) && arr.length > 0
   );
+
   const hasInfusion = Object.values(fluids.infusion ?? {}).some(
     (arr) => Array.isArray(arr) && arr.length > 0
   );
+
   const hasOutput = Object.values(fluids.output ?? {}).some(
     (arr) => Array.isArray(arr) && arr.length > 0
   );
@@ -201,6 +203,7 @@ function ViewportToolbar({
       <div className="flex items-center gap-2">
         {[15, 5].map((r) => {
           const active = timeResolution === r;
+
           return (
             <button
               key={r}
@@ -258,7 +261,9 @@ export default function UnifiedTimelineCard({
   const hasVentilationData = hasAnyFinitePoints(vitals?.ventilation);
   const hasCVData = hasAnyFinitePoints(vitals?.cv);
 
-  const [openSections, setOpenSections] = React.useState<Record<SectionKey, boolean>>({
+  const [openSections, setOpenSections] = React.useState<
+    Record<SectionKey, boolean>
+  >({
     vitals: hasVitalsData,
     medications: hasMedicationsData,
     fluids: hasFluidsData,
@@ -312,6 +317,7 @@ export default function UnifiedTimelineCard({
 
   React.useEffect(() => {
     const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
+
     if (viewStartMin > maxStart) {
       onChangeViewStartMin(maxStart);
     }
@@ -351,7 +357,8 @@ export default function UnifiedTimelineCard({
           startMin: Math.max(0, Number(managementEvent.time_min) - 10),
           endMin: Math.min(
             timelineEnd,
-            Number(managementEvent.end_time_min ?? managementEvent.time_min) + 10
+            Number(managementEvent.end_time_min ?? managementEvent.time_min) +
+              10
           ),
         }
       : null;
@@ -364,6 +371,20 @@ export default function UnifiedTimelineCard({
           endMin: selectedWindow.endMin,
         }
       : null;
+
+  const pxPerMin = timeResolution === 5 ? 64 / 5 : 64 / 15;
+  function handleSharedScrollLeftChange(nextScrollLeft: number) {
+    onSharedScrollLeftChange?.(nextScrollLeft);
+
+    const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
+
+    const nextViewStartMin = Math.max(
+      0,
+      Math.min(maxStart, nextScrollLeft / pxPerMin)
+    );
+
+    onChangeViewStartMin(nextViewStartMin);
+  }
 
   return (
     <div className="overflow-visible border bg-white shadow-sm">
@@ -387,14 +408,14 @@ export default function UnifiedTimelineCard({
             managementHighlightWindow
               ? managementHighlightWindow
               : selectedWindow
-              ? {
-                  startMin: selectedWindow.startMin,
-                  endMin: selectedWindow.endMin,
-                }
-              : managementHighlightWindow
+                ? {
+                    startMin: selectedWindow.startMin,
+                    endMin: selectedWindow.endMin,
+                  }
+                : null
           }
           sharedScrollLeft={sharedScrollLeft}
-          onSharedScrollLeftChange={onSharedScrollLeftChange}
+          onSharedScrollLeftChange={handleSharedScrollLeftChange}
         />
       </div>
 
@@ -403,6 +424,7 @@ export default function UnifiedTimelineCard({
         open={openSections.gas}
         onToggle={() => toggleSection("gas")}
       />
+
       {openSections.gas && (
         <div className="overflow-visible">
           <GasChart
@@ -417,10 +439,9 @@ export default function UnifiedTimelineCard({
             embedded
             highlightWindow={sharedHighlightWindow}
             managementEvent={managementEvent}
-           
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
+            onSharedScrollLeftChange={handleSharedScrollLeftChange}
           />
         </div>
       )}
@@ -430,6 +451,7 @@ export default function UnifiedTimelineCard({
         open={openSections.medications}
         onToggle={() => toggleSection("medications")}
       />
+
       {openSections.medications && (
         <div className="overflow-visible">
           <MedicationChart
@@ -445,7 +467,7 @@ export default function UnifiedTimelineCard({
             managementEvent={managementEvent}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
+            onSharedScrollLeftChange={handleSharedScrollLeftChange}
           />
         </div>
       )}
@@ -472,10 +494,14 @@ export default function UnifiedTimelineCard({
               onChangeSelectedDetectVital={onChangeSelectedDetectVital}
               selectedWindow={vitalSelectedWindow}
               highlightWindow={sharedHighlightWindow}
-              onChangeSelectedWindow={readOnly ? undefined : onChangeSelectedWindow}
-              onCreateEventFromWindow={readOnly ? undefined : onCreateEventFromWindow}
+              onChangeSelectedWindow={
+                readOnly ? undefined : onChangeSelectedWindow
+              }
+              onCreateEventFromWindow={
+                readOnly ? undefined : onCreateEventFromWindow
+              }
               sharedScrollLeft={sharedScrollLeft}
-              onSharedScrollLeftChange={onSharedScrollLeftChange}
+              onSharedScrollLeftChange={handleSharedScrollLeftChange}
               series={{
                 HR: vitals?.main?.["HR"] ?? [],
                 NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
@@ -569,10 +595,14 @@ export default function UnifiedTimelineCard({
               embedded
               selectedWindow={tmpSelectedWindow}
               highlightWindow={sharedHighlightWindow}
-              onChangeSelectedWindow={readOnly ? undefined : onChangeSelectedWindow}
-              onCreateEventFromWindow={readOnly ? undefined : onCreateEventFromWindow}
+              onChangeSelectedWindow={
+                readOnly ? undefined : onChangeSelectedWindow
+              }
+              onCreateEventFromWindow={
+                readOnly ? undefined : onCreateEventFromWindow
+              }
               sharedScrollLeft={sharedScrollLeft}
-              onSharedScrollLeftChange={onSharedScrollLeftChange}
+              onSharedScrollLeftChange={handleSharedScrollLeftChange}
             />
           </div>
         </div>
@@ -583,6 +613,7 @@ export default function UnifiedTimelineCard({
         open={openSections.fluids}
         onToggle={() => toggleSection("fluids")}
       />
+
       {openSections.fluids && (
         <div className="overflow-visible">
           <FluidChart
@@ -597,7 +628,7 @@ export default function UnifiedTimelineCard({
             highlightWindow={sharedHighlightWindow}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
+            onSharedScrollLeftChange={handleSharedScrollLeftChange}
           />
         </div>
       )}
@@ -607,6 +638,7 @@ export default function UnifiedTimelineCard({
         open={openSections.cv}
         onToggle={() => toggleSection("cv")}
       />
+
       {openSections.cv && (
         <div className="overflow-visible">
           <CVChart
@@ -620,7 +652,7 @@ export default function UnifiedTimelineCard({
             highlightWindow={sharedHighlightWindow}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
+            onSharedScrollLeftChange={handleSharedScrollLeftChange}
           />
         </div>
       )}
@@ -630,6 +662,7 @@ export default function UnifiedTimelineCard({
         open={openSections.ventilation}
         onToggle={() => toggleSection("ventilation")}
       />
+
       {openSections.ventilation && (
         <div className="overflow-visible">
           <VentilationChart
@@ -652,7 +685,7 @@ export default function UnifiedTimelineCard({
             highlightWindow={sharedHighlightWindow}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={onSharedScrollLeftChange}
+            onSharedScrollLeftChange={handleSharedScrollLeftChange}
           />
         </div>
       )}
