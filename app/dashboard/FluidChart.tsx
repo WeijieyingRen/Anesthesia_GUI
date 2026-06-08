@@ -68,6 +68,7 @@ const FLUID_DISPLAY_ORDER = [
 ];
 
 const ROW_HEIGHT = 20;
+const PANEL_PADDING = 28;
 
 function normalizeName(name: string) {
   return String(name ?? "").trim().toLowerCase();
@@ -238,7 +239,11 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
@@ -272,14 +277,26 @@ export default function FluidChart({
   onSharedScrollLeftChange,
 }: FluidChartProps) {
   const rows = useMemo(() => buildRows(fluids, xEnd), [fluids, xEnd]);
+
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const isSyncingFromSliderRef = useRef(false);
+
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
+  const majorStep = useMemo(
+    () => getChartMajorStep(timeResolution),
+    [timeResolution]
+  );
+
+  const minorStep = useMemo(
+    () => getChartMinorStep(timeResolution),
+    [timeResolution]
+  );
+
   const visibleRows = useMemo(
-    () => rows.filter((r) => !hiddenNames.includes(r.name)),
+    () => rows.filter((row) => !hiddenNames.includes(row.name)),
     [rows, hiddenNames]
   );
 
@@ -289,13 +306,11 @@ export default function FluidChart({
   );
 
   const allMaxTime = useMemo(() => getMaxTime(rows), [rows]);
-  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
 
   const computedXEnd = useMemo(() => {
-    const computed = Math.max(majorStep, Math.ceil(allMaxTime / majorStep) * majorStep);
-    return computed;
+    return Math.max(majorStep, Math.ceil(allMaxTime / majorStep) * majorStep);
   }, [allMaxTime, majorStep]);
+
   const effectiveXEnd = xEnd ?? computedXEnd;
 
   const majorTicks = useMemo(() => {
@@ -308,29 +323,41 @@ export default function FluidChart({
   }, [effectiveXEnd, minorStep]);
 
   const axisHeight = showXAxis ? 22 : 0;
-  const contentHeight = Math.max(visibleRowsReindexed.length * ROW_HEIGHT, ROW_HEIGHT);
-  
-  // 给 panel 额外加一点上下留白，不改变每行高度
-  const panelPadding = 28;
-  
-  const dynamicHeight = contentHeight + axisHeight + panelPadding;
-  const viewHeight = Math.min(dynamicHeight, 220);
+  const contentHeight = Math.max(
+    visibleRowsReindexed.length * ROW_HEIGHT,
+    ROW_HEIGHT
+  );
 
+  const dynamicHeight = contentHeight + axisHeight + PANEL_PADDING;
+  const viewHeight = Math.min(height, Math.max(120, dynamicHeight));
 
   const { contentWidth, plotWidth } = useMemo(
     () => getSharedChartGeometry(effectiveXEnd, timeResolution),
     [effectiveXEnd, timeResolution]
   );
 
+  function minuteToPixel(minute: number) {
+    return minuteToX(minute, effectiveXEnd, plotWidth);
+  }
+
   useEffect(() => {
-    if (scrollRef.current == null) return;
+    const el = scrollRef.current;
+    if (!el) return;
     if (sharedScrollLeft == null) return;
 
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
     }
-  }, [sharedScrollLeft, contentWidth]);
+
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
 
   useEffect(() => {
     function updateScrollMetrics() {
@@ -339,19 +366,37 @@ export default function FluidChart({
 
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }
+
+      setSliderValue(nextScrollLeft);
     }
 
     updateScrollMetrics();
+
     window.addEventListener("resize", updateScrollMetrics);
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, viewHeight, visibleRowsReindexed.length]);
-
-  function minuteToPixel(minute: number) {
-    return minuteToX(minute, effectiveXEnd, plotWidth);
-  }
+  }, [
+    contentWidth,
+    viewHeight,
+    hiddenNames.length,
+    rows.length,
+    sharedScrollLeft,
+  ]);
 
   if (!rows.length) {
     return embedded ? null : (
@@ -364,7 +409,9 @@ export default function FluidChart({
 
   return (
     <div
-      className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}
+      className={
+        embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
+      }
     >
       <style jsx>{`
         .fluid-scroll-hidden {
@@ -434,6 +481,7 @@ export default function FluidChart({
           background: #475569;
         }
       `}</style>
+
       {!embedded && title ? (
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
@@ -444,54 +492,58 @@ export default function FluidChart({
           gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0, 1fr)`,
         }}
       >
-        <div className="border-r pr-0" style={{ height: viewHeight }}>
-          <div>
-            {rows.map((row) => {
-              const hidden = hiddenNames.includes(row.name);
-              const active = visibleRows.some((r) => r.name === row.name);
-              const color = inferFluidColor(row.name);
-              const totalLabel = getFluidTotalLabel(row);
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
+          <div className="border-r pr-0" style={{ height: contentHeight }}>
+            <div>
+              {rows.map((row) => {
+                const hidden = hiddenNames.includes(row.name);
+                const active = visibleRows.some((r) => r.name === row.name);
+                const color = inferFluidColor(row.name);
+                const totalLabel = getFluidTotalLabel(row);
 
-              return (
-                <div
-                  key={row.name}
-                  className="flex items-center justify-between gap-2 px-2 text-sm"
-                  style={{
-                    height: ROW_HEIGHT,
-                    backgroundColor: active ? "#efefef" : "#f7f7f7",
-                    opacity: hidden ? 0.45 : 1,
-                    borderBottom: "1px solid #d1d5db",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <div className="min-w-0 flex-1 truncate text-gray-900">
-                    {row.name}
-                  </div>
-
-                  <div className="truncate text-right text-gray-700">
-                    {totalLabel}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHiddenNames((prev) =>
-                        prev.includes(row.name)
-                          ? prev.filter((x) => x !== row.name)
-                          : [...prev, row.name]
-                      );
+                return (
+                  <div
+                    key={row.name}
+                    className="flex items-center justify-between gap-2 px-2 text-sm"
+                    style={{
+                      height: ROW_HEIGHT,
+                      backgroundColor: active ? "#efefef" : "#f7f7f7",
+                      opacity: hidden ? 0.45 : 1,
+                      borderBottom: "1px solid #d1d5db",
+                      boxSizing: "border-box",
                     }}
-                    className="h-4 w-4 shrink-0 border"
-                    style={{ backgroundColor: color, borderColor: color }}
-                    title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
-                  />
-                </div>
-              );
-            })}
+                  >
+                    <div className="min-w-0 flex-1 truncate text-gray-900">
+                      {row.name}
+                    </div>
+
+                    <div className="truncate text-right text-gray-700">
+                      {totalLabel}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHiddenNames((prev) =>
+                          prev.includes(row.name)
+                            ? prev.filter((x) => x !== row.name)
+                            : [...prev, row.name]
+                        );
+                      }}
+                      className="h-4 w-4 shrink-0 border"
+                      style={{ backgroundColor: color, borderColor: color }}
+                      title={hidden ? `Show ${row.name}` : `Hide ${row.name}`}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <FixedYAxisSpacer height={viewHeight} />
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
+          <FixedYAxisSpacer height={contentHeight} />
+        </div>
 
         <div className="min-w-0">
           <div
@@ -509,11 +561,11 @@ export default function FluidChart({
 
                 if (absX <= absY || absX < 1) return;
 
-                const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                const maxScroll = el.scrollWidth - el.clientWidth;
                 const nextLeft = el.scrollLeft + e.deltaX;
 
                 const atLeftEdge = el.scrollLeft <= 0;
-                const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+                const atRightEdge = el.scrollLeft >= maxScroll - 1;
 
                 const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
                 const tryingGoPastRight = atRightEdge && e.deltaX > 0;
@@ -524,17 +576,20 @@ export default function FluidChart({
                   return;
                 }
 
+                const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+
                 e.preventDefault();
-                const clamped = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+                e.stopPropagation();
+
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
                 onSharedScrollLeftChange?.(clamped);
               }}
               onScroll={(e) => {
+                if (isSyncingFromSliderRef.current) return;
+
                 const next = e.currentTarget.scrollLeft;
-                if (!isSyncingFromSliderRef.current) {
-                  setSliderValue(next);
-                }
+                setSliderValue(next);
                 onSharedScrollLeftChange?.(next);
               }}
             >
@@ -545,323 +600,352 @@ export default function FluidChart({
                   height: contentHeight,
                 }}
               >
-              <svg
-                width={contentWidth}
-                height={contentHeight}
-                viewBox={`0 0 ${contentWidth} ${contentHeight}`}
-                preserveAspectRatio="none"
-              >
-              {highlightWindow && (
-                <rect
-                  x={minuteToPixel(highlightWindow.startMin)}
-                  y={0}
-                  width={Math.max(
-                    2,
-                    minuteToPixel(highlightWindow.endMin) -
-                      minuteToPixel(highlightWindow.startMin)
-                  )}
+                <svg
+                  width={contentWidth}
                   height={contentHeight}
-                  fill="lightblue"
-                  fillOpacity={0.45}
-                  stroke="none"
-                />
-              )}
+                  viewBox={`0 0 ${contentWidth} ${contentHeight}`}
+                  preserveAspectRatio="none"
+                >
+                  {highlightWindow && (
+                    <rect
+                      x={minuteToPixel(highlightWindow.startMin)}
+                      y={0}
+                      width={Math.max(
+                        2,
+                        minuteToPixel(highlightWindow.endMin) -
+                          minuteToPixel(highlightWindow.startMin)
+                      )}
+                      height={contentHeight}
+                      fill="lightblue"
+                      fillOpacity={0.45}
+                      stroke="none"
+                    />
+                  )}
 
-              {minorTicks.map((tick) => {
-                const x = minuteToPixel(tick);
-                return (
-                  <line
-                    key={`grid-x-minor-${tick}`}
-                    x1={x}
-                    y1={0}
-                    x2={x}
-                    y2={contentHeight}
-                    stroke="#d7dbe2"
-                    strokeWidth={0.9}
-                  />
-                );
-              })}
+                  {minorTicks.map((tick) => {
+                    const x = minuteToPixel(tick);
 
-              {majorTicks.map((tick) => {
-                const x = minuteToPixel(tick);
-                return (
-                  <line
-                    key={`grid-x-major-${tick}`}
-                    x1={x}
-                    y1={0}
-                    x2={x}
-                    y2={contentHeight}
-                    stroke="#9aa3b2"
-                    strokeWidth={1.4}
-                  />
-                );
-              })}
+                    return (
+                      <line
+                        key={`grid-x-minor-${tick}`}
+                        x1={x}
+                        y1={0}
+                        x2={x}
+                        y2={contentHeight}
+                        stroke="#d7dbe2"
+                        strokeWidth={0.9}
+                      />
+                    );
+                  })}
 
-              {Array.from(
-                { length: visibleRowsReindexed.length + 1 },
-                (_, i) => i
-              ).map((i) => {
-                const y = i * ROW_HEIGHT;
-                return (
-                  <line
-                    key={`grid-y-${i}`}
-                    x1={0}
-                    y1={y}
-                    x2={plotWidth}
-                    y2={y}
-                    stroke="#d1d5db"
-                    strokeWidth={1}
-                  />
-                );
-              })}
+                  {majorTicks.map((tick) => {
+                    const x = minuteToPixel(tick);
 
-              {visibleRowsReindexed.map((row) => {
-                const rowTop = row.rowIndex * ROW_HEIGHT;
-                const centerY = rowTop + ROW_HEIGHT / 2;
-                const color = inferFluidColor(row.name);
+                    return (
+                      <line
+                        key={`grid-x-major-${tick}`}
+                        x1={x}
+                        y1={0}
+                        x2={x}
+                        y2={contentHeight}
+                        stroke="#9aa3b2"
+                        strokeWidth={1.4}
+                      />
+                    );
+                  })}
 
-                return (
-                  <g key={`data-${row.name}`}>
-                    {row.infusion.map((seg, idx) => {
-                      const x1 = minuteToPixel(seg.start);
-                      const x2 = minuteToPixel(
-                        Math.max(seg.end, seg.start + 0.1)
-                      );
-                      const yTop = rowTop + ROW_HEIGHT * 0.28;
-                      const yBottom = rowTop + ROW_HEIGHT * 0.72;
-                      const width = x2 - x1;
+                  {Array.from(
+                    { length: visibleRowsReindexed.length + 1 },
+                    (_, i) => i
+                  ).map((i) => {
+                    const y = i * ROW_HEIGHT;
 
-                      const label =
-                        seg.label && String(seg.label).trim()
-                          ? String(seg.label).trim()
-                          : `${formatFluidNumber(seg.rate)} ${seg.unit ?? ""}`.trim();
+                    return (
+                      <line
+                        key={`grid-y-${i}`}
+                        x1={0}
+                        y1={y}
+                        x2={plotWidth}
+                        y2={y}
+                        stroke="#d1d5db"
+                        strokeWidth={1}
+                      />
+                    );
+                  })}
 
-                      const labelWidth = Math.max(
-                        18,
-                        estimateTextWidth(label, 10) + 10
-                      );
-                      const preferredCenterX = x1 + width * 0.72;
-                      const minCenterX = x1 + labelWidth / 2 + 2;
-                      const maxCenterX = x2 - labelWidth / 2 - 2;
-                      const labelCenterX = Math.max(
-                        minCenterX,
-                        Math.min(preferredCenterX, maxCenterX)
-                      );
-                      const showLabel = width >= labelWidth + 6 && !!label;
+                  {visibleRowsReindexed.map((row) => {
+                    const rowTop = row.rowIndex * ROW_HEIGHT;
+                    const centerY = rowTop + ROW_HEIGHT / 2;
+                    const color = inferFluidColor(row.name);
 
-                      return (
-                        <g key={`inf-${row.name}-${idx}`}>
-                          <rect
-                            x={x1}
-                            y={yTop}
-                            width={Math.max(2, x2 - x1)}
-                            height={yBottom - yTop}
-                            fill={color}
-                            stroke={color}
-                            strokeWidth={1}
-                          />
+                    return (
+                      <g key={`data-${row.name}`}>
+                        {row.infusion.map((seg, idx) => {
+                          const x1 = minuteToPixel(seg.start);
+                          const x2 = minuteToPixel(
+                            Math.max(seg.end, seg.start + 0.1)
+                          );
+                          const yTop = rowTop + ROW_HEIGHT * 0.28;
+                          const yBottom = rowTop + ROW_HEIGHT * 0.72;
+                          const width = x2 - x1;
 
-                          <line
-                            x1={x1}
-                            y1={yTop}
-                            x2={x1}
-                            y2={yBottom}
-                            stroke="#ffffff"
-                            strokeWidth={1.2}
-                            opacity={0.98}
-                          />
+                          const label =
+                            seg.label && String(seg.label).trim()
+                              ? String(seg.label).trim()
+                              : `${formatFluidNumber(seg.rate)} ${
+                                  seg.unit ?? ""
+                                }`.trim();
 
-                          <line
-                            x1={x2}
-                            y1={yTop}
-                            x2={x2}
-                            y2={yBottom}
-                            stroke="#ffffff"
-                            strokeWidth={1.2}
-                            opacity={0.98}
-                          />
+                          const labelWidth = Math.max(
+                            18,
+                            estimateTextWidth(label, 10) + 10
+                          );
 
-                          {showLabel && (
-                            <>
+                          const preferredCenterX = x1 + width * 0.72;
+                          const minCenterX = x1 + labelWidth / 2 + 2;
+                          const maxCenterX = x2 - labelWidth / 2 - 2;
+                          const labelCenterX = Math.max(
+                            minCenterX,
+                            Math.min(preferredCenterX, maxCenterX)
+                          );
+
+                          const showLabel = width >= labelWidth + 6 && !!label;
+
+                          return (
+                            <g key={`inf-${row.name}-${idx}`}>
                               <rect
-                                x={labelCenterX - labelWidth / 2}
-                                y={yBottom - 10}
-                                width={labelWidth}
-                                height={12}
+                                x={x1}
+                                y={yTop}
+                                width={Math.max(2, x2 - x1)}
+                                height={yBottom - yTop}
+                                fill={color}
+                                stroke={color}
+                                strokeWidth={1}
+                              />
+
+                              <line
+                                x1={x1}
+                                y1={yTop}
+                                x2={x1}
+                                y2={yBottom}
+                                stroke="#ffffff"
+                                strokeWidth={1.2}
+                                opacity={0.98}
+                              />
+
+                              <line
+                                x1={x2}
+                                y1={yTop}
+                                x2={x2}
+                                y2={yBottom}
+                                stroke="#ffffff"
+                                strokeWidth={1.2}
+                                opacity={0.98}
+                              />
+
+                              {showLabel && (
+                                <>
+                                  <rect
+                                    x={labelCenterX - labelWidth / 2}
+                                    y={yBottom - 10}
+                                    width={labelWidth}
+                                    height={12}
+                                    rx={2}
+                                    ry={2}
+                                    fill="white"
+                                    fillOpacity={0.92}
+                                    stroke={color}
+                                    strokeWidth={0.8}
+                                  />
+                                  <text
+                                    x={labelCenterX}
+                                    y={yBottom}
+                                    textAnchor="middle"
+                                    fontSize={10}
+                                    fill="#374151"
+                                    fontWeight={500}
+                                  >
+                                    {label}
+                                  </text>
+                                </>
+                              )}
+                            </g>
+                          );
+                        })}
+
+                        {row.bolus.map((p, idx) => {
+                          const cx = minuteToPixel(p.time);
+                          const text = String(
+                            p.label ??
+                              `${formatFluidNumber(p.dose)} ${
+                                p.unit ?? ""
+                              }`.trim()
+                          );
+
+                          const boxWidth = Math.max(
+                            28,
+                            Math.min(110, estimateTextWidth(text, 10) + 14)
+                          );
+                          const boxHeight = 16;
+                          const arrowTipX = cx;
+                          const arrowBaseX = cx + 6;
+                          const left = arrowBaseX;
+                          const top = centerY - boxHeight / 2;
+                          const textY = top + boxHeight / 2 + 4;
+
+                          return (
+                            <g key={`bolus-${row.name}-${idx}`}>
+                              <line
+                                x1={arrowTipX}
+                                y1={centerY - 9}
+                                x2={arrowTipX}
+                                y2={centerY + 9}
+                                stroke={color}
+                                strokeWidth={1.2}
+                                opacity={0.9}
+                              />
+
+                              <polygon
+                                points={`${arrowTipX},${centerY} ${arrowBaseX},${
+                                  centerY - 5
+                                } ${arrowBaseX},${centerY + 5}`}
+                                fill={color}
+                                stroke={color}
+                                strokeWidth={1}
+                              />
+
+                              <rect
+                                x={left}
+                                y={top}
+                                width={boxWidth}
+                                height={boxHeight}
                                 rx={2}
                                 ry={2}
                                 fill="white"
-                                fillOpacity={0.92}
                                 stroke={color}
-                                strokeWidth={0.8}
+                                strokeWidth={1.5}
                               />
+
                               <text
-                                x={labelCenterX}
-                                y={yBottom}
+                                x={left + boxWidth / 2}
+                                y={textY}
                                 textAnchor="middle"
                                 fontSize={10}
-                                fill="#374151"
-                                fontWeight={500}
+                                fill="#1f2937"
                               >
-                                {label}
+                                {text}
                               </text>
-                            </>
-                          )}
-                        </g>
-                      );
-                    })}
+                            </g>
+                          );
+                        })}
 
-                    {row.bolus.map((p, idx) => {
-                      const cx = minuteToPixel(p.time);
-                      const text = String(
-                        p.label ??
-                          `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
-                      );
-                      const boxWidth = Math.max(
-                        28,
-                        Math.min(110, estimateTextWidth(text, 10) + 14)
-                      );
-                      const boxHeight = 16;
-                      const arrowTipX = cx;
-                      const arrowBaseX = cx + 6;
-                      const left = arrowBaseX;
-                      const top = centerY - boxHeight / 2;
-                      const textY = top + boxHeight / 2 + 4;
+                        {row.output.map((p, idx) => {
+                          const cx = minuteToPixel(p.time);
+                          const text = String(
+                            p.label ??
+                              `${formatFluidNumber(p.dose)} ${
+                                p.unit ?? ""
+                              }`.trim()
+                          );
 
-                      return (
-                        <g key={`bolus-${row.name}-${idx}`}>
-                          <line
-                            x1={arrowTipX}
-                            y1={centerY - 9}
-                            x2={arrowTipX}
-                            y2={centerY + 9}
-                            stroke={color}
-                            strokeWidth={1.2}
-                            opacity={0.9}
-                          />
+                          const boxWidth = Math.max(
+                            28,
+                            Math.min(110, estimateTextWidth(text, 10) + 14)
+                          );
+                          const boxHeight = 16;
+                          const left = cx + 6;
+                          const top = centerY - boxHeight / 2;
+                          const textY = top + boxHeight / 2 + 4;
 
-                          <polygon
-                            points={`${arrowTipX},${centerY} ${arrowBaseX},${centerY - 5} ${arrowBaseX},${centerY + 5}`}
-                            fill={color}
-                            stroke={color}
-                            strokeWidth={1}
-                          />
+                          return (
+                            <g key={`output-${row.name}-${idx}`}>
+                              <line
+                                x1={cx}
+                                y1={centerY - 9}
+                                x2={cx}
+                                y2={centerY + 9}
+                                stroke={color}
+                                strokeWidth={1.2}
+                                opacity={0.9}
+                              />
 
-                          <rect
-                            x={left}
-                            y={top}
-                            width={boxWidth}
-                            height={boxHeight}
-                            rx={2}
-                            ry={2}
-                            fill="white"
-                            stroke={color}
-                            strokeWidth={1.5}
-                          />
+                              <circle
+                                cx={cx}
+                                cy={centerY}
+                                r={3.5}
+                                fill={color}
+                              />
 
-                          <text
-                            x={left + boxWidth / 2}
-                            y={textY}
-                            textAnchor="middle"
-                            fontSize={10}
-                            fill="#1f2937"
-                          >
-                            {text}
-                          </text>
-                        </g>
-                      );
-                    })}
+                              <rect
+                                x={left}
+                                y={top}
+                                width={boxWidth}
+                                height={boxHeight}
+                                rx={2}
+                                ry={2}
+                                fill="white"
+                                stroke={color}
+                                strokeWidth={1.2}
+                              />
 
-                    {row.output.map((p, idx) => {
-                      const cx = minuteToPixel(p.time);
-                      const outputColor = color;
-                      const text = String(
-                        p.label ??
-                          `${formatFluidNumber(p.dose)} ${p.unit ?? ""}`.trim()
-                      );
-                      const boxWidth = Math.max(
-                        28,
-                        Math.min(110, estimateTextWidth(text, 10) + 14)
-                      );
-                      const boxHeight = 16;
-                      const left = cx + 6;
-                      const top = centerY - boxHeight / 2;
-                      const textY = top + boxHeight / 2 + 4;
+                              <text
+                                x={left + boxWidth / 2}
+                                y={textY}
+                                textAnchor="middle"
+                                fontSize={10}
+                                fill="#111827"
+                              >
+                                {text}
+                              </text>
+                            </g>
+                          );
+                        })}
+                      </g>
+                    );
+                  })}
+
+                  {showXAxis &&
+                    majorTicks.map((tick, idx) => {
+                      const x = minuteToPixel(tick);
+                      const isFirst = idx === 0;
+                      const isLast = idx === majorTicks.length - 1;
 
                       return (
-                        <g key={`output-${row.name}-${idx}`}>
-                          <line
-                            x1={cx}
-                            y1={centerY - 9}
-                            x2={cx}
-                            y2={centerY + 9}
-                            stroke={outputColor}
-                            strokeWidth={1.2}
-                            opacity={0.9}
-                          />
-
-                          <circle cx={cx} cy={centerY} r={3.5} fill={outputColor} />
-
-                          <rect
-                            x={left}
-                            y={top}
-                            width={boxWidth}
-                            height={boxHeight}
-                            rx={2}
-                            ry={2}
-                            fill="white"
-                            stroke={outputColor}
-                            strokeWidth={1.2}
-                          />
-
-                          <text
-                            x={left + boxWidth / 2}
-                            y={textY}
-                            textAnchor="middle"
-                            fontSize={10}
-                            fill="#111827"
-                          >
-                            {text}
-                          </text>
-                        </g>
+                        <text
+                          key={`tick-label-${tick}`}
+                          x={x}
+                          y={contentHeight - 6}
+                          textAnchor={
+                            isFirst ? "start" : isLast ? "end" : "middle"
+                          }
+                          fontSize={10}
+                          fill="#6b7280"
+                        >
+                          {formatClockTime(tick, timeZero)}
+                        </text>
                       );
                     })}
-                  </g>
-                );
-              })}
-
-              {showXAxis &&
-                majorTicks.map((tick, idx) => {
-                  const x = minuteToPixel(tick);
-                  const isFirst = idx === 0;
-                  const isLast = idx === majorTicks.length - 1;
-
-                  return (
-                    <text
-                      key={`tick-label-${tick}`}
-                      x={x}
-                      y={contentHeight - 6}
-                      textAnchor={isFirst ? "start" : isLast ? "end" : "middle"}
-                      fontSize={10}
-                      fill="#6b7280"
-                    >
-                      {formatClockTime(tick, timeZero)}
-                    </text>
-                  );
-                })}
-              </svg>
+                </svg>
               </div>
             </div>
           </div>
+
           <div className="pt-2">
             <input
               type="range"
               min={0}
               max={Math.max(0, Math.round(maxScrollLeft))}
               step={1}
-              value={Math.min(sliderValue, maxScrollLeft)}
+              value={Math.min(
+                Math.max(0, Math.round(sliderValue)),
+                Math.round(maxScrollLeft)
+              )}
               onChange={(e) => {
-                const next = Number(e.target.value);
+                const next = Math.max(
+                  0,
+                  Math.min(maxScrollLeft, Number(e.target.value))
+                );
+
                 setSliderValue(next);
 
                 const el = scrollRef.current;

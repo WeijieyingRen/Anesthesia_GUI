@@ -20,7 +20,6 @@ import {
   buildChartTicks,
   getChartMajorStep,
   getChartMinorStep,
-  getChartPxPerMinute,
   getSharedChartGeometry,
   minuteToX,
   type TimeResolution,
@@ -100,7 +99,6 @@ const EDGE_HANDLE_PX = 16;
 const HANDLE_BORDER_PX = 4;
 const MIN_PREVIEW_BOX_PX = 18;
 const HOVER_PANEL_WIDTH = 112;
-const HOVER_PANEL_HEIGHT = 92;
 
 function buildScatterData(series: TimeValuePoint[] | undefined): ScatterPoint[] {
   return (series ?? [])
@@ -424,7 +422,6 @@ export default function VitalChart({
   embedded = false,
   timeResolution = 15,
   selectedDetectVital = "MAP",
-  onChangeSelectedDetectVital,
   selectedWindow = null,
   highlightWindow = null,
   onChangeSelectedWindow,
@@ -455,40 +452,31 @@ export default function VitalChart({
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const chartOverlayRef = useRef<HTMLDivElement | null>(null);
   const isSyncingFromSliderRef = useRef(false);
-  
+
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
   const [scrollViewportWidth, setScrollViewportWidth] = useState(0);
+
   const viewConfig = useMemo(() => {
     return {
       majorStep: getChartMajorStep(timeResolution),
       minorStep: getChartMinorStep(timeResolution),
-      pxPerMin: getChartPxPerMinute(timeResolution),
     };
   }, [timeResolution]);
-
-  useEffect(() => {
-    if (scrollRef.current == null) return;
-    if (sharedScrollLeft == null) return;
-  
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
-    }
-  }, [sharedScrollLeft]);
 
   const visibleKeys = keys.filter((key) => !hiddenKeys.includes(key));
   const keysSignature = keys.join("|");
 
   const scatterDataByKey = useMemo(() => {
     const out: Record<string, ScatterPoint[]> = {};
-  
+
     for (const key of keys) {
       out[key] = buildScatterData(series[key]);
     }
-  
+
     return out;
   }, [series, keysSignature]);
+
   const effectiveXEnd = xEnd ?? 0;
   const domain = yDomain ?? [0, 200];
   const domainMin = domain[0];
@@ -502,25 +490,64 @@ export default function VitalChart({
     () => getSharedChartGeometry(effectiveXEnd, timeResolution),
     [effectiveXEnd, timeResolution]
   );
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (sharedScrollLeft == null) return;
+  
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+  
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+  
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
+    }
+  
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
   useEffect(() => {
     function updateScrollMetrics() {
       const el = scrollRef.current;
       if (!el) return;
-  
+
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
       setScrollViewportWidth(el.clientWidth);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+      
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }
+      
+      setSliderValue(nextScrollLeft);
     }
-  
+
     updateScrollMetrics();
-  
+
     window.addEventListener("resize", updateScrollMetrics);
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, height, hiddenKeys.length, keys.length]);
-
+  }, [
+    contentWidth,
+    height,
+    hiddenKeys.length,
+    keys.length,
+    sharedScrollLeft,
+  ]);
   function minuteToPixel(minute: number) {
     return minuteToX(minute, effectiveXEnd, plotWidth);
   }
@@ -1294,34 +1321,46 @@ const activeEndMin =
     style={{ overscrollBehaviorX: "none" }}
     onWheel={(e) => {
       const el = e.currentTarget;
-
+    
       const absX = Math.abs(e.deltaX);
       const absY = Math.abs(e.deltaY);
-
-      // 上下滚动页面时，不要改变横向时间轴
+    
       if (absY >= absX) {
         return;
       }
-
+    
       const delta = e.deltaX;
       if (Math.abs(delta) < 1) return;
-
+    
       const maxScroll = el.scrollWidth - el.clientWidth;
       const nextLeft = el.scrollLeft + delta;
+    
+      const atLeftEdge = el.scrollLeft <= 0;
+      const atRightEdge = el.scrollLeft >= maxScroll - 1;
+    
+      const tryingGoPastLeft = atLeftEdge && delta < 0;
+      const tryingGoPastRight = atRightEdge && delta > 0;
+    
+      if (tryingGoPastLeft || tryingGoPastRight) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+    
       const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
-
+    
       e.preventDefault();
       e.stopPropagation();
-
+    
       el.scrollLeft = clamped;
       setSliderValue(clamped);
       onSharedScrollLeftChange?.(clamped);
     }}
     onScroll={(e) => {
+      if (isSyncingFromSliderRef.current) return;
+    
       const next = e.currentTarget.scrollLeft;
-      if (!isSyncingFromSliderRef.current) {
-        setSliderValue(next);
-      }
+      setSliderValue(next);
       onSharedScrollLeftChange?.(next);
     }}
   >
@@ -1341,7 +1380,7 @@ const activeEndMin =
             type="number"
             dataKey="time"
             name="time"
-            domain={[0, xEnd ?? "dataMax"]}
+            domain={[0, effectiveXEnd]}
             ticks={majorGridTicks}
             interval={0}
             allowDecimals={false}
@@ -1674,30 +1713,37 @@ const activeEndMin =
   )}
 
 <div className="pt-2">
-    <input
-      type="range"
-      min={0}
-      max={Math.max(0, Math.round(maxScrollLeft))}
-      step={1}
-      value={Math.min(sliderValue, maxScrollLeft)}
-      onChange={(e) => {
-        const next = Number(e.target.value);
-        setSliderValue(next);
+<input
+  type="range"
+  min={0}
+  max={Math.max(0, Math.round(maxScrollLeft))}
+  step={1}
+  value={Math.min(
+    Math.max(0, Math.round(sliderValue)),
+    Math.round(maxScrollLeft)
+  )}
+  onChange={(e) => {
+    const next = Math.max(
+      0,
+      Math.min(maxScrollLeft, Number(e.target.value))
+    );
 
-        const el = scrollRef.current;
-        if (!el) return;
+    setSliderValue(next);
 
-        isSyncingFromSliderRef.current = true;
-        el.scrollLeft = next;
-        onSharedScrollLeftChange?.(next);
+    const el = scrollRef.current;
+    if (!el) return;
 
-        requestAnimationFrame(() => {
-          isSyncingFromSliderRef.current = false;
-        });
-      }}
-      className="vital-slider"
-      aria-label="Vital chart horizontal scroll"
-    />
+    isSyncingFromSliderRef.current = true;
+    el.scrollLeft = next;
+    onSharedScrollLeftChange?.(next);
+
+    requestAnimationFrame(() => {
+      isSyncingFromSliderRef.current = false;
+    });
+  }}
+  className="vital-slider"
+  aria-label="Vital chart horizontal scroll"
+/>
   </div>
 </div>
 

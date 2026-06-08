@@ -243,11 +243,11 @@ export default function UnifiedTimelineCard({
   selectedWindow,
   onChangeSelectedWindow,
   onCreateEventFromWindow,
-  sharedScrollLeft,
-  onSharedScrollLeftChange,
   timelineContext,
   managementEvent = null,
   readOnly = false,
+  sharedScrollLeft: controlledSharedScrollLeft,
+  onSharedScrollLeftChange: controlledOnSharedScrollLeftChange,
 }: UnifiedTimelineCardProps) {
   const hasVitalsData =
     hasAnyFinitePoints(vitals?.main) ||
@@ -271,6 +271,24 @@ export default function UnifiedTimelineCard({
     ventilation: hasVentilationData,
     cv: hasCVData,
   });
+
+  const [internalSharedScrollLeft, setInternalSharedScrollLeft] =
+    React.useState(0);
+
+  const sharedScrollLeft =
+    controlledSharedScrollLeft ?? internalSharedScrollLeft;
+
+  const setSharedScrollLeft = React.useCallback(
+    (next: number) => {
+      setInternalSharedScrollLeft(next);
+      controlledOnSharedScrollLeftChange?.(next);
+    },
+    [controlledOnSharedScrollLeftChange]
+  );
+
+  React.useEffect(() => {
+    setSharedScrollLeft(0);
+  }, [timeResolution, timelineEnd, setSharedScrollLeft]);
 
   React.useEffect(() => {
     setOpenSections({
@@ -308,6 +326,34 @@ export default function UnifiedTimelineCard({
         gas: true,
       }));
     }
+
+    if (chartType === "ventilation") {
+      setOpenSections((prev) => ({
+        ...prev,
+        ventilation: true,
+      }));
+    }
+
+    if (chartType === "fluid") {
+      setOpenSections((prev) => ({
+        ...prev,
+        fluids: true,
+      }));
+    }
+
+    if (chartType === "cv") {
+      setOpenSections((prev) => ({
+        ...prev,
+        cv: true,
+      }));
+    }
+
+    if (chartType === "vital") {
+      setOpenSections((prev) => ({
+        ...prev,
+        vitals: true,
+      }));
+    }
   }, [managementEvent]);
 
   const viewEndMin = React.useMemo(
@@ -316,23 +362,20 @@ export default function UnifiedTimelineCard({
   );
 
   React.useEffect(() => {
-    const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
-
-    if (viewStartMin > maxStart) {
-      onChangeViewStartMin(maxStart);
+    if (viewStartMin > timelineEnd) {
+      onChangeViewStartMin(timelineEnd);
     }
-  }, [timelineEnd, viewWindowWidthMin, viewStartMin, onChangeViewStartMin]);
+  }, [timelineEnd, viewStartMin, onChangeViewStartMin]);
 
   React.useEffect(() => {
     if (!managementEvent) return;
     if (!Number.isFinite(Number(managementEvent.time_min))) return;
 
     const start = Number(managementEvent.time_min);
-    const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
 
     const targetStart = Math.max(
       0,
-      Math.min(maxStart, start - Math.floor(viewWindowWidthMin * 0.25))
+      Math.min(timelineEnd, start - Math.floor(viewWindowWidthMin * 0.25))
     );
 
     onChangeViewStartMin(targetStart);
@@ -372,20 +415,6 @@ export default function UnifiedTimelineCard({
         }
       : null;
 
-  const pxPerMin = timeResolution === 5 ? 64 / 5 : 64 / 15;
-  function handleSharedScrollLeftChange(nextScrollLeft: number) {
-    onSharedScrollLeftChange?.(nextScrollLeft);
-
-    const maxStart = Math.max(0, timelineEnd - viewWindowWidthMin);
-
-    const nextViewStartMin = Math.max(
-      0,
-      Math.min(maxStart, nextScrollLeft / pxPerMin)
-    );
-
-    onChangeViewStartMin(nextViewStartMin);
-  }
-
   return (
     <div className="overflow-visible border bg-white shadow-sm">
       <ViewportToolbar
@@ -415,7 +444,7 @@ export default function UnifiedTimelineCard({
                 : null
           }
           sharedScrollLeft={sharedScrollLeft}
-          onSharedScrollLeftChange={handleSharedScrollLeftChange}
+          onSharedScrollLeftChange={setSharedScrollLeft}
         />
       </div>
 
@@ -441,7 +470,7 @@ export default function UnifiedTimelineCard({
             managementEvent={managementEvent}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={handleSharedScrollLeftChange}
+            onSharedScrollLeftChange={setSharedScrollLeft}
           />
         </div>
       )}
@@ -467,7 +496,7 @@ export default function UnifiedTimelineCard({
             managementEvent={managementEvent}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={handleSharedScrollLeftChange}
+            onSharedScrollLeftChange={setSharedScrollLeft}
           />
         </div>
       )}
@@ -501,7 +530,7 @@ export default function UnifiedTimelineCard({
                 readOnly ? undefined : onCreateEventFromWindow
               }
               sharedScrollLeft={sharedScrollLeft}
-              onSharedScrollLeftChange={handleSharedScrollLeftChange}
+              onSharedScrollLeftChange={setSharedScrollLeft}
               series={{
                 HR: vitals?.main?.["HR"] ?? [],
                 NIBP_SBP: vitals?.main?.["NIBP_SBP"] ?? [],
@@ -583,7 +612,8 @@ export default function UnifiedTimelineCard({
                 "TMP Bladder": vitals?.tmp?.["TMP Bladder"] ?? [],
                 "TMP Blood": vitals?.tmp?.["TMP Blood"] ?? [],
                 "TMP Esophageal": vitals?.tmp?.["TMP Esophageal"] ?? [],
-                "TMP Nasopharyngeal": vitals?.tmp?.["TMP Nasopharyngeal"] ?? [],
+                "TMP Nasopharyngeal":
+                  vitals?.tmp?.["TMP Nasopharyngeal"] ?? [],
                 "TMP Rectal": vitals?.tmp?.["TMP Rectal"] ?? [],
               }}
               height={220}
@@ -602,7 +632,7 @@ export default function UnifiedTimelineCard({
                 readOnly ? undefined : onCreateEventFromWindow
               }
               sharedScrollLeft={sharedScrollLeft}
-              onSharedScrollLeftChange={handleSharedScrollLeftChange}
+              onSharedScrollLeftChange={setSharedScrollLeft}
             />
           </div>
         </div>
@@ -628,7 +658,7 @@ export default function UnifiedTimelineCard({
             highlightWindow={sharedHighlightWindow}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={handleSharedScrollLeftChange}
+            onSharedScrollLeftChange={setSharedScrollLeft}
           />
         </div>
       )}
@@ -652,7 +682,7 @@ export default function UnifiedTimelineCard({
             highlightWindow={sharedHighlightWindow}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={handleSharedScrollLeftChange}
+            onSharedScrollLeftChange={setSharedScrollLeft}
           />
         </div>
       )}
@@ -677,6 +707,7 @@ export default function UnifiedTimelineCard({
               "Plateau PIP": vitals?.ventilation?.["Plateau PIP"] ?? [],
             }}
             height={383}
+            windowSize={timeResolution}
             xEnd={timelineEnd}
             xTicks={ticks}
             showXAxis={false}
@@ -685,7 +716,7 @@ export default function UnifiedTimelineCard({
             highlightWindow={sharedHighlightWindow}
             timeResolution={timeResolution}
             sharedScrollLeft={sharedScrollLeft}
-            onSharedScrollLeftChange={handleSharedScrollLeftChange}
+            onSharedScrollLeftChange={setSharedScrollLeft}
           />
         </div>
       )}

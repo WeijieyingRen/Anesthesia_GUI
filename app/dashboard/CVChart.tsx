@@ -10,8 +10,17 @@ import {
   Tooltip,
 } from "recharts";
 import type { TimeValuePoint } from "@/lib/types";
-
-type TimeResolution = 15 | 5;
+import {
+  CHART_AXIS_WIDTH as AXIS_COL_WIDTH,
+  CHART_LEGEND_WIDTH as LEGEND_COL_WIDTH,
+  CHART_RIGHT_MARGIN as PLOT_RIGHT,
+  buildChartTicks,
+  getChartMajorStep,
+  getChartMinorStep,
+  getSharedChartGeometry,
+  minuteToX,
+  type TimeResolution,
+} from "@/src/components/charts/chartLayout";
 
 type CVChartProps = {
   title?: string;
@@ -51,13 +60,8 @@ type CVFeatureConfig = {
   rowBg: string;
 };
 
-const LEGEND_COL_WIDTH = 220;
-const AXIS_COL_WIDTH = 42;
-const PLOT_RIGHT = 20;
-const PX_PER_15_MIN = 64;
 const ROW_HEIGHT = 25;
-const RECHARTS_RIGHT_MARGIN = 20;
-const RECHARTS_YAXIS_WIDTH = 35;
+const RECHARTS_YAXIS_WIDTH = 0;
 
 const CV_FEATURES: CVFeatureConfig[] = [
   {
@@ -146,37 +150,17 @@ const CV_KEY_ALIASES: Record<string, string[]> = {
   ABPD: ["ABPD"],
 };
 
-function getPxPerMinute(timeResolution: TimeResolution) {
-  return timeResolution === 15 ? PX_PER_15_MIN / 15 : PX_PER_15_MIN / 5;
-}
-
-function getMajorStep(timeResolution: TimeResolution) {
-  return timeResolution === 15 ? 15 : 5;
-}
-
-function getMinorStep(timeResolution: TimeResolution) {
-  return timeResolution === 15 ? 5 : 1;
-}
-
-function buildGridTicks(end: number, step: number) {
-  if (!Number.isFinite(end) || end <= 0) return [];
-  const ticks: number[] = [];
-  for (let t = 0; t <= end; t += step) {
-    ticks.push(t);
-  }
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
-    ticks.push(end);
-  }
-  return ticks;
-}
-
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
   if (!timeZero || !Number.isFinite(offsetMin)) return `${offsetMin}`;
 
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return `${offsetMin}`;
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
@@ -225,7 +209,8 @@ function buildChartRows(
       }
 
       const matched = arr.find((p) => p.time === time);
-      row[feature.key] = matched ? matched.value : null;
+      row[feature.key] =
+        matched && Number.isFinite(matched.value) ? matched.value : null;
     });
 
     return row;
@@ -248,12 +233,15 @@ function buildChartRows(
 
 function buildAxisTicks(domainMax: number, step: number) {
   const ticks: number[] = [];
+
   for (let tick = 0; tick <= domainMax; tick += step) {
     ticks.push(tick);
   }
-  if (ticks[ticks.length - 1] !== domainMax) {
+
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== domainMax) {
     ticks.push(domainMax);
   }
+
   return ticks;
 }
 
@@ -285,7 +273,16 @@ function renderMarkerShape(
 
   switch (marker) {
     case "circle":
-      return <circle cx={cx} cy={cy} r={size} fill={color} stroke={color} strokeWidth={strokeWidth} />;
+      return (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={size}
+          fill={color}
+          stroke={color}
+          strokeWidth={strokeWidth}
+        />
+      );
 
     case "square":
       return (
@@ -303,7 +300,9 @@ function renderMarkerShape(
     case "diamond":
       return (
         <polygon
-          points={`${cx},${cy - size} ${cx + size},${cy} ${cx},${cy + size} ${cx - size},${cy}`}
+          points={`${cx},${cy - size} ${cx + size},${cy} ${cx},${
+            cy + size
+          } ${cx - size},${cy}`}
           fill={color}
           stroke={color}
           strokeWidth={strokeWidth}
@@ -313,7 +312,9 @@ function renderMarkerShape(
     case "triangle":
       return (
         <polygon
-          points={`${cx},${cy - size} ${cx + size},${cy + size} ${cx - size},${cy + size}`}
+          points={`${cx},${cy - size} ${cx + size},${cy + size} ${
+            cx - size
+          },${cy + size}`}
           fill={color}
           stroke={color}
           strokeWidth={strokeWidth}
@@ -323,7 +324,9 @@ function renderMarkerShape(
     case "triangle-down":
       return (
         <polygon
-          points={`${cx - size},${cy - size} ${cx + size},${cy - size} ${cx},${cy + size}`}
+          points={`${cx - size},${cy - size} ${cx + size},${cy - size} ${cx},${
+            cy + size
+          }`}
           fill={color}
           stroke={color}
           strokeWidth={strokeWidth}
@@ -347,15 +350,39 @@ function renderMarkerShape(
       );
 
     case "ring":
-      return <circle cx={cx} cy={cy} r={size} fill="white" stroke={color} strokeWidth={strokeWidth} />;
+      return (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={size}
+          fill="white"
+          stroke={color}
+          strokeWidth={strokeWidth}
+        />
+      );
 
     default:
-      return <circle cx={cx} cy={cy} r={size} fill={color} stroke={color} strokeWidth={strokeWidth} />;
+      return (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={size}
+          fill={color}
+          stroke={color}
+          strokeWidth={strokeWidth}
+        />
+      );
   }
 }
 
 function CustomDot({ cx, cy, stroke, payload, dataKey }: any) {
-  if (cx == null || cy == null || !stroke || dataKey == null || payload?.[dataKey] == null) {
+  if (
+    cx == null ||
+    cy == null ||
+    !stroke ||
+    dataKey == null ||
+    payload?.[dataKey] == null
+  ) {
     return null;
   }
 
@@ -366,7 +393,13 @@ function CustomDot({ cx, cy, stroke, payload, dataKey }: any) {
 }
 
 function CustomActiveDot({ cx, cy, stroke, payload, dataKey }: any) {
-  if (cx == null || cy == null || !stroke || dataKey == null || payload?.[dataKey] == null) {
+  if (
+    cx == null ||
+    cy == null ||
+    !stroke ||
+    dataKey == null ||
+    payload?.[dataKey] == null
+  ) {
     return null;
   }
 
@@ -395,11 +428,7 @@ function LegendMarker({
   );
 }
 
-function CVLegend({
-  features,
-}: {
-  features: CVFeatureConfig[];
-}) {
+function CVLegend({ features }: { features: CVFeatureConfig[] }) {
   return (
     <div className="border-r pr-0">
       {features.map((feature) => (
@@ -502,9 +531,13 @@ function CVGridSvg({
     >
       {highlightWindow && (
         <rect
-          x={(highlightWindow.startMin / end) * plotWidth}
+          x={minuteToX(highlightWindow.startMin, end, plotWidth)}
           y={0}
-          width={Math.max(2, ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth)}
+          width={Math.max(
+            2,
+            minuteToX(highlightWindow.endMin, end, plotWidth) -
+              minuteToX(highlightWindow.startMin, end, plotWidth)
+          )}
           height={height}
           fill="lightblue"
           fillOpacity={0.45}
@@ -513,7 +546,8 @@ function CVGridSvg({
       )}
 
       {minorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
+        const x = minuteToX(tick, end, plotWidth);
+
         return (
           <line
             key={`grid-x-minor-${tick}`}
@@ -528,7 +562,8 @@ function CVGridSvg({
       })}
 
       {majorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
+        const x = minuteToX(tick, end, plotWidth);
+
         return (
           <line
             key={`grid-x-major-${tick}`}
@@ -544,6 +579,7 @@ function CVGridSvg({
 
       {Array.from({ length: rowCount + 1 }, (_, i) => i).map((i) => {
         const y = i * ROW_HEIGHT;
+
         return (
           <line
             key={`grid-y-${i}`}
@@ -574,35 +610,53 @@ export default function CVChart({
   sharedScrollLeft,
   onSharedScrollLeftChange,
 }: CVChartProps) {
+  const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const isSyncingFromSliderRef = React.useRef(false);
+
+  const [sliderValue, setSliderValue] = React.useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
+
+  const effectiveXEnd = xEnd ?? 0;
+
   const visibleFeatures = React.useMemo(
     () =>
       CV_FEATURES.filter((feature) => {
         const aliases = CV_KEY_ALIASES[feature.key] ?? [feature.key];
+
         return aliases.some((name) =>
           (cv?.[name] ?? []).some(
-            (point) => Number.isFinite(point?.time) && Number.isFinite(point?.value)
+            (point) =>
+              Number.isFinite(point?.time) && Number.isFinite(point?.value)
           )
         );
       }),
     [cv]
   );
-  const majorStep = React.useMemo(() => getMajorStep(timeResolution), [timeResolution]);
-  const minorStep = React.useMemo(() => getMinorStep(timeResolution), [timeResolution]);
-  const pxPerMin = React.useMemo(() => getPxPerMinute(timeResolution), [timeResolution]);
+
+  const majorStep = React.useMemo(
+    () => getChartMajorStep(timeResolution),
+    [timeResolution]
+  );
+
+  const minorStep = React.useMemo(
+    () => getChartMinorStep(timeResolution),
+    [timeResolution]
+  );
 
   const majorTicks = React.useMemo(() => {
     if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
-    return buildGridTicks(xEnd, majorStep);
-  }, [timeResolution, xTicks, xEnd, majorStep]);
+    return buildChartTicks(effectiveXEnd, majorStep);
+  }, [timeResolution, xTicks, effectiveXEnd, majorStep]);
 
   const minorTicks = React.useMemo(() => {
-    return buildGridTicks(xEnd, minorStep);
-  }, [xEnd, minorStep]);
+    return buildChartTicks(effectiveXEnd, minorStep);
+  }, [effectiveXEnd, minorStep]);
 
   const data = React.useMemo(
     () => buildChartRows(cv ?? {}, majorTicks, visibleFeatures),
     [cv, majorTicks, visibleFeatures]
   );
+
   const yAxisConfig = React.useMemo(() => {
     const values = Object.values(cv ?? {})
       .flat()
@@ -620,41 +674,36 @@ export default function CVChart({
     };
   }, [cv]);
 
-  if (!visibleFeatures.length) {
-    return (
-      <div className={embedded ? "bg-white px-4 py-3" : "rounded-2xl border bg-white p-4 shadow-sm"}>
-        {!embedded && title ? (
-          <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
-        ) : null}
-        <div className="text-sm text-gray-500">No CV data available.</div>
-      </div>
-    );
-  }
+  const fullContentHeight = Math.max(
+    visibleFeatures.length * ROW_HEIGHT,
+    ROW_HEIGHT
+  );
 
-  const fullContentHeight = visibleFeatures.length * ROW_HEIGHT;
   const viewHeight = Math.min(height, Math.max(120, fullContentHeight));
-  const scrollRef = React.useRef<HTMLDivElement | null>(null);
-  const isSyncingFromSliderRef = React.useRef(false);
-  const [sliderValue, setSliderValue] = React.useState(0);
-  const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
+
+  const { contentWidth, plotWidth } = React.useMemo(
+    () => getSharedChartGeometry(effectiveXEnd, timeResolution),
+    [effectiveXEnd, timeResolution]
+  );
 
   React.useEffect(() => {
-    if (scrollRef.current == null) return;
+    const el = scrollRef.current;
+    if (!el) return;
     if (sharedScrollLeft == null) return;
 
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
     }
-  }, [sharedScrollLeft]);
 
-  const contentPlotWidth = React.useMemo(() => {
-    if (xEnd <= 0) return 800;
-    return Math.max(800, Math.ceil(xEnd * pxPerMin));
-  }, [xEnd, pxPerMin]);
-
-  const contentWidth = contentPlotWidth + PLOT_RIGHT;
-  const plotWidth = contentPlotWidth;
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
 
   React.useEffect(() => {
     function updateScrollMetrics() {
@@ -663,18 +712,59 @@ export default function CVChart({
 
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }
+
+      setSliderValue(nextScrollLeft);
     }
 
     updateScrollMetrics();
+
     window.addEventListener("resize", updateScrollMetrics);
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, fullContentHeight, viewHeight]);
+  }, [
+    contentWidth,
+    fullContentHeight,
+    viewHeight,
+    visibleFeatures.length,
+    sharedScrollLeft,
+  ]);
+
+  if (!visibleFeatures.length) {
+    return (
+      <div
+        className={
+          embedded ? "bg-white px-4 py-3" : "rounded-2xl border bg-white p-4 shadow-sm"
+        }
+      >
+        {!embedded && title ? (
+          <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+        ) : null}
+        <div className="text-sm text-gray-500">No CV data available.</div>
+      </div>
+    );
+  }
 
   return (
-    <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+    <div
+      className={
+        embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
+      }
+    >
       <style jsx>{`
         .cv-scroll-hidden {
           overflow-x: auto;
@@ -743,6 +833,7 @@ export default function CVChart({
           background: #475569;
         }
       `}</style>
+
       {!embedded && title ? (
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
@@ -753,18 +844,25 @@ export default function CVChart({
           gridTemplateColumns: `${LEGEND_COL_WIDTH}px ${AXIS_COL_WIDTH}px minmax(0,1fr)`,
         }}
       >
-        <div className="border-r pr-0" style={{ height: fullContentHeight }}>
-          <CVLegend features={visibleFeatures} />
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
+          <div style={{ height: fullContentHeight }}>
+            <CVLegend features={visibleFeatures} />
+          </div>
         </div>
 
-        <FixedYAxis
-          height={fullContentHeight}
-          ticks={yAxisConfig.ticks}
-          domainMax={yAxisConfig.domainMax}
-        />
+        <div className="overflow-hidden" style={{ height: viewHeight }}>
+          <FixedYAxis
+            height={fullContentHeight}
+            ticks={yAxisConfig.ticks}
+            domainMax={yAxisConfig.domainMax}
+          />
+        </div>
 
-        <div className="overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]" style={{ height: viewHeight }}>
-          <div className="overflow-x-hidden overflow-y-hidden">
+        <div className="min-w-0">
+          <div
+            className="overflow-x-hidden overflow-y-hidden"
+            style={{ height: viewHeight }}
+          >
             <div
               ref={scrollRef}
               className="cv-scroll-hidden"
@@ -774,14 +872,13 @@ export default function CVChart({
                 const absX = Math.abs(e.deltaX);
                 const absY = Math.abs(e.deltaY);
 
-                // 只处理“明显以横向为主”的触摸板/滚轮手势
                 if (absX <= absY || absX < 1) return;
 
-                const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                const maxScroll = el.scrollWidth - el.clientWidth;
                 const nextLeft = el.scrollLeft + e.deltaX;
 
                 const atLeftEdge = el.scrollLeft <= 0;
-                const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
+                const atRightEdge = el.scrollLeft >= maxScroll - 1;
 
                 const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
                 const tryingGoPastRight = atRightEdge && e.deltaX > 0;
@@ -792,14 +889,20 @@ export default function CVChart({
                   return;
                 }
 
+                const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+
                 e.preventDefault();
-                el.scrollLeft = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+                e.stopPropagation();
+
+                el.scrollLeft = clamped;
+                setSliderValue(clamped);
+                onSharedScrollLeftChange?.(clamped);
               }}
               onScroll={(e) => {
+                if (isSyncingFromSliderRef.current) return;
+
                 const next = e.currentTarget.scrollLeft;
-                if (!isSyncingFromSliderRef.current) {
-                  setSliderValue(next);
-                }
+                setSliderValue(next);
                 onSharedScrollLeftChange?.(next);
               }}
             >
@@ -812,7 +915,7 @@ export default function CVChart({
               >
                 <div className="absolute inset-0 z-0">
                   <CVGridSvg
-                    end={xEnd}
+                    end={effectiveXEnd}
                     majorTicks={majorTicks}
                     minorTicks={minorTicks}
                     height={fullContentHeight}
@@ -828,50 +931,54 @@ export default function CVChart({
                       data={data}
                       margin={{
                         top: 0,
-                        right: RECHARTS_RIGHT_MARGIN,
+                        right: PLOT_RIGHT,
                         left: 0,
                         bottom: 0,
                       }}
                     >
-                    <XAxis
-                      type="number"
-                      dataKey="time"
-                      domain={[0, xEnd]}
-                      ticks={majorTicks}
-                      interval={0}
-                      allowDecimals={false}
-                      tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
-                      tick={showXAxis ? undefined : false}
-                      axisLine={showXAxis}
-                      tickLine={showXAxis}
-                      height={showXAxis ? 30 : 0}
-                    />
+                      <XAxis
+                        type="number"
+                        dataKey="time"
+                        domain={[0, effectiveXEnd]}
+                        ticks={majorTicks}
+                        interval={0}
+                        allowDecimals={false}
+                        tickFormatter={(v) =>
+                          formatClockTime(Number(v), timeZero)
+                        }
+                        tick={showXAxis ? undefined : false}
+                        axisLine={showXAxis}
+                        tickLine={showXAxis}
+                        height={showXAxis ? 30 : 0}
+                      />
 
-                    <YAxis
-                      domain={[0, yAxisConfig.domainMax]}
-                      ticks={yAxisConfig.ticks}
-                      interval={0}
-                      width={RECHARTS_YAXIS_WIDTH}
-                      tick={false}
-                      axisLine={false}
-                      tickLine={false}
-                    />
+                      <YAxis
+                        domain={[0, yAxisConfig.domainMax]}
+                        ticks={yAxisConfig.ticks}
+                        interval={0}
+                        width={RECHARTS_YAXIS_WIDTH}
+                        tick={false}
+                        axisLine={false}
+                        tickLine={false}
+                      />
 
-                    <Tooltip
-                      formatter={(value: any, name: any) => {
-                        const feature = CV_FEATURES.find((f) => f.key === name);
-                        return [
-                          value != null ? Number(value).toFixed(2) : "NA",
-                          feature ? feature.label : String(name),
-                        ];
-                      }}
-                      labelFormatter={(label: any) =>
-                        `Time: ${formatClockTime(Number(label), timeZero)}`
-                      }
-                    />
+                      <Tooltip
+                        formatter={(value: any, name: any) => {
+                          const feature = CV_FEATURES.find(
+                            (f) => f.key === name
+                          );
 
-                    {visibleFeatures.map((feature) => {
-                      return (
+                          return [
+                            value != null ? Number(value).toFixed(2) : "NA",
+                            feature ? feature.label : String(name),
+                          ];
+                        }}
+                        labelFormatter={(label: any) =>
+                          `Time: ${formatClockTime(Number(label), timeZero)}`
+                        }
+                      />
+
+                      {visibleFeatures.map((feature) => (
                         <Line
                           key={feature.key}
                           type="linear"
@@ -883,38 +990,46 @@ export default function CVChart({
                           activeDot={<CustomActiveDot />}
                           isAnimationActive={false}
                         />
-                      );
-                    })}
+                      ))}
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
               </div>
             </div>
-            <div className="px-2 pt-2">
-              <input
-                type="range"
-                min={0}
-                max={Math.max(0, Math.round(maxScrollLeft))}
-                step={1}
-                value={Math.min(sliderValue, maxScrollLeft)}
-                onChange={(e) => {
-                  const next = Number(e.target.value);
-                  setSliderValue(next);
-                  const el = scrollRef.current;
-                  if (!el) return;
+          </div>
 
-                  isSyncingFromSliderRef.current = true;
-                  el.scrollLeft = next;
-                  onSharedScrollLeftChange?.(next);
+          <div className="pt-2">
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, Math.round(maxScrollLeft))}
+              step={1}
+              value={Math.min(
+                Math.max(0, Math.round(sliderValue)),
+                Math.round(maxScrollLeft)
+              )}
+              onChange={(e) => {
+                const next = Math.max(
+                  0,
+                  Math.min(maxScrollLeft, Number(e.target.value))
+                );
 
-                  requestAnimationFrame(() => {
-                    isSyncingFromSliderRef.current = false;
-                  });
-                }}
-                className="cv-slider"
-                aria-label="CV chart horizontal scroll"
-              />
-            </div>
+                setSliderValue(next);
+
+                const el = scrollRef.current;
+                if (!el) return;
+
+                isSyncingFromSliderRef.current = true;
+                el.scrollLeft = next;
+                onSharedScrollLeftChange?.(next);
+
+                requestAnimationFrame(() => {
+                  isSyncingFromSliderRef.current = false;
+                });
+              }}
+              className="cv-slider"
+              aria-label="CV chart horizontal scroll"
+            />
           </div>
         </div>
       </div>

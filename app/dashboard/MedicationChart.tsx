@@ -26,6 +26,7 @@ import {
   getChartMajorStep,
   getChartMinorStep,
   getSharedChartGeometry,
+  minuteToX,
   type TimeResolution,
 } from "@/src/components/charts/chartLayout";
 
@@ -478,11 +479,16 @@ function formatMedicationTitle(
     amount == null || !Number.isFinite(Number(amount))
       ? "-"
       : formatMedNumber(Number(amount));
+
   const unitText = unit ? ` ${unit}` : "";
+
   const timeText =
     endMin == null
       ? formatClockTime(startMin, timeZero)
-      : `${formatClockTime(startMin, timeZero)} - ${formatClockTime(endMin, timeZero)}`;
+      : `${formatClockTime(startMin, timeZero)} - ${formatClockTime(
+          endMin,
+          timeZero
+        )}`;
 
   return `${name}\nTime: ${timeText}\nVolume/Dose: ${amountText}${unitText}`;
 }
@@ -501,10 +507,14 @@ function makeMedicationClickInfo(
     amount == null || !Number.isFinite(Number(amount))
       ? "-"
       : `${formatMedNumber(Number(amount))}${unit ? ` ${unit}` : ""}`;
+
   const timeText =
     endMin == null
       ? formatClockTime(startMin, timeZero)
-      : `${formatClockTime(startMin, timeZero)} - ${formatClockTime(endMin, timeZero)}`;
+      : `${formatClockTime(startMin, timeZero)} - ${formatClockTime(
+          endMin,
+          timeZero
+        )}`;
 
   return {
     name,
@@ -571,8 +581,8 @@ function getInfusionLabelRects(rows: MedRow[], end: number, plotWidth: number) {
     }> = [];
 
     for (const seg of row.infusion) {
-      const x1 = (seg.start / end) * plotWidth;
-      const x2 = (Math.max(seg.end, seg.start + 0.1) / end) * plotWidth;
+      const x1 = minuteToX(seg.start, end, plotWidth);
+      const x2 = minuteToX(Math.max(seg.end, seg.start + 0.1), end, plotWidth);
 
       const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
       const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
@@ -645,7 +655,9 @@ function isMatchingMedicationRow(
   managementEvent?: ManagementEvent | null
 ) {
   if (!managementEvent) return false;
-  if (managementEvent.chart_type !== "medication") return false;
+  if (String(managementEvent.chart_type ?? "").toLowerCase() !== "medication") {
+    return false;
+  }
 
   const target = normalizeManagementRowName(managementEvent.row_name);
   const current = normalizeManagementRowName(rowName);
@@ -688,7 +700,7 @@ function BolusOverlaySvg({
 
       {rows.flatMap((row) =>
         row.bolus.map((p, idx) => {
-          const cx = (p.time / end) * plotWidth;
+          const cx = minuteToX(p.time, end, plotWidth);
           const cy = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.5;
 
           const medColor = inferColor(row.name);
@@ -725,6 +737,7 @@ function BolusOverlaySvg({
 
           const bodyLeft = finalLeft;
           const bodyRight = finalLeft + boxWidth;
+
           const shouldHighlight =
             isMatchingMedicationRow(row.name, managementEvent) &&
             managementEvent?.highlight_mode === "point" &&
@@ -763,7 +776,14 @@ function BolusOverlaySvg({
               }}
             >
               <title>
-                {formatMedicationTitle(row.name, p.time, null, p.dose, p.unit, timeZero)}
+                {formatMedicationTitle(
+                  row.name,
+                  p.time,
+                  null,
+                  p.dose,
+                  p.unit,
+                  timeZero
+                )}
               </title>
 
               {hasOverlap && (
@@ -843,8 +863,12 @@ function InfusionOverlaySvg({
 
       {rows.flatMap((row) =>
         row.infusion.map((seg, idx) => {
-          const x1 = (seg.start / end) * plotWidth;
-          const x2 = (Math.max(seg.end, seg.start + 0.1) / end) * plotWidth;
+          const x1 = minuteToX(seg.start, end, plotWidth);
+          const x2 = minuteToX(
+            Math.max(seg.end, seg.start + 0.1),
+            end,
+            plotWidth
+          );
 
           const yTop = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.28;
           const yBottom = row.rowIndex * ROW_HEIGHT + ROW_HEIGHT * 0.72;
@@ -1040,12 +1064,12 @@ function MedicationGridSvg({
     >
       {highlightWindow && (
         <rect
-          x={(highlightWindow.startMin / end) * plotWidth}
+          x={minuteToX(highlightWindow.startMin, end, plotWidth)}
           y={0}
           width={Math.max(
             2,
-            ((highlightWindow.endMin - highlightWindow.startMin) / end) *
-              plotWidth
+            minuteToX(highlightWindow.endMin, end, plotWidth) -
+              minuteToX(highlightWindow.startMin, end, plotWidth)
           )}
           height={height}
           fill="lightblue"
@@ -1055,7 +1079,8 @@ function MedicationGridSvg({
       )}
 
       {minorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
+        const x = minuteToX(tick, end, plotWidth);
+
         return (
           <line
             key={`grid-x-minor-${tick}`}
@@ -1070,7 +1095,8 @@ function MedicationGridSvg({
       })}
 
       {majorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
+        const x = minuteToX(tick, end, plotWidth);
+
         return (
           <line
             key={`grid-x-major-${tick}`}
@@ -1086,6 +1112,7 @@ function MedicationGridSvg({
 
       {Array.from({ length: rows.length + 1 }, (_, i) => i).map((i) => {
         const y = i * ROW_HEIGHT;
+
         return (
           <line
             key={`grid-y-${i}`}
@@ -1127,18 +1154,15 @@ export default function MedicationChart({
   const [selectedMedicationInfo, setSelectedMedicationInfo] =
     useState<MedicationClickInfo | null>(null);
 
-  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
+  const majorStep = useMemo(
+    () => getChartMajorStep(timeResolution),
+    [timeResolution]
+  );
 
-  useEffect(() => {
-    if (scrollRef.current == null) return;
-    if (sharedScrollLeft == null) return;
-
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
-    }
-  }, [sharedScrollLeft]);
+  const minorStep = useMemo(
+    () => getChartMinorStep(timeResolution),
+    [timeResolution]
+  );
 
   const visibleRows = useMemo(
     () => rows.filter((row) => !hiddenNames.includes(row.name)),
@@ -1151,10 +1175,12 @@ export default function MedicationChart({
   );
 
   const maxTime = useMemo(() => getMaxTime(rows), [rows]);
+
   const computedEnd = Math.max(
     majorStep,
     Math.ceil(maxTime / majorStep) * majorStep
   );
+
   const end = xEnd ?? computedEnd;
 
   const majorTicks = useMemo(() => {
@@ -1175,13 +1201,47 @@ export default function MedicationChart({
   );
 
   useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (sharedScrollLeft == null) return;
+
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
+    }
+
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
+
+  useEffect(() => {
     function updateScrollMetrics() {
       const el = scrollRef.current;
       if (!el) return;
 
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }
+
+      setSliderValue(nextScrollLeft);
       setSelectedMedicationInfo(null);
     }
 
@@ -1191,12 +1251,24 @@ export default function MedicationChart({
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, height, hiddenNames, rows.length]);
+  }, [
+    contentWidth,
+    height,
+    hiddenNames.length,
+    rows.length,
+    sharedScrollLeft,
+  ]);
 
   if (!rows.length) {
     return (
-      <div className="rounded-2xl border bg-white p-4 shadow-sm">
-        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+      <div
+        className={
+          embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
+        }
+      >
+        {!embedded && title ? (
+          <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+        ) : null}
         <div className="text-sm text-gray-500">No medication data available.</div>
       </div>
     );
@@ -1325,6 +1397,7 @@ export default function MedicationChart({
                             ? prev.filter((x) => x !== row.name)
                             : [...prev, row.name]
                         );
+                        setSelectedMedicationInfo(null);
                       }}
                       className="shrink-0 cursor-pointer"
                       title={isHidden ? `Show ${row.name}` : `Hide ${row.name}`}
@@ -1382,18 +1455,21 @@ export default function MedicationChart({
                   return;
                 }
 
-                e.preventDefault();
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+
+                e.preventDefault();
+                e.stopPropagation();
+
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
                 onSharedScrollLeftChange?.(clamped);
                 setSelectedMedicationInfo(null);
               }}
               onScroll={(e) => {
+                if (isSyncingFromSliderRef.current) return;
+
                 const next = e.currentTarget.scrollLeft;
-                if (!isSyncingFromSliderRef.current) {
-                  setSliderValue(next);
-                }
+                setSliderValue(next);
                 onSharedScrollLeftChange?.(next);
               }}
             >
@@ -1433,7 +1509,9 @@ export default function MedicationChart({
                         ticks={majorTicks}
                         interval={0}
                         allowDecimals={false}
-                        tickFormatter={(v) => formatClockTime(Number(v), timeZero)}
+                        tickFormatter={(v) =>
+                          formatClockTime(Number(v), timeZero)
+                        }
                         tick={showXAxis ? undefined : false}
                         axisLine={showXAxis}
                         tickLine={showXAxis}
@@ -1513,7 +1591,10 @@ export default function MedicationChart({
                       ),
                       top: Math.max(
                         4,
-                        Math.min(selectedMedicationInfo.y, fullContentHeight - 82)
+                        Math.min(
+                          selectedMedicationInfo.y,
+                          fullContentHeight - 82
+                        )
                       ),
                       pointerEvents: "auto",
                     }}
@@ -1537,17 +1618,24 @@ export default function MedicationChart({
                 )}
               </div>
             </div>
-
           </div>
+
           <div className="pt-2">
             <input
               type="range"
               min={0}
               max={Math.max(0, Math.round(maxScrollLeft))}
               step={1}
-              value={Math.min(sliderValue, maxScrollLeft)}
+              value={Math.min(
+                Math.max(0, Math.round(sliderValue)),
+                Math.round(maxScrollLeft)
+              )}
               onChange={(e) => {
-                const next = Number(e.target.value);
+                const next = Math.max(
+                  0,
+                  Math.min(maxScrollLeft, Number(e.target.value))
+                );
+
                 setSliderValue(next);
 
                 const el = scrollRef.current;
@@ -1556,6 +1644,7 @@ export default function MedicationChart({
                 isSyncingFromSliderRef.current = true;
                 el.scrollLeft = next;
                 onSharedScrollLeftChange?.(next);
+                setSelectedMedicationInfo(null);
 
                 requestAnimationFrame(() => {
                   isSyncingFromSliderRef.current = false;

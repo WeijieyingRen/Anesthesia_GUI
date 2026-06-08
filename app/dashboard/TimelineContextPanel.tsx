@@ -23,6 +23,7 @@ type TimelineContextPanelProps = {
     endMin: number;
   } | null;
   timeResolution?: TimeResolution;
+
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -41,14 +42,17 @@ const SVG_HEIGHT = 86;
 const TIME_LABEL_Y = 16;
 const TOP_LABEL_Y = 40;
 const BOTTOM_LABEL_Y = SVG_HEIGHT - 4;
-
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
   if (!timeZero) return String(offsetMin);
 
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
   return `${hh}:${mm}`;
@@ -79,15 +83,6 @@ function shouldShowTextLabel(event: TimelineContextEvent) {
   ]);
 
   return textEvents.has(event.event_type);
-}
-
-function shouldShowIconLabel(event: TimelineContextEvent) {
-  return (
-    event.event_type === "emergence" ||
-    (event.group === "positioning" &&
-      (event.label?.includes("Bed Position:") ||
-        event.label?.includes("Head-of-bed Positioning")))
-  );
 }
 
 function shouldUseBedIcon(event: TimelineContextEvent) {
@@ -200,8 +195,8 @@ function packSide(
   const sorted = [...events].sort(
     (a, b) => (a.relative_min ?? 0) - (b.relative_min ?? 0)
   );
-  const packed: PackedEvent[] = [];
 
+  const packed: PackedEvent[] = [];
   let cluster: TimelineContextEvent[] = [];
 
   function flushCluster() {
@@ -211,12 +206,14 @@ function packSide(
 
     cluster.forEach((e, idx) => {
       let level = 0;
+
       while (
         levelLastMinute[level] !== undefined &&
         Math.abs((e.relative_min ?? 0) - levelLastMinute[level]) < 16
       ) {
         level += 1;
       }
+
       levelLastMinute[level] = e.relative_min ?? 0;
 
       packed.push({
@@ -237,6 +234,7 @@ function packSide(
     }
 
     const prev = cluster[cluster.length - 1];
+
     if (Math.abs((e.relative_min ?? 0) - (prev.relative_min ?? 0)) < 24) {
       cluster.push(e);
     } else {
@@ -272,7 +270,9 @@ function packEvents(context: TimelineContextData | null): PackedEvent[] {
     ...context.block_events,
     ...context.surgical_events,
     ...context.airway_events,
-  ].filter((e) => e.relative_min !== undefined && Number.isFinite(e.relative_min));
+  ].filter(
+    (e) => e.relative_min !== undefined && Number.isFinite(e.relative_min)
+  );
 
   return [
     ...packSide(milestoneTopEvents, "top"),
@@ -307,23 +307,74 @@ function BedIcon({
   if (!tilted) {
     return (
       <g transform={`translate(${x - w / 2}, ${y - h / 2})`}>
-        <rect x={0} y={h * 0.35} width={w * 0.78} height={h * 0.28} rx={1.2} fill={color} />
-        <rect x={0} y={0} width={w * 0.18} height={h * 0.7} rx={1.2} fill={color} />
-        <line x1={w * 0.08} y1={h * 0.63} x2={w * 0.08} y2={h} stroke={color} strokeWidth={1.4} />
-        <line x1={w * 0.68} y1={h * 0.63} x2={w * 0.68} y2={h} stroke={color} strokeWidth={1.4} />
+        <rect
+          x={0}
+          y={h * 0.35}
+          width={w * 0.78}
+          height={h * 0.28}
+          rx={1.2}
+          fill={color}
+        />
+        <rect
+          x={0}
+          y={0}
+          width={w * 0.18}
+          height={h * 0.7}
+          rx={1.2}
+          fill={color}
+        />
+        <line
+          x1={w * 0.08}
+          y1={h * 0.63}
+          x2={w * 0.08}
+          y2={h}
+          stroke={color}
+          strokeWidth={1.4}
+        />
+        <line
+          x1={w * 0.68}
+          y1={h * 0.63}
+          x2={w * 0.68}
+          y2={h}
+          stroke={color}
+          strokeWidth={1.4}
+        />
       </g>
     );
   }
 
   return (
     <g transform={`translate(${x - w / 2}, ${y - h / 2})`}>
-      <rect x={0} y={h * 0.48} width={w * 0.72} height={h * 0.22} rx={1.2} fill={color} />
-      <polygon
-        points={`${w * 0.12},${h * 0.48} ${w * 0.38},${h * 0.18} ${w * 0.6},${h * 0.48}`}
+      <rect
+        x={0}
+        y={h * 0.48}
+        width={w * 0.72}
+        height={h * 0.22}
+        rx={1.2}
         fill={color}
       />
-      <line x1={w * 0.08} y1={h * 0.65} x2={w * 0.08} y2={h} stroke={color} strokeWidth={1.4} />
-      <line x1={w * 0.62} y1={h * 0.65} x2={w * 0.62} y2={h} stroke={color} strokeWidth={1.4} />
+      <polygon
+        points={`${w * 0.12},${h * 0.48} ${w * 0.38},${h * 0.18} ${
+          w * 0.6
+        },${h * 0.48}`}
+        fill={color}
+      />
+      <line
+        x1={w * 0.08}
+        y1={h * 0.65}
+        x2={w * 0.08}
+        y2={h}
+        stroke={color}
+        strokeWidth={1.4}
+      />
+      <line
+        x1={w * 0.62}
+        y1={h * 0.65}
+        x2={w * 0.62}
+        y2={h}
+        stroke={color}
+        strokeWidth={1.4}
+      />
     </g>
   );
 }
@@ -340,6 +391,7 @@ function EmergenceIcon({
   size?: number;
 }) {
   const r = size / 2;
+
   return (
     <g transform={`translate(${x}, ${y})`}>
       <circle cx={0} cy={0} r={r * 0.28} fill={color} />
@@ -422,7 +474,9 @@ function GenericEventSymbol({
     case "triangle":
       return (
         <polygon
-          points={`${x},${y - r} ${x + r * 0.92},${y + r * 0.82} ${x - r * 0.92},${y + r * 0.82}`}
+          points={`${x},${y - r} ${x + r * 0.92},${y + r * 0.82} ${
+            x - r * 0.92
+          },${y + r * 0.82}`}
           fill={color}
         />
       );
@@ -434,15 +488,28 @@ function GenericEventSymbol({
         />
       );
     case "square":
-      return <rect x={x - r} y={y - r} width={size} height={size} rx={2} fill={color} />;
+      return (
+        <rect
+          x={x - r}
+          y={y - r}
+          width={size}
+          height={size}
+          rx={2}
+          fill={color}
+        />
+      );
     case "star": {
       const outer = r;
       const inner = r * 0.48;
       const points = Array.from({ length: 10 }, (_, index) => {
         const angle = -Math.PI / 2 + (index * Math.PI) / 5;
         const radius = index % 2 === 0 ? outer : inner;
-        return `${x + Math.cos(angle) * radius},${y + Math.sin(angle) * radius}`;
+
+        return `${x + Math.cos(angle) * radius},${
+          y + Math.sin(angle) * radius
+        }`;
       }).join(" ");
+
       return <polygon points={points} fill={color} />;
     }
     case "pentagon": {
@@ -450,6 +517,7 @@ function GenericEventSymbol({
         const angle = -Math.PI / 2 + (index * 2 * Math.PI) / 5;
         return `${x + Math.cos(angle) * r},${y + Math.sin(angle) * r}`;
       }).join(" ");
+
       return <polygon points={points} fill={color} />;
     }
     case "circle":
@@ -538,10 +606,7 @@ function LegendIcon({
 
 function AxisSpacer({ height }: { height: number }) {
   return (
-    <div
-      className="border-r bg-white"
-      style={{ width: YAXIS_WIDTH, height }}
-    />
+    <div className="border-r bg-white" style={{ width: YAXIS_WIDTH, height }} />
   );
 }
 
@@ -559,6 +624,7 @@ export default function TimelineContextPanel({
   const [isExpanded, setIsExpanded] = React.useState(true);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const isSyncingFromSliderRef = React.useRef(false);
+
   const [sliderValue, setSliderValue] = React.useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
 
@@ -610,14 +676,23 @@ export default function TimelineContextPanel({
   );
 
   React.useEffect(() => {
-    if (scrollRef.current == null) return;
+    const el = scrollRef.current;
+    if (!el) return;
     if (sharedScrollLeft == null) return;
-
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
+  
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+  
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+  
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
     }
-  }, [sharedScrollLeft]);
+  
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
 
   React.useEffect(() => {
     function updateScrollMetrics() {
@@ -626,22 +701,38 @@ export default function TimelineContextPanel({
 
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+      
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }
+      
+      setSliderValue(nextScrollLeft);
     }
 
     updateScrollMetrics();
+
     window.addEventListener("resize", updateScrollMetrics);
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, isExpanded]);
+  }, [contentWidth, isExpanded, sharedScrollLeft]);
 
   if (!context) return null;
   if (!packedEvents.length) return null;
   if (!Number.isFinite(effectiveXEnd) || effectiveXEnd <= 0) return null;
 
   return (
-    <div className="border bg-white p-0 shadow-sm">
+    <div className="bg-white p-0">
       <style jsx>{`
         .timeline-scroll-hidden {
           overflow-x: auto;
@@ -710,6 +801,7 @@ export default function TimelineContextPanel({
           background: #475569;
         }
       `}</style>
+
       <div className="mb-1 flex items-center justify-between px-2 py-1">
         <button
           type="button"
@@ -717,7 +809,9 @@ export default function TimelineContextPanel({
           className="inline-flex items-center gap-2 rounded-md px-2 py-1 text-sm font-semibold text-gray-700 hover:bg-gray-100"
         >
           <span
-            className={`inline-block transition-transform ${isExpanded ? "rotate-90" : "rotate-0"}`}
+            className={`inline-block transition-transform ${
+              isExpanded ? "rotate-90" : "rotate-0"
+            }`}
           >
             ▶
           </span>
@@ -727,7 +821,10 @@ export default function TimelineContextPanel({
         {legendEvents.length > 0 && (
           <div className="flex items-center justify-end gap-4 text-xs text-gray-600">
             {legendEvents.map((event) => (
-              <span key={getEventLegendKey(event)} className="inline-flex items-center">
+              <span
+                key={getEventLegendKey(event)}
+                className="inline-flex items-center"
+              >
                 <LegendIcon event={event} color="#374151" />
                 {getEventLegendLabel(event)}
               </span>
@@ -762,216 +859,239 @@ export default function TimelineContextPanel({
 
                   if (absX <= absY || absX < 1) return;
 
-                  const maxScrollLeft = el.scrollWidth - el.clientWidth;
+                  const maxScroll = el.scrollWidth - el.clientWidth;
                   const nextLeft = el.scrollLeft + e.deltaX;
-
-                  const atLeftEdge = el.scrollLeft <= 0;
-                  const atRightEdge = el.scrollLeft >= maxScrollLeft - 1;
-
-                  const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
-                  const tryingGoPastRight = atRightEdge && e.deltaX > 0;
-
-                  if (tryingGoPastLeft || tryingGoPastRight) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return;
-                  }
+                  const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
 
                   e.preventDefault();
-                  const clamped = Math.max(0, Math.min(maxScrollLeft, nextLeft));
+                  e.stopPropagation();
+
                   el.scrollLeft = clamped;
                   setSliderValue(clamped);
                   onSharedScrollLeftChange?.(clamped);
                 }}
                 onScroll={(e) => {
+                  if (isSyncingFromSliderRef.current) return;
+                
                   const next = e.currentTarget.scrollLeft;
-                  if (!isSyncingFromSliderRef.current) {
-                    setSliderValue(next);
-                  }
+
+
+                  setSliderValue(next);
                   onSharedScrollLeftChange?.(next);
                 }}
               >
                 <div style={{ width: contentWidth, height: SVG_HEIGHT }}>
-                <svg
-                  width={contentWidth}
-                  height={SVG_HEIGHT}
-                  viewBox={`0 0 ${contentWidth} ${SVG_HEIGHT}`}
-                  preserveAspectRatio="none"
-                >
-                {majorTicks.map((tick) => {
-                  const x = minuteToX(tick);
-                  return (
-                    <line
-                      key={`tick-${tick}`}
-                      x1={x}
-                      y1={TOP_PAD}
-                      x2={x}
-                      y2={SVG_HEIGHT - BOTTOM_PAD}
-                      stroke="#C7CED8"
-                      strokeWidth={1.2}
-                      strokeDasharray="3 4"
-                    />
-                  );
-                })}
+                  <svg
+                    width={contentWidth}
+                    height={SVG_HEIGHT}
+                    viewBox={`0 0 ${contentWidth} ${SVG_HEIGHT}`}
+                    preserveAspectRatio="none"
+                  >
+                    {majorTicks.map((tick) => {
+                      const x = minuteToX(tick);
 
-                {topTimeSlots.map((slot, idx) => {
-                  const x = minuteToX(slot.minute);
-                  const isFirst = idx === 0;
-                  const isLast = idx === topTimeSlots.length - 1;
+                      return (
+                        <line
+                          key={`tick-${tick}`}
+                          x1={x}
+                          y1={TOP_PAD}
+                          x2={x}
+                          y2={SVG_HEIGHT - BOTTOM_PAD}
+                          stroke="#C7CED8"
+                          strokeWidth={1.2}
+                          strokeDasharray="3 4"
+                        />
+                      );
+                    })}
 
-                  return (
-                    <text
-                      key={`time-label-${idx}`}
-                      x={x}
-                      y={TIME_LABEL_Y}
-                      textAnchor={isFirst ? "start" : isLast ? "end" : "middle"}
-                      fontSize={11}
-                      fontWeight={600}
-                      fill="#4B5563"
-                    >
-                      {slot.label}
-                    </text>
-                  );
-                })}
+                    {topTimeSlots.map((slot, idx) => {
+                      const x = minuteToX(slot.minute);
+                      const isFirst = idx === 0;
+                      const isLast = idx === topTimeSlots.length - 1;
 
-                {episodeWindow && (
-                  <rect
-                    x={minuteToX(episodeWindow.startMin)}
-                    y={TOP_PAD}
-                    width={Math.max(
-                      2,
-                      minuteToX(episodeWindow.endMin) - minuteToX(episodeWindow.startMin)
+                      return (
+                        <text
+                          key={`time-label-${idx}`}
+                          x={x}
+                          y={TIME_LABEL_Y}
+                          textAnchor={
+                            isFirst ? "start" : isLast ? "end" : "middle"
+                          }
+                          fontSize={11}
+                          fontWeight={600}
+                          fill="#4B5563"
+                        >
+                          {slot.label}
+                        </text>
+                      );
+                    })}
+
+                    {episodeWindow && (
+                      <rect
+                        x={minuteToX(episodeWindow.startMin)}
+                        y={TOP_PAD}
+                        width={Math.max(
+                          2,
+                          minuteToX(episodeWindow.endMin) -
+                            minuteToX(episodeWindow.startMin)
+                        )}
+                        height={SVG_HEIGHT - TOP_PAD - BOTTOM_PAD}
+                        fill="#DBEAFE"
+                        fillOpacity={0.28}
+                        stroke="#60A5FA"
+                        strokeWidth={1}
+                        strokeDasharray="4 3"
+                      />
                     )}
-                    height={SVG_HEIGHT - TOP_PAD - BOTTOM_PAD}
-                    fill="#DBEAFE"
-                    fillOpacity={0.28}
-                    stroke="#60A5FA"
-                    strokeWidth={1}
-                    strokeDasharray="4 3"
-                  />
-                )}
 
-                <line
-                  x1={0}
-                  y1={AXIS_Y}
-                  x2={minuteToX(effectiveXEnd)}
-                  y2={AXIS_Y}
-                  stroke="#7C8EA3"
-                  strokeWidth={2.1}
-                />
-                <polygon
-                  points={`${minuteToX(effectiveXEnd)},${AXIS_Y} ${minuteToX(effectiveXEnd) - 8},${AXIS_Y - 5} ${minuteToX(effectiveXEnd) - 8},${AXIS_Y + 5}`}
-                  fill="#7C8EA3"
-                />
+                    <line
+                      x1={0}
+                      y1={AXIS_Y}
+                      x2={minuteToX(effectiveXEnd)}
+                      y2={AXIS_Y}
+                      stroke="#7C8EA3"
+                      strokeWidth={2.1}
+                    />
 
-                {packedEvents.map((event, idx) => {
-                  const x = minuteToX(event.relative_min!);
-                  const c = eventColor(event.group);
-                  const label = shortenLabel(event.label ?? "");
-                  const showTextLabel = shouldShowTextLabel(event);
-                  const isBedIconEvent = shouldUseBedIcon(event);
-                  const isPositioning = event.group === "positioning";
+                    <polygon
+                      points={`${minuteToX(effectiveXEnd)},${AXIS_Y} ${
+                        minuteToX(effectiveXEnd) - 8
+                      },${AXIS_Y - 5} ${
+                        minuteToX(effectiveXEnd) - 8
+                      },${AXIS_Y + 5}`}
+                      fill="#7C8EA3"
+                    />
 
-                  const stemBase = isPositioning ? 12 : 4;
-                  const stemStep = 6;
-                  const stemLen = stemBase + event.level * stemStep;
+                    {packedEvents.map((event, idx) => {
+                      const x = minuteToX(event.relative_min!);
+                      const c = eventColor(event.group);
+                      const label = shortenLabel(event.label ?? "");
+                      const showTextLabel = shouldShowTextLabel(event);
+                      const isBedIconEvent = shouldUseBedIcon(event);
+                      const isPositioning = event.group === "positioning";
 
-                  const connectorY =
-                    event.side === "top" ? AXIS_Y - stemLen : AXIS_Y + stemLen;
+                      const stemBase = isPositioning ? 12 : 4;
+                      const stemStep = 6;
+                      const stemLen = stemBase + event.level * stemStep;
 
-                  const labelDx =
-                    event.side === "top"
-                      ? getTopLabelDx(event.clusterRank, event.level)
-                      : getBottomLabelDx(event.clusterRank);
+                      const connectorY =
+                        event.side === "top"
+                          ? AXIS_Y - stemLen
+                          : AXIS_Y + stemLen;
 
-                  const labelX = x + labelDx;
-                  const labelY =
-                    event.side === "top"
-                      ? TOP_LABEL_Y
-                      : isPositioning
-                        ? BOTTOM_LABEL_Y
-                        : BOTTOM_LABEL_Y - 10;
+                      const labelDx =
+                        event.side === "top"
+                          ? getTopLabelDx(event.clusterRank, event.level)
+                          : getBottomLabelDx(event.clusterRank);
 
-                  return (
-                    <g key={`${event.event_type}-${idx}-${event.relative_min}`}>
-                      {!isBedIconEvent ? (
-                        <circle cx={x} cy={AXIS_Y} r={3} fill={c.fill} />
-                      ) : null}
+                      const labelX = x + labelDx;
+                      const labelY =
+                        event.side === "top"
+                          ? TOP_LABEL_Y
+                          : isPositioning
+                            ? BOTTOM_LABEL_Y
+                            : BOTTOM_LABEL_Y - 10;
 
-                      {showTextLabel && (
-                        <>
-                          <line
-                            x1={x}
-                            y1={AXIS_Y}
-                            x2={x}
-                            y2={connectorY}
-                            stroke={c.stroke}
-                            strokeWidth={1.1}
-                          />
+                      return (
+                        <g
+                          key={`${event.event_type}-${idx}-${event.relative_min}`}
+                        >
+                          {!isBedIconEvent ? (
+                            <circle cx={x} cy={AXIS_Y} r={3} fill={c.fill} />
+                          ) : null}
 
-                          {event.side === "top" && (
-                            <polygon
-                              points={`${x},${connectorY - 5} ${x - 3.5},${connectorY} ${x + 3.5},${connectorY}`}
-                              fill={c.stroke}
-                            />
+                          {showTextLabel && (
+                            <>
+                              <line
+                                x1={x}
+                                y1={AXIS_Y}
+                                x2={x}
+                                y2={connectorY}
+                                stroke={c.stroke}
+                                strokeWidth={1.1}
+                              />
+
+                              {event.side === "top" && (
+                                <polygon
+                                  points={`${x},${connectorY - 5} ${
+                                    x - 3.5
+                                  },${connectorY} ${x + 3.5},${connectorY}`}
+                                  fill={c.stroke}
+                                />
+                              )}
+
+                              {event.side === "bottom" && (
+                                <polygon
+                                  points={`${x},${connectorY + 5} ${
+                                    x - 3.5
+                                  },${connectorY} ${x + 3.5},${connectorY}`}
+                                  fill={c.stroke}
+                                />
+                              )}
+                            </>
                           )}
 
-                          {event.side === "bottom" && (
-                            <polygon
-                              points={`${x},${connectorY + 5} ${x - 3.5},${connectorY} ${x + 3.5},${connectorY}`}
-                              fill={c.stroke}
-                            />
-                          )}
-                        </>
-                      )}
+                          {showTextLabel ? (
+                            <>
+                              <line
+                                x1={x}
+                                y1={connectorY}
+                                x2={labelX}
+                                y2={connectorY}
+                                stroke={c.stroke}
+                                strokeWidth={1}
+                              />
 
-                      {showTextLabel ? (
-                        <>
-                          <line
-                            x1={x}
-                            y1={connectorY}
-                            x2={labelX}
-                            y2={connectorY}
-                            stroke={c.stroke}
-                            strokeWidth={1}
-                          />
+                              <text
+                                x={labelX}
+                                y={labelY}
+                                textAnchor="middle"
+                                fontSize={10.5}
+                                fontWeight={600}
+                                fill={c.text}
+                              >
+                                {label}
+                              </text>
 
-                          <text
-                            x={labelX}
-                            y={labelY}
-                            textAnchor="middle"
-                            fontSize={10.5}
-                            fontWeight={600}
-                            fill={c.text}
-                          >
-                            {label}
-                          </text>
-
-                          <title>{event.label}</title>
-                        </>
-                      ) : shouldShowHeaderLabel(event) ? (
-                        <>
-                          <TimelineMiniIcon event={event} x={x} y={AXIS_Y} color={c.text} />
-                          <title>{event.label}</title>
-                        </>
-                      ) : null}
-                    </g>
-                  );
-                })}
-                </svg>
+                              <title>{event.label}</title>
+                            </>
+                          ) : shouldShowHeaderLabel(event) ? (
+                            <>
+                              <TimelineMiniIcon
+                                event={event}
+                                x={x}
+                                y={AXIS_Y}
+                                color={c.text}
+                              />
+                              <title>{event.label}</title>
+                            </>
+                          ) : null}
+                        </g>
+                      );
+                    })}
+                  </svg>
                 </div>
               </div>
             </div>
+
             <div className="pt-2">
               <input
                 type="range"
                 min={0}
                 max={Math.max(0, Math.round(maxScrollLeft))}
                 step={1}
-                value={Math.min(sliderValue, maxScrollLeft)}
+                value={Math.min(
+                  Math.max(0, Math.round(sliderValue)),
+                  Math.round(maxScrollLeft)
+                )}
                 onChange={(e) => {
-                  const next = Number(e.target.value);
+                  const next = Math.max(
+                    0,
+                    Math.min(maxScrollLeft, Number(e.target.value))
+                  );
+
                   setSliderValue(next);
+
                   const el = scrollRef.current;
                   if (!el) return;
 

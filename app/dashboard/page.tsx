@@ -2482,20 +2482,20 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
   const sharedTimelineEnd = (() => {
     if (!anesthesiaStart || !anesthesiaStop) return 240;
-
+  
     const start = new Date(anesthesiaStart);
     const stop = new Date(anesthesiaStop);
-
+  
     const diffMin = Math.ceil((stop.getTime() - start.getTime()) / 60000);
     if (!Number.isFinite(diffMin) || diffMin <= 0) return 240;
-
-    return Math.ceil(diffMin / 15) * 15;
+  
+    return Math.ceil(diffMin / 5) * 5;
   })();
 
   const viewWindowWidthMin = useMemo(() => {
-    if (timeResolution === 15) return sharedTimelineEnd;
+    if (timeResolution === 15) return 240;
     return 120;
-  }, [timeResolution, sharedTimelineEnd]);
+  }, [timeResolution]);
 
   const sharedXTicks = Array.from(
     { length: Math.floor(sharedTimelineEnd / 15) + 1 },
@@ -2574,7 +2574,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     setTimeResolution(nextResolution);
   
     const nextViewWindowWidthMin =
-      nextResolution === 15 ? sharedTimelineEnd : 120;
+      nextResolution === 15 ? 240 : 120;
   
     const maxStart = Math.max(0, sharedTimelineEnd - nextViewWindowWidthMin);
     const nextViewStartMin = Math.min(viewStartMin, maxStart);

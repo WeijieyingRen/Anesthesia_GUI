@@ -20,7 +20,7 @@ type HighlightWindow = {
 
 type VentilationChartProps = {
   title?: string;
-  ventilation: Record<string, TimeValuePoint[] | undefined>;
+  ventilation?: Record<string, TimeValuePoint[] | undefined> | null;
   height?: number;
   windowSize?: number;
   xEnd?: number;
@@ -29,7 +29,7 @@ type VentilationChartProps = {
   timeZero?: string | null;
   embedded?: boolean;
   highlightWindow?: HighlightWindow | null;
-  timeResolution?: 15 | 5;
+  timeResolution?: TimeResolution;
   sharedScrollLeft?: number;
   onSharedScrollLeftChange?: (scrollLeft: number) => void;
 };
@@ -76,7 +76,9 @@ function sortVentNames(names: string[]) {
     const ib = DEFAULT_VENT_ORDER.indexOf(b);
     const va = ia === -1 ? Number.MAX_SAFE_INTEGER : ia;
     const vb = ib === -1 ? Number.MAX_SAFE_INTEGER : ib;
+
     if (va !== vb) return va - vb;
+
     return a.localeCompare(b);
   });
 }
@@ -89,6 +91,7 @@ function inferVentColor(name: string) {
   if (name === "PIP") return "#f59e0b";
   if (name === "Mean PIP") return "#22c55e";
   if (name === "Plateau PIP") return "#a855f7";
+
   return "#14b8a6";
 }
 
@@ -97,10 +100,14 @@ function getVentDisplayName(name: string) {
   return name;
 }
 
-function buildRows(ventilation: Record<string, TimeValuePoint[] | undefined>): VentRow[] {
+function buildRows(
+  ventilation?: Record<string, TimeValuePoint[] | undefined> | null
+): VentRow[] {
+  const safeVentilation = ventilation ?? {};
+
   const names = sortVentNames(
-    Object.keys(ventilation).filter((key) =>
-      (ventilation[key] ?? []).some(
+    Object.keys(safeVentilation).filter((key) =>
+      (safeVentilation[key] ?? []).some(
         (p) => Number.isFinite(p.time) && Number.isFinite(p.value)
       )
     )
@@ -108,7 +115,7 @@ function buildRows(ventilation: Record<string, TimeValuePoint[] | undefined>): V
 
   return names.map((name, idx) => ({
     name,
-    values: [...(ventilation[name] ?? [])]
+    values: [...(safeVentilation[name] ?? [])]
       .filter((p) => Number.isFinite(p.time) && Number.isFinite(p.value))
       .sort((a, b) => a.time - b.time),
     rowIndex: idx,
@@ -120,28 +127,30 @@ function maxTimeOfRows(rows: VentRow[]) {
   return vals.length ? Math.max(...vals) : 0;
 }
 
-function buildWindowSegments(rows: VentRow[], windowSize: number): VentWindowSegment[] {
+function buildWindowSegments(
+  rows: VentRow[],
+  windowSize: number
+): VentWindowSegment[] {
   const segments: VentWindowSegment[] = [];
 
   rows.forEach((row) => {
     const rowMaxTime = row.values.length
       ? Math.max(...row.values.map((p) => p.time))
       : 0;
+
     const end = Math.ceil(rowMaxTime / windowSize) * windowSize;
 
     for (let start = 0; start < end; start += windowSize) {
       const stop = start + windowSize;
       const points = row.values.filter((p) => p.time >= start && p.time < stop);
-      if (!points.length) continue;
 
-      const segStart = points[0].time;
-      const segEnd = points[points.length - 1].time;
+      if (!points.length) continue;
 
       segments.push({
         rowName: row.name,
         rowIndex: row.rowIndex,
-        x0: segStart,
-        x1: Math.max(segEnd, segStart + 0.5),
+        x0: start,
+        x1: stop,
         points,
         firstValue: points[0].value,
       });
@@ -164,9 +173,14 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
+
   return `${hh}:${mm}`;
 }
 
@@ -223,11 +237,7 @@ function estimateTextWidth(text: string, fontSize = 10) {
   return Math.max(10, text.length * (fontSize * 0.62));
 }
 
-function FixedYAxisSpacer({
-  height,
-}: {
-  height: number;
-}) {
+function FixedYAxisSpacer({ height }: { height: number }) {
   return (
     <div
       className="relative border-r bg-white"
@@ -263,6 +273,54 @@ function VentilationGridSvg({
       preserveAspectRatio="none"
       className="absolute inset-0 pointer-events-none"
     >
+      {highlightWindow && (
+        <rect
+          x={minuteToX(highlightWindow.startMin, end, plotWidth)}
+          y={0}
+          width={Math.max(
+            2,
+            minuteToX(highlightWindow.endMin, end, plotWidth) -
+              minuteToX(highlightWindow.startMin, end, plotWidth)
+          )}
+          height={height}
+          fill="lightblue"
+          fillOpacity={0.75}
+          stroke="none"
+        />
+      )}
+
+      {minorTicks.map((tick) => {
+        const x = minuteToX(tick, end, plotWidth);
+
+        return (
+          <line
+            key={`grid-x-minor-${tick}`}
+            x1={x}
+            y1={0}
+            x2={x}
+            y2={height}
+            stroke="#d7dbe2"
+            strokeWidth={0.9}
+          />
+        );
+      })}
+
+      {majorTicks.map((tick) => {
+        const x = minuteToX(tick, end, plotWidth);
+
+        return (
+          <line
+            key={`grid-x-major-${tick}`}
+            x1={x}
+            y1={0}
+            x2={x}
+            y2={height}
+            stroke="#9aa3b2"
+            strokeWidth={1.4}
+          />
+        );
+      })}
+
       {rows.map((row, idx) => {
         const yTop = TOP_PAD + idx * ROW_HEIGHT;
         const yBottom = yTop + ROW_HEIGHT;
@@ -278,6 +336,7 @@ function VentilationGridSvg({
               stroke="#d1d5db"
               strokeWidth={1}
             />
+
             <line
               x1={0}
               y1={yBottom}
@@ -289,60 +348,15 @@ function VentilationGridSvg({
           </g>
         );
       })}
-
-      {highlightWindow && (
-        <rect
-          x={(highlightWindow.startMin / end) * plotWidth}
-          y={0}
-          width={Math.max(
-            2,
-            ((highlightWindow.endMin - highlightWindow.startMin) / end) * plotWidth
-          )}
-          height={height}
-          fill="lightblue"
-          fillOpacity={0.75}
-          stroke="none"
-        />
-      )}
-
-      {minorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
-        return (
-          <line
-            key={`grid-x-minor-${tick}`}
-            x1={x}
-            y1={0}
-            x2={x}
-            y2={height}
-            stroke="#d7dbe2"
-            strokeWidth={0.9}
-          />
-        );
-      })}
-
-      {majorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
-        return (
-          <line
-            key={`grid-x-major-${tick}`}
-            x1={x}
-            y1={0}
-            x2={x}
-            y2={height}
-            stroke="#9aa3b2"
-            strokeWidth={1.4}
-          />
-        );
-      })}
     </svg>
   );
 }
 
 export default function VentilationChart({
   title = "Ventilation Trends",
-  ventilation,
+  ventilation = {},
   height = 220,
-  windowSize = 15,
+  windowSize,
   xEnd,
   xTicks,
   showXAxis = true,
@@ -354,6 +368,7 @@ export default function VentilationChart({
   onSharedScrollLeftChange,
 }: VentilationChartProps) {
   const rows = useMemo(() => buildRows(ventilation), [ventilation]);
+
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
   const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null);
 
@@ -363,22 +378,49 @@ export default function VentilationChart({
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
-  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
-
-  const visibleRows = rows.filter((r) => !hiddenNames.includes(r.name));
-  const visibleRowsReindexed = visibleRows.map((row, idx) => ({ ...row, rowIndex: idx }));
-
-  const allMaxTime = maxTimeOfRows(visibleRowsReindexed);
-  const effectiveWindowSize = timeResolution === 15 ? windowSize : 5;
-  const computedXEnd = Math.max(
-    majorStep,
-    Math.ceil(allMaxTime / majorStep) * majorStep
+  const majorStep = useMemo(
+    () => getChartMajorStep(timeResolution),
+    [timeResolution]
   );
+
+  const minorStep = useMemo(
+    () => getChartMinorStep(timeResolution),
+    [timeResolution]
+  );
+
+  const effectiveWindowSize = windowSize ?? majorStep;
+
+  const visibleRows = useMemo(
+    () => rows.filter((r) => !hiddenNames.includes(r.name)),
+    [rows, hiddenNames]
+  );
+
+  const visibleRowsReindexed = useMemo(
+    () =>
+      visibleRows.map((row, idx) => ({
+        ...row,
+        rowIndex: idx,
+      })),
+    [visibleRows]
+  );
+
+  const allMaxTime = useMemo(
+    () => maxTimeOfRows(visibleRowsReindexed),
+    [visibleRowsReindexed]
+  );
+
+  const computedXEnd = Math.max(
+    effectiveWindowSize,
+    Math.ceil(allMaxTime / effectiveWindowSize) * effectiveWindowSize
+  );
+
   const effectiveXEnd = xEnd ?? computedXEnd;
 
   const majorTicks = useMemo(() => {
-    if (timeResolution === 15 && xTicks && xTicks.length > 0) return xTicks;
+    if (timeResolution === 15 && xTicks && xTicks.length > 0) {
+      return xTicks;
+    }
+
     return buildChartTicks(effectiveXEnd, majorStep);
   }, [timeResolution, xTicks, effectiveXEnd, majorStep]);
 
@@ -391,7 +433,9 @@ export default function VentilationChart({
     [visibleRowsReindexed, effectiveWindowSize]
   );
 
-  const contentHeight = visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
+  const contentHeight =
+    visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
+
   const viewHeight = Math.min(height, Math.max(120, contentHeight));
 
   const { contentWidth, plotWidth } = useMemo(
@@ -410,11 +454,21 @@ export default function VentilationChart({
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+    if (sharedScrollLeft == null) return;
 
-    const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
-    setMaxScrollLeft(nextMax);
-    setSliderValue(Math.min(el.scrollLeft, nextMax));
-  }, [contentWidth, contentHeight, hiddenNames.length, rows.length, viewHeight]);
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
+    }
+
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
 
   useEffect(() => {
     function updateScrollMetrics() {
@@ -423,39 +477,57 @@ export default function VentilationChart({
 
       const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScrollLeft(nextMax);
-      setSliderValue(Math.min(el.scrollLeft, nextMax));
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }
+
+      setSliderValue(nextScrollLeft);
     }
 
     updateScrollMetrics();
+
     window.addEventListener("resize", updateScrollMetrics);
+
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, contentHeight, viewHeight]);
-
-  useEffect(() => {
-    if (scrollRef.current == null) return;
-    if (sharedScrollLeft == null) return;
-
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
-    }
-  }, [sharedScrollLeft]);
+  }, [
+    contentWidth,
+    contentHeight,
+    viewHeight,
+    hiddenNames.length,
+    rows.length,
+    sharedScrollLeft,
+  ]);
 
   if (!rows.length) {
-    return (
-      <div className={embedded ? "bg-white px-4 py-3" : "rounded-2xl border bg-white p-4 shadow-sm"}>
-        {!embedded && title ? (
-          <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
-        ) : null}
-        <div className="text-sm text-gray-500">No ventilation data available.</div>
+    return embedded ? null : (
+      <div className="rounded-2xl border bg-white p-4 shadow-sm">
+        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+        <div className="text-sm text-gray-500">
+          No ventilation data available.
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"}>
+    <div
+      className={
+        embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
+      }
+    >
       <style jsx>{`
         .vent-scroll-hidden {
           overflow-x: auto;
@@ -525,7 +597,9 @@ export default function VentilationChart({
         }
       `}</style>
 
-      {!embedded && title ? <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3> : null}
+      {!embedded && title ? (
+        <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
+      ) : null}
 
       <div
         className="grid gap-0"
@@ -536,8 +610,11 @@ export default function VentilationChart({
         <div className="overflow-hidden" style={{ height: viewHeight }}>
           <div className="border-r pr-0" style={{ height: contentHeight }}>
             <div>
-              {visibleRowsReindexed.map((row) => {
+              {rows.map((row) => {
                 const hidden = hiddenNames.includes(row.name);
+                const active = visibleRowsReindexed.some(
+                  (r) => r.name === row.name
+                );
                 const color = inferVentColor(row.name);
 
                 return (
@@ -546,7 +623,7 @@ export default function VentilationChart({
                     className="flex items-center justify-between gap-2 px-2 text-sm"
                     style={{
                       height: ROW_HEIGHT,
-                      backgroundColor: "#efefef",
+                      backgroundColor: active ? "#efefef" : "#f7f7f7",
                       opacity: hidden ? 0.45 : 1,
                       borderBottom: "1px solid #d1d5db",
                     }}
@@ -554,6 +631,7 @@ export default function VentilationChart({
                     <div className="min-w-0 flex-1 truncate text-gray-900">
                       {getVentDisplayName(row.name)}
                     </div>
+
                     <button
                       type="button"
                       onClick={() => {
@@ -609,17 +687,20 @@ export default function VentilationChart({
                   return;
                 }
 
-                e.preventDefault();
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+
+                e.preventDefault();
+                e.stopPropagation();
+
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
                 onSharedScrollLeftChange?.(clamped);
               }}
               onScroll={(e) => {
+                if (isSyncingFromSliderRef.current) return;
+
                 const next = e.currentTarget.scrollLeft;
-                if (!isSyncingFromSliderRef.current) {
-                  setSliderValue(next);
-                }
+                setSliderValue(next);
                 onSharedScrollLeftChange?.(next);
               }}
             >
@@ -652,8 +733,17 @@ export default function VentilationChart({
                     const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
                     const centerY = rowTop + ROW_HEIGHT / 2;
 
-                    const segLeft = minuteToX(seg.x0, effectiveXEnd, plotWidth);
-                    const segRight = minuteToX(seg.x1, effectiveXEnd, plotWidth);
+                    const segLeft = minuteToX(
+                      seg.x0,
+                      effectiveXEnd,
+                      plotWidth
+                    );
+
+                    const segRight = minuteToX(
+                      seg.x1,
+                      effectiveXEnd,
+                      plotWidth
+                    );
 
                     const label = String(roundSmart(seg.firstValue));
                     const textWidth = estimateTextWidth(label, 10);
@@ -664,9 +754,16 @@ export default function VentilationChart({
                     const lineStartX = textX + textWidth + 6;
                     const lineEndX = segRight - 6;
                     const canDrawLine = lineEndX > lineStartX + 2;
+
                     const markerX = canDrawLine
                       ? segLeft + 4
-                      : Math.min(segRight - 4, Math.max(segLeft + 4, segLeft + (segRight - segLeft) / 2));
+                      : Math.min(
+                          segRight - 4,
+                          Math.max(
+                            segLeft + 4,
+                            segLeft + (segRight - segLeft) / 2
+                          )
+                        );
 
                     const isSelected =
                       zoomTarget &&
@@ -681,6 +778,7 @@ export default function VentilationChart({
                         onMouseDown={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
+
                           setZoomTarget({
                             rowName: seg.rowName,
                             x0: seg.x0,
@@ -688,16 +786,16 @@ export default function VentilationChart({
                             points: seg.points,
                           });
                         }}
-                        >
-                          <rect
-                            x={segLeft}
+                      >
+                        <rect
+                          x={segLeft}
                           y={rowTop}
                           width={Math.max(2, segRight - segLeft)}
                           height={ROW_HEIGHT}
                           fill={isSelected ? "#FFF7ED" : "transparent"}
                           stroke={isSelected ? "#FB923C" : "transparent"}
-                            strokeWidth={isSelected ? 1.5 : 0}
-                          />
+                          strokeWidth={isSelected ? 1.5 : 0}
+                        />
 
                         <circle
                           cx={markerX}
@@ -738,6 +836,7 @@ export default function VentilationChart({
                   {showXAxis &&
                     majorTicks.map((tick) => {
                       const x = minuteToX(tick, effectiveXEnd, plotWidth);
+
                       return (
                         <text
                           key={`tick-label-${tick}`}
@@ -773,9 +872,16 @@ export default function VentilationChart({
               min={0}
               max={Math.max(0, Math.round(maxScrollLeft))}
               step={1}
-              value={Math.min(sliderValue, maxScrollLeft)}
+              value={Math.min(
+                Math.max(0, Math.round(sliderValue)),
+                Math.round(maxScrollLeft)
+              )}
               onChange={(e) => {
-                const next = Number(e.target.value);
+                const next = Math.max(
+                  0,
+                  Math.min(maxScrollLeft, Number(e.target.value))
+                );
+
                 setSliderValue(next);
 
                 const el = scrollRef.current;
@@ -804,7 +910,8 @@ export default function VentilationChart({
                 {getVentDisplayName(zoomTarget.rowName)} detail
               </div>
               <div className="text-xs text-gray-500">
-                {formatClockTime(zoomTarget.x0, timeZero)} - {formatClockTime(zoomTarget.x1, timeZero)}
+                {formatClockTime(zoomTarget.x0, timeZero)} -{" "}
+                {formatClockTime(zoomTarget.x1, timeZero)}
               </div>
             </div>
 
@@ -841,6 +948,7 @@ export default function VentilationChart({
               stroke="#d1d5db"
               strokeWidth={1}
             />
+
             <line
               x1={40}
               y1={14}
@@ -853,6 +961,7 @@ export default function VentilationChart({
             <text x={8} y={22} fontSize={10} fill="#6b7280">
               {roundSmart(detailInfo.maxV)}
             </text>
+
             <text x={8} y={detailHeight - 28} fontSize={10} fill="#6b7280">
               {roundSmart(detailInfo.minV)}
             </text>
@@ -860,6 +969,7 @@ export default function VentilationChart({
             <text x={40} y={detailHeight - 8} fontSize={10} fill="#6b7280">
               {formatClockTime(detailInfo.minT, timeZero)}
             </text>
+
             <text
               x={detailWidth - 14}
               y={detailHeight - 8}
@@ -886,6 +996,7 @@ export default function VentilationChart({
               const rx =
                 (p.time - detailInfo.minT) /
                 Math.max(1e-6, detailInfo.maxT - detailInfo.minT || 1);
+
               const ry =
                 (p.value - detailInfo.minV) /
                 Math.max(1e-6, detailInfo.maxV - detailInfo.minV);

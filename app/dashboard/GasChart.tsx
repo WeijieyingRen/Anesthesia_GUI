@@ -197,7 +197,11 @@ function formatClockTime(offsetMin: number, timeZero?: string | null) {
   const base = new Date(timeZero);
   if (Number.isNaN(base.getTime())) return String(offsetMin);
 
-  const dt = new Date(base.getTime() + offsetMin * 60000);
+  const roundedBase = new Date(base);
+  const roundedMinutes = Math.floor(roundedBase.getMinutes() / 15) * 15;
+  roundedBase.setMinutes(roundedMinutes, 0, 0);
+
+  const dt = new Date(roundedBase.getTime() + offsetMin * 60000);
   const hh = String(dt.getHours()).padStart(2, "0");
   const mm = String(dt.getMinutes()).padStart(2, "0");
 
@@ -266,7 +270,9 @@ function isMatchingGasRow(
   managementEvent?: ManagementEvent | null
 ) {
   if (!managementEvent) return false;
-  if (managementEvent.chart_type !== "gas") return false;
+  if (String(managementEvent.chart_type ?? "").toLowerCase() !== "gas") {
+    return false;
+  }
 
   const target = normalizeManagementRowName(managementEvent.row_name);
   const current = normalizeManagementRowName(rowName);
@@ -292,6 +298,23 @@ function isHighlightedGasSegment(
   return seg.x0 <= highlightTime && highlightTime < seg.x1;
 }
 
+function getManagementEventHeader(managementEvent?: ManagementEvent | null) {
+  if (!managementEvent) return null;
+  if (String(managementEvent.chart_type ?? "").toLowerCase() !== "gas") {
+    return null;
+  }
+
+  const rowName = String(managementEvent.row_name ?? "Gas event");
+  const timeMin = Number(managementEvent.time_min);
+  const endTimeMin = Number(managementEvent.end_time_min ?? managementEvent.time_min);
+
+  return {
+    rowName,
+    timeMin,
+    endTimeMin,
+  };
+}
+
 function FixedAxisSpacer({ height }: { height: number }) {
   return (
     <div
@@ -300,7 +323,6 @@ function FixedAxisSpacer({ height }: { height: number }) {
     />
   );
 }
-
 function GasGridSvg({
   end,
   majorTicks,
@@ -330,12 +352,12 @@ function GasGridSvg({
     >
       {highlightWindow && (
         <rect
-          x={(highlightWindow.startMin / end) * plotWidth}
+          x={minuteToX(highlightWindow.startMin, end, plotWidth)}
           y={TOP_PAD}
           width={Math.max(
             2,
-            ((highlightWindow.endMin - highlightWindow.startMin) / end) *
-              plotWidth
+            minuteToX(highlightWindow.endMin, end, plotWidth) -
+              minuteToX(highlightWindow.startMin, end, plotWidth)
           )}
           height={rows.length * ROW_HEIGHT}
           fill="lightblue"
@@ -345,7 +367,7 @@ function GasGridSvg({
       )}
 
       {minorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
+        const x = minuteToX(tick, end, plotWidth);
 
         return (
           <line
@@ -361,7 +383,7 @@ function GasGridSvg({
       })}
 
       {majorTicks.map((tick) => {
-        const x = (tick / end) * plotWidth;
+        const x = minuteToX(tick, end, plotWidth);
 
         return (
           <line
@@ -440,8 +462,15 @@ export default function GasChart({
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
-  const majorStep = useMemo(() => getChartMajorStep(timeResolution), [timeResolution]);
-  const minorStep = useMemo(() => getChartMinorStep(timeResolution), [timeResolution]);
+  const majorStep = useMemo(
+    () => getChartMajorStep(timeResolution),
+    [timeResolution]
+  );
+
+  const minorStep = useMemo(
+    () => getChartMinorStep(timeResolution),
+    [timeResolution]
+  );
 
   const effectiveWindowSize = windowSize ?? majorStep;
 
@@ -499,25 +528,50 @@ export default function GasChart({
     return buildDetailPolyline(zoomTarget.points, detailWidth, detailHeight);
   }, [zoomTarget]);
 
+  const eventHeader = getManagementEventHeader(managementEvent);
+
   useEffect(() => {
-    if (scrollRef.current == null) return;
+    const el = scrollRef.current;
+    if (!el) return;
     if (sharedScrollLeft == null) return;
 
-    if (Math.abs(scrollRef.current.scrollLeft - sharedScrollLeft) > 1) {
-      scrollRef.current.scrollLeft = sharedScrollLeft;
-      setSliderValue(sharedScrollLeft);
+    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
+
+    if (Math.abs(el.scrollLeft - next) > 1) {
+      isSyncingFromSliderRef.current = true;
+      el.scrollLeft = next;
+
+      requestAnimationFrame(() => {
+        isSyncingFromSliderRef.current = false;
+      });
     }
-  }, [sharedScrollLeft]);
+
+    setSliderValue(next);
+  }, [sharedScrollLeft, maxScrollLeft]);
 
   useEffect(() => {
     function updateScrollMetrics() {
-      const xEl = scrollRef.current;
+      const el = scrollRef.current;
+      if (!el) return;
 
-      if (xEl) {
-        const nextMaxLeft = Math.max(0, xEl.scrollWidth - xEl.clientWidth);
-        setMaxScrollLeft(nextMaxLeft);
-        setSliderValue(Math.min(xEl.scrollLeft, nextMaxLeft));
+      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+      setMaxScrollLeft(nextMax);
+
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+      );
+
+      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = nextScrollLeft;
+
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
       }
+
+      setSliderValue(nextScrollLeft);
     }
 
     updateScrollMetrics();
@@ -527,7 +581,13 @@ export default function GasChart({
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
-  }, [contentWidth, viewHeight, hiddenNames, rows.length]);
+  }, [
+    contentWidth,
+    viewHeight,
+    hiddenNames.length,
+    rows.length,
+    sharedScrollLeft,
+  ]);
 
   if (!Object.keys(safeGas).length || rows.length === 0) {
     return embedded ? null : (
@@ -619,6 +679,23 @@ export default function GasChart({
         <h3 className="mb-3 text-base font-bold text-gray-900">{title}</h3>
       ) : null}
 
+      {eventHeader && (
+        <div className="border-b border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-800">
+          Gas event:{" "}
+          <span className="font-semibold">{eventHeader.rowName}</span>
+          {Number.isFinite(eventHeader.timeMin) && (
+            <>
+              {" "}
+              · {formatClockTime(eventHeader.timeMin, timeZero)}
+              {Number.isFinite(eventHeader.endTimeMin) &&
+              eventHeader.endTimeMin !== eventHeader.timeMin
+                ? ` – ${formatClockTime(eventHeader.endTimeMin, timeZero)}`
+                : ""}
+            </>
+          )}
+        </div>
+      )}
+
       <div
         className="grid gap-0"
         style={{
@@ -705,20 +782,20 @@ export default function GasChart({
                   return;
                 }
 
-                e.preventDefault();
-
                 const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
+
+                e.preventDefault();
+                e.stopPropagation();
+
                 el.scrollLeft = clamped;
                 setSliderValue(clamped);
                 onSharedScrollLeftChange?.(clamped);
               }}
               onScroll={(e) => {
+                if (isSyncingFromSliderRef.current) return;
+
                 const next = e.currentTarget.scrollLeft;
-
-                if (!isSyncingFromSliderRef.current) {
-                  setSliderValue(next);
-                }
-
+                setSliderValue(next);
                 onSharedScrollLeftChange?.(next);
               }}
             >
@@ -750,8 +827,17 @@ export default function GasChart({
                         const rowTop = TOP_PAD + seg.rowIndex * ROW_HEIGHT;
                         const centerY = rowTop + ROW_HEIGHT / 2;
 
-                        const segLeft = minuteToX(seg.x0, effectiveXEnd, plotWidth);
-                        const segRight = minuteToX(seg.x1, effectiveXEnd, plotWidth);
+                        const segLeft = minuteToX(
+                          seg.x0,
+                          effectiveXEnd,
+                          plotWidth
+                        );
+
+                        const segRight = minuteToX(
+                          seg.x1,
+                          effectiveXEnd,
+                          plotWidth
+                        );
 
                         const label = String(roundSmart(seg.displayValue));
                         const hideVisual = !seg.hasNonZeroValue;
@@ -890,9 +976,16 @@ export default function GasChart({
               min={0}
               max={Math.max(0, Math.round(maxScrollLeft))}
               step={1}
-              value={Math.min(sliderValue, maxScrollLeft)}
+              value={Math.min(
+                Math.max(0, Math.round(sliderValue)),
+                Math.round(maxScrollLeft)
+              )}
               onChange={(e) => {
-                const next = Number(e.target.value);
+                const next = Math.max(
+                  0,
+                  Math.min(maxScrollLeft, Number(e.target.value))
+                );
+
                 setSliderValue(next);
 
                 const el = scrollRef.current;
