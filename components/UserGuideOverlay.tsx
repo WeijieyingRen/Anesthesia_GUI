@@ -16,6 +16,7 @@ type GuideStep = {
   description: string;
   selector: string;
   navGroup: NavGroup;
+  hidePreview?: true;
   highlightMode?:
     | "layout"
     | "preop"
@@ -159,6 +160,7 @@ const GUIDE_STEPS: GuideStep[] = [
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-timeline",
     cardPlacement: "left",
+    hidePreview: true,
     screenNote: {
       text: "Use timeline events to anchor your reasoning.",
       placement: "below",
@@ -172,8 +174,9 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 3: Choose time resolution",
     shortTitle: "Visualization",
     navGroup: "visualization",
+    hidePreview: true,
     description:
-      "Click 15 min or 5 min to choose the time resolution you want to view.",
+      "Click 15 min or 5 min button to choose the time resolution you want to view.",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-resolution",
     cardPlacement: "left",
@@ -190,10 +193,11 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 3: Drag the timeline scroll bar",
     shortTitle: "Visualization",
     navGroup: "visualization",
-    description: "Drag the timeline scroll bar to visualize the whole timeline.",
+    description: "You can Drag the timeline scroll bar of any section to visualize the whole timeline.",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-time-scroll",
     cardPlacement: "left",
+    hidePreview: true,
     screenNote: {
       text: "↘ Drag it to visualize the whole timeline.",
       placement: "timeline-scroll",
@@ -204,7 +208,7 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "visualization-gas-overview",
-    title: "Step 3: Locate the gas panel",
+    title: "Step 3: Gas panel",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description: "",
@@ -217,11 +221,11 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "visualization-gas",
-    title: "Step 3: Inspect gas values",
+    title: "Step 3: Inspect gas values and detailed trajectory",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Click the left label/color area to hide one gas row. Click a gas value or segment to open the detailed trajectory.",
+      "Click the left color area to hide one gas row. Click a gas value segment to open the detailed trajectory.",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-gas",
     cardPlacement: "left",
@@ -231,7 +235,7 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "visualization-medication-overview",
-    title: "Step 3: Locate the medication panel",
+    title: "Step 3: Medication panel",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
@@ -242,18 +246,18 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "visualization-medication",
-    title: "Step 3: Inspect medication events",
+    title: "Step 3: Inspect medication value and units",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Click a medication event to inspect medication name, time, dose, and route. You can also hide or show rows to reduce clutter.",
+      "Click a medication event icon to inspect medication name, time, dose, and route. You can also hide or show rows to reduce clutter.",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-medication",
     cardPlacement: "left",
   },
   {
     id: "visualization-vitals-overview",
-    title: "Step 3: Locate the vitals panel",
+    title: "Step 3: Vitals panel",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description: "This section shows vital signs and physiologic trends.",
@@ -270,7 +274,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Click the color square on the left side of a vital sign row to hide or show the corresponding trend line. This helps reduce clutter and makes the remaining trends easier to inspect.",
+      "Click the color square on the left side of a vital sign row to hide or show the corresponding trend line.",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-vitals",
     cardPlacement: "left",
@@ -280,7 +284,7 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "visualization-ventilation-overview",
-    title: "Step 3: Locate the ventilation panel",
+    title: "Step 3: Ventilation panel",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description: "This section shows ventilation-related values during the case.",
@@ -327,10 +331,11 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "There are three tasks to finish. Click one task button to choose what you want to work on.",
+      "There are three tasks to finish.",
     selector: '[data-guide="task-tabs"]',
     highlightMode: "annotation-tabs",
     cardPlacement: "right",
+    hidePreview: true,
     realAnnotationTask: "summary",
     screenNote: {
       text: "Three tasks need to be finished. Click the buttons to switch tasks.",
@@ -345,6 +350,7 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 4: Read task instructions, examples, and FAQ",
     shortTitle: "Annotation task",
     navGroup: "annotation",
+    hidePreview: true,
     description:
       "Click the instruction, example, or FAQ sections to unfold the detailed description before writing your answer.",
     selector: '[data-guide="instructions"]',
@@ -364,6 +370,7 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 4: Type your response",
     shortTitle: "Annotation task",
     navGroup: "annotation",
+    hidePreview: true,
     description:
       "Write your response in the text box. You can edit the text before saving.",
     selector: '[data-guide="instructions"]',
@@ -383,8 +390,9 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 4: Use speech input if needed",
     shortTitle: "Annotation task",
     navGroup: "annotation",
+    hidePreview: true,
     description:
-      "If you want to use speech input, choose a language, click Start Recording, and click Stop Recording when you finish. Speech input supports English, Chinese, Hindi, and Bengali.",
+      "Choose language before start recording and click Stop Recording when you finish.",
     selector: '[data-guide="annotation-tasks"]',
     highlightMode: "annotation-voice",
     cardPlacement: "right",
@@ -402,14 +410,15 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 4: Save each task",
     shortTitle: "Annotation task",
     navGroup: "annotation",
+    hidePreview: true,
     description:
-      "Click Save and Next when you finish one task. The task must be saved before you move to another unfinished task or submit the case.",
+      " ",
     selector: '[data-guide="annotation-tasks"]',
     highlightMode: "annotation-save",
     cardPlacement: "right",
     realAnnotationTask: "summary",
     screenNote: {
-      text: "Click Save and Next when you finish one task.",
+      text: "Click Save and Next when you finish one task. You must save before moving to the next task.",
       placement: "below",
     },
     annotationPreview: {
@@ -422,13 +431,14 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "Once you finish one task, switch to another unfinished task using the task buttons.",
+      " ",
     selector: '[data-guide="task-tabs"]',
+    hidePreview: true,
     highlightMode: "annotation-tabs",
     cardPlacement: "right",
     realAnnotationTask: "summary",
     screenNote: {
-      text: "Once you finish one task, switch to another unfinished task.",
+      text: "Once you finish one task, switch to another unfinished task using the task buttons.",
       placement: "below",
     },
     annotationPreview: {
@@ -440,6 +450,7 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 4: Open Abnormality Reasoning",
     shortTitle: "Annotation task",
     navGroup: "annotation",
+    hidePreview: true,
     description:
       "Click Abnormality Reasoning to detect all abnormalities and annotate one episode before moving to the next task.",
     selector: '[data-guide="annotation-tasks"]',
@@ -447,7 +458,7 @@ const GUIDE_STEPS: GuideStep[] = [
     cardPlacement: "right",
     realAnnotationTask: "abnormality",
     screenNote: {
-      text: "This is the Abnormality Reasoning task. Detect abnormalities, select one episode for reasoning, then click Save & Next Step.",
+      text: "Click on Abnormality Reasoning button to open the task panel.",
       placement: "below",
     },
     annotationPreview: {
@@ -456,11 +467,11 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "annotation-abnormality-draw",
-    title: "Step 4: Draw an abnormal episode",
+    title: "Step 4: Select all abnormal episodes using your mouse on the right vital penel",
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "Draw one abnormal time window on the Vitals panel. The episode will appear in the checklist automatically.",
+      " ",
     selector: '[data-guide="dashboard-overview"]',
     highlightMode: "annotation-abnormality-draw",
     cardPlacement: "left",
@@ -473,7 +484,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "Detect all abnormal episodes. When you draw a new box, the previous box is saved in the checklist. Click any checklist episode to show its highlighted region again on the Vitals panel.",
+      " ",
     selector: '[data-guide="dashboard-overview"]',
     highlightMode: "annotation-abnormality-review",
     cardPlacement: "left",
@@ -486,7 +497,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "If the selected time range is not correct, drag the left or right edge of the highlighted box. The checklist time range will update automatically.",
+      " ",
     selector: '[data-guide="dashboard-overview"]',
     highlightMode: "annotation-abnormality-adjust",
     cardPlacement: "left",
@@ -508,7 +519,7 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "annotation-management-real",
-    title: "Step 4: Open Management Reasoning",
+    title: "Step 4: Management Reasoning",
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
@@ -517,6 +528,7 @@ const GUIDE_STEPS: GuideStep[] = [
     highlightMode: "annotation-management",
     cardPlacement: "right",
     realAnnotationTask: "management",
+    hidePreview: true,
     screenNote: {
       text: "This is the Management Reasoning task. Review the focused event, write your reasoning, then save the task.",
       placement: "below",
@@ -547,7 +559,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "This focused event is selected by the system. Your reasoning should focus on this medication or gas event.",
+      " ",
     selector: '[data-guide="annotation-tasks"]',
     highlightMode: "annotation-management-focused-event",
     cardPlacement: "right",
@@ -596,7 +608,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "After finishing your management reasoning, click Save & Next Step to save this task and continue.",
+      "After finishing your management reasoning, click Save & Next Step to save this task.",
     selector: '[data-guide="annotation-tasks"]',
     highlightMode: "annotation-management-save",
     cardPlacement: "right",
@@ -2851,7 +2863,7 @@ export default function UserGuideOverlay({
                 </div>
 
                 <div className="mt-1">
-                  3. You can also click the × button on a marked episode to
+                  3. You can also click the '×' button on a marked episode to
                   delete an incorrect or accidentally selected episode.
                 </div>
               </div>
@@ -3241,11 +3253,7 @@ export default function UserGuideOverlay({
               <div className="text-xs font-semibold uppercase tracking-wide text-blue-600">
                 User Guide · Step {progressText}
               </div>
-              <div className="mt-0.5 text-xs text-gray-400">
-              {isCompactCard
-  ? "This step uses the real Abnormality Reasoning page"
-  : "Drag this bar to move the guide"}
-              </div>
+          
             </div>
 
             <div className="flex shrink-0 items-center gap-2">
@@ -3351,11 +3359,11 @@ export default function UserGuideOverlay({
           {currentStep.layoutPreview && <LayoutPreview />}
           {currentStep.preopPreview && <PreopPreview />}
 
-          {currentStep.annotationPreview && !isCompactCard && (
-  <AnnotationPreview mode={currentStep.annotationPreview.mode} />
-)}
+          {!currentStep.hidePreview && currentStep.annotationPreview && !isCompactCard && (
+            <AnnotationPreview mode={currentStep.annotationPreview.mode} />
+          )}
 
-          {currentStep.visualizationPreview && (
+          {!currentStep.hidePreview && currentStep.visualizationPreview && (
             <VisualizationPreview mode={currentStep.visualizationPreview.mode} />
           )}
         </div>
