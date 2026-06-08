@@ -247,8 +247,13 @@ export default function Episode3TextPanel({
   const [saveMessage, setSaveMessage] = useState("");
 
   const [recording, setRecording] = useState(false);
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const recognitionRef = useRef<any>(null);
+
   const voiceBaseTextRef = useRef("");
+  const voiceInsertStartRef = useRef(0);
+  const voiceInsertEndRef = useRef(0);
 
   const openedAtUtcRef = useRef<string | null>(null);
   const openedAtLocalRef = useRef<string | null>(null);
@@ -279,6 +284,8 @@ export default function Episode3TextPanel({
 
     setRecording(false);
     voiceBaseTextRef.current = "";
+    voiceInsertStartRef.current = 0;
+    voiceInsertEndRef.current = 0;
 
     setFreeTextMap((prev) => {
       if (prev[eventId] !== undefined) return prev;
@@ -372,6 +379,44 @@ export default function Episode3TextPanel({
     typingStartedAtMsRef.current = null;
   }
 
+  function insertVoiceTextAtCursor(insertedText: string) {
+    const baseText = voiceBaseTextRef.current;
+    const insertStart = voiceInsertStartRef.current;
+    const insertEnd = voiceInsertEndRef.current;
+
+    const before = baseText.slice(0, insertStart);
+    const after = baseText.slice(insertEnd);
+
+    const needsSpaceBefore =
+      before.length > 0 &&
+      !before.endsWith(" ") &&
+      !before.endsWith("\n") &&
+      insertedText.length > 0;
+
+    const needsSpaceAfter =
+      after.length > 0 &&
+      !after.startsWith(" ") &&
+      !after.startsWith("\n") &&
+      insertedText.length > 0;
+
+    const nextText = `${before}${needsSpaceBefore ? " " : ""}${insertedText}${
+      needsSpaceAfter ? " " : ""
+    }${after}`;
+
+    setCurrentFreeText(nextText);
+
+    const cursorPosition =
+      before.length +
+      (needsSpaceBefore ? 1 : 0) +
+      insertedText.length +
+      (needsSpaceAfter ? 1 : 0);
+
+    window.requestAnimationFrame(() => {
+      textareaRef.current?.focus();
+      textareaRef.current?.setSelectionRange(cursorPosition, cursorPosition);
+    });
+  }
+
   async function startVoiceNote() {
     if (readOnly) return;
     if (saving) return;
@@ -397,13 +442,19 @@ export default function Episode3TextPanel({
         // ignore
       }
 
+      const textarea = textareaRef.current;
+      const currentText = freeText;
+
+      voiceBaseTextRef.current = currentText;
+      voiceInsertStartRef.current =
+        textarea?.selectionStart ?? currentText.length;
+      voiceInsertEndRef.current = textarea?.selectionEnd ?? currentText.length;
+
       const recognition = new SpeechRecognition();
 
       recognition.lang = getSpeechRecognitionLanguage();
       recognition.interimResults = true;
       recognition.continuous = true;
-
-      voiceBaseTextRef.current = freeText.trim();
 
       let finalTranscript = "";
 
@@ -420,24 +471,13 @@ export default function Episode3TextPanel({
           }
         }
 
-        const combined = `${finalTranscript} ${interimTranscript}`.trim();
+        const combined = `${finalTranscript} ${interimTranscript}`
+          .replace(/\s+/g, " ")
+          .trim();
 
         if (!combined) return;
 
-        const marker = "\n\n[Voice note in progress]\n";
-        const base = voiceBaseTextRef.current;
-        const nextText = `${base}${base ? marker : ""}${combined}`.trim();
-
-        setFreeTextMap((prev) => ({
-          ...prev,
-          [eventId]: nextText,
-        }));
-
-        try {
-          localStorage.setItem(draftKey(patientId, caseId, eventId), nextText);
-        } catch {
-          // ignore
-        }
+        insertVoiceTextAtCursor(combined);
       };
 
       recognition.onerror = (event: any) => {
@@ -454,30 +494,9 @@ export default function Episode3TextPanel({
         finalizeVoiceDuration();
         setRecording(false);
 
-        const cleanedTranscript = finalTranscript.trim();
-
-        if (cleanedTranscript) {
-          const base = voiceBaseTextRef.current;
-          const finalText = base
-            ? `${base}\n\n${cleanedTranscript}`.trim()
-            : cleanedTranscript;
-
-          setFreeTextMap((prev) => ({
-            ...prev,
-            [eventId]: finalText,
-          }));
-
-          try {
-            localStorage.setItem(
-              draftKey(patientId, caseId, eventId),
-              finalText
-            );
-          } catch {
-            // ignore
-          }
-        }
-
         voiceBaseTextRef.current = "";
+        voiceInsertStartRef.current = 0;
+        voiceInsertEndRef.current = 0;
       };
 
       recognitionRef.current = recognition;
@@ -909,6 +928,7 @@ export default function Episode3TextPanel({
       </InstructionPanel>
 
       <textarea
+        ref={textareaRef}
         value={freeText}
         onFocus={startTypingTimer}
         onBlur={finalizeTypingDuration}

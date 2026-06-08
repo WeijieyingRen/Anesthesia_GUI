@@ -192,15 +192,12 @@ export default function SummaryPanel({
 
       setSummaryText(draftText || fallbackText);
 
-      const savedNotice = localStorage.getItem(saveNoticeKey(patientId, caseId));
-
-      if (savedResult || savedNotice) {
-        setSaveStatus("success");
-        setSaveMessage(savedNotice || successSaveMessage());
-      } else {
-        setSaveStatus("idle");
-        setSaveMessage("");
-      }
+      // Important:
+      // When opening review mode, still load previous annotation text,
+      // but do NOT show an old saved message.
+      // The saved message should only appear after the current reviewer clicks Save.
+      setSaveStatus("idle");
+      setSaveMessage("");
     } catch {
       setSummaryText("");
       setSaveStatus("idle");
@@ -435,12 +432,8 @@ export default function SummaryPanel({
 
       const successMessage = successSaveMessage();
 
-      try {
-        localStorage.setItem(saveNoticeKey(patientId, caseId), successMessage);
-      } catch {
-        // ignore
-      }
-
+      // Do not store saveNotice in localStorage.
+      // Otherwise review mode may show an old saved message when reopened.
       setSaveStatus("success");
       setSaveMessage(successMessage);
       onSaveAndNextStep?.();

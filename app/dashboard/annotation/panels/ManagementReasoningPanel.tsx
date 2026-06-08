@@ -168,6 +168,7 @@ function formatClinicalNumber(value: number) {
 
 function isChangeManagementEvent(managementEvent: ManagementEvent) {
   const eventType = String(managementEvent.event_type ?? "").toLowerCase();
+
   return (
     eventType.includes("infusion_adjustment") ||
     eventType.includes("gas_adjustment") ||
@@ -283,7 +284,11 @@ export default function ManagementReasoningPanel({
   const [saveMessage, setSaveMessage] = useState("");
 
   const recognitionRef = useRef<any>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const voiceBaseTextRef = useRef("");
+  const voiceInsertStartRef = useRef<number | null>(null);
+  const voiceInsertEndRef = useRef<number | null>(null);
 
   const pageOpenedAtRef = useRef<string | null>(null);
   const pageOpenedAtLocalRef = useRef<string | null>(null);
@@ -361,6 +366,8 @@ export default function ManagementReasoningPanel({
 
     setRecording(false);
     voiceBaseTextRef.current = "";
+    voiceInsertStartRef.current = null;
+    voiceInsertEndRef.current = null;
     recognitionRef.current?.stop?.();
   }, [
     managementEvent?.row_name,
@@ -455,7 +462,14 @@ export default function ManagementReasoningPanel({
       recognitionRef.current?.stop?.();
 
       markVoiceStart();
-      voiceBaseTextRef.current = answer.trim();
+
+      const textarea = textareaRef.current;
+      const selectionStart = textarea?.selectionStart ?? answer.length;
+      const selectionEnd = textarea?.selectionEnd ?? answer.length;
+
+      voiceBaseTextRef.current = answer;
+      voiceInsertStartRef.current = selectionStart;
+      voiceInsertEndRef.current = selectionEnd;
 
       const recognition = new SpeechRecognition();
 
@@ -472,8 +486,25 @@ export default function ManagementReasoningPanel({
         if (!transcript) return;
 
         const resolvedPatientId = patientId ?? patientFolder;
-        const base = voiceBaseTextRef.current;
-        const nextText = base ? `${base}\n\n${transcript}` : transcript;
+
+        const baseText = voiceBaseTextRef.current;
+        const insertStart = voiceInsertStartRef.current ?? baseText.length;
+        const insertEnd = voiceInsertEndRef.current ?? insertStart;
+
+        const before = baseText.slice(0, insertStart);
+        const after = baseText.slice(insertEnd);
+
+        const needsSpaceBefore =
+          before.length > 0 && !before.endsWith(" ") && !before.endsWith("\n");
+
+        const needsSpaceAfter =
+          after.length > 0 && !after.startsWith(" ") && !after.startsWith("\n");
+
+        const insertedText = `${needsSpaceBefore ? " " : ""}${transcript}${
+          needsSpaceAfter ? " " : ""
+        }`;
+
+        const nextText = `${before}${insertedText}${after}`;
 
         setAnswer(nextText);
 
@@ -482,6 +513,12 @@ export default function ManagementReasoningPanel({
         } catch {
           // ignore
         }
+
+        window.setTimeout(() => {
+          const nextCursor = before.length + insertedText.length;
+          textareaRef.current?.focus();
+          textareaRef.current?.setSelectionRange(nextCursor, nextCursor);
+        }, 0);
       };
 
       recognition.onerror = () => {
@@ -495,6 +532,8 @@ export default function ManagementReasoningPanel({
         finalizeVoiceDuration();
         setRecording(false);
         voiceBaseTextRef.current = "";
+        voiceInsertStartRef.current = null;
+        voiceInsertEndRef.current = null;
       };
 
       recognition.start();
@@ -504,6 +543,8 @@ export default function ManagementReasoningPanel({
       finalizeVoiceDuration();
       setRecording(false);
       voiceBaseTextRef.current = "";
+      voiceInsertStartRef.current = null;
+      voiceInsertEndRef.current = null;
       setSaveStatus("error");
       setSaveMessage("Failed to start voice note.");
     }
@@ -514,6 +555,8 @@ export default function ManagementReasoningPanel({
     finalizeVoiceDuration();
     setRecording(false);
     voiceBaseTextRef.current = "";
+    voiceInsertStartRef.current = null;
+    voiceInsertEndRef.current = null;
   }
 
   function validateBeforeSave() {
@@ -898,10 +941,12 @@ export default function ManagementReasoningPanel({
       </div>
 
       <textarea
+        ref={textareaRef}
         value={answer}
         onBlur={finalizeTypingDuration}
         onChange={(e) => {
           if (readOnly) return;
+
           markTyping();
 
           try {
@@ -944,9 +989,7 @@ export default function ManagementReasoningPanel({
           <button
             type="button"
             onClick={handleSave}
-            disabled={
-              readOnly || saveStatus === "saving" || !answer.trim()
-            }
+            disabled={readOnly || saveStatus === "saving" || !answer.trim()}
             className={`rounded-md px-3 py-1.5 text-xs font-medium text-white ${
               readOnly || saveStatus === "saving" || !answer.trim()
                 ? saveStatus === "saving"
