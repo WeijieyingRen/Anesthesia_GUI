@@ -1,6 +1,8 @@
 export const CHART_LEGEND_WIDTH = 220;
 export const CHART_AXIS_WIDTH = 42;
 export const CHART_RIGHT_MARGIN = 20;
+
+// 恢复原来的 15-min spacing
 export const CHART_PX_PER_15_MIN = 64;
 
 export type TimeResolution = 15 | 5;
@@ -24,6 +26,7 @@ export function getSharedChartGeometry(
   timeResolution: TimeResolution
 ) {
   const pxPerMin = getChartPxPerMinute(timeResolution);
+
   const contentPlotWidth =
     !Number.isFinite(xEnd) || xEnd <= 0
       ? 800
@@ -38,14 +41,25 @@ export function getSharedChartGeometry(
 }
 
 export function minuteToX(minute: number, xEnd: number, plotWidth: number) {
+  if (!Number.isFinite(minute)) return 0;
   if (!Number.isFinite(xEnd) || xEnd <= 0 || plotWidth <= 0) return 0;
+
   return (minute / xEnd) * plotWidth;
 }
 
 export function buildChartTicks(end: number, step: number) {
   if (!Number.isFinite(end) || end <= 0) return [];
+  if (!Number.isFinite(step) || step <= 0) return [];
+
   const ticks: number[] = [];
-  for (let t = 0; t <= end; t += step) ticks.push(t);
-  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) ticks.push(end);
+
+  for (let t = 0; t <= end; t += step) {
+    ticks.push(t);
+  }
+
+  if (ticks.length === 0 || ticks[ticks.length - 1] !== end) {
+    ticks.push(end);
+  }
+
   return ticks;
 }

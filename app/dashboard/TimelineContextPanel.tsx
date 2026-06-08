@@ -42,6 +42,7 @@ const SVG_HEIGHT = 86;
 const TIME_LABEL_Y = 16;
 const TOP_LABEL_Y = 40;
 const BOTTOM_LABEL_Y = SVG_HEIGHT - 4;
+
 function formatClockTime(offsetMin: number, timeZero?: string | null) {
   if (!timeZero) return String(offsetMin);
 
@@ -679,50 +680,68 @@ export default function TimelineContextPanel({
     const el = scrollRef.current;
     if (!el) return;
     if (sharedScrollLeft == null) return;
-  
-    const next = Math.max(0, Math.min(maxScrollLeft, sharedScrollLeft));
-  
+
+    const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+    const next = Math.max(0, Math.min(nextMax, sharedScrollLeft));
+
+    setMaxScrollLeft(nextMax);
+
     if (Math.abs(el.scrollLeft - next) > 1) {
       isSyncingFromSliderRef.current = true;
       el.scrollLeft = next;
-  
+
       requestAnimationFrame(() => {
         isSyncingFromSliderRef.current = false;
       });
     }
-  
+
     setSliderValue(next);
-  }, [sharedScrollLeft, maxScrollLeft]);
+  }, [sharedScrollLeft, contentWidth, isExpanded]);
 
   React.useEffect(() => {
-    function updateScrollMetrics() {
-      const el = scrollRef.current;
-      if (!el) return;
+    const el = scrollRef.current;
+    if (!el) return;
 
-      const nextMax = Math.max(0, el.scrollWidth - el.clientWidth);
+    function updateScrollMetrics() {
+      const currentEl = scrollRef.current;
+      if (!currentEl) return;
+
+      const nextMax = Math.max(
+        0,
+        currentEl.scrollWidth - currentEl.clientWidth
+      );
+
       setMaxScrollLeft(nextMax);
 
       const nextScrollLeft = Math.max(
         0,
-        Math.min(nextMax, sharedScrollLeft ?? el.scrollLeft)
+        Math.min(nextMax, sharedScrollLeft ?? currentEl.scrollLeft)
       );
 
-      if (Math.abs(el.scrollLeft - nextScrollLeft) > 1) {
+      if (Math.abs(currentEl.scrollLeft - nextScrollLeft) > 1) {
         isSyncingFromSliderRef.current = true;
-        el.scrollLeft = nextScrollLeft;
-      
+        currentEl.scrollLeft = nextScrollLeft;
+
         requestAnimationFrame(() => {
           isSyncingFromSliderRef.current = false;
         });
       }
-      
+
       setSliderValue(nextScrollLeft);
     }
 
     updateScrollMetrics();
 
+    const resizeObserver = new ResizeObserver(updateScrollMetrics);
+    resizeObserver.observe(el);
+
     window.addEventListener("resize", updateScrollMetrics);
+
+    requestAnimationFrame(updateScrollMetrics);
+    setTimeout(updateScrollMetrics, 0);
+
     return () => {
+      resizeObserver.disconnect();
       window.removeEventListener("resize", updateScrollMetrics);
     };
   }, [contentWidth, isExpanded, sharedScrollLeft]);
@@ -859,23 +878,41 @@ export default function TimelineContextPanel({
 
                   if (absX <= absY || absX < 1) return;
 
-                  const maxScroll = el.scrollWidth - el.clientWidth;
+                  const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
                   const nextLeft = el.scrollLeft + e.deltaX;
+
+                  const atLeftEdge = el.scrollLeft <= 0;
+                  const atRightEdge = el.scrollLeft >= maxScroll - 1;
+
+                  const tryingGoPastLeft = atLeftEdge && e.deltaX < 0;
+                  const tryingGoPastRight = atRightEdge && e.deltaX > 0;
+
+                  if (tryingGoPastLeft || tryingGoPastRight) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                  }
+
                   const clamped = Math.max(0, Math.min(maxScroll, nextLeft));
 
                   e.preventDefault();
                   e.stopPropagation();
 
                   el.scrollLeft = clamped;
+                  setMaxScrollLeft(maxScroll);
                   setSliderValue(clamped);
                   onSharedScrollLeftChange?.(clamped);
                 }}
                 onScroll={(e) => {
                   if (isSyncingFromSliderRef.current) return;
-                
+
                   const next = e.currentTarget.scrollLeft;
+                  const nextMax = Math.max(
+                    0,
+                    e.currentTarget.scrollWidth - e.currentTarget.clientWidth
+                  );
 
-
+                  setMaxScrollLeft(nextMax);
                   setSliderValue(next);
                   onSharedScrollLeftChange?.(next);
                 }}
