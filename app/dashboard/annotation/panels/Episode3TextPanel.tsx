@@ -955,7 +955,7 @@ export default function Episode3TextPanel({
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {saving ? "Saving..." : "Save and Next"}
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
 

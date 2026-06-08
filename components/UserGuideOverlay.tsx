@@ -418,7 +418,7 @@ const GUIDE_STEPS: GuideStep[] = [
     cardPlacement: "right",
     realAnnotationTask: "summary",
     screenNote: {
-      text: "Click Save and Next when you finish one task. You must save before moving to the next task.",
+      text: "Click Save button when you finish one task. You must save before moving to the next task.",
       placement: "below",
     },
     annotationPreview: {
@@ -510,7 +510,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "After detecting all abnormal episodes, select one episode for reasoning, then click Save & Next Step.",
+      "After detecting all abnormal episodes, select one episode for reasoning, then click Save button.",
     selector: '[data-guide="dashboard-overview"]',
     highlightMode: "annotation-abnormality-save",
     cardPlacement: "left",
@@ -608,13 +608,13 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "After finishing your management reasoning, click Save & Next Step to save this task.",
+      "After finishing your management reasoning, click Save button to save this task.",
     selector: '[data-guide="annotation-tasks"]',
     highlightMode: "annotation-management-save",
     cardPlacement: "right",
     realAnnotationTask: "management",
     screenNote: {
-      text: "Click Save & Next Step after you finish your reasoning.",
+      text: "Click Save button after you finish your reasoning.",
       placement: "below",
     },
   },
@@ -2002,7 +2002,7 @@ function AnnotationPreview({
               Reset All
             </span>
             <span className="rounded-md bg-blue-500 px-3 py-2 text-xs font-semibold text-white">
-              Save & Next Step
+              Save button
             </span>
           </div>
         </div>
@@ -2075,7 +2075,7 @@ function AnnotationPreview({
           </div>
 
           <div className="inline-flex rounded-md bg-blue-500 px-3 py-2 text-xs font-semibold text-white">
-            Save & Next Step
+            Save
           </div>
         </div>
       </div>
@@ -2882,7 +2882,7 @@ export default function UserGuideOverlay({
                   </div>
 
                   <div className="mt-1">
-                    3. Click Save & Next Step to continue.
+                    3. Click Save button to save results.
                   </div>
                 </div>
 
@@ -2892,7 +2892,7 @@ export default function UserGuideOverlay({
                   </span>
 
                   <span className="rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white">
-                    Save & Next Step
+                    Save
                   </span>
                 </div>
               </>

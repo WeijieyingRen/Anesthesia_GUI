@@ -3237,7 +3237,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
               >
-                {submitting ? "Saving..." : "Save & Next Step"}
+                {submitting ? "Saving..." : "Save"}
               </button>
             </div>
           </div>
@@ -3379,7 +3379,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                   : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             >
-              {submitting ? "Saving..." : "Save & Next Step"}
+              {submitting ? "Saving..." : "Save"}
             </button>
           </div>
         </div>

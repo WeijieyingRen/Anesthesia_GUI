@@ -955,7 +955,7 @@ export default function ManagementReasoningPanel({
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {saveStatus === "saving" ? "Saving..." : "Save and Next"}
+            {saveStatus === "saving" ? "Saving..." : "Save"}
           </button>
         </div>
 
