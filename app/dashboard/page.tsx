@@ -450,15 +450,156 @@ function extractManagementTextFromReviewPayload(payload: DriveReviewPayload) {
       ""
   ).trim();
 }
-
 function extractAbnormalityEventIdFromPayload(payload: DriveReviewPayload) {
   const answers = extractAbnormalityAnswersFromReviewPayload(payload);
 
-  return String(
-      answers?.eventId ??
+  const directId = String(
+    answers?.eventId ??
       answers?.episodeId ??
+      answers?.event_id ??
+      answers?.episode_id ??
       ""
   ).trim();
+
+  if (directId) return directId;
+
+  const annotatedEpisode = asRecord(answers?.annotatedEpisode);
+
+  const annotatedEpisodeId = String(
+    annotatedEpisode?.id ??
+      annotatedEpisode?.eventId ??
+      annotatedEpisode?.episodeId ??
+      annotatedEpisode?.event_id ??
+      annotatedEpisode?.episode_id ??
+      ""
+  ).trim();
+
+  if (annotatedEpisodeId) return annotatedEpisodeId;
+
+  const selectedEpisodes = Array.isArray(answers?.selectedEpisodes)
+    ? (answers.selectedEpisodes as Array<Record<string, unknown>>)
+    : [];
+
+  const selectedEpisode =
+    selectedEpisodes.find((episode) => Boolean(episode.selected)) ??
+    selectedEpisodes[0];
+
+  return String(
+    selectedEpisode?.id ??
+      selectedEpisode?.eventId ??
+      selectedEpisode?.episodeId ??
+      selectedEpisode?.event_id ??
+      selectedEpisode?.episode_id ??
+      ""
+  ).trim();
+}
+
+function getPointTime(point: any): number | null {
+  return toFiniteNumber(
+    point?.timeMin ??
+      point?.time_min ??
+      point?.relative_anesthesia_time ??
+      point?.time ??
+      point?.x
+  );
+}
+
+function getPointValue(point: any): number | null {
+  return toFiniteNumber(point?.value ?? point?.y);
+}
+
+function getVitalSeriesFromPanel(
+  vitals: VitalPanelData | null,
+  vital: DetectVital
+): any[] {
+  if (!vitals) return [];
+
+  const keyCandidates = [
+    vital,
+    `NIBP_${vital}`,
+    vital === "SPO2" ? "SPO2 %" : null,
+   
+  ].filter(Boolean) as string[];
+
+  const groups = [
+    vitals.main,
+    vitals.gas,
+    vitals.ventilation,
+    vitals.hemodynamics,
+    vitals.cv,
+    vitals.depth,
+    vitals.tmp,
+    vitals.other,
+  ] as Array<Record<string, any[]> | undefined>;
+
+  for (const group of groups) {
+    if (!group) continue;
+
+    for (const key of keyCandidates) {
+      if (Array.isArray(group[key]) && group[key].length > 0) {
+        return group[key];
+      }
+    }
+
+    const vitalLower = String(vital).toLowerCase();
+    const matchedKey = Object.keys(group).find(
+      (key) =>
+        key.toLowerCase() === vitalLower ||
+        key.toLowerCase().includes(vitalLower)
+    );
+
+    if (matchedKey && Array.isArray(group[matchedKey])) {
+      return group[matchedKey];
+    }
+  }
+
+  return [];
+}
+
+function repairEpisodeYRangeFromVitals(
+  episode: DetectedEpisodeItem,
+  vitals: VitalPanelData | null
+): DetectedEpisodeItem {
+  const y1 = toFiniteNumber(episode.y1);
+  const y2 = toFiniteNumber(episode.y2);
+
+  if (
+    y1 !== null &&
+    y2 !== null &&
+    Number.isFinite(y1) &&
+    Number.isFinite(y2) &&
+    y1 !== y2
+  ) {
+    return episode;
+  }
+
+  const series = getVitalSeriesFromPanel(vitals, episode.vital);
+
+  const values = series
+    .filter((point) => {
+      const t = getPointTime(point);
+      return (
+        t !== null &&
+        t >= episode.startMin &&
+        t <= episode.endMin
+      );
+    })
+    .map(getPointValue)
+    .filter((value): value is number => value !== null);
+
+  if (values.length === 0) {
+    return episode;
+  }
+
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const padding = Math.max(5, (maxValue - minValue) * 0.2);
+
+  return {
+    ...episode,
+    y1: minValue - padding,
+    y2: maxValue + padding,
+  };
 }
 
 function parseClockTimeToOffsetMin(
@@ -479,7 +620,6 @@ function parseClockTimeToOffsetMin(
 
   return Math.round((target.getTime() - base.getTime()) / 60000);
 }
-
 function buildEpisodeStateFromStoredAbnormalityResult({
   abnormalityResult,
   anesthesiaStart,
@@ -498,16 +638,24 @@ function buildEpisodeStateFromStoredAbnormalityResult({
     return null;
   }
 
+  const annotatedEpisode = asRecord(abnormalityAnswers?.annotatedEpisode);
+  const annotatedEpisodeIndex = Number(annotatedEpisode?.episodeIndex);
+
   const detectedEpisodes: DetectedEpisodeItem[] = [];
   const prioritizedEpisodeIds: string[] = [];
 
   for (const episode of selectedEpisodes) {
     const episodeIndex = Number(episode.episodeIndex);
+
     const startMin = parseClockTimeToOffsetMin(
       episode.startMin,
       anesthesiaStart
     );
-    const endMin = parseClockTimeToOffsetMin(episode.endMin, anesthesiaStart);
+
+    const endMin = parseClockTimeToOffsetMin(
+      episode.endMin,
+      anesthesiaStart
+    );
 
     if (
       !Number.isFinite(episodeIndex) ||
@@ -517,17 +665,37 @@ function buildEpisodeStateFromStoredAbnormalityResult({
       continue;
     }
 
-    const id = `review-episode-${Math.floor(episodeIndex)}`;
+    const fallbackId = `review-episode-${Math.floor(episodeIndex)}`;
+
+    const id = String(
+      episode.id ??
+        episode.eventId ??
+        episode.episodeId ??
+        episode.event_id ??
+        episode.episode_id ??
+        fallbackId
+    ).trim();
+
     const selected = Boolean(episode.selected);
 
+    const vital = String(
+      episode.vital ??
+        episode.detectVital ??
+        episode.selectedDetectVital ??
+        "MAP"
+    ).trim() as DetectVital;
+
+    const rawY1 = toFiniteNumber(episode.y1);
+    const rawY2 = toFiniteNumber(episode.y2);
+    
     detectedEpisodes.push({
       id,
       label: `Episode ${Math.floor(episodeIndex)}`,
-      vital: "MAP",
+      vital,
       startMin,
       endMin,
-      y1: Number(episode.y1 ?? 0),
-      y2: Number(episode.y2 ?? 0),
+      y1: rawY1 ?? 0,
+      y2: rawY2 ?? 0,
       selectedForAnnotation: selected,
       createdAtUtc: String(episode.createdAtUtc ?? "") || undefined,
       updatedAtUtc: String(episode.updatedAtUtc ?? "") || undefined,
@@ -540,12 +708,21 @@ function buildEpisodeStateFromStoredAbnormalityResult({
 
   if (detectedEpisodes.length === 0) return null;
 
-  const annotatedEpisode = asRecord(abnormalityAnswers?.annotatedEpisode);
-  const annotatedEpisodeIndex = Number(annotatedEpisode?.episodeIndex);
   const activeEpisodeId =
-    Number.isFinite(annotatedEpisodeIndex) && annotatedEpisodeIndex > 0
-      ? `review-episode-${Math.floor(annotatedEpisodeIndex)}`
-      : prioritizedEpisodeIds[0] ?? detectedEpisodes[0]?.id ?? null;
+    detectedEpisodes.find((episode) => {
+      const numberFromLabel = Number(
+        String(episode.label).replace("Episode ", "")
+      );
+
+      return (
+        Number.isFinite(annotatedEpisodeIndex) &&
+        annotatedEpisodeIndex > 0 &&
+        numberFromLabel === Math.floor(annotatedEpisodeIndex)
+      );
+    })?.id ??
+    prioritizedEpisodeIds[0] ??
+    detectedEpisodes[0]?.id ??
+    null;
 
   return {
     stage: "annotate",
@@ -559,6 +736,40 @@ function buildEpisodeStateFromStoredAbnormalityResult({
           : [],
     activeEpisodeId,
   } satisfies EpisodeAnnotationState;
+}
+function forceReviewEpisodeSelectionStage(
+  state: EpisodeAnnotationState | null
+): EpisodeAnnotationState | null {
+  if (!state) return null;
+
+  const selectedIdsFromEpisodes = state.detectedEpisodes
+    .filter((episode) => episode.selectedForAnnotation)
+    .map((episode) => episode.id);
+
+  const existingPrioritizedIds = state.prioritizedEpisodeIds ?? [];
+
+  const prioritizedEpisodeIds =
+    existingPrioritizedIds.length > 0
+      ? existingPrioritizedIds
+      : selectedIdsFromEpisodes;
+
+  const activeEpisodeId =
+    state.activeEpisodeId ??
+    prioritizedEpisodeIds[0] ??
+    state.detectedEpisodes[0]?.id ??
+    null;
+
+  return {
+    ...state,
+    stage: "select_all",
+    annotateStep: "detect",
+    prioritizedEpisodeIds,
+    activeEpisodeId,
+    detectedEpisodes: state.detectedEpisodes.map((episode) => ({
+      ...episode,
+      selectedForAnnotation: prioritizedEpisodeIds.includes(episode.id),
+    })),
+  };
 }
 
 function hydrateReviewDraftFromDrive({
@@ -1319,8 +1530,13 @@ export default function DashboardPage() {
 
   function saveDashboardDraft() {
     if (!currentPatient?.folder || !caseId || caseId === "unknown_case") return;
-
+  
     try {
+      const episodeStateToSave =
+        isReviewMode
+          ? forceReviewEpisodeSelectionStage(episodeState) ?? episodeState
+          : episodeState;
+  
       localStorage.setItem(
         dashboardDraftKey(currentPatient.folder, caseId),
         JSON.stringify({
@@ -1331,7 +1547,7 @@ export default function DashboardPage() {
           patientSummaryCompleted,
           abnormalityReasoningCompleted,
           managementReasoningCompleted,
-          episodeState,
+          episodeState: episodeStateToSave,
           episodeTaskCompletion,
           selectedManagementEventId: getManagementEventId(selectedManagementEvent),
           hasSubmitted,
@@ -1341,7 +1557,6 @@ export default function DashboardPage() {
       // ignore
     }
   }
-
   const prioritizedEpisodes = useMemo(() => {
     return episodeState.detectedEpisodes.filter((e) =>
       episodeState.prioritizedEpisodeIds.includes(e.id)
@@ -1393,9 +1608,11 @@ export default function DashboardPage() {
       },
     };
   }, [activeEpisode, episodeTaskCompletion]);
-  useEffect(() => {
-    if (!activeEpisode) return;
 
+  useEffect(() => {
+    if (annotationLevel !== "episode") return;
+    if (!activeEpisode) return;
+  
     setSelectedDetectVital(activeEpisode.vital);
     setSelectedWindow({
       vital: activeEpisode.vital,
@@ -1404,8 +1621,7 @@ export default function DashboardPage() {
       y1: activeEpisode.y1,
       y2: activeEpisode.y2,
     });
-  }, [activeEpisode]);
-
+  }, [annotationLevel, activeEpisode]);
   function resetEpisodeWorkflow() {
     if (isCaseLocked) return;
     setEpisodeState(buildEmptyEpisodeState());
@@ -1868,8 +2084,13 @@ export default function DashboardPage() {
   }
 
   async function handleNextNavigation() {
-    const nextIndex = currentPatientIndex + 1;
+    const accessOk = await validateStoredAccessCodeOrRedirect();
 
+    if (!accessOk) {
+      return;
+    }
+
+    const nextIndex = currentPatientIndex + 1;
     if (nextIndex >= selectedPatients.length) {
       alert("No more patients.");
       return;
@@ -1916,15 +2137,19 @@ export default function DashboardPage() {
       sessionStartUtcRef.current = new Date().toISOString();
       sessionStartLocalRef.current = getLocalTimestamp();
       actionLogRef.current = [];
+  
       const patientMeta =
         patientMetaOverride ??
         selectedPatients.find((patient) => patient.folder === folder);
-      const reviewMode =
-        patientMeta?.workflowMode === "review";
+  
+      const reviewMode = patientMeta?.workflowMode === "review";
+  
       let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
         Promise.resolve(null);
+  
       setHasSubmitted(false);
       setIsReviewMode(reviewMode);
+  
       try {
         localStorage.setItem(
           "currentWorkflowMode",
@@ -1937,13 +2162,14 @@ export default function DashboardPage() {
       } catch {
         // ignore
       }
+  
       setPatientSummaryCompleted(false);
       setAbnormalityReasoningCompleted(false);
       setManagementReasoningCompleted(false);
       setSubmitError(null);
       setLoadError(null);
       setLoading(true);
-
+  
       setSelectedTask("summary");
       setSelectedDetectVital("MAP");
       setSelectedWindow(null);
@@ -1956,7 +2182,7 @@ export default function DashboardPage() {
       setEpisodeState(buildEmptyEpisodeState());
       setEpisodeTaskCompletion({});
       setReviewHydrationVersion(0);
-
+  
       const [
         caseInfoRows,
         patientAttrRows,
@@ -1994,11 +2220,13 @@ export default function DashboardPage() {
         fetchCsvRows(folder, "fluid_out.csv"),
         fetchCsvRows(folder, "management.csv"),
       ]);
+  
       const caseInfo = caseInfoRows[0] ?? {};
       const patientAttr = patientAttrRows[0] ?? {};
       const caseStatic = caseStaticRows[0] ?? {};
       const preopRow = preopRows[0] ?? {};
       const labRow = labRows[0] ?? {};
+  
       const phyRows = buildPhysiologyRowsFromPanelFiles({
         vitalRows,
         gasRows,
@@ -2006,144 +2234,168 @@ export default function DashboardPage() {
         cvRows,
         temperatureRows,
       });
+  
       const resolvedCaseId =
         String(caseInfo["mpog_case_id"] ?? "").trim() ||
         String(caseStatic["mpog_case_id"] ?? "").trim() ||
         folder;
+  
       setCaseId(resolvedCaseId);
+  
       const rawAnesthesiaStart = caseStatic["anesthesia_start"] ?? null;
       const visualizationStart =
         roundDownToQuarterHourIso(rawAnesthesiaStart) ?? rawAnesthesiaStart;
+  
       const visualizationOffsetMin = getMinuteOffset(
         rawAnesthesiaStart,
         visualizationStart
       );
+  
       const visualizationCaseStatic = {
         ...caseStatic,
         __visualization_start: visualizationStart,
       };
+  
       const shiftedPhyRows = shiftRelativeTimeRows(
         phyRows,
         ["relative_anesthesia_time"],
         visualizationOffsetMin
       );
+  
       const shiftedMedBolusRows = shiftRelativeTimeRows(
         medBolusRows,
         ["relative_anesthesia_time"],
         visualizationOffsetMin
       );
+  
       const shiftedMedInfusionRows = shiftRelativeTimeRows(
         medInfusionRows,
         ["relative_anesthesia_start", "relative_anesthesia_end"],
         visualizationOffsetMin
       );
+  
       const shiftedFluidInRows = shiftRelativeTimeRows(
         fluidInRows,
         ["relative_anesthesia_start", "relative_anesthesia_end"],
         visualizationOffsetMin
       );
+  
       const shiftedFluidOutRows = shiftRelativeTimeRows(
         fluidOutRows,
         ["relative_anesthesia_start", "relative_anesthesia_end"],
         visualizationOffsetMin
       );
+  
       const shiftedManagementRows = shiftRelativeTimeRows(
         managementRows,
         ["time_min", "end_time_min"],
         visualizationOffsetMin
       );
-
+  
       setCaseStaticRowState(visualizationCaseStatic);
       setCaseDynamicRowsState(caseDynamicRows);
       setAnesthesiaStart(visualizationStart);
       setAnesthesiaStop(caseStatic["anesthesia_stop"] ?? null);
-
+  
       setDemographic(
         prepareDemographicData(caseInfo, patientAttr, preopRow, resolvedCaseId)
       );
-
-      setSurgeryContext(prepareSurgeryContextData(caseInfo, caseStatic, preopRow));
+  
+      setSurgeryContext(
+        prepareSurgeryContextData(caseInfo, caseStatic, preopRow)
+      );
+  
       setPreop(preparePreopData(preopRow));
       setPreopHistoryRows(preopHistoryRowsLoaded);
       setLab(prepareLabData(labRow));
       setVitals(prepareVitalsDataRaw(shiftedPhyRows));
-
+  
       setMedBolusRowsState(shiftedMedBolusRows);
       setMedInfusionRowsState(shiftedMedInfusionRows);
       setFluidInRowsState(shiftedFluidInRows);
       setFluidOutRowsState(shiftedFluidOutRows);
-
-      setMedications(prepareMedicationData(shiftedMedBolusRows, shiftedMedInfusionRows));
+  
+      setMedications(
+        prepareMedicationData(shiftedMedBolusRows, shiftedMedInfusionRows)
+      );
+  
       setFluids(prepareFluidData(shiftedFluidInRows, shiftedFluidOutRows));
+  
       const parsedManagementEvents = enrichManagementEventsWithChangeValues(
         prepareManagementEvents(shiftedManagementRows),
         shiftedMedInfusionRows,
         shiftedPhyRows
       );
-setManagementEvents(parsedManagementEvents);
-setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
-
+  
+      setManagementEvents(parsedManagementEvents);
+      setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
+  
       try {
         let participantInfo: any = {};
+  
         try {
           const raw = localStorage.getItem("participantInfo");
           participantInfo = raw ? JSON.parse(raw) : {};
         } catch {
           participantInfo = {};
         }
-
+  
         const accessCode =
           String(
             participantInfo?.accessCode ??
               localStorage.getItem("doctorAccessCode") ??
               ""
           ).trim() || "";
+  
         const doctorName = String(participantInfo?.name ?? "").trim();
+  
         const displayCaseId =
           String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
-
-        clearCaseLocalDrafts(folder, resolvedCaseId);
-
-        if (accessCode && displayCaseId) {
-          const params = new URLSearchParams({
-            accessCode,
-            doctorName,
-            patientId: folder,
-            displayCaseId,
-            caseId: resolvedCaseId,
-          });
-
-          reviewPayloadPromise = fetch(
-            `/api/case_review_data?${params.toString()}`,
-            { cache: "no-store" }
-          )
-            .then(async (reviewRes) => {
-              if (!reviewRes.ok) return null;
-              return (await reviewRes.json()) as DriveReviewPayload;
-            })
-            .catch((error) => {
-              console.error("Failed to load review content from Drive:", error);
-              return null;
-            });
-        }
+  
+          if (reviewMode) {
+            clearCaseLocalDrafts(folder, resolvedCaseId);
+          
+            if (accessCode && displayCaseId) {
+              const params = new URLSearchParams({
+                accessCode,
+                doctorName,
+                patientId: folder,
+                displayCaseId,
+                caseId: resolvedCaseId,
+              });
+          
+              reviewPayloadPromise = fetch(
+                `/api/case_review_data?${params.toString()}`,
+                { cache: "no-store" }
+              )
+                .then(async (reviewRes) => {
+                  if (!reviewRes.ok) return null;
+                  return (await reviewRes.json()) as DriveReviewPayload;
+                })
+                .catch((error) => {
+                  console.error("Failed to load review content from Drive:", error);
+                  return null;
+                });
+            }
+          }
       } catch (error) {
         console.error("Failed to load review content from Drive:", error);
       }
-
+  
       try {
         const reviewPayload = await reviewPayloadPromise;
-
+  
         if (reviewPayload && hasAnyDriveReviewContent(reviewPayload)) {
           const remoteCaseId = extractPayloadCaseId(reviewPayload);
-          const caseIdsMatch =
-            !remoteCaseId || remoteCaseId === resolvedCaseId;
-
+          const caseIdsMatch = !remoteCaseId || remoteCaseId === resolvedCaseId;
+  
           if (caseIdsMatch) {
             hydrateReviewDraftFromDrive({
               patientFolder: folder,
               caseId: resolvedCaseId,
               payload: reviewPayload,
             });
+  
             setReviewHydrationVersion((value) => value + 1);
           } else {
             console.warn("Skipping Drive hydrate due to caseId mismatch.", {
@@ -2156,60 +2408,57 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
       } catch (error) {
         console.error("Failed to hydrate review content from Drive:", error);
       }
-
+  
       const savedDraft = readStoredJson<DashboardCaseDraft>(
         dashboardDraftKey(folder, resolvedCaseId)
       );
+  
       const storedAbnormalityResult =
         readStoredJson<Record<string, unknown>>(
           `annotationResult:abnormality_reasoning:${folder}:${resolvedCaseId}`
         );
+  
       const fallbackEpisodeState = buildEpisodeStateFromStoredAbnormalityResult({
         abnormalityResult: storedAbnormalityResult,
         anesthesiaStart: visualizationStart,
       });
-
+  
       if (savedDraft) {
-        if (savedDraft.selectedTask) setSelectedTask(savedDraft.selectedTask);
-        if (savedDraft.annotationLevel) {
+        if (savedDraft.selectedTask) {
+          setSelectedTask(savedDraft.selectedTask);
+        }
+  
+        if (!reviewMode && savedDraft.annotationLevel) {
           setAnnotationLevel(savedDraft.annotationLevel);
         }
         if (savedDraft.selectedDetectVital) {
           setSelectedDetectVital(savedDraft.selectedDetectVital);
         }
-        if (savedDraft.selectedWindow !== undefined) {
+  
+        if (!reviewMode && savedDraft.selectedWindow !== undefined) {
           setSelectedWindow(savedDraft.selectedWindow ?? null);
         }
+  
         if (typeof savedDraft.patientSummaryCompleted === "boolean") {
           setPatientSummaryCompleted(savedDraft.patientSummaryCompleted);
         }
+  
         if (typeof savedDraft.abnormalityReasoningCompleted === "boolean") {
           setAbnormalityReasoningCompleted(
             savedDraft.abnormalityReasoningCompleted
           );
         }
+  
         if (typeof savedDraft.managementReasoningCompleted === "boolean") {
           setManagementReasoningCompleted(
             savedDraft.managementReasoningCompleted
           );
         }
-        if (savedDraft.episodeState) {
-          setEpisodeState(savedDraft.episodeState);
-        } else if (fallbackEpisodeState) {
-          setEpisodeState(fallbackEpisodeState);
-        }
-        if (savedDraft.episodeTaskCompletion) {
-          setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
-        } else if (fallbackEpisodeState?.activeEpisodeId) {
-          setEpisodeTaskCompletion({
-            [fallbackEpisodeState.activeEpisodeId]: {
-              detect: true,
-            },
-          });
-        }
+  
         if (!reviewMode && typeof savedDraft.hasSubmitted === "boolean") {
           setHasSubmitted(savedDraft.hasSubmitted);
         }
+  
         if (savedDraft.selectedManagementEventId) {
           const restoredManagementEvent =
             parsedManagementEvents.find(
@@ -2217,12 +2466,51 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                 getManagementEventId(event) ===
                 savedDraft.selectedManagementEventId
             ) ?? null;
+  
           if (restoredManagementEvent) {
             setSelectedManagementEvent(restoredManagementEvent);
           }
         }
+      }
+  
+      const baseEpisodeState = savedDraft?.episodeState ?? fallbackEpisodeState;
+
+      if (reviewMode) {
+        const reviewEpisodeState =
+          forceReviewEpisodeSelectionStage(baseEpisodeState);
+      
+        // Review mode 进入 case 时，永远先停在 Summary
+        setAnnotationLevel("summary");
+        setSelectedTask("summary");
+      
+        if (reviewEpisodeState) {
+          // 但是提前恢复 abnormality checklist
+          // reviewer 点 Abnormality Reasoning 后，就能看到 checklist
+          setEpisodeState(reviewEpisodeState);
+      
+          const nextCompletion: EpisodeTaskCompletionMap = {};
+      
+          for (const episode of reviewEpisodeState.detectedEpisodes) {
+            nextCompletion[episode.id] = {
+              detect: reviewEpisodeState.prioritizedEpisodeIds.includes(
+                episode.id
+              ),
+            };
+          }
+      
+          setEpisodeTaskCompletion(nextCompletion);
+      
+   
+        }
+      } else if (savedDraft?.episodeState) {
+        setEpisodeState(savedDraft.episodeState);
+      
+        if (savedDraft.episodeTaskCompletion) {
+          setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
+        }
       } else if (fallbackEpisodeState) {
         setEpisodeState(fallbackEpisodeState);
+      
         if (fallbackEpisodeState.activeEpisodeId) {
           setEpisodeTaskCompletion({
             [fallbackEpisodeState.activeEpisodeId]: {
@@ -2230,6 +2518,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             },
           });
         }
+      
         setAbnormalityReasoningCompleted(
           Boolean(
             String(
@@ -2240,8 +2529,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
           )
         );
       }
-      setLoading(false);
       
+      setLoading(false);
     } catch (e: any) {
       console.error("Failed to load patient:", e);
       setLoadError(e?.message ?? "Failed to load patient.");
@@ -2249,23 +2538,130 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     }
   }
 
-  const collectSubmissionPayload = () => {
-    const participantInfoRaw = localStorage.getItem("participantInfo");
+  function getStoredAccessInfo() {
     let participantInfo: any = {};
-  
+
     try {
-      participantInfo = participantInfoRaw ? JSON.parse(participantInfoRaw) : {};
+      const raw = localStorage.getItem("participantInfo");
+      participantInfo = raw ? JSON.parse(raw) : {};
     } catch {
       participantInfo = {};
     }
-  
+
     const accessCode =
-      String(participantInfo?.accessCode ?? localStorage.getItem("doctorAccessCode") ?? "").trim() || null;
-  
-    // 如果前端暂时没有 doctorId，也没关系；后端会用 accessCode.csv 反查
+      String(
+        participantInfo?.accessCode ??
+          localStorage.getItem("doctorAccessCode") ??
+          ""
+      ).trim() || null;
+
     const doctorId =
-      String(participantInfo?.doctorId ?? "").trim() || null;
-  
+      String(
+        participantInfo?.doctorId ??
+          localStorage.getItem("doctorId") ??
+          ""
+      ).trim() || null;
+
+    return {
+      participantInfo,
+      accessCode,
+      doctorId,
+    };
+  }
+
+
+  async function validateStoredAccessCodeOrRedirect(): Promise<boolean> {
+    const { accessCode } = getStoredAccessInfo();
+
+    if (!accessCode || !/^\d{4}$/.test(accessCode)) {
+      const message =
+        "Invalid access code. Please log in again with a valid 4-digit access code.";
+
+      setSubmitError(message);
+      alert(message);
+
+      logAction("blocked_invalid_access_code_format", {
+        accessCodePresent: Boolean(accessCode),
+      });
+
+      router.push("/");
+      return false;
+    }
+
+    try {
+      const res = await fetch("/assigned_code/access_review_code.csv", {
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        const message =
+          "Failed to validate access code. Please log in again.";
+
+        setSubmitError(message);
+        alert(message);
+
+        logAction("blocked_access_code_validation_load_failed", {
+          status: res.status,
+        });
+
+        router.push("/");
+        return false;
+      }
+
+      const text = await res.text();
+
+      const rows = Papa.parse<CsvRow>(text, {
+        header: true,
+        dynamicTyping: false,
+        skipEmptyLines: true,
+      }).data;
+
+      const matched = rows.find(
+        (row) =>
+          String(row["annotation_code"] ?? "").trim() === accessCode ||
+          String(row["review_code"] ?? "").trim() === accessCode
+      );
+
+      if (!matched) {
+        const message =
+          "Invalid access code. Please log in again with a valid access code.";
+
+        setSubmitError(message);
+        alert(message);
+
+        localStorage.removeItem("gameData");
+        localStorage.removeItem("participantInfo");
+        localStorage.removeItem("doctorAccessCode");
+        localStorage.removeItem("doctorId");
+        localStorage.removeItem("currentWorkflowMode");
+        localStorage.removeItem("loginWorkflowMode");
+
+        logAction("blocked_access_code_not_found", {
+          accessCode,
+        });
+
+        router.push("/");
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Access code validation failed:", error);
+
+      const message =
+        "Failed to validate access code. Please log in again.";
+
+      setSubmitError(message);
+      alert(message);
+
+      logAction("blocked_access_code_validation_exception", {});
+      router.push("/");
+      return false;
+    }
+  }
+  const collectSubmissionPayload = () => {
+    const { participantInfo, accessCode, doctorId } = getStoredAccessInfo();
+
     const patientFolder = currentPatient?.folder ?? null;
   
     const summaryResult = patientFolder && caseId
@@ -2362,11 +2758,15 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
 
   function downloadSubmissionPayload(payload: ReturnType<typeof collectSubmissionPayload>) {
     try {
+      if (!payload.accessCode || !/^\d{4}$/.test(String(payload.accessCode))) {
+        throw new Error("Invalid access code. Submission file was not generated.");
+      }
+
       const patientPart = makeSafeFileNamePart(payload.patientFolder, "unknown_patient");
       const casePart = makeSafeFileNamePart(payload.caseId, "unknown_case");
       const accessCodePart = makeSafeFileNamePart(
         payload.accessCode,
-        "unknown_code"
+        "invalid_code"
       );
       const modePart = payload.workflowMode === "review" ? "review" : "annotation";
       const root = `${accessCodePart}/${modePart}/patient_${patientPart}_${casePart}`;
@@ -2389,8 +2789,8 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
         path: `${root}/case_submission/case_summary.json`,
         data: JSON.stringify(
           {
-            doctor_id: payload.doctorId ?? "unknown_doctor",
-            access_code: payload.accessCode ?? "unknown_code",
+            doctor_id: payload.doctorId ?? null,
+            access_code: payload.accessCode,
             patient_id:
               payload.patientId ?? payload.patientFolder ?? "unknown_patient",
             patient_folder: payload.patientFolder ?? null,
@@ -2442,11 +2842,18 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
   }
 
   const submitCurrentSession = async (): Promise<boolean> => {
+    const accessOk = await validateStoredAccessCodeOrRedirect();
+
+    if (!accessOk) {
+      return false;
+    }
+
     const payload = collectSubmissionPayload();
-    downloadSubmissionPayload(payload);
 
     console.log("===== SUBMISSION PAYLOAD =====");
     console.log(payload);
+
+    downloadSubmissionPayload(payload);
 
     try {
       setSubmitting(true);
@@ -2545,14 +2952,21 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     if (!caseStaticRowState) return null;
   
     const contextStart =
-      annotationLevel === "otherEvents" && selectedManagementEvent
-        ? Math.max(0, Number(selectedManagementEvent.time_min) - 10)
-        : selectedWindow?.startMin;
+    annotationLevel === "otherEvents" && selectedManagementEvent
+      ? Math.max(0, Number(selectedManagementEvent.time_min) - 10)
+      : annotationLevel === "episode"
+        ? selectedWindow?.startMin
+        : undefined;
   
-    const contextEnd =
-      annotationLevel === "otherEvents" && selectedManagementEvent
-        ? Number(selectedManagementEvent.end_time_min ?? selectedManagementEvent.time_min) + 10
-        : selectedWindow?.endMin;
+  const contextEnd =
+    annotationLevel === "otherEvents" && selectedManagementEvent
+      ? Number(
+          selectedManagementEvent.end_time_min ??
+            selectedManagementEvent.time_min
+        ) + 10
+      : annotationLevel === "episode"
+        ? selectedWindow?.endMin
+        : undefined;
   
     return prepareTimelineContextData(
       caseStaticRowState,
@@ -2588,6 +3002,10 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     if (annotationLevel !== "otherEvents") return null;
     return selectedManagementEvent;
   }, [annotationLevel, selectedManagementEvent]);
+
+
+  
+
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -3004,13 +3422,14 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                       data-guide="task-tabs"
                       className="flex items-center gap-2 overflow-x-auto pb-1"
                     >
-    <button
-      type="button"
-      onClick={() => {
-        setAnnotationLevel("summary");
-        setSelectedTask("summary");
-        logAction("annotation_level_click", { level: "summary" });
-      }}
+   <button
+  type="button"
+  onClick={() => {
+    setAnnotationLevel("summary");
+    setSelectedTask("summary");
+    setSelectedWindow(null);
+    logAction("annotation_level_click", { level: "summary" });
+  }}
       className={`shrink-0 rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition ${
         annotationLevel === "summary"
           ? "border-blue-600 bg-blue-600 text-white"
@@ -3021,23 +3440,50 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
     </button>
 
     <button
-      type="button"
-      onClick={() => {
-        setAnnotationLevel("episode");
-        if (selectedTask !== "detect") {
-          setSelectedTask("detect");
-        }
-        logAction("annotation_level_click", { level: "episode" });
-      }}
-      className={`shrink-0 rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition ${
-        annotationLevel === "episode"
-          ? "border-blue-600 bg-blue-600 text-white"
-          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-      }`}
-    >
-       Abnormality Reasoning
-    </button>
+  type="button"
+  onClick={() => {
+    setAnnotationLevel("episode");
 
+    if (selectedTask !== "detect") {
+      setSelectedTask("detect");
+    }
+
+    const episodeToRestore =
+      episodeState.detectedEpisodes.find(
+        (episode) => episode.id === episodeState.activeEpisodeId
+      ) ??
+      episodeState.detectedEpisodes.find((episode) =>
+        episodeState.prioritizedEpisodeIds.includes(episode.id)
+      ) ??
+      episodeState.detectedEpisodes[0] ??
+      null;
+
+    if (episodeToRestore) {
+      setEpisodeState((prev) => ({
+        ...prev,
+        activeEpisodeId: episodeToRestore.id,
+      }));
+
+      setSelectedDetectVital(episodeToRestore.vital);
+      setSelectedWindow({
+        vital: episodeToRestore.vital,
+        startMin: episodeToRestore.startMin,
+        endMin: episodeToRestore.endMin,
+        y1: episodeToRestore.y1,
+        y2: episodeToRestore.y2,
+      });
+    }
+
+    logAction("annotation_level_click", { level: "episode" });
+  }}
+  className={`shrink-0 rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition ${
+    annotationLevel === "episode"
+      ? "border-blue-600 bg-blue-600 text-white"
+      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+  }`}
+>
+  Abnormality Reasoning
+</button>
     <button
   type="button"
   onClick={() => {
@@ -3227,38 +3673,27 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
             </div>
 
             <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  resetEpisodeWorkflow();
-                  logAction("episode_select_all_reset");
-                }}
-                className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-              >
-                Reset All
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  void handleAdvanceEpisodeStage();
-                }}
-                disabled={
-                  isCaseLocked ||
-                  episodeState.prioritizedEpisodeIds.length === 0 ||
-                  submitting
-                }
-                className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                  isCaseLocked ||
-                  episodeState.prioritizedEpisodeIds.length === 0 ||
-                  submitting
-                    ? "cursor-not-allowed bg-blue-300 text-white"
-                    : "bg-blue-600 text-white hover:bg-blue-700"
-                }`}
-              >
-                {submitting ? "Saving..." : "Save"}
-              </button>
-            </div>
+  <button
+    type="button"
+    onClick={() => {
+      void handleAdvanceEpisodeStage();
+    }}
+    disabled={
+      isCaseLocked ||
+      episodeState.prioritizedEpisodeIds.length === 0 ||
+      submitting
+    }
+    className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
+      isCaseLocked ||
+      episodeState.prioritizedEpisodeIds.length === 0 ||
+      submitting
+        ? "cursor-not-allowed bg-blue-300 text-white"
+        : "bg-blue-600 text-white hover:bg-blue-700"
+    }`}
+  >
+    {submitting ? "Saving..." : "Save"}
+  </button>
+</div>
           </div>
         </div>
       )}
@@ -3514,7 +3949,7 @@ setSelectedManagementEvent(parsedManagementEvents[0] ?? null);
                     selectedDetectVital={selectedDetectVital}
                     onChangeSelectedDetectVital={setSelectedDetectVital}
                     showVitalSelector={annotationLevel !== "episode"}
-                    selectedWindow={selectedWindow}
+                    selectedWindow={annotationLevel === "episode" ? selectedWindow : null}
                     onChangeSelectedWindow={handleSelectedWindowChange}
                     onCreateEventFromWindow={handleTimelineWindowCreate}
                     readOnly={isCaseLocked}

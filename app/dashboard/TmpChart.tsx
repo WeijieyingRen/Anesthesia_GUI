@@ -621,6 +621,7 @@ export default function TmpChart({
 
   const [sliderValue, setSliderValue] = React.useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
+  const showHorizontalSlider = maxScrollLeft > 1;
 
   React.useEffect(() => {
     const el = scrollRef.current;
@@ -1705,47 +1706,49 @@ export default function TmpChart({
             </div>
           </div>
 
-          <div className="pt-2">
-            <input
-              type="range"
-              min={0}
-              max={Math.max(0, Math.round(maxScrollLeft))}
-              step={1}
-              value={Math.min(
-                Math.max(0, Math.round(sliderValue)),
-                Math.round(maxScrollLeft)
-              )}
-              onChange={(e) => {
-                const next = Math.max(
-                  0,
-                  Math.min(maxScrollLeft, Number(e.target.value))
-                );
+          {showHorizontalSlider && (
+  <div className="pt-2">
+    <input
+      type="range"
+      min={0}
+      max={Math.max(0, Math.round(maxScrollLeft))}
+      step={1}
+      value={Math.min(
+        Math.max(0, Math.round(sliderValue)),
+        Math.round(maxScrollLeft)
+      )}
+      onChange={(e) => {
+        const next = Math.max(
+          0,
+          Math.min(maxScrollLeft, Number(e.target.value))
+        );
 
-                setSliderValue(next);
+        setSliderValue(next);
 
-                const el = scrollRef.current;
-                if (!el) return;
+        const el = scrollRef.current;
+        if (!el) return;
 
-                isSyncingFromSliderRef.current = true;
-                el.scrollLeft = next;
-                onSharedScrollLeftChange?.(next);
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = next;
+        onSharedScrollLeftChange?.(next);
 
-                requestAnimationFrame(() => {
-                  isSyncingFromSliderRef.current = false;
-                });
-              }}
-              aria-label="Temperature chart horizontal scroll"
-              className="tmp-slider"
-            />
-          </div>
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }}
+      aria-label="Temperature chart horizontal scroll"
+      className="tmp-slider"
+    />
+  </div>
+)}
         </div>
       </div>
 
-      {showXAxis && (
-        <div className="mt-1 text-xs text-gray-500">
-          Horizontal scroll enabled for long cases.
-        </div>
-      )}
+      {showXAxis && showHorizontalSlider && (
+  <div className="mt-1 text-xs text-gray-500">
+    Horizontal scroll enabled for long cases.
+  </div>
+)}
     </div>
   );
 }

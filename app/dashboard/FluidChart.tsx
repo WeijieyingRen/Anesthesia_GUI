@@ -46,6 +46,14 @@ type FluidRow = {
   rowIndex: number;
 };
 
+type FluidTooltip = {
+  title: string;
+  time: string;
+  value: string;
+  unit: string;
+  type: string;
+} | null;
+
 const FLUID_DISPLAY_ORDER = [
   "NS",
   "NS + KCl",
@@ -128,12 +136,21 @@ function buildRows(fluids: FluidPanelData | null, xEnd?: number): FluidRow[] {
 
     const bolus =
       xEnd === undefined
-        ? rawBolus
-        : rawBolus.filter((p) => Number.isFinite(p.time) && p.time <= xEnd);
+        ? rawBolus.filter(
+            (p) => Number.isFinite(p.time) && Number.isFinite(p.dose)
+          )
+        : rawBolus.filter(
+            (p) =>
+              Number.isFinite(p.time) &&
+              Number.isFinite(p.dose) &&
+              p.time <= xEnd
+          );
 
     const infusion =
       xEnd === undefined
-        ? rawInfusion
+        ? rawInfusion.filter(
+            (seg) => Number.isFinite(seg.start) && Number.isFinite(seg.end)
+          )
         : rawInfusion
             .filter(
               (seg) =>
@@ -148,8 +165,15 @@ function buildRows(fluids: FluidPanelData | null, xEnd?: number): FluidRow[] {
 
     const output =
       xEnd === undefined
-        ? rawOutput
-        : rawOutput.filter((p) => Number.isFinite(p.time) && p.time <= xEnd);
+        ? rawOutput.filter(
+            (p) => Number.isFinite(p.time) && Number.isFinite(p.dose)
+          )
+        : rawOutput.filter(
+            (p) =>
+              Number.isFinite(p.time) &&
+              Number.isFinite(p.dose) &&
+              p.time <= xEnd
+          );
 
     return {
       name,
@@ -279,11 +303,15 @@ export default function FluidChart({
   const rows = useMemo(() => buildRows(fluids, xEnd), [fluids, xEnd]);
 
   const [hiddenNames, setHiddenNames] = useState<string[]>([]);
+  const [tooltip, setTooltip] = useState<FluidTooltip>(null);
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const isSyncingFromSliderRef = useRef(false);
 
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+
+  const showHorizontalSlider = maxScrollLeft > 1;
 
   const majorStep = useMemo(
     () => getChartMajorStep(timeResolution),
@@ -323,12 +351,16 @@ export default function FluidChart({
   }, [effectiveXEnd, minorStep]);
 
   const axisHeight = showXAxis ? 22 : 0;
+  const sliderHeight = showHorizontalSlider ? 26 : 0;
+
   const contentHeight = Math.max(
     visibleRowsReindexed.length * ROW_HEIGHT,
     ROW_HEIGHT
   );
 
-  const dynamicHeight = contentHeight + axisHeight + PANEL_PADDING;
+  const dynamicHeight =
+    contentHeight + axisHeight + PANEL_PADDING + sliderHeight;
+
   const viewHeight = Math.min(height, Math.max(120, dynamicHeight));
 
   const { contentWidth, plotWidth } = useMemo(
@@ -338,6 +370,28 @@ export default function FluidChart({
 
   function minuteToPixel(minute: number) {
     return minuteToX(minute, effectiveXEnd, plotWidth);
+  }
+
+  function showTooltip({
+    title,
+    type,
+    time,
+    value,
+    unit,
+  }: {
+    title: string;
+    type: string;
+    time: string;
+    value: string;
+    unit: string;
+  }) {
+    setTooltip({
+      title,
+      type,
+      time,
+      value,
+      unit,
+    });
   }
 
   useEffect(() => {
@@ -387,6 +441,7 @@ export default function FluidChart({
     updateScrollMetrics();
 
     window.addEventListener("resize", updateScrollMetrics);
+
     return () => {
       window.removeEventListener("resize", updateScrollMetrics);
     };
@@ -410,7 +465,9 @@ export default function FluidChart({
   return (
     <div
       className={
-        embedded ? "bg-white p-0" : "rounded-2xl border bg-white p-4 shadow-sm"
+        embedded
+          ? "relative bg-white p-0"
+          : "relative rounded-2xl border bg-white p-4 shadow-sm"
       }
     >
       <style jsx>{`
@@ -692,7 +749,7 @@ export default function FluidChart({
                           const label =
                             seg.label && String(seg.label).trim()
                               ? String(seg.label).trim()
-                              : `${formatFluidNumber(seg.rate)} ${
+                              : `${formatFluidNumber(Number(seg.rate))} ${
                                   seg.unit ?? ""
                                 }`.trim();
 
@@ -710,9 +767,106 @@ export default function FluidChart({
                           );
 
                           const showLabel = width >= labelWidth + 6 && !!label;
+                          const isShortEvent = width < labelWidth + 6;
+
+                          const timeText =
+                            formatClockTime(seg.start, timeZero) +
+                            " - " +
+                            formatClockTime(seg.end, timeZero);
+
+                          const valueText = formatFluidNumber(Number(seg.rate));
+                          const unitText = String(seg.unit ?? "");
+
+                          if (isShortEvent) {
+                            const boxWidth = Math.max(
+                              28,
+                              Math.min(110, estimateTextWidth(label, 10) + 14)
+                            );
+                            const boxHeight = 16;
+                            const arrowTipX = x1;
+                            const arrowBaseX = x1 + 6;
+                            const left = arrowBaseX;
+                            const top = centerY - boxHeight / 2;
+                            const textY = top + boxHeight / 2 + 4;
+
+                            return (
+                              <g
+                                key={`inf-short-${row.name}-${idx}`}
+                                style={{ cursor: "pointer" }}
+                                onMouseDown={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+
+                                  showTooltip({
+                                    title: row.name,
+                                    type: "Infusion / short event",
+                                    time: timeText,
+                                    value: valueText,
+                                    unit: unitText,
+                                  });
+                                }}
+                              >
+                                <line
+                                  x1={arrowTipX}
+                                  y1={centerY - 9}
+                                  x2={arrowTipX}
+                                  y2={centerY + 9}
+                                  stroke={color}
+                                  strokeWidth={1.8}
+                                  opacity={1}
+                                />
+
+                                <polygon
+                                  points={`${arrowTipX},${centerY} ${arrowBaseX},${
+                                    centerY - 5
+                                  } ${arrowBaseX},${centerY + 5}`}
+                                  fill={color}
+                                  stroke={color}
+                                  strokeWidth={1.2}
+                                />
+
+                                <rect
+                                  x={left}
+                                  y={top}
+                                  width={boxWidth}
+                                  height={boxHeight}
+                                  rx={2}
+                                  ry={2}
+                                  fill="white"
+                                  stroke={color}
+                                  strokeWidth={1.5}
+                                />
+
+                                <text
+                                  x={left + boxWidth / 2}
+                                  y={textY}
+                                  textAnchor="middle"
+                                  fontSize={10}
+                                  fill="#1f2937"
+                                >
+                                  {label}
+                                </text>
+                              </g>
+                            );
+                          }
 
                           return (
-                            <g key={`inf-${row.name}-${idx}`}>
+                            <g
+                              key={`inf-${row.name}-${idx}`}
+                              style={{ cursor: "pointer" }}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                showTooltip({
+                                  title: row.name,
+                                  type: "Infusion",
+                                  time: timeText,
+                                  value: valueText,
+                                  unit: unitText,
+                                });
+                              }}
+                            >
                               <rect
                                 x={x1}
                                 y={yTop}
@@ -775,11 +929,10 @@ export default function FluidChart({
 
                         {row.bolus.map((p, idx) => {
                           const cx = minuteToPixel(p.time);
+                          const valueText = formatFluidNumber(p.dose);
+                          const unitText = String(p.unit ?? "");
                           const text = String(
-                            p.label ??
-                              `${formatFluidNumber(p.dose)} ${
-                                p.unit ?? ""
-                              }`.trim()
+                            p.label ?? `${valueText} ${unitText}`.trim()
                           );
 
                           const boxWidth = Math.max(
@@ -794,15 +947,30 @@ export default function FluidChart({
                           const textY = top + boxHeight / 2 + 4;
 
                           return (
-                            <g key={`bolus-${row.name}-${idx}`}>
+                            <g
+                              key={`bolus-${row.name}-${idx}`}
+                              style={{ cursor: "pointer" }}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                showTooltip({
+                                  title: row.name,
+                                  type: "Bolus",
+                                  time: formatClockTime(p.time, timeZero),
+                                  value: valueText,
+                                  unit: unitText,
+                                });
+                              }}
+                            >
                               <line
                                 x1={arrowTipX}
                                 y1={centerY - 9}
                                 x2={arrowTipX}
                                 y2={centerY + 9}
                                 stroke={color}
-                                strokeWidth={1.2}
-                                opacity={0.9}
+                                strokeWidth={1.8}
+                                opacity={1}
                               />
 
                               <polygon
@@ -811,7 +979,7 @@ export default function FluidChart({
                                 } ${arrowBaseX},${centerY + 5}`}
                                 fill={color}
                                 stroke={color}
-                                strokeWidth={1}
+                                strokeWidth={1.2}
                               />
 
                               <rect
@@ -841,11 +1009,10 @@ export default function FluidChart({
 
                         {row.output.map((p, idx) => {
                           const cx = minuteToPixel(p.time);
+                          const valueText = formatFluidNumber(p.dose);
+                          const unitText = String(p.unit ?? "");
                           const text = String(
-                            p.label ??
-                              `${formatFluidNumber(p.dose)} ${
-                                p.unit ?? ""
-                              }`.trim()
+                            p.label ?? `${valueText} ${unitText}`.trim()
                           );
 
                           const boxWidth = Math.max(
@@ -853,27 +1020,46 @@ export default function FluidChart({
                             Math.min(110, estimateTextWidth(text, 10) + 14)
                           );
                           const boxHeight = 16;
-                          const left = cx + 6;
+                          const arrowTipX = cx;
+                          const arrowBaseX = cx + 6;
+                          const left = arrowBaseX;
                           const top = centerY - boxHeight / 2;
                           const textY = top + boxHeight / 2 + 4;
 
                           return (
-                            <g key={`output-${row.name}-${idx}`}>
+                            <g
+                              key={`output-${row.name}-${idx}`}
+                              style={{ cursor: "pointer" }}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                showTooltip({
+                                  title: row.name,
+                                  type: "Output",
+                                  time: formatClockTime(p.time, timeZero),
+                                  value: valueText,
+                                  unit: unitText,
+                                });
+                              }}
+                            >
                               <line
-                                x1={cx}
+                                x1={arrowTipX}
                                 y1={centerY - 9}
-                                x2={cx}
+                                x2={arrowTipX}
                                 y2={centerY + 9}
                                 stroke={color}
-                                strokeWidth={1.2}
-                                opacity={0.9}
+                                strokeWidth={1.8}
+                                opacity={1}
                               />
 
-                              <circle
-                                cx={cx}
-                                cy={centerY}
-                                r={3.5}
+                              <polygon
+                                points={`${arrowTipX},${centerY} ${arrowBaseX},${
+                                  centerY - 5
+                                } ${arrowBaseX},${centerY + 5}`}
                                 fill={color}
+                                stroke={color}
+                                strokeWidth={1.2}
                               />
 
                               <rect
@@ -885,7 +1071,7 @@ export default function FluidChart({
                                 ry={2}
                                 fill="white"
                                 stroke={color}
-                                strokeWidth={1.2}
+                                strokeWidth={1.5}
                               />
 
                               <text
@@ -893,7 +1079,7 @@ export default function FluidChart({
                                 y={textY}
                                 textAnchor="middle"
                                 fontSize={10}
-                                fill="#111827"
+                                fill="#1f2937"
                               >
                                 {text}
                               </text>
@@ -930,43 +1116,80 @@ export default function FluidChart({
             </div>
           </div>
 
-          <div className="pt-2">
-            <input
-              type="range"
-              min={0}
-              max={Math.max(0, Math.round(maxScrollLeft))}
-              step={1}
-              value={Math.min(
-                Math.max(0, Math.round(sliderValue)),
-                Math.round(maxScrollLeft)
-              )}
-              onChange={(e) => {
-                const next = Math.max(
-                  0,
-                  Math.min(maxScrollLeft, Number(e.target.value))
-                );
+          {showHorizontalSlider && (
+            <div className="pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(
+                  Math.max(0, Math.round(sliderValue)),
+                  Math.round(maxScrollLeft)
+                )}
+                onChange={(e) => {
+                  const next = Math.max(
+                    0,
+                    Math.min(maxScrollLeft, Number(e.target.value))
+                  );
 
-                setSliderValue(next);
+                  setSliderValue(next);
 
-                const el = scrollRef.current;
-                if (!el) return;
+                  const el = scrollRef.current;
+                  if (!el) return;
 
-                isSyncingFromSliderRef.current = true;
-                el.scrollLeft = next;
-                onSharedScrollLeftChange?.(next);
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
 
-                requestAnimationFrame(() => {
-                  isSyncingFromSliderRef.current = false;
-                });
-              }}
-              className="fluid-slider"
-              aria-label="Fluid chart horizontal scroll"
-            />
-          </div>
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="fluid-slider"
+                aria-label="Fluid chart horizontal scroll"
+              />
+            </div>
+          )}
         </div>
       </div>
 
-      {showXAxis && (
+      {tooltip && (
+        <div className="absolute right-4 top-10 z-50 w-[240px] rounded-md border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800 shadow-lg">
+          <div className="mb-1 flex items-start justify-between gap-2">
+            <div className="font-semibold text-gray-900">{tooltip.title}</div>
+
+            <button
+              type="button"
+              onClick={() => setTooltip(null)}
+              className="leading-none text-gray-400 hover:text-gray-700"
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="space-y-0.5">
+            <div>
+              <span className="font-medium text-gray-600">Type:</span>{" "}
+              {tooltip.type}
+            </div>
+            <div>
+              <span className="font-medium text-gray-600">Time:</span>{" "}
+              {tooltip.time}
+            </div>
+            <div>
+              <span className="font-medium text-gray-600">Value:</span>{" "}
+              {tooltip.value || "-"}
+            </div>
+            <div>
+              <span className="font-medium text-gray-600">Unit:</span>{" "}
+              {tooltip.unit || "-"}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showXAxis && showHorizontalSlider && (
         <div className="mt-1 text-xs text-gray-500">
           Horizontal scroll enabled for long cases.
         </div>

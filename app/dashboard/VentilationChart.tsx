@@ -146,6 +146,10 @@ function buildWindowSegments(
 
       if (!points.length) continue;
 
+      // 如果这个 segment 里所有值都是 0，就不显示这个 segment。
+      // 但如果 firstValue 是 0、后面有非 0 值，仍然会显示。
+      if (points.every((p) => p.value === 0)) continue;
+
       segments.push({
         rowName: row.name,
         rowIndex: row.rowIndex,
@@ -378,6 +382,8 @@ export default function VentilationChart({
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
+  const showHorizontalSlider = maxScrollLeft > 1;
+
   const majorStep = useMemo(
     () => getChartMajorStep(timeResolution),
     [timeResolution]
@@ -436,7 +442,10 @@ export default function VentilationChart({
   const contentHeight =
     visibleRowsReindexed.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD;
 
-  const viewHeight = Math.min(height, Math.max(120, contentHeight));
+  const sliderHeight = showHorizontalSlider ? 26 : 0;
+  const dynamicHeight = contentHeight + sliderHeight;
+
+  const viewHeight = Math.min(height, Math.max(120, dynamicHeight));
 
   const { contentWidth, plotWidth } = useMemo(
     () => getSharedChartGeometry(effectiveXEnd, timeResolution),
@@ -755,16 +764,6 @@ export default function VentilationChart({
                     const lineEndX = segRight - 6;
                     const canDrawLine = lineEndX > lineStartX + 2;
 
-                    const markerX = canDrawLine
-                      ? segLeft + 4
-                      : Math.min(
-                          segRight - 4,
-                          Math.max(
-                            segLeft + 4,
-                            segLeft + (segRight - segLeft) / 2
-                          )
-                        );
-
                     const isSelected =
                       zoomTarget &&
                       zoomTarget.rowName === seg.rowName &&
@@ -795,15 +794,6 @@ export default function VentilationChart({
                           fill={isSelected ? "#FFF7ED" : "transparent"}
                           stroke={isSelected ? "#FB923C" : "transparent"}
                           strokeWidth={isSelected ? 1.5 : 0}
-                        />
-
-                        <circle
-                          cx={markerX}
-                          cy={centerY}
-                          r={3.5}
-                          fill={color}
-                          stroke="white"
-                          strokeWidth={1}
                         />
 
                         <text x={textX} y={textY} fontSize={10} fill="#111827">
@@ -866,39 +856,41 @@ export default function VentilationChart({
             </div>
           </div>
 
-          <div className="pt-2">
-            <input
-              type="range"
-              min={0}
-              max={Math.max(0, Math.round(maxScrollLeft))}
-              step={1}
-              value={Math.min(
-                Math.max(0, Math.round(sliderValue)),
-                Math.round(maxScrollLeft)
-              )}
-              onChange={(e) => {
-                const next = Math.max(
-                  0,
-                  Math.min(maxScrollLeft, Number(e.target.value))
-                );
+          {showHorizontalSlider && (
+            <div className="pt-2">
+              <input
+                type="range"
+                min={0}
+                max={Math.max(0, Math.round(maxScrollLeft))}
+                step={1}
+                value={Math.min(
+                  Math.max(0, Math.round(sliderValue)),
+                  Math.round(maxScrollLeft)
+                )}
+                onChange={(e) => {
+                  const next = Math.max(
+                    0,
+                    Math.min(maxScrollLeft, Number(e.target.value))
+                  );
 
-                setSliderValue(next);
+                  setSliderValue(next);
 
-                const el = scrollRef.current;
-                if (!el) return;
+                  const el = scrollRef.current;
+                  if (!el) return;
 
-                isSyncingFromSliderRef.current = true;
-                el.scrollLeft = next;
-                onSharedScrollLeftChange?.(next);
+                  isSyncingFromSliderRef.current = true;
+                  el.scrollLeft = next;
+                  onSharedScrollLeftChange?.(next);
 
-                requestAnimationFrame(() => {
-                  isSyncingFromSliderRef.current = false;
-                });
-              }}
-              className="vent-slider"
-              aria-label="Ventilation chart horizontal scroll"
-            />
-          </div>
+                  requestAnimationFrame(() => {
+                    isSyncingFromSliderRef.current = false;
+                  });
+                }}
+                className="vent-slider"
+                aria-label="Ventilation chart horizontal scroll"
+              />
+            </div>
+          )}
         </div>
       </div>
 

@@ -1151,6 +1151,8 @@ export default function MedicationChart({
 
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+  const showHorizontalSlider = maxScrollLeft > 1;
+  
   const [selectedMedicationInfo, setSelectedMedicationInfo] =
     useState<MedicationClickInfo | null>(null);
 
@@ -1620,40 +1622,42 @@ export default function MedicationChart({
             </div>
           </div>
 
-          <div className="pt-2">
-            <input
-              type="range"
-              min={0}
-              max={Math.max(0, Math.round(maxScrollLeft))}
-              step={1}
-              value={Math.min(
-                Math.max(0, Math.round(sliderValue)),
-                Math.round(maxScrollLeft)
-              )}
-              onChange={(e) => {
-                const next = Math.max(
-                  0,
-                  Math.min(maxScrollLeft, Number(e.target.value))
-                );
+          {showHorizontalSlider && (
+  <div className="pt-2">
+    <input
+      type="range"
+      min={0}
+      max={Math.max(0, Math.round(maxScrollLeft))}
+      step={1}
+      value={Math.min(
+        Math.max(0, Math.round(sliderValue)),
+        Math.round(maxScrollLeft)
+      )}
+      onChange={(e) => {
+        const next = Math.max(
+          0,
+          Math.min(maxScrollLeft, Number(e.target.value))
+        );
 
-                setSliderValue(next);
+        setSliderValue(next);
 
-                const el = scrollRef.current;
-                if (!el) return;
+        const el = scrollRef.current;
+        if (!el) return;
 
-                isSyncingFromSliderRef.current = true;
-                el.scrollLeft = next;
-                onSharedScrollLeftChange?.(next);
-                setSelectedMedicationInfo(null);
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = next;
+        onSharedScrollLeftChange?.(next);
+        setSelectedMedicationInfo(null);
 
-                requestAnimationFrame(() => {
-                  isSyncingFromSliderRef.current = false;
-                });
-              }}
-              className="med-slider"
-              aria-label="Medication chart horizontal scroll"
-            />
-          </div>
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }}
+      className="med-slider"
+      aria-label="Medication chart horizontal scroll"
+    />
+  </div>
+)}
         </div>
       </div>
     </div>

@@ -615,7 +615,7 @@ export default function CVChart({
 
   const [sliderValue, setSliderValue] = React.useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = React.useState(0);
-
+  const showHorizontalSlider = maxScrollLeft > 1;
   const effectiveXEnd = xEnd ?? 0;
 
   const visibleFeatures = React.useMemo(
@@ -998,39 +998,41 @@ export default function CVChart({
             </div>
           </div>
 
-          <div className="pt-2">
-            <input
-              type="range"
-              min={0}
-              max={Math.max(0, Math.round(maxScrollLeft))}
-              step={1}
-              value={Math.min(
-                Math.max(0, Math.round(sliderValue)),
-                Math.round(maxScrollLeft)
-              )}
-              onChange={(e) => {
-                const next = Math.max(
-                  0,
-                  Math.min(maxScrollLeft, Number(e.target.value))
-                );
+          {showHorizontalSlider && (
+  <div className="pt-2">
+    <input
+      type="range"
+      min={0}
+      max={Math.max(0, Math.round(maxScrollLeft))}
+      step={1}
+      value={Math.min(
+        Math.max(0, Math.round(sliderValue)),
+        Math.round(maxScrollLeft)
+      )}
+      onChange={(e) => {
+        const next = Math.max(
+          0,
+          Math.min(maxScrollLeft, Number(e.target.value))
+        );
 
-                setSliderValue(next);
+        setSliderValue(next);
 
-                const el = scrollRef.current;
-                if (!el) return;
+        const el = scrollRef.current;
+        if (!el) return;
 
-                isSyncingFromSliderRef.current = true;
-                el.scrollLeft = next;
-                onSharedScrollLeftChange?.(next);
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = next;
+        onSharedScrollLeftChange?.(next);
 
-                requestAnimationFrame(() => {
-                  isSyncingFromSliderRef.current = false;
-                });
-              }}
-              className="cv-slider"
-              aria-label="CV chart horizontal scroll"
-            />
-          </div>
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }}
+      className="cv-slider"
+      aria-label="CV chart horizontal scroll"
+    />
+  </div>
+)}
         </div>
       </div>
     </div>

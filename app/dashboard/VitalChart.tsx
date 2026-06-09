@@ -455,8 +455,8 @@ export default function VitalChart({
 
   const [sliderValue, setSliderValue] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+  const showHorizontalSlider = maxScrollLeft > 1;
   const [scrollViewportWidth, setScrollViewportWidth] = useState(0);
-
   const viewConfig = useMemo(() => {
     return {
       majorStep: getChartMajorStep(timeResolution),
@@ -1711,40 +1711,42 @@ const activeEndMin =
       <div>TEMP: {formatHoverValue(hoverStats.temp, 1)}</div>
     </div>
   )}
+{showHorizontalSlider && (
+  <div className="pt-2">
+    <input
+      type="range"
+      min={0}
+      max={Math.max(0, Math.round(maxScrollLeft))}
+      step={1}
+      value={Math.min(
+        Math.max(0, Math.round(sliderValue)),
+        Math.round(maxScrollLeft)
+      )}
+      onChange={(e) => {
+        const next = Math.max(
+          0,
+          Math.min(maxScrollLeft, Number(e.target.value))
+        );
 
-<div className="pt-2">
-<input
-  type="range"
-  min={0}
-  max={Math.max(0, Math.round(maxScrollLeft))}
-  step={1}
-  value={Math.min(
-    Math.max(0, Math.round(sliderValue)),
-    Math.round(maxScrollLeft)
-  )}
-  onChange={(e) => {
-    const next = Math.max(
-      0,
-      Math.min(maxScrollLeft, Number(e.target.value))
-    );
+        setSliderValue(next);
 
-    setSliderValue(next);
+        const el = scrollRef.current;
+        if (!el) return;
 
-    const el = scrollRef.current;
-    if (!el) return;
+        isSyncingFromSliderRef.current = true;
+        el.scrollLeft = next;
+        onSharedScrollLeftChange?.(next);
 
-    isSyncingFromSliderRef.current = true;
-    el.scrollLeft = next;
-    onSharedScrollLeftChange?.(next);
-
-    requestAnimationFrame(() => {
-      isSyncingFromSliderRef.current = false;
-    });
-  }}
-  className="vital-slider"
-  aria-label="Vital chart horizontal scroll"
-/>
+        requestAnimationFrame(() => {
+          isSyncingFromSliderRef.current = false;
+        });
+      }}
+      className="vital-slider"
+      aria-label="Vital chart horizontal scroll"
+    />
   </div>
+)}
+
 </div>
 
       </div>
