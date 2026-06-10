@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 type CsvRow = Record<string, any>;
 
 type WorkflowMode = "annotation" | "review";
+type LoadMode = "empty" | "annotation_result" | "review_result";
 
 type AccessCodeLookupResult = {
   doctorId: string;
@@ -44,6 +45,7 @@ type GameData = {
     status?: "not_started" | "in_progress" | "completed";
     workflowMode?: "annotation" | "review";
     displayCaseId?: number;
+    loadMode?: LoadMode;
   }>;
   diagnoses: Array<string | null>;
   startTime: string;
@@ -65,10 +67,21 @@ type CaseStatusIndexEntry = {
 };
 
 function getButtonLabel(status: ReviewCaseStatus): string {
-  if (status === "reviewed") return "Review and Revise";
+  if (status === "reviewed") return "Review";
   if (status === "review_in_progress") return "Continue Review";
-  if (status === "ready_for_review") return "Start Review";
+  if (status === "ready_for_review") return "Start";
   return "Not Ready";
+}
+function getReviewLoadMode(status: ReviewCaseStatus): LoadMode {
+  if (status === "reviewed" || status === "review_in_progress") {
+    return "review_result";
+  }
+
+  if (status === "ready_for_review") {
+    return "annotation_result";
+  }
+
+  return "empty";
 }
 
 function resolveStoredWorkflowMode(parsedParticipantInfo: any): WorkflowMode {
@@ -397,6 +410,7 @@ export default function ReviewList() {
             : "not_started",
         workflowMode: "review",
         displayCaseId: c.displayCaseId,
+        loadMode: getReviewLoadMode(c.status),
       })),
       diagnoses: Array(reviewableCases.length).fill(null),
       startTime: new Date().toISOString(),

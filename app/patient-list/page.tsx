@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-
 type CsvRow = Record<string, any>;
 type WorkflowMode = "annotation" | "review";
+type LoadMode = "empty" | "annotation_result" | "review_result";
 
 type AccessCodeLookupResult = {
   doctorId: string;
@@ -32,6 +32,7 @@ type GameData = {
     status?: CaseStatus;
     workflowMode?: WorkflowMode;
     displayCaseId?: number;
+    loadMode?: LoadMode;
   }>;
   diagnoses: Array<string | null>;
   startTime: string;
@@ -75,7 +76,7 @@ function getButtonLabel(status: CaseStatus, workflowMode: WorkflowMode): string 
     return "Start Review";
   }
 
-  if (status === "completed") return "Review and Revise";
+  if (status === "completed") return "Review";
   if (status === "in_progress") return "Continue";
   return "Start";
 }
@@ -383,6 +384,7 @@ export default function PatientList() {
         status: c.status,
         workflowMode: loginWorkflowMode === "review" ? "review" : "annotation",
         displayCaseId: c.displayCaseId,
+        loadMode: c.status === "completed" ? "annotation_result" : "empty",
       })),
       diagnoses: Array(selectedCases.length).fill(null),
       startTime: new Date().toISOString(),
@@ -395,18 +397,19 @@ export default function PatientList() {
     const workflowMode: WorkflowMode =
       loginWorkflowMode === "review" ? "review" : "annotation";
 
-    const gameData: GameData = {
-      currentPatientIndex: startIndex >= 0 ? startIndex : 0,
-      selectedPatients: cases.map((c) => ({
-        id: c.id,
-        folder: c.folder,
-        status: c.status,
-        workflowMode,
-        displayCaseId: c.displayCaseId,
-      })),
-      diagnoses: Array(cases.length).fill(null),
-      startTime: new Date().toISOString(),
-    };
+      const gameData: GameData = {
+        currentPatientIndex: startIndex >= 0 ? startIndex : 0,
+        selectedPatients: cases.map((c) => ({
+          id: c.id,
+          folder: c.folder,
+          status: c.status,
+          workflowMode,
+          displayCaseId: c.displayCaseId,
+          loadMode: c.status === "completed" ? "annotation_result" : "empty",
+        })),
+        diagnoses: Array(cases.length).fill(null),
+        startTime: new Date().toISOString(),
+      };
 
     localStorage.setItem("gameData", JSON.stringify(gameData));
     localStorage.setItem("currentWorkflowMode", workflowMode);
@@ -416,24 +419,21 @@ export default function PatientList() {
   };
 
   const handleStartUserGuide = () => {
-    const firstCase = cases[0];
-  
-    if (!firstCase) {
-      return;
-    }
-  
     const workflowMode: WorkflowMode = "annotation";
   
     const gameData: GameData = {
       currentPatientIndex: 0,
-      selectedPatients: cases.map((c) => ({
-        id: c.id,
-        folder: c.folder,
-        status: c.status,
-        workflowMode,
-        displayCaseId: c.displayCaseId,
-      })),
-      diagnoses: Array(cases.length).fill(null),
+      selectedPatients: [
+        {
+          id: "user_guide",
+          folder: "user_guide",
+          status: "not_started",
+          workflowMode,
+          displayCaseId: 1,
+          loadMode: "empty",
+        },
+      ],
+      diagnoses: [null],
       startTime: new Date().toISOString(),
     };
   

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import UserGuideOverlay from "@/components/UserGuideOverlay";
+import UserCaseDemoGate from "@/components/userGuide/UserCaseDemoGate";
 import ObservationSelectionGuide from "./annotation/panels/ObservationSelectionGuide";
 import type {
   AnnotationTaskKey,
@@ -51,6 +52,8 @@ type SelectedWindow = {
   y2: number;
 };
 
+type LoadMode = "empty" | "annotation_result" | "review_result";
+
 type GameData = {
   currentPatientIndex: number;
   selectedPatients: Array<{
@@ -58,6 +61,7 @@ type GameData = {
     status?: "not_started" | "in_progress" | "completed";
     workflowMode?: "annotation" | "review";
     displayCaseId?: number;
+    loadMode?: LoadMode;
   }>;
   diagnoses?: any[];
   startTime?: string;
@@ -68,13 +72,10 @@ type StoredSelected = {
   status?: "not_started" | "in_progress" | "completed";
   workflowMode?: "annotation" | "review";
   displayCaseId?: number;
+  loadMode?: LoadMode;
 };
 
-type LocalDriveExportEntry = {
-  objectPath: string;
-  data: unknown;
-  savedAt?: string;
-};
+
 
 type AnnotationLevel = "summary" | "episode" | "otherEvents";
 
@@ -251,19 +252,6 @@ function readStoredJson<T>(key: string): T | null {
   }
 }
 
-type DashboardCaseDraft = {
-  selectedTask?: WorkspaceTaskKey;
-  annotationLevel?: AnnotationLevel;
-  selectedDetectVital?: DetectVital;
-  selectedWindow?: SelectedWindow | null;
-  patientSummaryCompleted?: boolean;
-  abnormalityReasoningCompleted?: boolean;
-  managementReasoningCompleted?: boolean;
-  episodeState?: EpisodeAnnotationState;
-  episodeTaskCompletion?: EpisodeTaskCompletionMap;
-  selectedManagementEventId?: string | null;
-  hasSubmitted?: boolean;
-};
 
 type DriveReviewPayload = {
   ok?: boolean;
@@ -278,18 +266,24 @@ function dashboardDraftKey(patientFolder: string, caseId: string) {
 }
 
 function clearCaseLocalDrafts(patientFolder: string, caseId: string) {
+
   try {
     const exactKeys = [
       `annotationDraft:summary:${patientFolder}:${caseId}`,
       `annotationResult:summary:${patientFolder}:${caseId}`,
       `annotationRevision:summary:${patientFolder}:${caseId}`,
       `annotationSaveNotice:summary:${patientFolder}:${caseId}`,
+
       `annotationDraft:management_reasoning:${patientFolder}:${caseId}`,
       `annotationResult:management_reasoning:${patientFolder}:${caseId}`,
       `annotationRevision:management_reasoning:${patientFolder}:${caseId}`,
       `annotationSaveNotice:management_reasoning:${patientFolder}:${caseId}`,
+
       `annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`,
       `annotationRevision:abnormality_reasoning:${patientFolder}:${caseId}`,
+
+      `localDriveExportArchive:${patientFolder}:${caseId}`,
+
       dashboardDraftKey(patientFolder, caseId),
     ];
 
@@ -303,6 +297,7 @@ function clearCaseLocalDrafts(patientFolder: string, caseId: string) {
     ];
 
     const keysToRemove: string[] = [];
+
     for (let i = 0; i < localStorage.length; i += 1) {
       const key = localStorage.key(i);
       if (!key) continue;
@@ -322,9 +317,16 @@ function clearCaseLocalDrafts(patientFolder: string, caseId: string) {
 
 function extractPayloadCaseId(payload: DriveReviewPayload): string | null {
   const candidates = [
+    payload.caseSubmission?.data?.case_id,
     payload.caseSubmission?.data?.caseId,
+
+    payload.summary?.data?.case_id,
     payload.summary?.data?.caseId,
+
+    payload.managementReasoning?.data?.case_id,
     payload.managementReasoning?.data?.caseId,
+
+    payload.abnormalityReasoning?.data?.case_id,
     payload.abnormalityReasoning?.data?.caseId,
   ];
 
@@ -379,27 +381,6 @@ function extractSummaryAnswersFromReviewPayload(payload: DriveReviewPayload) {
   return getSavedAnswers(payload.summary);
 }
 
-function resolveReviewDashboardDraft(payload: DriveReviewPayload) {
-  const abnormalityAnswers = extractAbnormalityAnswersFromReviewPayload(payload);
-
-  const nextDraft: DashboardCaseDraft | null =
-    abnormalityAnswers
-      ? {
-          hasSubmitted: false,
-          patientSummaryCompleted: false,
-          managementReasoningCompleted: false,
-          abnormalityReasoningCompleted:
-            Boolean(
-              String(abnormalityAnswers?.abnormalityReasoningText ?? "").trim()
-            ),
-        }
-      : null;
-
-  return {
-    draft: nextDraft,
-    eventId: null,
-  };
-}
 
 function extractSummaryTextFromReviewPayload(payload: DriveReviewPayload) {
   const answers = extractSummaryAnswersFromReviewPayload(payload);
@@ -782,7 +763,6 @@ function hydrateReviewDraftFromDrive({
   payload: DriveReviewPayload;
 }) {
   try {
-    const reviewDraft = resolveReviewDashboardDraft(payload);
 
     const summaryText = extractSummaryTextFromReviewPayload(payload);
     const summaryResult = extractSummaryResultRecord(payload);
@@ -817,8 +797,7 @@ function hydrateReviewDraftFromDrive({
     const abnormalityText = extractAbnormalityTextFromReviewPayload(payload);
     const abnormalityResult = extractAbnormalityResultRecord(payload);
 
-    let abnormalityEventId =
-      reviewDraft.eventId || extractAbnormalityEventIdFromPayload(payload);
+    let abnormalityEventId = extractAbnormalityEventIdFromPayload(payload);
 
     if (!abnormalityEventId) {
       const abnormalityData = abnormalityResult;
@@ -842,22 +821,7 @@ function hydrateReviewDraftFromDrive({
         JSON.stringify(abnormalityResult ?? {})
       );
     }
-
-    const nextDraft: DashboardCaseDraft = {
-      ...(reviewDraft.draft ?? {}),
-      patientSummaryCompleted: Boolean(summaryText),
-      abnormalityReasoningCompleted: Boolean(abnormalityText),
-      managementReasoningCompleted: Boolean(managementText),
-      selectedManagementEventId:
-        reviewDraft.draft?.selectedManagementEventId ?? undefined,
-      hasSubmitted: false,
-    };
-
-    localStorage.setItem(
-      dashboardDraftKey(patientFolder, caseId),
-      JSON.stringify(nextDraft)
-    );
-
+   
     console.log("[Review hydrate] restored from Drive", {
       summaryText: Boolean(summaryText),
       abnormalityText: Boolean(abnormalityText),
@@ -1504,7 +1468,11 @@ export default function DashboardPage() {
   const [preopInfoOpen, setPreopInfoOpen] = useState(false);
   const [showUserGuide, setShowUserGuide] = useState(false);
   const [isUserGuideMode, setIsUserGuideMode] = useState(false);
-  const isCaseLocked = hasSubmitted && !isReviewMode;
+  const [demoGateOpen, setDemoGateOpen] = useState(false);
+  const isCaseLocked = hasSubmitted;
+
+  const isEpisodeSelectionPage =
+    annotationLevel === "episode" && episodeState.stage !== "annotate";
 
   const sessionStartRef = useRef<number>(performance.now());
   const sessionStartUtcRef = useRef<string>(new Date().toISOString());
@@ -1528,35 +1496,7 @@ export default function DashboardPage() {
     console.log("[ACTION]", { type, ts, payload });
   }
 
-  function saveDashboardDraft() {
-    if (!currentPatient?.folder || !caseId || caseId === "unknown_case") return;
-  
-    try {
-      const episodeStateToSave =
-        isReviewMode
-          ? forceReviewEpisodeSelectionStage(episodeState) ?? episodeState
-          : episodeState;
-  
-      localStorage.setItem(
-        dashboardDraftKey(currentPatient.folder, caseId),
-        JSON.stringify({
-          selectedTask,
-          annotationLevel,
-          selectedDetectVital,
-          selectedWindow,
-          patientSummaryCompleted,
-          abnormalityReasoningCompleted,
-          managementReasoningCompleted,
-          episodeState: episodeStateToSave,
-          episodeTaskCompletion,
-          selectedManagementEventId: getManagementEventId(selectedManagementEvent),
-          hasSubmitted,
-        } satisfies DashboardCaseDraft)
-      );
-    } catch {
-      // ignore
-    }
-  }
+
   const prioritizedEpisodes = useMemo(() => {
     return episodeState.detectedEpisodes.filter((e) =>
       episodeState.prioritizedEpisodeIds.includes(e.id)
@@ -1761,7 +1701,8 @@ export default function DashboardPage() {
   }
 
   function handleTogglePrioritizedEpisode(episodeId: string) {
-    if (isCaseLocked) return;
+    if (isCaseLocked && !isEpisodeSelectionPage) return;
+  
     setEpisodeState((prev) => {
       const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
 
@@ -1800,7 +1741,7 @@ export default function DashboardPage() {
 
   
   async function handleAdvanceEpisodeStage() {
-    if (isCaseLocked) return;
+    if (isCaseLocked && !isEpisodeSelectionPage) return;
     if (episodeState.stage === "select_all") {
       if (episodeState.detectedEpisodes.length === 0) {
         setSubmitError("Please detect at least one episode before continuing.");
@@ -1996,9 +1937,7 @@ export default function DashboardPage() {
       );
   
       if (nextIsUserGuideMode) {
-        window.setTimeout(() => {
-          setShowUserGuide(true);
-        }, 500);
+        setDemoGateOpen(true);
       }
     } else {
       setLoading(false);
@@ -2035,6 +1974,41 @@ export default function DashboardPage() {
     });
   }
 
+  function markCurrentPatientCompleted() {
+    setSelectedPatients((prev) => {
+      const next = prev.map((patient, index) =>
+        index === currentPatientIndex
+          ? {
+              ...patient,
+              status: "completed" as const,
+              loadMode: isReviewMode
+                ? ("review_result" as const)
+                : ("annotation_result" as const),
+            }
+          : patient
+      );
+  
+      try {
+        const raw = localStorage.getItem("gameData");
+        if (raw) {
+          const gameData = JSON.parse(raw) as GameData;
+          localStorage.setItem(
+            "gameData",
+            JSON.stringify({
+              ...gameData,
+              selectedPatients: next,
+              currentPatientIndex,
+            })
+          );
+        }
+      } catch {
+        // ignore
+      }
+  
+      return next;
+    });
+  }
+
   function persistCurrentPatientIndex(nextIndex: number) {
     try {
       const raw = localStorage.getItem("gameData");
@@ -2059,14 +2033,15 @@ export default function DashboardPage() {
   ) {
     const nextPatient = selectedPatients[nextIndex];
     if (!nextPatient) return;
-
+  
     if (options.pushCurrentToBackStack) {
       setDashboardBackStack((prev) => [...prev, currentPatientIndex]);
     }
-
-      setCurrentPatientIndex(nextIndex);
+  
+    setCurrentPatientIndex(nextIndex);
     persistCurrentPatientIndex(nextIndex);
-    await loadPatient(nextPatient.folder);
+  
+    await loadPatient(nextPatient.folder, nextPatient);
   }
 
   async function handleBackNavigation() {
@@ -2085,46 +2060,36 @@ export default function DashboardPage() {
 
   async function handleNextNavigation() {
     const accessOk = await validateStoredAccessCodeOrRedirect();
-
+  
     if (!accessOk) {
       return;
     }
-
+  
     const nextIndex = currentPatientIndex + 1;
     if (nextIndex >= selectedPatients.length) {
       alert("No more patients.");
       return;
     }
-
+  
     if (!hasSubmitted) {
-      if (isReviewMode) {
-        logAction("next_in_review_mode_without_validation");
-        await navigateToPatientIndex(nextIndex, { pushCurrentToBackStack: true });
-        return;
-      }
-
       const validationError = validateBeforeFinalSubmit();
-
-      if (!validationError) {
-        logAction("next_with_submit");
-        const success = await submitCurrentSession();
-        if (!success) return;
-      } else {
-        const ok = window.confirm(
-          `${validationError}\n\nMove to the next patient without submitting this case?`
-        );
-
-        if (!ok) {
-          logAction("next_cancelled", { reason: "incomplete_case" });
-          return;
-        }
-
-        logAction("next_without_submit", { reason: validationError });
-      }
-    } else {
-      logAction(isReviewMode ? "next_in_review_mode" : "next_after_submit");
+  
+      const message = validationError
+        ? `${validationError}\n\nPlease submit this case before moving to the next patient.`
+        : "Please submit this case before moving to the next patient.";
+  
+      alert(message);
+  
+      logAction("next_blocked_without_submit", {
+        reason: validationError ?? "not_submitted",
+        workflowMode: isReviewMode ? "review" : "annotation",
+      });
+  
+      return;
     }
-
+  
+    logAction(isReviewMode ? "next_after_review_submit" : "next_after_submit");
+  
     await navigateToPatientIndex(nextIndex, { pushCurrentToBackStack: true });
   }
 
@@ -2142,13 +2107,29 @@ export default function DashboardPage() {
         patientMetaOverride ??
         selectedPatients.find((patient) => patient.folder === folder);
   
-      const reviewMode = patientMeta?.workflowMode === "review";
-  
-      let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
-        Promise.resolve(null);
-  
-      setHasSubmitted(false);
-      setIsReviewMode(reviewMode);
+        const reviewMode = patientMeta?.workflowMode === "review";
+
+        const patientStatus = patientMeta?.status ?? "not_started";
+
+        const loadMode: LoadMode =
+          patientMeta?.loadMode ??
+          (reviewMode
+            ? patientStatus === "completed" || patientStatus === "in_progress"
+              ? "review_result"
+              : "annotation_result"
+            : patientStatus === "completed" || patientStatus === "in_progress"
+              ? "annotation_result"
+              : "empty");
+
+const alreadySubmitted =
+  patientMeta?.status === "completed" &&
+  loadMode === (reviewMode ? "review_result" : "annotation_result");
+
+let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
+  Promise.resolve(null);
+
+setHasSubmitted(alreadySubmitted);
+setIsReviewMode(reviewMode);
   
       try {
         localStorage.setItem(
@@ -2352,9 +2333,9 @@ export default function DashboardPage() {
         const displayCaseId =
           String(patientMeta?.displayCaseId ?? currentPatientIndex + 1).trim();
   
-          if (reviewMode) {
-            clearCaseLocalDrafts(folder, resolvedCaseId);
-          
+          clearCaseLocalDrafts(folder, resolvedCaseId);
+
+          if (loadMode !== "empty") {
             if (accessCode && displayCaseId) {
               const params = new URLSearchParams({
                 accessCode,
@@ -2362,6 +2343,7 @@ export default function DashboardPage() {
                 patientId: folder,
                 displayCaseId,
                 caseId: resolvedCaseId,
+                loadMode,
               });
           
               reviewPayloadPromise = fetch(
@@ -2373,7 +2355,7 @@ export default function DashboardPage() {
                   return (await reviewRes.json()) as DriveReviewPayload;
                 })
                 .catch((error) => {
-                  console.error("Failed to load review content from Drive:", error);
+                  console.error("Failed to load content from Drive:", error);
                   return null;
                 });
             }
@@ -2409,126 +2391,71 @@ export default function DashboardPage() {
         console.error("Failed to hydrate review content from Drive:", error);
       }
   
-      const savedDraft = readStoredJson<DashboardCaseDraft>(
-        dashboardDraftKey(folder, resolvedCaseId)
-      );
-  
       const storedAbnormalityResult =
-        readStoredJson<Record<string, unknown>>(
-          `annotationResult:abnormality_reasoning:${folder}:${resolvedCaseId}`
-        );
-  
-      const fallbackEpisodeState = buildEpisodeStateFromStoredAbnormalityResult({
-        abnormalityResult: storedAbnormalityResult,
-        anesthesiaStart: visualizationStart,
-      });
-  
-      if (savedDraft) {
-        if (savedDraft.selectedTask) {
-          setSelectedTask(savedDraft.selectedTask);
+      readStoredJson<Record<string, unknown>>(
+        `annotationResult:abnormality_reasoning:${folder}:${resolvedCaseId}`
+      );
+    
+    const fallbackEpisodeState = buildEpisodeStateFromStoredAbnormalityResult({
+      abnormalityResult: storedAbnormalityResult,
+      anesthesiaStart: visualizationStart,
+    });
+    
+    const summaryResult =
+      readStoredJson<Record<string, unknown>>(
+        `annotationResult:summary:${folder}:${resolvedCaseId}`
+      );
+    
+    const managementReasoningResult =
+      readStoredJson<Record<string, unknown>>(
+        `annotationResult:management_reasoning:${folder}:${resolvedCaseId}`
+      );
+    
+    setPatientSummaryCompleted(Boolean(summaryResult));
+    setManagementReasoningCompleted(Boolean(managementReasoningResult));
+    
+    if (reviewMode) {
+      const reviewEpisodeState =
+        forceReviewEpisodeSelectionStage(fallbackEpisodeState);
+    
+      // Reviewer 每次进入 case，先停在 Summary。
+      // 点 Abnormality Reasoning 后，先看到 select/checklist 框，再进入文本框。
+      setAnnotationLevel("summary");
+      setSelectedTask("summary");
+      setSelectedWindow(null);
+    
+      if (reviewEpisodeState) {
+        setEpisodeState(reviewEpisodeState);
+    
+        const nextCompletion: EpisodeTaskCompletionMap = {};
+    
+        for (const episode of reviewEpisodeState.detectedEpisodes) {
+          nextCompletion[episode.id] = {
+            detect: reviewEpisodeState.prioritizedEpisodeIds.includes(episode.id),
+          };
         }
-  
-        if (!reviewMode && savedDraft.annotationLevel) {
-          setAnnotationLevel(savedDraft.annotationLevel);
-        }
-        if (savedDraft.selectedDetectVital) {
-          setSelectedDetectVital(savedDraft.selectedDetectVital);
-        }
-  
-        if (!reviewMode && savedDraft.selectedWindow !== undefined) {
-          setSelectedWindow(savedDraft.selectedWindow ?? null);
-        }
-  
-        if (typeof savedDraft.patientSummaryCompleted === "boolean") {
-          setPatientSummaryCompleted(savedDraft.patientSummaryCompleted);
-        }
-  
-        if (typeof savedDraft.abnormalityReasoningCompleted === "boolean") {
-          setAbnormalityReasoningCompleted(
-            savedDraft.abnormalityReasoningCompleted
-          );
-        }
-  
-        if (typeof savedDraft.managementReasoningCompleted === "boolean") {
-          setManagementReasoningCompleted(
-            savedDraft.managementReasoningCompleted
-          );
-        }
-  
-        if (!reviewMode && typeof savedDraft.hasSubmitted === "boolean") {
-          setHasSubmitted(savedDraft.hasSubmitted);
-        }
-  
-        if (savedDraft.selectedManagementEventId) {
-          const restoredManagementEvent =
-            parsedManagementEvents.find(
-              (event) =>
-                getManagementEventId(event) ===
-                savedDraft.selectedManagementEventId
-            ) ?? null;
-  
-          if (restoredManagementEvent) {
-            setSelectedManagementEvent(restoredManagementEvent);
-          }
-        }
-      }
-  
-      const baseEpisodeState = savedDraft?.episodeState ?? fallbackEpisodeState;
-
-      if (reviewMode) {
-        const reviewEpisodeState =
-          forceReviewEpisodeSelectionStage(baseEpisodeState);
-      
-        // Review mode 进入 case 时，永远先停在 Summary
-        setAnnotationLevel("summary");
-        setSelectedTask("summary");
-      
-        if (reviewEpisodeState) {
-          // 但是提前恢复 abnormality checklist
-          // reviewer 点 Abnormality Reasoning 后，就能看到 checklist
-          setEpisodeState(reviewEpisodeState);
-      
-          const nextCompletion: EpisodeTaskCompletionMap = {};
-      
-          for (const episode of reviewEpisodeState.detectedEpisodes) {
-            nextCompletion[episode.id] = {
-              detect: reviewEpisodeState.prioritizedEpisodeIds.includes(
-                episode.id
-              ),
-            };
-          }
-      
-          setEpisodeTaskCompletion(nextCompletion);
-      
-   
-        }
-      } else if (savedDraft?.episodeState) {
-        setEpisodeState(savedDraft.episodeState);
-      
-        if (savedDraft.episodeTaskCompletion) {
-          setEpisodeTaskCompletion(savedDraft.episodeTaskCompletion);
-        }
-      } else if (fallbackEpisodeState) {
-        setEpisodeState(fallbackEpisodeState);
-      
-        if (fallbackEpisodeState.activeEpisodeId) {
-          setEpisodeTaskCompletion({
-            [fallbackEpisodeState.activeEpisodeId]: {
-              detect: true,
-            },
-          });
-        }
-      
+    
+        setEpisodeTaskCompletion(nextCompletion);
         setAbnormalityReasoningCompleted(
-          Boolean(
-            String(
-              storedAbnormalityResult?.abnormalityReasoningText ??
-                storedAbnormalityResult?.freeText ??
-                ""
-            ).trim()
-          )
+          Boolean(storedAbnormalityResult)
         );
       }
+    } else if (fallbackEpisodeState) {
+      setEpisodeState(fallbackEpisodeState);
+    
+      if (fallbackEpisodeState.activeEpisodeId) {
+        setEpisodeTaskCompletion({
+          [fallbackEpisodeState.activeEpisodeId]: {
+            detect: true,
+          },
+        });
+      }
+    
+      setAbnormalityReasoningCompleted(
+        Boolean(storedAbnormalityResult)
+      );
+    }
+    
       
       setLoading(false);
     } catch (e: any) {
@@ -2874,10 +2801,9 @@ export default function DashboardPage() {
         return false;
       }
 
-      if (!isReviewMode) {
-        setHasSubmitted(true);
-      }
-      return true;
+   setHasSubmitted(true);
+markCurrentPatientCompleted();
+return true;
     } catch (e) {
       console.error("Submit exception:", e);
       setSubmitError("Submit exception");
@@ -2927,26 +2853,6 @@ export default function DashboardPage() {
       setSelectedManagementEvent(managementEvents[0]);
     }
   }, [annotationLevel, selectedManagementEvent, managementEvents]);
-
-  useEffect(() => {
-    if (loading) return;
-    saveDashboardDraft();
-  }, [
-    loading,
-    currentPatient?.folder,
-    caseId,
-    selectedTask,
-    annotationLevel,
-    selectedDetectVital,
-    selectedWindow,
-    patientSummaryCompleted,
-    abnormalityReasoningCompleted,
-    managementReasoningCompleted,
-    episodeState,
-    episodeTaskCompletion,
-    selectedManagementEvent,
-    hasSubmitted,
-  ]);
 
   const timelineContext = useMemo(() => {
     if (!caseStaticRowState) return null;
@@ -3016,7 +2922,6 @@ export default function DashboardPage() {
       </div>
     );
   }
-
   if (loadError) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -3035,7 +2940,29 @@ export default function DashboardPage() {
       </div>
     );
   }
-
+  
+  if (demoGateOpen) {
+    return (
+      <UserCaseDemoGate
+        patientFolder={currentPatient?.folder ?? "unknown_patient"}
+        caseId={caseId}
+        onClose={() => {
+          logAction("close_user_case_demo_gate");
+  
+          setDemoGateOpen(false);
+          setIsUserGuideMode(false);
+          setPatientSummaryCompleted(true);
+          setReviewHydrationVersion((value) => value + 1);
+  
+          try {
+            localStorage.removeItem("isUserGuideMode");
+          } catch {
+            // ignore
+          }
+        }}
+      />
+    );
+  }
   return (
     <main className="min-h-screen bg-gray-50">
       <div
@@ -3051,15 +2978,15 @@ export default function DashboardPage() {
 </h1>
 
 <div data-guide="submit-area" className="flex items-center gap-3">
-  {hasSubmitted && !isReviewMode ? (
-    <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
-      ✅ Submitted
-    </span>
-  ) : null}
+{hasSubmitted ? (
+  <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-semibold text-green-700">
+    ✅ Submitted
+  </span>
+) : null}
 
   <button
     type="button"
-    disabled={submitting || (!isReviewMode && (hasSubmitted || !canSubmitFinal))}
+    disabled={submitting || hasSubmitted || (!isReviewMode && !canSubmitFinal)}
     onClick={async () => {
       const validationError = validateBeforeFinalSubmit();
       if (validationError) {
@@ -3073,7 +3000,7 @@ export default function DashboardPage() {
     className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
       submitting
         ? "cursor-wait bg-blue-300 text-white"
-        : !isReviewMode && hasSubmitted
+        : hasSubmitted
           ? "cursor-not-allowed bg-green-200 text-green-800"
           : !canSubmitFinal
             ? "cursor-not-allowed bg-blue-300 text-white"
@@ -3081,10 +3008,10 @@ export default function DashboardPage() {
     }`}
   >
     {submitting
-      ? "Submitting..."
-      : hasSubmitted && !isReviewMode
-        ? "Submitted"
-        : "Submit"}
+  ? "Submitting..."
+  : hasSubmitted
+    ? "Submitted"
+    : "Submit"}
   </button>
 
   <button
@@ -3620,7 +3547,7 @@ export default function DashboardPage() {
                             nextSelected: !checked,
                           });
                         }}
-                        disabled={isCaseLocked}
+                        disabled={isCaseLocked && !isEpisodeSelectionPage}
                         className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded border text-[10px] font-bold ${
                           checked
                             ? "border-blue-600 bg-blue-600 text-white"
@@ -3637,7 +3564,7 @@ export default function DashboardPage() {
                           e.stopPropagation();
                           handleDeleteDetectedEpisode(episode.id);
                         }}
-                        disabled={isCaseLocked}
+                        disabled={isCaseLocked && !isEpisodeSelectionPage}
                         className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
                         title="Delete event"
                       >
@@ -3679,12 +3606,12 @@ export default function DashboardPage() {
       void handleAdvanceEpisodeStage();
     }}
     disabled={
-      isCaseLocked ||
+      (isCaseLocked && !isEpisodeSelectionPage) ||
       episodeState.prioritizedEpisodeIds.length === 0 ||
       submitting
     }
     className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-      isCaseLocked ||
+      (isCaseLocked && !isEpisodeSelectionPage) ||
       episodeState.prioritizedEpisodeIds.length === 0 ||
       submitting
         ? "cursor-not-allowed bg-blue-300 text-white"
@@ -3771,7 +3698,7 @@ export default function DashboardPage() {
                             nextSelected: !checked,
                           });
                         }}
-                        disabled={isCaseLocked}
+                        disabled={isCaseLocked && !isEpisodeSelectionPage}
                         className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] font-bold ${
                           checked
                             ? "border-blue-600 bg-blue-600 text-white"
@@ -3788,7 +3715,7 @@ export default function DashboardPage() {
                           e.stopPropagation();
                           handleDeleteDetectedEpisode(episode.id);
                         }}
-                        disabled={isCaseLocked}
+                        disabled={isCaseLocked && !isEpisodeSelectionPage}
                         className="flex h-5 w-5 items-center justify-center rounded-md text-base font-black text-black hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
                         title="Delete event"
                       >
@@ -3821,12 +3748,12 @@ export default function DashboardPage() {
                 void handleAdvanceEpisodeStage();
               }}
               disabled={
-                isCaseLocked ||
+                (isCaseLocked && !isEpisodeSelectionPage) ||
                 episodeState.prioritizedEpisodeIds.length === 0 ||
                 submitting
               }
               className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
-                isCaseLocked ||
+                (isCaseLocked && !isEpisodeSelectionPage) ||
                 episodeState.prioritizedEpisodeIds.length === 0 ||
                 submitting
                   ? "cursor-not-allowed bg-blue-300 text-white"
@@ -3979,12 +3906,13 @@ export default function DashboardPage() {
         <UserGuideOverlay
   open={showUserGuide}
   onClose={() => {
+    logAction("close_user_guide");
+
     setShowUserGuide(false);
 
     if (isUserGuideMode) {
       localStorage.removeItem("isUserGuideMode");
       setIsUserGuideMode(false);
-      router.push("/patient-list");
     }
   }}
 />

@@ -4,6 +4,8 @@ import path from "path";
 import { readJsonFromDrive } from "@/lib/drive-upload";
 
 type WorkflowMode = "annotation" | "review";
+type LoadMode = "empty" | "annotation_result" | "review_result";
+type DataSource = "annotation" | "review" | "none";
 
 type AccessCodeLookupEntry = {
   doctorId: string;
@@ -46,6 +48,26 @@ function sanitizePathPart(value: unknown): string {
 
 function normalizeString(value: unknown) {
   return String(value ?? "").trim();
+}
+
+function normalizeLoadMode(value: unknown): LoadMode {
+  const text = normalizeString(value);
+
+  if (
+    text === "empty" ||
+    text === "annotation_result" ||
+    text === "review_result"
+  ) {
+    return text;
+  }
+
+  return "empty";
+}
+
+function resolveRequestedDataSource(loadMode: LoadMode): DataSource {
+  if (loadMode === "annotation_result") return "annotation";
+  if (loadMode === "review_result") return "review";
+  return "none";
 }
 
 async function loadAccessCodeLookup(): Promise<
@@ -361,6 +383,66 @@ async function readAnnotationCaseStatusIndex(sourceAccessCode: string) {
   };
 }
 
+async function readReviewCaseStatusIndex(sourceAccessCode: string) {
+  const sanitizedAccessCode = sanitizePathPart(sourceAccessCode);
+
+  const reviewIndexPath = `${sanitizedAccessCode}/review/case_status_index.json`;
+
+  const reviewFound = await readJsonFromDrive({
+    objectPath: reviewIndexPath,
+  }).catch(() => null);
+
+  if (reviewFound?.data) {
+    return {
+      found: reviewFound,
+      indexPath: reviewIndexPath,
+      source: "google_drive_review_index",
+      usedLegacyFallback: false,
+    };
+  }
+
+  return {
+    found: null,
+    indexPath: reviewIndexPath,
+    source: "none",
+    usedLegacyFallback: false,
+  };
+}
+
+async function loadSectionsFromIndex({
+  indexFound,
+  patientId,
+  caseId,
+}: {
+  indexFound: any;
+  patientId: string;
+  caseId: string;
+}) {
+  const caseStatusEntry = extractCaseStatusEntry(
+    indexFound?.data,
+    patientId,
+    caseId
+  );
+
+  const sections = await loadSectionsFromCaseStatusEntry(caseStatusEntry);
+
+  const loadedSections = [
+    sections.summary,
+    sections.abnormalityReasoning,
+    sections.managementReasoning,
+  ];
+
+  const hasAnySection = loadedSections.some(Boolean);
+  const matchedCaseId = extractMatchedCaseIdFromSections(loadedSections);
+
+  return {
+    caseStatusEntry,
+    sections,
+    hasAnySection,
+    matchedCaseId,
+  };
+}
+
 export async function GET(req: Request) {
   try {
     const t0 = Date.now();
@@ -369,6 +451,9 @@ export async function GET(req: Request) {
     const accessCode = normalizeString(searchParams.get("accessCode"));
     const patientId = normalizeString(searchParams.get("patientId"));
     const caseId = normalizeString(searchParams.get("caseId"));
+
+    const loadMode = normalizeLoadMode(searchParams.get("loadMode"));
+    const requestedDataSource = resolveRequestedDataSource(loadMode);
 
     if (!accessCode || !patientId || !caseId) {
       return NextResponse.json(
@@ -389,26 +474,158 @@ export async function GET(req: Request) {
       );
     }
 
-    // Important:
-    // review_code 也要回到对应 annotation_code 的根目录读取原始 annotation 内容。
-    // 例如 review code 登录时，也读取 2413/annotation/case_status_index.json。
+    /*
+     * Important:
+     * The Google Drive storage root is always the annotation code.
+     *
+     * Example:
+     * annotation_code = 2413
+     * review_code     = 2295
+     *
+     * Annotator results are saved under:
+     * 2413/annotation/...
+     *
+     * Reviewer results are saved under:
+     * 2413/review/...
+     *
+     * Therefore, even when the user logs in with review_code 2295,
+     * review data must be loaded from sourceAccessCode = 2413.
+     */
     const sourceAccessCode = accessEntry.annotationCode;
 
-    const {
-      found: indexFound,
-      indexPath,
-      source,
-      usedLegacyFallback,
-    } = await readAnnotationCaseStatusIndex(sourceAccessCode);
+    if (requestedDataSource === "none") {
+      return NextResponse.json({
+        ok: true,
+        matched: false,
+        reason: "empty_load_mode",
 
-    const caseStatusEntry = extractCaseStatusEntry(
-      indexFound?.data,
-      patientId,
-      caseId
-    );
+        accessCode,
+        workflowMode: accessEntry.workflowMode,
+        loadMode,
+        requestedDataSource,
+        sourceAccessCode,
+
+        selectedDataSource: "none",
+
+        reviewResultFound: false,
+        annotationResultFound: false,
+
+        patientId,
+        caseId,
+
+        indexPath: "",
+        source: "none",
+        usedLegacyFallback: false,
+        fastPathHit: false,
+
+        reviewDebug: null,
+        annotationDebug: null,
+
+        summary: null,
+        abnormalityReasoning: null,
+        managementReasoning: null,
+
+        elapsedMs: Date.now() - t0,
+      });
+    }
+
+    let selectedIndexPath = "";
+    let selectedSource = "none";
+    let selectedUsedLegacyFallback = false;
+    let selectedCaseStatusEntry: CaseStatusIndexEntry | null = null;
+    let selectedSections: {
+      summary: LoadedSection | null;
+      abnormalityReasoning: LoadedSection | null;
+      managementReasoning: LoadedSection | null;
+    } = {
+      summary: null,
+      abnormalityReasoning: null,
+      managementReasoning: null,
+    };
+
+    let selectedDataSource: DataSource = "none";
+
+    let reviewResultFound = false;
+    let annotationResultFound = false;
+
+    let reviewDebug: Record<string, unknown> | null = null;
+    let annotationDebug: Record<string, unknown> | null = null;
+
+    if (requestedDataSource === "review") {
+      const {
+        found: reviewIndexFound,
+        indexPath: reviewIndexPath,
+        source: reviewSource,
+        usedLegacyFallback: reviewUsedLegacyFallback,
+      } = await readReviewCaseStatusIndex(sourceAccessCode);
+
+      const reviewLoad = await loadSectionsFromIndex({
+        indexFound: reviewIndexFound,
+        patientId,
+        caseId,
+      });
+
+      reviewResultFound = Boolean(
+        reviewLoad.caseStatusEntry && reviewLoad.hasAnySection
+      );
+
+      reviewDebug = {
+        indexPath: reviewIndexPath,
+        source: reviewSource,
+        fastPathHit: Boolean(reviewLoad.caseStatusEntry),
+        hasAnySection: reviewLoad.hasAnySection,
+        matchedCaseId: reviewLoad.matchedCaseId,
+      };
+
+      selectedIndexPath = reviewIndexPath;
+      selectedSource = reviewSource;
+      selectedUsedLegacyFallback = reviewUsedLegacyFallback;
+      selectedCaseStatusEntry = reviewLoad.caseStatusEntry;
+      selectedSections = reviewLoad.sections;
+      selectedDataSource = reviewResultFound ? "review" : "none";
+    }
+
+    if (requestedDataSource === "annotation") {
+      const {
+        found: annotationIndexFound,
+        indexPath: annotationIndexPath,
+        source: annotationSource,
+        usedLegacyFallback: annotationUsedLegacyFallback,
+      } = await readAnnotationCaseStatusIndex(sourceAccessCode);
+
+      const annotationLoad = await loadSectionsFromIndex({
+        indexFound: annotationIndexFound,
+        patientId,
+        caseId,
+      });
+
+      annotationResultFound = Boolean(
+        annotationLoad.caseStatusEntry && annotationLoad.hasAnySection
+      );
+
+      annotationDebug = {
+        indexPath: annotationIndexPath,
+        source: annotationSource,
+        fastPathHit: Boolean(annotationLoad.caseStatusEntry),
+        hasAnySection: annotationLoad.hasAnySection,
+        matchedCaseId: annotationLoad.matchedCaseId,
+      };
+
+      selectedIndexPath = annotationIndexPath;
+      selectedSource = annotationSource;
+      selectedUsedLegacyFallback = annotationUsedLegacyFallback;
+      selectedCaseStatusEntry = annotationLoad.caseStatusEntry;
+      selectedSections = annotationLoad.sections;
+      selectedDataSource = annotationResultFound ? "annotation" : "none";
+    }
 
     const { summary, abnormalityReasoning, managementReasoning } =
-      await loadSectionsFromCaseStatusEntry(caseStatusEntry);
+      selectedSections;
+
+    const indexPath = selectedIndexPath;
+    const source = selectedSource;
+    const usedLegacyFallback = selectedUsedLegacyFallback;
+    const caseStatusEntry = selectedCaseStatusEntry;
 
     const loadedSections = [
       summary,
@@ -424,12 +641,18 @@ export async function GET(req: Request) {
         ok: true,
         matched: false,
         reason: !caseStatusEntry
-          ? "case_not_found_in_annotation_index"
+          ? "case_not_found_in_index"
           : "case_found_but_no_panel_sections_loaded",
 
         accessCode,
         workflowMode: accessEntry.workflowMode,
+        loadMode,
+        requestedDataSource,
         sourceAccessCode,
+        selectedDataSource,
+
+        reviewResultFound,
+        annotationResultFound,
 
         patientId,
         caseId,
@@ -438,6 +661,9 @@ export async function GET(req: Request) {
         source,
         usedLegacyFallback,
         fastPathHit: Boolean(caseStatusEntry),
+
+        reviewDebug,
+        annotationDebug,
 
         summary: null,
         abnormalityReasoning: null,
@@ -455,7 +681,13 @@ export async function GET(req: Request) {
 
         accessCode,
         workflowMode: accessEntry.workflowMode,
+        loadMode,
+        requestedDataSource,
         sourceAccessCode,
+        selectedDataSource,
+
+        reviewResultFound,
+        annotationResultFound,
 
         patientId,
         caseId,
@@ -465,6 +697,9 @@ export async function GET(req: Request) {
         source,
         usedLegacyFallback,
         fastPathHit: Boolean(caseStatusEntry),
+
+        reviewDebug,
+        annotationDebug,
 
         summary: null,
         abnormalityReasoning: null,
@@ -480,7 +715,13 @@ export async function GET(req: Request) {
 
       accessCode,
       workflowMode: accessEntry.workflowMode,
+      loadMode,
+      requestedDataSource,
       sourceAccessCode,
+      selectedDataSource,
+
+      reviewResultFound,
+      annotationResultFound,
 
       patientId,
       caseId,
@@ -490,6 +731,9 @@ export async function GET(req: Request) {
       source,
       usedLegacyFallback,
       fastPathHit: Boolean(caseStatusEntry),
+
+      reviewDebug,
+      annotationDebug,
 
       elapsedMs: Date.now() - t0,
 
