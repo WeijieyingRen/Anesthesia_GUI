@@ -363,7 +363,7 @@ export default function UserCaseDemoGate({
             <p className="text-sm leading-6 text-slate-600">
               Detect abnormal physiologic episodes on the timeline. In this
               demo, several estimated abnormalities are shown in the checklist,
-              but only the hypotension episode is pre-selected for detailed
+              but only one episode is pre-selected for detailed
               reasoning.
             </p>
           </div>

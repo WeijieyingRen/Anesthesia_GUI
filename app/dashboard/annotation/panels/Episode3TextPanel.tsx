@@ -738,10 +738,10 @@ export default function Episode3TextPanel({
         <button
           type="button"
           onClick={onBackToEpisodeSelection}
-          className="inline-flex w-fit items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-left text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
+          className="inline-flex w-fit items-center gap-2 rounded-lg border border-purple-300 bg-purple-100 px-3 py-2 text-left text-sm font-semibold text-purple-800 transition hover:bg-purple-200"
         >
           <span className="text-lg leading-none">←</span>
-          <span>Back to episode selection</span>
+          <span>Back to episode selection page</span>
         </button>
       )}
 

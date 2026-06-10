@@ -1705,31 +1705,25 @@ export default function DashboardPage() {
   
     setEpisodeState((prev) => {
       const isSelected = prev.prioritizedEpisodeIds.includes(episodeId);
-
-      const nextPrioritized = isSelected
-        ? prev.prioritizedEpisodeIds.filter((id) => id !== episodeId)
-        : [...prev.prioritizedEpisodeIds, episodeId];
-
-      const nextDetected = prev.detectedEpisodes.map((episode) =>
-        episode.id === episodeId
-          ? { ...episode, selectedForAnnotation: !isSelected }
-          : {
-              ...episode,
-              selectedForAnnotation: nextPrioritized.includes(episode.id),
-            }
-      );
-
-      let nextActive = prev.activeEpisodeId;
-      if (!nextActive || !nextPrioritized.includes(nextActive)) {
-        nextActive = nextPrioritized[0] ?? null;
-      }
-
+  
+      // Only allow one selected episode for detailed annotation.
+      // If the current one is already selected, clicking again will unselect it.
+      // If another one is selected, clicking this one will replace the previous selection.
+      const nextPrioritized = isSelected ? [] : [episodeId];
+  
+      const nextDetected = prev.detectedEpisodes.map((episode) => ({
+        ...episode,
+        selectedForAnnotation: nextPrioritized.includes(episode.id),
+      }));
+  
+      const nextActive = nextPrioritized[0] ?? null;
+  
       logAction("episode_prioritized_toggle", {
         episodeId,
         selected: !isSelected,
         prioritizedCount: nextPrioritized.length,
       });
-
+  
       return {
         ...prev,
         detectedEpisodes: nextDetected,
