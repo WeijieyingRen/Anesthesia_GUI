@@ -3,527 +3,271 @@ import shutil
 import pandas as pd
 
 
-BASE_DIR = Path(__file__).resolve().parent
-
-MOVER_ASSIGNMENT = (
-    BASE_DIR / "assigned_mover_350_cases_by_access_code.csv"
+BASE_DIR = Path(
+    "/home/wjyren/GUI_Stanford_mpog/public/assigned_code"
 )
 
-MPOG_ASSIGNMENT = (
-    BASE_DIR / "assigned_650_cases_by_access_code.csv"
-)
+MOVER_FILES = [
+    BASE_DIR / "assigned_mover_350_cases_by_access_code.csv",
+    BASE_DIR / "mover_access_code_lookup_for_ui.csv",
+    BASE_DIR / "mover_access_review_code.csv",
+]
 
-MOVER_LOOKUP = (
-    BASE_DIR / "mover_access_code_lookup_for_ui.csv"
-)
+# MOVER 原始 doctor_01–doctor_14
+# 改为全局唯一的 doctor_27–doctor_40
+DOCTOR_ID_MAP = {
+    f"doctor_{old_id:02d}": f"doctor_{old_id + 26:02d}"
+    for old_id in range(1, 15)
+}
 
-MOVER_REVIEW = (
-    BASE_DIR / "mover_access_review_code.csv"
-)
-
-BACKUP_FILE = (
-    BASE_DIR / "assigned_mover_350_cases_by_access_code.backup.csv"
-)
+VALID_NEW_IDS = set(DOCTOR_ID_MAP.values())
 
 
-# ============================================================
-# 1. Check required files
-# ============================================================
-
-for path in [MOVER_ASSIGNMENT, MPOG_ASSIGNMENT]:
+def update_one_file(path: Path) -> pd.DataFrame:
     if not path.exists():
-        raise FileNotFoundError(f"Missing required file: {path}")
+        raise FileNotFoundError(f"文件不存在：{path}")
 
+    df = pd.read_csv(path, dtype=str)
 
-# ============================================================
-# 2. Repair missing newline after assignment_seed
-# ============================================================
-
-raw_text = MOVER_ASSIGNMENT.read_text(encoding="utf-8-sig")
-
-broken_marker = "assignment_seeddoctor_"
-
-if broken_marker in raw_text:
-    if not BACKUP_FILE.exists():
-        shutil.copy2(MOVER_ASSIGNMENT, BACKUP_FILE)
-
-    raw_text = raw_text.replace(
-        broken_marker,
-        "assignment_seed\ndoctor_",
-        1,
-    )
-
-    MOVER_ASSIGNMENT.write_text(
-        raw_text,
-        encoding="utf-8",
-        newline="",
-    )
-
-    print("Fixed missing newline after assignment_seed.")
-    print(f"Backup saved to: {BACKUP_FILE}")
-else:
-    print("Assignment header newline is already correct.")
-
-
-# ============================================================
-# 3. Read assignment files
-# ============================================================
-
-mover = pd.read_csv(
-    MOVER_ASSIGNMENT,
-    dtype=str,
-    keep_default_na=False,
-)
-
-mpog = pd.read_csv(
-    MPOG_ASSIGNMENT,
-    dtype=str,
-    keep_default_na=False,
-)
-
-mover.columns = mover.columns.str.strip()
-mpog.columns = mpog.columns.str.strip()
-
-required_columns = [
-    "doctor_id",
-    "annotation_code",
-    "review_code",
-    "case_order_within_doctor",
-    "patient_folder",
-    "case_id",
-    "patient_id",
-]
-
-missing_mover_columns = [
-    col for col in required_columns
-    if col not in mover.columns
-]
-
-if missing_mover_columns:
-    raise ValueError(
-        "MOVER assignment is missing columns: "
-        + ", ".join(missing_mover_columns)
-    )
-
-for col in required_columns:
-    mover[col] = mover[col].astype(str).str.strip()
-
-for col in ["annotation_code", "review_code"]:
-    if col not in mpog.columns:
+    if "doctor_id" not in df.columns:
         raise ValueError(
-            f"MPOG assignment is missing column: {col}"
+            f"{path.name} 中没有 doctor_id 列。"
+            f"实际列名：{list(df.columns)}"
         )
 
-    mpog[col] = mpog[col].astype(str).str.strip()
+    original = df.copy(deep=True)
 
+    current_ids = set(df["doctor_id"].dropna().str.strip())
 
-# ============================================================
-# 4. Validate MOVER assignment structure
-# ============================================================
-
-if len(mover) != 350:
-    raise ValueError(
-        f"Expected 350 MOVER rows, found {len(mover)}"
-    )
-
-if mover["doctor_id"].nunique() != 14:
-    raise ValueError(
-        "Expected 14 doctors, found "
-        f"{mover['doctor_id'].nunique()}"
-    )
-
-cases_per_doctor = mover.groupby("doctor_id").size()
-
-bad_case_counts = cases_per_doctor[
-    cases_per_doctor != 25
-]
-
-if not bad_case_counts.empty:
-    raise ValueError(
-        "Some doctors do not have 25 cases:\n"
-        f"{bad_case_counts.to_string()}"
-    )
-
-codes_per_doctor = (
-    mover.groupby("doctor_id")
-    .agg(
-        n_annotation_codes=(
-            "annotation_code",
-            "nunique",
-        ),
-        n_review_codes=(
-            "review_code",
-            "nunique",
-        ),
-    )
-)
-
-bad_doctor_codes = codes_per_doctor[
-    (codes_per_doctor["n_annotation_codes"] != 1)
-    | (codes_per_doctor["n_review_codes"] != 1)
-]
-
-if not bad_doctor_codes.empty:
-    raise ValueError(
-        "Each doctor must have exactly one annotation code "
-        "and one review code:\n"
-        f"{bad_doctor_codes.to_string()}"
-    )
-
-if mover["case_id"].duplicated().any():
-    duplicate_rows = mover[
-        mover["case_id"].duplicated(keep=False)
-    ].sort_values("case_id")
-
-    raise ValueError(
-        "Duplicate MOVER case_id values found:\n"
-        f"{duplicate_rows.to_string(index=False)}"
-    )
-
-doctor_order_duplicate = mover.duplicated(
-    subset=[
-        "doctor_id",
-        "case_order_within_doctor",
-    ],
-    keep=False,
-)
-
-if doctor_order_duplicate.any():
-    raise ValueError(
-        "Duplicate doctor/order combinations found:\n"
-        + mover.loc[
-            doctor_order_duplicate,
-            [
-                "doctor_id",
-                "case_order_within_doctor",
-                "patient_folder",
-                "case_id",
-            ],
-        ].to_string(index=False)
-    )
-
-required_nonempty = [
-    "doctor_id",
-    "annotation_code",
-    "review_code",
-    "patient_folder",
-    "case_id",
-    "patient_id",
-]
-
-for col in required_nonempty:
-    empty_rows = mover[col].eq("")
-
-    if empty_rows.any():
+    unexpected_ids = current_ids - set(DOCTOR_ID_MAP) - VALID_NEW_IDS
+    if unexpected_ids:
         raise ValueError(
-            f"Empty values found in MOVER column: {col}"
+            f"{path.name} 中发现无法识别的 doctor_id："
+            f"{sorted(unexpected_ids)}"
         )
 
-
-# ============================================================
-# 5. Validate all access codes
-# ============================================================
-
-mover_annotation_codes = set(
-    mover["annotation_code"]
-)
-
-mover_review_codes = set(
-    mover["review_code"]
-)
-
-mpog_annotation_codes = set(
-    mpog["annotation_code"]
-)
-
-mpog_review_codes = set(
-    mpog["review_code"]
-)
-
-mover_all_codes = (
-    mover_annotation_codes
-    | mover_review_codes
-)
-
-mpog_all_codes = (
-    mpog_annotation_codes
-    | mpog_review_codes
-)
-
-if len(mover_annotation_codes) != 14:
-    raise ValueError(
-        "MOVER annotation codes are not unique across doctors."
+    # 支持重复运行：
+    # doctor_01–doctor_14 会转换；
+    # 已经是 doctor_27–doctor_40 的保持不变。
+    df["doctor_id"] = (
+        df["doctor_id"]
+        .str.strip()
+        .replace(DOCTOR_ID_MAP)
     )
 
-if len(mover_review_codes) != 14:
-    raise ValueError(
-        "MOVER review codes are not unique across doctors."
-    )
+    backup_path = path.with_suffix(path.suffix + ".before_doctor_id_update.bak")
+    if not backup_path.exists():
+        shutil.copy2(path, backup_path)
 
-internal_overlap = (
-    mover_annotation_codes
-    & mover_review_codes
-)
-
-if internal_overlap:
-    raise ValueError(
-        "MOVER annotation/review code overlap found: "
-        f"{sorted(internal_overlap)}"
-    )
-
-mpog_overlap = mover_all_codes & mpog_all_codes
-
-if mpog_overlap:
-    raise ValueError(
-        "MOVER codes overlap with MPOG codes: "
-        f"{sorted(mpog_overlap)}"
-    )
-
-
-# ============================================================
-# 6. Build one-row-per-doctor source table
-# ============================================================
-
-doctor_codes = (
-    mover[
-        [
-            "doctor_id",
-            "annotation_code",
-            "review_code",
-        ]
+    # 确认除了 doctor_id，其他列完全没变
+    other_columns = [
+        column for column in df.columns
+        if column != "doctor_id"
     ]
-    .drop_duplicates()
-    .sort_values("doctor_id")
-    .reset_index(drop=True)
-)
 
-assigned_counts = (
-    mover.groupby("doctor_id")
-    .size()
-    .rename("n_assigned")
-    .reset_index()
-)
+    if not original[other_columns].equals(df[other_columns]):
+        raise AssertionError(
+            f"{path.name} 中除 doctor_id 外还有其他字段发生变化。"
+        )
 
-doctor_codes = doctor_codes.merge(
-    assigned_counts,
-    on="doctor_id",
-    how="left",
-    validate="one_to_one",
-)
+    df.to_csv(path, index=False)
 
+    print(f"\n已更新：{path.name}")
+    print(
+        df["doctor_id"]
+        .value_counts()
+        .sort_index()
+        .to_string()
+    )
 
-# ============================================================
-# 7. Generate mover_access_review_code.csv
-# ============================================================
-
-review_output = doctor_codes[
-    [
-        "doctor_id",
-        "annotation_code",
-        "review_code",
-        "n_assigned",
-    ]
-].copy()
-
-review_output.to_csv(
-    MOVER_REVIEW,
-    index=False,
-)
+    return df
 
 
-# ============================================================
-# 8. Generate mover_access_code_lookup_for_ui.csv
-# ============================================================
-
-annotation_lookup = doctor_codes[
-    [
-        "doctor_id",
-        "annotation_code",
-        "n_assigned",
-    ]
-].copy()
-
-annotation_lookup = annotation_lookup.rename(
-    columns={
-        "annotation_code": "access_code",
+def validate_files(
+    assignment: pd.DataFrame,
+    lookup: pd.DataFrame,
+    review: pd.DataFrame,
+) -> None:
+    expected_doctors = {
+        f"doctor_{doctor_id:02d}"
+        for doctor_id in range(27, 41)
     }
-)
 
-annotation_lookup["workflowMode"] = "annotation"
+    # 1. 三个文件都必须是 doctor_27–doctor_40
+    for name, df in [
+        ("assignment", assignment),
+        ("lookup", lookup),
+        ("review", review),
+    ]:
+        actual = set(df["doctor_id"].dropna())
 
-annotation_lookup = annotation_lookup[
-    [
+        if actual != expected_doctors:
+            raise AssertionError(
+                f"{name} doctor_id 不正确。\n"
+                f"缺失：{sorted(expected_doctors - actual)}\n"
+                f"多余：{sorted(actual - expected_doctors)}"
+            )
+
+    # 2. Assignment：350 行、每位医生 25 例
+    if len(assignment) != 350:
+        raise AssertionError(
+            f"Assignment 应为 350 行，实际为 {len(assignment)} 行。"
+        )
+
+    assignment_counts = assignment.groupby("doctor_id").size()
+
+    if not assignment_counts.eq(25).all():
+        raise AssertionError(
+            "Assignment 中不是每位医生都有 25 个病例：\n"
+            f"{assignment_counts.to_string()}"
+        )
+
+    # 3. 每位医生仅有一个 annotation code 和一个 review code
+    code_counts = assignment.groupby("doctor_id").agg(
+        n_annotation_codes=("annotation_code", "nunique"),
+        n_review_codes=("review_code", "nunique"),
+    )
+
+    if not (
+        code_counts["n_annotation_codes"].eq(1).all()
+        and code_counts["n_review_codes"].eq(1).all()
+    ):
+        raise AssertionError(
+            "Assignment 中部分医生具有多个 code：\n"
+            f"{code_counts.to_string()}"
+        )
+
+    # 4. 从 assignment 提取标准 doctor-code 对应关系
+    expected_codes = (
+        assignment[
+            ["doctor_id", "annotation_code", "review_code"]
+        ]
+        .drop_duplicates()
+        .sort_values("doctor_id")
+        .reset_index(drop=True)
+    )
+
+    # 5. 验证 mover_access_review_code.csv
+    actual_review = (
+        review[
+            ["doctor_id", "annotation_code", "review_code"]
+        ]
+        .drop_duplicates()
+        .sort_values("doctor_id")
+        .reset_index(drop=True)
+    )
+
+    if not expected_codes.equals(actual_review):
+        comparison = expected_codes.merge(
+            actual_review,
+            on="doctor_id",
+            how="outer",
+            suffixes=("_assignment", "_review"),
+            indicator=True,
+        )
+
+        raise AssertionError(
+            "mover_access_review_code.csv 与 assignment 的 code 对应不一致：\n"
+            f"{comparison.to_string(index=False)}"
+        )
+
+    # 6. 验证 mover_access_code_lookup_for_ui.csv
+    required_lookup_columns = {
         "access_code",
         "doctor_id",
         "workflowMode",
-        "n_assigned",
-    ]
-]
-
-review_lookup = doctor_codes[
-    [
-        "doctor_id",
-        "review_code",
-        "n_assigned",
-    ]
-].copy()
-
-review_lookup = review_lookup.rename(
-    columns={
-        "review_code": "access_code",
     }
-)
 
-review_lookup["workflowMode"] = "review"
-
-review_lookup = review_lookup[
-    [
-        "access_code",
-        "doctor_id",
-        "workflowMode",
-        "n_assigned",
-    ]
-]
-
-lookup_output = pd.concat(
-    [
-        annotation_lookup,
-        review_lookup,
-    ],
-    ignore_index=True,
-)
-
-doctor_order = {
-    doctor_id: index
-    for index, doctor_id in enumerate(
-        sorted(doctor_codes["doctor_id"])
+    missing_lookup_columns = (
+        required_lookup_columns - set(lookup.columns)
     )
-}
 
-workflow_order = {
-    "annotation": 0,
-    "review": 1,
-}
+    if missing_lookup_columns:
+        raise AssertionError(
+            "mover_access_code_lookup_for_ui.csv 缺少列："
+            f"{sorted(missing_lookup_columns)}"
+        )
 
-lookup_output["_doctor_order"] = (
-    lookup_output["doctor_id"].map(doctor_order)
-)
+    expected_lookup_rows = []
 
-lookup_output["_workflow_order"] = (
-    lookup_output["workflowMode"].map(workflow_order)
-)
+    for row in expected_codes.itertuples(index=False):
+        expected_lookup_rows.append(
+            {
+                "access_code": row.annotation_code,
+                "doctor_id": row.doctor_id,
+                "workflowMode": "annotation",
+            }
+        )
+        expected_lookup_rows.append(
+            {
+                "access_code": row.review_code,
+                "doctor_id": row.doctor_id,
+                "workflowMode": "review",
+            }
+        )
 
-lookup_output = (
-    lookup_output
-    .sort_values(
-        [
-            "_doctor_order",
-            "_workflow_order",
+    expected_lookup = (
+        pd.DataFrame(expected_lookup_rows)
+        .sort_values(
+            ["doctor_id", "workflowMode", "access_code"]
+        )
+        .reset_index(drop=True)
+    )
+
+    actual_lookup = (
+        lookup[
+            ["access_code", "doctor_id", "workflowMode"]
         ]
-    )
-    .drop(
-        columns=[
-            "_doctor_order",
-            "_workflow_order",
-        ]
-    )
-    .reset_index(drop=True)
-)
-
-lookup_output.to_csv(
-    MOVER_LOOKUP,
-    index=False,
-)
-
-
-# ============================================================
-# 9. Final round-trip validation
-# ============================================================
-
-saved_review = pd.read_csv(
-    MOVER_REVIEW,
-    dtype=str,
-    keep_default_na=False,
-)
-
-saved_lookup = pd.read_csv(
-    MOVER_LOOKUP,
-    dtype=str,
-    keep_default_na=False,
-)
-
-expected_review = review_output.astype(str)
-saved_review = saved_review.astype(str)
-
-pd.testing.assert_frame_equal(
-    saved_review.reset_index(drop=True),
-    expected_review.reset_index(drop=True),
-    check_dtype=False,
-)
-
-lookup_codes = set(
-    saved_lookup["access_code"].str.strip()
-)
-
-if lookup_codes != mover_all_codes:
-    raise ValueError(
-        "Generated lookup codes do not exactly match "
-        "the MOVER assignment codes."
+        .copy()
+        .sort_values(
+            ["doctor_id", "workflowMode", "access_code"]
+        )
+        .reset_index(drop=True)
     )
 
-lookup_annotation = set(
-    saved_lookup.loc[
-        saved_lookup["workflowMode"] == "annotation",
-        "access_code",
-    ]
-)
+    if not expected_lookup.equals(actual_lookup):
+        raise AssertionError(
+            "mover_access_code_lookup_for_ui.csv "
+            "与 assignment 的 code 对应不一致。"
+        )
 
-lookup_review = set(
-    saved_lookup.loc[
-        saved_lookup["workflowMode"] == "review",
-        "access_code",
-    ]
-)
+    # 7. annotation code 和 review code 不能交叉
+    annotation_codes = set(expected_codes["annotation_code"])
+    review_codes = set(expected_codes["review_code"])
 
-if lookup_annotation != mover_annotation_codes:
-    raise ValueError(
-        "Generated annotation lookup does not match "
-        "the MOVER assignment."
-    )
+    overlap = annotation_codes & review_codes
 
-if lookup_review != mover_review_codes:
-    raise ValueError(
-        "Generated review lookup does not match "
-        "the MOVER assignment."
+    if overlap:
+        raise AssertionError(
+            f"annotation_code 和 review_code 存在交叉：{sorted(overlap)}"
+        )
+
+    print("\n" + "=" * 70)
+    print("ALL MOVER DOCTOR-ID VALIDATIONS PASSED")
+    print("=" * 70)
+    print("1. MOVER doctor_01–doctor_14 已统一改为 doctor_27–doctor_40")
+    print("2. Assignment 仍为 350 行")
+    print("3. 每位 MOVER doctor 仍为 25 个病例")
+    print("4. Annotation code 未改变")
+    print("5. Review code 未改变")
+    print("6. 除 doctor_id 外，其他字段未改变")
+    print("7. 三个 MOVER 文件的 doctor/code 对应完全一致")
+    print("8. Annotation code 与 review code 无交叉")
+    print("\n最终对应关系：")
+    print(expected_codes.to_string(index=False))
+
+
+def main() -> None:
+    assignment = update_one_file(MOVER_FILES[0])
+    lookup = update_one_file(MOVER_FILES[1])
+    review = update_one_file(MOVER_FILES[2])
+
+    validate_files(
+        assignment=assignment,
+        lookup=lookup,
+        review=review,
     )
 
 
-# ============================================================
-# 10. Report
-# ============================================================
-
-print()
-print("=" * 70)
-print("ALL MOVER CODE FILES ARE NOW CONSISTENT")
-print("=" * 70)
-
-print(f"\nMOVER assignment:\n{MOVER_ASSIGNMENT}")
-print(f"\nMOVER UI lookup:\n{MOVER_LOOKUP}")
-print(f"\nMOVER review lookup:\n{MOVER_REVIEW}")
-
-print("\nCodes now used:")
-print(
-    doctor_codes.to_string(index=False)
-)
-
-print("\nValidation results:")
-print("1. MOVER assignment contains 350 rows")
-print("2. MOVER assignment contains 14 doctors")
-print("3. Every doctor has 25 cases")
-print("4. Every doctor has one annotation code")
-print("5. Every doctor has one review code")
-print("6. Annotation and review codes do not overlap")
-print("7. MOVER and MPOG codes do not overlap")
-print("8. Both MOVER lookup files exactly match the assignment")
-print("9. No extra code-mapping file was generated")
-print("\nCompleted.")
+if __name__ == "__main__":
+    main()
