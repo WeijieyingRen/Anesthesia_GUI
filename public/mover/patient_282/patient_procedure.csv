@@ -1,0 +1,9 @@
+case_id,patient_id,event_name,event_time
+c1843084e46b80ba,50ad46129bcf97fb,Anesthesia Start,2022-07-15 07:22:00
+c1843084e46b80ba,50ad46129bcf97fb,Induction,2022-07-15 07:33:00
+c1843084e46b80ba,50ad46129bcf97fb,Anesthesia Ready,2022-07-15 07:37:00
+c1843084e46b80ba,50ad46129bcf97fb,Double Lumen Tube Confirmation,2022-07-15 08:41:00
+c1843084e46b80ba,50ad46129bcf97fb,One-Lung Ventilation,2022-07-15 08:43:00
+c1843084e46b80ba,50ad46129bcf97fb,Two-Lung Ventilation,2022-07-15 09:44:00
+c1843084e46b80ba,50ad46129bcf97fb,Emergence,2022-07-15 10:46:00
+c1843084e46b80ba,50ad46129bcf97fb,Anesthesia Stop,2022-07-15 14:37:00

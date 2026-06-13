@@ -1,0 +1,6 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+b5e638e8ac139087,c531cbce74c1db4d,sufentanil,opioid,2020-08-22 17:52:00,2020-08-22,2020-08-23,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),New Bag
+b5e638e8ac139087,c531cbce74c1db4d,sufentanil,opioid,2020-08-22 19:07:00,2020-08-22,2020-08-23,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),Rate Change
+b5e638e8ac139087,c531cbce74c1db4d,sufentanil,opioid,2020-08-22 19:14:00,2020-08-22,2020-08-23,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),Rate Change
+b5e638e8ac139087,c531cbce74c1db4d,sufentanil,opioid,2020-08-22 20:06:00,2020-08-22,2020-08-23,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),Rate Change
+b5e638e8ac139087,c531cbce74c1db4d,sufentanil,opioid,2020-08-22 21:20:00,2020-08-22,2020-08-23,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),Stopped

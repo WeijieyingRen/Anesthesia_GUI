@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import UserGuideOverlay from "@/components/UserGuideOverlay";
-import UserCaseDemoGate from "@/components/userGuide/UserCaseDemoGate";
 import ObservationSelectionGuide from "./annotation/panels/ObservationSelectionGuide";
 import type {
   AnnotationTaskKey,
@@ -29,7 +28,7 @@ import TaskWorkspace from "./annotation/TaskWorkspace";
 import { prepareDemographicData } from "@/lib/prepare_raw_data/demographic";
 import { prepareSurgeryContextData } from "@/lib/prepare_raw_data/surgery_context";
 import { preparePreopData } from "@/lib/prepare_raw_data/preop";
-import { prepareLabData } from "@/lib/prepare_raw_data/lab";
+
 import { prepareTimelineContextData } from "@/lib/prepare_raw_data/timeline_context";
 import {
   buildPhysiologyRowsFromPanelFiles,
@@ -40,7 +39,8 @@ import UnifiedTimelineCard from "./UnifiedTimelineCard";
 import { prepareFluidData } from "@/lib/prepare_raw_data/fluid";
 import SummaryPanel from "./annotation/panels/SummaryPanel";
 import { getSpeechRecognitionLanguage } from "@/lib/speech-language";
-import { DATASET_BASE } from "@/lib/dataset-config";
+import { loadDashboardPatient } from "@/lib/loaders/load-dashboard-patient";
+import type { DatasetSource } from "@/lib/loaders/dashboard-case-types";
 
 type CsvRow = Record<string, any>;
 
@@ -62,6 +62,7 @@ type GameData = {
     workflowMode?: "annotation" | "review";
     displayCaseId?: number;
     loadMode?: LoadMode;
+    source?: DatasetSource;
   }>;
   diagnoses?: any[];
   startTime?: string;
@@ -73,6 +74,7 @@ type StoredSelected = {
   workflowMode?: "annotation" | "review";
   displayCaseId?: number;
   loadMode?: LoadMode;
+  source?: DatasetSource;
 };
 
 
@@ -809,17 +811,68 @@ function hydrateReviewDraftFromDrive({
     }
 
     if (abnormalityText) {
+      const abnormalityAnswers =
+        extractAbnormalityAnswersFromReviewPayload(payload);
+    
+      const selectedEpisodes = Array.isArray(
+        abnormalityAnswers?.selectedEpisodes
+      )
+        ? (abnormalityAnswers.selectedEpisodes as Array<
+            Record<string, unknown>
+          >)
+        : [];
+    
+      const candidateEventIds = new Set<string>();
+    
+      // 1. 保存提取到的主 event ID
       if (abnormalityEventId) {
+        candidateEventIds.add(abnormalityEventId);
+      }
+    
+      // 2. 保存 selectedEpisodes 里的真实 ID
+      for (const episode of selectedEpisodes) {
+        const episodeIndex = Number(episode.episodeIndex);
+    
+        const episodeId = String(
+          episode.id ??
+            episode.eventId ??
+            episode.episodeId ??
+            episode.event_id ??
+            episode.episode_id ??
+            ""
+        ).trim();
+    
+        if (episodeId) {
+          candidateEventIds.add(episodeId);
+        }
+    
+        // 与 buildEpisodeStateFromStoredAbnormalityResult 中的 fallback ID 保持一致
+        if (Number.isFinite(episodeIndex)) {
+          candidateEventIds.add(
+            `review-episode-${Math.floor(episodeIndex)}`
+          );
+        }
+      }
+    
+      // 为所有可能的 episode ID 写入文本
+      for (const eventId of candidateEventIds) {
         localStorage.setItem(
-          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${abnormalityEventId}`,
+          `annotationDraft:abnormality_reasoning:${patientFolder}:${caseId}:${eventId}`,
           abnormalityText
         );
       }
-
+    
       localStorage.setItem(
         `annotationResult:abnormality_reasoning:${patientFolder}:${caseId}`,
         JSON.stringify(abnormalityResult ?? {})
       );
+    
+      console.log("[Review hydrate] abnormality drafts restored", {
+        abnormalityText: Boolean(abnormalityText),
+        candidateEventIds: Array.from(candidateEventIds),
+        patientFolder,
+        caseId,
+      });
     }
    
     console.log("[Review hydrate] restored from Drive", {
@@ -1150,41 +1203,6 @@ function groupPreopHistoryRows(rows: CsvRow[]) {
   return grouped;
 }
 
-async function fetchCsvRows(folder: string, filename: string): Promise<CsvRow[]> {
-  const url = `${DATASET_BASE}/${folder}/${filename}`;
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
-  }
-
-  const text = await res.text();
-  return Papa.parse<CsvRow>(text, {
-    header: true,
-    dynamicTyping: true,
-    skipEmptyLines: true,
-  }).data;
-}
-
-async function fetchOptionalCsvRows(
-  folder: string,
-  filename: string
-): Promise<CsvRow[]> {
-  const url = `${DATASET_BASE}/${folder}/${filename}`;
-  const res = await fetch(url, { cache: "no-store" });
-
-  if (!res.ok) {
-    return [];
-  }
-
-  const text = await res.text();
-
-  return Papa.parse<CsvRow>(text, {
-    header: true,
-    dynamicTyping: true,
-    skipEmptyLines: true,
-  }).data;
-}
 
 function useVoiceNote() {
   const recognitionRef = useRef<any>(null);
@@ -1417,8 +1435,22 @@ export default function DashboardPage() {
   const [currentPatientIndex, setCurrentPatientIndex] = useState(0);
   const [selectedPatients, setSelectedPatients] = useState<StoredSelected[]>([]);
   const currentPatient = selectedPatients[currentPatientIndex];
-  const currentCaseLabel = currentPatient?.folder ?? "unknown_patient";
-  const currentDisplayCaseId = currentPatient?.displayCaseId ?? currentPatientIndex + 1;
+
+  const currentCaseLabel =
+    currentPatient?.folder ?? "unknown_patient";
+  
+  const currentDisplayCaseId =
+    currentPatient?.displayCaseId ?? currentPatientIndex + 1;
+  
+  /*
+   * Only the patient folder named "user_guide" is treated as
+   * the User Guide case.
+   *
+   * Do not use URL parameters or a persistent localStorage flag
+   * to classify normal clinical cases as User Guide cases.
+   */
+  const isUserGuideCase =
+    currentPatient?.folder === "user_guide";
   const [caseId, setCaseId] = useState("unknown_case");
   const [demographic, setDemographic] = useState<PatientDemographic | null>(null);
   const [surgeryContext, setSurgeryContext] = useState<SurgeryContext | null>(null);
@@ -1467,8 +1499,6 @@ export default function DashboardPage() {
 
   const [preopInfoOpen, setPreopInfoOpen] = useState(false);
   const [showUserGuide, setShowUserGuide] = useState(false);
-  const [isUserGuideMode, setIsUserGuideMode] = useState(false);
-  const [demoGateOpen, setDemoGateOpen] = useState(false);
   const isCaseLocked = hasSubmitted;
 
   const isEpisodeSelectionPage =
@@ -1569,19 +1599,25 @@ export default function DashboardPage() {
     setAbnormalityReasoningCompleted(false);
     setSelectedWindow(null);
   }
-
-  const canSubmitFinal = isReviewMode
-    ? true
-    : patientSummaryCompleted &&
-      abnormalityReasoningCompleted &&
-      managementReasoningCompleted &&
-      episodeState.prioritizedEpisodeIds.length > 0;
+  const canSubmitFinal =
+  isUserGuideCase ||
+  isReviewMode ||
+  (
+    patientSummaryCompleted &&
+    abnormalityReasoningCompleted &&
+    managementReasoningCompleted &&
+    episodeState.prioritizedEpisodeIds.length > 0
+  );
 
   function validateBeforeFinalSubmit(): string | null {
+    if (isUserGuideCase) {
+      return null;
+    }
+  
     if (isReviewMode) {
       return null;
     }
-
+  
     if (!patientSummaryCompleted) {
       return "Please complete and save the patient-level summary before submitting.";
     }
@@ -1895,9 +1931,9 @@ export default function DashboardPage() {
       task,
     });
   }
-
   useEffect(() => {
     const raw = localStorage.getItem("gameData");
+  
     if (!raw) {
       const currentWorkflowMode =
         localStorage.getItem("currentWorkflowMode") === "review"
@@ -1905,37 +1941,44 @@ export default function DashboardPage() {
           : "annotation";
   
       router.push(
-        currentWorkflowMode === "review" ? "/review-list" : "/patient-list"
+        currentWorkflowMode === "review"
+          ? "/review-list"
+          : "/patient-list"
       );
+  
       return;
     }
   
-    const params = new URLSearchParams(window.location.search);
-    const guideFromUrl = params.get("guide") === "1";
-    const guideFromStorage = localStorage.getItem("isUserGuideMode") === "true";
-    const nextIsUserGuideMode = guideFromUrl || guideFromStorage;
+    try {
+      /*
+       * The old demo implementation used this flag.
+       * Remove it so that it cannot affect a real case.
+       */
+      localStorage.removeItem("isUserGuideMode");
   
-    setIsUserGuideMode(nextIsUserGuideMode);
+      const gameData = JSON.parse(raw) as GameData;
+      const idx = gameData.currentPatientIndex ?? 0;
   
-    const gameData = JSON.parse(raw) as GameData;
-    const idx = gameData.currentPatientIndex ?? 0;
+      setCurrentPatientIndex(idx);
+      setSelectedPatients(gameData.selectedPatients || []);
+      setDashboardBackStack([]);
   
-    setCurrentPatientIndex(idx);
-    setSelectedPatients(gameData.selectedPatients || []);
-    setDashboardBackStack([]);
+      const selectedPatient =
+        gameData.selectedPatients?.[idx];
   
-    if (gameData.selectedPatients?.length) {
-      void loadPatient(
-        gameData.selectedPatients[idx].folder,
-        gameData.selectedPatients[idx]
-      );
-  
-      if (nextIsUserGuideMode) {
-        setDemoGateOpen(true);
+      if (selectedPatient) {
+        void loadPatient(
+          selectedPatient.folder,
+          selectedPatient
+        );
+      } else {
+        setLoading(false);
+        setLoadError("No selected patients found.");
       }
-    } else {
+    } catch (error) {
+      console.error("Failed to initialize dashboard:", error);
       setLoading(false);
-      setLoadError("No selected patients found.");
+      setLoadError("Failed to initialize dashboard.");
     }
   }, [router]);
 
@@ -2053,7 +2096,9 @@ export default function DashboardPage() {
   }
 
   async function handleNextNavigation() {
-    const accessOk = await validateStoredAccessCodeOrRedirect();
+    const accessOk = isUserGuideCase
+      ? true
+      : await validateStoredAccessCodeOrRedirect();
   
     if (!accessOk) {
       return;
@@ -2098,32 +2143,59 @@ export default function DashboardPage() {
       actionLogRef.current = [];
   
       const patientMeta =
-        patientMetaOverride ??
-        selectedPatients.find((patient) => patient.folder === folder);
-  
-        const reviewMode = patientMeta?.workflowMode === "review";
-
-        const patientStatus = patientMeta?.status ?? "not_started";
-
-        const loadMode: LoadMode =
-          patientMeta?.loadMode ??
-          (reviewMode
-            ? patientStatus === "completed" || patientStatus === "in_progress"
-              ? "review_result"
-              : "annotation_result"
-            : patientStatus === "completed" || patientStatus === "in_progress"
-              ? "annotation_result"
-              : "empty");
-
-const alreadySubmitted =
-  patientMeta?.status === "completed" &&
-  loadMode === (reviewMode ? "review_result" : "annotation_result");
-
-let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
-  Promise.resolve(null);
-
-setHasSubmitted(alreadySubmitted);
-setIsReviewMode(reviewMode);
+      patientMetaOverride ??
+      selectedPatients.find(
+        (patient) => patient.folder === folder
+      );
+    
+    /*
+     * User Guide is always opened as a new, blank annotation case.
+     * It must never inherit review mode or a completed status.
+     */
+    const loadingUserGuideCase =
+      folder === "user_guide";
+    
+    const reviewMode =
+      loadingUserGuideCase
+        ? false
+        : patientMeta?.workflowMode === "review";
+    
+    const patientStatus =
+      loadingUserGuideCase
+        ? "not_started"
+        : patientMeta?.status ?? "not_started";
+    
+    const loadMode: LoadMode =
+      loadingUserGuideCase
+        ? "empty"
+        : patientMeta?.loadMode ??
+          (
+            reviewMode
+              ? patientStatus === "completed" ||
+                patientStatus === "in_progress"
+                ? "review_result"
+                : "annotation_result"
+              : patientStatus === "completed" ||
+                  patientStatus === "in_progress"
+                ? "annotation_result"
+                : "empty"
+          );
+    
+    const alreadySubmitted =
+      !loadingUserGuideCase &&
+      patientMeta?.status === "completed" &&
+      loadMode ===
+        (
+          reviewMode
+            ? "review_result"
+            : "annotation_result"
+        );
+    
+    let reviewPayloadPromise: Promise<DriveReviewPayload | null> =
+      Promise.resolve(null);
+    
+    setHasSubmitted(alreadySubmitted);
+    setIsReviewMode(reviewMode);
   
       try {
         localStorage.setItem(
@@ -2158,62 +2230,45 @@ setIsReviewMode(reviewMode);
       setEpisodeTaskCompletion({});
       setReviewHydrationVersion(0);
   
-      const [
-        caseInfoRows,
-        patientAttrRows,
-        caseStaticRows,
-        caseDynamicRows,
-        preopRows,
-        preopHistoryRowsLoaded,
-        labRows,
-        vitalRows,
-        gasRows,
-        ventilationRows,
-        cvRows,
-        temperatureRows,
-        medBolusRows,
-        medInfusionRows,
-        fluidInRows,
-        fluidOutRows,
-        managementRows,
-      ] = await Promise.all([
-        fetchCsvRows(folder, "case_info.csv"),
-        fetchCsvRows(folder, "patients_attributes_case.csv"),
-        fetchCsvRows(folder, "case_static.csv"),
-        fetchCsvRows(folder, "case_dynamic_events.csv"),
-        fetchCsvRows(folder, "preop.csv"),
-        fetchOptionalCsvRows(folder, "preop_history.csv"),
-        fetchCsvRows(folder, "lab.csv"),
-        fetchCsvRows(folder, "vital.csv"),
-        fetchCsvRows(folder, "gas.csv"),
-        fetchCsvRows(folder, "ventilation.csv"),
-        fetchCsvRows(folder, "cv.csv"),
-        fetchCsvRows(folder, "temperature.csv"),
-        fetchCsvRows(folder, "med_bolus.csv"),
-        fetchCsvRows(folder, "med_infusion.csv"),
-        fetchCsvRows(folder, "fluid_in.csv"),
-        fetchCsvRows(folder, "fluid_out.csv"),
-        fetchCsvRows(folder, "management.csv"),
-      ]);
-  
-      const caseInfo = caseInfoRows[0] ?? {};
-      const patientAttr = patientAttrRows[0] ?? {};
-      const caseStatic = caseStaticRows[0] ?? {};
-      const preopRow = preopRows[0] ?? {};
-      const labRow = labRows[0] ?? {};
-  
-      const phyRows = buildPhysiologyRowsFromPanelFiles({
-        vitalRows,
-        gasRows,
-        ventilationRows,
-        cvRows,
-        temperatureRows,
-      });
-  
-      const resolvedCaseId =
-        String(caseInfo["mpog_case_id"] ?? "").trim() ||
-        String(caseStatic["mpog_case_id"] ?? "").trim() ||
-        folder;
+      const datasetSource: DatasetSource =
+      patientMeta?.source ?? "stanford_mpog";
+    
+    const loadedCase = await loadDashboardPatient(folder, datasetSource);
+    
+    const {
+      caseId: resolvedCaseId,
+    
+      caseInfo,
+      patientAttr,
+      caseStatic,
+      caseDynamicRows,
+    
+      preopRow,
+      preopHistoryRows,
+      labData,
+    
+      vitalRows,
+      gasRows,
+      ventilationRows,
+      cvRows,
+      temperatureRows,
+    
+      medBolusRows,
+      medInfusionRows,
+    
+      fluidInRows,
+      fluidOutRows,
+    
+      managementRows,
+    } = loadedCase;
+    
+    const phyRows = buildPhysiologyRowsFromPanelFiles({
+      vitalRows,
+      gasRows,
+      ventilationRows,
+      cvRows,
+      temperatureRows,
+    });
   
       setCaseId(resolvedCaseId);
   
@@ -2281,8 +2336,8 @@ setIsReviewMode(reviewMode);
       );
   
       setPreop(preparePreopData(preopRow));
-      setPreopHistoryRows(preopHistoryRowsLoaded);
-      setLab(prepareLabData(labRow));
+      setPreopHistoryRows(preopHistoryRows);
+      setLab(labData);
       setVitals(prepareVitalsDataRaw(shiftedPhyRows));
   
       setMedBolusRowsState(shiftedMedBolusRows);
@@ -2338,6 +2393,7 @@ setIsReviewMode(reviewMode);
                 displayCaseId,
                 caseId: resolvedCaseId,
                 loadMode,
+                source: datasetSource,
               });
           
               reviewPayloadPromise = fetch(
@@ -2604,6 +2660,7 @@ setIsReviewMode(reviewMode);
       accessCode,
       patientId: patientFolder,
       patientFolder,
+      source: currentPatient?.source ?? "stanford_mpog",
       displayCaseId: currentDisplayCaseId,
       workflowMode: isReviewMode ? "review" : "annotation",
 
@@ -2763,17 +2820,47 @@ setIsReviewMode(reviewMode);
   }
 
   const submitCurrentSession = async (): Promise<boolean> => {
+    /*
+     * User Guide: simulate submission locally.
+     * Do not call /api/submit and do not upload to Google Drive.
+     */
+    if (isUserGuideCase) {
+      try {
+        setSubmitting(true);
+        setSubmitError(null);
+  
+        await new Promise<void>((resolve) => {
+          window.setTimeout(resolve, 600);
+        });
+  
+        setHasSubmitted(true);
+  
+        logAction("user_guide_submit_simulated", {
+          patientFolder: currentPatient?.folder ?? null,
+          caseId,
+        });
+  
+        return true;
+      } finally {
+        setSubmitting(false);
+      }
+    }
+  
     const accessOk = await validateStoredAccessCodeOrRedirect();
-
+  
     if (!accessOk) {
       return false;
     }
-
+  
     const payload = collectSubmissionPayload();
-
+  
     console.log("===== SUBMISSION PAYLOAD =====");
     console.log(payload);
-
+  
+    /*
+     * Real cases download a local ZIP backup.
+     * The User Guide case only simulates submission.
+     */
     downloadSubmissionPayload(payload);
 
     try {
@@ -2935,28 +3022,6 @@ return true;
     );
   }
   
-  if (demoGateOpen) {
-    return (
-      <UserCaseDemoGate
-        patientFolder={currentPatient?.folder ?? "unknown_patient"}
-        caseId={caseId}
-        onClose={() => {
-          logAction("close_user_case_demo_gate");
-  
-          setDemoGateOpen(false);
-          setIsUserGuideMode(false);
-          setPatientSummaryCompleted(true);
-          setReviewHydrationVersion((value) => value + 1);
-  
-          try {
-            localStorage.removeItem("isUserGuideMode");
-          } catch {
-            // ignore
-          }
-        }}
-      />
-    );
-  }
   return (
     <main className="min-h-screen bg-gray-50">
       <div
@@ -3061,19 +3126,18 @@ return true;
   >
     Home
   </button>
-
-  {!isUserGuideMode && (
-    <button
-      type="button"
-      onClick={() => {
-        logAction("open_user_guide");
-        setShowUserGuide(true);
-      }}
-      className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-    >
-      User Guide
-    </button>
-  )}
+  {isUserGuideCase && (
+  <button
+    type="button"
+    onClick={() => {
+      logAction("open_user_guide");
+      setShowUserGuide(true);
+    }}
+    className="rounded-md bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+  >
+    User Guide
+  </button>
+)}
 </div>
 </div>
 
@@ -3902,14 +3966,14 @@ return true;
   onClose={() => {
     logAction("close_user_guide");
 
+    /*
+     * Close only the step-by-step instructional overlay.
+     * Do not exit the User Guide case.
+     */
     setShowUserGuide(false);
-
-    if (isUserGuideMode) {
-      localStorage.removeItem("isUserGuideMode");
-      setIsUserGuideMode(false);
-    }
   }}
 />
+
 </main>
 );
 }

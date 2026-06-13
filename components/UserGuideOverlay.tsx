@@ -113,7 +113,6 @@ const GUIDE_STEPS: GuideStep[] = [
     selector: '[data-guide="dashboard-overview"]',
     highlightMode: "layout",
     cardPlacement: "right",
-    layoutPreview: true,
   },
   {
     id: "preop-info",
@@ -134,11 +133,11 @@ const GUIDE_STEPS: GuideStep[] = [
 
   {
     id: "visualization-workflow",
-    title: "Step 3: Use the visualization panel",
+    title: "Step 3: read the visualization panel",
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Use the visualization panel to review the intraoperative course. Each section can be expanded or collapsed.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-panel",
     cardPlacement: "left",
@@ -156,7 +155,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "The timeline shows key intraoperative events. Use these events to anchor your reasoning to the correct time period.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-timeline",
     cardPlacement: "left",
@@ -176,7 +175,7 @@ const GUIDE_STEPS: GuideStep[] = [
     navGroup: "visualization",
     hidePreview: true,
     description:
-      "Click 15 min or 5 min button to choose the time resolution you want to view.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-resolution",
     cardPlacement: "left",
@@ -193,13 +192,13 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 3: Drag the timeline scroll bar",
     shortTitle: "Visualization",
     navGroup: "visualization",
-    description: "You can Drag the timeline scroll bar of any section to visualize the whole timeline.",
+    description: " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-time-scroll",
     cardPlacement: "left",
     hidePreview: true,
     screenNote: {
-      text: "↘ Drag it to visualize the whole timeline.",
+      text: "↘ For longer cases, a timeline scroll bar will appear. Drag the bar to view the full case timeline.",
       placement: "timeline-scroll",
     },
     visualizationPreview: {
@@ -225,7 +224,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Click the left color area to hide one gas row. Click a gas value segment to open the detailed trajectory.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-gas",
     cardPlacement: "left",
@@ -239,7 +238,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "This section shows medication events, doses, and timing.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-medication-overview",
     cardPlacement: "left",
@@ -250,7 +249,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Click a medication event icon to inspect medication name, time, dose, and route. You can also hide or show rows to reduce clutter.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-medication",
     cardPlacement: "left",
@@ -260,7 +259,7 @@ const GUIDE_STEPS: GuideStep[] = [
     title: "Step 3: Vitals panel",
     shortTitle: "Visualization",
     navGroup: "visualization",
-    description: "This section shows vital signs and physiologic trends.",
+    description: " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-vitals-overview",
     cardPlacement: "left",
@@ -274,7 +273,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Visualization",
     navGroup: "visualization",
     description:
-      "Click the color square on the left side of a vital sign row to hide or show the corresponding trend line.",
+      " ",
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "visualization-vitals",
     cardPlacement: "left",
@@ -310,28 +309,14 @@ const GUIDE_STEPS: GuideStep[] = [
     },
   },
 
-  {
-    id: "annotation-panel",
-    title: "Step 4: Understand the annotation task panel",
-    shortTitle: "Annotation task",
-    navGroup: "annotation",
-    description:
-      "This panel is where you complete the required annotation tasks.",
-    selector: '[data-guide="annotation-tasks"]',
-    highlightMode: "annotation-panel",
-    cardPlacement: "right",
-    realAnnotationTask: "summary",
-    annotationPreview: {
-      mode: "panel",
-    },
-  },
+
   {
     id: "annotation-tabs",
-    title: "Step 4: Choose one of the three annotation tasks",
+    title: "Step 4: Three annotation tasks In total",
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "There are three tasks to finish.",
+      " ",
     selector: '[data-guide="task-tabs"]',
     highlightMode: "annotation-tabs",
     cardPlacement: "right",
@@ -352,13 +337,13 @@ const GUIDE_STEPS: GuideStep[] = [
     navGroup: "annotation",
     hidePreview: true,
     description:
-      "Click the instruction, example, or FAQ sections to unfold the detailed description before writing your answer.",
+      " ",
     selector: '[data-guide="instructions"]',
     highlightMode: "annotation-instructions",
     cardPlacement: "right",
     realAnnotationTask: "summary",
     screenNote: {
-      text: "Click it to read the full description, or click again to collapse it.",
+      text: "Click the instruction, example, or FAQ sections to unfold the detailed description before writing your answer.",
       placement: "below",
     },
     annotationPreview: {
@@ -445,29 +430,10 @@ const GUIDE_STEPS: GuideStep[] = [
       mode: "switch",
     },
   },
-  {
-    id: "annotation-abnormality-real",
-    title: "Step 4: Open Abnormality Reasoning",
-    shortTitle: "Annotation task",
-    navGroup: "annotation",
-    hidePreview: true,
-    description:
-      "Click Abnormality Reasoning to detect all abnormalities and annotate one episode before moving to the next task.",
-    selector: '[data-guide="annotation-tasks"]',
-    highlightMode: "annotation-abnormality",
-    cardPlacement: "right",
-    realAnnotationTask: "abnormality",
-    screenNote: {
-      text: "Click on Abnormality Reasoning button to open the task panel.",
-      placement: "below",
-    },
-    annotationPreview: {
-      mode: "abnormality",
-    },
-  },
+ 
   {
     id: "annotation-abnormality-draw",
-    title: "Step 4: Select all abnormal episodes using your mouse on the right vital penel",
+    title: "Step 4: Abnormality Reasoning Task",
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
@@ -506,11 +472,11 @@ const GUIDE_STEPS: GuideStep[] = [
   },
   {
     id: "annotation-abnormality-save",
-    title: "Step 4: Select one episode and save",
+    title: "Step 4: Detect all abnormality, Select one episode and save",
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "After detecting all abnormal episodes, select one episode for reasoning, then click Save button.",
+      " ",
     selector: '[data-guide="dashboard-overview"]',
     highlightMode: "annotation-abnormality-save",
     cardPlacement: "left",
@@ -575,7 +541,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-    "The corresponding event is highlighted in either the Medication panel or the Gas panel on the right. Scroll the bar if needed to find the highlighted event and review the surrounding context.",
+    " ",
      
     selector: '[data-guide="visualization-panel"]',
     highlightMode: "annotation-management-right-panel",
@@ -592,7 +558,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Annotation task",
     navGroup: "annotation",
     description:
-      "Write or record your management reasoning in the response box. Explain why the selected medication/gas event was appropriate or inappropriate based on the surrounding clinical context.",
+      " ",
     selector: '[data-guide="annotation-tasks"]',
     highlightMode: "annotation-management-text",
     cardPlacement: "right",
@@ -625,7 +591,7 @@ const GUIDE_STEPS: GuideStep[] = [
     shortTitle: "Submit",
     navGroup: "submit",
     description:
-      "After submitting the current case, use Next to move to the next patient.",
+      " ",
     selector: '[data-guide="submit-area"], [data-guide="dashboard-overview"]',
     highlightMode: "submit",
     cardPlacement: "left",
@@ -2834,27 +2800,24 @@ export default function UserGuideOverlay({
 
             {currentStep.highlightMode === "annotation-abnormality-review" && (
               <div className="mt-2 rounded-md bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
-                <div>
-                  1. Detect all abnormal episodes based on your clinical
-                  practice.
-                </div>
+               
 
                 <div className="mt-1">
-                  2. Only the currently selected episode is highlighted on the
+                  1. Only the currently selected episode is highlighted on the
                   Vitals panel.
                 </div>
-
-                <div className="mt-1">
-                  3. Click an episode in the checklist to review its highlighted
-                  region again.
+                <div>
+                  2. You can click on other episode button to review the highlighted region again.
                 </div>
+
+              
               </div>
             )}
 
             {currentStep.highlightMode === "annotation-abnormality-adjust" && (
               <div className="mt-2 rounded-md bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
                 <div>
-                  1. If you want to modify a selected abnormality box, drag the
+                  1. If you want to modify a selected abnormality box, on the vital panel, drag the
                   left or right edge of the box to adjust the time range.
                 </div>
 
@@ -3348,6 +3311,10 @@ export default function UserGuideOverlay({
       button/status shows “Submitted”.
     </div>
 
+    <div>
+     2. Click on Next button to go to the next page only after there is a green 'submitted' status.
+    </div>
+
     <div className="mt-1">
       2. A backup file will also be saved to your computer’s Downloads folder.
       Please keep this file temporarily. If the case is not uploaded correctly,
@@ -3363,9 +3330,11 @@ export default function UserGuideOverlay({
             <AnnotationPreview mode={currentStep.annotationPreview.mode} />
           )}
 
-          {!currentStep.hidePreview && currentStep.visualizationPreview && (
-            <VisualizationPreview mode={currentStep.visualizationPreview.mode} />
-          )}
+{currentStep.navGroup !== "visualization" &&
+  !currentStep.hidePreview &&
+  currentStep.visualizationPreview && (
+    <VisualizationPreview mode={currentStep.visualizationPreview.mode} />
+  )}
         </div>
       </div>
     </div>

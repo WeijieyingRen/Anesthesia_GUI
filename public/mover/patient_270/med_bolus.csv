@@ -1,0 +1,4 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+ab18e55cf690b329,f16a3eff0ae96db3,propofol,sedative,2020-10-23 07:36:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ab18e55cf690b329,f16a3eff0ae96db3,propofol,sedative,2020-10-23 07:42:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ab18e55cf690b329,f16a3eff0ae96db3,sugammadex,reversal,2020-10-23 14:53:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given

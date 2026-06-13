@@ -1,0 +1,13 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 04:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 12:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,sugammadex,reversal,2021-02-24 12:20:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 12:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 12:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 12:32:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 12:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,ephedrine,vasopressor,2021-02-24 12:56:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+9abb881600f84eb1,47321661dbf72000,epinephrine,vasopressor,2021-02-24 13:00:00,1.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 13:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 13:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9abb881600f84eb1,47321661dbf72000,propofol,sedative,2021-02-24 13:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

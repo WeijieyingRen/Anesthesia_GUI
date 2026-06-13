@@ -1,0 +1,10 @@
+case_id,patient_id,event_name,event_time
+5eaddb875bac3cdd,965a47e97587e034,Anesthesia Start,2019-12-07 10:45:00
+5eaddb875bac3cdd,965a47e97587e034,Block administered,2019-12-07 11:00:00
+5eaddb875bac3cdd,965a47e97587e034,Anesthesia Ready,2019-12-07 11:19:00
+5eaddb875bac3cdd,965a47e97587e034,Intubation,2019-12-07 11:51:00
+5eaddb875bac3cdd,965a47e97587e034,Intubation,2019-12-07 11:51:00
+5eaddb875bac3cdd,965a47e97587e034,Intubation,2019-12-07 11:51:00
+5eaddb875bac3cdd,965a47e97587e034,Emergence,2019-12-07 14:03:00
+5eaddb875bac3cdd,965a47e97587e034,Extubation,2019-12-07 14:09:00
+5eaddb875bac3cdd,965a47e97587e034,Anesthesia Stop,2019-12-07 14:21:00

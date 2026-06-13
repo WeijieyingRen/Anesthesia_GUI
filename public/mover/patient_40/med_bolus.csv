@@ -1,0 +1,9 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:00:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:06:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:10:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:22:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:31:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,ephedrine,vasopressor,2020-05-20 08:10:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,ephedrine,vasopressor,2020-05-20 08:16:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,ephedrine,vasopressor,2020-05-20 08:21:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given

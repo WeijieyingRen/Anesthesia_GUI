@@ -1,0 +1,11 @@
+case_id,patient_id,event_name,event_time
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Anesthesia Start,2019-12-27 11:44:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Induction,2019-12-27 11:53:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,LMA  Placed,2019-12-27 11:56:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Anesthesia Ready,2019-12-27 11:58:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Extubation,2019-12-27 12:54:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,LMA Removed,2019-12-27 12:54:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Intubation,2019-12-27 12:56:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Emergence,2019-12-27 19:51:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Extubation,2019-12-27 19:51:00
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,Anesthesia Stop,2019-12-27 20:25:00

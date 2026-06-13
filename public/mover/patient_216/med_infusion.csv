@@ -1,0 +1,8 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+119e7a0dab4d376a,9f97273b4ef3a6f2,ketamine,sedative,2020-12-27 11:54:00,2020-12-27,2020-12-27,500.0,mg/kg/hr,IntraVENOUS,ketamine (KETALAR) 500 mg in sodium chloride 0.9 % 250 mL infusion,KETAMINE INFUSION (ANESTHESIA) (UCI),New Bag
+119e7a0dab4d376a,9f97273b4ef3a6f2,ketamine,sedative,2020-12-27 12:17:00,2020-12-27,2020-12-27,500.0,mg/kg/hr,IntraVENOUS,ketamine (KETALAR) 500 mg in sodium chloride 0.9 % 250 mL infusion,KETAMINE INFUSION (ANESTHESIA) (UCI),Rate Change
+119e7a0dab4d376a,9f97273b4ef3a6f2,propofol,sedative,2020-12-27 15:00:00,2020-12-27,2020-12-27,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),New Bag
+119e7a0dab4d376a,9f97273b4ef3a6f2,ketamine,sedative,2020-12-27 18:20:00,2020-12-27,2020-12-27,500.0,mg/kg/hr,IntraVENOUS,ketamine (KETALAR) 500 mg in sodium chloride 0.9 % 250 mL infusion,KETAMINE INFUSION (ANESTHESIA) (UCI),Rate Change
+119e7a0dab4d376a,9f97273b4ef3a6f2,ketamine,sedative,2020-12-27 19:17:00,2020-12-27,2020-12-27,500.0,mg/kg/hr,IntraVENOUS,ketamine (KETALAR) 500 mg in sodium chloride 0.9 % 250 mL infusion,KETAMINE INFUSION (ANESTHESIA) (UCI),Stopped
+119e7a0dab4d376a,9f97273b4ef3a6f2,propofol,sedative,2020-12-27 19:29:00,2020-12-27,2020-12-27,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+119e7a0dab4d376a,9f97273b4ef3a6f2,propofol,sedative,2020-12-27 19:54:00,2020-12-27,2020-12-27,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Stopped

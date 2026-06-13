@@ -1,0 +1,557 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+fe92c1daa45950fe,ec28978e213393df,4092-3,Vancomycin^trough,15.3,MCG/ML,5.0-20.0,N,2021-04-18 13:03:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,16.0,%,11.6-14.4,H,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,29.9,PG,27.0-33.5,N,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.1,G/DL,32.0-35.5,N,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,93.0,FL,81.5-97.0,N,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,3.15,MILL/MCL,3.70-5.00,L,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,29.3,%,34.0-44.0,L,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,9.4,G/DL,11.5-15.0,L,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,13.7,THOUS/MCL,4.0-10.5,H,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,9.0,FL,7.2-11.7,N,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,204.0,THOUS/MCL,150-400,N,2021-04-18 18:11:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,7.0,mmol/L,2-12,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,7.8,mg/dL,8.6-10.3,L,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,21.0,mmol/L,21-31,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,113.0,mmol/L,98-107,H,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,110.0,mg/dL,85-125,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,1.6,MG/DL,2.5-5.0,L,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,141.0,mmol/L,136-145,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,16.0,mg/dL,7-25,N,2021-04-18 18:31:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,76078-5,Influenza virus A RNA,9999999.0,Unknown,Unknown,N,2021-04-18 22:33:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,76080-1,Influenza virus B RNA,9999999.0,Unknown,Unknown,N,2021-04-18 22:33:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,76089-2,Respiratory syncytial virus RNA,9999999.0,Unknown,Unknown,N,2021-04-18 22:33:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,94500-6,SARS coronavirus 2 RNA,9999999.0,Unknown,Unknown,N,2021-04-18 22:33:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.6,%,Unknown,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,1.3,%,Unknown,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.5,PG,27.0-33.5,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.0,G/DL,32.0-35.5,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,92.2,FL,81.5-97.0,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,3.25,MILL/MCL,3.70-5.00,L,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,29.9,%,34.0-44.0,L,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,9.9,G/DL,11.5-15.0,L,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,14.1,THOUS/MCL,4.0-10.5,H,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.7,THOUS/MCL,0.9-3.3,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,12.0,%,Unknown,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,0.9,THOUS/MCL,0.0-0.8,H,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,6.1,%,Unknown,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,11.3,THOUS/MCL,2.0-8.1,H,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,80.0,%,Unknown,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,9.1,FL,7.2-11.7,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,231.0,THOUS/MCL,150-400,N,2021-04-19 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,6.0,mmol/L,2-12,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.4,mg/dL,8.6-10.3,L,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,19.0,mmol/L,21-31,L,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,112.0,mmol/L,98-107,H,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,92.0,mg/dL,85-125,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,3.4,MG/DL,2.5-5.0,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,136-145,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,16.0,mg/dL,7-25,N,2021-04-19 06:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.6,%,Unknown,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,1.4,%,Unknown,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.1,PG,27.0-33.5,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.8,G/DL,32.0-35.5,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,91.8,FL,81.5-97.0,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,3.08,MILL/MCL,3.70-5.00,L,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,28.3,%,34.0-44.0,L,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,9.3,G/DL,11.5-15.0,L,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,13.6,THOUS/MCL,4.0-10.5,H,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,10.3,%,Unknown,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,1.0,THOUS/MCL,0.0-0.8,H,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,7.2,%,Unknown,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,10.9,THOUS/MCL,2.0-8.1,H,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,80.5,%,Unknown,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,244.0,THOUS/MCL,150-400,N,2021-04-20 06:46:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,7.0,mmol/L,2-12,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,19.0,mmol/L,21-31,L,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,110.0,mmol/L,98-107,H,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.5,mg/dL,0.6-1.2,L,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,86.0,mg/dL,85-125,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.2,mg/dL,1.9-2.7,L,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,2.6,MG/DL,2.5-5.0,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.6,mmol/L,3.5-5.1,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,136.0,mmol/L,136-145,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,12.0,mg/dL,7-25,N,2021-04-20 07:39:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,4092-3,Vancomycin^trough,9999999.0,MCG/ML,5.0-20.0,N,2021-04-20 13:54:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,4092-3,Vancomycin^trough,12.6,MCG/ML,5.0-20.0,N,2021-04-21 00:47:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2021-04-21 01:36:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2021-04-21 01:36:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2021-04-21 03:54:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,4.0,mmol/L,2-12,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.699999999999998,mg/dL,8.6-10.3,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,111.0,mmol/L,98-107,H,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.5,mg/dL,0.6-1.2,L,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,85.0,mg/dL,85-125,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.7,mg/dL,1.9-2.7,L,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,3.2,MG/DL,2.5-5.0,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.3,mmol/L,3.5-5.1,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,136-145,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,12.0,mg/dL,7-25,N,2021-04-21 06:08:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.9,%,Unknown,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,1.9,%,Unknown,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.8,PG,27.0-33.5,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.6,G/DL,32.0-35.5,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,91.6,FL,81.5-97.0,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.88,MILL/MCL,3.70-5.00,L,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,26.4,%,34.0-44.0,L,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,8.9,G/DL,11.5-15.0,L,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.1,THOUS/MCL,4.0-10.5,H,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.7,THOUS/MCL,0.9-3.3,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,15.1,%,Unknown,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,1.1,THOUS/MCL,0.0-0.8,H,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,9.6,%,Unknown,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,8.099999999999998,THOUS/MCL,2.0-8.1,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,72.5,%,Unknown,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.699999999999998,FL,7.2-11.7,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,241.0,THOUS/MCL,150-400,N,2021-04-21 06:23:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,5902-2,Coagulation tissue factor induced,13.0,SEC,11.7-13.6,N,2021-04-21 06:33:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6301-6,Coagulation tissue factor induced.INR,1.04,Unknown,0.91-1.10,N,2021-04-21 06:33:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14979-9,Coagulation surface induced,31.1,SEC,23.9-35.9,N,2021-04-21 06:34:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-21 07:41:00,preop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,66748-5,Clot angle,80.0,Degree,65-80,N,2021-04-21 10:34:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,52770-5,Clot formation.extrinsic coagulation system activated,51.0,SEC,48-127,N,2021-04-21 10:34:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,52773-9,Clotting time.extrinsic coagulation system activated,54.0,SEC,43-82,N,2021-04-21 10:34:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,52783-8,Maximum clot firmness.extrinsic coagulation system activated,75.0,mm,52-70,H,2021-04-21 10:34:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,52780-4,Maximum clot firmness.extrinsic coagulation system activated.platelets inhibited,34.0,mm,7-24,H,2021-04-21 10:34:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,52786-1,Maximum lysis.extrinsic coagulation system activated,10.0,%,Unknown,N,2021-04-21 10:34:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,718-7,Hemoglobin,8.4,G/DL,11.5-15.0,L,2021-04-21 13:55:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,718-7,Hemoglobin,9.5,G/DL,11.5-15.0,L,2021-04-21 13:55:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,718-7,Hemoglobin,8.099999999999998,G/DL,11.5-15.0,L,2021-04-21 13:55:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,718-7,Hemoglobin,8.699999999999998,G/DL,11.5-15.0,L,2021-04-21 13:55:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14045-9,D-lactate,1.2,mmol/L,0.5-2.0,N,2021-04-21 14:52:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30934-4,Natriuretic peptide.B,2451.0,pg/mL,0-100,H,2021-04-21 14:54:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.6,mg/dL,1.9-2.7,L,2021-04-21 14:59:00,intraop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1959-6,Bicarbonate,22.0,MMOL/L,21-27,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.37,mmol/L,1.13-1.32,H,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20565-8,Carbon dioxide,23.0,MMOL/L,23-29,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,36.0,MMHG,36-42,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,93.0,MG/DL,70-110,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,64.0,MMHG,80-104,L,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2713-6,Oxygen saturation,92.0,%,95-98,L,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6298-4,Potassium,4.1,MMOL/L,3.7-5.5,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2947-0,Sodium,139.0,MMOL/L,138-146,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11558-4,pH,7.38,Unknown,7.38-7.42,N,2021-04-21 16:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3184-9,Activated clotting time,125.0,SEC.,74-137,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3184-9,Activated clotting time,252.0,SEC.,74-137,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3184-9,Activated clotting time,224.0,SEC.,74-137,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3184-9,Activated clotting time,241.0,SEC.,74-137,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1959-6,Bicarbonate,22.0,MMOL/L,21-27,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1959-6,Bicarbonate,24.0,MMOL/L,21-27,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.36,mmol/L,1.13-1.32,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.29,mmol/L,1.13-1.32,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.34,mmol/L,1.13-1.32,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.27,mmol/L,1.13-1.32,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.37,mmol/L,1.13-1.32,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,59.0,MMHG,36-42,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20565-8,Carbon dioxide,23.0,MMOL/L,23-29,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20565-8,Carbon dioxide,24.0,MMOL/L,23-29,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,49.0,MMHG,36-42,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20565-8,Carbon dioxide,26.0,MMOL/L,23-29,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,45.0,MMHG,36-42,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20565-8,Carbon dioxide,25.0,MMOL/L,23-29,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,50.0,MMHG,36-42,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,130.0,MG/DL,70-110,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,150.0,MG/DL,70-110,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,165.0,MG/DL,70-110,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,166.0,MG/DL,70-110,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,112.0,MG/DL,70-110,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,274.0,MMHG,80-104,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,287.0,MMHG,80-104,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,397.0,MMHG,80-104,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,178.0,MMHG,80-104,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,284.0,MMHG,80-104,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2713-6,Oxygen saturation,99.0,%,95-98,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2713-6,Oxygen saturation,100.0,%,95-98,H,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6298-4,Potassium,4.8,MMOL/L,3.7-5.5,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6298-4,Potassium,4.9,MMOL/L,3.7-5.5,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6298-4,Potassium,4.2,MMOL/L,3.7-5.5,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6298-4,Potassium,4.4,MMOL/L,3.7-5.5,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2947-0,Sodium,139.0,MMOL/L,138-146,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2947-0,Sodium,138.0,MMOL/L,138-146,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2947-0,Sodium,140.0,MMOL/L,138-146,N,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11558-4,pH,7.26,Unknown,7.38-7.42,L,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11558-4,pH,7.3,Unknown,7.38-7.42,L,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11558-4,pH,7.22,Unknown,7.38-7.42,L,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11558-4,pH,7.32,Unknown,7.38-7.42,L,2021-04-21 16:27:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1959-6,Bicarbonate,22.0,MMOL/L,21-27,N,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.29,mmol/L,1.13-1.32,N,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,50.0,MMHG,36-42,H,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20565-8,Carbon dioxide,24.0,MMOL/L,23-29,N,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2339-0,Glucose,165.0,MG/DL,70-110,H,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11556-8,Oxygen,438.0,MMHG,80-104,H,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2713-6,Oxygen saturation,100.0,%,95-98,H,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6298-4,Potassium,4.9,MMOL/L,3.7-5.5,N,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2947-0,Sodium,138.0,MMOL/L,138-146,N,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11558-4,pH,7.269999999999999,Unknown,7.38-7.42,L,2021-04-21 16:28:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,718-7,Hemoglobin,8.4,G/DL,11.5-15.0,L,2021-04-21 16:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14045-9,D-lactate,1.3,mmol/L,0.5-2.0,N,2021-04-21 16:46:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,6.0,mmol/L,2-12,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,23.0,mmol/L,21-31,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,108.0,mmol/L,98-107,H,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.5,mg/dL,0.6-1.2,L,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,168.0,mg/dL,85-125,H,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.6,mmol/L,3.5-5.1,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,136-145,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,11.0,mg/dL,7-25,N,2021-04-21 17:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30934-4,Natriuretic peptide.B,2400.0,pg/mL,0-100,H,2021-04-21 17:02:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2021-04-21 18:16:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,,Unknown,Unknown,N,2021-04-21 18:16:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.4,%,Unknown,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,0.0,%,Unknown,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,15.1,%,11.6-14.4,H,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,31.2,PG,27.0-33.5,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.8,G/DL,32.0-35.5,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,92.3,FL,81.5-97.0,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.68,MILL/MCL,3.70-5.00,L,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,24.8,%,34.0-44.0,L,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,8.4,G/DL,11.5-15.0,L,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,15.9,THOUS/MCL,4.0-10.5,H,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,0.5,THOUS/MCL,0.9-3.3,L,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,3.1,%,Unknown,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,0.3,THOUS/MCL,0.0-0.8,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,1.9,%,Unknown,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,15.0,THOUS/MCL,2.0-8.1,H,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,94.6,%,Unknown,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.599999999999998,FL,7.2-11.7,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,194.0,THOUS/MCL,150-400,N,2021-04-21 18:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14045-9,D-lactate,1.6,mmol/L,0.5-2.0,N,2021-04-21 18:31:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,5902-2,Coagulation tissue factor induced,14.0,SEC,11.7-13.6,H,2021-04-21 18:37:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,5902-2,Coagulation tissue factor induced,14.1,SEC,11.7-13.6,H,2021-04-21 18:37:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6301-6,Coagulation tissue factor induced.INR,1.14,Unknown,0.91-1.10,H,2021-04-21 18:37:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6301-6,Coagulation tissue factor induced.INR,1.15,Unknown,0.91-1.10,H,2021-04-21 18:37:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14979-9,Coagulation surface induced,29.5,SEC,23.9-35.9,N,2021-04-21 18:38:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1742-6,Alanine aminotransferase,14.0,U/L,7-52,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1751-7,Albumin,2.6,G/DL,3.7-5.3,L,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6768-6,Alkaline phosphatase,152.0,U/L,34-104,H,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,6.0,mmol/L,2-12,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1920-8,Aspartate aminotransferase,19.0,U/L,13-39,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1975-2,Bilirubin,0.6,mg/dL,0.0-1.4,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,112.0,mmol/L,98-107,H,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,165.0,mg/dL,85-125,H,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.5,mg/dL,1.9-2.7,L,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,4.0,MG/DL,2.5-5.0,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.9,mmol/L,3.5-5.1,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2885-2,Protein,4.6,G/DL,6.0-8.3,L,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,140.0,mmol/L,136-145,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,13.0,mg/dL,7-25,N,2021-04-21 18:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1960-4,Bicarbonate,21.8,mmol/L,21.0-27.0,N,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,0.28,Unknown,Unknown,N,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2019-8,Carbon dioxide,37.9,MMHG,36.0-42.0,N,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2703-7,Oxygen,156.0,MMHG,80.0-104.0,H,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2708-6,Oxygen saturation,98.5,%,95.0-99.0,N,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2744-1,pH,7.38,Unknown,7.38-7.42,N,2021-04-21 18:49:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1742-6,Alanine aminotransferase,14.0,U/L,7-52,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1751-7,Albumin,2.7,G/DL,3.7-5.3,L,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6768-6,Alkaline phosphatase,149.0,U/L,34-104,H,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,4.0,mmol/L,2-12,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1920-8,Aspartate aminotransferase,18.0,U/L,13-39,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1975-2,Bilirubin,0.6,mg/dL,0.0-1.4,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,112.0,mmol/L,98-107,H,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,159.0,mg/dL,85-125,H,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.5,mg/dL,1.9-2.7,L,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,4.1,MG/DL,2.5-5.0,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.8,mmol/L,3.5-5.1,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2885-2,Protein,4.6,G/DL,6.0-8.3,L,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,138.0,mmol/L,136-145,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,13.0,mg/dL,7-25,N,2021-04-21 18:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,89579-7,Troponin I.cardiac,114.0,ng/L,0-15,H,2021-04-21 18:59:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2021-04-21 20:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,,Unknown,Unknown,N,2021-04-21 20:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,28638-5,Base excess,0.0,mmol/L,Unknown,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19229-4,Bicarbonate,25.6,mmol/L,Unknown,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1994-3,Calcium.ionized,1.23,mmol/L,1.13-1.32,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11557-6,Carbon dioxide,0.28,Unknown,Unknown,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19212-0,Carbon dioxide,46.8,MMHG,Unknown,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20563-3,Carboxyhemoglobin/Hemoglobin.total,0.1,%,0.5-1.5,L,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2069-3,Chloride,110.0,mmol/L,99-111,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,148.0,MG/DL,70-110,H,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,4544-3,Hematocrit,24.0,%,38-46,L,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,15082-1,Methemoglobin,0.2,%,0.0-1.5,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19211-2,Oxygen,32.7,MMHG,Unknown,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.4,mmol/L,3.7-5.5,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,138-146,L,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19213-8,pH,7.36,Unknown,Unknown,N,2021-04-21 21:22:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,,Unknown,Unknown,N,2021-04-21 21:38:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2021-04-21 21:38:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2021-04-21 21:46:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,664-3,Microscopic observation,,Unknown,Unknown,N,2021-04-21 21:46:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,21003-9,Fungus identified,9999999.0,Unknown,Unknown,N,2021-04-22 00:03:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,21003-9,Fungus identified,9999999.0,Unknown,Unknown,N,2021-04-22 00:05:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,6.0,mmol/L,2-12,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.699999999999998,mg/dL,8.6-10.3,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,108.0,mmol/L,98-107,H,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.5,mg/dL,0.6-1.2,L,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,132.0,mg/dL,85-125,H,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.3,mmol/L,3.5-5.1,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,138.0,mmol/L,136-145,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,12.0,mg/dL,7-25,N,2021-04-22 01:11:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,6.0,mmol/L,2-12,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,107.0,mmol/L,98-107,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,98.0,mg/dL,85-125,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,3.9,MG/DL,2.5-5.0,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,136-145,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,12.0,mg/dL,7-25,N,2021-04-22 06:44:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.4,%,Unknown,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,0.2,%,Unknown,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,15.5,%,11.6-14.4,H,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.3,PG,27.0-33.5,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.2,G/DL,32.0-35.5,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,91.2,FL,81.5-97.0,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.22,MILL/MCL,3.70-5.00,L,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,20.2,%,34.0-44.0,LL,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,6.7,G/DL,11.5-15.0,LL,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,18.4,THOUS/MCL,4.0-10.5,H,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,7.5,%,Unknown,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,1.3,THOUS/MCL,0.0-0.8,H,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,6.9,%,Unknown,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,15.6,THOUS/MCL,2.0-8.1,H,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,85.0,%,Unknown,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.9,FL,7.2-11.7,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,190.0,THOUS/MCL,150-400,N,2021-04-22 06:54:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14045-9,D-lactate,0.8,mmol/L,0.5-2.0,N,2021-04-22 09:00:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,89579-7,Troponin I.cardiac,91.0,ng/L,0-15,H,2021-04-22 09:41:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2021-04-22 10:01:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,14.6,%,11.6-14.4,H,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.2,PG,27.0-33.5,N,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.9,G/DL,32.0-35.5,N,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,91.6,FL,81.5-97.0,N,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.66,MILL/MCL,3.70-5.00,L,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,24.4,%,34.0-44.0,L,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,8.0,G/DL,11.5-15.0,L,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,18.5,THOUS/MCL,4.0-10.5,H,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,9.1,FL,7.2-11.7,N,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,176.0,THOUS/MCL,150-400,N,2021-04-22 12:29:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11545-1,Microscopic observation,9999999.0,Unknown,Unknown,N,2021-04-22 13:57:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.7,%,Unknown,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.1,THOUS/MCL,0.0-0.5,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,1.2,%,Unknown,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,14.9,%,11.6-14.4,H,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.5,PG,27.0-33.5,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.1,G/DL,32.0-35.5,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,92.0,FL,81.5-97.0,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.51,MILL/MCL,3.70-5.00,L,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,23.1,%,34.0-44.0,L,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,7.599999999999999,G/DL,11.5-15.0,L,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,12.5,THOUS/MCL,4.0-10.5,H,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.6,THOUS/MCL,0.9-3.3,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,12.6,%,Unknown,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,1.1,THOUS/MCL,0.0-0.8,H,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,8.699999999999998,%,Unknown,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,9.6,THOUS/MCL,2.0-8.1,H,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,76.79999999999998,%,Unknown,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,178.0,THOUS/MCL,150-400,N,2021-04-23 06:26:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,5.0,mmol/L,2-12,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,23.0,mmol/L,21-31,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,106.0,mmol/L,98-107,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,91.0,mg/dL,85-125,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.4,mg/dL,1.9-2.7,L,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,3.1,MG/DL,2.5-5.0,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.5,mmol/L,3.5-5.1,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,134.0,mmol/L,136-145,L,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,14.0,mg/dL,7-25,N,2021-04-23 06:43:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,89579-7,Troponin I.cardiac,262.0,ng/L,0-15,H,2021-04-23 06:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,4092-3,Vancomycin^trough,13.9,MCG/ML,5.0-20.0,N,2021-04-23 13:25:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,0.8,%,Unknown,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,1.7,%,Unknown,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,14.9,%,11.6-14.4,H,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,31.1,PG,27.0-33.5,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.7,G/DL,32.0-35.5,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,92.2,FL,81.5-97.0,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.47,MILL/MCL,3.70-5.00,L,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,22.8,%,34.0-44.0,L,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,7.7,G/DL,11.5-15.0,L,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.4,THOUS/MCL,4.0-10.5,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.3,THOUS/MCL,0.9-3.3,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,13.6,%,Unknown,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,1.0,THOUS/MCL,0.0-0.8,H,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,11.0,%,Unknown,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,6.8,THOUS/MCL,2.0-8.1,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,72.9,%,Unknown,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.699999999999998,FL,7.2-11.7,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,163.0,THOUS/MCL,150-400,N,2021-04-24 06:04:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,3.0,mmol/L,2-12,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,111.0,mmol/L,98-107,H,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,105.0,mg/dL,85-125,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.6,mg/dL,1.9-2.7,L,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,2.9,MG/DL,2.5-5.0,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,140.0,mmol/L,136-145,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,14.0,mg/dL,7-25,N,2021-04-24 06:15:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,89579-7,Troponin I.cardiac,1111.0,ng/L,0-15,H,2021-04-24 06:18:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,89579-7,Troponin I.cardiac,958.0,ng/L,0-15,H,2021-04-24 12:03:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,1.3,%,Unknown,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,2.3,%,Unknown,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,14.8,%,11.6-14.4,H,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,31.5,PG,27.0-33.5,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,92.6,FL,81.5-97.0,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.57,MILL/MCL,3.70-5.00,L,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,23.8,%,34.0-44.0,L,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,8.099999999999998,G/DL,11.5-15.0,L,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.199999999999998,THOUS/MCL,4.0-10.5,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.5,THOUS/MCL,0.9-3.3,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,17.8,%,Unknown,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,0.8,THOUS/MCL,0.0-0.8,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,10.3,%,Unknown,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,5.6,THOUS/MCL,2.0-8.1,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,68.3,%,Unknown,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.599999999999998,FL,7.2-11.7,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,178.0,THOUS/MCL,150-400,N,2021-04-25 05:47:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,3.0,mmol/L,2-12,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.699999999999998,mg/dL,8.6-10.3,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,25.0,mmol/L,21-31,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,109.0,mmol/L,98-107,H,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.5,mg/dL,0.6-1.2,L,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,91.0,mg/dL,85-125,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.6,mg/dL,1.9-2.7,L,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,2.8,MG/DL,2.5-5.0,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.5,mmol/L,3.5-5.1,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,136-145,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,13.0,mg/dL,7-25,N,2021-04-25 05:55:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2021-04-25 08:52:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-25 08:52:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,,Unknown,Unknown,N,2021-04-25 08:53:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2021-04-25 08:53:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-25 08:53:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,76078-5,Influenza virus A RNA,9999999.0,Unknown,Unknown,N,2021-04-25 14:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,76080-1,Influenza virus B RNA,9999999.0,Unknown,Unknown,N,2021-04-25 14:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,76089-2,Respiratory syncytial virus RNA,9999999.0,Unknown,Unknown,N,2021-04-25 14:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,94500-6,SARS coronavirus 2 RNA,9999999.0,Unknown,Unknown,N,2021-04-25 14:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,14.4,%,11.6-14.4,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.7,PG,27.0-33.5,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.7,G/DL,32.0-35.5,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,93.9,FL,81.5-97.0,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.7,MILL/MCL,3.70-5.00,L,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,25.3,%,34.0-44.0,L,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,8.3,G/DL,11.5-15.0,L,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.9,THOUS/MCL,4.0-10.5,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.099999999999998,FL,7.2-11.7,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,209.0,THOUS/MCL,150-400,N,2021-04-25 20:07:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,5902-2,Coagulation tissue factor induced,14.1,SEC,11.7-13.6,H,2021-04-25 20:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,6301-6,Coagulation tissue factor induced.INR,1.15,Unknown,0.91-1.10,H,2021-04-25 20:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,14979-9,Coagulation surface induced,34.7,SEC,23.9-35.9,N,2021-04-25 20:14:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30180-4,Basophils/100 leukocytes,1.2,%,Unknown,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26450-7,Eosinophils/100 leukocytes,3.0,%,Unknown,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,788-0,Erythrocyte distribution width,15.1,%,11.6-14.4,H,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,785-6,Erythrocyte mean corpuscular hemoglobin,30.8,PG,27.0-33.5,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.0,G/DL,32.0-35.5,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30428-7,Erythrocyte mean corpuscular volume,93.3,FL,81.5-97.0,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,789-8,Erythrocytes,2.61,MILL/MCL,3.70-5.00,L,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,20570-8,Hematocrit,24.4,%,34.0-44.0,L,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,30350-3,Hemoglobin,8.0,G/DL,11.5-15.0,L,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.2,THOUS/MCL,4.0-10.5,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,731-0,Lymphocytes,1.5,THOUS/MCL,0.9-3.3,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,736-9,Lymphocytes/100 leukocytes,20.9,%,Unknown,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26484-6,Monocytes,0.8,THOUS/MCL,0.0-0.8,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26485-3,Monocytes/100 leukocytes,10.9,%,Unknown,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26499-4,Neutrophils,4.6,THOUS/MCL,2.0-8.1,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,770-8,Neutrophils/100 leukocytes,64.0,%,Unknown,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,32623-1,Platelet mean volume,8.4,FL,7.2-11.7,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,26515-7,Platelets,211.0,THOUS/MCL,150-400,N,2021-04-26 06:19:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,33037-3,Anion gap,4.0,mmol/L,2-12,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,17861-6,Calcium,8.699999999999998,mg/dL,8.6-10.3,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2075-0,Chloride,109.0,mmol/L,98-107,H,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2160-0,Creatinine,0.6,mg/dL,0.6-1.2,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2345-7,Glucose,82.0,mg/dL,85-125,L,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,19123-9,Magnesium,1.4,mg/dL,1.9-2.7,L,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2777-1,Phosphate,3.1,MG/DL,2.5-5.0,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2823-3,Potassium,4.6,mmol/L,3.5-5.1,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,2951-2,Sodium,137.0,mmol/L,136-145,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,3094-0,Urea nitrogen,14.0,mg/dL,7-25,N,2021-04-26 06:35:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-27 21:39:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-28 08:13:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-28 08:14:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-04-28 22:53:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-05-19 10:52:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-05-19 10:53:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00
+fe92c1daa45950fe,ec28978e213393df,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-06-22 16:31:00,postop,Hospital Encounter,2021-04-21 07:48:00,2021-04-21 16:14:00

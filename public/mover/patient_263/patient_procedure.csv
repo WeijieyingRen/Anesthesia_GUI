@@ -1,0 +1,8 @@
+case_id,patient_id,event_name,event_time
+5e8adbbeb5ced343,5f18f9287aeee181,Anesthesia Start,2020-12-26 07:28:00
+5e8adbbeb5ced343,5f18f9287aeee181,Induction,2020-12-26 07:37:00
+5e8adbbeb5ced343,5f18f9287aeee181,Intubation,2020-12-26 07:41:00
+5e8adbbeb5ced343,5f18f9287aeee181,Anesthesia Ready,2020-12-26 07:53:00
+5e8adbbeb5ced343,5f18f9287aeee181,Emergence,2020-12-26 14:39:00
+5e8adbbeb5ced343,5f18f9287aeee181,Extubation,2020-12-26 14:41:00
+5e8adbbeb5ced343,5f18f9287aeee181,Anesthesia Stop,2020-12-26 15:31:00

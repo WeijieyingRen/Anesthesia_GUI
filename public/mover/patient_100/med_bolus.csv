@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+85f0a1e3eb1f67e9,010877d90bd874ab,propofol,sedative,2020-12-16 18:09:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+85f0a1e3eb1f67e9,010877d90bd874ab,epinephrine,vasopressor,2020-12-16 23:39:00,1.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given

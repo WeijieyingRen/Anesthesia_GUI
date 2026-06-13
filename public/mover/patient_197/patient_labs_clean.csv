@@ -1,0 +1,388 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+59b7f9a983b1e92f,6a382fba57000353,19235-1,Base excess^^standard,3.0,MMOL/L,Unknown,N,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,1959-6,Bicarbonate,28.0,MMOL/L,21-27,H,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,1994-3,Calcium.ionized,1.27,mmol/L,1.13-1.32,N,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,11557-6,Carbon dioxide,46.0,MMHG,36-42,H,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20565-8,Carbon dioxide,29.0,MMOL/L,23-29,N,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2339-0,Glucose,143.0,MG/DL,70-110,H,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,11556-8,Oxygen,175.0,MMHG,80-104,H,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2713-6,Oxygen saturation,100.0,%,95-98,H,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,6298-4,Potassium,4.1,MMOL/L,3.7-5.5,N,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2947-0,Sodium,139.0,MMOL/L,138-146,N,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,11558-4,pH,7.39,Unknown,7.38-7.42,N,2018-08-13 11:11:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,718-7,Hemoglobin,10.2,G/DL,13.5-16.9,L,2018-08-13 11:48:00,intraop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,6.0,mmol/L,2-12,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,25.0,mmol/L,21-31,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,107.0,mmol/L,98-107,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.4,%,11.6-14.4,H,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.9,PG,27.0-33.5,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.6,G/DL,32.0-35.5,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,91.7,FL,81.5-97.0,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.08,MILL/MCL,3.70-5.00,L,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,174.0,mg/dL,85-125,H,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,28.3,%,39.5-50.0,L,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,9.2,G/DL,13.5-16.9,L,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.2,THOUS/MCL,4.0-10.5,H,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,1.9,mg/dL,1.9-2.7,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.1,MG/DL,2.5-5.0,L,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.9,FL,7.2-11.7,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,152.0,THOUS/MCL,150-400,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.9,mmol/L,3.5-5.1,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,138.0,mmol/L,136-145,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,18.0,mg/dL,7-25,N,2018-08-14 04:12:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,6.0,mmol/L,2-12,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,25.0,mmol/L,21-31,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,108.0,mmol/L,98-107,H,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.7,%,11.6-14.4,H,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.4,PG,27.0-33.5,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,31.7,G/DL,32.0-35.5,L,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,92.6,FL,81.5-97.0,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.17,MILL/MCL,3.70-5.00,L,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,189.0,mg/dL,85-125,H,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,29.3,%,39.5-50.0,L,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,9.3,G/DL,13.5-16.9,L,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,16.8,THOUS/MCL,4.0-10.5,H,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.5,MG/DL,2.5-5.0,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.7,FL,7.2-11.7,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,158.0,THOUS/MCL,150-400,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,139.0,mmol/L,136-145,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,22.0,mg/dL,7-25,N,2018-08-15 04:40:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,5.0,mmol/L,2-12,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,7.5,mg/dL,8.6-10.3,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,111.0,mmol/L,98-107,H,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.2,%,11.6-14.4,H,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,30.7,PG,27.0-33.5,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.2,G/DL,32.0-35.5,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,92.3,FL,81.5-97.0,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.02,MILL/MCL,3.70-5.00,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,179.0,mg/dL,85-125,H,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,27.8,%,39.5-50.0,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,9.3,G/DL,13.5-16.9,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,10.8,THOUS/MCL,4.0-10.5,H,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,1.7,mg/dL,1.9-2.7,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.1,MG/DL,2.5-5.0,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.2,FL,7.2-11.7,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,173.0,THOUS/MCL,150-400,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.4,mmol/L,3.5-5.1,L,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,138.0,mmol/L,136-145,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,22.0,mg/dL,7-25,N,2018-08-16 04:23:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,6.0,mmol/L,2-12,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,9.2,mg/dL,8.6-10.3,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,106.0,mmol/L,98-107,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.1,%,11.6-14.4,H,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.6,PG,27.0-33.5,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.4,G/DL,32.0-35.5,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,91.2,FL,81.5-97.0,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.68,MILL/MCL,3.70-5.00,L,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,87.0,mg/dL,85-125,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,33.5,%,39.5-50.0,L,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,10.9,G/DL,13.5-16.9,L,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.8,THOUS/MCL,4.0-10.5,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,1.9,mg/dL,1.9-2.7,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,3.3,MG/DL,2.5-5.0,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.3,FL,7.2-11.7,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,176.0,THOUS/MCL,150-400,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.7,mmol/L,3.5-5.1,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,136.0,mmol/L,136-145,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,21.0,mg/dL,7-25,N,2018-08-17 04:14:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,7.0,mmol/L,2-12,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,9.3,mg/dL,8.6-10.3,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,101.0,mmol/L,98-107,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,14.9,%,11.6-14.4,H,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.8,PG,27.0-33.5,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.9,G/DL,32.0-35.5,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,90.6,FL,81.5-97.0,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,4.0,MILL/MCL,3.70-5.00,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,114.0,mg/dL,85-125,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,36.3,%,39.5-50.0,L,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,11.9,G/DL,13.5-16.9,L,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,13.3,THOUS/MCL,4.0-10.5,H,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,1.7,mg/dL,1.9-2.7,L,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,3.0,MG/DL,2.5-5.0,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.7,FL,7.2-11.7,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,198.0,THOUS/MCL,150-400,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.8,mmol/L,3.5-5.1,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,132.0,mmol/L,136-145,L,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,20.0,mg/dL,7-25,N,2018-08-18 04:01:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2018-08-18 14:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2018-08-18 14:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,664-3,Microscopic observation,,Unknown,Unknown,N,2018-08-18 14:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,4.0,mmol/L,2-12,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,107.0,mmol/L,98-107,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.5,PG,27.0-33.5,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.1,G/DL,32.0-35.5,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,91.7,FL,81.5-97.0,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.74,MILL/MCL,3.70-5.00,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,129.0,mg/dL,85-125,H,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,34.2,%,39.5-50.0,L,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,11.0,G/DL,13.5-16.9,L,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,17.0,THOUS/MCL,4.0-10.5,H,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.6,MG/DL,2.5-5.0,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.7,FL,7.2-11.7,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,187.0,THOUS/MCL,150-400,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,4.0,mmol/L,3.5-5.1,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,137.0,mmol/L,136-145,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,18.0,mg/dL,7-25,N,2018-08-19 06:52:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,7.0,mmol/L,2-12,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,107.0,mmol/L,98-107,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.5,%,11.6-14.4,H,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.2,PG,27.0-33.5,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.3,G/DL,32.0-35.5,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,90.5,FL,81.5-97.0,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.75,MILL/MCL,3.70-5.00,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,145.0,mg/dL,85-125,H,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,33.9,%,39.5-50.0,L,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,11.0,G/DL,13.5-16.9,L,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,12.9,THOUS/MCL,4.0-10.5,H,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.4,MG/DL,2.5-5.0,L,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.7,FL,7.2-11.7,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,196.0,THOUS/MCL,150-400,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.8,mmol/L,3.5-5.1,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,140.0,mmol/L,136-145,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,23.0,mg/dL,7-25,N,2018-08-20 03:25:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,5.0,mmol/L,2-12,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,28.0,mmol/L,21-31,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,108.0,mmol/L,98-107,H,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.8,%,11.6-14.4,H,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.3,PG,27.0-33.5,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,31.8,G/DL,32.0-35.5,L,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,92.3,FL,81.5-97.0,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.85,MILL/MCL,3.70-5.00,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,120.0,mg/dL,85-125,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,35.5,%,39.5-50.0,L,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,11.3,G/DL,13.5-16.9,L,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,13.2,THOUS/MCL,4.0-10.5,H,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.7,MG/DL,2.5-5.0,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.7,FL,7.2-11.7,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,195.0,THOUS/MCL,150-400,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,4.0,mmol/L,3.5-5.1,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,141.0,mmol/L,136-145,N,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,28.0,mg/dL,7-25,H,2018-08-21 04:35:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,17.9,%,11.6-14.4,H,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.7,PG,27.0-33.5,N,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.2,G/DL,32.0-35.5,N,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,89.3,FL,81.5-97.0,N,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.84,MILL/MCL,3.70-5.00,N,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,34.3,%,39.5-50.0,L,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,11.4,G/DL,13.5-16.9,L,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,12.4,THOUS/MCL,4.0-10.5,H,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.3,FL,7.2-11.7,N,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,203.0,THOUS/MCL,150-400,N,2018-08-22 04:11:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,7.0,mmol/L,2-12,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,108.0,mmol/L,98-107,H,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.1,mg/dL,0.7-1.3,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,120.0,mg/dL,85-125,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,3.1,MG/DL,2.5-5.0,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.4,mmol/L,3.5-5.1,L,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,144.0,mmol/L,136-145,N,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,30.0,mg/dL,7-25,H,2018-08-22 05:45:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,4092-3,Vancomycin^trough,2.6,MCG/ML,5.0-20.0,L,2018-08-23 00:38:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,5.0,mmol/L,2-12,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.7,mg/dL,8.6-10.3,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,33.0,mmol/L,21-31,H,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,109.0,mmol/L,98-107,H,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.2,mg/dL,0.7-1.3,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,16.1,%,11.6-14.4,H,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,30.0,PG,27.0-33.5,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.0,G/DL,32.0-35.5,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,90.9,FL,81.5-97.0,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.72,MILL/MCL,3.70-5.00,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,148.0,mg/dL,85-125,H,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,33.8,%,39.5-50.0,L,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,11.1,G/DL,13.5-16.9,L,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.3,THOUS/MCL,4.0-10.5,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,3.0,MG/DL,2.5-5.0,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,178.0,THOUS/MCL,150-400,N,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,2.9,mmol/L,3.5-5.1,L,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,147.0,mmol/L,136-145,H,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,32.0,mg/dL,7-25,H,2018-08-23 04:34:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,3.0,mmol/L,2-12,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.3,mg/dL,8.6-10.3,L,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,36.0,mmol/L,21-31,H,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,104.0,mmol/L,98-107,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.9,PG,27.0-33.5,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.7,G/DL,32.0-35.5,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,91.5,FL,81.5-97.0,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.52,MILL/MCL,3.70-5.00,L,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,106.0,mg/dL,85-125,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,32.2,%,39.5-50.0,L,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,10.5,G/DL,13.5-16.9,L,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.0,THOUS/MCL,4.0-10.5,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.4,MG/DL,2.5-5.0,L,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.1,FL,7.2-11.7,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,159.0,THOUS/MCL,150-400,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.0,mmol/L,3.5-5.1,L,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,143.0,mmol/L,136-145,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,20.0,mg/dL,7-25,N,2018-08-24 06:08:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,3.0,mmol/L,2-12,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.4,mg/dL,8.6-10.3,L,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,36.0,mmol/L,21-31,H,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,102.0,mmol/L,98-107,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,30.0,PG,27.0-33.5,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.1,G/DL,32.0-35.5,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,90.4,FL,81.5-97.0,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.49,MILL/MCL,3.70-5.00,L,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,119.0,mg/dL,85-125,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,31.5,%,39.5-50.0,L,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,10.4,G/DL,13.5-16.9,L,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.0,THOUS/MCL,4.0-10.5,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.6,MG/DL,2.5-5.0,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.2,FL,7.2-11.7,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,155.0,THOUS/MCL,150-400,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,2.9,mmol/L,3.5-5.1,L,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,141.0,mmol/L,136-145,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,15.0,mg/dL,7-25,N,2018-08-25 06:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2018-08-25 14:20:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2018-08-25 14:20:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2018-08-25 14:20:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2018-08-25 14:30:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,718-7,Hemoglobin,8.2,G/DL,13.5-16.9,L,2018-08-25 18:05:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,718-7,Hemoglobin,8.6,G/DL,13.5-16.9,L,2018-08-25 19:43:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2018-08-25 19:53:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,718-7,Hemoglobin,9.4,G/DL,13.5-16.9,L,2018-08-25 20:39:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,28638-5,Base excess,4.3,mmol/L,Unknown,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,1960-4,Bicarbonate,28.0,mmol/L,21.0-27.0,H,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,8310-5,Body temperature,37.1,DEG C,Unknown,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32771-8,Carbon dioxide^^adjusted to patient's actual temperature,38.6,MMHG,36.0-42.0,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.6,%,11.6-14.4,H,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.1,PG,27.0-33.5,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.9,G/DL,32.0-35.5,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,88.5,FL,81.5-97.0,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.1,MILL/MCL,3.70-5.00,L,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,27.5,%,39.5-50.0,L,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,9.0,G/DL,13.5-16.9,L,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.5,THOUS/MCL,4.0-10.5,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2708-6,Oxygen saturation,98.4,%,95.0-99.0,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19255-9,Oxygen^^adjusted to patient's actual temperature,144.5,MMHG,80.0-104.0,H,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,124.0,THOUS/MCL,150-400,L,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33254-4,pH^^adjusted to patient's actual temperature,7.48,Unknown,7.38-7.42,H,2018-08-25 22:17:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,5.0,mmol/L,2-12,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.2,mg/dL,8.6-10.3,L,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,28.0,mmol/L,21-31,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,106.0,mmol/L,98-107,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.5,%,11.6-14.4,H,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,30.0,PG,27.0-33.5,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,88.1,FL,81.5-97.0,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,2.81,MILL/MCL,3.70-5.00,L,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,109.0,mg/dL,85-125,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,24.8,%,39.5-50.0,L,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,8.4,G/DL,13.5-16.9,L,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.7,THOUS/MCL,4.0-10.5,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,3.1,MG/DL,2.5-5.0,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.0,FL,7.2-11.7,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,121.0,THOUS/MCL,150-400,L,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.2,mmol/L,3.5-5.1,L,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,139.0,mmol/L,136-145,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,15.0,mg/dL,7-25,N,2018-08-26 03:54:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,7.0,mmol/L,2-12,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.1,mg/dL,8.6-10.3,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,27.0,mmol/L,21-31,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,106.0,mmol/L,98-107,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.7,%,11.6-14.4,H,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.5,PG,27.0-33.5,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.0,G/DL,32.0-35.5,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,89.6,FL,81.5-97.0,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.15,MILL/MCL,3.70-5.00,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,97.0,mg/dL,85-125,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,28.2,%,39.5-50.0,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,9.3,G/DL,13.5-16.9,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.5,THOUS/MCL,4.0-10.5,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.4,MG/DL,2.5-5.0,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.5,FL,7.2-11.7,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,133.0,THOUS/MCL,150-400,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.3,mmol/L,3.5-5.1,L,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,140.0,mmol/L,136-145,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,16.0,mg/dL,7-25,N,2018-08-27 03:51:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33037-3,Anion gap,6.0,mmol/L,2-12,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,17861-6,Calcium,8.2,mg/dL,8.6-10.3,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2075-0,Chloride,107.0,mmol/L,98-107,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,788-0,Erythrocyte distribution width,15.8,%,11.6-14.4,H,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,785-6,Erythrocyte mean corpuscular hemoglobin,29.9,PG,27.0-33.5,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.4,G/DL,32.0-35.5,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30428-7,Erythrocyte mean corpuscular volume,89.4,FL,81.5-97.0,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,789-8,Erythrocytes,3.47,MILL/MCL,3.70-5.00,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2345-7,Glucose,112.0,mg/dL,85-125,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,20570-8,Hematocrit,31.0,%,39.5-50.0,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,30350-3,Hemoglobin,10.4,G/DL,13.5-16.9,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.7,THOUS/MCL,4.0-10.5,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2777-1,Phosphate,2.2,MG/DL,2.5-5.0,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,32623-1,Platelet mean volume,9.4,FL,7.2-11.7,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,26515-7,Platelets,148.0,THOUS/MCL,150-400,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2823-3,Potassium,3.0,mmol/L,3.5-5.1,L,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,2951-2,Sodium,142.0,mmol/L,136-145,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00
+59b7f9a983b1e92f,6a382fba57000353,3094-0,Urea nitrogen,15.0,mg/dL,7-25,N,2018-08-28 05:47:00,postop,Hospital Encounter,2018-08-13 08:13:00,2018-08-13 18:07:00

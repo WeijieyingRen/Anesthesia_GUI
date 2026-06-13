@@ -1,0 +1,7 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+2060f6218904c25a,0fcc56f9d525ec1f,propofol,sedative,2020-02-29 11:09:00,2020-02-29,2020-02-29,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+2060f6218904c25a,0fcc56f9d525ec1f,propofol,sedative,2020-02-29 11:15:00,2020-02-29,2020-02-29,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+2060f6218904c25a,0fcc56f9d525ec1f,propofol,sedative,2020-02-29 11:27:00,2020-02-29,2020-02-29,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+2060f6218904c25a,0fcc56f9d525ec1f,propofol,sedative,2020-02-29 11:55:00,2020-02-29,2020-02-29,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+2060f6218904c25a,0fcc56f9d525ec1f,propofol,sedative,2020-02-29 12:08:00,2020-02-29,2020-02-29,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+2060f6218904c25a,0fcc56f9d525ec1f,propofol,sedative,2020-02-29 14:00:00,2020-02-29,2020-02-29,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Stopped

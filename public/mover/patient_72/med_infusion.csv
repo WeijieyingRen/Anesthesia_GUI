@@ -1,0 +1,2 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+120fc21de435802a,ef7375f6f56cf268,fentanyl,opioid,2019-12-15 16:17:00,2019-12-15,2019-12-15,2.0,ml/hr,Epidural,fentaNYL 2 mcg/mL-bupivacaine 0.1% epidural infusion,FENTANYL-BUPIVACAINE-NACL 0.2-0.1-0.9 MG/100ML-% EP SOLN,New Bag

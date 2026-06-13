@@ -1,0 +1,18 @@
+case_id,patient_id,event_name,event_time
+5fe5f1ae56c0e7b9,d74bca056df43a10,Anesthesia Start,2022-02-09 06:40:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Induction,2022-02-09 06:54:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Intubation,2022-02-09 06:54:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,TEE Echo Placed,2022-02-09 07:30:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Anesthesia Ready,2022-02-09 07:35:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Aortic Cannula,2022-02-09 08:55:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Venous Cannula,2022-02-09 10:01:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,CV Bypass Initiated,2022-02-09 10:03:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Aortic Clamp On,2022-02-09 10:23:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Start Cooling,2022-02-09 10:23:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Aortic Clamp On,2022-02-09 10:45:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,DHCA Started,2022-02-09 11:01:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,DHCA Ended,2022-02-09 11:22:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Re Warming,2022-02-09 11:27:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Aortic Clamp Off,2022-02-09 12:48:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,CV Bypass Ended,2022-02-09 13:19:00
+5fe5f1ae56c0e7b9,d74bca056df43a10,Anesthesia Stop,2022-02-09 17:50:00

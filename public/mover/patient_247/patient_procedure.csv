@@ -1,0 +1,13 @@
+case_id,patient_id,event_name,event_time
+2dfe753d040dd81c,1f84fa09b7f4f10c,Anesthesia Start,2021-03-03 09:42:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Induction,2021-03-03 09:52:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Intubation,2021-03-03 09:57:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Double Lumen Tube Confirmation,2021-03-03 10:01:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Anesthesia Ready,2021-03-03 10:05:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,One-Lung Ventilation,2021-03-03 10:12:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Two-Lung Ventilation,2021-03-03 12:02:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,One-Lung Ventilation,2021-03-03 12:10:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Two-Lung Ventilation,2021-03-03 13:20:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Emergence,2021-03-03 13:38:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Extubation,2021-03-03 13:38:00
+2dfe753d040dd81c,1f84fa09b7f4f10c,Anesthesia Stop,2021-03-03 14:02:00

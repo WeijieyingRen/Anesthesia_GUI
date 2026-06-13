@@ -1,0 +1,12 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+c1843084e46b80ba,50ad46129bcf97fb,propofol,sedative,2022-07-15 07:33:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 08:02:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,propofol,sedative,2022-07-15 08:02:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 08:30:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,propofol,sedative,2022-07-15 08:31:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 09:27:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 09:40:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 09:50:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 10:01:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,ephedrine,vasopressor,2022-07-15 10:08:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c1843084e46b80ba,50ad46129bcf97fb,epinephrine,vasopressor,2022-07-15 13:22:00,1.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given

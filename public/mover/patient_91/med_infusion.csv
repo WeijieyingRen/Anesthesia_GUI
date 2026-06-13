@@ -1,0 +1,11 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 09:56:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 10:04:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 10:11:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 10:17:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 10:45:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 12:05:00,2021-07-01,2021-07-01,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 14:11:00,2021-07-01,2021-07-01,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 14:39:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 16:20:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+3d9aa5ad395a25d1,f44df296687a7307,propofol,sedative,2021-07-01 18:16:00,2021-07-01,2021-07-01,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Stopped

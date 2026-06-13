@@ -1,0 +1,175 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+c121761ca0bdefb0,05652556cd907769,718-7,Hemoglobin,15.7,G/DL,13.5-16.9,N,2021-02-18 18:34:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,788-0,Erythrocyte distribution width,13.4,%,11.6-14.4,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,785-6,Erythrocyte mean corpuscular hemoglobin,31.2,PG,27.0-33.5,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30428-7,Erythrocyte mean corpuscular volume,91.9,FL,81.5-97.0,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,789-8,Erythrocytes,4.79,MILL/MCL,4.38-5.62,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,20570-8,Hematocrit,44.0,%,39.5-50.0,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30350-3,Hemoglobin,14.9,G/DL,13.5-16.9,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.0,THOUS/MCL,4.0-10.5,H,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,32623-1,Platelet mean volume,7.1,FL,7.2-11.7,L,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26515-7,Platelets,237.0,THOUS/MCL,150-400,N,2021-02-18 18:52:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,14045-9,D-lactate,1.7,mmol/L,0.5-2.0,N,2021-02-18 19:03:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,1742-6,Alanine aminotransferase,23.0,U/L,7-52,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,1751-7,Albumin,3.9,G/DL,4.2-5.5,L,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,6768-6,Alkaline phosphatase,40.0,U/L,34-104,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33037-3,Anion gap,8.0,mmol/L,2-12,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,1920-8,Aspartate aminotransferase,33.0,U/L,13-39,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,1975-2,Bilirubin,0.4,mg/dL,0.0-1.4,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,17861-6,Calcium,8.199999999999998,mg/dL,8.6-10.3,L,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2075-0,Chloride,108.0,mmol/L,98-107,H,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,5643-2,Ethanol,9999999.0,mg/dL,Unknown,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2345-7,Glucose,149.0,mg/dL,85-125,H,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2885-2,Protein,6.4,G/DL,6.0-8.3,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2951-2,Sodium,138.0,mmol/L,136-145,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,3094-0,Urea nitrogen,22.0,mg/dL,7-25,N,2021-02-18 19:05:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,24472-3,Platelet function.collagen+Adenosine diphosphate induced,91.0,SEC,Unknown,N,2021-02-18 19:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,24471-5,Platelet function.collagen+EPINEPHrine induced,109.0,SEC,Unknown,N,2021-02-18 19:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,14979-9,Coagulation surface induced,26.0,SEC,25.4-34.5,N,2021-02-18 19:10:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,5902-2,Coagulation tissue factor induced,12.2,SEC,11.7-13.6,N,2021-02-18 19:10:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,6301-6,Coagulation tissue factor induced.INR,0.96,Unknown,0.91-1.10,N,2021-02-18 19:10:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19159-3,Urinalysis specimen collection method,9999999.0,Unknown,Unknown,N,2021-02-18 19:32:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33218-9,Bacteria,9999999.0,Unknown,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50551-1,Bilirubin,9999999.0,Unknown,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50552-9,Clarity,9999999.0,Unknown,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50553-7,Color,9999999.0,Unknown,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50225-2,Epithelial cells.non-squamous,9999999.0,/HPF,0-5,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,46419-8,Erythrocytes,3.0,#/HPF,0-3,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,53328-1,Glucose,50.0,MG/DL,Unknown,,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,57751-0,Hemoglobin,9999999.0,Unknown,Unknown,,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50557-8,Ketones,9999999.0,MG/DL,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50233-6,Leukocyte clumps,9999999.0,#/HPF,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,60026-2,Leukocyte esterase,9999999.0,Unknown,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,46702-7,Leukocytes,1.0,#/HPF,0-5,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50235-1,Mucus,9999999.0,/LPF,Unknown,,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50558-6,Nitrite,9999999.0,Unknown,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50561-0,Protein,9999999.0,MG/DL,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50562-8,Specific gravity,1.041,Unknown,1.003-1.030,H,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50563-6,Urobilinogen,9999999.0,MG/DL,Unknown,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,50560-2,pH,6.0,Unknown,5.0-8.0,N,2021-02-18 20:09:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2021-02-18 20:59:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19343-3,Amphetamine,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19270-8,Barbiturates,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,14316-4,Benzodiazepines,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,14314-9,Benzoylecgonine,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19550-3,Methadone,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19568-5,Methylenedioxymethamphetamine,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19295-5,Opiates,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19659-2,Phencyclidine,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19429-0,Propoxyphene,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19415-9,Tetrahydrocannabinol,9999999.0,Unknown,Unknown,N,2021-02-18 21:06:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2021-02-18 21:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,94500-6,SARS coronavirus 2 RNA,9999999.0,Unknown,Unknown,N,2021-02-18 21:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,14045-9,D-lactate,1.9,mmol/L,0.5-2.0,N,2021-02-19 01:43:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30180-4,Basophils/100 leukocytes,0.3,%,Unknown,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26450-7,Eosinophils/100 leukocytes,0.3,%,Unknown,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,788-0,Erythrocyte distribution width,13.3,%,11.6-14.4,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,785-6,Erythrocyte mean corpuscular hemoglobin,30.4,PG,27.0-33.5,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.3,G/DL,32.0-35.5,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30428-7,Erythrocyte mean corpuscular volume,91.4,FL,81.5-97.0,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,789-8,Erythrocytes,4.91,MILL/MCL,4.38-5.62,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,20570-8,Hematocrit,44.9,%,39.5-50.0,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30350-3,Hemoglobin,15.0,G/DL,13.5-16.9,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.1,THOUS/MCL,4.0-10.5,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,731-0,Lymphocytes,0.9,THOUS/MCL,0.9-3.3,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,736-9,Lymphocytes/100 leukocytes,9.5,%,Unknown,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26484-6,Monocytes,0.9,THOUS/MCL,0.0-0.8,H,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26485-3,Monocytes/100 leukocytes,9.7,%,Unknown,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26499-4,Neutrophils,7.3,THOUS/MCL,2.0-8.1,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,770-8,Neutrophils/100 leukocytes,80.2,%,Unknown,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,32623-1,Platelet mean volume,7.599999999999999,FL,7.2-11.7,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26515-7,Platelets,248.0,THOUS/MCL,150-400,N,2021-02-19 02:07:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33037-3,Anion gap,7.0,mmol/L,2-12,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,17861-6,Calcium,8.699999999999998,mg/dL,8.6-10.3,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2028-9,Carbon dioxide,23.0,mmol/L,21-31,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2075-0,Chloride,105.0,mmol/L,98-107,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2345-7,Glucose,130.0,mg/dL,85-125,H,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2777-1,Phosphate,3.2,MG/DL,2.5-5.0,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2823-3,Potassium,4.0,mmol/L,3.5-5.1,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,2951-2,Sodium,135.0,mmol/L,136-145,L,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,3094-0,Urea nitrogen,19.0,mg/dL,7-25,N,2021-02-19 06:18:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,14045-9,D-lactate,1.8,mmol/L,0.5-2.0,N,2021-02-19 06:26:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30180-4,Basophils/100 leukocytes,0.3,%,Unknown,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26450-7,Eosinophils/100 leukocytes,0.3,%,Unknown,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,788-0,Erythrocyte distribution width,13.2,%,11.6-14.4,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,785-6,Erythrocyte mean corpuscular hemoglobin,31.0,PG,27.0-33.5,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.6,G/DL,32.0-35.5,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30428-7,Erythrocyte mean corpuscular volume,92.1,FL,81.5-97.0,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,789-8,Erythrocytes,4.73,MILL/MCL,4.38-5.62,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,20570-8,Hematocrit,43.6,%,39.5-50.0,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30350-3,Hemoglobin,14.7,G/DL,13.5-16.9,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.4,THOUS/MCL,4.0-10.5,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,731-0,Lymphocytes,1.5,THOUS/MCL,0.9-3.3,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,736-9,Lymphocytes/100 leukocytes,20.2,%,Unknown,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26484-6,Monocytes,0.9,THOUS/MCL,0.0-0.8,H,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26485-3,Monocytes/100 leukocytes,11.9,%,Unknown,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26499-4,Neutrophils,5.0,THOUS/MCL,2.0-8.1,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,770-8,Neutrophils/100 leukocytes,67.3,%,Unknown,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,32623-1,Platelet mean volume,6.9,FL,7.2-11.7,L,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26515-7,Platelets,238.0,THOUS/MCL,150-400,N,2021-02-19 06:58:00,preop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-02-19 08:04:00,intraop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-02-20 08:44:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30180-4,Basophils/100 leukocytes,0.3,%,Unknown,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26450-7,Eosinophils/100 leukocytes,0.5,%,Unknown,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,788-0,Erythrocyte distribution width,13.3,%,11.6-14.4,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,785-6,Erythrocyte mean corpuscular hemoglobin,31.6,PG,27.0-33.5,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.4,G/DL,32.0-35.5,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30428-7,Erythrocyte mean corpuscular volume,91.7,FL,81.5-97.0,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,789-8,Erythrocytes,3.9,MILL/MCL,4.38-5.62,L,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,20570-8,Hematocrit,35.8,%,39.5-50.0,L,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30350-3,Hemoglobin,12.3,G/DL,13.5-16.9,L,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.3,THOUS/MCL,4.0-10.5,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,731-0,Lymphocytes,1.8,THOUS/MCL,0.9-3.3,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,736-9,Lymphocytes/100 leukocytes,18.9,%,Unknown,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26484-6,Monocytes,1.1,THOUS/MCL,0.0-0.8,H,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26485-3,Monocytes/100 leukocytes,12.1,%,Unknown,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26499-4,Neutrophils,6.4,THOUS/MCL,2.0-8.1,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,770-8,Neutrophils/100 leukocytes,68.2,%,Unknown,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,32623-1,Platelet mean volume,7.2,FL,7.2-11.7,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26515-7,Platelets,220.0,THOUS/MCL,150-400,N,2021-02-20 09:22:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30180-4,Basophils/100 leukocytes,0.5,%,Unknown,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,711-2,Eosinophils,0.1,THOUS/MCL,0.0-0.5,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26450-7,Eosinophils/100 leukocytes,1.5,%,Unknown,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,788-0,Erythrocyte distribution width,13.1,%,11.6-14.4,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,785-6,Erythrocyte mean corpuscular hemoglobin,32.0,PG,27.0-33.5,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,786-4,Erythrocyte mean corpuscular hemoglobin concentration,35.1,G/DL,32.0-35.5,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30428-7,Erythrocyte mean corpuscular volume,91.1,FL,81.5-97.0,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,789-8,Erythrocytes,3.75,MILL/MCL,4.38-5.62,L,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,20570-8,Hematocrit,34.2,%,39.5-50.0,L,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,30350-3,Hemoglobin,12.0,G/DL,13.5-16.9,L,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.3,THOUS/MCL,4.0-10.5,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,731-0,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,736-9,Lymphocytes/100 leukocytes,17.0,%,Unknown,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26484-6,Monocytes,0.8,THOUS/MCL,0.0-0.8,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26485-3,Monocytes/100 leukocytes,9.2,%,Unknown,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26499-4,Neutrophils,6.0,THOUS/MCL,2.0-8.1,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,770-8,Neutrophils/100 leukocytes,71.8,%,Unknown,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,32623-1,Platelet mean volume,7.0,FL,7.2-11.7,L,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,26515-7,Platelets,206.0,THOUS/MCL,150-400,N,2021-02-21 13:39:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,3271-4,Heparin.low molecular weight,0.17,IU/ML,Unknown,N,2021-02-21 19:40:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,76078-5,Influenza virus A RNA,9999999.0,Unknown,Unknown,N,2021-02-23 13:47:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,76080-1,Influenza virus B RNA,9999999.0,Unknown,Unknown,N,2021-02-23 13:47:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,76089-2,Respiratory syncytial virus RNA,9999999.0,Unknown,Unknown,N,2021-02-23 13:47:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,94500-6,SARS coronavirus 2 RNA,9999999.0,Unknown,Unknown,N,2021-02-23 13:47:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00
+c121761ca0bdefb0,05652556cd907769,3271-4,Heparin.low molecular weight,0.4,IU/ML,Unknown,N,2021-02-23 14:23:00,postop,Hospital Encounter,2021-02-19 07:12:00,2021-02-19 14:47:00

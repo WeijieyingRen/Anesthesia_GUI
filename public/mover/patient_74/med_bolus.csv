@@ -1,0 +1,9 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+b776ecc84046b2b6,7b984b0bd14163b1,propofol,sedative,2021-10-29 07:16:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b776ecc84046b2b6,7b984b0bd14163b1,ephedrine,vasopressor,2021-10-29 07:47:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b776ecc84046b2b6,7b984b0bd14163b1,ephedrine,vasopressor,2021-10-29 08:02:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b776ecc84046b2b6,7b984b0bd14163b1,propofol,sedative,2021-10-29 08:12:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b776ecc84046b2b6,7b984b0bd14163b1,ephedrine,vasopressor,2021-10-29 08:35:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b776ecc84046b2b6,7b984b0bd14163b1,ephedrine,vasopressor,2021-10-29 08:44:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b776ecc84046b2b6,7b984b0bd14163b1,ephedrine,vasopressor,2021-10-29 16:00:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b776ecc84046b2b6,7b984b0bd14163b1,sugammadex,reversal,2021-10-29 16:35:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given

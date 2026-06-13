@@ -1,0 +1,1169 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.599999999999999,mg/dL,8.6-10.3,L,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,21.0,mmol/L,21-31,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,101.0,mmol/L,98-107,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.6,mg/dL,0.6-1.2,H,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.1,PG,27.0-33.5,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.5,G/DL,32.0-35.5,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,90.4,FL,81.5-97.0,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.7,MILL/MCL,3.70-5.00,L,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,11.0,Unknown,Unknown,L,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9.0,Unknown,Unknown,L,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,120.0,mg/dL,85-125,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,24.4,%,34.0-44.0,L,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.4,G/DL,11.5-15.0,L,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.6,THOUS/MCL,4.0-10.5,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,6.7,MG/DL,2.5-5.0,H,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.699999999999998,FL,7.2-11.7,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,362.0,THOUS/MCL,150-400,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.8,mmol/L,3.5-5.1,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,136.0,mmol/L,136-145,N,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,90.0,mg/dL,7-25,HH,2020-05-26 03:05:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2020-05-26 06:30:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2020-05-26 06:30:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-05-26 06:30:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,19.0,mmol/L,2-12,H,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.199999999999998,mg/dL,8.6-10.3,L,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,98.0,mmol/L,98-107,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,6.3,mg/dL,0.6-1.2,H,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,16.3,%,11.6-14.4,H,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.1,PG,27.0-33.5,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.2,G/DL,32.0-35.5,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,90.9,FL,81.5-97.0,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,3.03,MILL/MCL,3.70-5.00,L,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,7.0,Unknown,Unknown,L,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,6.0,Unknown,Unknown,L,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,108.0,mg/dL,85-125,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,27.6,%,34.0-44.0,L,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,9.4,G/DL,11.5-15.0,L,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.4,THOUS/MCL,4.0-10.5,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.6,mg/dL,1.9-2.7,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,9.4,MG/DL,2.5-5.0,H,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.599999999999998,FL,7.2-11.7,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,413.0,THOUS/MCL,150-400,H,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,139.0,mmol/L,136-145,N,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,118.0,mg/dL,7-25,HH,2020-05-27 06:24:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.199999999999998,mg/dL,8.6-10.3,L,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,23.0,mmol/L,21-31,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,100.0,mmol/L,98-107,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.8,mg/dL,0.6-1.2,H,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,16.0,%,11.6-14.4,H,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.1,PG,27.0-33.5,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.4,G/DL,32.0-35.5,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,90.1,FL,81.5-97.0,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.91,MILL/MCL,3.70-5.00,L,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,11.0,Unknown,Unknown,L,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9.0,Unknown,Unknown,L,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,104.0,mg/dL,85-125,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,26.2,%,34.0-44.0,L,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.8,G/DL,11.5-15.0,L,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.0,THOUS/MCL,4.0-10.5,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,6.4,MG/DL,2.5-5.0,H,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.3,FL,7.2-11.7,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,411.0,THOUS/MCL,150-400,H,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.8,mmol/L,3.5-5.1,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,137.0,mmol/L,136-145,N,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,71.0,mg/dL,7-25,H,2020-05-28 07:02:00,preop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,7.3,G/DL,11.5-15.0,L,2020-05-28 12:19:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,1.0,MMOL/L,Unknown,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,26.0,MMOL/L,21-27,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,1.02,mmol/L,1.13-1.32,L,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,27.0,MMOL/L,23-29,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,40.0,MMHG,36-42,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,94.0,MG/DL,70-110,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,148.0,MMHG,80-104,H,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,99.0,%,95-98,H,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,3.8,MMOL/L,3.7-5.5,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,138.0,MMOL/L,138-146,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.41,Unknown,7.38-7.42,N,2020-05-28 12:21:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,7.5,G/DL,11.5-15.0,L,2020-05-28 13:52:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,0.0,MMOL/L,Unknown,N,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,25.0,MMOL/L,21-27,N,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,1.0,mmol/L,1.13-1.32,L,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,27.0,MMOL/L,23-29,N,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,43.0,MMHG,36-42,H,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,96.0,MG/DL,70-110,N,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,125.0,MMHG,80-104,H,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,99.0,%,95-98,H,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,4.0,MMOL/L,3.7-5.5,N,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,137.0,MMOL/L,138-146,L,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.38,Unknown,7.38-7.42,N,2020-05-28 13:54:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,21003-9,Fungus identified,9999999.0,Unknown,Unknown,N,2020-05-28 14:51:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-05-28 14:51:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2020-05-28 14:51:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2020-05-28 14:51:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11545-1,Microscopic observation,9999999.0,Unknown,Unknown,N,2020-05-28 14:51:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11475-1,Microorganism identified,,Unknown,Unknown,N,2020-05-28 14:53:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,10.2,G/DL,11.5-15.0,L,2020-05-28 15:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,24.0,MMOL/L,21-27,N,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.98,mmol/L,1.13-1.32,L,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,25.0,MMOL/L,23-29,N,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,41.0,MMHG,36-42,N,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,124.0,MG/DL,70-110,H,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,122.0,MMHG,80-104,H,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,99.0,%,95-98,H,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,4.5,MMOL/L,3.7-5.5,N,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,137.0,MMOL/L,138-146,L,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.37,Unknown,7.38-7.42,L,2020-05-28 15:59:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3184-9,Activated clotting time,125.0,SEC.,74-137,N,2020-05-28 16:02:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3184-9,Activated clotting time,257.0,SEC.,74-137,H,2020-05-28 16:28:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,21003-9,Fungus identified,9999999.0,Unknown,Unknown,N,2020-05-28 16:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-05-28 16:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2020-05-28 16:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,664-3,Microscopic observation,,Unknown,Unknown,N,2020-05-28 16:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11545-1,Microscopic observation,9999999.0,Unknown,Unknown,N,2020-05-28 16:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2020-05-28 16:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11475-1,Microorganism identified,,Unknown,Unknown,N,2020-05-28 16:37:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,10.0,G/DL,11.5-15.0,L,2020-05-28 17:02:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3184-9,Activated clotting time,230.0,SEC.,74-137,H,2020-05-28 17:03:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3184-9,Activated clotting time,257.0,SEC.,74-137,H,2020-05-28 17:20:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,9.7,G/DL,11.5-15.0,L,2020-05-28 17:53:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,22.0,MMOL/L,21-27,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,1.13,mmol/L,1.13-1.32,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,23.0,MMOL/L,23-29,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,38.0,MMHG,36-42,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,145.0,MG/DL,70-110,H,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,115.0,MMHG,80-104,H,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,98.0,%,95-98,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,5.2,MMOL/L,3.7-5.5,N,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,136.0,MMOL/L,138-146,L,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.37,Unknown,7.38-7.42,L,2020-05-28 17:55:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,8.8,G/DL,11.5-15.0,L,2020-05-28 18:31:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,21.0,MMOL/L,21-27,N,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,1.1,mmol/L,1.13-1.32,L,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,22.0,MMOL/L,23-29,L,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,38.0,MMHG,36-42,N,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,231.0,MG/DL,70-110,H,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,111.0,MMHG,80-104,H,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,98.0,%,95-98,N,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,5.3,MMOL/L,3.7-5.5,N,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,136.0,MMOL/L,138-146,L,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.34,Unknown,7.38-7.42,L,2020-05-28 18:32:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3184-9,Activated clotting time,202.0,SEC.,74-137,H,2020-05-28 18:38:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-05-28 18:39:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,9.0,G/DL,11.5-15.0,L,2020-05-28 19:35:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3184-9,Activated clotting time,169.0,SEC.,74-137,H,2020-05-28 19:37:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,20.0,MMOL/L,21-27,L,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.98,mmol/L,1.13-1.32,L,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,37.0,MMHG,36-42,N,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,21.0,MMOL/L,23-29,L,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,232.0,MG/DL,70-110,H,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,196.0,MMHG,80-104,H,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,100.0,%,95-98,H,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,4.5,MMOL/L,3.7-5.5,N,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,137.0,MMOL/L,138-146,L,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.34,Unknown,7.38-7.42,L,2020-05-28 19:43:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14979-9,Coagulation surface induced,159.4,SEC,24.9-34.5,HH,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,5902-2,Coagulation tissue factor induced,18.9,SEC,12.0-14.4,H,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6301-6,Coagulation tissue factor induced.INR,1.59,Unknown,0.88-1.12,H,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.1,THOUS/MCL,0.0-0.5,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.9,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.4,%,11.6-14.4,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.1,PG,27.0-33.5,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.4,G/DL,32.0-35.5,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,90.0,FL,81.5-97.0,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.56,MILL/MCL,3.70-5.00,L,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.1,%,34.0-44.0,L,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.7,G/DL,11.5-15.0,L,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,12.8,THOUS/MCL,4.0-10.5,H,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,0.7,THOUS/MCL,0.9-3.3,L,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,5.7,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,739-3,Metamyelocytes,0.4,THOUS/MCL,Unknown,H,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,740-1,Metamyelocytes/100 leukocytes,2.9,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.1,THOUS/MCL,0.0-0.8,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,0.9,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,748-4,Myelocytes,0.1,THOUS/MCL,Unknown,H,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,749-2,Myelocytes/100 leukocytes,1.0,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,10.7,THOUS/MCL,2.0-8.1,H,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,0.6,THOUS/MCL,0.0-0.6,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,4.8,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,83.79999999999998,%,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.3,FL,7.2-11.7,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,313.0,THOUS/MCL,150-400,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32146-3,Platelets.large,9999999.0,Unknown,Unknown,N,2020-05-28 20:14:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,6.4,G/DL,11.5-15.0,L,2020-05-28 21:04:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1959-6,Bicarbonate,20.0,MMOL/L,21-27,L,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,1.13,mmol/L,1.13-1.32,N,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20565-8,Carbon dioxide,21.0,MMOL/L,23-29,L,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,36.0,MMHG,36-42,N,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2339-0,Glucose,179.0,MG/DL,70-110,H,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,718-7,Hemoglobin,6.4,G/DL,11.5-15.0,L,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11556-8,Oxygen,223.0,MMHG,80-104,H,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2713-6,Oxygen saturation,100.0,%,95-98,H,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6298-4,Potassium,4.5,MMOL/L,3.7-5.5,N,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2947-0,Sodium,139.0,MMOL/L,138-146,N,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11558-4,pH,7.349999999999999,Unknown,7.38-7.42,L,2020-05-28 21:06:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-05-28 21:15:00,intraop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,17.0,mmol/L,2-12,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,19.3,mmol/L,21.0-27.0,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,7790-9,Burr cells,9999999.0,Unknown,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.699999999999998,mg/dL,8.6-10.3,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,34.2,MMHG,36.0-42.0,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,19.0,mmol/L,21-31,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,103.0,mmol/L,98-107,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14979-9,Coagulation surface induced,38.0,SEC,24.9-34.5,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,5902-2,Coagulation tissue factor induced,17.9,SEC,12.0-14.4,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6301-6,Coagulation tissue factor induced.INR,1.48,Unknown,0.88-1.12,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2157-6,Creatine kinase,83.0,U/L,30-223,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,5.3,mg/dL,0.6-1.2,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.0,%,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.2,%,11.6-14.4,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.2,PG,27.0-33.5,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.6,G/DL,32.0-35.5,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,89.79999999999998,FL,81.5-97.0,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.57,MILL/MCL,3.70-5.00,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,10.0,Unknown,Unknown,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,8.0,Unknown,Unknown,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,192.0,mg/dL,85-125,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.1,%,34.0-44.0,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.8,G/DL,11.5-15.0,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.0,THOUS/MCL,4.0-10.5,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,0.3,THOUS/MCL,0.9-3.3,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,3.0,%,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.5,THOUS/MCL,0.0-0.8,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,4.1,%,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,9.3,THOUS/MCL,2.0-8.1,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,0.9,THOUS/MCL,0.0-0.6,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,8.199999999999998,%,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,84.7,%,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,160.0,MMHG,80.0-104.0,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,98.8,%,95.0-99.0,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,10.2,MG/DL,2.5-5.0,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.199999999999998,FL,7.2-11.7,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,232.0,THOUS/MCL,150-400,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.7,mmol/L,3.5-5.1,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,139.0,mmol/L,136-145,N,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,72.0,mg/dL,7-25,H,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.37,Unknown,7.38-7.42,L,2020-05-28 22:32:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14045-9,D-lactate,1.6,mmol/L,0.5-2.0,N,2020-05-28 22:35:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.0,mg/dL,0.6-1.2,H,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,3.0,mg/dL,0.6-1.2,H,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.1,mg/dL,0.6-1.2,H,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,58.0,mg/dL,7-25,H,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,46.0,mg/dL,7-25,H,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,59.0,mg/dL,7-25,H,2020-05-29 02:42:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1742-6,Alanine aminotransferase,17.0,U/L,7-52,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1751-7,Albumin,3.3,G/DL,3.7-5.3,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6768-6,Alkaline phosphatase,55.0,U/L,34-104,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,16.0,mmol/L,2-12,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1920-8,Aspartate aminotransferase,23.0,U/L,13-39,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.5,%,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,20.3,mmol/L,21.0-27.0,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1975-2,Bilirubin,1.4,mg/dL,0.0-1.4,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1968-7,Bilirubin.glucuronidated+Bilirubin.albumin bound,0.7,mg/dL,0.0-0.2,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.3,mg/dL,8.6-10.3,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.31,mmol/L,1.13-1.32,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.96,mmol/L,1.13-1.32,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,32.1,MMHG,36.0-42.0,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,20.0,mmol/L,21-31,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,104.0,mmol/L,98-107,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14979-9,Coagulation surface induced,35.4,SEC,24.9-34.5,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,5902-2,Coagulation tissue factor induced,18.5,SEC,12.0-14.4,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6301-6,Coagulation tissue factor induced.INR,1.55,Unknown,0.88-1.12,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.8,mg/dL,0.6-1.2,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.1,%,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.1,%,11.6-14.4,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.9,PG,27.0-33.5,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,35.5,G/DL,32.0-35.5,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,89.7,FL,81.5-97.0,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.28,MILL/MCL,3.70-5.00,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,11.0,Unknown,Unknown,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9.0,Unknown,Unknown,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,151.0,mg/dL,85-125,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,20.5,%,34.0-44.0,LL,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.3,G/DL,11.5-15.0,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.4,THOUS/MCL,4.0-10.5,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,0.9,THOUS/MCL,0.9-3.3,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,8.0,%,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.8,THOUS/MCL,0.0-0.8,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,7.3,%,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,9.6,THOUS/MCL,2.0-8.1,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,84.09999999999998,%,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,147.6,MMHG,80.0-104.0,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,99.0,%,95.0-99.0,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,8.0,MG/DL,2.5-5.0,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.3,FL,7.2-11.7,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,216.0,THOUS/MCL,150-400,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.5,mmol/L,3.5-5.1,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2885-2,Protein,5.2,G/DL,6.0-8.3,L,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,140.0,mmol/L,136-145,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,66.0,mg/dL,7-25,H,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.42,Unknown,7.38-7.42,N,2020-05-29 03:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.31,mmol/L,1.13-1.32,L,2020-05-29 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,13.0,mmol/L,2-12,H,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.5,%,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.0,mg/dL,8.6-10.3,L,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.43,mmol/L,1.13-1.32,L,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,108.0,mmol/L,98-107,H,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,3.2,mg/dL,0.6-1.2,H,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.2,%,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.1,%,11.6-14.4,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.9,PG,27.0-33.5,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.8,G/DL,32.0-35.5,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,88.79999999999998,FL,81.5-97.0,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.21,MILL/MCL,3.70-5.00,L,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,17.0,Unknown,Unknown,L,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,14.0,Unknown,Unknown,L,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,122.0,mg/dL,85-125,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,19.6,%,34.0-44.0,LL,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,6.8,G/DL,11.5-15.0,LL,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.7,THOUS/MCL,4.0-10.5,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,17.9,%,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.7,THOUS/MCL,0.0-0.8,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,9.0,%,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,5.6,THOUS/MCL,2.0-8.1,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,72.4,%,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,5.1,MG/DL,2.5-5.0,H,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,191.0,THOUS/MCL,150-400,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,143.0,mmol/L,136-145,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,48.0,mg/dL,7-25,H,2020-05-29 08:58:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.94,mmol/L,1.13-1.32,L,2020-05-29 09:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 09:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14575-5,Blood group antibody investigation,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,897-9,Blood group antibody screen,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1006-6,Direct antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,55774-4,Direct antiglobulin test.complement C3d specific reagent,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1007-4,Direct antiglobulin test.poly specific reagent,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,38167-3,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-05-29 11:12:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,12.0,mmol/L,2-12,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,22.7,mmol/L,21.0-27.0,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.4,mg/dL,8.6-10.3,L,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.38,mmol/L,1.13-1.32,L,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,32.9,MMHG,36.0-42.0,L,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,108.0,mmol/L,98-107,H,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,2.9,mg/dL,0.6-1.2,H,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,19.0,Unknown,Unknown,L,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,16.0,Unknown,Unknown,L,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,123.0,mg/dL,85-125,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,170.4,MMHG,80.0-104.0,H,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,99.0,%,95.0-99.0,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,4.5,MG/DL,2.5-5.0,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.0,mmol/L,3.5-5.1,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,144.0,mmol/L,136-145,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,40.0,mg/dL,7-25,H,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.46,Unknown,7.38-7.42,H,2020-05-29 12:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,1.0,mmol/L,1.13-1.32,L,2020-05-29 12:35:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 12:35:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,16.0,mmol/L,2-12,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,1.3,mmol/L,Unknown,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,24.7,mmol/L,21.0-27.0,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,33.2,MMHG,36.0-42.0,L,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,107.0,mmol/L,98-107,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,2.1,mg/dL,0.6-1.2,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,2.6,mg/dL,0.6-1.2,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,1.7,mg/dL,0.6-1.2,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,2.2,mg/dL,0.6-1.2,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.2,%,11.6-14.4,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.6,PG,27.0-33.5,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.3,G/DL,32.0-35.5,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,89.4,FL,81.5-97.0,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.31,MILL/MCL,3.70-5.00,L,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,22.0,Unknown,Unknown,L,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,18.0,Unknown,Unknown,L,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,122.0,mg/dL,85-125,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,20.6,%,34.0-44.0,LL,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.1,G/DL,11.5-15.0,L,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.0,THOUS/MCL,4.0-10.5,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,160.5,MMHG,80.0-104.0,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,99.1,%,95.0-99.0,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,3.8,MG/DL,2.5-5.0,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.599999999999998,FL,7.2-11.7,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,208.0,THOUS/MCL,150-400,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.0,mmol/L,3.5-5.1,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,147.0,mmol/L,136-145,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,24.0,mg/dL,7-25,N,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,32.0,mg/dL,7-25,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,36.0,mg/dL,7-25,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,30.0,mg/dL,7-25,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.49,Unknown,7.38-7.42,H,2020-05-29 15:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.98,mmol/L,1.13-1.32,L,2020-05-29 15:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.37,mmol/L,1.13-1.32,L,2020-05-29 15:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 15:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.38,mmol/L,1.13-1.32,L,2020-05-29 18:26:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 18:26:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,16.0,mmol/L,2-12,H,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.4,mg/dL,8.6-10.3,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.94,mmol/L,1.13-1.32,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.26,mmol/L,1.13-1.32,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,19.0,mmol/L,21-31,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,109.0,mmol/L,98-107,H,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,2.4,mg/dL,0.6-1.2,H,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,13.9,%,11.6-14.4,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.3,PG,27.0-33.5,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.1,G/DL,32.0-35.5,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,88.79999999999998,FL,81.5-97.0,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.65,MILL/MCL,3.70-5.00,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,23.0,Unknown,Unknown,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,19.0,Unknown,Unknown,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,117.0,mg/dL,85-125,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.6,%,34.0-44.0,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.0,G/DL,11.5-15.0,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.2,THOUS/MCL,4.0-10.5,H,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,1.7,mg/dL,1.9-2.7,L,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,3.3,MG/DL,2.5-5.0,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.599999999999998,FL,7.2-11.7,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,209.0,THOUS/MCL,150-400,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.8,mmol/L,3.5-5.1,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,144.0,mmol/L,136-145,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,30.0,mg/dL,7-25,H,2020-05-29 20:06:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,1.2,mmol/L,Unknown,N,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,24.2,mmol/L,21.0-27.0,N,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,32.2,MMHG,36.0-42.0,L,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,174.4,MMHG,80.0-104.0,H,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,98.8,%,95.0-99.0,N,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.49,Unknown,7.38-7.42,H,2020-05-29 20:07:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,13.0,mmol/L,2-12,H,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.9,%,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.4,mg/dL,8.6-10.3,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1994-3,Calcium.ionized,0.96,mmol/L,1.13-1.32,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,23.0,mmol/L,21-31,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,104.0,mmol/L,98-107,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,2.2,mg/dL,0.6-1.2,H,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.1,THOUS/MCL,0.0-0.5,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.7,%,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,13.7,%,11.6-14.4,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.2,PG,27.0-33.5,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,35.1,G/DL,32.0-35.5,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,88.59999999999998,FL,81.5-97.0,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.75,MILL/MCL,3.70-5.00,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,25.0,Unknown,Unknown,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,21.0,Unknown,Unknown,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,112.0,mg/dL,85-125,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,24.4,%,34.0-44.0,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.599999999999998,G/DL,11.5-15.0,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,12.0,THOUS/MCL,4.0-10.5,H,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,1.7,THOUS/MCL,0.9-3.3,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,14.2,%,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,1.6,mg/dL,1.9-2.7,L,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.9,THOUS/MCL,0.0-0.8,H,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,7.8,%,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,9.1,THOUS/MCL,2.0-8.1,H,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,76.4,%,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,2.7,MG/DL,2.5-5.0,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,211.0,THOUS/MCL,150-400,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.6,mmol/L,3.5-5.1,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,140.0,mmol/L,136-145,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,27.0,mg/dL,7-25,H,2020-05-29 23:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,1.5,mmol/L,Unknown,N,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,24.3,mmol/L,21.0-27.0,N,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,31.1,MMHG,36.0-42.0,L,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,169.9,MMHG,80.0-104.0,H,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,98.7,%,95.0-99.0,N,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.51,Unknown,7.38-7.42,H,2020-05-29 23:46:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1742-6,Alanine aminotransferase,21.0,U/L,7-52,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1751-7,Albumin,3.6,G/DL,3.7-5.3,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6768-6,Alkaline phosphatase,76.0,U/L,34-104,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1920-8,Aspartate aminotransferase,32.0,U/L,13-39,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.2,THOUS/MCL,0.0-0.2,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,1.0,%,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1975-2,Bilirubin,2.0,mg/dL,0.0-1.4,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1968-7,Bilirubin.glucuronidated+Bilirubin.albumin bound,1.0,mg/dL,0.0-0.2,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.099999999999998,mg/dL,8.6-10.3,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,21.0,mmol/L,21-31,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,106.0,mmol/L,98-107,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14979-9,Coagulation surface induced,34.8,SEC,24.9-34.5,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,5902-2,Coagulation tissue factor induced,16.1,SEC,12.0-14.4,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6301-6,Coagulation tissue factor induced.INR,1.29,Unknown,0.88-1.12,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2157-6,Creatine kinase,180.0,U/L,30-223,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,1.9,mg/dL,0.6-1.2,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,1.0,%,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.4,%,11.6-14.4,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.0,PG,27.0-33.5,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,89.5,FL,81.5-97.0,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.89,MILL/MCL,3.70-5.00,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,30.0,Unknown,Unknown,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,25.0,Unknown,Unknown,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,124.0,mg/dL,85-125,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,25.8,%,34.0-44.0,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,9.0,G/DL,11.5-15.0,L,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,16.1,THOUS/MCL,4.0-10.5,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,8.599999999999998,%,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.9,THOUS/MCL,0.0-0.8,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,5.8,%,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,13.5,THOUS/MCL,2.0-8.1,H,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,83.59999999999998,%,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,2.7,MG/DL,2.5-5.0,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.699999999999998,FL,7.2-11.7,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,231.0,THOUS/MCL,150-400,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.7,mmol/L,3.5-5.1,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2885-2,Protein,6.0,G/DL,6.0-8.3,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,141.0,mmol/L,136-145,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,24.0,mg/dL,7-25,N,2020-05-30 03:53:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,20.5,mmol/L,21.0-27.0,L,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,33.4,MMHG,36.0-42.0,L,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,162.8,MMHG,80.0-104.0,H,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,98.7,%,95.0-99.0,N,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.41,Unknown,7.38-7.42,N,2020-05-30 03:54:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,1.4,mg/dL,0.6-1.2,H,2020-05-30 04:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,1.6,mg/dL,0.6-1.2,H,2020-05-30 04:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-30 04:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,21.0,mg/dL,7-25,N,2020-05-30 04:23:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,1.2,mg/dL,0.6-1.2,N,2020-05-30 07:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,68992-7,Specimen-related information panel,9999999.0,Unknown,Unknown,N,2020-05-30 07:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,19.0,mg/dL,7-25,N,2020-05-30 07:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,22.2,mmol/L,21.0-27.0,N,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.4,Unknown,Unknown,N,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,33.2,MMHG,36.0-42.0,L,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,154.1,MMHG,80.0-104.0,H,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,98.8,%,95.0-99.0,N,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.44,Unknown,7.38-7.42,H,2020-05-30 07:15:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.599999999999999,mg/dL,8.6-10.3,L,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,105.0,mmol/L,98-107,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,1.7,mg/dL,0.6-1.2,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.0,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.6,%,11.6-14.4,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.1,PG,27.0-33.5,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.4,G/DL,32.0-35.5,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,90.4,FL,81.5-97.0,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.93,MILL/MCL,3.70-5.00,L,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,35.0,Unknown,Unknown,L,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,29.0,Unknown,Unknown,L,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,130.0,mg/dL,85-125,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,26.5,%,34.0-44.0,L,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,9.1,G/DL,11.5-15.0,L,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,16.4,THOUS/MCL,4.0-10.5,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,8.599999999999998,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.8,mg/dL,1.9-2.7,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,739-3,Metamyelocytes,0.2,THOUS/MCL,Unknown,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,740-1,Metamyelocytes/100 leukocytes,1.0,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,1.0,THOUS/MCL,0.0-0.8,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,5.8,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,748-4,Myelocytes,0.2,THOUS/MCL,Unknown,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,749-2,Myelocytes/100 leukocytes,1.0,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,10.9,THOUS/MCL,2.0-8.1,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,2.8,THOUS/MCL,0.0-0.6,H,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,17.3,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,66.3,%,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,2.6,MG/DL,2.5-5.0,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,235.0,THOUS/MCL,150-400,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.5,mmol/L,3.5-5.1,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,141.0,mmol/L,136-145,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,22.0,mg/dL,7-25,N,2020-05-30 08:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,28638-5,Base excess,0.0,mmol/L,Unknown,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1960-4,Bicarbonate,22.8,mmol/L,21.0-27.0,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2019-8,Carbon dioxide,30.0,MMHG,36.0-42.0,L,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11557-6,Carbon dioxide,0.28,Unknown,Unknown,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.2,%,11.6-14.4,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.2,PG,27.0-33.5,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,35.0,G/DL,32.0-35.5,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,89.29999999999998,FL,81.5-97.0,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.57,MILL/MCL,3.70-5.00,L,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,22.9,%,34.0-44.0,L,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.0,G/DL,11.5-15.0,L,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,14.3,THOUS/MCL,4.0-10.5,H,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2703-7,Oxygen,108.7,MMHG,80.0-104.0,H,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2708-6,Oxygen saturation,97.9,%,95.0-99.0,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.099999999999998,FL,7.2-11.7,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,194.0,THOUS/MCL,150-400,N,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2744-1,pH,7.5,Unknown,7.38-7.42,H,2020-05-30 14:38:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,12.0,mmol/L,2-12,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.599999999999999,mg/dL,8.6-10.3,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,107.0,mmol/L,98-107,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,3.0,mg/dL,0.6-1.2,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.1,THOUS/MCL,0.0-0.5,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.9,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,14.9,%,11.6-14.4,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,30.9,PG,27.0-33.5,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.8,G/DL,32.0-35.5,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,91.4,FL,81.5-97.0,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.43,MILL/MCL,3.70-5.00,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,18309-5,Erythrocytes.nucleated/100 leukocytes,1.0,/100 WBC,Unknown,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,18.0,Unknown,Unknown,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,15.0,Unknown,Unknown,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,133.0,mg/dL,85-125,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,22.2,%,34.0-44.0,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.5,G/DL,11.5-15.0,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,13.3,THOUS/MCL,4.0-10.5,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,10.6,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.4,mg/dL,1.9-2.7,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,739-3,Metamyelocytes,0.1,THOUS/MCL,Unknown,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,740-1,Metamyelocytes/100 leukocytes,1.0,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.1,THOUS/MCL,0.0-0.8,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,1.0,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,748-4,Myelocytes,0.1,THOUS/MCL,Unknown,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,749-2,Myelocytes/100 leukocytes,1.0,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,10.5,THOUS/MCL,2.0-8.1,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,0.9,THOUS/MCL,0.0-0.6,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,6.7,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,78.79999999999998,%,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,3.5,MG/DL,2.5-5.0,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,200.0,THOUS/MCL,150-400,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.2,mmol/L,3.5-5.1,L,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,143.0,mmol/L,136-145,N,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,37.0,mg/dL,7-25,H,2020-05-31 04:00:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1988-5,C reactive protein,23.5,MG/DL,0.0-1.0,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.9,mg/dL,8.6-10.3,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,104.0,mmol/L,98-107,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.4,mg/dL,0.6-1.2,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.6,THOUS/MCL,0.0-0.5,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,4.7,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,15.9,%,11.6-14.4,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.3,PG,27.0-33.5,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,32.7,G/DL,32.0-35.5,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,95.8,FL,81.5-97.0,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.44,MILL/MCL,3.70-5.00,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,12.0,Unknown,Unknown,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,10.0,Unknown,Unknown,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,125.0,mg/dL,85-125,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.4,%,34.0-44.0,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.599999999999999,G/DL,11.5-15.0,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,13.0,THOUS/MCL,4.0-10.5,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.5,THOUS/MCL,0.9-3.3,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,11.3,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.5,mg/dL,1.9-2.7,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.2,THOUS/MCL,0.0-0.8,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,1.9,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,748-4,Myelocytes,0.5,THOUS/MCL,Unknown,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,749-2,Myelocytes/100 leukocytes,3.8,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,9.3,THOUS/MCL,2.0-8.1,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,0.9,THOUS/MCL,0.0-0.6,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,6.6,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,71.7,%,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,5.4,MG/DL,2.5-5.0,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,219.0,THOUS/MCL,150-400,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.4,mmol/L,3.5-5.1,L,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,140.0,mmol/L,136-145,N,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,53.0,mg/dL,7-25,H,2020-06-01 03:52:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,16.0,mmol/L,2-12,H,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.2,THOUS/MCL,0.0-0.2,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,1.9,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.7,mg/dL,8.6-10.3,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,21.0,mmol/L,21-31,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,105.0,mmol/L,98-107,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2157-6,Creatine kinase,49.0,U/L,30-223,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,5.6,mg/dL,0.6-1.2,H,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.1,THOUS/MCL,0.0-0.5,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.9,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,15.8,%,11.6-14.4,H,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.0,PG,27.0-33.5,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.4,G/DL,32.0-35.5,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,95.8,FL,81.5-97.0,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.47,MILL/MCL,3.70-5.00,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,8.0,Unknown,Unknown,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,7.0,Unknown,Unknown,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,122.0,mg/dL,85-125,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.6,%,34.0-44.0,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.9,G/DL,11.5-15.0,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,10.4,THOUS/MCL,4.0-10.5,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.8,THOUS/MCL,0.9-3.3,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,17.1,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,738-5,Macrocytes,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.5,mg/dL,1.9-2.7,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.3,THOUS/MCL,0.0-0.8,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,2.9,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,748-4,Myelocytes,0.3,THOUS/MCL,Unknown,H,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,749-2,Myelocytes/100 leukocytes,2.9,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,7.5,THOUS/MCL,2.0-8.1,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,0.2,THOUS/MCL,0.0-0.6,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,1.9,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,72.4,%,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,774-0,Ovalocytes,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,5.1,MG/DL,2.5-5.0,H,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,214.0,THOUS/MCL,150-400,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.4,mmol/L,3.5-5.1,L,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,142.0,mmol/L,136-145,N,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,73.0,mg/dL,7-25,H,2020-06-02 04:04:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1751-7,Albumin,2.5,G/DL,3.7-5.3,L,2020-06-02 08:41:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,46130-1,Prealbumin,11.4,MG/DL,17-34,L,2020-06-02 08:41:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.599999999999999,mg/dL,8.6-10.3,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,21.0,mmol/L,21-31,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,102.0,mmol/L,98-107,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.7,mg/dL,0.6-1.2,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,1.2,THOUS/MCL,0.0-0.5,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,11.1,%,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,15.8,%,11.6-14.4,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.8,PG,27.0-33.5,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.6,G/DL,32.0-35.5,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,94.5,FL,81.5-97.0,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.55,MILL/MCL,3.70-5.00,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,11.0,Unknown,Unknown,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9.0,Unknown,Unknown,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,130.0,mg/dL,85-125,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,24.1,%,34.0-44.0,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.099999999999998,G/DL,11.5-15.0,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.1,THOUS/MCL,4.0-10.5,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.2,THOUS/MCL,0.9-3.3,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,11.1,%,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,739-3,Metamyelocytes,0.2,THOUS/MCL,Unknown,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,740-1,Metamyelocytes/100 leukocytes,1.9,%,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.3,THOUS/MCL,0.0-0.8,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,2.8,%,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,8.099999999999998,THOUS/MCL,2.0-8.1,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,73.09999999999998,%,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,3.3,MG/DL,2.5-5.0,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.599999999999998,FL,7.2-11.7,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,235.0,THOUS/MCL,150-400,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.2,mmol/L,3.5-5.1,L,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,137.0,mmol/L,136-145,N,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,63.0,mg/dL,7-25,H,2020-06-03 05:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.6,mmol/L,3.5-5.1,N,2020-06-03 15:57:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,16.0,mmol/L,2-12,H,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.7,%,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.7,mg/dL,8.6-10.3,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,21.0,mmol/L,21-31,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,98.0,mmol/L,98-107,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2157-6,Creatine kinase,48.0,U/L,30-223,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,6.0,mg/dL,0.6-1.2,H,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.5,THOUS/MCL,0.0-0.5,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,4.5,%,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,15.6,%,11.6-14.4,H,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.5,PG,27.0-33.5,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,95.6,FL,81.5-97.0,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.5,MILL/MCL,3.70-5.00,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,8.0,Unknown,Unknown,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,7.0,Unknown,Unknown,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,122.0,mg/dL,85-125,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.9,%,34.0-44.0,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.099999999999998,G/DL,11.5-15.0,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,10.2,THOUS/MCL,4.0-10.5,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,1.3,THOUS/MCL,0.9-3.3,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,13.1,%,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,738-5,Macrocytes,9999999.0,Unknown,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.8,THOUS/MCL,0.0-0.8,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,7.8,%,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,7.5,THOUS/MCL,2.0-8.1,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,73.9,%,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,4.3,MG/DL,2.5-5.0,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,152.0,THOUS/MCL,150-400,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.7,mmol/L,3.5-5.1,N,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,135.0,mmol/L,136-145,L,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,85.0,mg/dL,7-25,HH,2020-06-04 05:20:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,7.0,mmol/L,2-12,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.4,%,Unknown,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.8,mg/dL,8.6-10.3,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,99.0,mmol/L,98-107,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,3.6,mg/dL,0.6-1.2,H,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.3,THOUS/MCL,0.0-0.5,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,2.8,%,Unknown,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,16.2,%,11.6-14.4,H,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.6,PG,27.0-33.5,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.5,G/DL,32.0-35.5,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,94.6,FL,81.5-97.0,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.45,MILL/MCL,3.70-5.00,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,15.0,Unknown,Unknown,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,12.0,Unknown,Unknown,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,142.0,mg/dL,85-125,H,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,23.2,%,34.0-44.0,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.0,G/DL,11.5-15.0,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.9,THOUS/MCL,4.0-10.5,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,0.5,THOUS/MCL,0.9-3.3,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,5.5,%,Unknown,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,1.9,mg/dL,1.9-2.7,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.7,THOUS/MCL,0.0-0.8,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,7.2,%,Unknown,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,8.3,THOUS/MCL,2.0-8.1,H,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,84.09999999999998,%,Unknown,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,2.9,MG/DL,2.5-5.0,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.199999999999998,FL,7.2-11.7,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,191.0,THOUS/MCL,150-400,N,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.0,mmol/L,3.5-5.1,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,132.0,mmol/L,136-145,L,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,50.0,mg/dL,7-25,H,2020-06-05 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,13.0,mmol/L,2-12,H,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.7,mg/dL,8.6-10.3,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,96.0,mmol/L,98-107,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,5.1,mg/dL,0.6-1.2,H,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.4,THOUS/MCL,0.0-0.5,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,4.8,%,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,16.2,%,11.6-14.4,H,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,93.9,FL,81.5-97.0,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.26,MILL/MCL,3.70-5.00,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,10.0,Unknown,Unknown,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,8.0,Unknown,Unknown,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,123.0,mg/dL,85-125,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,21.2,%,34.0-44.0,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.3,G/DL,11.5-15.0,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.099999999999998,THOUS/MCL,4.0-10.5,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,0.8,THOUS/MCL,0.9-3.3,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,9.6,%,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.4,THOUS/MCL,0.0-0.8,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,4.8,%,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,6.5,THOUS/MCL,2.0-8.1,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,763-3,Neutrophils.band form,0.1,THOUS/MCL,0.0-0.6,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,764-1,Neutrophils.band form/100 leukocytes,1.0,%,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,79.79999999999998,%,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,774-0,Ovalocytes,9999999.0,Unknown,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,5.2,MG/DL,2.5-5.0,H,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.3,FL,7.2-11.7,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,207.0,THOUS/MCL,150-400,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,10378-8,Polychromasia,9999999.0,Unknown,Unknown,N,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.4,mmol/L,3.5-5.1,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,133.0,mmol/L,136-145,L,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,80.0,mg/dL,7-25,HH,2020-06-06 04:28:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,11.0,mmol/L,2-12,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,0.0,%,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.0,mg/dL,8.6-10.3,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,96.0,mmol/L,98-107,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.0,mg/dL,0.6-1.2,H,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.3,THOUS/MCL,0.0-0.5,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,2.9,%,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,17.4,%,11.6-14.4,H,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.7,PG,27.0-33.5,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,94.4,FL,81.5-97.0,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.4,MILL/MCL,3.70-5.00,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,13.0,Unknown,Unknown,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,11.0,Unknown,Unknown,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,132.0,mg/dL,85-125,H,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,22.6,%,34.0-44.0,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.8,G/DL,11.5-15.0,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.8,THOUS/MCL,4.0-10.5,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.0,THOUS/MCL,0.9-3.3,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,11.4,%,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,739-3,Metamyelocytes,0.3,THOUS/MCL,Unknown,H,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,740-1,Metamyelocytes/100 leukocytes,3.8,%,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.1,THOUS/MCL,0.0-0.8,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,1.0,%,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,7.1,THOUS/MCL,2.0-8.1,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,80.9,%,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,4.0,MG/DL,2.5-5.0,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.199999999999998,FL,7.2-11.7,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,240.0,THOUS/MCL,150-400,N,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.4,mmol/L,3.5-5.1,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,133.0,mmol/L,136-145,L,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,57.0,mg/dL,7-25,H,2020-06-07 07:45:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1751-7,Albumin,2.3,G/DL,3.7-5.3,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,12.0,mmol/L,2-12,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,702-1,Anisocytosis,9999999.0,Unknown,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,705-4,Basophils,0.2,THOUS/MCL,0.0-0.2,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,707-0,Basophils/100 leukocytes,1.9,%,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1988-5,C reactive protein,8.699999999999998,MG/DL,0.0-1.0,H,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.8,mg/dL,8.6-10.3,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,25.0,mmol/L,21-31,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,95.0,mmol/L,98-107,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2157-6,Creatine kinase,31.0,U/L,30-223,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,5.2,mg/dL,0.6-1.2,H,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,712-0,Eosinophils,0.3,THOUS/MCL,0.0-0.5,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,2.9,%,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,18.5,%,11.6-14.4,H,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.3,PG,27.0-33.5,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,93.3,FL,81.5-97.0,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6742-1,Erythrocyte morphology finding,9999999.0,Unknown,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.27,MILL/MCL,3.70-5.00,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,10.0,Unknown,Unknown,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,8.0,Unknown,Unknown,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,118.0,mg/dL,85-125,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,21.2,%,34.0-44.0,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.3,G/DL,11.5-15.0,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.5,THOUS/MCL,4.0-10.5,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,732-8,Lymphocytes,1.3,THOUS/MCL,0.9-3.3,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,737-7,Lymphocytes/100 leukocytes,13.3,%,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.5,THOUS/MCL,0.0-0.8,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,4.8,%,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,753-4,Neutrophils,7.3,THOUS/MCL,2.0-8.1,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,23761-0,Neutrophils/100 leukocytes,77.09999999999998,%,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,5.5,MG/DL,2.5-5.0,H,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,8.3,FL,7.2-11.7,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,11125-2,Platelet morphology finding,9999999.0,Unknown,Unknown,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,236.0,THOUS/MCL,150-400,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.8,mmol/L,3.5-5.1,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,46130-1,Prealbumin,22.1,MG/DL,17-34,N,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,132.0,mmol/L,136-145,L,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,81.0,mg/dL,7-25,HH,2020-06-08 06:37:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,14575-5,Blood group antibody investigation,,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,897-9,Blood group antibody screen,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1006-6,Direct antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,55774-4,Direct antiglobulin test.complement C3d specific reagent,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1007-4,Direct antiglobulin test.poly specific reagent,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,38167-3,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-06-09 04:30:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,15.0,mmol/L,2-12,H,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.3,%,Unknown,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.8,mg/dL,8.6-10.3,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,23.0,mmol/L,21-31,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,90.0,mmol/L,98-107,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,6.3,mg/dL,0.6-1.2,H,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.3,THOUS/MCL,0.0-0.5,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,3.4,%,Unknown,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,17.4,%,11.6-14.4,H,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.5,PG,27.0-33.5,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,93.9,FL,81.5-97.0,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.15,MILL/MCL,3.70-5.00,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,7.0,Unknown,Unknown,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,6.0,Unknown,Unknown,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,123.0,mg/dL,85-125,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,20.2,%,34.0-44.0,LL,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,7.0,G/DL,11.5-15.0,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.5,THOUS/MCL,4.0-10.5,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,1.4,THOUS/MCL,0.9-3.3,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,14.7,%,Unknown,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.6,THOUS/MCL,0.0-0.8,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,5.8,%,Unknown,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,7.2,THOUS/MCL,2.0-8.1,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,75.79999999999998,%,Unknown,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,6.9,MG/DL,2.5-5.0,H,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,7.9,FL,7.2-11.7,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,253.0,THOUS/MCL,150-400,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,3.9,mmol/L,3.5-5.1,N,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,128.0,mmol/L,136-145,L,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,96.0,mg/dL,7-25,HH,2020-06-09 04:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,14.0,mmol/L,2-12,H,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.4,%,Unknown,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,8.199999999999998,mg/dL,8.6-10.3,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,96.0,mmol/L,98-107,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,4.9,mg/dL,0.6-1.2,H,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,0.1,%,Unknown,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,17.2,%,11.6-14.4,H,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,31.7,PG,27.0-33.5,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.5,G/DL,32.0-35.5,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,94.6,FL,81.5-97.0,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.91,MILL/MCL,3.70-5.00,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,10.0,Unknown,Unknown,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,8.0,Unknown,Unknown,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,108.0,mg/dL,85-125,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,27.6,%,34.0-44.0,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,9.2,G/DL,11.5-15.0,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.599999999999998,THOUS/MCL,4.0-10.5,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,1.0,THOUS/MCL,0.9-3.3,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,11.9,%,Unknown,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.4,THOUS/MCL,0.0-0.8,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,4.1,%,Unknown,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,7.2,THOUS/MCL,2.0-8.1,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,83.5,%,Unknown,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,7.4,MG/DL,2.5-5.0,H,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,7.7,FL,7.2-11.7,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,273.0,THOUS/MCL,150-400,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.5,mmol/L,3.5-5.1,N,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,132.0,mmol/L,136-145,L,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,65.0,mg/dL,7-25,H,2020-06-10 06:40:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1742-6,Alanine aminotransferase,49.0,U/L,7-52,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1751-7,Albumin,2.4,G/DL,3.7-5.3,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,6768-6,Alkaline phosphatase,123.0,U/L,34-104,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,13.0,mmol/L,2-12,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1920-8,Aspartate aminotransferase,52.0,U/L,13-39,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.6,%,Unknown,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1975-2,Bilirubin,0.7,mg/dL,0.0-1.4,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,1968-7,Bilirubin.glucuronidated+Bilirubin.albumin bound,0.3,mg/dL,0.0-0.2,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.4,mg/dL,8.6-10.3,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,22.0,mmol/L,21-31,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,96.0,mmol/L,98-107,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,6.2,mg/dL,0.6-1.2,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.2,THOUS/MCL,0.0-0.5,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,3.4,%,Unknown,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,17.9,%,11.6-14.4,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.7,PG,27.0-33.5,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.5,G/DL,32.0-35.5,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,94.8,FL,81.5-97.0,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.55,MILL/MCL,3.70-5.00,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,7.0,Unknown,Unknown,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,6.0,Unknown,Unknown,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,91.0,mg/dL,85-125,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,24.2,%,34.0-44.0,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.3,G/DL,11.5-15.0,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.2,THOUS/MCL,4.0-10.5,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,0.9,THOUS/MCL,0.9-3.3,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,13.1,%,Unknown,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.4,THOUS/MCL,0.0-0.8,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,5.2,%,Unknown,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,5.6,THOUS/MCL,2.0-8.1,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,77.7,%,Unknown,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,8.199999999999998,MG/DL,2.5-5.0,H,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,7.5,FL,7.2-11.7,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,267.0,THOUS/MCL,150-400,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2885-2,Protein,5.5,G/DL,6.0-8.3,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,131.0,mmol/L,136-145,L,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,81.0,mg/dL,7-25,HH,2020-06-11 09:11:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33037-3,Anion gap,17.0,mmol/L,2-12,H,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30180-4,Basophils/100 leukocytes,0.7,%,Unknown,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,17861-6,Calcium,7.3,mg/dL,8.6-10.3,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2028-9,Carbon dioxide,18.0,mmol/L,21-31,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2075-0,Chloride,96.0,mmol/L,98-107,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2160-0,Creatinine,7.2,mg/dL,0.6-1.2,H,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,711-2,Eosinophils,0.3,THOUS/MCL,0.0-0.5,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26450-7,Eosinophils/100 leukocytes,3.8,%,Unknown,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,788-0,Erythrocyte distribution width,17.8,%,11.6-14.4,H,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.3,G/DL,32.0-35.5,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30428-7,Erythrocyte mean corpuscular volume,94.4,FL,81.5-97.0,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,789-8,Erythrocytes,2.65,MILL/MCL,3.70-5.00,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,6.0,Unknown,Unknown,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,5.0,Unknown,Unknown,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2345-7,Glucose,77.0,mg/dL,85-125,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,20570-8,Hematocrit,25.1,%,34.0-44.0,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,30350-3,Hemoglobin,8.599999999999998,G/DL,11.5-15.0,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.7,THOUS/MCL,4.0-10.5,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,731-0,Lymphocytes,1.2,THOUS/MCL,0.9-3.3,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,736-9,Lymphocytes/100 leukocytes,18.1,%,Unknown,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26484-6,Monocytes,0.4,THOUS/MCL,0.0-0.8,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26485-3,Monocytes/100 leukocytes,5.8,%,Unknown,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26499-4,Neutrophils,4.8,THOUS/MCL,2.0-8.1,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,770-8,Neutrophils/100 leukocytes,71.6,%,Unknown,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,9.2,MG/DL,2.5-5.0,H,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,32623-1,Platelet mean volume,7.1,FL,7.2-11.7,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,26515-7,Platelets,285.0,THOUS/MCL,150-400,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2823-3,Potassium,4.6,mmol/L,3.5-5.1,N,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2951-2,Sodium,131.0,mmol/L,136-145,L,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,3094-0,Urea nitrogen,92.0,mg/dL,7-25,HH,2020-06-12 06:17:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2020-06-13 06:19:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00
+b5309edb123b1209,05ab06a8f1e5d2a1,2777-1,Phosphate,6.3,MG/DL,2.5-5.0,H,2020-06-13 06:19:00,postop,Hospital Encounter,2020-05-28 11:10:00,2020-05-28 22:23:00

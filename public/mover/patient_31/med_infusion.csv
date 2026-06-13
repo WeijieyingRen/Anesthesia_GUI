@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+93a03432f8f1caa3,6c3c8423317993ac,tranexamic acid,rescue_or_correction,2020-09-06 09:09:00,2020-09-06,2020-09-06,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),New Bag
+93a03432f8f1caa3,6c3c8423317993ac,hydromorphone,opioid,2020-09-06 15:38:00,2020-09-06,2020-09-06,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag

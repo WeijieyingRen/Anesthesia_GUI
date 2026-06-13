@@ -1,0 +1,5 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+d5fff6a33b3650fd,93f2aacf74784594,propofol,sedative,2021-02-19 09:45:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+d5fff6a33b3650fd,93f2aacf74784594,dexamethasone,antiemetic,2021-02-19 10:22:00,10.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection 10 mg,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+d5fff6a33b3650fd,93f2aacf74784594,ephedrine,vasopressor,2021-02-19 10:57:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+d5fff6a33b3650fd,93f2aacf74784594,propofol,sedative,2021-02-19 11:04:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

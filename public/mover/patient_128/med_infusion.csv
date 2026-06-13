@@ -1,0 +1,5 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+9a333893ee607c9b,934f276ec8418f5a,phenylephrine,vasopressor,2021-03-01 11:16:00,2021-03-01,2021-03-01,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),New Bag
+9a333893ee607c9b,934f276ec8418f5a,phenylephrine,vasopressor,2021-03-01 12:00:00,2021-03-01,2021-03-01,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Stopped
+9a333893ee607c9b,934f276ec8418f5a,dopamine,inotrope,2021-03-01 15:20:00,2021-03-01,2021-03-01,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL) (CONCENTRATED),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,New Bag
+9a333893ee607c9b,934f276ec8418f5a,dopamine,inotrope,2021-03-01 15:37:00,2021-03-01,2021-03-01,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL) (CONCENTRATED),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Rate Change

@@ -1,0 +1,73 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+f0506b5a2030b15e,64271d9ff8dafcfd,33037-3,Anion gap,9.0,mmol/L,2-12,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,33037-3,Anion gap,9.0,mmol/L,2-12,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,17861-6,Calcium,8.5,mg/dL,8.6-10.3,L,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,17861-6,Calcium,8.5,mg/dL,8.6-10.3,L,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2028-9,Carbon dioxide,24.0,mmol/L,21-31,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2075-0,Chloride,106.0,mmol/L,98-107,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2075-0,Chloride,106.0,mmol/L,98-107,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2160-0,Creatinine,1.0,mg/dL,0.7-1.3,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2345-7,Glucose,155.0,mg/dL,85-125,H,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2345-7,Glucose,155.0,mg/dL,85-125,H,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2777-1,Phosphate,2.1,MG/DL,2.5-5.0,L,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2777-1,Phosphate,2.1,MG/DL,2.5-5.0,L,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2951-2,Sodium,139.0,mmol/L,136-145,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,2951-2,Sodium,139.0,mmol/L,136-145,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,3094-0,Urea nitrogen,11.0,mg/dL,7-25,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,3094-0,Urea nitrogen,11.0,mg/dL,7-25,N,2020-09-27 06:25:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,30180-4,Basophils/100 leukocytes,0.1,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,30180-4,Basophils/100 leukocytes,0.1,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26450-7,Eosinophils/100 leukocytes,0.0,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26450-7,Eosinophils/100 leukocytes,0.0,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,788-0,Erythrocyte distribution width,13.5,%,11.6-14.4,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,788-0,Erythrocyte distribution width,13.5,%,11.6-14.4,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,785-6,Erythrocyte mean corpuscular hemoglobin,31.6,PG,27.0-33.5,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,785-6,Erythrocyte mean corpuscular hemoglobin,31.6,PG,27.0-33.5,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.9,G/DL,32.0-35.5,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,786-4,Erythrocyte mean corpuscular hemoglobin concentration,33.9,G/DL,32.0-35.5,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,30428-7,Erythrocyte mean corpuscular volume,93.1,FL,81.5-97.0,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,30428-7,Erythrocyte mean corpuscular volume,93.1,FL,81.5-97.0,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,789-8,Erythrocytes,4.7,MILL/MCL,4.38-5.62,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,789-8,Erythrocytes,4.7,MILL/MCL,4.38-5.62,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,20570-8,Hematocrit,43.7,%,39.5-50.0,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,20570-8,Hematocrit,43.7,%,39.5-50.0,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,30350-3,Hemoglobin,14.8,G/DL,13.5-16.9,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,30350-3,Hemoglobin,14.8,G/DL,13.5-16.9,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,33256-9,Leukocytes^^corrected for nucleated erythrocytes,14.5,THOUS/MCL,4.0-10.5,H,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,33256-9,Leukocytes^^corrected for nucleated erythrocytes,14.5,THOUS/MCL,4.0-10.5,H,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,731-0,Lymphocytes,0.5,THOUS/MCL,0.9-3.3,L,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,731-0,Lymphocytes,0.5,THOUS/MCL,0.9-3.3,L,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,736-9,Lymphocytes/100 leukocytes,3.4,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,736-9,Lymphocytes/100 leukocytes,3.4,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26484-6,Monocytes,0.3,THOUS/MCL,0.0-0.8,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26484-6,Monocytes,0.3,THOUS/MCL,0.0-0.8,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26485-3,Monocytes/100 leukocytes,2.2,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26485-3,Monocytes/100 leukocytes,2.2,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26499-4,Neutrophils,13.7,THOUS/MCL,2.0-8.1,H,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26499-4,Neutrophils,13.7,THOUS/MCL,2.0-8.1,H,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,770-8,Neutrophils/100 leukocytes,94.3,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,770-8,Neutrophils/100 leukocytes,94.3,%,Unknown,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,32623-1,Platelet mean volume,7.5,FL,7.2-11.7,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,32623-1,Platelet mean volume,7.5,FL,7.2-11.7,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26515-7,Platelets,278.0,THOUS/MCL,150-400,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,26515-7,Platelets,278.0,THOUS/MCL,150-400,N,2020-09-27 06:50:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2020-09-28 12:56:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2020-09-28 12:56:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-09-28 12:56:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00
+f0506b5a2030b15e,64271d9ff8dafcfd,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-09-28 12:56:00,postop,Hospital Encounter,2020-09-26 16:36:00,2020-09-26 23:32:00

@@ -1,0 +1,2 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+2060f6218904c25a,0fcc56f9d525ec1f,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-02-29 17:20:00,postop,Hospital Encounter,2020-02-29 10:54:00,2020-02-29 14:48:00

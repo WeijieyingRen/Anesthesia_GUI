@@ -1,0 +1,4 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+f9d0a13b304a32ea,87ac6fcd64a4e2d0,propofol,sedative,2019-06-13 07:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f9d0a13b304a32ea,87ac6fcd64a4e2d0,hydromorphone,opioid,2019-06-13 17:58:00,100.0,ml,Epidural,"bupivacaine 0.1% 100 mL, hydromorphone (DILAUDID) 10 mcg/mL epidural injection",HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+f9d0a13b304a32ea,87ac6fcd64a4e2d0,hydromorphone,opioid,2019-06-13 18:08:00,100.0,ml,Epidural,"bupivacaine 0.1% 100 mL, hydromorphone (DILAUDID) 10 mcg/mL epidural injection",HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus

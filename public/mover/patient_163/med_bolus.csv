@@ -1,0 +1,15 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+b02fd0fca03d8c0a,e42bb23543722619,propofol,sedative,2021-06-14 08:41:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 08:42:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,propofol,sedative,2021-06-14 09:24:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 09:35:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 09:52:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 10:00:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 10:41:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 10:43:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 10:51:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,ephedrine,vasopressor,2021-06-14 14:56:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b02fd0fca03d8c0a,e42bb23543722619,hydromorphone,opioid,2021-06-14 18:53:00,10.0,ml,Epidural,hydromorphone (DILAUDID) 10 mcg/mL epidural injection,HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+b02fd0fca03d8c0a,e42bb23543722619,hydromorphone,opioid,2021-06-14 18:57:00,10.0,ml,Epidural,hydromorphone (DILAUDID) 10 mcg/mL epidural injection,HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+b02fd0fca03d8c0a,e42bb23543722619,hydromorphone,opioid,2021-06-14 19:03:00,10.0,ml,Epidural,hydromorphone (DILAUDID) 10 mcg/mL epidural injection,HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+b02fd0fca03d8c0a,e42bb23543722619,sugammadex,reversal,2021-06-14 19:32:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given

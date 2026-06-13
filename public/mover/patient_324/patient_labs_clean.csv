@@ -1,0 +1,14 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,718-7,Hemoglobin,12.6,G/DL,13.5-16.9,L,2019-10-28 16:20:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,1959-6,Bicarbonate,24.0,MMOL/L,21-27,N,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,1994-3,Calcium.ionized,1.1,mmol/L,1.13-1.32,L,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,20565-8,Carbon dioxide,25.0,MMOL/L,23-29,N,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,11557-6,Carbon dioxide,43.0,MMHG,36-42,H,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,2339-0,Glucose,186.0,MG/DL,70-110,H,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,11556-8,Oxygen,261.0,MMHG,80-104,H,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,2713-6,Oxygen saturation,100.0,%,95-98,H,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,6298-4,Potassium,4.0,MMOL/L,3.7-5.5,N,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,2947-0,Sodium,139.0,MMOL/L,138-146,N,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,11558-4,pH,7.36,Unknown,7.38-7.42,L,2019-10-28 16:22:00,intraop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00
+38a4476bc7cd83a8,fbc6b24e1ce37b1d,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2019-10-28 20:40:00,postop,Hospital Encounter,2019-10-28 10:09:00,2019-10-28 18:54:00

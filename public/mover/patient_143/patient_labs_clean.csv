@@ -1,0 +1,6 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+c9ff54f087a230f4,028bb5fbe105d515,664-3,Microscopic observation,,Unknown,Unknown,N,2021-01-17 19:01:00,postop,Hospital Encounter,2021-01-17 07:20:00,2021-01-17 13:34:00
+c9ff54f087a230f4,028bb5fbe105d515,664-3,Microscopic observation,9999999.0,Unknown,Unknown,N,2021-01-17 19:01:00,postop,Hospital Encounter,2021-01-17 07:20:00,2021-01-17 13:34:00
+c9ff54f087a230f4,028bb5fbe105d515,21003-9,Fungus identified,9999999.0,Unknown,Unknown,N,2021-01-17 23:22:00,postop,Hospital Encounter,2021-01-17 07:20:00,2021-01-17 13:34:00
+c9ff54f087a230f4,028bb5fbe105d515,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-01-24 08:00:00,postop,Hospital Encounter,2021-01-17 07:20:00,2021-01-17 13:34:00
+c9ff54f087a230f4,028bb5fbe105d515,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2021-02-15 10:59:00,postop,Hospital Encounter,2021-01-17 07:20:00,2021-01-17 13:34:00

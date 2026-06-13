@@ -1,0 +1,9 @@
+case_id,patient_id,event_name,event_time
+ace6feae24423a7a,7af77a11d1ca2584,Anesthesia Start,2020-07-23 07:15:00
+ace6feae24423a7a,7af77a11d1ca2584,Induction,2020-07-23 07:26:00
+ace6feae24423a7a,7af77a11d1ca2584,Intubation,2020-07-23 07:34:00
+ace6feae24423a7a,7af77a11d1ca2584,Intubation,2020-07-23 07:34:00
+ace6feae24423a7a,7af77a11d1ca2584,Anesthesia Ready,2020-07-23 07:36:00
+ace6feae24423a7a,7af77a11d1ca2584,Emergence,2020-07-23 09:48:00
+ace6feae24423a7a,7af77a11d1ca2584,Extubation,2020-07-23 17:58:00
+ace6feae24423a7a,7af77a11d1ca2584,Anesthesia Stop,2020-07-23 18:15:00

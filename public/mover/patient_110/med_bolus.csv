@@ -1,0 +1,4 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+fe109843f63e07be,ad367212c8d395df,propofol,sedative,2021-07-10 13:12:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fe109843f63e07be,ad367212c8d395df,propofol,sedative,2021-07-10 14:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fe109843f63e07be,ad367212c8d395df,metoclopramide,antiemetic,2021-07-10 17:26:00,10.0,mg,IntraVENOUS,metoclopramide (REGLAN) injection 10 mg,METOCLOPRAMIDE HCL 5 MG/ML IJ SOLN,Given

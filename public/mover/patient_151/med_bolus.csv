@@ -1,0 +1,8 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+0c07bddc79a8dcd9,77d65ac33e6a95d3,propofol,sedative,2021-06-23 15:52:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,ephedrine,vasopressor,2021-06-23 16:05:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,ephedrine,vasopressor,2021-06-23 16:32:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,propofol,sedative,2021-06-23 16:40:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,ephedrine,vasopressor,2021-06-23 16:53:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,tranexamic acid,rescue_or_correction,2021-06-23 19:52:00,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),Bolus
+0c07bddc79a8dcd9,77d65ac33e6a95d3,propofol,sedative,2021-06-23 20:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

@@ -1,0 +1,4 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+5315f373d7751a70,6c77ae6ed06b0fd7,sufentanil,opioid,2021-06-04 08:54:00,2021-06-04,2021-06-04,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),New Bag
+5315f373d7751a70,6c77ae6ed06b0fd7,sufentanil,opioid,2021-06-04 09:25:00,2021-06-04,2021-06-04,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),Rate Change
+5315f373d7751a70,6c77ae6ed06b0fd7,sufentanil,opioid,2021-06-04 13:38:00,2021-06-04,2021-06-04,50.0,mcg/kg/hr,IntraVENOUS,SUFentanil (SUFENTA) 50 mcg in sodium chloride 0.9 % 50 mL infusion,SUFENTANIL INFUSION (ANESTHESIA) (UCI),Stopped

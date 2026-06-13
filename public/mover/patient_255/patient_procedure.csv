@@ -1,0 +1,8 @@
+case_id,patient_id,event_name,event_time
+bedc93a8fcf6983b,2c41db199f33101e,Anesthesia Start,2021-01-29 07:25:00
+bedc93a8fcf6983b,2c41db199f33101e,Induction,2021-01-29 07:38:00
+bedc93a8fcf6983b,2c41db199f33101e,Intubation,2021-01-29 07:41:00
+bedc93a8fcf6983b,2c41db199f33101e,Anesthesia Ready,2021-01-29 08:25:00
+bedc93a8fcf6983b,2c41db199f33101e,Emergence,2021-01-29 17:50:00
+bedc93a8fcf6983b,2c41db199f33101e,Extubation,2021-01-29 17:58:00
+bedc93a8fcf6983b,2c41db199f33101e,Anesthesia Stop,2021-01-29 18:10:00

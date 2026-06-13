@@ -1,0 +1,2 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+67f65dd29a203623,0135b5068157a5d8,21198-7,Choriogonadotropin.beta subunit,9999999.0,mIU/mL,Unknown,N,2020-09-21 10:18:00,preop,Hospital Encounter,2020-09-21 11:16:00,2020-09-21 21:11:00

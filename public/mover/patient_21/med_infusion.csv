@@ -1,0 +1,10 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 14:20:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),New Bag
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 14:33:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 14:44:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 14:58:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 16:15:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 16:40:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 17:41:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 19:11:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 19:32:00,2020-03-04,2020-03-04,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Stopped

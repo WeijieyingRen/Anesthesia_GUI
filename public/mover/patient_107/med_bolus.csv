@@ -1,0 +1,4 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,propofol,sedative,2019-12-27 11:53:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,propofol,sedative,2019-12-27 11:58:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,propofol,sedative,2019-12-27 12:05:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

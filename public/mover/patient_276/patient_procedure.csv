@@ -1,0 +1,11 @@
+case_id,patient_id,event_name,event_time
+83cc3f3a6799a5d9,1b9beec8292522de,Anesthesia Start,2020-07-19 09:41:00
+83cc3f3a6799a5d9,1b9beec8292522de,Induction,2020-07-19 09:59:00
+83cc3f3a6799a5d9,1b9beec8292522de,Intubation,2020-07-19 10:11:00
+83cc3f3a6799a5d9,1b9beec8292522de,Double Lumen Tube Confirmation,2020-07-19 10:14:00
+83cc3f3a6799a5d9,1b9beec8292522de,Anesthesia Ready,2020-07-19 10:50:00
+83cc3f3a6799a5d9,1b9beec8292522de,One-Lung Ventilation,2020-07-19 11:28:00
+83cc3f3a6799a5d9,1b9beec8292522de,Two-Lung Ventilation,2020-07-19 14:27:00
+83cc3f3a6799a5d9,1b9beec8292522de,Emergence,2020-07-19 17:01:00
+83cc3f3a6799a5d9,1b9beec8292522de,Extubation,2020-07-19 17:02:00
+83cc3f3a6799a5d9,1b9beec8292522de,Anesthesia Stop,2020-07-19 17:19:00

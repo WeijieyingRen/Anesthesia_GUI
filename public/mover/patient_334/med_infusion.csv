@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+43c0826124ade971,8c5de21be607bb03,phenylephrine,vasopressor,2020-10-29 13:34:00,2020-10-29,2020-10-29,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),New Bag
+43c0826124ade971,8c5de21be607bb03,phenylephrine,vasopressor,2020-10-29 13:56:00,2020-10-29,2020-10-29,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Stopped

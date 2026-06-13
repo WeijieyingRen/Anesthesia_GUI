@@ -1,0 +1,25 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+c8877c3be1dc49ea,e09b858d945b9d15,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-03-28 15:02:00,intraop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,33037-3,Anion gap,3.0,mmol/L,2-12,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,17861-6,Calcium,7.9,mg/dL,8.6-10.3,L,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2075-0,Chloride,106.0,mmol/L,98-107,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2160-0,Creatinine,0.8,mg/dL,0.6-1.2,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,788-0,Erythrocyte distribution width,12.3,%,11.6-14.4,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,785-6,Erythrocyte mean corpuscular hemoglobin,34.5,PG,27.0-33.5,H,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,786-4,Erythrocyte mean corpuscular hemoglobin concentration,35.20000000000001,G/DL,32.0-35.5,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,30428-7,Erythrocyte mean corpuscular volume,98.1,FL,81.5-97.0,H,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,789-8,Erythrocytes,3.26,MILL/MCL,3.70-5.00,L,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2345-7,Glucose,133.0,mg/dL,85-125,H,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,20570-8,Hematocrit,32.0,%,34.0-44.0,L,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,30350-3,Hemoglobin,11.3,G/DL,11.5-15.0,L,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.0,THOUS/MCL,4.0-10.5,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2777-1,Phosphate,3.7,MG/DL,2.5-5.0,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,26515-7,Platelets,145.0,THOUS/MCL,150-400,L,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2823-3,Potassium,3.5,mmol/L,3.5-5.1,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,2951-2,Sodium,138.0,mmol/L,136-145,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00
+c8877c3be1dc49ea,e09b858d945b9d15,3094-0,Urea nitrogen,12.0,mg/dL,7-25,N,2020-03-29 04:40:00,postop,Hospital Encounter,2020-03-28 07:11:00,2020-03-28 15:25:00

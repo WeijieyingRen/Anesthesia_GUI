@@ -1,0 +1,7 @@
+case_id,patient_id,event_name,event_time
+c541f1afdcc1ee56,ed891b7f5f1403c1,Anesthesia Start,2020-09-09 11:48:00
+c541f1afdcc1ee56,ed891b7f5f1403c1,Induction,2020-09-09 11:56:00
+c541f1afdcc1ee56,ed891b7f5f1403c1,Intubation,2020-09-09 11:58:00
+c541f1afdcc1ee56,ed891b7f5f1403c1,Emergence,2020-09-09 18:36:00
+c541f1afdcc1ee56,ed891b7f5f1403c1,Extubation,2020-09-09 18:48:00
+c541f1afdcc1ee56,ed891b7f5f1403c1,Anesthesia Stop,2020-09-09 19:01:00

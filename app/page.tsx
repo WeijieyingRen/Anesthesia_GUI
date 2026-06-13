@@ -311,7 +311,7 @@ export default function Home() {
 
             <div className="space-y-2">
               <Label htmlFor="trainingCountry">
-                Country of Primary Clinical Training
+                Country and State of Primary Clinical Training
               </Label>
               <Input
                 id="trainingCountry"

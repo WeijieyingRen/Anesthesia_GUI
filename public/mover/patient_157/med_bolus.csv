@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+ec2b6362c5a17d8a,7645afed1e64d463,propofol,sedative,2019-04-22 10:38:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ec2b6362c5a17d8a,7645afed1e64d463,tranexamic acid,rescue_or_correction,2019-04-22 12:34:00,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),Bolus

@@ -1,0 +1,6 @@
+case_id,patient_id,event_name,event_time
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,Anesthesia Start,2021-11-21 07:21:00
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,Induction,2021-11-21 07:30:00
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,Anesthesia Ready,2021-11-21 07:31:00
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,Case Completion,2021-11-21 14:15:00
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,Anesthesia Stop,2021-11-21 14:30:00

@@ -1,0 +1,7 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+cd97f5b882f65136,08da2a273adf8812,propofol,sedative,2021-06-07 09:04:00,2021-06-07,2021-06-07,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),New Bag
+cd97f5b882f65136,08da2a273adf8812,propofol,sedative,2021-06-07 10:14:00,2021-06-07,2021-06-07,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+cd97f5b882f65136,08da2a273adf8812,propofol,sedative,2021-06-07 13:26:00,2021-06-07,2021-06-07,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+cd97f5b882f65136,08da2a273adf8812,propofol,sedative,2021-06-07 13:49:00,2021-06-07,2021-06-07,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+cd97f5b882f65136,08da2a273adf8812,propofol,sedative,2021-06-07 16:10:00,2021-06-07,2021-06-07,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+cd97f5b882f65136,08da2a273adf8812,propofol,sedative,2021-06-07 17:05:00,2021-06-07,2021-06-07,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Stopped

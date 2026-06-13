@@ -1,0 +1,8 @@
+case_id,patient_id,event_name,event_time
+1f95c330cb21bbcb,8359f85aa12c0ce9,Anesthesia Start,2022-02-10 07:26:00
+1f95c330cb21bbcb,8359f85aa12c0ce9,Induction,2022-02-10 07:32:00
+1f95c330cb21bbcb,8359f85aa12c0ce9,Intubation,2022-02-10 07:34:00
+1f95c330cb21bbcb,8359f85aa12c0ce9,Anesthesia Ready,2022-02-10 08:00:00
+1f95c330cb21bbcb,8359f85aa12c0ce9,Emergence,2022-02-10 16:05:00
+1f95c330cb21bbcb,8359f85aa12c0ce9,Extubation,2022-02-10 16:10:00
+1f95c330cb21bbcb,8359f85aa12c0ce9,Anesthesia Stop,2022-02-10 16:28:00

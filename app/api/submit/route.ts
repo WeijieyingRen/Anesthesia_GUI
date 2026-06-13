@@ -9,6 +9,8 @@ import {
 } from "@/lib/drive-upload";
 import { DATASET_ROOT } from "@/lib/dataset-config";
 
+type DatasetSource = "stanford_mpog" | "mover";
+
 type SubmitBody = {
   annotator?: { name?: string; email?: string };
   participant?: { name?: string; email?: string };
@@ -53,6 +55,7 @@ type SubmitBody = {
 
   patientId?: string | null;
   patientFolder?: string | null;
+  source?: DatasetSource | null;
   displayCaseId?: string | number | null;
 
   caseId?: string | number | null;
@@ -194,7 +197,10 @@ async function resolveAccessCodeEntry(
     const map = await loadAccessCodeLookup();
     return map.get(String(accessCode).trim()) ?? null;
   } catch (error) {
-    console.error("Failed to resolve access code from access_review_code.csv:", error);
+    console.error(
+      "Failed to resolve access code from access_review_code.csv:",
+      error
+    );
     return null;
   }
 }
@@ -252,7 +258,10 @@ async function resolveDoctorIdFromAccessCode(
     const map = await loadAccessCodeDoctorMap();
     return map.get(String(accessCode).trim()) ?? null;
   } catch (error) {
-    console.error("Failed to resolve doctor_id from access_code.csv:", error);
+    console.error(
+      "Failed to resolve doctor_id from access_code.csv:",
+      error
+    );
     return null;
   }
 }
@@ -309,6 +318,10 @@ function normalizePatientId(body: SubmitBody): string {
   );
 }
 
+function normalizeDatasetSource(body: SubmitBody): DatasetSource {
+  return body.source === "mover" ? "mover" : "stanford_mpog";
+}
+
 function normalizeRealCaseId(body: SubmitBody): string {
   return sanitizePathPart(body.caseId ?? "unknown_case_id");
 }
@@ -348,10 +361,35 @@ function buildPatientCaseFolderName(body: SubmitBody): string {
   return `${patientId}__case_${caseNumber}_${caseRawId}`;
 }
 
-function buildCaseKey(patientId: string, caseId: string | number | null) {
-  return `${sanitizePathPart(patientId)}::${sanitizePathPart(
+function buildCaseKey(
+  source: DatasetSource,
+  patientId: string,
+  caseId: string | number | null
+) {
+  const normalizedPatientId = sanitizePathPart(patientId);
+  const normalizedCaseId = sanitizePathPart(
     caseId ?? "unknown_case_id"
-  )}`;
+  );
+
+  /*
+   * Keep the existing Stanford key unchanged so that all historical
+   * Stanford status records remain compatible.
+   *
+   * Example:
+   * patient_1::stanford_case_id
+   */
+  if (source === "stanford_mpog") {
+    return `${normalizedPatientId}::${normalizedCaseId}`;
+  }
+
+  /*
+   * MOVER uses a source prefix because its patient folder names overlap
+   * with Stanford patient folder names.
+   *
+   * Example:
+   * mover::patient_1::mover_case_id
+   */
+  return `${source}::${normalizedPatientId}::${normalizedCaseId}`;
 }
 
 function toIsoTime(value: unknown): string | null {
@@ -402,7 +440,9 @@ function removeNullFields<T>(value: T): T {
   if (value && typeof value === "object") {
     const cleaned: Record<string, unknown> = {};
 
-    for (const [key, val] of Object.entries(value as Record<string, unknown>)) {
+    for (const [key, val] of Object.entries(
+      value as Record<string, unknown>
+    )) {
       if (val === null || val === undefined) continue;
       cleaned[key] = removeNullFields(val);
     }
@@ -561,7 +601,9 @@ function buildAnswers(body: SubmitBody): Record<string, unknown> | null {
   if (body.result !== undefined) fallbackAnswers.result = body.result;
   if (body.response !== undefined) fallbackAnswers.response = body.response;
   if (body.notes !== undefined) fallbackAnswers.notes = body.notes;
-  if (body.confidence !== undefined) fallbackAnswers.confidence = body.confidence;
+  if (body.confidence !== undefined) {
+    fallbackAnswers.confidence = body.confidence;
+  }
 
   return Object.keys(fallbackAnswers).length > 0
     ? removeNullFields(fallbackAnswers)
@@ -610,7 +652,10 @@ async function resolveRevisionedFileName(
     const entries = await listDriveEntries({ objectPath: sectionPath });
 
     const latestRevision = entries.reduce((max, entry) => {
-      const revision = entry.name ? parseRevision(entry.name, baseName) : null;
+      const revision = entry.name
+        ? parseRevision(entry.name, baseName)
+        : null;
+
       return revision !== null && revision > max ? revision : max;
     }, -1);
 
@@ -631,9 +676,9 @@ function resolveWorkflowMode(
    * annotation_code -> annotation
    * review_code     -> review
    *
-   * Do NOT trust body.workflowMode or participantInfo.workflowMode here,
+   * Do not trust body.workflowMode or participantInfo.workflowMode here,
    * because the frontend may temporarily switch a completed annotation case
-   * into review view for display/revision purposes.
+   * into review view for display or revision purposes.
    */
   if (accessEntry?.workflowMode === "review") return "review";
   if (accessEntry?.workflowMode === "annotation") return "annotation";
@@ -711,7 +756,9 @@ async function buildDriveObjectPath({
   const rootFolder = buildAccessCodeRoot(accessCode);
   const patientCaseFolder = buildPatientCaseFolderName(body);
 
-  const sectionPath = `${rootFolder}/${workflowMode}/${patientCaseFolder}/${target.section}`;
+  const sectionPath =
+    `${rootFolder}/${workflowMode}/` +
+    `${patientCaseFolder}/${target.section}`;
 
   const fileName = await resolveRevisionedFileName(
     sectionPath,
@@ -746,9 +793,12 @@ async function updateCaseStatusIndex({
   driveObjectPath: string;
 }) {
   const rootFolder = buildAccessCodeRoot(accessCode);
-  const objectPath = `${rootFolder}/${workflowMode}/case_status_index.json`;
+  const objectPath =
+    `${rootFolder}/${workflowMode}/case_status_index.json`;
 
-  const existing = await readJsonFromDrive({ objectPath }).catch(() => null);
+  const existing = await readJsonFromDrive({ objectPath }).catch(
+    () => null
+  );
 
   const oldCases =
     existing?.data?.cases &&
@@ -759,9 +809,17 @@ async function updateCaseStatusIndex({
 
   const now = new Date().toISOString();
   const fullName = resolveFullName(body, doctorId);
+  const normalizedSource = normalizeDatasetSource(body);
   const normalizedPatientId = sanitizePathPart(patientId);
-  const normalizedCaseId = sanitizePathPart(caseId ?? "unknown_case_id");
-  const caseKey = buildCaseKey(normalizedPatientId, normalizedCaseId);
+  const normalizedCaseId = sanitizePathPart(
+    caseId ?? "unknown_case_id"
+  );
+
+  const caseKey = buildCaseKey(
+    normalizedSource,
+    normalizedPatientId,
+    normalizedCaseId
+  );
 
   const previous =
     oldCases[caseKey] &&
@@ -779,14 +837,22 @@ async function updateCaseStatusIndex({
       updated_at: previousTasks.summary?.updated_at ?? null,
     },
     abnormality_reasoning: {
-      completed: Boolean(previousTasks.abnormality_reasoning?.completed),
-      latest_path: previousTasks.abnormality_reasoning?.latest_path ?? null,
-      updated_at: previousTasks.abnormality_reasoning?.updated_at ?? null,
+      completed: Boolean(
+        previousTasks.abnormality_reasoning?.completed
+      ),
+      latest_path:
+        previousTasks.abnormality_reasoning?.latest_path ?? null,
+      updated_at:
+        previousTasks.abnormality_reasoning?.updated_at ?? null,
     },
     management_reasoning: {
-      completed: Boolean(previousTasks.management_reasoning?.completed),
-      latest_path: previousTasks.management_reasoning?.latest_path ?? null,
-      updated_at: previousTasks.management_reasoning?.updated_at ?? null,
+      completed: Boolean(
+        previousTasks.management_reasoning?.completed
+      ),
+      latest_path:
+        previousTasks.management_reasoning?.latest_path ?? null,
+      updated_at:
+        previousTasks.management_reasoning?.updated_at ?? null,
     },
   };
 
@@ -832,9 +898,13 @@ async function updateCaseStatusIndex({
   oldCases[caseKey] = removeNullFields({
     ...previous,
 
+    source: normalizedSource,
     patient_id: normalizedPatientId,
     case_id: normalizedCaseId,
-    display_case_id: displayCaseId ?? previous.display_case_id ?? null,
+    display_case_id:
+      displayCaseId ??
+      previous.display_case_id ??
+      null,
     full_name: fullName,
     workflow: workflowMode,
 
@@ -874,24 +944,34 @@ export async function POST(req: Request) {
 
     console.log(">>> NEW SUBMIT ROUTE HIT");
     console.log("SUBMIT_STORAGE_TARGET = Google Drive");
-    console.log("DRIVE_ENABLED =", isDriveUploadEnabled() ? "true" : "false");
+    console.log(
+      "DRIVE_ENABLED =",
+      isDriveUploadEnabled() ? "true" : "false"
+    );
     console.log(
       "DRIVE_FOLDER_ID =",
       process.env.DRIVE_FOLDER_ID ? "configured" : "missing"
     );
     console.log(
       "GOOGLE_APPLICATION_CREDENTIALS =",
-      process.env.GOOGLE_APPLICATION_CREDENTIALS ? "configured" : "missing"
+      process.env.GOOGLE_APPLICATION_CREDENTIALS
+        ? "configured"
+        : "missing"
     );
     console.log(
       "DRIVE_SERVICE_ACCOUNT_KEY =",
-      process.env.DRIVE_SERVICE_ACCOUNT_KEY ? "configured" : "missing"
+      process.env.DRIVE_SERVICE_ACCOUNT_KEY
+        ? "configured"
+        : "missing"
     );
 
     const body = (await req.json()) as SubmitBody;
 
     const caseId = body?.caseId ?? null;
-    const eventId = body?.eventId ?? body?.selectedEventId ?? null;
+    const eventId =
+      body?.eventId ??
+      body?.selectedEventId ??
+      null;
     const action = body?.action ?? "session";
     const task = body?.task ?? null;
     const panel = body?.panel ?? null;
@@ -899,9 +979,13 @@ export async function POST(req: Request) {
     const pageOpenedAtMs = toTimestampMs(
       body?.pageOpenedAt ?? body?.panelOpenedAt
     );
-    const firstInteractionAtMs = toTimestampMs(body?.firstInteractionAt);
+    const firstInteractionAtMs = toTimestampMs(
+      body?.firstInteractionAt
+    );
     const firstTypingAtMs = toTimestampMs(body?.firstTypingAt);
-    const firstVoiceStartAtMs = toTimestampMs(body?.firstVoiceStartAt);
+    const firstVoiceStartAtMs = toTimestampMs(
+      body?.firstVoiceStartAt
+    );
     const pageSubmittedAtMs = toTimestampMs(
       body?.submittedAt ?? body?.clickedAt
     );
@@ -909,44 +993,74 @@ export async function POST(req: Request) {
     const pageOpenedAtIso = toIsoTime(
       body?.pageOpenedAt ?? body?.panelOpenedAt
     );
-    const firstInteractionAtIso = toIsoTime(body?.firstInteractionAt);
+    const firstInteractionAtIso = toIsoTime(
+      body?.firstInteractionAt
+    );
     const firstTypingAtIso = toIsoTime(body?.firstTypingAt);
-    const firstVoiceStartAtIso = toIsoTime(body?.firstVoiceStartAt);
-    const pageSubmittedAtIso = toIsoTime(body?.submittedAt ?? body?.clickedAt);
+    const firstVoiceStartAtIso = toIsoTime(
+      body?.firstVoiceStartAt
+    );
+    const pageSubmittedAtIso = toIsoTime(
+      body?.submittedAt ?? body?.clickedAt
+    );
 
     const responseTimeSec =
-      pageOpenedAtMs !== null && pageSubmittedAtMs !== null
-        ? Math.max(0, (pageSubmittedAtMs - pageOpenedAtMs) / 1000)
+      pageOpenedAtMs !== null &&
+      pageSubmittedAtMs !== null
+        ? Math.max(
+            0,
+            (pageSubmittedAtMs - pageOpenedAtMs) / 1000
+          )
         : null;
 
     const timeToFirstInteractionSec =
-      pageOpenedAtMs !== null && firstInteractionAtMs !== null
-        ? Math.max(0, (firstInteractionAtMs - pageOpenedAtMs) / 1000)
+      pageOpenedAtMs !== null &&
+      firstInteractionAtMs !== null
+        ? Math.max(
+            0,
+            (firstInteractionAtMs - pageOpenedAtMs) / 1000
+          )
         : null;
 
     const typingToSubmitSec =
-      firstTypingAtMs !== null && pageSubmittedAtMs !== null
-        ? Math.max(0, (pageSubmittedAtMs - firstTypingAtMs) / 1000)
+      firstTypingAtMs !== null &&
+      pageSubmittedAtMs !== null
+        ? Math.max(
+            0,
+            (pageSubmittedAtMs - firstTypingAtMs) / 1000
+          )
         : null;
 
     const voiceToSubmitSec =
-      firstVoiceStartAtMs !== null && pageSubmittedAtMs !== null
-        ? Math.max(0, (pageSubmittedAtMs - firstVoiceStartAtMs) / 1000)
+      firstVoiceStartAtMs !== null &&
+      pageSubmittedAtMs !== null
+        ? Math.max(
+            0,
+            (pageSubmittedAtMs - firstVoiceStartAtMs) / 1000
+          )
         : null;
 
     const answers = buildAnswers(body);
 
     const submittedAccessCode = normalizeAccessCode(body);
-    const accessEntry = await resolveAccessCodeEntry(submittedAccessCode);
+    const accessEntry = await resolveAccessCodeEntry(
+      submittedAccessCode
+    );
 
     const doctorId = await normalizeDoctorId(body, accessEntry);
 
-    const accessCode = normalizeStorageRootAccessCode(body, accessEntry);
+    const accessCode = normalizeStorageRootAccessCode(
+      body,
+      accessEntry
+    );
 
     const patientId = normalizePatientId(body);
+    const datasetSource = normalizeDatasetSource(body);
     const target = detectStorageTarget(body);
     const workflowMode = resolveWorkflowMode(body, accessEntry);
-    const cleanedAnnotationState = cleanAnnotationState(body.annotationState);
+    const cleanedAnnotationState = cleanAnnotationState(
+      body.annotationState
+    );
 
     const savedAtUtc = new Date().toISOString();
 
@@ -962,42 +1076,62 @@ export async function POST(req: Request) {
       access_code: accessCode,
       submitted_access_code: submittedAccessCode,
       full_name: resolveFullName(body, doctorId),
+
+      source: datasetSource,
       patient_id: patientId,
       case_id: caseId ?? null,
       display_case_id: body.displayCaseId ?? null,
+
       event_id: eventId ?? null,
       episode_id:
-        body?.episodeId ?? body?.selectedEventId ?? body?.eventId ?? null,
+        body?.episodeId ??
+        body?.selectedEventId ??
+        body?.eventId ??
+        null,
       episode_number: body?.episodeNumber ?? null,
       episode_folder: body?.episodeFolder ?? null,
+
       workflow_mode: workflowMode,
       task_key: getTaskKey(target),
       panel,
       action,
       task,
+
       saved_at_utc: savedAtUtc,
       saved_at_local: body.submittedAtLocal ?? null,
 
-      participant_metadata: buildParticipantMetadata(body, workflowMode),
+      participant_metadata: buildParticipantMetadata(
+        body,
+        workflowMode
+      ),
 
       answers,
       annotation_state: cleanedAnnotationState,
 
       timing: {
         page_opened_at_utc: pageOpenedAtIso,
-        page_opened_at_local: body.pageOpenedAtLocal ?? null,
-        first_interaction_at_utc: firstInteractionAtIso,
+        page_opened_at_local:
+          body.pageOpenedAtLocal ?? null,
+        first_interaction_at_utc:
+          firstInteractionAtIso,
         first_typing_at_utc: firstTypingAtIso,
-        first_voice_start_at_utc: firstVoiceStartAtIso,
-        page_submitted_at_utc: pageSubmittedAtIso,
-        page_submitted_at_local: body.submittedAtLocal ?? null,
+        first_voice_start_at_utc:
+          firstVoiceStartAtIso,
+        page_submitted_at_utc:
+          pageSubmittedAtIso,
+        page_submitted_at_local:
+          body.submittedAtLocal ?? null,
         total_duration_sec:
-          numericOrNull(body.totalDurationSec) ?? responseTimeSec,
-        time_to_first_interaction_sec: timeToFirstInteractionSec,
+          numericOrNull(body.totalDurationSec) ??
+          responseTimeSec,
+        time_to_first_interaction_sec:
+          timeToFirstInteractionSec,
         typing_duration_sec:
-          numericOrNull(body.typingDurationSec) ?? typingToSubmitSec,
+          numericOrNull(body.typingDurationSec) ??
+          typingToSubmitSec,
         voice_duration_sec:
-          numericOrNull(body.voiceDurationSec) ?? voiceToSubmitSec,
+          numericOrNull(body.voiceDurationSec) ??
+          voiceToSubmitSec,
         local_timezone: body.localTimezone ?? null,
       },
     });
@@ -1031,10 +1165,12 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       ok: true,
+
       saved: removeNullFields({
         doctorId,
         accessCode,
         submittedAccessCode,
+        source: datasetSource,
         patientId,
         caseId,
         eventId,
@@ -1049,6 +1185,7 @@ export async function POST(req: Request) {
         voiceToSubmitSec,
         totalServerSec,
       }),
+
       drive: {
         saved: true,
         skipped: false,
@@ -1059,12 +1196,14 @@ export async function POST(req: Request) {
         webViewLink: uploaded.webViewLink ?? null,
         warning: null,
       },
+
       localExport: {
         objectPath: uploaded.objectPath,
         data: driveRecord,
       },
+
       debug_version:
-        "access-code-index-submit-route-v10-workflow-mode-from-access-code-only",
+        "access-code-index-submit-route-v11-dataset-source-aware",
     });
   } catch (error) {
     console.error("Submit route error:", error);

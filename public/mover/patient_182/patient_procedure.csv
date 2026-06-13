@@ -1,0 +1,5 @@
+case_id,patient_id,event_name,event_time
+34baddf14157f3ff,f496e524aa02ee36,Anesthesia Start,2021-07-16 19:14:00
+34baddf14157f3ff,f496e524aa02ee36,Anesthesia Ready,2021-07-16 19:27:00
+34baddf14157f3ff,f496e524aa02ee36,Emergence,2021-07-17 01:30:00
+34baddf14157f3ff,f496e524aa02ee36,Anesthesia Stop,2021-07-17 02:08:00

@@ -1,0 +1,5 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+5e8adbbeb5ced343,5f18f9287aeee181,phenylephrine,vasopressor,2020-12-26 08:30:00,2020-12-26,2020-12-26,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),New Bag
+5e8adbbeb5ced343,5f18f9287aeee181,phenylephrine,vasopressor,2020-12-26 08:50:00,2020-12-26,2020-12-26,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Rate Change
+5e8adbbeb5ced343,5f18f9287aeee181,phenylephrine,vasopressor,2020-12-26 09:50:00,2020-12-26,2020-12-26,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Rate Change
+5e8adbbeb5ced343,5f18f9287aeee181,phenylephrine,vasopressor,2020-12-26 13:50:00,2020-12-26,2020-12-26,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Stopped

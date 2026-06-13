@@ -1,0 +1,2 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+935c614ad237ac7c,7eb8496809c07752,tranexamic acid,rescue_or_correction,2019-05-19 07:46:00,2019-05-19,2019-05-19,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),New Bag

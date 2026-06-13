@@ -1,0 +1,8 @@
+case_id,patient_id,event_name,event_time
+010e2092c3d16b18,f4604dbaecf72dcb,Anesthesia Start,2019-10-06 12:50:00
+010e2092c3d16b18,f4604dbaecf72dcb,Induction,2019-10-06 13:03:00
+010e2092c3d16b18,f4604dbaecf72dcb,Intubation,2019-10-06 13:03:00
+010e2092c3d16b18,f4604dbaecf72dcb,Anesthesia Ready,2019-10-06 14:10:00
+010e2092c3d16b18,f4604dbaecf72dcb,Emergence,2019-10-06 21:06:00
+010e2092c3d16b18,f4604dbaecf72dcb,Extubation,2019-10-06 21:10:00
+010e2092c3d16b18,f4604dbaecf72dcb,Anesthesia Stop,2019-10-06 21:34:00

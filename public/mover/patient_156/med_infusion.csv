@@ -1,0 +1,14 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 07:40:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 07:44:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+7506e1575c53e4c9,d56efe8fc9c3b38b,tranexamic acid,rescue_or_correction,2019-12-09 07:45:00,2019-12-09,2019-12-09,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),New Bag
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 07:56:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 08:30:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 09:01:00,2019-12-09,2019-12-09,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 10:13:00,2019-12-09,2019-12-09,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 11:32:00,2019-12-09,2019-12-09,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,New Bag
+7506e1575c53e4c9,d56efe8fc9c3b38b,tranexamic acid,rescue_or_correction,2019-12-09 11:41:00,2019-12-09,2019-12-09,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),New Bag
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 11:45:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 12:27:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 12:45:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Rate Change
+7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 12:56:00,2019-12-09,2019-12-09,10.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (10 mg/mL),PROPOFOL 1000 MG/100ML IV EMUL,Stopped

@@ -1,0 +1,78 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+c6d79ca7f9781f76,bf34929742a3f0d9,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-03-28 07:29:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,788-0,Erythrocyte distribution width,12.5,%,11.6-14.4,N,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,785-6,Erythrocyte mean corpuscular hemoglobin,30.4,PG,27.0-33.5,N,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.3,G/DL,32.0-35.5,N,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30428-7,Erythrocyte mean corpuscular volume,88.7,FL,81.5-97.0,N,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,789-8,Erythrocytes,2.94,MILL/MCL,3.70-5.00,L,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,26.1,%,34.0-44.0,L,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,8.9,G/DL,11.5-15.0,L,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,33256-9,Leukocytes^^corrected for nucleated erythrocytes,16.8,THOUS/MCL,4.0-10.5,H,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,32623-1,Platelet mean volume,10.7,FL,7.2-11.7,N,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26515-7,Platelets,212.0,THOUS/MCL,150-400,N,2020-03-30 08:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,6824-7,Color,9999999.0,Unknown,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,13530-1,Erythrocytes.nucleated,417.0,/CUMM,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26460-6,Erythrocytes.nucleated,506250.0,/CUMM,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,14725-6,Fluid,9999999.0,Unknown,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,13941-0,Lymphocytes/100 leukocytes,4.0,%,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26487-9,Monocytes/100 leukocytes,3.0,%,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26510-8,Neutrophils.band form/100 leukocytes,93.0,%,Unknown,N,2020-03-30 17:56:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,788-0,Erythrocyte distribution width,12.4,%,11.6-14.4,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,785-6,Erythrocyte mean corpuscular hemoglobin,30.8,PG,27.0-33.5,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.7,G/DL,32.0-35.5,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30428-7,Erythrocyte mean corpuscular volume,88.79999999999998,FL,81.5-97.0,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,789-8,Erythrocytes,2.36,MILL/MCL,3.70-5.00,L,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,21.0,%,34.0-44.0,L,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,7.3,G/DL,11.5-15.0,L,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.9,THOUS/MCL,4.0-10.5,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,32623-1,Platelet mean volume,9.7,FL,7.2-11.7,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26515-7,Platelets,179.0,THOUS/MCL,150-400,N,2020-03-31 03:49:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,788-0,Erythrocyte distribution width,12.7,%,11.6-14.4,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,785-6,Erythrocyte mean corpuscular hemoglobin,31.2,PG,27.0-33.5,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30428-7,Erythrocyte mean corpuscular volume,90.2,FL,81.5-97.0,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,789-8,Erythrocytes,2.34,MILL/MCL,3.70-5.00,L,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,21.1,%,34.0-44.0,L,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,7.3,G/DL,11.5-15.0,L,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.9,THOUS/MCL,4.0-10.5,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,32623-1,Platelet mean volume,9.6,FL,7.2-11.7,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26515-7,Platelets,221.0,THOUS/MCL,150-400,N,2020-04-01 04:08:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,788-0,Erythrocyte distribution width,12.7,%,11.6-14.4,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,785-6,Erythrocyte mean corpuscular hemoglobin,30.8,PG,27.0-33.5,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.1,G/DL,32.0-35.5,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30428-7,Erythrocyte mean corpuscular volume,90.4,FL,81.5-97.0,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,789-8,Erythrocytes,2.12,MILL/MCL,3.70-5.00,L,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,19.2,%,34.0-44.0,LL,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,6.5,G/DL,11.5-15.0,LL,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,33256-9,Leukocytes^^corrected for nucleated erythrocytes,5.8,THOUS/MCL,4.0-10.5,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,32623-1,Platelet mean volume,9.3,FL,7.2-11.7,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26515-7,Platelets,202.0,THOUS/MCL,150-400,N,2020-04-02 05:58:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,20.4,%,34.0-44.0,LL,2020-04-02 07:19:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,7.0,G/DL,11.5-15.0,L,2020-04-02 07:19:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2020-04-02 14:20:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2020-04-02 14:20:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2020-04-02 14:20:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2020-04-02 15:09:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,23.6,%,34.0-44.0,L,2020-04-02 21:02:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,8.199999999999998,G/DL,11.5-15.0,L,2020-04-02 21:02:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,788-0,Erythrocyte distribution width,13.1,%,11.6-14.4,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,785-6,Erythrocyte mean corpuscular hemoglobin,30.9,PG,27.0-33.5,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30428-7,Erythrocyte mean corpuscular volume,90.7,FL,81.5-97.0,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,789-8,Erythrocytes,2.85,MILL/MCL,3.70-5.00,L,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,25.9,%,34.0-44.0,L,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,8.8,G/DL,11.5-15.0,L,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.0,THOUS/MCL,4.0-10.5,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,32623-1,Platelet mean volume,8.8,FL,7.2-11.7,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26515-7,Platelets,261.0,THOUS/MCL,150-400,N,2020-04-03 04:06:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,788-0,Erythrocyte distribution width,13.0,%,11.6-14.4,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,785-6,Erythrocyte mean corpuscular hemoglobin,30.6,PG,27.0-33.5,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.1,G/DL,32.0-35.5,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30428-7,Erythrocyte mean corpuscular volume,89.7,FL,81.5-97.0,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,789-8,Erythrocytes,2.71,MILL/MCL,3.70-5.00,L,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,20570-8,Hematocrit,24.3,%,34.0-44.0,L,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,30350-3,Hemoglobin,8.3,G/DL,11.5-15.0,L,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,33256-9,Leukocytes^^corrected for nucleated erythrocytes,5.7,THOUS/MCL,4.0-10.5,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,32623-1,Platelet mean volume,8.9,FL,7.2-11.7,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,26515-7,Platelets,237.0,THOUS/MCL,150-400,N,2020-04-04 04:05:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00
+c6d79ca7f9781f76,bf34929742a3f0d9,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-04-05 10:39:00,postop,Hospital Encounter,2020-03-27 07:14:00,2020-03-27 18:44:00

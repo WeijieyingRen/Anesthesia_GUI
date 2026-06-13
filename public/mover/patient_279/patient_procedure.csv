@@ -1,0 +1,9 @@
+case_id,patient_id,event_name,event_time
+1fa9a5e60944128a,f0bef91fc7b65906,Anesthesia Start,2021-01-04 09:55:00
+1fa9a5e60944128a,f0bef91fc7b65906,Induction,2021-01-04 10:19:00
+1fa9a5e60944128a,f0bef91fc7b65906,Intubation,2021-01-04 10:23:00
+1fa9a5e60944128a,f0bef91fc7b65906,Anesthesia Ready,2021-01-04 11:05:00
+1fa9a5e60944128a,f0bef91fc7b65906,One-Lung Ventilation,2021-01-04 11:17:00
+1fa9a5e60944128a,f0bef91fc7b65906,Two-Lung Ventilation,2021-01-04 13:00:00
+1fa9a5e60944128a,f0bef91fc7b65906,Emergence,2021-01-04 15:04:00
+1fa9a5e60944128a,f0bef91fc7b65906,Anesthesia Stop,2021-01-04 15:25:00

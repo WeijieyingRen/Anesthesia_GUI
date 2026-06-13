@@ -1,0 +1,12 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 10:51:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 10:57:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 11:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 11:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 11:57:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 12:00:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 12:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 19:06:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,propofol,sedative,2020-02-10 19:20:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f6ef5f17fc0722f3,de71bc1c0c5bae82,labetalol,vasodilator_or_rate_control,2020-02-10 19:49:00,500.0,mg,IntraVENOUS,labetalol (NORMODYNE) 500 mg in sodium chloride 0.9 % 250 mL infusion,LABETALOL INFUSION,Bolus
+f6ef5f17fc0722f3,de71bc1c0c5bae82,labetalol,vasodilator_or_rate_control,2020-02-10 19:57:00,500.0,mg,IntraVENOUS,labetalol (NORMODYNE) 500 mg in sodium chloride 0.9 % 250 mL infusion,LABETALOL INFUSION,Bolus

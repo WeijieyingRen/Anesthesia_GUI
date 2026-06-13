@@ -1,0 +1,7 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+bf58bd7081942901,f313b1d9b3208991,nitroglycerin,vasodilator_or_rate_control,2020-05-31 08:37:00,50.0,mcg,IntraARTERIAL,nitroGLYcerin 50 mg/250 mL infusion (200 mcg/mL),NITROGLYCERIN 50 MG/250 ML D5W PREMIX INFUSION (UCI),Given
+bf58bd7081942901,f313b1d9b3208991,ephedrine,vasopressor,2020-05-31 09:00:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+bf58bd7081942901,f313b1d9b3208991,propofol,sedative,2020-05-31 09:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+bf58bd7081942901,f313b1d9b3208991,ephedrine,vasopressor,2020-05-31 10:12:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+bf58bd7081942901,f313b1d9b3208991,ephedrine,vasopressor,2020-05-31 10:39:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+bf58bd7081942901,f313b1d9b3208991,propofol,sedative,2020-05-31 13:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

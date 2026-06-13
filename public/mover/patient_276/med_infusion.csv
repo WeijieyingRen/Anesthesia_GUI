@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+83cc3f3a6799a5d9,1b9beec8292522de,fentanyl,opioid,2020-07-19 09:41:00,2020-07-19,2020-07-19,2.0,ml/hr,Epidural,fentaNYL 2 mcg/mL and bupivacaine 0.0625 % in sodium chloride 0.9 % 100 mL epidural,FENTANYL 2 MCG/ML WITH BUPIVACAINE 0.0625 % ANES EPIDURAL INFUSION (UCI),New Bag
+83cc3f3a6799a5d9,1b9beec8292522de,fentanyl,opioid,2020-07-19 17:00:00,2020-07-19,2020-07-19,2.0,ml/hr,Epidural,fentaNYL 2 mcg/mL and bupivacaine 0.0625 % in sodium chloride 0.9 % 100 mL epidural,FENTANYL 2 MCG/ML WITH BUPIVACAINE 0.0625 % ANES EPIDURAL INFUSION (UCI),Stopped

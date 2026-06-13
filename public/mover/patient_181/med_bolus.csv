@@ -1,0 +1,6 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+65b958c4e309e986,752d15ec98ee183e,ephedrine,vasopressor,2019-07-13 19:16:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+65b958c4e309e986,752d15ec98ee183e,ephedrine,vasopressor,2019-07-13 19:25:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+65b958c4e309e986,752d15ec98ee183e,ephedrine,vasopressor,2019-07-13 21:01:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+65b958c4e309e986,752d15ec98ee183e,ephedrine,vasopressor,2019-07-13 21:59:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+65b958c4e309e986,752d15ec98ee183e,ondansetron,antiemetic,2019-07-13 22:18:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection 4 mg,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given

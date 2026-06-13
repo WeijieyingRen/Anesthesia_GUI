@@ -1,0 +1,10 @@
+case_id,patient_id,event_name,event_time
+bd29c155c9239ba1,45b0dcef6fb21254,Anesthesia Start,2021-04-04 09:49:00
+bd29c155c9239ba1,45b0dcef6fb21254,Induction,2021-04-04 09:59:00
+bd29c155c9239ba1,45b0dcef6fb21254,Intubation,2021-04-04 10:06:00
+bd29c155c9239ba1,45b0dcef6fb21254,Anesthesia Ready,2021-04-04 10:27:00
+bd29c155c9239ba1,45b0dcef6fb21254,Aortic Clamp On,2021-04-04 14:19:00
+bd29c155c9239ba1,45b0dcef6fb21254,Aortic Clamp Off,2021-04-04 14:59:00
+bd29c155c9239ba1,45b0dcef6fb21254,Emergence,2021-04-04 18:55:00
+bd29c155c9239ba1,45b0dcef6fb21254,Extubation,2021-04-04 19:01:00
+bd29c155c9239ba1,45b0dcef6fb21254,Anesthesia Stop,2021-04-04 19:26:00

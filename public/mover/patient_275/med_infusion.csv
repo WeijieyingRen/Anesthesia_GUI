@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+c4b1c627b3416bd8,f417d2eafc0aca04,hydromorphone,opioid,2021-02-21 18:04:00,2021-02-21,2021-02-22,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag
+c4b1c627b3416bd8,f417d2eafc0aca04,hydromorphone,opioid,2021-02-21 23:51:00,2021-02-21,2021-02-22,100.0,ml,Epidural,"bupivacaine 0.1% 100 mL, hydromorphone (DILAUDID) 10 mcg/mL epidural injection",HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),New Bag

@@ -1,0 +1,12 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+bf58bd7081942901,f313b1d9b3208991,788-0,Erythrocyte distribution width,19.2,%,11.6-14.4,H,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,785-6,Erythrocyte mean corpuscular hemoglobin,21.9,PG,27.0-33.5,L,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,786-4,Erythrocyte mean corpuscular hemoglobin concentration,31.5,G/DL,32.0-35.5,L,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,30428-7,Erythrocyte mean corpuscular volume,69.4,FL,81.5-97.0,L,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,789-8,Erythrocytes,4.49,MILL/MCL,4.38-5.62,N,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,20570-8,Hematocrit,31.1,%,39.5-50.0,L,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,30350-3,Hemoglobin,9.8,G/DL,13.5-16.9,L,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.2,THOUS/MCL,4.0-10.5,N,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,32623-1,Platelet mean volume,9.3,FL,7.2-11.7,N,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,26515-7,Platelets,170.0,THOUS/MCL,150-400,N,2020-05-31 06:43:00,preop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00
+bf58bd7081942901,f313b1d9b3208991,3184-9,Activated clotting time,131.0,SEC.,74-137,N,2020-05-31 11:47:00,intraop,Hospital Encounter,2020-05-31 07:59:00,2020-05-31 14:18:00

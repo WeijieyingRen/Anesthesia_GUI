@@ -1,0 +1,24 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+e8041bcdc71021c8,484ef21c4fc97665,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,1959-6,Bicarbonate,25.0,MMOL/L,21-27,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,1994-3,Calcium.ionized,1.2,mmol/L,1.13-1.32,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11557-6,Carbon dioxide,43.0,MMHG,36-42,H,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,20565-8,Carbon dioxide,26.0,MMOL/L,23-29,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,2339-0,Glucose,108.0,MG/DL,70-110,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11556-8,Oxygen,92.0,MMHG,80-104,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,2713-6,Oxygen saturation,97.0,%,95-98,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,6298-4,Potassium,4.2,MMOL/L,3.7-5.5,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,2947-0,Sodium,140.0,MMOL/L,138-146,N,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11558-4,pH,7.36,Unknown,7.38-7.42,L,2020-02-26 13:52:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,19235-1,Base excess^^standard,9999999.0,MMOL/L,Unknown,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,1959-6,Bicarbonate,22.0,MMOL/L,21-27,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,1994-3,Calcium.ionized,1.12,mmol/L,1.13-1.32,L,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11557-6,Carbon dioxide,38.0,MMHG,36-42,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,20565-8,Carbon dioxide,24.0,MMOL/L,23-29,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,2339-0,Glucose,129.0,MG/DL,70-110,H,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11556-8,Oxygen,89.0,MMHG,80-104,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,2713-6,Oxygen saturation,97.0,%,95-98,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,6298-4,Potassium,4.2,MMOL/L,3.7-5.5,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,2947-0,Sodium,137.0,MMOL/L,138-146,L,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11558-4,pH,7.38,Unknown,7.38-7.42,N,2020-02-26 20:55:00,intraop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00
+e8041bcdc71021c8,484ef21c4fc97665,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2020-02-27 01:04:00,postop,Hospital Encounter,2020-02-26 11:59:00,2020-02-26 22:14:00

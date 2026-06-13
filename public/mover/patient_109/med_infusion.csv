@@ -1,0 +1,9 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 16:03:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,New Bag
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 16:18:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Stopped
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 16:34:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Restarted
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 16:39:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Rate Change
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 16:41:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Stopped
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 17:18:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Restarted
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 17:21:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Rate Change
+e9c538709cf900a5,824ba0e03173b8ae,dopamine,inotrope,2019-12-29 18:52:00,2019-12-29,2019-12-29,800.0,mcg/kg/min,IntraVENOUS,DOPamine (INTROPIN) 800 mg/250 mL infusion (3200 mcg/mL),DOPAMINE IN D5W 3.2-5 MG/ML-% IV SOLN,Stopped

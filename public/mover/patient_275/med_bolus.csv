@@ -1,0 +1,6 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+c4b1c627b3416bd8,f417d2eafc0aca04,propofol,sedative,2021-02-21 16:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+c4b1c627b3416bd8,f417d2eafc0aca04,propofol,sedative,2021-02-21 19:52:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+c4b1c627b3416bd8,f417d2eafc0aca04,hydromorphone,opioid,2021-02-21 23:59:00,100.0,ml,Epidural,"bupivacaine 0.1% 100 mL, hydromorphone (DILAUDID) 10 mcg/mL epidural injection",HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+c4b1c627b3416bd8,f417d2eafc0aca04,ephedrine,vasopressor,2021-02-22 00:07:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+c4b1c627b3416bd8,f417d2eafc0aca04,hydromorphone,opioid,2021-02-22 00:17:00,100.0,ml,Epidural,"bupivacaine 0.1% 100 mL, hydromorphone (DILAUDID) 10 mcg/mL epidural injection",HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus

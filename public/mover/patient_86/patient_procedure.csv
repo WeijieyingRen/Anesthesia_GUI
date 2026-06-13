@@ -1,0 +1,6 @@
+case_id,patient_id,event_name,event_time
+07c084e5858e3f3c,46b7d8db91d25bc4,Anesthesia Start,2021-10-26 07:14:00
+07c084e5858e3f3c,46b7d8db91d25bc4,Induction,2021-10-26 07:28:00
+07c084e5858e3f3c,46b7d8db91d25bc4,Intubation,2021-10-26 07:32:00
+07c084e5858e3f3c,46b7d8db91d25bc4,Anesthesia Ready,2021-10-26 07:44:00
+07c084e5858e3f3c,46b7d8db91d25bc4,Anesthesia Stop,2021-10-26 17:06:00

@@ -1,0 +1,5 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+8b454e4e02251329,3928f7a4a2a0efc7,propofol,sedative,2021-06-14 14:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8b454e4e02251329,3928f7a4a2a0efc7,ephedrine,vasopressor,2021-06-14 14:41:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+8b454e4e02251329,3928f7a4a2a0efc7,propofol,sedative,2021-06-14 14:44:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8b454e4e02251329,3928f7a4a2a0efc7,sugammadex,reversal,2021-06-14 16:40:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given

@@ -1,0 +1,5 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+a6df93e0331db42a,fecce269580bc21b,hydromorphone,opioid,2019-06-14 12:13:00,2019-06-14,2019-06-14,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag
+a6df93e0331db42a,fecce269580bc21b,hydromorphone,opioid,2019-06-14 13:42:00,2019-06-14,2019-06-14,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,Stopped
+a6df93e0331db42a,fecce269580bc21b,hydromorphone,opioid,2019-06-14 16:42:00,2019-06-14,2019-06-14,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,Restarted
+a6df93e0331db42a,fecce269580bc21b,hydromorphone,opioid,2019-06-14 18:00:00,2019-06-14,2019-06-18,10.0,mcg,Epidural,HYDROmorphone 10 mcg/mL bupivicaine 0.1% in sodium chloride 0.9% 100 mL Pain Management PCeA,HYDROMORPHONE 10 MCG/ML BUPIVACAINE 0.1% PAIN MANAGEMENT PCEA (UCI),Rate Verify

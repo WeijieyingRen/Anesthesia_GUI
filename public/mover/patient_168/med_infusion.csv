@@ -1,0 +1,7 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+246a2575c7c2e30d,8bcd620005aba44b,phenylephrine,vasopressor,2022-04-30 08:45:00,2022-04-30,2022-04-30,40.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 40 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),New Bag
+246a2575c7c2e30d,8bcd620005aba44b,phenylephrine,vasopressor,2022-04-30 11:44:00,2022-04-30,2022-04-30,40.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 40 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Stopped
+246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 14:43:00,2022-04-30,2022-04-30,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),New Bag
+246a2575c7c2e30d,8bcd620005aba44b,hydromorphone,opioid,2022-04-30 15:00:00,2022-04-30,2022-04-30,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag
+246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 15:45:00,2022-04-30,2022-04-30,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Rate Change
+246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 16:34:00,2022-04-30,2022-04-30,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Stopped

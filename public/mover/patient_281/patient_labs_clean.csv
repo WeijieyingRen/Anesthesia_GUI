@@ -1,0 +1,431 @@
+case_id,patient_id,lab_code,lab_name,observation_value,measurement_units,reference_range,abnormal_flag,collection_time,lab_phase,enc_type,an_start_datetime,an_stop_datetime
+cf823e85c8d0d56a,45789e90d3f2691f,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2019-08-23 13:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,718-7,Hemoglobin,15.5,G/DL,13.5-16.9,N,2019-08-23 13:44:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2019-08-23 13:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2019-08-23 13:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1742-6,Alanine aminotransferase,49.0,U/L,7-52,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1751-7,Albumin,4.5,G/DL,4.2-5.5,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,6768-6,Alkaline phosphatase,81.0,U/L,34-104,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,16.0,mmol/L,2-12,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1920-8,Aspartate aminotransferase,50.0,U/L,13-39,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1975-2,Bilirubin,0.7,mg/dL,0.0-1.4,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,9.5,mg/dL,8.6-10.3,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,20.0,mmol/L,21-31,L,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,108.0,mmol/L,98-107,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14979-9,Coagulation surface induced,26.9,SEC,24.9-34.5,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,5902-2,Coagulation tissue factor induced,13.2,SEC,12.2-15.0,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,6301-6,Coagulation tissue factor induced.INR,0.96,Unknown,0.87-1.14,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,1.7,mg/dL,0.7-1.3,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14045-9,D-lactate,3.9,mmol/L,0.5-2.0,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.0,%,11.6-14.4,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,31.4,PG,27.0-33.5,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,92.2,FL,81.5-97.0,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,4.81,MILL/MCL,4.38-5.62,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,5643-2,Ethanol,9999999.0,mg/dL,Unknown,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,52.0,Unknown,Unknown,L,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,43.0,Unknown,Unknown,L,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,183.0,mg/dL,70-115,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,44.4,%,39.5-50.0,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,15.1,G/DL,13.5-16.9,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,25.6,THOUS/MCL,4.0-10.5,H,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,24472-3,Platelet function.collagen+Adenosine diphosphate induced,57.0,SEC,Unknown,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,24471-5,Platelet function.collagen+EPINEPHrine induced,71.0,SEC,Unknown,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,8.199999999999998,FL,7.2-11.7,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,285.0,THOUS/MCL,150-400,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2885-2,Protein,7.2,G/DL,6.0-8.3,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,144.0,mmol/L,136-145,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,17.0,mg/dL,7-25,N,2019-08-23 13:51:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2019-08-23 13:56:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,28638-5,Base excess,9999999.0,mmol/L,Unknown,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1960-4,Bicarbonate,22.9,mmol/L,21.0-27.0,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,11557-6,Carbon dioxide,0.33,Unknown,Unknown,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2019-8,Carbon dioxide,38.8,MMHG,36.0-42.0,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2703-7,Oxygen,83.0,MMHG,80.0-104.0,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2708-6,Oxygen saturation,95.7,%,95.0-99.0,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2744-1,pH,7.389999999999999,Unknown,7.38-7.42,N,2019-08-23 16:43:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14045-9,D-lactate,2.6,mmol/L,0.5-2.0,H,2019-08-23 17:10:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19343-3,Amphetamine,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33218-9,Bacteria,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19270-8,Barbiturates,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14316-4,Benzodiazepines,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14314-9,Benzoylecgonine,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50551-1,Bilirubin,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50552-9,Clarity,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50553-7,Color,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50225-2,Epithelial cells.non-squamous,1.0,/HPF,0-5,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,46419-8,Erythrocytes,8.0,#/HPF,0-3,H,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,53328-1,Glucose,9999999.0,MG/DL,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,57751-0,Hemoglobin,9999999.0,Unknown,Unknown,,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50557-8,Ketones,20.0,MG/DL,Unknown,,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50233-6,Leukocyte clumps,9999999.0,#/HPF,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,60026-2,Leukocyte esterase,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,46702-7,Leukocytes,1.0,#/HPF,0-5,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19550-3,Methadone,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19568-5,Methylenedioxymethamphetamine,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50235-1,Mucus,9999999.0,/LPF,Unknown,,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50558-6,Nitrite,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19295-5,Opiates,9999999.0,Unknown,Unknown,,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19659-2,Phencyclidine,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19429-0,Propoxyphene,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50561-0,Protein,30.0,MG/DL,Unknown,,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50562-8,Specific gravity,1.056,Unknown,1.003-1.030,H,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19415-9,Tetrahydrocannabinol,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19159-3,Urinalysis specimen collection method,9999999.0,Unknown,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50563-6,Urobilinogen,9999999.0,MG/DL,Unknown,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,50560-2,pH,5.0,Unknown,5.0-8.0,N,2019-08-23 18:45:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14045-9,D-lactate,2.6,mmol/L,0.5-2.0,H,2019-08-23 19:35:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2019-08-23 20:52:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2019-08-23 20:52:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,7.0,mmol/L,2-12,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.3,mg/dL,8.6-10.3,L,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,25.0,mmol/L,21-31,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,107.0,mmol/L,98-107,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,1.1,mg/dL,0.7-1.3,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14045-9,D-lactate,2.5,mmol/L,0.5-2.0,H,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,12.8,%,11.6-14.4,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,31.9,PG,27.0-33.5,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.2,G/DL,32.0-35.5,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,93.3,FL,81.5-97.0,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.83,MILL/MCL,4.38-5.62,L,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,166.0,mg/dL,70-115,H,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,35.70000000000001,%,39.5-50.0,L,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,12.2,G/DL,13.5-16.9,L,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.3,THOUS/MCL,4.0-10.5,H,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,1.5,mg/dL,1.9-2.7,L,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,4.1,MG/DL,2.5-5.0,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,8.099999999999998,FL,7.2-11.7,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,178.0,THOUS/MCL,150-400,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.3,mmol/L,3.5-5.1,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,139.0,mmol/L,136-145,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,16.0,mg/dL,7-25,N,2019-08-24 01:37:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1742-6,Alanine aminotransferase,54.0,U/L,7-52,H,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1751-7,Albumin,3.5,G/DL,4.2-5.5,L,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,6768-6,Alkaline phosphatase,52.0,U/L,34-104,N,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1920-8,Aspartate aminotransferase,97.0,U/L,13-39,H,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1975-2,Bilirubin,0.8,mg/dL,0.0-1.4,N,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1968-7,Bilirubin.glucuronidated+Bilirubin.albumin bound,0.1,mg/dL,0.0-0.2,N,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2885-2,Protein,5.4,G/DL,6.0-8.3,L,2019-08-24 06:32:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,14045-9,D-lactate,1.9,mmol/L,0.5-2.0,N,2019-08-24 09:36:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17856-6,Hemoglobin A1c/Hemoglobin.total,6.0,%,4.6-5.6,H,2019-08-24 09:36:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,5.0,mmol/L,2-12,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.099999999999998,mg/dL,8.6-10.3,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,106.0,mmol/L,98-107,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.9,mg/dL,0.7-1.3,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.0,%,11.6-14.4,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.5,G/DL,32.0-35.5,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,93.8,FL,81.5-97.0,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.3,MILL/MCL,4.38-5.62,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,142.0,mg/dL,70-115,H,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,30.9,%,39.5-50.0,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.7,G/DL,13.5-16.9,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.0,THOUS/MCL,4.0-10.5,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,1.7,mg/dL,1.9-2.7,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,2.2,MG/DL,2.5-5.0,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.8,FL,7.2-11.7,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,122.0,THOUS/MCL,150-400,L,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,3.5,mmol/L,3.5-5.1,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,137.0,mmol/L,136-145,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,13.0,mg/dL,7-25,N,2019-08-25 03:07:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3271-4,Heparin.low molecular weight,0.21,IU/ML,Unknown,N,2019-08-25 13:36:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,8.0,mmol/L,2-12,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.0,mg/dL,8.6-10.3,L,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,27.0,mmol/L,21-31,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,104.0,mmol/L,98-107,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,12.7,%,11.6-14.4,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.5,G/DL,32.0-35.5,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,94.0,FL,81.5-97.0,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.16,MILL/MCL,4.38-5.62,L,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,275.0,mg/dL,70-115,H,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,29.7,%,39.5-50.0,L,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.2,G/DL,13.5-16.9,L,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.9,THOUS/MCL,4.0-10.5,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,3.1,MG/DL,2.5-5.0,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,8.5,FL,7.2-11.7,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,121.0,THOUS/MCL,150-400,L,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,139.0,mmol/L,136-145,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,13.0,mg/dL,7-25,N,2019-08-26 02:59:00,preop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2019-08-26 11:05:00,intraop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2019-08-26 11:05:00,intraop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1251-8,Major crossmatch,9999999.0,Unknown,Unknown,N,2019-08-26 11:05:00,intraop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,5.0,mmol/L,2-12,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,704-7,Basophils,0.0,THOUS/MCL,0.0-0.2,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30180-4,Basophils/100 leukocytes,0.3,%,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,7.7,mg/dL,8.6-10.3,L,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,27.0,mmol/L,21-31,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,106.0,mmol/L,98-107,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,711-2,Eosinophils,0.0,THOUS/MCL,0.0-0.5,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26450-7,Eosinophils/100 leukocytes,0.6,%,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.0,%,11.6-14.4,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.9,G/DL,32.0-35.5,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,92.8,FL,81.5-97.0,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.09,MILL/MCL,4.38-5.62,L,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,178.0,mg/dL,70-115,H,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,28.7,%,39.5-50.0,L,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.0,G/DL,13.5-16.9,L,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.7,THOUS/MCL,4.0-10.5,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,731-0,Lymphocytes,0.4,THOUS/MCL,0.9-3.3,L,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,736-9,Lymphocytes/100 leukocytes,5.2,%,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26484-6,Monocytes,0.2,THOUS/MCL,0.0-0.8,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26485-3,Monocytes/100 leukocytes,3.6,%,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26499-4,Neutrophils,6.1,THOUS/MCL,2.0-8.1,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,770-8,Neutrophils/100 leukocytes,90.3,%,Unknown,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,3.4,MG/DL,2.5-5.0,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.8,FL,7.2-11.7,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,118.0,THOUS/MCL,150-400,L,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,138.0,mmol/L,136-145,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,14.0,mg/dL,7-25,N,2019-08-26 15:13:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,4.0,mmol/L,2-12,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,7.9,mg/dL,8.6-10.3,L,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,28.0,mmol/L,21-31,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,109.0,mmol/L,98-107,H,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,12.7,%,11.6-14.4,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.2,PG,27.0-33.5,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.2,G/DL,32.0-35.5,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,94.1,FL,81.5-97.0,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,2.82,MILL/MCL,4.38-5.62,L,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,162.0,mg/dL,70-115,H,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,26.6,%,39.5-50.0,L,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,9.1,G/DL,13.5-16.9,L,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.8,THOUS/MCL,4.0-10.5,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.3,mg/dL,1.9-2.7,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,2.4,MG/DL,2.5-5.0,L,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.4,FL,7.2-11.7,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,130.0,THOUS/MCL,150-400,L,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.0,mmol/L,3.5-5.1,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,141.0,mmol/L,136-145,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,13.0,mg/dL,7-25,N,2019-08-27 03:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,7.0,mmol/L,2-12,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.099999999999998,mg/dL,8.6-10.3,L,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,106.0,mmol/L,98-107,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.1,%,11.6-14.4,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.8,PG,27.0-33.5,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,94.8,FL,81.5-97.0,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,2.97,MILL/MCL,4.38-5.62,L,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,100.0,mg/dL,70-115,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,28.1,%,39.5-50.0,L,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,9.7,G/DL,13.5-16.9,L,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.7,THOUS/MCL,4.0-10.5,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,1.9,mg/dL,1.9-2.7,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,3.1,MG/DL,2.5-5.0,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.7,FL,7.2-11.7,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,167.0,THOUS/MCL,150-400,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,3.9,mmol/L,3.5-5.1,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,142.0,mmol/L,136-145,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,22.0,mg/dL,7-25,N,2019-08-28 06:22:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,4.0,mmol/L,2-12,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.3,mg/dL,8.6-10.3,L,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,107.0,mmol/L,98-107,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.7,mg/dL,0.7-1.3,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,12.8,%,11.6-14.4,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.6,PG,27.0-33.5,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.8,G/DL,32.0-35.5,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,93.4,FL,81.5-97.0,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.17,MILL/MCL,4.38-5.62,L,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,113.0,mg/dL,70-115,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,29.7,%,39.5-50.0,L,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.3,G/DL,13.5-16.9,L,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,7.5,THOUS/MCL,4.0-10.5,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,1.8,mg/dL,1.9-2.7,L,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,4.0,MG/DL,2.5-5.0,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.3,FL,7.2-11.7,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,192.0,THOUS/MCL,150-400,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,3.9,mmol/L,3.5-5.1,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,140.0,mmol/L,136-145,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,19.0,mg/dL,7-25,N,2019-08-29 08:44:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,7.0,mmol/L,2-12,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.4,mg/dL,8.6-10.3,L,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,26.0,mmol/L,21-31,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,108.0,mmol/L,98-107,H,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.7,mg/dL,0.7-1.3,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,12.8,%,11.6-14.4,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.7,G/DL,32.0-35.5,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,93.5,FL,81.5-97.0,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.33,MILL/MCL,4.38-5.62,L,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,121.0,mg/dL,70-115,H,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,31.2,%,39.5-50.0,L,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.8,G/DL,13.5-16.9,L,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,6.8,THOUS/MCL,4.0-10.5,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,4.6,MG/DL,2.5-5.0,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,8.0,FL,7.2-11.7,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,117.0,THOUS/MCL,150-400,L,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.1,mmol/L,3.5-5.1,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,141.0,mmol/L,136-145,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,17.0,mg/dL,7-25,N,2019-08-30 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,7.0,mmol/L,2-12,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.8,mg/dL,8.6-10.3,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,28.0,mmol/L,21-31,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,103.0,mmol/L,98-107,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.7,mg/dL,0.7-1.3,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,12.8,%,11.6-14.4,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,35.1,G/DL,32.0-35.5,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,92.2,FL,81.5-97.0,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.63,MILL/MCL,4.38-5.62,L,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,122.0,mg/dL,70-115,H,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,33.4,%,39.5-50.0,L,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,11.7,G/DL,13.5-16.9,L,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,8.4,THOUS/MCL,4.0-10.5,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.4,mg/dL,1.9-2.7,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,3.9,MG/DL,2.5-5.0,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.5,FL,7.2-11.7,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,280.0,THOUS/MCL,150-400,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.3,mmol/L,3.5-5.1,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,138.0,mmol/L,136-145,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,15.0,mg/dL,7-25,N,2019-08-31 07:17:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,882-1,ABO & Rh group,9999999.0,Unknown,Unknown,N,2019-08-31 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,1005-8,Indirect antiglobulin test.IgG specific reagent,9999999.0,Unknown,Unknown,N,2019-08-31 07:18:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.4,%,11.6-14.4,N,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.3,PG,27.0-33.5,N,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.6,G/DL,32.0-35.5,N,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,93.3,FL,81.5-97.0,N,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.15,MILL/MCL,4.38-5.62,L,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,29.4,%,39.5-50.0,L,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.2,G/DL,13.5-16.9,L,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,11.3,THOUS/MCL,4.0-10.5,H,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.599999999999999,FL,7.2-11.7,N,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,304.0,THOUS/MCL,150-400,N,2019-09-01 06:32:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,4.0,mmol/L,2-12,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,7.599999999999999,mg/dL,8.6-10.3,L,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,103.0,mmol/L,98-107,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.7,mg/dL,0.7-1.3,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,119.0,mg/dL,70-115,H,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,3.5,MG/DL,2.5-5.0,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,5.0,mmol/L,3.5-5.1,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,136.0,mmol/L,136-145,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,18.0,mg/dL,7-25,N,2019-09-01 14:15:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,5.0,mmol/L,2-12,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.599999999999998,mg/dL,8.6-10.3,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,102.0,mmol/L,98-107,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.5,%,11.6-14.4,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.0,G/DL,32.0-35.5,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,95.4,FL,81.5-97.0,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.02,MILL/MCL,4.38-5.62,L,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,99.0,mg/dL,70-115,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,28.8,%,39.5-50.0,L,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,9.8,G/DL,13.5-16.9,L,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.3,THOUS/MCL,4.0-10.5,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.0,mg/dL,1.9-2.7,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,4.2,MG/DL,2.5-5.0,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.5,FL,7.2-11.7,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,313.0,THOUS/MCL,150-400,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,136.0,mmol/L,136-145,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,16.0,mg/dL,7-25,N,2019-09-02 06:40:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,9.0,mmol/L,2-12,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,29.0,mmol/L,21-31,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,101.0,mmol/L,98-107,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.8,mg/dL,0.7-1.3,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.4,%,11.6-14.4,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.3,G/DL,32.0-35.5,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,94.6,FL,81.5-97.0,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.12,MILL/MCL,4.38-5.62,L,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,107.0,mg/dL,70-115,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,29.6,%,39.5-50.0,L,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.1,G/DL,13.5-16.9,L,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,9.5,THOUS/MCL,4.0-10.5,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.2,mg/dL,1.9-2.7,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,5.6,MG/DL,2.5-5.0,H,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.5,FL,7.2-11.7,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,386.0,THOUS/MCL,150-400,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.2,mmol/L,3.5-5.1,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,139.0,mmol/L,136-145,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,17.0,mg/dL,7-25,N,2019-09-03 06:30:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33037-3,Anion gap,10.0,mmol/L,2-12,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,17861-6,Calcium,8.9,mg/dL,8.6-10.3,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2028-9,Carbon dioxide,27.0,mmol/L,21-31,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2075-0,Chloride,104.0,mmol/L,98-107,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2160-0,Creatinine,0.7,mg/dL,0.7-1.3,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.4,%,11.6-14.4,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.4,PG,27.0-33.5,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.4,G/DL,32.0-35.5,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,94.4,FL,81.5-97.0,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.09,MILL/MCL,4.38-5.62,L,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48643-1,Glomerular filtration rate/1.73 sq M.predicted.black,9999999.0,Unknown,Unknown,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,48642-3,Glomerular filtration rate/1.73 sq M.predicted.non black,9999999.0,Unknown,Unknown,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2345-7,Glucose,119.0,mg/dL,70-115,H,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,29.2,%,39.5-50.0,L,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.0,G/DL,13.5-16.9,L,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,10.7,THOUS/MCL,4.0-10.5,H,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,19123-9,Magnesium,2.1,mg/dL,1.9-2.7,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2777-1,Phosphate,4.2,MG/DL,2.5-5.0,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.4,FL,7.2-11.7,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,443.0,THOUS/MCL,150-400,H,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2823-3,Potassium,4.5,mmol/L,3.5-5.1,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,2951-2,Sodium,141.0,mmol/L,136-145,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3094-0,Urea nitrogen,16.0,mg/dL,7-25,N,2019-09-04 06:16:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,704-7,Basophils,0.1,THOUS/MCL,0.0-0.2,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30180-4,Basophils/100 leukocytes,0.9,%,Unknown,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,49024-3,Differential cell count method,9999999.0,Unknown,Unknown,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,711-2,Eosinophils,0.3,THOUS/MCL,0.0-0.5,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26450-7,Eosinophils/100 leukocytes,2.4,%,Unknown,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,788-0,Erythrocyte distribution width,13.3,%,11.6-14.4,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,785-6,Erythrocyte mean corpuscular hemoglobin,32.1,PG,27.0-33.5,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,786-4,Erythrocyte mean corpuscular hemoglobin concentration,34.1,G/DL,32.0-35.5,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30428-7,Erythrocyte mean corpuscular volume,94.2,FL,81.5-97.0,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,789-8,Erythrocytes,3.14,MILL/MCL,4.38-5.62,L,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,20570-8,Hematocrit,29.5,%,39.5-50.0,L,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,30350-3,Hemoglobin,10.1,G/DL,13.5-16.9,L,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,33256-9,Leukocytes^^corrected for nucleated erythrocytes,10.9,THOUS/MCL,4.0-10.5,H,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,731-0,Lymphocytes,1.6,THOUS/MCL,0.9-3.3,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,736-9,Lymphocytes/100 leukocytes,14.9,%,Unknown,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26484-6,Monocytes,0.9,THOUS/MCL,0.0-0.8,H,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26485-3,Monocytes/100 leukocytes,8.199999999999998,%,Unknown,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26499-4,Neutrophils,8.0,THOUS/MCL,2.0-8.1,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,770-8,Neutrophils/100 leukocytes,73.59999999999998,%,Unknown,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,32623-1,Platelet mean volume,7.3,FL,7.2-11.7,N,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,26515-7,Platelets,471.0,THOUS/MCL,150-400,H,2019-09-04 14:53:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2019-09-06 10:08:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,3271-4,Heparin.low molecular weight,0.25,IU/ML,Unknown,N,2019-09-07 12:51:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,N,2019-09-07 13:37:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00
+cf823e85c8d0d56a,45789e90d3f2691f,11475-1,Microorganism identified,9999999.0,Unknown,Unknown,,2019-09-07 13:37:00,postop,Hospital Encounter,2019-08-26 09:39:00,2019-08-26 14:48:00

@@ -1,0 +1,4 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+38cb9c58f6109fa3,0da61a2e3516f446,ondansetron,antiemetic,2020-09-29 14:45:00,2020-09-29,2020-09-29,16.0,mg,IntraVENOUS,ondansetron (ZOFRAN) 16 mg in sodium chloride 0.9 % 50 mL IVPB,ONDANSETRON IVPB (UCI),New Bag
+38cb9c58f6109fa3,0da61a2e3516f446,hydromorphone,opioid,2020-09-29 17:39:00,2020-09-29,2020-09-29,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag
+38cb9c58f6109fa3,0da61a2e3516f446,hydromorphone,opioid,2020-09-29 17:40:00,2020-09-29,2020-09-29,10.0,ml,Epidural,hydromorphone (DILAUDID) 10 mcg/mL epidural injection,HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),New Bag

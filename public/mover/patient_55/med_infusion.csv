@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+7ea0e424e347ff18,acc8ae1a34f124f6,hydromorphone,opioid,2021-12-22 18:32:00,2021-12-22,2021-12-22,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag
+7ea0e424e347ff18,acc8ae1a34f124f6,hydromorphone,opioid,2021-12-22 20:38:00,2021-12-22,2021-12-26,10.0,mcg,Epidural,HYDROmorphone 10 mcg/mL bupivicaine 0.1% in sodium chloride 0.9% 100 mL Pain Management PCeA,HYDROMORPHONE 10 MCG/ML BUPIVACAINE 0.1% PAIN MANAGEMENT PCEA (UCI),Rate Verify

@@ -1,0 +1,10 @@
+case_id,patient_id,event_name,event_time
+51acadd35a9347e3,4e1851b6fa23ee6b,Anesthesia Start,2021-08-28 07:23:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Induction,2021-08-28 07:29:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Intubation,2021-08-28 07:30:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Anesthesia Ready,2021-08-28 08:49:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Double Lumen Tube Confirmation,2021-08-28 08:51:00
+51acadd35a9347e3,4e1851b6fa23ee6b,One-Lung Ventilation,2021-08-28 09:07:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Emergence,2021-08-28 11:37:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Extubation,2021-08-28 11:56:00
+51acadd35a9347e3,4e1851b6fa23ee6b,Anesthesia Stop,2021-08-28 12:09:00

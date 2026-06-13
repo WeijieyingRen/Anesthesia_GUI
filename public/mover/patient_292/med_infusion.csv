@@ -1,0 +1,2 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+dd502cb6dbb87862,b0ec7803e8846b8c,sodium bicarbonate,rescue_or_correction,2019-05-26 15:27:00,2019-05-26,2019-05-26,150.0,ml/hr,IntraVENOUS,"sodium bicarbonate 150 mEq in dextrose 5 % 1,150 mL infusion",SODIUM BICARBONATE 150 MEQ/1000 ML INFUSION (UCI)(OPTIME),New Bag

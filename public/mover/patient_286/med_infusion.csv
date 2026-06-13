@@ -1,0 +1,7 @@
+case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+fd50927fa58711ee,3561862f7d034af0,propofol,sedative,2022-05-16 08:15:00,2022-05-16,2022-05-16,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),New Bag
+fd50927fa58711ee,3561862f7d034af0,propofol,sedative,2022-05-16 09:33:00,2022-05-16,2022-05-16,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),New Bag
+fd50927fa58711ee,3561862f7d034af0,propofol,sedative,2022-05-16 09:47:00,2022-05-16,2022-05-16,1000.0,mcg/kg/min,IntraVENOUS,propofol (DIPRIVAN) infusion (1000 mg/100 mL),PROPOFOL 1000 MG/100 ML INFUSION (UCI),Stopped
+fd50927fa58711ee,3561862f7d034af0,phenylephrine,vasopressor,2022-05-16 12:23:00,2022-05-16,2022-05-16,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),New Bag
+fd50927fa58711ee,3561862f7d034af0,phenylephrine,vasopressor,2022-05-16 12:33:00,2022-05-16,2022-05-16,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Rate Change
+fd50927fa58711ee,3561862f7d034af0,phenylephrine,vasopressor,2022-05-16 13:00:00,2022-05-16,2022-05-16,20.0,mcg/min,IntraVENOUS,phenylephrine (NEO-SYNEPHRINE) 20 mg in sodium chloride 0.9 % 250 mL infusion,PHENYLEPHRINE INFUSION (ANESTHESIA) (UCI),Rate Change

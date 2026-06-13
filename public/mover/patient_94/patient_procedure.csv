@@ -1,0 +1,4 @@
+case_id,patient_id,event_name,event_time
+35c35ec5ce66541f,db9a0dc522d08288,Anesthesia Start,2020-10-28 07:12:00
+35c35ec5ce66541f,db9a0dc522d08288,Anesthesia Ready,2020-10-28 08:16:00
+35c35ec5ce66541f,db9a0dc522d08288,Anesthesia Stop,2020-10-28 13:17:00

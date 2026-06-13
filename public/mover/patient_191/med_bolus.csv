@@ -1,0 +1,8 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+f41d6e4fccf71c10,b36a44c0b49c1226,propofol,sedative,2019-12-23 08:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f41d6e4fccf71c10,b36a44c0b49c1226,propofol,sedative,2019-12-23 09:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f41d6e4fccf71c10,b36a44c0b49c1226,propofol,sedative,2019-12-23 09:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f41d6e4fccf71c10,b36a44c0b49c1226,ephedrine,vasopressor,2019-12-23 09:30:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+f41d6e4fccf71c10,b36a44c0b49c1226,propofol,sedative,2019-12-23 10:12:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f41d6e4fccf71c10,b36a44c0b49c1226,propofol,sedative,2019-12-23 10:51:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f41d6e4fccf71c10,b36a44c0b49c1226,propofol,sedative,2019-12-23 18:27:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

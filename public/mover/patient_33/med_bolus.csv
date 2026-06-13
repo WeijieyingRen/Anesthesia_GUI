@@ -1,0 +1,3 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+3796a2fbdbba0bfc,b653f7623ac3de28,propofol,sedative,2021-03-26 07:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+3796a2fbdbba0bfc,b653f7623ac3de28,morphine,opioid,2021-03-26 16:03:00,0.5,mg,Epidural,morphine (PF) (DURAMORPH) (0.5 mg/mL) injection,MORPHINE SULFATE (PF) 0.5 MG/ML IJ SOLN,Given

@@ -1,0 +1,12 @@
+case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5957bac91e66409a,643bb701cebbd319,propofol,sedative,2021-06-01 07:37:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5957bac91e66409a,643bb701cebbd319,ephedrine,vasopressor,2021-06-01 10:19:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5957bac91e66409a,643bb701cebbd319,ephedrine,vasopressor,2021-06-01 10:39:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5957bac91e66409a,643bb701cebbd319,ephedrine,vasopressor,2021-06-01 13:11:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5957bac91e66409a,643bb701cebbd319,ephedrine,vasopressor,2021-06-01 13:25:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5957bac91e66409a,643bb701cebbd319,propofol,sedative,2021-06-01 15:17:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5957bac91e66409a,643bb701cebbd319,propofol,sedative,2021-06-01 15:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5957bac91e66409a,643bb701cebbd319,propofol,sedative,2021-06-01 15:28:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5957bac91e66409a,643bb701cebbd319,ephedrine,vasopressor,2021-06-01 15:35:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5957bac91e66409a,643bb701cebbd319,propofol,sedative,2021-06-01 15:39:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5957bac91e66409a,643bb701cebbd319,propofol,sedative,2021-06-01 15:49:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
