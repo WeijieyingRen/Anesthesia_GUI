@@ -1,29 +1,29 @@
 doctor_id,annotation_code,review_code,case_order_within_doctor,patient_folder,case_id,patient_id,procedure_service,procedure_name,anesthesia_type,age,asa,anesthesia_duration_min,sex,assignment_seed
-doctor_27,9424,3907,1,patient_200,c5267c024c3d4b2f,15265a9edf3c2d9d,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,64,Mild Systemic Disease,455.0,Male,20260531
-doctor_27,9424,3907,2,patient_320,bfde91cef6f6db36,2b90308e62e27f9a,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,34,Healthy,547.0,Male,20260531
-doctor_27,9424,3907,3,patient_145,64fd5343a2bd81a8,58a330480175a534,Ophthalmology,"REPAIR, GLOBE, RUPTURED",General,31,Mild Systemic Disease,314.0,Male,20260531
-doctor_27,9424,3907,4,patient_224,21190cad6c747d80,aa29a6747de62c6e,Plastics / Wound,"RECONSTRUCTION, BREAST, BILATERAL",General,54,Mild Systemic Disease,653.0,Female,20260531
-doctor_27,9424,3907,5,patient_83,fd162ac9ce001f09,e2ba08b0296581f7,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",General,52,Severe Systemic Disease,637.0,Male,20260531
-doctor_27,9424,3907,6,patient_265,123096f6271bf241,4a5a956f569b455d,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR AND LUMBOSACRAL, USING POSTERIOR TECHNIQUE",General,52,Severe Systemic Disease,639.0,Female,20260531
-doctor_27,9424,3907,7,patient_17,ce4de11d3797a607,077922595174b679,Gastroenterology,"ORIF, FRACTURE, CALCANEUS",General,71,Severe Systemic Disease,386.0,Male,20260531
-doctor_27,9424,3907,8,patient_313,aca8205d1623bcc9,6652edb883663ec9,Urology,"RECONSTRUCTION, URETHRA",General,31,Mild Systemic Disease,678.0,Male,20260531
-doctor_27,9424,3907,9,patient_110,fe109843f63e07be,ad367212c8d395df,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",Monitored Anesthesia Care (MAC),48,Severe Systemic Disease,386.0,Male,20260531
-doctor_27,9424,3907,10,patient_268,60fb115b0294379c,48d6820d00f60f16,Spine / Neurosurgery,"FUSION, SPINE, ANTERIOR ABDOMINAL APPROACH",General,37,Severe Systemic Disease,590.0,Female,20260531
-doctor_27,9424,3907,11,patient_125,803da2d92f477381,c06e43be1cd55f5d,Neurosurgery,CRANIOTOMY,General,65,Severe Systemic Disease,704.0,Male,20260531
-doctor_27,9424,3907,12,patient_185,4913216df955529d,98d8b8c63e2c8c3e,Other,"HERNIORRHAPHY, INGUINAL",General,70,Severe Systemic Disease,719.0,Male,20260531
-doctor_27,9424,3907,13,patient_258,346007a74e5f73c9,1a8cfde188166199,Spine / Neurosurgery,"FUSION, SPINE, CERVICAL, ANTERIOR APPROACH",General,42,Severe Systemic Disease,652.0,Male,20260531
-doctor_27,9424,3907,14,patient_190,f402e9e1a3db593f,0011f276489a0b7e,Otolaryngology Head and Neck Surgery,"REPAIR, STENOSIS, NOSE, VESTIBULE",Monitored Anesthesia Care (MAC),33,Mild Systemic Disease,318.0,Male,20260531
-doctor_27,9424,3907,15,patient_333,bd29c155c9239ba1,45b0dcef6fb21254,Vascular,"CREATION, BYPASS, AORTO-BIFEMORAL, USING GRAFT",General,53,Severe Systemic Disease,577.0,Male,20260531
-doctor_27,9424,3907,16,patient_37,f8b6d6abf6175f1f,b8ec08cc3fdc2041,General Surgery,"LAPAROTOMY, EXPLORATORY",Epidural,38,Severe Systemic Disease,550.0,Female,20260531
-doctor_27,9424,3907,17,patient_203,fe95e2162a9e89ad,b4e31b78104e1be9,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,64,Severe Systemic Disease,605.0,Male,20260531
-doctor_27,9424,3907,18,patient_247,2dfe753d040dd81c,1f84fa09b7f4f10c,Pulmonary,BRONCHOSCOPY,General,50,Incapacitating Disease,260.0,Male,20260531
-doctor_27,9424,3907,19,patient_112,b9f9af32087311b6,fecc30cd302fbe59,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",General,73,Severe Systemic Disease,276.0,Male,20260531
-doctor_27,9424,3907,20,patient_342,5fe5f1ae56c0e7b9,d74bca056df43a10,Vascular,"REPAIR, ASCENDING AORTA AND AORTIC ARCH",General,75,Incapacitating Disease,670.0,Male,20260531
-doctor_27,9424,3907,21,patient_97,b4f40e006db11ca1,9129bd31715d80de,Interventional Radiology,"ANGIOGRAM, LOWER EXTREMITY, WITH ANGIOPLASTY",General,68,Incapacitating Disease,641.0,Male,20260531
-doctor_27,9424,3907,22,patient_50,478dff59dd3048a1,cd1096f687b47545,General Surgery,"LAPAROSCOPY, DIAGNOSTIC",General,45,Severe Systemic Disease,623.0,Female,20260531
-doctor_27,9424,3907,23,patient_82,d1aacf2d3e9de4d9,c558e89a38a1127d,Hepatobiliary,"EXCISION, LIVER",Regional,34,Severe Systemic Disease,621.0,Male,20260531
-doctor_27,9424,3907,24,patient_63,bac21b9701a397a1,1d5a05046cffc054,Gynecology,"EXAM UNDER ANESTHESIA, VAGINA",General,45,Severe Systemic Disease,488.0,Female,20260531
-doctor_27,9424,3907,25,patient_86,07c084e5858e3f3c,46b7d8db91d25bc4,Other,"BIOPSY, LIVER, LAPAROSCOPIC",General,39,Severe Systemic Disease,592.0,Male,20260531
+doctor_27,2828,3907,1,patient_200,c5267c024c3d4b2f,15265a9edf3c2d9d,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,64,Mild Systemic Disease,455.0,Male,20260531
+doctor_27,2828,3907,2,patient_320,bfde91cef6f6db36,2b90308e62e27f9a,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,34,Healthy,547.0,Male,20260531
+doctor_27,2828,3907,3,patient_145,64fd5343a2bd81a8,58a330480175a534,Ophthalmology,"REPAIR, GLOBE, RUPTURED",General,31,Mild Systemic Disease,314.0,Male,20260531
+doctor_27,2828,3907,4,patient_224,21190cad6c747d80,aa29a6747de62c6e,Plastics / Wound,"RECONSTRUCTION, BREAST, BILATERAL",General,54,Mild Systemic Disease,653.0,Female,20260531
+doctor_27,2828,3907,5,patient_83,fd162ac9ce001f09,e2ba08b0296581f7,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",General,52,Severe Systemic Disease,637.0,Male,20260531
+doctor_27,2828,3907,6,patient_265,123096f6271bf241,4a5a956f569b455d,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR AND LUMBOSACRAL, USING POSTERIOR TECHNIQUE",General,52,Severe Systemic Disease,639.0,Female,20260531
+doctor_27,2828,3907,7,patient_17,ce4de11d3797a607,077922595174b679,Gastroenterology,"ORIF, FRACTURE, CALCANEUS",General,71,Severe Systemic Disease,386.0,Male,20260531
+doctor_27,2828,3907,8,patient_313,aca8205d1623bcc9,6652edb883663ec9,Urology,"RECONSTRUCTION, URETHRA",General,31,Mild Systemic Disease,678.0,Male,20260531
+doctor_27,2828,3907,9,patient_110,fe109843f63e07be,ad367212c8d395df,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",Monitored Anesthesia Care (MAC),48,Severe Systemic Disease,386.0,Male,20260531
+doctor_27,2828,3907,10,patient_268,60fb115b0294379c,48d6820d00f60f16,Spine / Neurosurgery,"FUSION, SPINE, ANTERIOR ABDOMINAL APPROACH",General,37,Severe Systemic Disease,590.0,Female,20260531
+doctor_27,2828,3907,11,patient_125,803da2d92f477381,c06e43be1cd55f5d,Neurosurgery,CRANIOTOMY,General,65,Severe Systemic Disease,704.0,Male,20260531
+doctor_27,2828,3907,12,patient_185,4913216df955529d,98d8b8c63e2c8c3e,Other,"HERNIORRHAPHY, INGUINAL",General,70,Severe Systemic Disease,719.0,Male,20260531
+doctor_27,2828,3907,13,patient_258,346007a74e5f73c9,1a8cfde188166199,Spine / Neurosurgery,"FUSION, SPINE, CERVICAL, ANTERIOR APPROACH",General,42,Severe Systemic Disease,652.0,Male,20260531
+doctor_27,2828,3907,14,patient_190,f402e9e1a3db593f,0011f276489a0b7e,Otolaryngology Head and Neck Surgery,"REPAIR, STENOSIS, NOSE, VESTIBULE",Monitored Anesthesia Care (MAC),33,Mild Systemic Disease,318.0,Male,20260531
+doctor_27,2828,3907,15,patient_333,bd29c155c9239ba1,45b0dcef6fb21254,Vascular,"CREATION, BYPASS, AORTO-BIFEMORAL, USING GRAFT",General,53,Severe Systemic Disease,577.0,Male,20260531
+doctor_27,2828,3907,16,patient_37,f8b6d6abf6175f1f,b8ec08cc3fdc2041,General Surgery,"LAPAROTOMY, EXPLORATORY",Epidural,38,Severe Systemic Disease,550.0,Female,20260531
+doctor_27,2828,3907,17,patient_203,fe95e2162a9e89ad,b4e31b78104e1be9,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,64,Severe Systemic Disease,605.0,Male,20260531
+doctor_27,2828,3907,18,patient_247,2dfe753d040dd81c,1f84fa09b7f4f10c,Pulmonary,BRONCHOSCOPY,General,50,Incapacitating Disease,260.0,Male,20260531
+doctor_27,2828,3907,19,patient_112,b9f9af32087311b6,fecc30cd302fbe59,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",General,73,Severe Systemic Disease,276.0,Male,20260531
+doctor_27,2828,3907,20,patient_342,5fe5f1ae56c0e7b9,d74bca056df43a10,Vascular,"REPAIR, ASCENDING AORTA AND AORTIC ARCH",General,75,Incapacitating Disease,670.0,Male,20260531
+doctor_27,2828,3907,21,patient_97,b4f40e006db11ca1,9129bd31715d80de,Interventional Radiology,"ANGIOGRAM, LOWER EXTREMITY, WITH ANGIOPLASTY",General,68,Incapacitating Disease,641.0,Male,20260531
+doctor_27,2828,3907,22,patient_50,478dff59dd3048a1,cd1096f687b47545,General Surgery,"LAPAROSCOPY, DIAGNOSTIC",General,45,Severe Systemic Disease,623.0,Female,20260531
+doctor_27,2828,3907,23,patient_82,d1aacf2d3e9de4d9,c558e89a38a1127d,Hepatobiliary,"EXCISION, LIVER",Regional,34,Severe Systemic Disease,621.0,Male,20260531
+doctor_27,2828,3907,24,patient_63,bac21b9701a397a1,1d5a05046cffc054,Gynecology,"EXAM UNDER ANESTHESIA, VAGINA",General,45,Severe Systemic Disease,488.0,Female,20260531
+doctor_27,2828,3907,25,patient_86,07c084e5858e3f3c,46b7d8db91d25bc4,Other,"BIOPSY, LIVER, LAPAROSCOPIC",General,39,Severe Systemic Disease,592.0,Male,20260531
 doctor_28,6981,4301,1,patient_169,8a092b6c5954bfec,83e5106831b4b782,Orthopedics,WHIPPLE PROCEDURE,General,79,Severe Systemic Disease,654.0,Female,20260531
 doctor_28,6981,4301,2,patient_248,9094a730fc4a05ae,c959df2f0a345364,Pulmonary,"BRONCHOSCOPY, RIGID",General,56,Severe Systemic Disease,176.0,Female,20260531
 doctor_28,6981,4301,3,patient_192,4ce39dec9ebf7b23,b890ebce3a611c59,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,70,Severe Systemic Disease,602.0,Male,20260531
@@ -49,31 +49,31 @@ doctor_28,6981,4301,22,patient_324,38a4476bc7cd83a8,fbc6b24e1ce37b1d,Urology,"RE
 doctor_28,6981,4301,23,patient_121,89b4c5f2f4a752ed,effa7ff0aef65f90,Neurosurgery,CRANIOTOMY,General,55,Severe Systemic Disease,696.0,Male,20260531
 doctor_28,6981,4301,24,patient_181,65b958c4e309e986,752d15ec98ee183e,Orthopedics,"REVISION, AMPUTATION SITE",Monitored Anesthesia Care (MAC),54,Incapacitating Disease,262.0,Male,20260531
 doctor_28,6981,4301,25,patient_231,46b23d945dd7a538,95ee34485e1dec75,Podiatry,FOOT AND ANKLE - MASS OR FOREIGN BODY EXCISION,General,53,Mild Systemic Disease,475.0,Female,20260531
-doctor_29,5785,7564,1,patient_250,a085427cf3b11fae,e6b8fbc432c2b002,Spine / Neurosurgery,"FUSION, SPINE, THORACOLUMBAR, POSTERIOR APPROACH, USING INSTRUMENTATION",General,61,Mild Systemic Disease,595.0,Male,20260531
-doctor_29,5785,7564,2,patient_85,a31beba09250ce54,c03d0ded67455085,Hepatobiliary,"EXCISION, LIVER",General,63,Incapacitating Disease,566.0,Female,20260531
-doctor_29,5785,7564,3,patient_260,951a3d47e2162c34,04ff035eca961141,Spine / Neurosurgery,"DECOMPRESSION, SPINE, CERVICAL, ANTERIOR APPROACH",General,47,Severe Systemic Disease,672.0,Female,20260531
-doctor_29,5785,7564,4,patient_4,af24392b90298442,748f04cedae8732b,Orthopedics,"ORIF, FRACTURE, MANDIBLE, WITH MAXILLOMANDIBULAR FIXATION",General,27,Mild Systemic Disease,513.0,Male,20260531
-doctor_29,5785,7564,5,patient_306,fcd721b179d0c16e,e3c8707cdf6dabd9,Urology,"COLPORRHAPY, ANTEROPOSTERIOR, WITH CYSTOSCOPY AND MIDURETHRAL SLING CREATION",Monitored Anesthesia Care (MAC),47,Mild Systemic Disease,231.0,Female,20260531
-doctor_29,5785,7564,6,patient_113,f7e7d80050a536dc,f3ca7eee485c346f,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",General,25,Mild Systemic Disease,377.0,Female,20260531
-doctor_29,5785,7564,7,patient_220,8305d97a0178b6e0,cecd4120685e0872,Plastics / Wound,"DEBRIDEMENT, WITH SPLIT-THICKNESS SKIN GRAFT APPLICATION",General,32,Incapacitating Disease,531.0,Male,20260531
-doctor_29,5785,7564,8,patient_70,f9d0a13b304a32ea,87ac6fcd64a4e2d0,Hepatobiliary,ROUX-EN-Y HEPATICOJEJUNOSTOMY,General,57,Severe Systemic Disease,682.0,Male,20260531
-doctor_29,5785,7564,9,patient_65,c8877c3be1dc49ea,e09b858d945b9d15,Gynecology,"SACROCOLPOPEXY, ROBOT-ASSISTED",General,68,Mild Systemic Disease,494.0,Female,20260531
-doctor_29,5785,7564,10,patient_38,5ca449b9dedefb54,754b0469b88bb124,General Surgery,"LAPAROTOMY, EXPLORATORY",General,60,Severe Systemic Disease,557.0,Male,20260531
-doctor_29,5785,7564,11,patient_266,969d22efbc1e51f8,c2239627b9d5a60c,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR AND LUMBOSACRAL, USING POSTERIOR TECHNIQUE",General,59,Severe Systemic Disease,565.0,Female,20260531
-doctor_29,5785,7564,12,patient_297,2fd90b5572eaef83,7ff93987b4c74e2d,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM DECEASED DONOR",General,28,Severe Systemic Disease,316.0,Male,20260531
-doctor_29,5785,7564,13,patient_210,937ed2d4d01245c0,eb46fc597c281050,Plastics / Wound,"RECONSTRUCTION, BREAST, BILATERAL",General,38,Healthy,718.0,Female,20260531
-doctor_29,5785,7564,14,patient_332,c6e895ae95b9aeba,7422d2a7a7a567b0,Vascular,"REPAIR, AORTA, THORACIC, DESCENDING, ENDOVASCULAR",General,50,Incapacitating Disease,632.0,Male,20260531
-doctor_29,5785,7564,15,patient_292,dd502cb6dbb87862,b0ec7803e8846b8c,Transplant,"TRANSPLANT, PANCREAS",Regional,33,Severe Systemic Disease,448.0,Male,20260531
-doctor_29,5785,7564,16,patient_184,b90eb0a194a3307f,52e8887ed2944a01,Other,EXAM UNDER ANESTHESIA,General,46,Mild Systemic Disease,699.0,Female,20260531
-doctor_29,5785,7564,17,patient_72,120fc21de435802a,ef7375f6f56cf268,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",Epidural,48,Severe Systemic Disease,636.0,Female,20260531
-doctor_29,5785,7564,18,patient_339,1fc360eab33ba4aa,d7559716620d7afb,Vascular,"FREE FLAP, LOWER EXTREMITY, WITH MICROVASCULAR ANASTOMOSIS",General,71,Severe Systemic Disease,669.0,Female,20260531
-doctor_29,5785,7564,19,patient_116,ce4b70be9c1fe66f,538796057335efd9,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",General,49,Severe Systemic Disease,327.0,Male,20260531
-doctor_29,5785,7564,20,patient_102,a258475d4deb3df6,32388bee581caacb,Interventional Radiology,"ANGIOGRAM, WITH ANGIOPLASTY",General,76,Severe Systemic Disease,703.0,Female,20260531
-doctor_29,5785,7564,21,patient_39,42e2a1b92ff1028b,045ef66f85261334,General Surgery,"LAPAROTOMY, EXPLORATORY",General,57,Severe Systemic Disease,547.0,Male,20260531
-doctor_29,5785,7564,22,patient_155,5eaddb875bac3cdd,965a47e97587e034,Orthopedics,"ARTHROPLASTY, KNEE",Monitored Anesthesia Care (MAC),71,Mild Systemic Disease,216.0,Male,20260531
-doctor_29,5785,7564,23,patient_287,f5bb599c0ec35fe1,358d115de14b9880,Thoracic,VIDEO-ASSISTED THORACOSCOPIC SURGERY (VATS),General,66,Severe Systemic Disease,389.0,Female,20260531
-doctor_29,5785,7564,24,patient_263,5e8adbbeb5ced343,5f18f9287aeee181,Spine / Neurosurgery,"FUSION, SPINE, CERVICAL, POSTERIOR APPROACH",General,75,Severe Systemic Disease,483.0,Male,20260531
-doctor_29,5785,7564,25,patient_290,aa9d6ef84e734e25,e17c64bc956e40f3,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,31,Incapacitating Disease,555.0,Female,20260531
+doctor_29,7592,7564,1,patient_250,a085427cf3b11fae,e6b8fbc432c2b002,Spine / Neurosurgery,"FUSION, SPINE, THORACOLUMBAR, POSTERIOR APPROACH, USING INSTRUMENTATION",General,61,Mild Systemic Disease,595.0,Male,20260531
+doctor_29,7592,7564,2,patient_85,a31beba09250ce54,c03d0ded67455085,Hepatobiliary,"EXCISION, LIVER",General,63,Incapacitating Disease,566.0,Female,20260531
+doctor_29,7592,7564,3,patient_260,951a3d47e2162c34,04ff035eca961141,Spine / Neurosurgery,"DECOMPRESSION, SPINE, CERVICAL, ANTERIOR APPROACH",General,47,Severe Systemic Disease,672.0,Female,20260531
+doctor_29,7592,7564,4,patient_4,af24392b90298442,748f04cedae8732b,Orthopedics,"ORIF, FRACTURE, MANDIBLE, WITH MAXILLOMANDIBULAR FIXATION",General,27,Mild Systemic Disease,513.0,Male,20260531
+doctor_29,7592,7564,5,patient_306,fcd721b179d0c16e,e3c8707cdf6dabd9,Urology,"COLPORRHAPY, ANTEROPOSTERIOR, WITH CYSTOSCOPY AND MIDURETHRAL SLING CREATION",Monitored Anesthesia Care (MAC),47,Mild Systemic Disease,231.0,Female,20260531
+doctor_29,7592,7564,6,patient_113,f7e7d80050a536dc,f3ca7eee485c346f,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",General,25,Mild Systemic Disease,377.0,Female,20260531
+doctor_29,7592,7564,7,patient_220,8305d97a0178b6e0,cecd4120685e0872,Plastics / Wound,"DEBRIDEMENT, WITH SPLIT-THICKNESS SKIN GRAFT APPLICATION",General,32,Incapacitating Disease,531.0,Male,20260531
+doctor_29,7592,7564,8,patient_70,f9d0a13b304a32ea,87ac6fcd64a4e2d0,Hepatobiliary,ROUX-EN-Y HEPATICOJEJUNOSTOMY,General,57,Severe Systemic Disease,682.0,Male,20260531
+doctor_29,7592,7564,9,patient_65,c8877c3be1dc49ea,e09b858d945b9d15,Gynecology,"SACROCOLPOPEXY, ROBOT-ASSISTED",General,68,Mild Systemic Disease,494.0,Female,20260531
+doctor_29,7592,7564,10,patient_38,5ca449b9dedefb54,754b0469b88bb124,General Surgery,"LAPAROTOMY, EXPLORATORY",General,60,Severe Systemic Disease,557.0,Male,20260531
+doctor_29,7592,7564,11,patient_266,969d22efbc1e51f8,c2239627b9d5a60c,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR AND LUMBOSACRAL, USING POSTERIOR TECHNIQUE",General,59,Severe Systemic Disease,565.0,Female,20260531
+doctor_29,7592,7564,12,patient_297,2fd90b5572eaef83,7ff93987b4c74e2d,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM DECEASED DONOR",General,28,Severe Systemic Disease,316.0,Male,20260531
+doctor_29,7592,7564,13,patient_210,937ed2d4d01245c0,eb46fc597c281050,Plastics / Wound,"RECONSTRUCTION, BREAST, BILATERAL",General,38,Healthy,718.0,Female,20260531
+doctor_29,7592,7564,14,patient_332,c6e895ae95b9aeba,7422d2a7a7a567b0,Vascular,"REPAIR, AORTA, THORACIC, DESCENDING, ENDOVASCULAR",General,50,Incapacitating Disease,632.0,Male,20260531
+doctor_29,7592,7564,15,patient_292,dd502cb6dbb87862,b0ec7803e8846b8c,Transplant,"TRANSPLANT, PANCREAS",Regional,33,Severe Systemic Disease,448.0,Male,20260531
+doctor_29,7592,7564,16,patient_184,b90eb0a194a3307f,52e8887ed2944a01,Other,EXAM UNDER ANESTHESIA,General,46,Mild Systemic Disease,699.0,Female,20260531
+doctor_29,7592,7564,17,patient_72,120fc21de435802a,ef7375f6f56cf268,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",Epidural,48,Severe Systemic Disease,636.0,Female,20260531
+doctor_29,7592,7564,18,patient_339,1fc360eab33ba4aa,d7559716620d7afb,Vascular,"FREE FLAP, LOWER EXTREMITY, WITH MICROVASCULAR ANASTOMOSIS",General,71,Severe Systemic Disease,669.0,Female,20260531
+doctor_29,7592,7564,19,patient_116,ce4b70be9c1fe66f,538796057335efd9,Neuroradiology,"ANGIOGRAM, VESSEL, CEREBRAL, WITH EMBOLIZATION",General,49,Severe Systemic Disease,327.0,Male,20260531
+doctor_29,7592,7564,20,patient_102,a258475d4deb3df6,32388bee581caacb,Interventional Radiology,"ANGIOGRAM, WITH ANGIOPLASTY",General,76,Severe Systemic Disease,703.0,Female,20260531
+doctor_29,7592,7564,21,patient_39,42e2a1b92ff1028b,045ef66f85261334,General Surgery,"LAPAROTOMY, EXPLORATORY",General,57,Severe Systemic Disease,547.0,Male,20260531
+doctor_29,7592,7564,22,patient_155,5eaddb875bac3cdd,965a47e97587e034,Orthopedics,"ARTHROPLASTY, KNEE",Monitored Anesthesia Care (MAC),71,Mild Systemic Disease,216.0,Male,20260531
+doctor_29,7592,7564,23,patient_287,f5bb599c0ec35fe1,358d115de14b9880,Thoracic,VIDEO-ASSISTED THORACOSCOPIC SURGERY (VATS),General,66,Severe Systemic Disease,389.0,Female,20260531
+doctor_29,7592,7564,24,patient_263,5e8adbbeb5ced343,5f18f9287aeee181,Spine / Neurosurgery,"FUSION, SPINE, CERVICAL, POSTERIOR APPROACH",General,75,Severe Systemic Disease,483.0,Male,20260531
+doctor_29,7592,7564,25,patient_290,aa9d6ef84e734e25,e17c64bc956e40f3,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,31,Incapacitating Disease,555.0,Female,20260531
 doctor_30,1583,7304,1,patient_61,9a5669cd43342af5,4d52e514aae22a7b,Gynecology,"SACROCOLPOPEXY, ROBOT-ASSISTED",General,67,Mild Systemic Disease,614.0,Female,20260531
 doctor_30,1583,7304,2,patient_59,dacd4656b2f618cc,cd0792cd7c8f59fd,Gynecology,"EXCISION, MESH, VAGINA",Monitored Anesthesia Care (MAC),48,Mild Systemic Disease,251.0,Female,20260531
 doctor_30,1583,7304,3,patient_93,d88fb7f65c77980b,cf954e996f155b70,Interventional Radiology,"ANGIOGRAM, LOWER EXTREMITY, WITH ANGIOPLASTY",Monitored Anesthesia Care (MAC),56,Severe Systemic Disease,195.0,Male,20260531
@@ -99,56 +99,56 @@ doctor_30,1583,7304,22,patient_300,92ed1a6943c1dc4f,3528c97ccb3bc348,Transplant,
 doctor_30,1583,7304,23,patient_130,010e2092c3d16b18,f4604dbaecf72dcb,Neurosurgery,"CRANIOTOMY, MIDDLE FOSSA",General,57,Severe Systemic Disease,524.0,Female,20260531
 doctor_30,1583,7304,24,patient_225,4f8a9edcd38bdc26,e2a395a6546d50fc,Plastics / Wound,"BREAST RECONSTRUCTION, WITH FREE FLAP",General,56,Mild Systemic Disease,653.0,Female,20260531
 doctor_30,1583,7304,25,patient_12,fe9cfbaa1ccea217,c4c4bb290bc8f8d3,Hepatology,"ANASTOMOSIS, HEPATIC DUCT TO GI TRACT",General,59,Severe Systemic Disease,497.0,Female,20260531
-doctor_31,8741,6924,1,patient_346,834ef805023b9d5c,d8759c71b46dd99f,Vascular,"FREE FLAP,  WITH MICROVASCULAR ANASTOMOSIS",General,89,Severe Systemic Disease,535.0,Male,20260531
-doctor_31,8741,6924,2,patient_326,60036e9b1d4cfa95,4c78081f7523f158,Vascular,"REPAIR, AAA, ENDOVASCULAR",Monitored Anesthesia Care (MAC),72,Severe Systemic Disease,366.0,Male,20260531
-doctor_31,8741,6924,3,patient_88,09da3a867fc22921,3bd70e80cadabecd,Other,HEPATOJEJUNOSTOMY,General,60,Severe Systemic Disease,550.0,Female,20260531
-doctor_31,8741,6924,4,patient_165,daa6330e82246dae,82afa87ca98b2fd6,Orthopedics,"ORIF, FRACTURE, HUMERUS",General,37,Severe Systemic Disease,596.0,Male,20260531
-doctor_31,8741,6924,5,patient_298,8cf08d13a5156929,661a0abde89a87bd,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM LIVING DONOR",General,69,Severe Systemic Disease,475.0,Male,20260531
-doctor_31,8741,6924,6,patient_276,83cc3f3a6799a5d9,1b9beec8292522de,Thoracic,"FIXATION, RIB, USING PLATE",General,69,Severe Systemic Disease,458.0,Female,20260531
-doctor_31,8741,6924,7,patient_94,35c35ec5ce66541f,db9a0dc522d08288,Interventional Radiology,"ANGIOGRAM, VISCERAL",Monitored Anesthesia Care (MAC),75,Severe Systemic Disease,365.0,Male,20260531
-doctor_31,8741,6924,8,patient_128,9a333893ee607c9b,934f276ec8418f5a,Plastics / Wound,CRANIOPLASTY,General,59,Severe Systemic Disease,637.0,Female,20260531
-doctor_31,8741,6924,9,patient_129,fc3a7dfa6695ee94,eadc77146c12049d,Neurosurgery,"INSERTION, DEEP BRAIN STIMULATOR, ROBOT-ASSISTED, FOR PARKINSON'S DISEASE",General,80,Severe Systemic Disease,539.0,Female,20260531
-doctor_31,8741,6924,10,patient_311,e8041bcdc71021c8,484ef21c4fc97665,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,47,Incapacitating Disease,615.0,Male,20260531
-doctor_31,8741,6924,11,patient_198,4b0af4b7cd309da3,4cffac38e41d553d,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,67,Severe Systemic Disease,599.0,Male,20260531
-doctor_31,8741,6924,12,patient_328,ee1dc93671cc0539,06e22fdb1e77a248,Vascular,"CREATION, AV FISTULA",Monitored Anesthesia Care (MAC),38,Incapacitating Disease,213.0,Male,20260531
-doctor_31,8741,6924,13,patient_214,b5309edb123b1209,05ab06a8f1e5d2a1,Plastics / Wound,"IRRIGATION AND DEBRIDEMENT, WOUND",General,84,Incapacitating Disease,673.0,Female,20260531
-doctor_31,8741,6924,14,patient_289,1f20f4438b1cdb3d,c3810bd9f6a727c4,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,40,Severe Systemic Disease,459.0,Male,20260531
-doctor_31,8741,6924,15,patient_343,9a2d10bba61a3ac7,a65f1e64a9380eb9,Other,"REPAIR, ARTERY, BRACHIAL",General,44,Severe Systemic Disease,608.0,Male,20260531
-doctor_31,8741,6924,16,patient_329,567f27d6b3169025,f35086637e787086,Vascular,"CREATION, AV FISTULA",Monitored Anesthesia Care (MAC),54,Severe Systemic Disease,163.0,Male,20260531
-doctor_31,8741,6924,17,patient_179,364bf86b1c009f2e,8226774b41bee186,Orthopedics,"CONVERSION, PREVIOUS HIP SURGERY TO TOTAL HIP REPLACEMENT",General,68,Severe Systemic Disease,509.0,Male,20260531
-doctor_31,8741,6924,18,patient_127,3315a33164b2b60a,2fa7d109f2483012,Neurosurgery,"CRANIOTOMY, FOR BRAIN NEOPLASM EXCISION, USING NAVIGATION SYSTEM",General,55,Severe Systemic Disease,574.0,Female,20260531
-doctor_31,8741,6924,19,patient_222,4cf2ba6570a3b1ff,c94985e347c59c4e,Plastics / Wound,ABDOMINOPLASTY,General,50,Mild Systemic Disease,607.0,Female,20260531
-doctor_31,8741,6924,20,patient_262,a802ab5301e24084,e8dd6c1b4f3753c6,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR, ANTERIOR APPROACH",General,62,Severe Systemic Disease,603.0,Male,20260531
-doctor_31,8741,6924,21,patient_281,cf823e85c8d0d56a,45789e90d3f2691f,Thoracic,"FIXATION, RIB, USING PLATE",General,48,Severe Systemic Disease,309.0,Male,20260531
-doctor_31,8741,6924,22,patient_90,bf58bd7081942901,f313b1d9b3208991,Interventional Radiology,IR EMBO NON-CNS,Monitored Anesthesia Care (MAC),89,Severe Systemic Disease,379.0,Male,20260531
-doctor_31,8741,6924,23,patient_334,43c0826124ade971,8c5de21be607bb03,Vascular,"CREATION, BYPASS, ARTERIAL, SUBCLAVIAN TO CAROTID",General,51,Incapacitating Disease,712.0,Male,20260531
-doctor_31,8741,6924,24,patient_347,8625169678eafa4d,ff8ec8f2cb751fb6,Vascular,"FREE FLAP, LOWER EXTREMITY, WITH MICROVASCULAR ANASTOMOSIS",General,55,Severe Systemic Disease,633.0,Male,20260531
-doctor_31,8741,6924,25,patient_259,1c14eaf5704fa826,b193fe0fcaed952c,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR AND LUMBOSACRAL, USING POSTERIOR TECHNIQUE",General,74,Severe Systemic Disease,558.0,Female,20260531
-doctor_32,8372,2707,1,patient_322,4f7a444e27f644d1,e529f4db42e60f85,Plastics / Wound,"REIMPLANTATION, URETER",General,40,Mild Systemic Disease,379.0,Male,20260531
-doctor_32,8372,2707,2,patient_316,32ea69c19627b36d,ad01f751d05455cf,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,51,Severe Systemic Disease,528.0,Male,20260531
-doctor_32,8372,2707,3,patient_150,935c614ad237ac7c,7eb8496809c07752,Orthopedics,"ARTHROPLASTY, KNEE",Monitored Anesthesia Care (MAC),72,Severe Systemic Disease,298.0,Male,20260531
-doctor_32,8372,2707,4,patient_69,8c06c104dc3a9069,6399c14f78f300b9,Gynecology,"EXAM UNDER ANESTHESIA, GYNECOLOGIC",General,59,Severe Systemic Disease,458.0,Female,20260531
-doctor_32,8372,2707,5,patient_238,c162b5ae5615cbb2,a32f3327f7781394,Podiatry,"AMPUTATION, FOOT",General,74,Incapacitating Disease,221.0,Male,20260531
-doctor_32,8372,2707,6,patient_79,67ffe1306e8b6435,55680d51d324a3df,Hepatobiliary,"EXCISION, LIVER",General,76,Severe Systemic Disease,600.0,Male,20260531
-doctor_32,8372,2707,7,patient_212,5e2dcafc5e9e3afe,4f1c93eed0d26459,Plastics / Wound,"MASTOPEXY, BILATERAL",General,55,Mild Systemic Disease,673.0,Female,20260531
-doctor_32,8372,2707,8,patient_22,35adcc40c73daffb,621082a2865aaf73,Gastroenterology,"SINUS SURGERY, ENDOSCOPIC",General,58,Severe Systemic Disease,422.0,Male,20260531
-doctor_32,8372,2707,9,patient_204,61905cf6d470dfb5,4d69211ca90c8197,Otolaryngology Head and Neck Surgery,"REPAIR, STENOSIS, NOSE, VESTIBULE",General,43,Severe Systemic Disease,495.0,Male,20260531
-doctor_32,8372,2707,10,patient_309,d1dd4aca477583b9,ddb299d956b08ffb,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,43,Mild Systemic Disease,618.0,Male,20260531
-doctor_32,8372,2707,11,patient_325,1f9d1ac22f2698b2,f5bcabbeb5fc9d8b,Urology,CYSTOSCOPY,General,60,Severe Systemic Disease,335.0,Female,20260531
-doctor_32,8372,2707,12,patient_40,b76487f0718ef266,156f52ab7e122c39,General Surgery,"LAPAROTOMY, EXPLORATORY",General,50,Incapacitating Disease,639.0,Male,20260531
-doctor_32,8372,2707,13,patient_274,25e78dad3deaa605,87439126fc531584,Thoracic,"FIXATION, RIB, USING PLATE",General,46,Severe Systemic Disease,483.0,Male,20260531
-doctor_32,8372,2707,14,patient_299,6a0ea841c2b01d9c,156f52ab7e122c39,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,50,Severe Systemic Disease,433.0,Male,20260531
-doctor_32,8372,2707,15,patient_187,44930d1398b029bb,2da8c39bb2bc0a8f,Other,FASCIOTOMY,General,46,Mild Systemic Disease,702.0,Female,20260531
-doctor_32,8372,2707,16,patient_167,87c28714bc152893,dda378fb96b53670,Orthopedics,"ORIF, FRACTURE, TIBIA",General,39,Incapacitating Disease,679.0,Male,20260531
-doctor_32,8372,2707,17,patient_293,b201dfc159ac60dd,c3a0a3e58b821fcf,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM DECEASED DONOR",General,29,Severe Systemic Disease,478.0,Male,20260531
-doctor_32,8372,2707,18,patient_16,40f15f5299a7c96a,faa9d2565dd38e87,Gastroenterology,"BROW LIFT, WITH FACE LIFT, ENDOSCOPIC",General,69,Mild Systemic Disease,525.0,Female,20260531
-doctor_32,8372,2707,19,patient_286,fd50927fa58711ee,3561862f7d034af0,Thoracic,"FIXATION, RIB, USING PLATE",General,52,Incapacitating Disease,506.0,Male,20260531
-doctor_32,8372,2707,20,patient_251,379338c94d482e35,fdf4066e38995ee1,Spine / Neurosurgery,"FUSION, SPINE, THORACIC OR LUMBAR, OR BOTH THORACIC AND LUMBAR, POSTERIOR APPROACH, USING INSTRUMENTATION",General,63,Mild Systemic Disease,656.0,Male,20260531
-doctor_32,8372,2707,21,patient_13,a9fcac29046d044e,07d4919907ea72c1,Gastroenterology,"BROW LIFT, WITH FACE LIFT, ENDOSCOPIC",General,74,Healthy,530.0,Male,20260531
-doctor_32,8372,2707,22,patient_202,f68fc195e39bfdad,c56b8e2aa25eaf56,Otolaryngology Head and Neck Surgery,"WIDE LOCAL EXCISION, LESION, SKIN, HEAD AND NECK",General,62,Mild Systemic Disease,611.0,Male,20260531
-doctor_32,8372,2707,23,patient_310,18f7665ee6d0b9fd,8a9bbe49a2c83d8e,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,50,Severe Systemic Disease,656.0,Male,20260531
-doctor_32,8372,2707,24,patient_107,8a963b9cd20b8a7c,bc0e14edd49ba5e9,Interventional Radiology,"ANGIOGRAM, LOWER EXTREMITY, WITH ANGIOPLASTY",General,56,Severe Systemic Disease,521.0,Male,20260531
-doctor_32,8372,2707,25,patient_178,9827da74e1493c1c,eb3cc37ace9a0798,Orthopedics,"HIPEC - CHEMOTHERAPY, INTRAPERITONEAL, HYPERTHERMIC",General,56,Severe Systemic Disease,590.0,Male,20260531
+doctor_31,9470,6924,1,patient_346,834ef805023b9d5c,d8759c71b46dd99f,Vascular,"FREE FLAP,  WITH MICROVASCULAR ANASTOMOSIS",General,89,Severe Systemic Disease,535.0,Male,20260531
+doctor_31,9470,6924,2,patient_326,60036e9b1d4cfa95,4c78081f7523f158,Vascular,"REPAIR, AAA, ENDOVASCULAR",Monitored Anesthesia Care (MAC),72,Severe Systemic Disease,366.0,Male,20260531
+doctor_31,9470,6924,3,patient_88,09da3a867fc22921,3bd70e80cadabecd,Other,HEPATOJEJUNOSTOMY,General,60,Severe Systemic Disease,550.0,Female,20260531
+doctor_31,9470,6924,4,patient_165,daa6330e82246dae,82afa87ca98b2fd6,Orthopedics,"ORIF, FRACTURE, HUMERUS",General,37,Severe Systemic Disease,596.0,Male,20260531
+doctor_31,9470,6924,5,patient_298,8cf08d13a5156929,661a0abde89a87bd,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM LIVING DONOR",General,69,Severe Systemic Disease,475.0,Male,20260531
+doctor_31,9470,6924,6,patient_276,83cc3f3a6799a5d9,1b9beec8292522de,Thoracic,"FIXATION, RIB, USING PLATE",General,69,Severe Systemic Disease,458.0,Female,20260531
+doctor_31,9470,6924,7,patient_94,35c35ec5ce66541f,db9a0dc522d08288,Interventional Radiology,"ANGIOGRAM, VISCERAL",Monitored Anesthesia Care (MAC),75,Severe Systemic Disease,365.0,Male,20260531
+doctor_31,9470,6924,8,patient_128,9a333893ee607c9b,934f276ec8418f5a,Plastics / Wound,CRANIOPLASTY,General,59,Severe Systemic Disease,637.0,Female,20260531
+doctor_31,9470,6924,9,patient_129,fc3a7dfa6695ee94,eadc77146c12049d,Neurosurgery,"INSERTION, DEEP BRAIN STIMULATOR, ROBOT-ASSISTED, FOR PARKINSON'S DISEASE",General,80,Severe Systemic Disease,539.0,Female,20260531
+doctor_31,9470,6924,10,patient_311,e8041bcdc71021c8,484ef21c4fc97665,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,47,Incapacitating Disease,615.0,Male,20260531
+doctor_31,9470,6924,11,patient_198,4b0af4b7cd309da3,4cffac38e41d553d,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,67,Severe Systemic Disease,599.0,Male,20260531
+doctor_31,9470,6924,12,patient_328,ee1dc93671cc0539,06e22fdb1e77a248,Vascular,"CREATION, AV FISTULA",Monitored Anesthesia Care (MAC),38,Incapacitating Disease,213.0,Male,20260531
+doctor_31,9470,6924,13,patient_214,b5309edb123b1209,05ab06a8f1e5d2a1,Plastics / Wound,"IRRIGATION AND DEBRIDEMENT, WOUND",General,84,Incapacitating Disease,673.0,Female,20260531
+doctor_31,9470,6924,14,patient_289,1f20f4438b1cdb3d,c3810bd9f6a727c4,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,40,Severe Systemic Disease,459.0,Male,20260531
+doctor_31,9470,6924,15,patient_343,9a2d10bba61a3ac7,a65f1e64a9380eb9,Other,"REPAIR, ARTERY, BRACHIAL",General,44,Severe Systemic Disease,608.0,Male,20260531
+doctor_31,9470,6924,16,patient_329,567f27d6b3169025,f35086637e787086,Vascular,"CREATION, AV FISTULA",Monitored Anesthesia Care (MAC),54,Severe Systemic Disease,163.0,Male,20260531
+doctor_31,9470,6924,17,patient_179,364bf86b1c009f2e,8226774b41bee186,Orthopedics,"CONVERSION, PREVIOUS HIP SURGERY TO TOTAL HIP REPLACEMENT",General,68,Severe Systemic Disease,509.0,Male,20260531
+doctor_31,9470,6924,18,patient_127,3315a33164b2b60a,2fa7d109f2483012,Neurosurgery,"CRANIOTOMY, FOR BRAIN NEOPLASM EXCISION, USING NAVIGATION SYSTEM",General,55,Severe Systemic Disease,574.0,Female,20260531
+doctor_31,9470,6924,19,patient_222,4cf2ba6570a3b1ff,c94985e347c59c4e,Plastics / Wound,ABDOMINOPLASTY,General,50,Mild Systemic Disease,607.0,Female,20260531
+doctor_31,9470,6924,20,patient_262,a802ab5301e24084,e8dd6c1b4f3753c6,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR, ANTERIOR APPROACH",General,62,Severe Systemic Disease,603.0,Male,20260531
+doctor_31,9470,6924,21,patient_281,cf823e85c8d0d56a,45789e90d3f2691f,Thoracic,"FIXATION, RIB, USING PLATE",General,48,Severe Systemic Disease,309.0,Male,20260531
+doctor_31,9470,6924,22,patient_90,bf58bd7081942901,f313b1d9b3208991,Interventional Radiology,IR EMBO NON-CNS,Monitored Anesthesia Care (MAC),89,Severe Systemic Disease,379.0,Male,20260531
+doctor_31,9470,6924,23,patient_334,43c0826124ade971,8c5de21be607bb03,Vascular,"CREATION, BYPASS, ARTERIAL, SUBCLAVIAN TO CAROTID",General,51,Incapacitating Disease,712.0,Male,20260531
+doctor_31,9470,6924,24,patient_347,8625169678eafa4d,ff8ec8f2cb751fb6,Vascular,"FREE FLAP, LOWER EXTREMITY, WITH MICROVASCULAR ANASTOMOSIS",General,55,Severe Systemic Disease,633.0,Male,20260531
+doctor_31,9470,6924,25,patient_259,1c14eaf5704fa826,b193fe0fcaed952c,Spine / Neurosurgery,"FUSION, SPINE, LUMBAR AND LUMBOSACRAL, USING POSTERIOR TECHNIQUE",General,74,Severe Systemic Disease,558.0,Female,20260531
+doctor_32,6364,2707,1,patient_322,4f7a444e27f644d1,e529f4db42e60f85,Plastics / Wound,"REIMPLANTATION, URETER",General,40,Mild Systemic Disease,379.0,Male,20260531
+doctor_32,6364,2707,2,patient_316,32ea69c19627b36d,ad01f751d05455cf,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,51,Severe Systemic Disease,528.0,Male,20260531
+doctor_32,6364,2707,3,patient_150,935c614ad237ac7c,7eb8496809c07752,Orthopedics,"ARTHROPLASTY, KNEE",Monitored Anesthesia Care (MAC),72,Severe Systemic Disease,298.0,Male,20260531
+doctor_32,6364,2707,4,patient_69,8c06c104dc3a9069,6399c14f78f300b9,Gynecology,"EXAM UNDER ANESTHESIA, GYNECOLOGIC",General,59,Severe Systemic Disease,458.0,Female,20260531
+doctor_32,6364,2707,5,patient_238,c162b5ae5615cbb2,a32f3327f7781394,Podiatry,"AMPUTATION, FOOT",General,74,Incapacitating Disease,221.0,Male,20260531
+doctor_32,6364,2707,6,patient_79,67ffe1306e8b6435,55680d51d324a3df,Hepatobiliary,"EXCISION, LIVER",General,76,Severe Systemic Disease,600.0,Male,20260531
+doctor_32,6364,2707,7,patient_212,5e2dcafc5e9e3afe,4f1c93eed0d26459,Plastics / Wound,"MASTOPEXY, BILATERAL",General,55,Mild Systemic Disease,673.0,Female,20260531
+doctor_32,6364,2707,8,patient_22,35adcc40c73daffb,621082a2865aaf73,Gastroenterology,"SINUS SURGERY, ENDOSCOPIC",General,58,Severe Systemic Disease,422.0,Male,20260531
+doctor_32,6364,2707,9,patient_204,61905cf6d470dfb5,4d69211ca90c8197,Otolaryngology Head and Neck Surgery,"REPAIR, STENOSIS, NOSE, VESTIBULE",General,43,Severe Systemic Disease,495.0,Male,20260531
+doctor_32,6364,2707,10,patient_309,d1dd4aca477583b9,ddb299d956b08ffb,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,43,Mild Systemic Disease,618.0,Male,20260531
+doctor_32,6364,2707,11,patient_325,1f9d1ac22f2698b2,f5bcabbeb5fc9d8b,Urology,CYSTOSCOPY,General,60,Severe Systemic Disease,335.0,Female,20260531
+doctor_32,6364,2707,12,patient_40,b76487f0718ef266,156f52ab7e122c39,General Surgery,"LAPAROTOMY, EXPLORATORY",General,50,Incapacitating Disease,639.0,Male,20260531
+doctor_32,6364,2707,13,patient_274,25e78dad3deaa605,87439126fc531584,Thoracic,"FIXATION, RIB, USING PLATE",General,46,Severe Systemic Disease,483.0,Male,20260531
+doctor_32,6364,2707,14,patient_299,6a0ea841c2b01d9c,156f52ab7e122c39,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,50,Severe Systemic Disease,433.0,Male,20260531
+doctor_32,6364,2707,15,patient_187,44930d1398b029bb,2da8c39bb2bc0a8f,Other,FASCIOTOMY,General,46,Mild Systemic Disease,702.0,Female,20260531
+doctor_32,6364,2707,16,patient_167,87c28714bc152893,dda378fb96b53670,Orthopedics,"ORIF, FRACTURE, TIBIA",General,39,Incapacitating Disease,679.0,Male,20260531
+doctor_32,6364,2707,17,patient_293,b201dfc159ac60dd,c3a0a3e58b821fcf,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM DECEASED DONOR",General,29,Severe Systemic Disease,478.0,Male,20260531
+doctor_32,6364,2707,18,patient_16,40f15f5299a7c96a,faa9d2565dd38e87,Gastroenterology,"BROW LIFT, WITH FACE LIFT, ENDOSCOPIC",General,69,Mild Systemic Disease,525.0,Female,20260531
+doctor_32,6364,2707,19,patient_286,fd50927fa58711ee,3561862f7d034af0,Thoracic,"FIXATION, RIB, USING PLATE",General,52,Incapacitating Disease,506.0,Male,20260531
+doctor_32,6364,2707,20,patient_251,379338c94d482e35,fdf4066e38995ee1,Spine / Neurosurgery,"FUSION, SPINE, THORACIC OR LUMBAR, OR BOTH THORACIC AND LUMBAR, POSTERIOR APPROACH, USING INSTRUMENTATION",General,63,Mild Systemic Disease,656.0,Male,20260531
+doctor_32,6364,2707,21,patient_13,a9fcac29046d044e,07d4919907ea72c1,Gastroenterology,"BROW LIFT, WITH FACE LIFT, ENDOSCOPIC",General,74,Healthy,530.0,Male,20260531
+doctor_32,6364,2707,22,patient_202,f68fc195e39bfdad,c56b8e2aa25eaf56,Otolaryngology Head and Neck Surgery,"WIDE LOCAL EXCISION, LESION, SKIN, HEAD AND NECK",General,62,Mild Systemic Disease,611.0,Male,20260531
+doctor_32,6364,2707,23,patient_310,18f7665ee6d0b9fd,8a9bbe49a2c83d8e,Urology,"UNLISTED PROCEDURE, URINARY SYSTEM",General,50,Severe Systemic Disease,656.0,Male,20260531
+doctor_32,6364,2707,24,patient_107,8a963b9cd20b8a7c,bc0e14edd49ba5e9,Interventional Radiology,"ANGIOGRAM, LOWER EXTREMITY, WITH ANGIOPLASTY",General,56,Severe Systemic Disease,521.0,Male,20260531
+doctor_32,6364,2707,25,patient_178,9827da74e1493c1c,eb3cc37ace9a0798,Orthopedics,"HIPEC - CHEMOTHERAPY, INTRAPERITONEAL, HYPERTHERMIC",General,56,Severe Systemic Disease,590.0,Male,20260531
 doctor_33,4739,1215,1,patient_143,c9ff54f087a230f4,028bb5fbe105d515,Ophthalmology,"REPAIR, RETINAL DETACHMENT",General,62,Mild Systemic Disease,374.0,Male,20260531
 doctor_33,4739,1215,2,patient_84,7349e9ee5b92810f,6ce8b7378e84df02,Hepatobiliary,"EXCISION, LIVER",General,68,Severe Systemic Disease,622.0,Male,20260531
 doctor_33,4739,1215,3,patient_188,aa07034535eeed5c,51a58981da8724ca,Other,"EXCISION, NEOPLASM, PARAPHARYNGEAL",General,55,Severe Systemic Disease,699.0,Male,20260531
@@ -174,31 +174,31 @@ doctor_33,4739,1215,22,patient_191,f41d6e4fccf71c10,b36a44c0b49c1226,Plastics / 
 doctor_33,4739,1215,23,patient_25,5427ff28431cca78,6cb318785441e9d5,Gastroenterology,SINUS SURGERY ENDOSCOPIC LIMITED W/ IMAGE GUIDANCE,General,43,Severe Systemic Disease,365.0,Male,20260531
 doctor_33,4739,1215,24,patient_106,f06d937ece056f55,f2788358d86c8606,Interventional Radiology,"EXPLORATION, WITH NERVE REPAIR OF HAND OR WRIST",Regional,59,Mild Systemic Disease,572.0,Male,20260531
 doctor_33,4739,1215,25,patient_10,f0506b5a2030b15e,64271d9ff8dafcfd,Dental,"DA VINCI SI- TRANSORAL SURGERY, ROBOT-ASSISTED",General,55,Mild Systemic Disease,416.0,Male,20260531
-doctor_34,3655,8323,1,patient_315,b7c0df29952c1a6d,660d3b6181b7d817,Plastics / Wound,"REIMPLANTATION, URETER",General,50,Mild Systemic Disease,630.0,Female,20260531
-doctor_34,3655,8323,2,patient_11,b5e638e8ac139087,c531cbce74c1db4d,Gastroenterology,"SINUS SURGERY, ENDOSCOPIC",General,67,Incapacitating Disease,684.0,Male,20260531
-doctor_34,3655,8323,3,patient_218,aad560476a11bc5f,09a6ed80ff79dea6,Plastics / Wound,ABDOMINOPLASTY,General,37,Healthy,653.0,Female,20260531
-doctor_34,3655,8323,4,patient_166,0ddc982aa2bd7384,f54770000d4dc94c,Orthopedics,"HIPEC - CHEMOTHERAPY, INTRAPERITONEAL, HYPERTHERMIC",General,47,Incapacitating Disease,617.0,Female,20260531
-doctor_34,3655,8323,5,patient_277,41a46a7973ca80aa,7a16609bf5260101,Thoracic,"FIXATION, RIB, USING PLATE",General,57,Severe Systemic Disease,391.0,Male,20260531
-doctor_34,3655,8323,6,patient_153,c1b7eb268a94c36e,b97b2f5227125090,Orthopedics,"REPAIR, JOINT, HIP",Monitored Anesthesia Care (MAC),86,Mild Systemic Disease,306.0,Female,20260531
-doctor_34,3655,8323,7,patient_221,513b40d6bf97f52a,bab37394e1090a8b,Plastics / Wound,"RECONSTRUCTION, BREAST, UNILATERAL",General,63,Mild Systemic Disease,629.0,Female,20260531
-doctor_34,3655,8323,8,patient_73,e229d5de442fd172,64d34947e1fc667b,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",General,20,Mild Systemic Disease,548.0,Female,20260531
-doctor_34,3655,8323,9,patient_136,a5740bc0680a36f8,ba43937650b84a2e,Neurosurgery,"CRANIOTOMY, WITH NEOPLASM EXCISION",General,53,Incapacitating Disease,651.0,Female,20260531
-doctor_34,3655,8323,10,patient_157,ec2b6362c5a17d8a,7645afed1e64d463,Orthopedics,"REPAIR, JOINT, HIP",Monitored Anesthesia Care (MAC),68,Severe Systemic Disease,184.0,Male,20260531
-doctor_34,3655,8323,11,patient_236,ae51f8f0dbcd15a4,e11a2da2f1654d48,Podiatry,"ARTHRODESIS AND ARTHROEREISIS, FOOT AND ANKLE",General,62,Mild Systemic Disease,352.0,Male,20260531
-doctor_34,3655,8323,12,patient_21,768739b404eb125f,2bfcf8009624887e,Gastroenterology,SINUS SURGERY ENDOSCOPIC LIMITED W/ IMAGE GUIDANCE,General,44,Severe Systemic Disease,382.0,Female,20260531
-doctor_34,3655,8323,13,patient_159,cdaa2d606a280090,8f85be1559640988,Orthopedics,WHIPPLE PROCEDURE,General,55,Incapacitating Disease,720.0,Female,20260531
-doctor_34,3655,8323,14,patient_80,8fdc54b397abd336,d6dbc8f7f4964501,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",General,59,Severe Systemic Disease,544.0,Male,20260531
-doctor_34,3655,8323,15,patient_301,133c706ac326d261,e868e5bf8d7f149e,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM DECEASED DONOR",General,74,Incapacitating Disease,500.0,Female,20260531
-doctor_34,3655,8323,16,patient_133,baec7612c45a2167,d704e7e529e0a6c2,Neurosurgery,"CRANIOTOMY, WITH NEOPLASM EXCISION",General,42,Mild Systemic Disease,460.0,Male,20260531
-doctor_34,3655,8323,17,patient_307,1cd7a37d673ee27e,7b66651d1066ab88,Urology,"COLPORRHAPHY, ANTEROPOSTERIOR, WITH SUSPENSION OF VAGINAL VAULT AND CYSTOSCOPY",Monitored Anesthesia Care (MAC),80,Mild Systemic Disease,207.0,Female,20260531
-doctor_34,3655,8323,18,patient_78,728afacbfe6b693b,7180f4df20c1a0bf,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",Regional,71,Severe Systemic Disease,588.0,Male,20260531
-doctor_34,3655,8323,19,patient_34,e13f34ea1298cff5,c4891a4647716dac,General Surgery,"LAPAROTOMY, EXPLORATORY",Epidural,45,Severe Systemic Disease,650.0,Female,20260531
-doctor_34,3655,8323,20,patient_57,b81645dc39b4141d,cf12ec01d91e9139,General Surgery,"REPAIR, HERNIA, INCISIONAL",Epidural,70,Severe Systemic Disease,418.0,Male,20260531
-doctor_34,3655,8323,21,patient_252,1d712e5f8710c690,4100863eab69e9e9,Spine / Neurosurgery,"FUSION, SPINE, THORACIC OR LUMBAR, OR BOTH THORACIC AND LUMBAR, POSTERIOR APPROACH, USING INSTRUMENTATION",General,56,Severe Systemic Disease,648.0,Male,20260531
-doctor_34,3655,8323,22,patient_305,08bf5b931bdce3b3,e4805a838530c2fa,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,38,Severe Systemic Disease,436.0,Male,20260531
-doctor_34,3655,8323,23,patient_245,8b454e4e02251329,3928f7a4a2a0efc7,Pulmonary,"BRONCHOSCOPY, RIGID",General,55,Severe Systemic Disease,192.0,Female,20260531
-doctor_34,3655,8323,24,patient_172,01b3de901f9bbaf8,c0eedfc634232ffa,Orthopedics,"HIPEC - CHEMOTHERAPY, INTRAPERITONEAL, HYPERTHERMIC",General,59,Severe Systemic Disease,588.0,Male,20260531
-doctor_34,3655,8323,25,patient_44,0ecf1673d5e38d07,572a64a8593f2d55,General Surgery,"LAPAROTOMY, EXPLORATORY, EMERGENT FOR ABDOMINAL TRAUMA",General,24,Severe Systemic Disease,677.0,Male,20260531
+doctor_34,7711,8323,1,patient_315,b7c0df29952c1a6d,660d3b6181b7d817,Plastics / Wound,"REIMPLANTATION, URETER",General,50,Mild Systemic Disease,630.0,Female,20260531
+doctor_34,7711,8323,2,patient_11,b5e638e8ac139087,c531cbce74c1db4d,Gastroenterology,"SINUS SURGERY, ENDOSCOPIC",General,67,Incapacitating Disease,684.0,Male,20260531
+doctor_34,7711,8323,3,patient_218,aad560476a11bc5f,09a6ed80ff79dea6,Plastics / Wound,ABDOMINOPLASTY,General,37,Healthy,653.0,Female,20260531
+doctor_34,7711,8323,4,patient_166,0ddc982aa2bd7384,f54770000d4dc94c,Orthopedics,"HIPEC - CHEMOTHERAPY, INTRAPERITONEAL, HYPERTHERMIC",General,47,Incapacitating Disease,617.0,Female,20260531
+doctor_34,7711,8323,5,patient_277,41a46a7973ca80aa,7a16609bf5260101,Thoracic,"FIXATION, RIB, USING PLATE",General,57,Severe Systemic Disease,391.0,Male,20260531
+doctor_34,7711,8323,6,patient_153,c1b7eb268a94c36e,b97b2f5227125090,Orthopedics,"REPAIR, JOINT, HIP",Monitored Anesthesia Care (MAC),86,Mild Systemic Disease,306.0,Female,20260531
+doctor_34,7711,8323,7,patient_221,513b40d6bf97f52a,bab37394e1090a8b,Plastics / Wound,"RECONSTRUCTION, BREAST, UNILATERAL",General,63,Mild Systemic Disease,629.0,Female,20260531
+doctor_34,7711,8323,8,patient_73,e229d5de442fd172,64d34947e1fc667b,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",General,20,Mild Systemic Disease,548.0,Female,20260531
+doctor_34,7711,8323,9,patient_136,a5740bc0680a36f8,ba43937650b84a2e,Neurosurgery,"CRANIOTOMY, WITH NEOPLASM EXCISION",General,53,Incapacitating Disease,651.0,Female,20260531
+doctor_34,7711,8323,10,patient_157,ec2b6362c5a17d8a,7645afed1e64d463,Orthopedics,"REPAIR, JOINT, HIP",Monitored Anesthesia Care (MAC),68,Severe Systemic Disease,184.0,Male,20260531
+doctor_34,7711,8323,11,patient_236,ae51f8f0dbcd15a4,e11a2da2f1654d48,Podiatry,"ARTHRODESIS AND ARTHROEREISIS, FOOT AND ANKLE",General,62,Mild Systemic Disease,352.0,Male,20260531
+doctor_34,7711,8323,12,patient_21,768739b404eb125f,2bfcf8009624887e,Gastroenterology,SINUS SURGERY ENDOSCOPIC LIMITED W/ IMAGE GUIDANCE,General,44,Severe Systemic Disease,382.0,Female,20260531
+doctor_34,7711,8323,13,patient_159,cdaa2d606a280090,8f85be1559640988,Orthopedics,WHIPPLE PROCEDURE,General,55,Incapacitating Disease,720.0,Female,20260531
+doctor_34,7711,8323,14,patient_80,8fdc54b397abd336,d6dbc8f7f4964501,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",General,59,Severe Systemic Disease,544.0,Male,20260531
+doctor_34,7711,8323,15,patient_301,133c706ac326d261,e868e5bf8d7f149e,Transplant,"TRANSPLANT RECIPIENT, KIDNEY, FROM DECEASED DONOR",General,74,Incapacitating Disease,500.0,Female,20260531
+doctor_34,7711,8323,16,patient_133,baec7612c45a2167,d704e7e529e0a6c2,Neurosurgery,"CRANIOTOMY, WITH NEOPLASM EXCISION",General,42,Mild Systemic Disease,460.0,Male,20260531
+doctor_34,7711,8323,17,patient_307,1cd7a37d673ee27e,7b66651d1066ab88,Urology,"COLPORRHAPHY, ANTEROPOSTERIOR, WITH SUSPENSION OF VAGINAL VAULT AND CYSTOSCOPY",Monitored Anesthesia Care (MAC),80,Mild Systemic Disease,207.0,Female,20260531
+doctor_34,7711,8323,18,patient_78,728afacbfe6b693b,7180f4df20c1a0bf,Hepatobiliary,"EXCISION, LIVER, LAPAROSCOPIC",Regional,71,Severe Systemic Disease,588.0,Male,20260531
+doctor_34,7711,8323,19,patient_34,e13f34ea1298cff5,c4891a4647716dac,General Surgery,"LAPAROTOMY, EXPLORATORY",Epidural,45,Severe Systemic Disease,650.0,Female,20260531
+doctor_34,7711,8323,20,patient_57,b81645dc39b4141d,cf12ec01d91e9139,General Surgery,"REPAIR, HERNIA, INCISIONAL",Epidural,70,Severe Systemic Disease,418.0,Male,20260531
+doctor_34,7711,8323,21,patient_252,1d712e5f8710c690,4100863eab69e9e9,Spine / Neurosurgery,"FUSION, SPINE, THORACIC OR LUMBAR, OR BOTH THORACIC AND LUMBAR, POSTERIOR APPROACH, USING INSTRUMENTATION",General,56,Severe Systemic Disease,648.0,Male,20260531
+doctor_34,7711,8323,22,patient_305,08bf5b931bdce3b3,e4805a838530c2fa,Transplant,"TRANSPLANT, KIDNEY AND PANCREAS, DECEASED DONOR",General,38,Severe Systemic Disease,436.0,Male,20260531
+doctor_34,7711,8323,23,patient_245,8b454e4e02251329,3928f7a4a2a0efc7,Pulmonary,"BRONCHOSCOPY, RIGID",General,55,Severe Systemic Disease,192.0,Female,20260531
+doctor_34,7711,8323,24,patient_172,01b3de901f9bbaf8,c0eedfc634232ffa,Orthopedics,"HIPEC - CHEMOTHERAPY, INTRAPERITONEAL, HYPERTHERMIC",General,59,Severe Systemic Disease,588.0,Male,20260531
+doctor_34,7711,8323,25,patient_44,0ecf1673d5e38d07,572a64a8593f2d55,General Surgery,"LAPAROTOMY, EXPLORATORY, EMERGENT FOR ABDOMINAL TRAUMA",General,24,Severe Systemic Disease,677.0,Male,20260531
 doctor_35,9039,1710,1,patient_108,728c273e4ce017bd,fa0c0670ae71c014,Interventional Radiology,"ANGIOGRAM, LOWER EXTREMITY, WITH ANGIOPLASTY",General,57,Severe Systemic Disease,547.0,Female,20260531
 doctor_35,9039,1710,2,patient_170,f6295858333e29c7,7300b84e9f3af779,Orthopedics,WHIPPLE PROCEDURE,Epidural,70,Severe Systemic Disease,566.0,Male,20260531
 doctor_35,9039,1710,3,patient_199,372e33f87a044226,f4604dbaecf72dcb,Plastics / Wound,"FLAP MUSCLE, MYOCUTANEOUS OR FASCIOCUTANEOUS; HEAD/NECK, TRUNK, OR UPPER EXT",General,58,Severe Systemic Disease,597.0,Female,20260531
