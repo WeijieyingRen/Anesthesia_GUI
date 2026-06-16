@@ -1475,14 +1475,21 @@ export default function MedicationChart({
                 onSharedScrollLeftChange?.(next);
               }}
             >
-              <div
-                className="relative"
-                style={{
-                  width: contentWidth,
-                  height: fullContentHeight,
-                }}
-              >
-                <div className="absolute inset-0 z-0">
+             <div
+  className="relative"
+  style={{
+    width: contentWidth,
+    height,
+  }}
+>
+  <div
+    className="relative"
+    style={{
+      width: contentWidth,
+      height: fullContentHeight,
+    }}
+  >
+    <div className="absolute inset-0 z-0">
                   <MedicationGridSvg
                     end={end}
                     majorTicks={majorTicks}
@@ -1571,19 +1578,20 @@ export default function MedicationChart({
                 </div>
 
                 <div className="absolute inset-0 z-30 pointer-events-auto">
-                  <BolusOverlaySvg
-                    end={end}
-                    rows={visibleRows}
-                    height={fullContentHeight}
-                    svgWidth={contentWidth}
-                    plotWidth={plotWidth}
-                    managementEvent={managementEvent}
-                    timeZero={timeZero}
-                    onMedicationClick={setSelectedMedicationInfo}
-                  />
-                </div>
+  <BolusOverlaySvg
+    end={end}
+    rows={visibleRows}
+    height={fullContentHeight}
+    svgWidth={contentWidth}
+    plotWidth={plotWidth}
+    managementEvent={managementEvent}
+    timeZero={timeZero}
+    onMedicationClick={setSelectedMedicationInfo}
+  />
+</div>
+</div>
 
-                {selectedMedicationInfo && (
+{selectedMedicationInfo && (
                   <div
                     className="absolute z-40 min-w-[180px] rounded-md border border-gray-200 bg-white px-3 py-2 text-xs text-gray-900 shadow-lg"
                     style={{
@@ -1595,7 +1603,7 @@ export default function MedicationChart({
                         4,
                         Math.min(
                           selectedMedicationInfo.y,
-                          fullContentHeight - 82
+                          height - 82
                         )
                       ),
                       pointerEvents: "auto",

@@ -913,11 +913,6 @@ export default function ManagementReasoningPanel({
             {getDisplayTime(managementEvent, anesthesiaStart)}
           </div>
 
-          <div>
-            <span className="font-semibold text-gray-600">Type:</span>{" "}
-            {managementEvent.event_type || "-"}
-          </div>
-
           {isChangeManagementEvent(managementEvent) &&
           buildChangeLabel(managementEvent) ? (
             <div>

@@ -9,7 +9,7 @@ import type {
 } from "@/lib/loaders/dashboard-case-types";
 
 /*
- * Clinical timestamps should display the wall-clock time written in the
+ * Clinical timestamps must preserve the wall-clock time written in the
  * Stanford source data, regardless of the annotator's browser timezone.
  *
  * Example:
@@ -20,14 +20,15 @@ import type {
  *
  *   2025-11-20T23:38:00
  *
- * The timezone suffix is intentionally removed before the clinical time is
- * passed to the dashboard. This prevents browsers in the United States,
- * China, or India from displaying different clock times.
+ * The timezone suffix is intentionally removed before clinical timestamps
+ * are passed to the dashboard. This prevents browsers in California, China,
+ * or India from displaying different clock times.
  *
- * This applies only to clinical timestamps from the dataset. Submission and
- * annotation timestamps such as saved_at_utc and saved_at_local are handled
+ * This applies only to clinical timestamps loaded from the dataset.
+ * Submission timestamps such as saved_at_utc and saved_at_local are handled
  * elsewhere and remain unchanged.
  */
+
 const STANFORD_CASE_STATIC_TIME_FIELDS = [
   "anesthesia_start",
   "induction",
@@ -41,6 +42,24 @@ const STANFORD_CASE_STATIC_TIME_FIELDS = [
   "anesthesia_end",
 ] as const;
 
+const STANFORD_MANAGEMENT_TIME_FIELDS = [
+  "start_time",
+  "end_time",
+] as const;
+
+/**
+ * Convert a timezone-bearing clinical timestamp into a timezone-free
+ * wall-clock timestamp.
+ *
+ * Examples:
+ *
+ * 2025-11-20 23:38:00+00:00 -> 2025-11-20T23:38:00
+ * 2025-11-20T23:38:00Z      -> 2025-11-20T23:38:00
+ * 2025-11-20 23:38:00       -> 2025-11-20T23:38:00
+ *
+ * This function deliberately does not use new Date(), because Date would
+ * convert the value into the browser's local timezone.
+ */
 function normalizeClinicalWallTime(value: unknown): unknown {
   if (typeof value !== "string") {
     return value;
@@ -52,65 +71,65 @@ function normalizeClinicalWallTime(value: unknown): unknown {
     return value;
   }
 
-  /*
-   * Supported examples:
-   *
-   * 2025-11-20 23:38:00+00:00
-   * 2025-11-20T23:38:00+00:00
-   * 2025-11-20T23:38:00Z
-   * 2025-11-20 23:38:00
-   * 2025-11-20T23:38:00
-   * 2025-11-20 23:38
-   *
-   * Only the date and written clock time are retained.
-   */
   const match = text.match(
-    /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(?::(\d{2}))?(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?$/,
+    /^(\d{4}-\d{2}-\d{2})[T\s](\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?)(?:Z|[+-]\d{2}:?\d{2})?$/
   );
 
   if (!match) {
-    /*
-     * Leave unexpected values unchanged rather than corrupting them.
-     */
     return value;
   }
 
-  const datePart = match[1];
-  const hourMinutePart = match[2];
-  const secondPart = match[3] ?? "00";
+  const [, datePart, timePart] = match;
 
-  /*
-   * A timezone-free ISO-like value is interpreted by the browser as a local
-   * wall-clock time. Therefore, every annotator sees the same written clock
-   * time, such as 23:38, regardless of their physical location.
-   */
-  return `${datePart}T${hourMinutePart}:${secondPart}`;
+  return `${datePart}T${timePart}`;
 }
 
-function normalizeStanfordCaseStaticTimes(row: CsvRow): CsvRow {
+function normalizeStanfordCaseStaticTimes(
+  row: CsvRow
+): CsvRow {
   const normalizedRow: CsvRow = {
     ...row,
   };
 
   for (const field of STANFORD_CASE_STATIC_TIME_FIELDS) {
-    if (field in normalizedRow) {
-      normalizedRow[field] = normalizeClinicalWallTime(normalizedRow[field]);
-    }
+    normalizedRow[field] = normalizeClinicalWallTime(
+      normalizedRow[field]
+    );
   }
 
   return normalizedRow;
 }
 
+function normalizeStanfordManagementTimes(
+  rows: CsvRow[]
+): CsvRow[] {
+  return rows.map((row) => {
+    const normalizedRow: CsvRow = {
+      ...row,
+    };
+
+    for (const field of STANFORD_MANAGEMENT_TIME_FIELDS) {
+      normalizedRow[field] = normalizeClinicalWallTime(
+        normalizedRow[field]
+      );
+    }
+
+    return normalizedRow;
+  });
+}
+
 async function fetchRequiredCsvRows(
   folder: string,
-  filename: string,
+  filename: string
 ): Promise<CsvRow[]> {
   const url = `${STANFORD_DATASET_BASE}/${folder}/${filename}`;
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error(
-      `Failed to load required file ${url}: ${res.status} ${res.statusText}`,
+      `Failed to load required file ${url}: ${res.status} ${res.statusText}`
     );
   }
 
@@ -125,10 +144,12 @@ async function fetchRequiredCsvRows(
 
 async function fetchOptionalCsvRows(
   folder: string,
-  filename: string,
+  filename: string
 ): Promise<CsvRow[]> {
   const url = `${STANFORD_DATASET_BASE}/${folder}/${filename}`;
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     return [];
@@ -148,7 +169,7 @@ async function fetchOptionalCsvRows(
 }
 
 export async function loadStanfordDashboardCase(
-  folder: string,
+  folder: string
 ): Promise<LoadedDashboardCase> {
   const [
     caseInfoRows,
@@ -170,9 +191,15 @@ export async function loadStanfordDashboardCase(
     managementRows,
   ] = await Promise.all([
     fetchRequiredCsvRows(folder, "case_info.csv"),
-    fetchRequiredCsvRows(folder, "patients_attributes_case.csv"),
+    fetchRequiredCsvRows(
+      folder,
+      "patients_attributes_case.csv"
+    ),
     fetchRequiredCsvRows(folder, "case_static.csv"),
-    fetchRequiredCsvRows(folder, "case_dynamic_events.csv"),
+    fetchRequiredCsvRows(
+      folder,
+      "case_dynamic_events.csv"
+    ),
     fetchRequiredCsvRows(folder, "preop.csv"),
     fetchOptionalCsvRows(folder, "preop_history.csv"),
     fetchRequiredCsvRows(folder, "lab.csv"),
@@ -191,11 +218,12 @@ export async function loadStanfordDashboardCase(
   const caseInfo = caseInfoRows[0] ?? {};
   const patientAttr = patientAttrRows[0] ?? {};
 
-  /*
-   * Remove timezone conversion semantics from Stanford clinical timestamps
-   * before they are passed to dashboard components.
-   */
-  const caseStatic = normalizeStanfordCaseStaticTimes(caseStaticRows[0] ?? {});
+  const caseStatic = normalizeStanfordCaseStaticTimes(
+    caseStaticRows[0] ?? {}
+  );
+
+  const normalizedManagementRows =
+    normalizeStanfordManagementTimes(managementRows);
 
   const preopRow = preopRows[0] ?? {};
   const labRow = labRows[0] ?? {};
@@ -232,6 +260,6 @@ export async function loadStanfordDashboardCase(
     fluidInRows,
     fluidOutRows,
 
-    managementRows,
+    managementRows: normalizedManagementRows,
   };
 }
