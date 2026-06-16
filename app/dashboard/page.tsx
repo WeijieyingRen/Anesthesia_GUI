@@ -1473,10 +1473,42 @@ export default function DashboardPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isReviewMode, setIsReviewMode] = useState(false);
-  const [patientSummaryCompleted, setPatientSummaryCompleted] = useState(false);
-  const [abnormalityReasoningCompleted, setAbnormalityReasoningCompleted] =
+
+  const [patientSummaryCompleted, setPatientSummaryCompleted] =
     useState(false);
-  const [managementReasoningCompleted, setManagementReasoningCompleted] = useState(false);
+  
+  const [
+    abnormalityReasoningCompleted,
+    setAbnormalityReasoningCompleted,
+  ] = useState(false);
+  
+  const [
+    managementReasoningCompleted,
+    setManagementReasoningCompleted,
+  ] = useState(false);
+  
+  /*
+   * These three states mean that the reviewer has explicitly clicked Save
+   * for each task during the current review session.
+   *
+   * They are intentionally separate from the three completion states above.
+   * The completion states above may become true merely because annotation
+   * results were loaded from Google Drive.
+   */
+  const [
+    reviewSummarySaved,
+    setReviewSummarySaved,
+  ] = useState(false);
+  
+  const [
+    reviewAbnormalitySaved,
+    setReviewAbnormalitySaved,
+  ] = useState(false);
+  
+  const [
+    reviewManagementSaved,
+    setReviewManagementSaved,
+  ] = useState(false);
   const [selectedTask, setSelectedTask] = useState<WorkspaceTaskKey>("summary");
   const [annotationLevel, setAnnotationLevel] = useState<AnnotationLevel>("summary");
 
@@ -1601,20 +1633,40 @@ export default function DashboardPage() {
   }
   const canSubmitFinal =
   isUserGuideCase ||
-  isReviewMode ||
   (
-    patientSummaryCompleted &&
-    abnormalityReasoningCompleted &&
-    managementReasoningCompleted &&
-    episodeState.prioritizedEpisodeIds.length > 0
+    isReviewMode
+      ? reviewSummarySaved &&
+        reviewAbnormalitySaved &&
+        reviewManagementSaved
+      : patientSummaryCompleted &&
+        abnormalityReasoningCompleted &&
+        managementReasoningCompleted &&
+        episodeState.prioritizedEpisodeIds.length > 0
   );
-
   function validateBeforeFinalSubmit(): string | null {
     if (isUserGuideCase) {
       return null;
     }
   
+    /*
+     * Review requires an explicit Save for all three tasks.
+     *
+     * Loading the annotator's original answers does not count as the
+     * reviewer confirming those answers.
+     */
     if (isReviewMode) {
+      if (!reviewSummarySaved) {
+        return "Please open the Summary task and click Save before submitting the review.";
+      }
+  
+      if (!reviewAbnormalitySaved) {
+        return "Please open the Abnormality Reasoning task and click Save before submitting the review.";
+      }
+  
+      if (!reviewManagementSaved) {
+        return "Please open the Management Reasoning task and click Save before submitting the review.";
+      }
+  
       return null;
     }
   
@@ -2209,10 +2261,18 @@ export default function DashboardPage() {
       } catch {
         // ignore
       }
-  
       setPatientSummaryCompleted(false);
       setAbnormalityReasoningCompleted(false);
       setManagementReasoningCompleted(false);
+      
+      /*
+       * Each case requires the reviewer to explicitly save all three tasks.
+       * Do not carry confirmation state from the previous case.
+       */
+      setReviewSummarySaved(false);
+      setReviewAbnormalitySaved(false);
+      setReviewManagementSaved(false);
+      
       setSubmitError(null);
       setLoadError(null);
       setLoading(true);
@@ -2546,92 +2606,118 @@ export default function DashboardPage() {
     };
   }
 
-
   async function validateStoredAccessCodeOrRedirect(): Promise<boolean> {
     const { accessCode } = getStoredAccessInfo();
-
+  
     if (!accessCode || !/^\d{4}$/.test(accessCode)) {
       const message =
         "Invalid access code. Please log in again with a valid 4-digit access code.";
-
+  
       setSubmitError(message);
       alert(message);
-
+  
       logAction("blocked_invalid_access_code_format", {
         accessCodePresent: Boolean(accessCode),
       });
-
+  
       router.push("/");
       return false;
     }
-
+  
     try {
-      const res = await fetch("/assigned_code/access_review_code.csv", {
-        cache: "no-store",
-      });
-
-      if (!res.ok) {
-        const message =
-          "Failed to validate access code. Please log in again.";
-
-        setSubmitError(message);
-        alert(message);
-
-        logAction("blocked_access_code_validation_load_failed", {
-          status: res.status,
-        });
-
-        router.push("/");
-        return false;
-      }
-
-      const text = await res.text();
-
-      const rows = Papa.parse<CsvRow>(text, {
-        header: true,
-        dynamicTyping: false,
-        skipEmptyLines: true,
-      }).data;
-
+      /*
+       * Access codes may belong to either dataset:
+       *
+       * Stanford MPOG:
+       *   access_review_code.csv
+       *
+       * MOVER:
+       *   mover_access_review_code.csv
+       */
+      const lookupFiles = [
+        "/assigned_code/access_review_code.csv",
+        "/assigned_code/mover_access_review_code.csv",
+      ];
+  
+      const parsedResults = await Promise.all(
+        lookupFiles.map(async (filePath) => {
+          const res = await fetch(filePath, {
+            cache: "no-store",
+          });
+  
+          if (!res.ok) {
+            throw new Error(
+              `Failed to load ${filePath}: ${res.status} ${res.statusText}`
+            );
+          }
+  
+          const text = await res.text();
+  
+          const parsed = Papa.parse<CsvRow>(text, {
+            header: true,
+            dynamicTyping: false,
+            skipEmptyLines: true,
+          });
+  
+          if (parsed.errors.length > 0) {
+            console.warn(
+              `CSV parsing warnings in ${filePath}:`,
+              parsed.errors
+            );
+          }
+  
+          return parsed.data;
+        })
+      );
+  
+      const rows = parsedResults.flat();
+  
       const matched = rows.find(
         (row) =>
           String(row["annotation_code"] ?? "").trim() === accessCode ||
           String(row["review_code"] ?? "").trim() === accessCode
       );
-
+  
       if (!matched) {
         const message =
           "Invalid access code. Please log in again with a valid access code.";
-
+  
         setSubmitError(message);
         alert(message);
-
+  
         localStorage.removeItem("gameData");
         localStorage.removeItem("participantInfo");
         localStorage.removeItem("doctorAccessCode");
         localStorage.removeItem("doctorId");
         localStorage.removeItem("currentWorkflowMode");
         localStorage.removeItem("loginWorkflowMode");
-
+  
         logAction("blocked_access_code_not_found", {
           accessCode,
+          lookupFiles,
         });
-
+  
         router.push("/");
         return false;
       }
-
+  
       return true;
     } catch (error) {
       console.error("Access code validation failed:", error);
-
+  
       const message =
         "Failed to validate access code. Please log in again.";
-
+  
       setSubmitError(message);
       alert(message);
-
-      logAction("blocked_access_code_validation_exception", {});
+  
+      logAction("blocked_access_code_validation_exception", {
+        error:
+          error instanceof Error
+            ? error.message
+            : String(error),
+      });
+  
       router.push("/");
       return false;
     }
@@ -3045,7 +3131,11 @@ return true;
 
   <button
     type="button"
-    disabled={submitting || hasSubmitted || (!isReviewMode && !canSubmitFinal)}
+    disabled={
+      submitting ||
+      hasSubmitted ||
+      !canSubmitFinal
+    }
     onClick={async () => {
       const validationError = validateBeforeFinalSubmit();
       if (validationError) {
@@ -3491,7 +3581,7 @@ return true;
 
                     {annotationLevel === "summary" && (
                       <div data-guide="instructions" className="bg-white">
-                      <SummaryPanel
+                     <SummaryPanel
   key={`summary:${currentPatient?.folder ?? "unknown_patient"}:${caseId}:${reviewHydrationVersion}`}
   caseId={caseId}
   patientId={currentPatient?.folder ?? "unknown_patient"}
@@ -3502,6 +3592,10 @@ return true;
   endMin={sharedTimelineEnd}
   onSaveAndNextStep={() => {
     setPatientSummaryCompleted(true);
+
+    if (isReviewMode) {
+      setReviewSummarySaved(true);
+    }
   }}
   readOnly={isCaseLocked}
 />
@@ -3521,6 +3615,10 @@ return true;
       anesthesiaStart={anesthesiaStart}
       onSaveSuccess={() => {
         setManagementReasoningCompleted(true);
+      
+        if (isReviewMode) {
+          setReviewManagementSaved(true);
+        }
       }}
       
       readOnly={isCaseLocked}
@@ -3866,6 +3964,10 @@ return true;
           if (finishedTask === "detect") {
             handleSaveAndNextStep(finishedTask);
             setAbnormalityReasoningCompleted(true);
+        
+            if (isReviewMode) {
+              setReviewAbnormalitySaved(true);
+            }
           }
         }}
         selectedEvent={selectedEvent}

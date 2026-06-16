@@ -14,11 +14,14 @@ import { Label } from "@/components/ui/label";
 
 type CsvRow = Record<string, any>;
 type WorkflowMode = "annotation" | "review";
+type DatasetSource = "stanford_mpog" | "mover";
 
 type AccessCodeLookupResult = {
   doctorId: string;
   workflowMode: WorkflowMode;
   annotationCode: string;
+  reviewCode: string | null;
+  datasetSource: DatasetSource;
 };
 
 export default function Home() {
@@ -33,7 +36,8 @@ export default function Home() {
   const [clinicalRoleOther, setClinicalRoleOther] = useState("");
 
   const [boardCertified, setBoardCertified] = useState("");
-  const [clinicalSubspecialty, setClinicalSubspecialty] = useState("");
+  const [clinicalSubspecialty, setClinicalSubspecialty] =
+    useState("");
 
   const [experienceYears, setExperienceYears] = useState("");
   const [accessCode, setAccessCode] = useState("");
@@ -44,30 +48,59 @@ export default function Home() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem("participantInfo");
-      if (!raw) return;
+
+      if (!raw) {
+        return;
+      }
 
       const saved = JSON.parse(raw);
 
-      if (saved?.name) setName(saved.name);
-      if (saved?.gender) setGender(saved.gender);
+      if (saved?.name) {
+        setName(saved.name);
+      }
+
+      if (saved?.gender) {
+        setGender(saved.gender);
+      }
 
       if (typeof saved?.degree === "string") {
         setDegree(saved.degree);
       } else if (Array.isArray(saved?.degrees)) {
-        const firstDegree = String(saved.degrees[0] ?? "").trim();
-        const fallbackOther = String(saved?.degreeOther ?? "").trim();
-        setDegree(firstDegree === "Other" ? fallbackOther : firstDegree);
+        const firstDegree = String(
+          saved.degrees[0] ?? ""
+        ).trim();
+
+        const fallbackOther = String(
+          saved?.degreeOther ?? ""
+        ).trim();
+
+        setDegree(
+          firstDegree === "Other"
+            ? fallbackOther
+            : firstDegree
+        );
       }
 
-      if (saved?.trainingCountry) setTrainingCountry(saved.trainingCountry);
-      if (saved?.clinicalRole) setClinicalRole(saved.clinicalRole);
+      if (saved?.trainingCountry) {
+        setTrainingCountry(saved.trainingCountry);
+      }
+
+      if (saved?.clinicalRole) {
+        setClinicalRole(saved.clinicalRole);
+      }
+
       if (saved?.clinicalRoleOther) {
         setClinicalRoleOther(saved.clinicalRoleOther);
       }
 
-      if (saved?.boardCertified) setBoardCertified(saved.boardCertified);
+      if (saved?.boardCertified) {
+        setBoardCertified(saved.boardCertified);
+      }
+
       if (saved?.clinicalSubspecialty) {
-        setClinicalSubspecialty(saved.clinicalSubspecialty);
+        setClinicalSubspecialty(
+          saved.clinicalSubspecialty
+        );
       }
 
       if (saved?.experienceYears) {
@@ -77,77 +110,160 @@ export default function Home() {
       if (saved?.accessCode) {
         setAccessCode(saved.accessCode);
       }
-    } catch {
-      // ignore corrupted localStorage
+    } catch (error) {
+      console.warn(
+        "Failed to restore participantInfo from localStorage:",
+        error
+      );
     }
   }, []);
-
-  function rowOrEmpty(row: CsvRow, key: string) {
-    return row?.[key] ?? "";
-  }
 
   async function resolveAccessCodeInfo(
     code: string
   ): Promise<AccessCodeLookupResult | null> {
-    const reviewLookupRes = await fetch("/assigned_code/access_review_code.csv", {
-      cache: "no-store",
-    });
+    const normalizedCode = String(code ?? "").trim();
 
-    if (!reviewLookupRes.ok) {
+    const lookupConfigs: Array<{
+      fileName: string;
+      datasetSource: DatasetSource;
+    }> = [
+      {
+        fileName: "access_review_code.csv",
+        datasetSource: "stanford_mpog",
+      },
+      {
+        fileName: "mover_access_review_code.csv",
+        datasetSource: "mover",
+      },
+    ];
+
+    const matches: AccessCodeLookupResult[] = [];
+
+    for (const config of lookupConfigs) {
+      const res = await fetch(
+        `/assigned_code/${config.fileName}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error(
+          `Failed to load ${config.fileName}: ${res.status} ${res.statusText}`
+        );
+      }
+
+      const text = await res.text();
+
+      const parsed = Papa.parse<CsvRow>(text, {
+        header: true,
+        dynamicTyping: false,
+        skipEmptyLines: true,
+      });
+
+      if (parsed.errors.length > 0) {
+        console.warn(
+          `CSV parsing warnings in ${config.fileName}:`,
+          parsed.errors
+        );
+      }
+
+      const matchedRow = parsed.data.find((row) => {
+        const annotationCode = String(
+          row["annotation_code"] ?? ""
+        ).trim();
+
+        const reviewCode = String(
+          row["review_code"] ?? ""
+        ).trim();
+
+        return (
+          annotationCode === normalizedCode ||
+          reviewCode === normalizedCode
+        );
+      });
+
+      if (!matchedRow) {
+        continue;
+      }
+
+      const doctorId = String(
+        matchedRow["doctor_id"] ?? ""
+      ).trim();
+
+      const annotationCode = String(
+        matchedRow["annotation_code"] ?? ""
+      ).trim();
+
+      const reviewCode =
+        String(
+          matchedRow["review_code"] ?? ""
+        ).trim() || null;
+
+      if (!doctorId || !annotationCode) {
+        throw new Error(
+          `Matched access-code row in ${config.fileName} is missing doctor_id or annotation_code.`
+        );
+      }
+
+      const workflowMode: WorkflowMode =
+        reviewCode !== null &&
+        normalizedCode === reviewCode
+          ? "review"
+          : "annotation";
+
+      matches.push({
+        doctorId,
+        workflowMode,
+        annotationCode,
+        reviewCode,
+        datasetSource: config.datasetSource,
+      });
+    }
+
+    if (matches.length === 0) {
+      return null;
+    }
+
+    if (matches.length > 1) {
       throw new Error(
-        `Failed to load access_review_code.csv: ${reviewLookupRes.status} ${reviewLookupRes.statusText}`
+        `Access code ${normalizedCode} appears in more than one lookup file. MPOG and MOVER access codes must not overlap.`
       );
     }
 
-    const text = await reviewLookupRes.text();
-
-    const rows = Papa.parse<CsvRow>(text, {
-      header: true,
-      dynamicTyping: false,
-      skipEmptyLines: true,
-    }).data;
-
-    const trimmedCode = code.trim();
-
-    const matched = rows.find(
-      (row) =>
-        String(row["annotation_code"] ?? "").trim() === trimmedCode ||
-        String(row["review_code"] ?? "").trim() === trimmedCode
-    );
-
-    if (!matched) return null;
-
-    const doctorId = String(rowOrEmpty(matched, "doctor_id")).trim();
-    const annotationCode = String(rowOrEmpty(matched, "annotation_code")).trim();
-    const reviewCode = String(rowOrEmpty(matched, "review_code")).trim();
-
-    const workflowMode: WorkflowMode =
-      trimmedCode === reviewCode ? "review" : "annotation";
-
-    if (!doctorId || !annotationCode) return null;
-
-    return {
-      doctorId,
-      workflowMode,
-      annotationCode,
-    };
+    return matches[0];
   }
 
-  const hasOtherClinicalRole = clinicalRole === "Other";
+  const hasOtherClinicalRole =
+    clinicalRole === "Other";
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
     e.preventDefault();
     setError("");
 
     const trimmedName = name.trim();
     const trimmedGender = gender.trim();
     const trimmedDegree = degree.trim();
-    const trimmedTrainingCountry = trainingCountry.trim();
-    const trimmedClinicalRoleOther = clinicalRoleOther.trim();
-    const trimmedBoardCertified = boardCertified.trim();
-    const trimmedClinicalSubspecialty = clinicalSubspecialty.trim();
-    const trimmedExperienceYears = experienceYears.trim();
-    const trimmedAccessCode = accessCode.trim();
+
+    const trimmedTrainingCountry =
+      trainingCountry.trim();
+
+    const trimmedClinicalRoleOther =
+      clinicalRoleOther.trim();
+
+    const trimmedBoardCertified =
+      boardCertified.trim();
+
+    const trimmedClinicalSubspecialty =
+      clinicalSubspecialty.trim();
+
+    const trimmedExperienceYears =
+      experienceYears.trim();
+
+    const trimmedAccessCode =
+      accessCode.trim();
 
     if (!trimmedName) {
       setError("Please enter your full name.");
@@ -155,27 +271,40 @@ export default function Home() {
     }
 
     if (!trimmedTrainingCountry) {
-      setError("Please enter the country of your primary clinical training.");
+      setError(
+        "Please enter the country of your primary clinical training."
+      );
       return;
     }
 
     if (!clinicalRole) {
-      setError("Please select your current clinical role.");
+      setError(
+        "Please select your current clinical role."
+      );
       return;
     }
 
-    if (hasOtherClinicalRole && !trimmedClinicalRoleOther) {
-      setError("Please specify your clinical role.");
+    if (
+      hasOtherClinicalRole &&
+      !trimmedClinicalRoleOther
+    ) {
+      setError(
+        "Please specify your clinical role."
+      );
       return;
     }
 
     if (!trimmedDegree) {
-      setError("Please specify your professional degree(s).");
+      setError(
+        "Please specify your professional degree(s)."
+      );
       return;
     }
 
     if (!trimmedBoardCertified) {
-      setError("Please indicate whether you have board certification.");
+      setError(
+        "Please indicate whether you have board certification."
+      );
       return;
     }
 
@@ -194,25 +323,39 @@ export default function Home() {
     }
 
     if (!/^\d{4}$/.test(trimmedAccessCode)) {
-      setError("Access Code must be a 4-digit number.");
+      setError(
+        "Access Code must be a 4-digit number."
+      );
       return;
     }
 
     try {
       setSubmitting(true);
 
-      const accessInfo = await resolveAccessCodeInfo(trimmedAccessCode);
+      const accessInfo =
+        await resolveAccessCodeInfo(
+          trimmedAccessCode
+        );
 
       if (!accessInfo) {
         setError(
-          "Invalid access code. No matching annotation/review assignment was found."
+          "Invalid access code. No matching MPOG or MOVER annotation/review assignment was found."
         );
         return;
       }
 
+      /*
+       * Clear data from the previous case/session.
+       *
+       * consentInfo is deliberately removed so that a new login
+       * must review and accept the consent page.
+       */
       localStorage.removeItem("gameData");
-      localStorage.removeItem("currentDisplayCaseId");
+      localStorage.removeItem(
+        "currentDisplayCaseId"
+      );
       localStorage.removeItem("consentInfo");
+      localStorage.removeItem("isUserGuideMode");
 
       const participantInfo = {
         name: trimmedName,
@@ -222,113 +365,237 @@ export default function Home() {
         degrees: [trimmedDegree],
         degreeOther: "",
 
-        trainingCountry: trimmedTrainingCountry,
+        trainingCountry:
+          trimmedTrainingCountry,
 
         clinicalRole,
-        clinicalRoleOther: trimmedClinicalRoleOther,
 
-        boardCertified: trimmedBoardCertified,
-        clinicalSubspecialty: trimmedClinicalSubspecialty,
+        clinicalRoleOther:
+          hasOtherClinicalRole
+            ? trimmedClinicalRoleOther
+            : "",
 
-        experienceYears: trimmedExperienceYears,
+        boardCertified:
+          trimmedBoardCertified,
 
-        accessCode: trimmedAccessCode,
-        doctorId: accessInfo.doctorId,
-        workflowMode: accessInfo.workflowMode,
-        annotationCode: accessInfo.annotationCode,
+        clinicalSubspecialty:
+          trimmedClinicalSubspecialty,
 
-        timestamp: new Date().toISOString(),
+        experienceYears:
+          trimmedExperienceYears,
+
+        accessCode:
+          trimmedAccessCode,
+
+        doctorId:
+          accessInfo.doctorId,
+
+        workflowMode:
+          accessInfo.workflowMode,
+
+        annotationCode:
+          accessInfo.annotationCode,
+
+        reviewCode:
+          accessInfo.reviewCode,
+
+        datasetSource:
+          accessInfo.datasetSource,
+
+        timestamp:
+          new Date().toISOString(),
       };
 
-      localStorage.setItem("participantInfo", JSON.stringify(participantInfo));
-      localStorage.setItem("doctorAccessCode", trimmedAccessCode);
-      localStorage.setItem("doctorId", accessInfo.doctorId);
-      localStorage.setItem("loginWorkflowMode", accessInfo.workflowMode);
-      localStorage.setItem("currentWorkflowMode", accessInfo.workflowMode);
+      /*
+       * This is the key line that was missing.
+       *
+       * The consent page checks participantInfo.
+       * If participantInfo is not saved, it redirects back to "/".
+       */
+      localStorage.setItem(
+        "participantInfo",
+        JSON.stringify(participantInfo)
+      );
+
+      localStorage.setItem(
+        "doctorAccessCode",
+        trimmedAccessCode
+      );
+
+      localStorage.setItem(
+        "doctorId",
+        accessInfo.doctorId
+      );
+
+      localStorage.setItem(
+        "annotationCode",
+        accessInfo.annotationCode
+      );
+
+      localStorage.setItem(
+        "loginWorkflowMode",
+        accessInfo.workflowMode
+      );
+
+      localStorage.setItem(
+        "currentWorkflowMode",
+        accessInfo.workflowMode
+      );
+
+      localStorage.setItem(
+        "currentDatasetSource",
+        accessInfo.datasetSource
+      );
+
+      localStorage.setItem(
+        "datasetSource",
+        accessInfo.datasetSource
+      );
+
+      if (accessInfo.reviewCode) {
+        localStorage.setItem(
+          "reviewCode",
+          accessInfo.reviewCode
+        );
+      } else {
+        localStorage.removeItem("reviewCode");
+      }
+
+      console.log(
+        "[Login] participant information saved:",
+        {
+          doctorId: accessInfo.doctorId,
+          workflowMode:
+            accessInfo.workflowMode,
+          annotationCode:
+            accessInfo.annotationCode,
+          reviewCode:
+            accessInfo.reviewCode,
+          datasetSource:
+            accessInfo.datasetSource,
+        }
+      );
 
       router.push("/consent");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Login error:", err);
-      setError(err?.message ?? "Failed to validate access code.");
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to validate access code."
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
-      <div className="max-w-3xl w-full bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
-        <h1 className="text-3xl font-bold text-center mb-2">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-8">
+      <div className="flex w-full max-w-3xl flex-col items-center rounded-lg bg-white p-8 shadow-lg">
+        <h1 className="mb-2 text-center text-3xl font-bold">
           Welcome to the AnesthesiaGPT Project
         </h1>
 
-        <p className="text-gray-600 text-center mb-8">
-          Interpret intraoperative vital signs, annotate abnormalities, and
-          provide clinical reasoning.
+        <p className="mb-8 text-center text-gray-600">
+          Interpret intraoperative vital signs,
+          annotate abnormalities, and provide
+          clinical reasoning.
         </p>
 
         <div className="w-full max-w-md">
-          <h2 className="text-xl font-semibold text-center mb-4">
+          <h2 className="mb-4 text-center text-xl font-semibold">
             Participant Information
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name">
+                Full Name
+              </Label>
+
               <Input
                 id="name"
                 placeholder="Enter your full name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="gender">Gender</Label>
+              <Label htmlFor="gender">
+                Gender
+              </Label>
+
               <Input
                 id="gender"
                 placeholder="Enter your gender"
                 value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                onChange={(e) =>
+                  setGender(e.target.value)
+                }
               />
+
               <p className="text-xs text-gray-500">
-                This field will be used only for analysis of annotation behavior
+                This field will be used only for
+                analysis of annotation behavior
                 across participants.
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="degree">Professional Degree</Label>
+              <Label htmlFor="degree">
+                Professional Degree
+              </Label>
+
               <Input
                 id="degree"
                 placeholder="e.g., MD, PhD, MS, MD-PhD"
                 value={degree}
-                onChange={(e) => setDegree(e.target.value)}
+                onChange={(e) =>
+                  setDegree(e.target.value)
+                }
                 required
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="trainingCountry">
-                Country and State of Primary Clinical Training
+                Country and State of Primary
+                Clinical Training
               </Label>
+
               <Input
                 id="trainingCountry"
-                placeholder="e.g., United States, China, India"
+                placeholder="e.g., United States, California; China; India"
                 value={trainingCountry}
-                onChange={(e) => setTrainingCountry(e.target.value)}
+                onChange={(e) =>
+                  setTrainingCountry(
+                    e.target.value
+                  )
+                }
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="clinicalRole">Current Clinical Role</Label>
+              <Label htmlFor="clinicalRole">
+                Current Clinical Role
+              </Label>
+
               <select
                 id="clinicalRole"
                 value={clinicalRole}
                 onChange={(e) => {
-                  const value = e.target.value;
+                  const value =
+                    e.target.value;
+
                   setClinicalRole(value);
 
                   if (value !== "Other") {
@@ -341,49 +608,91 @@ export default function Home() {
                 <option value="" disabled>
                   Select your current role
                 </option>
-                <option value="Resident">Resident</option>
-                <option value="Fellow">Fellow</option>
-                <option value="Attending physician">Attending physician</option>
-                <option value="Nurse anesthetist">Nurse anesthetist</option>
-                <option value="Other">Other</option>
+
+                <option value="Resident">
+                  Resident
+                </option>
+
+                <option value="Fellow">
+                  Fellow
+                </option>
+
+                <option value="Attending physician">
+                  Attending physician
+                </option>
+
+                <option value="Nurse anesthetist">
+                  Nurse anesthetist
+                </option>
+
+                <option value="Other">
+                  Other
+                </option>
               </select>
 
               {hasOtherClinicalRole && (
                 <div className="space-y-2">
                   <Label htmlFor="clinicalRoleOther">
-                    Please specify your clinical role
+                    Please specify your clinical
+                    role
                   </Label>
+
                   <Input
                     id="clinicalRoleOther"
                     placeholder="Enter your clinical role"
                     value={clinicalRoleOther}
-                    onChange={(e) => setClinicalRoleOther(e.target.value)}
-                    required={hasOtherClinicalRole}
+                    onChange={(e) =>
+                      setClinicalRoleOther(
+                        e.target.value
+                      )
+                    }
+                    required
                   />
                 </div>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="boardCertified">Board Certification</Label>
+              <Label htmlFor="boardCertified">
+                Board Certification
+              </Label>
+
               <select
                 id="boardCertified"
                 value={boardCertified}
-                onChange={(e) => setBoardCertified(e.target.value)}
+                onChange={(e) =>
+                  setBoardCertified(
+                    e.target.value
+                  )
+                }
                 className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
                 required
               >
                 <option value="" disabled>
-                  Select your board certification status
+                  Select your board certification
+                  status
                 </option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="In progress">In progress</option>
-                <option value="Not applicable">Not applicable</option>
+
+                <option value="Yes">
+                  Yes
+                </option>
+
+                <option value="No">
+                  No
+                </option>
+
+                <option value="In progress">
+                  In progress
+                </option>
+
+                <option value="Not applicable">
+                  Not applicable
+                </option>
               </select>
 
               <p className="text-xs text-gray-500">
-                Please indicate whether you currently hold board certification.
+                Please indicate whether you
+                currently hold board certification.
               </p>
             </div>
 
@@ -391,39 +700,55 @@ export default function Home() {
               <Label htmlFor="clinicalSubspecialty">
                 Clinical Subspecialty
               </Label>
+
               <Input
                 id="clinicalSubspecialty"
                 placeholder="e.g., Pediatric anesthesia, Cardiac anesthesia, Critical care, Pain medicine, None"
                 value={clinicalSubspecialty}
-                onChange={(e) => setClinicalSubspecialty(e.target.value)}
+                onChange={(e) =>
+                  setClinicalSubspecialty(
+                    e.target.value
+                  )
+                }
                 required
               />
 
               <p className="text-xs text-gray-500">
-                Please enter your clinical subspecialty, or enter None if not
+                Please enter your clinical
+                subspecialty, or enter None if not
                 applicable.
               </p>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="experienceYears">
-                Approximate Years of Hands-on Anesthesia-Related Clinical Care
+                Approximate Years of Hands-on
+                Anesthesia-Related Clinical Care
               </Label>
+
               <Input
                 id="experienceYears"
                 placeholder="e.g., 2, 5, 12"
                 value={experienceYears}
-                onChange={(e) => setExperienceYears(e.target.value)}
+                onChange={(e) =>
+                  setExperienceYears(
+                    e.target.value
+                  )
+                }
                 required
               />
 
               <p className="text-xs text-gray-500">
-                Please include both supervised training and independent practice.
+                Please include both supervised
+                training and independent practice.
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="accessCode">Access Code</Label>
+              <Label htmlFor="accessCode">
+                Access Code
+              </Label>
+
               <Input
                 id="accessCode"
                 type="text"
@@ -432,14 +757,20 @@ export default function Home() {
                 placeholder="Enter your 4-digit access code"
                 value={accessCode}
                 onChange={(e) => {
-                  const onlyDigits = e.target.value.replace(/\D/g, "");
+                  const onlyDigits =
+                    e.target.value.replace(
+                      /\D/g,
+                      ""
+                    );
+
                   setAccessCode(onlyDigits);
                 }}
                 required
               />
 
               <p className="text-xs text-gray-500">
-                Please enter the 4-digit code provided to you.
+                Please enter the 4-digit code
+                provided to you.
               </p>
             </div>
 
@@ -449,14 +780,20 @@ export default function Home() {
               </div>
             ) : null}
 
-            <Button type="submit" className="w-full" disabled={submitting}>
-              {submitting ? "Logging in..." : "Log In"}
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={submitting}
+            >
+              {submitting
+                ? "Logging in..."
+                : "Log In"}
             </Button>
           </form>
         </div>
 
-        <div className="flex justify-between w-full mt-12">
-          <div className="relative w-36 h-24">
+        <div className="mt-12 flex w-full justify-between">
+          <div className="relative h-24 w-36">
             <Image
               src="/images/university-logo.png"
               alt="University Logo"
@@ -466,7 +803,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="relative w-32 h-24">
+          <div className="relative h-24 w-32">
             <Image
               src="/images/medicine-logo.png"
               alt="School of Medicine Logo"

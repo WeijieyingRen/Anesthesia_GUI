@@ -127,60 +127,166 @@ let accessCodeDoctorMapPromise: Promise<Map<string, string>> | null = null;
 let accessCodeLookupPromise: Promise<Map<string, AccessCodeLookupEntry>> | null =
   null;
 
-async function loadAccessCodeLookup(): Promise<
+  async function loadAccessCodeLookup(): Promise<
   Map<string, AccessCodeLookupEntry>
 > {
-  if (accessCodeLookupPromise) return accessCodeLookupPromise;
+  if (accessCodeLookupPromise) {
+    return accessCodeLookupPromise;
+  }
 
   accessCodeLookupPromise = (async () => {
-    const map = new Map<string, AccessCodeLookupEntry>();
+    const map = new Map<
+      string,
+      AccessCodeLookupEntry
+    >();
 
-    const reviewCsvPath = path.join(
-      process.cwd(),
-      "public",
-      "assigned_code",
-      "access_review_code.csv"
-    );
+    /*
+     * MPOG 和 MOVER 分别使用自己的
+     * annotation/review access-code lookup 文件。
+     */
+    const lookupFileNames = [
+      "access_review_code.csv",
+      "mover_access_review_code.csv",
+    ];
 
-    try {
-      const raw = await fs.readFile(reviewCsvPath, "utf-8");
-      const lines = raw.split(/\r?\n/).filter(Boolean);
-      const header = lines[0]?.split(",") ?? [];
+    for (const fileName of lookupFileNames) {
+      const csvPath = path.join(
+        process.cwd(),
+        "public",
+        "assigned_code",
+        fileName
+      );
 
-      const doctorIdx = header.indexOf("doctor_id");
-      const annotationIdx = header.indexOf("annotation_code");
-      const reviewIdx = header.indexOf("review_code");
+      let raw: string;
 
-      if (doctorIdx >= 0 && annotationIdx >= 0 && reviewIdx >= 0) {
-        for (const line of lines.slice(1)) {
-          const cols = line.split(",");
+      try {
+        raw = await fs.readFile(
+          csvPath,
+          "utf-8"
+        );
+      } catch (error) {
+        console.error(
+          `[submit] Failed to read ${fileName}:`,
+          error
+        );
 
-          const doctorId = String(cols[doctorIdx] ?? "").trim();
-          const annotationCode = String(cols[annotationIdx] ?? "").trim();
-          const reviewCode = String(cols[reviewIdx] ?? "").trim();
+        throw new Error(
+          `Failed to load access-code lookup file: ${fileName}`
+        );
+      }
 
-          if (!doctorId || !annotationCode) continue;
+      const lines = raw
+        .split(/\r?\n/)
+        .filter(
+          (line) =>
+            String(line ?? "").trim() !== ""
+        );
 
-          map.set(annotationCode, {
-            doctorId,
-            workflowMode: "annotation",
-            annotationCode,
-            reviewCode: reviewCode || null,
-          });
+      if (lines.length === 0) {
+        throw new Error(
+          `Access-code lookup file is empty: ${fileName}`
+        );
+      }
 
-          if (reviewCode) {
-            map.set(reviewCode, {
-              doctorId,
-              workflowMode: "review",
-              annotationCode,
-              reviewCode,
-            });
+      const header =
+        lines[0]?.split(",").map((value) =>
+          String(value ?? "").trim()
+        ) ?? [];
+
+      const doctorIdx =
+        header.indexOf("doctor_id");
+
+      const annotationIdx =
+        header.indexOf("annotation_code");
+
+      const reviewIdx =
+        header.indexOf("review_code");
+
+      if (
+        doctorIdx < 0 ||
+        annotationIdx < 0 ||
+        reviewIdx < 0
+      ) {
+        throw new Error(
+          `${fileName} is missing one or more required columns: doctor_id, annotation_code, review_code`
+        );
+      }
+
+      for (const line of lines.slice(1)) {
+        const cols = line.split(",");
+
+        const doctorId = String(
+          cols[doctorIdx] ?? ""
+        ).trim();
+
+        const annotationCode = String(
+          cols[annotationIdx] ?? ""
+        ).trim();
+
+        const reviewCode = String(
+          cols[reviewIdx] ?? ""
+        ).trim();
+
+        if (
+          !doctorId ||
+          !annotationCode
+        ) {
+          continue;
+        }
+
+        /*
+         * annotation code 必须唯一。
+         */
+        if (map.has(annotationCode)) {
+          throw new Error(
+            `Duplicate access code ${annotationCode} found while loading ${fileName}. MPOG and MOVER access codes must not overlap.`
+          );
+        }
+
+        map.set(annotationCode, {
+          doctorId,
+          workflowMode: "annotation",
+          annotationCode,
+          reviewCode:
+            reviewCode || null,
+        });
+
+        /*
+         * review code 指向同一个 annotation root。
+         *
+         * 例如：
+         * annotationCode = 3720
+         * reviewCode = 8462
+         *
+         * 8462 登录后，storage root 仍然是 3720。
+         */
+        if (reviewCode) {
+          if (map.has(reviewCode)) {
+            throw new Error(
+              `Duplicate access code ${reviewCode} found while loading ${fileName}. MPOG and MOVER access codes must not overlap.`
+            );
           }
+
+          map.set(reviewCode, {
+            doctorId,
+            workflowMode: "review",
+            annotationCode,
+            reviewCode,
+          });
         }
       }
-    } catch (error) {
-      console.error("Failed to load access_review_code.csv:", error);
     }
+
+    console.log(
+      "[submit] access-code lookup loaded",
+      {
+        lookupFiles:
+          lookupFileNames,
+
+        totalAccessCodes:
+          map.size,
+      }
+    );
 
     return map;
   })();
@@ -191,18 +297,20 @@ async function loadAccessCodeLookup(): Promise<
 async function resolveAccessCodeEntry(
   accessCode: string | null | undefined
 ): Promise<AccessCodeLookupEntry | null> {
-  if (!accessCode) return null;
+  const normalizedAccessCode =
+    String(accessCode ?? "").trim();
 
-  try {
-    const map = await loadAccessCodeLookup();
-    return map.get(String(accessCode).trim()) ?? null;
-  } catch (error) {
-    console.error(
-      "Failed to resolve access code from access_review_code.csv:",
-      error
-    );
+  if (!normalizedAccessCode) {
     return null;
   }
+
+  const map =
+    await loadAccessCodeLookup();
+
+  return (
+    map.get(normalizedAccessCode) ??
+    null
+  );
 }
 
 async function loadAccessCodeDoctorMap(): Promise<Map<string, string>> {
@@ -1042,16 +1150,87 @@ export async function POST(req: Request) {
 
     const answers = buildAnswers(body);
 
-    const submittedAccessCode = normalizeAccessCode(body);
-    const accessEntry = await resolveAccessCodeEntry(
-      submittedAccessCode
-    );
+/*
+ * submittedAccessCode 是用户实际登录时输入的 code。
+ *
+ * 它可能是：
+ * - annotation code
+ * - review code
+ */
+const submittedAccessCode =
+  normalizeAccessCode(body);
 
-    const doctorId = await normalizeDoctorId(body, accessEntry);
+const accessEntry =
+  await resolveAccessCodeEntry(
+    submittedAccessCode
+  );
 
-    const accessCode = normalizeStorageRootAccessCode(
-      body,
-      accessEntry
+/*
+ * 不再允许 lookup 失败后，
+ * 把用户输入的 review code 直接作为 Drive 根目录。
+ */
+if (!accessEntry) {
+  console.error(
+    "[submit] Access code was not found",
+    {
+      submittedAccessCode,
+      lookupFiles: [
+        "access_review_code.csv",
+        "mover_access_review_code.csv",
+      ],
+    }
+  );
+
+  return NextResponse.json(
+    {
+      ok: false,
+      error:
+        `Invalid access code ${submittedAccessCode}. ` +
+        "The code was not found in either the MPOG or MOVER access-code lookup file.",
+    },
+    {
+      status: 400,
+    }
+  );
+}
+
+    const doctorId =
+      await normalizeDoctorId(
+        body,
+        accessEntry
+      );
+
+    /*
+    * Google Drive 的根目录必须始终使用 annotation code。
+    *
+    * annotation 用户：
+    * annotationCode/annotation/...
+    *
+    * review 用户：
+    * annotationCode/review/...
+    */
+    const accessCode =
+      sanitizePathPart(
+        accessEntry.annotationCode
+      );
+
+    console.log(
+      "[submit] resolved storage destination",
+      {
+        submittedAccessCode,
+
+        storageRootAccessCode:
+          accessCode,
+
+        workflowMode:
+          accessEntry.workflowMode,
+
+        annotationCode:
+          accessEntry.annotationCode,
+
+        reviewCode:
+          accessEntry.reviewCode,
+      }
     );
 
     const patientId = normalizePatientId(body);
@@ -1203,7 +1382,7 @@ export async function POST(req: Request) {
       },
 
       debug_version:
-        "access-code-index-submit-route-v11-dataset-source-aware",
+      "access-code-index-submit-route-v12-shared-annotation-root",
     });
   } catch (error) {
     console.error("Submit route error:", error);
