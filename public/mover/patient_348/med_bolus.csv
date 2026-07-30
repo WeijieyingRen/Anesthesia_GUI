@@ -1,13 +1,29 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-709bdd46425cbe87,040c02bffd3b3be1,propofol,sedative,2020-08-05 09:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-709bdd46425cbe87,040c02bffd3b3be1,nitroglycerin,vasodilator_or_rate_control,2020-08-05 10:55:00,50.0,mcg,IntraVENOUS,nitroGLYcerin 50 mg/250 mL infusion (200 mcg/mL),NITROGLYCERIN 50 MG/250 ML D5W PREMIX INFUSION (UCI),Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 16:51:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 16:55:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 16:59:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:05:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:12:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:21:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:30:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:36:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:42:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-709bdd46425cbe87,040c02bffd3b3be1,epinephrine,vasopressor,2020-08-05 17:51:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+709bdd46425cbe87,040c02bffd3b3be1,119106,fentanyl,opioid,2020-08-05 09:26:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,119103,propofol,sedative,2020-08-05 09:26:00,120.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+709bdd46425cbe87,040c02bffd3b3be1,121005,rocuronium,muscle_relaxant,2020-08-05 09:29:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,403,aminocaproic acid,rescue_or_correction,2020-08-05 10:20:00,5.0,g,IntraVENOUS,aminocaproic acid (AMICAR) injection,AMINOCAPROIC ACID 250 MG/ML IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,119106,fentanyl,opioid,2020-08-05 10:25:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,121005,rocuronium,muscle_relaxant,2020-08-05 10:25:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,10181,heparin,anticoagulant,2020-08-05 10:46:00,10000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,505230,nitroglycerin,vasodilator_or_rate_control,2020-08-05 10:55:00,15.0,mcg,IntraVENOUS,nitroGLYcerin 50 mg/250 mL infusion (200 mcg/mL),NITROGLYCERIN 50 MG/250 ML D5W PREMIX INFUSION (UCI),Given
+709bdd46425cbe87,040c02bffd3b3be1,10181,heparin,anticoagulant,2020-08-05 11:18:00,10000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,121005,rocuronium,muscle_relaxant,2020-08-05 16:40:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,48072,esmolol,vasodilator_or_rate_control,2020-08-05 16:44:00,40.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 16:51:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,114429,vasopressin,vasopressor,2020-08-05 16:52:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 16:55:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,114429,vasopressin,vasopressor,2020-08-05 16:58:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 16:59:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:05:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:12:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:21:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:30:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:36:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:42:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,1306,calcium chloride,rescue_or_correction,2020-08-05 17:45:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,129393,epinephrine,vasopressor,2020-08-05 17:51:00,0.1,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+709bdd46425cbe87,040c02bffd3b3be1,1306,calcium chloride,rescue_or_correction,2020-08-05 17:58:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,119106,fentanyl,opioid,2020-08-05 18:30:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,1306,calcium chloride,rescue_or_correction,2020-08-05 18:59:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+709bdd46425cbe87,040c02bffd3b3be1,121005,rocuronium,muscle_relaxant,2020-08-05 19:00:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given

@@ -1,8 +1,16 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-5315f373d7751a70,6c77ae6ed06b0fd7,propofol,sedative,2021-06-04 07:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5315f373d7751a70,6c77ae6ed06b0fd7,sugammadex,reversal,2021-06-04 08:39:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
-5315f373d7751a70,6c77ae6ed06b0fd7,propofol,sedative,2021-06-04 08:45:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5315f373d7751a70,6c77ae6ed06b0fd7,ephedrine,vasopressor,2021-06-04 11:09:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-5315f373d7751a70,6c77ae6ed06b0fd7,propofol,sedative,2021-06-04 11:28:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5315f373d7751a70,6c77ae6ed06b0fd7,propofol,sedative,2021-06-04 11:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5315f373d7751a70,6c77ae6ed06b0fd7,propofol,sedative,2021-06-04 14:31:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5315f373d7751a70,6c77ae6ed06b0fd7,41381,midazolam,sedative,2021-06-04 07:18:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,119106,fentanyl,opioid,2021-06-04 07:21:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,119103,propofol,sedative,2021-06-04 07:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,59728,rocuronium,muscle_relaxant,2021-06-04 07:23:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,118627,sugammadex,reversal,2021-06-04 08:39:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,119103,propofol,sedative,2021-06-04 08:45:00,70.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,500840,phenylephrine,vasopressor,2021-06-04 09:22:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,2833,ephedrine,vasopressor,2021-06-04 11:09:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,119103,propofol,sedative,2021-06-04 11:28:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,119103,propofol,sedative,2021-06-04 11:30:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,1306,calcium chloride,rescue_or_correction,2021-06-04 12:11:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,500840,phenylephrine,vasopressor,2021-06-04 13:37:00,800.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,59059,ondansetron,antiemetic,2021-06-04 13:50:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,119103,propofol,sedative,2021-06-04 14:31:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5315f373d7751a70,6c77ae6ed06b0fd7,3758,hydromorphone,opioid,2021-06-04 14:49:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

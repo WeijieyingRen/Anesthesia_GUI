@@ -1,2 +1,9 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-7506e1575c53e4c9,d56efe8fc9c3b38b,propofol,sedative,2019-12-09 08:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+7506e1575c53e4c9,d56efe8fc9c3b38b,2332,dexamethasone,antiemetic,2019-12-09 07:55:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,119106,fentanyl,opioid,2019-12-09 08:30:00,30.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,119103,propofol,sedative,2019-12-09 08:30:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,119106,fentanyl,opioid,2019-12-09 08:50:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,119106,fentanyl,opioid,2019-12-09 08:59:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,2332,dexamethasone,antiemetic,2019-12-09 11:41:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,3758,hydromorphone,opioid,2019-12-09 12:00:00,1.0,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7506e1575c53e4c9,d56efe8fc9c3b38b,48072,esmolol,vasodilator_or_rate_control,2019-12-09 12:12:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given

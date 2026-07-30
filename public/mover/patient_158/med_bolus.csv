@@ -1,4 +1,13 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-397eb7933bd5feda,4db209f3fb115745,propofol,sedative,2019-03-16 07:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-397eb7933bd5feda,4db209f3fb115745,tranexamic acid,rescue_or_correction,2019-03-16 09:15:00,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),Bolus
-397eb7933bd5feda,4db209f3fb115745,propofol,sedative,2019-03-16 09:35:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+397eb7933bd5feda,4db209f3fb115745,500840,phenylephrine,vasopressor,2019-03-16 07:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,119103,propofol,sedative,2019-03-16 07:26:00,80.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+397eb7933bd5feda,4db209f3fb115745,119661,succinylcholine,muscle_relaxant,2019-03-16 07:26:00,80.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+397eb7933bd5feda,4db209f3fb115745,2332,dexamethasone,antiemetic,2019-03-16 07:45:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,3758,hydromorphone,opioid,2019-03-16 09:15:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,59059,ondansetron,antiemetic,2019-03-16 09:15:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,453446,tranexamic acid,rescue_or_correction,2019-03-16 09:15:00,1000.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),Bolus
+397eb7933bd5feda,4db209f3fb115745,3758,hydromorphone,opioid,2019-03-16 09:33:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,119103,propofol,sedative,2019-03-16 09:35:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+397eb7933bd5feda,4db209f3fb115745,119106,fentanyl,opioid,2019-03-16 09:38:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,119106,fentanyl,opioid,2019-03-16 09:41:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+397eb7933bd5feda,4db209f3fb115745,119106,fentanyl,opioid,2019-03-16 10:01:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

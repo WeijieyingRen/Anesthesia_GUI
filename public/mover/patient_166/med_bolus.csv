@@ -1,7 +1,41 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-0ddc982aa2bd7384,f54770000d4dc94c,propofol,sedative,2019-11-21 07:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-0ddc982aa2bd7384,f54770000d4dc94c,ephedrine,vasopressor,2019-11-21 07:38:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0ddc982aa2bd7384,f54770000d4dc94c,ephedrine,vasopressor,2019-11-21 07:45:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0ddc982aa2bd7384,f54770000d4dc94c,ephedrine,vasopressor,2019-11-21 07:50:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0ddc982aa2bd7384,f54770000d4dc94c,ephedrine,vasopressor,2019-11-21 08:41:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0ddc982aa2bd7384,f54770000d4dc94c,ephedrine,vasopressor,2019-11-21 08:47:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+0ddc982aa2bd7384,f54770000d4dc94c,119106,fentanyl,opioid,2019-11-21 07:22:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,119103,propofol,sedative,2019-11-21 07:22:00,140.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 07:23:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2833,ephedrine,vasopressor,2019-11-21 07:38:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2833,ephedrine,vasopressor,2019-11-21 07:45:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2833,ephedrine,vasopressor,2019-11-21 07:50:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2332,dexamethasone,antiemetic,2019-11-21 08:00:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,119106,fentanyl,opioid,2019-11-21 08:37:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2833,ephedrine,vasopressor,2019-11-21 08:41:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 08:41:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2833,ephedrine,vasopressor,2019-11-21 08:47:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,8478,vasopressin,vasopressor,2019-11-21 08:47:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,119106,fentanyl,opioid,2019-11-21 08:52:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,119106,fentanyl,opioid,2019-11-21 09:01:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 09:43:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,500840,phenylephrine,vasopressor,2019-11-21 10:04:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 10:36:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,1306,calcium chloride,rescue_or_correction,2019-11-21 10:57:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,1306,calcium chloride,rescue_or_correction,2019-11-21 11:02:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,1306,calcium chloride,rescue_or_correction,2019-11-21 11:07:00,400.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 11:12:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,500840,phenylephrine,vasopressor,2019-11-21 11:24:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,500840,phenylephrine,vasopressor,2019-11-21 11:33:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,8478,vasopressin,vasopressor,2019-11-21 11:36:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,8478,vasopressin,vasopressor,2019-11-21 11:52:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 11:55:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,2332,dexamethasone,antiemetic,2019-11-21 12:05:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,59059,ondansetron,antiemetic,2019-11-21 12:05:00,16.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 12:24:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 13:50:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,121005,rocuronium,muscle_relaxant,2019-11-21 14:32:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+0ddc982aa2bd7384,f54770000d4dc94c,1306,calcium chloride,rescue_or_correction,2019-11-21 15:06:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,119106,fentanyl,opioid,2019-11-21 15:25:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,1306,calcium chloride,rescue_or_correction,2019-11-21 16:29:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,8478,vasopressin,vasopressor,2019-11-21 16:29:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,500840,phenylephrine,vasopressor,2019-11-21 16:43:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,59059,ondansetron,antiemetic,2019-11-21 16:51:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,118625,sugammadex,reversal,2019-11-21 16:51:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,119106,fentanyl,opioid,2019-11-21 16:52:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0ddc982aa2bd7384,f54770000d4dc94c,8478,vasopressin,vasopressor,2019-11-21 16:58:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given

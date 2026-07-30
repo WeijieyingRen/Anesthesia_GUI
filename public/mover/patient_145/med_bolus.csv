@@ -1,3 +1,16 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-64fd5343a2bd81a8,58a330480175a534,propofol,sedative,2022-04-08 05:20:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-64fd5343a2bd81a8,58a330480175a534,propofol,sedative,2022-04-08 05:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+64fd5343a2bd81a8,58a330480175a534,119106,fentanyl,opioid,2022-04-08 05:20:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,119103,propofol,sedative,2022-04-08 05:20:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+64fd5343a2bd81a8,58a330480175a534,59728,rocuronium,muscle_relaxant,2022-04-08 05:20:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,119106,fentanyl,opioid,2022-04-08 05:22:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,119103,propofol,sedative,2022-04-08 05:22:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+64fd5343a2bd81a8,58a330480175a534,2332,dexamethasone,antiemetic,2022-04-08 05:29:00,8.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,59728,rocuronium,muscle_relaxant,2022-04-08 06:32:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,119106,fentanyl,opioid,2022-04-08 06:36:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,119106,fentanyl,opioid,2022-04-08 06:44:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,119106,fentanyl,opioid,2022-04-08 08:17:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,59728,rocuronium,muscle_relaxant,2022-04-08 08:17:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,59728,rocuronium,muscle_relaxant,2022-04-08 08:21:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,59728,rocuronium,muscle_relaxant,2022-04-08 08:57:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+64fd5343a2bd81a8,58a330480175a534,120326,glycopyrrolate,reversal,2022-04-08 09:36:00,0.8,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+64fd5343a2bd81a8,58a330480175a534,117431,neostigmine,reversal,2022-04-08 09:36:00,4.5,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

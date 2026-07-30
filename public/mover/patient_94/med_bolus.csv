@@ -1,17 +1,26 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:18:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:24:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:29:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:32:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:35:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:38:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,ephedrine,vasopressor,2020-10-28 08:40:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:41:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:43:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:46:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:49:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:52:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-35c35ec5ce66541f,db9a0dc522d08288,propofol,sedative,2020-10-28 08:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+35c35ec5ce66541f,db9a0dc522d08288,41381,midazolam,sedative,2020-10-28 07:45:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119106,fentanyl,opioid,2020-10-28 08:09:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119106,fentanyl,opioid,2020-10-28 08:15:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:15:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:18:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119106,fentanyl,opioid,2020-10-28 08:20:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:21:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:24:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:26:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119106,fentanyl,opioid,2020-10-28 08:27:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:29:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:32:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,500840,phenylephrine,vasopressor,2020-10-28 08:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:35:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,500840,phenylephrine,vasopressor,2020-10-28 08:38:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:38:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,2833,ephedrine,vasopressor,2020-10-28 08:40:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,500840,phenylephrine,vasopressor,2020-10-28 08:41:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:41:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:43:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,114429,vasopressin,vasopressor,2020-10-28 08:45:00,2.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:46:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:49:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:52:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+35c35ec5ce66541f,db9a0dc522d08288,119103,propofol,sedative,2020-10-28 08:55:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

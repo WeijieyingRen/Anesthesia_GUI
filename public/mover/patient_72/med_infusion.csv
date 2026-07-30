@@ -1,2 +1,3 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
-120fc21de435802a,ef7375f6f56cf268,fentanyl,opioid,2019-12-15 16:17:00,2019-12-15,2019-12-15,2.0,ml/hr,Epidural,fentaNYL 2 mcg/mL-bupivacaine 0.1% epidural infusion,FENTANYL-BUPIVACAINE-NACL 0.2-0.1-0.9 MG/100ML-% EP SOLN,New Bag
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+120fc21de435802a,ef7375f6f56cf268,120409,fentanyl,opioid,2019-12-15 16:17:00,2019-12-15 18:10:00,5.0,mL/hr,Epidural,fentaNYL 2 mcg/mL-bupivacaine 0.1% epidural infusion,FENTANYL-BUPIVACAINE-NACL 0.2-0.1-0.9 MG/100ML-% EP SOLN,New Bag,anesthesia_end,False,True,2019-12-15 16:17:00
+120fc21de435802a,ef7375f6f56cf268,505995,fentanyl,opioid,2019-12-15 18:04:00,2019-12-15 18:10:00,,,Epidural,fentaNYL 2 mcg/mL bupivacaine 0.1% in sodium chloride 0.9% 100 mL Pain Management PCeA,FENTANYL 2 MCG/ML BUPIVACAINE 0.1% PAIN MANAGEMENT PCEA (UCI),Rate Verify,anesthesia_end,False,True,2019-12-15 18:04:00

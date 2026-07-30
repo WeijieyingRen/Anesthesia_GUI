@@ -1,4 +1,22 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-60fb115b0294379c,48d6820d00f60f16,propofol,sedative,2019-07-11 07:28:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-60fb115b0294379c,48d6820d00f60f16,propofol,sedative,2019-07-11 16:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-60fb115b0294379c,48d6820d00f60f16,propofol,sedative,2019-07-11 16:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+60fb115b0294379c,48d6820d00f60f16,2332,dexamethasone,antiemetic,2019-07-11 07:21:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,119106,fentanyl,opioid,2019-07-11 07:28:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,4237,ketamine,sedative,2019-07-11 07:28:00,30.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,119103,propofol,sedative,2019-07-11 07:28:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+60fb115b0294379c,48d6820d00f60f16,59727,rocuronium,muscle_relaxant,2019-07-11 07:28:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,500840,phenylephrine,vasopressor,2019-07-11 07:40:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,4237,ketamine,sedative,2019-07-11 08:15:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,118625,sugammadex,reversal,2019-07-11 08:15:00,100.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,4237,ketamine,sedative,2019-07-11 11:11:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,119106,fentanyl,opioid,2019-07-11 11:15:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,4237,ketamine,sedative,2019-07-11 12:03:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,3758,hydromorphone,opioid,2019-07-11 13:04:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,500840,phenylephrine,vasopressor,2019-07-11 13:04:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,3758,hydromorphone,opioid,2019-07-11 13:24:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,4237,ketamine,sedative,2019-07-11 13:25:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,2332,dexamethasone,antiemetic,2019-07-11 13:59:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,59059,ondansetron,antiemetic,2019-07-11 13:59:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,3758,hydromorphone,opioid,2019-07-11 14:03:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,3758,hydromorphone,opioid,2019-07-11 14:20:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+60fb115b0294379c,48d6820d00f60f16,119103,propofol,sedative,2019-07-11 16:15:00,25.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+60fb115b0294379c,48d6820d00f60f16,119103,propofol,sedative,2019-07-11 16:23:00,25.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

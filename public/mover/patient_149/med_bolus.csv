@@ -1,3 +1,14 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-8530816ca79f7802,38f1865ada185033,propofol,sedative,2021-04-30 02:49:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8530816ca79f7802,38f1865ada185033,propofol,sedative,2021-04-30 02:51:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+8530816ca79f7802,38f1865ada185033,119106,fentanyl,opioid,2021-04-30 02:48:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8530816ca79f7802,38f1865ada185033,119103,propofol,sedative,2021-04-30 02:49:00,120.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8530816ca79f7802,38f1865ada185033,121005,rocuronium,muscle_relaxant,2021-04-30 02:50:00,90.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8530816ca79f7802,38f1865ada185033,119103,propofol,sedative,2021-04-30 02:51:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8530816ca79f7802,38f1865ada185033,2332,dexamethasone,antiemetic,2021-04-30 03:08:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+8530816ca79f7802,38f1865ada185033,121005,rocuronium,muscle_relaxant,2021-04-30 03:53:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8530816ca79f7802,38f1865ada185033,121005,rocuronium,muscle_relaxant,2021-04-30 04:35:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8530816ca79f7802,38f1865ada185033,121005,rocuronium,muscle_relaxant,2021-04-30 05:25:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8530816ca79f7802,38f1865ada185033,119106,fentanyl,opioid,2021-04-30 05:59:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8530816ca79f7802,38f1865ada185033,59059,ondansetron,antiemetic,2021-04-30 05:59:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+8530816ca79f7802,38f1865ada185033,121005,rocuronium,muscle_relaxant,2021-04-30 05:59:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8530816ca79f7802,38f1865ada185033,119106,fentanyl,opioid,2021-04-30 06:26:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8530816ca79f7802,38f1865ada185033,118625,sugammadex,reversal,2021-04-30 06:45:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

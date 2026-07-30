@@ -1,6 +1,37 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-803da2d92f477381,c06e43be1cd55f5d,propofol,sedative,2019-08-07 12:49:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-803da2d92f477381,c06e43be1cd55f5d,propofol,sedative,2019-08-07 12:50:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-803da2d92f477381,c06e43be1cd55f5d,propofol,sedative,2019-08-07 13:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-803da2d92f477381,c06e43be1cd55f5d,ephedrine,vasopressor,2019-08-07 13:45:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-803da2d92f477381,c06e43be1cd55f5d,ephedrine,vasopressor,2019-08-07 14:26:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 12:49:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119103,propofol,sedative,2019-08-07 12:49:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+803da2d92f477381,c06e43be1cd55f5d,119103,propofol,sedative,2019-08-07 12:50:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+803da2d92f477381,c06e43be1cd55f5d,119661,succinylcholine,muscle_relaxant,2019-08-07 12:51:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+803da2d92f477381,c06e43be1cd55f5d,119103,propofol,sedative,2019-08-07 13:10:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+803da2d92f477381,c06e43be1cd55f5d,48072,esmolol,vasodilator_or_rate_control,2019-08-07 13:24:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,2833,ephedrine,vasopressor,2019-08-07 13:45:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,2833,ephedrine,vasopressor,2019-08-07 14:26:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 16:46:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 16:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 17:03:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,8478,vasopressin,vasopressor,2019-08-07 17:04:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 17:23:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 18:22:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 18:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,500840,phenylephrine,vasopressor,2019-08-07 18:39:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,8478,vasopressin,vasopressor,2019-08-07 18:58:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,2332,dexamethasone,antiemetic,2019-08-07 19:01:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 20:10:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 20:17:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 22:44:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 23:04:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 23:15:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 23:25:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:30:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,59059,ondansetron,antiemetic,2019-08-07 23:32:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:33:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:35:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:38:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,119106,fentanyl,opioid,2019-08-07 23:41:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:41:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:43:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:46:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,5599,nitroglycerin,vasodilator_or_rate_control,2019-08-07 23:49:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,48072,esmolol,vasodilator_or_rate_control,2019-08-07 23:55:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+803da2d92f477381,c06e43be1cd55f5d,48072,esmolol,vasodilator_or_rate_control,2019-08-08 00:09:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given

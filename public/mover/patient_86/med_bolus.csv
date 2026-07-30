@@ -1,3 +1,43 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-07c084e5858e3f3c,46b7d8db91d25bc4,propofol,sedative,2021-10-26 07:28:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-07c084e5858e3f3c,46b7d8db91d25bc4,ephedrine,vasopressor,2021-10-26 07:34:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+07c084e5858e3f3c,46b7d8db91d25bc4,119106,fentanyl,opioid,2021-10-26 07:28:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,500840,phenylephrine,vasopressor,2021-10-26 07:28:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,119103,propofol,sedative,2021-10-26 07:28:00,70.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,119661,succinylcholine,muscle_relaxant,2021-10-26 07:28:00,80.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,2833,ephedrine,vasopressor,2021-10-26 07:34:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,500840,phenylephrine,vasopressor,2021-10-26 07:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 07:34:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 07:36:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 09:17:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 09:33:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,500840,phenylephrine,vasopressor,2021-10-26 10:11:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 10:11:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,500840,phenylephrine,vasopressor,2021-10-26 10:17:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,500840,phenylephrine,vasopressor,2021-10-26 10:23:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 10:23:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,500840,phenylephrine,vasopressor,2021-10-26 10:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 10:37:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 10:49:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 10:51:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 10:54:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 11:00:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 11:03:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 11:04:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 11:40:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 11:43:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 11:44:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 12:08:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 12:14:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,114429,vasopressin,vasopressor,2021-10-26 12:23:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 12:38:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 14:07:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 14:29:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,59728,rocuronium,muscle_relaxant,2021-10-26 14:50:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:01:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:03:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:07:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:09:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:12:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:15:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:18:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,10734,norepinephrine,vasopressor,2021-10-26 15:21:00,16.0,mcg,IntraVENOUS,norepinephrine (LEVOPHED) injection,NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN,Given
+07c084e5858e3f3c,46b7d8db91d25bc4,1306,calcium chloride,rescue_or_correction,2021-10-26 16:05:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given

@@ -1,3 +1,32 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-4f8a9edcd38bdc26,e2a395a6546d50fc,propofol,sedative,2019-08-15 08:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-4f8a9edcd38bdc26,e2a395a6546d50fc,propofol,sedative,2019-08-15 08:24:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+4f8a9edcd38bdc26,e2a395a6546d50fc,41381,midazolam,sedative,2019-08-15 08:16:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,41381,midazolam,sedative,2019-08-15 08:20:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 08:23:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119103,propofol,sedative,2019-08-15 08:23:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119103,propofol,sedative,2019-08-15 08:24:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 08:54:00,10.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,2332,dexamethasone,antiemetic,2019-08-15 09:00:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,5002,metoclopramide,antiemetic,2019-08-15 09:00:00,10.0,mg,IntraVENOUS,metoclopramide (REGLAN) injection,METOCLOPRAMIDE HCL 5 MG/ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 09:18:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 09:49:00,5.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 09:56:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 10:55:00,10.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 12:02:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 12:02:00,10.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 13:00:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,10181,heparin,anticoagulant,2019-08-15 13:02:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 13:09:00,2.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 13:42:00,2.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 14:34:00,3.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 15:40:00,2.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 16:13:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 16:29:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 16:56:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,120334,vecuronium,muscle_relaxant,2019-08-15 16:56:00,1.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 18:16:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,59059,ondansetron,antiemetic,2019-08-15 18:20:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 18:23:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 18:28:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,118625,sugammadex,reversal,2019-08-15 18:32:00,250.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 18:39:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+4f8a9edcd38bdc26,e2a395a6546d50fc,119106,fentanyl,opioid,2019-08-15 18:45:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

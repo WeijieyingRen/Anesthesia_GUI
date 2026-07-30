@@ -1,2 +1,20 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-2fd90b5572eaef83,7ff93987b4c74e2d,propofol,sedative,2020-02-07 21:47:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-07 21:47:00,20.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,119103,propofol,sedative,2020-02-07 21:47:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,119106,fentanyl,opioid,2020-02-07 22:50:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-07 22:59:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,1306,calcium chloride,rescue_or_correction,2020-02-07 23:46:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-07 23:48:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-08 00:06:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,17837,albuterol,pulmonary,2020-02-08 00:13:00,5.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-08 00:35:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-08 00:56:00,2.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,2332,dexamethasone,antiemetic,2020-02-08 01:00:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,1306,calcium chloride,rescue_or_correction,2020-02-08 01:20:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,107330,cisatracurium,muscle_relaxant,2020-02-08 01:24:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,59059,ondansetron,antiemetic,2020-02-08 01:35:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,119106,fentanyl,opioid,2020-02-08 01:36:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,119106,fentanyl,opioid,2020-02-08 01:58:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,17837,albuterol,pulmonary,2020-02-08 02:11:00,10.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,120326,glycopyrrolate,reversal,2020-02-08 02:25:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+2fd90b5572eaef83,7ff93987b4c74e2d,117431,neostigmine,reversal,2020-02-08 02:25:00,5.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

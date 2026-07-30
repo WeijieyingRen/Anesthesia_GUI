@@ -1,3 +1,23 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-bac21b9701a397a1,1d5a05046cffc054,propofol,sedative,2021-10-25 18:13:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-bac21b9701a397a1,1d5a05046cffc054,ephedrine,vasopressor,2021-10-25 19:54:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+bac21b9701a397a1,1d5a05046cffc054,41381,midazolam,sedative,2021-10-25 18:02:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,119106,fentanyl,opioid,2021-10-25 18:13:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,119103,propofol,sedative,2021-10-25 18:13:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+bac21b9701a397a1,1d5a05046cffc054,59728,rocuronium,muscle_relaxant,2021-10-25 18:13:00,70.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,59728,rocuronium,muscle_relaxant,2021-10-25 18:43:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,500840,phenylephrine,vasopressor,2021-10-25 18:44:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,2332,dexamethasone,antiemetic,2021-10-25 18:48:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,119106,fentanyl,opioid,2021-10-25 19:25:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,59728,rocuronium,muscle_relaxant,2021-10-25 19:25:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,2833,ephedrine,vasopressor,2021-10-25 19:54:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,59728,rocuronium,muscle_relaxant,2021-10-25 21:35:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,59728,rocuronium,muscle_relaxant,2021-10-25 22:16:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,3758,hydromorphone,opioid,2021-10-25 23:23:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,59728,rocuronium,muscle_relaxant,2021-10-25 23:46:00,5.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,3758,hydromorphone,opioid,2021-10-25 23:48:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,3758,hydromorphone,opioid,2021-10-26 00:04:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,3758,hydromorphone,opioid,2021-10-26 00:38:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,59059,ondansetron,antiemetic,2021-10-26 00:52:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,120326,glycopyrrolate,reversal,2021-10-26 01:08:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+bac21b9701a397a1,1d5a05046cffc054,3758,hydromorphone,opioid,2021-10-26 01:08:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bac21b9701a397a1,1d5a05046cffc054,117431,neostigmine,reversal,2021-10-26 01:08:00,5.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+bac21b9701a397a1,1d5a05046cffc054,3758,hydromorphone,opioid,2021-10-26 01:15:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

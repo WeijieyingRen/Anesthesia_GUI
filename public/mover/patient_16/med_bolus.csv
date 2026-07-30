@@ -1,2 +1,15 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-40f15f5299a7c96a,faa9d2565dd38e87,propofol,sedative,2019-11-10 07:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 07:22:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119103,propofol,sedative,2019-11-10 07:22:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119661,succinylcholine,muscle_relaxant,2019-11-10 07:22:00,50.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+40f15f5299a7c96a,faa9d2565dd38e87,120326,glycopyrrolate,reversal,2019-11-10 07:32:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 07:33:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,2332,dexamethasone,antiemetic,2019-11-10 07:48:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 07:53:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 09:47:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 12:36:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 13:26:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 13:30:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,59059,ondansetron,antiemetic,2019-11-10 15:01:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 15:09:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+40f15f5299a7c96a,faa9d2565dd38e87,119106,fentanyl,opioid,2019-11-10 15:14:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

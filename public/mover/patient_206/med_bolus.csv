@@ -1,2 +1,32 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-110742adcee1da2a,c0ab40dfbb921242,propofol,sedative,2019-09-06 13:24:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+110742adcee1da2a,c0ab40dfbb921242,119106,fentanyl,opioid,2019-09-06 13:24:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,119103,propofol,sedative,2019-09-06 13:24:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 13:25:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,2332,dexamethasone,antiemetic,2019-09-06 13:40:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 13:49:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,4237,ketamine,sedative,2019-09-06 14:25:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 14:25:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,119106,fentanyl,opioid,2019-09-06 14:42:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,119106,fentanyl,opioid,2019-09-06 15:08:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 15:08:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,4237,ketamine,sedative,2019-09-06 15:15:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 15:34:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,4237,ketamine,sedative,2019-09-06 16:22:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 16:24:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 17:12:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,4237,ketamine,sedative,2019-09-06 17:20:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,121005,rocuronium,muscle_relaxant,2019-09-06 18:11:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+110742adcee1da2a,c0ab40dfbb921242,10181,heparin,anticoagulant,2019-09-06 18:13:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,119106,fentanyl,opioid,2019-09-06 19:15:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,119106,fentanyl,opioid,2019-09-06 19:46:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,59059,ondansetron,antiemetic,2019-09-06 20:15:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,119106,fentanyl,opioid,2019-09-06 21:18:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,1306,calcium chloride,rescue_or_correction,2019-09-06 21:22:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,1306,calcium chloride,rescue_or_correction,2019-09-06 21:28:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,3758,hydromorphone,opioid,2019-09-06 21:33:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,1306,calcium chloride,rescue_or_correction,2019-09-06 21:42:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,3758,hydromorphone,opioid,2019-09-06 21:42:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,1306,calcium chloride,rescue_or_correction,2019-09-06 21:46:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,3758,hydromorphone,opioid,2019-09-06 22:08:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,3758,hydromorphone,opioid,2019-09-06 22:17:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+110742adcee1da2a,c0ab40dfbb921242,118625,sugammadex,reversal,2019-09-06 22:23:00,150.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

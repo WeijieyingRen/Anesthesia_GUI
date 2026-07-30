@@ -1,13 +1,54 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-6151eb635c1d2174,41e5b9bdf07ab827,propofol,sedative,2021-09-23 12:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 13:15:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 13:25:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 14:04:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 15:14:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 15:49:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 17:18:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,ephedrine,vasopressor,2021-09-23 18:06:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-6151eb635c1d2174,41e5b9bdf07ab827,propofol,sedative,2021-09-23 18:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-6151eb635c1d2174,41e5b9bdf07ab827,propofol,sedative,2021-09-23 20:11:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-6151eb635c1d2174,41e5b9bdf07ab827,propofol,sedative,2021-09-23 21:02:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-6151eb635c1d2174,41e5b9bdf07ab827,sugammadex,reversal,2021-09-23 21:54:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+6151eb635c1d2174,41e5b9bdf07ab827,41381,midazolam,sedative,2021-09-23 12:08:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,119106,fentanyl,opioid,2021-09-23 12:10:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,119103,propofol,sedative,2021-09-23 12:10:00,120.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 12:11:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 12:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2332,dexamethasone,antiemetic,2021-09-23 12:43:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,119106,fentanyl,opioid,2021-09-23 12:44:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 12:45:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 13:15:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 13:22:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 13:25:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 13:45:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 14:04:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 14:11:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,3758,hydromorphone,opioid,2021-09-23 14:14:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,3758,hydromorphone,opioid,2021-09-23 14:28:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 14:49:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 15:14:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,10181,heparin,anticoagulant,2021-09-23 15:19:00,8500.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,3758,hydromorphone,opioid,2021-09-23 15:21:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 15:36:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 15:49:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,10181,heparin,anticoagulant,2021-09-23 16:01:00,2500.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 16:08:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,10181,heparin,anticoagulant,2021-09-23 16:36:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 16:45:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,3758,hydromorphone,opioid,2021-09-23 17:07:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 17:11:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 17:18:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 17:42:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 17:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 18:03:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,2833,ephedrine,vasopressor,2021-09-23 18:06:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 18:11:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 18:21:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,3758,hydromorphone,opioid,2021-09-23 18:29:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,10181,heparin,anticoagulant,2021-09-23 18:31:00,5000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,119103,propofol,sedative,2021-09-23 18:54:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 19:04:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 19:16:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 19:45:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,119103,propofol,sedative,2021-09-23 20:11:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59728,rocuronium,muscle_relaxant,2021-09-23 20:21:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 20:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,119103,propofol,sedative,2021-09-23 21:02:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+6151eb635c1d2174,41e5b9bdf07ab827,59059,ondansetron,antiemetic,2021-09-23 21:08:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,3758,hydromorphone,opioid,2021-09-23 21:11:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,500840,phenylephrine,vasopressor,2021-09-23 21:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,120326,glycopyrrolate,reversal,2021-09-23 21:45:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+6151eb635c1d2174,41e5b9bdf07ab827,117431,neostigmine,reversal,2021-09-23 21:45:00,3.5,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+6151eb635c1d2174,41e5b9bdf07ab827,118627,sugammadex,reversal,2021-09-23 21:54:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,114429,vasopressin,vasopressor,2021-09-23 22:05:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+6151eb635c1d2174,41e5b9bdf07ab827,114429,vasopressin,vasopressor,2021-09-23 22:14:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given

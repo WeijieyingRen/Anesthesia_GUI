@@ -1,3 +1,24 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-b201dfc159ac60dd,c3a0a3e58b821fcf,propofol,sedative,2020-03-27 19:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-b201dfc159ac60dd,c3a0a3e58b821fcf,propofol,sedative,2020-03-27 20:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+b201dfc159ac60dd,c3a0a3e58b821fcf,119106,fentanyl,opioid,2020-03-27 19:10:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,119103,propofol,sedative,2020-03-27 19:10:00,120.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,107330,cisatracurium,muscle_relaxant,2020-03-27 19:11:00,10.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,2332,dexamethasone,antiemetic,2020-03-27 19:40:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,107330,cisatracurium,muscle_relaxant,2020-03-27 20:15:00,10.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,119106,fentanyl,opioid,2020-03-27 20:15:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,119103,propofol,sedative,2020-03-27 20:15:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,119106,fentanyl,opioid,2020-03-27 20:45:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,119106,fentanyl,opioid,2020-03-27 21:24:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,119106,fentanyl,opioid,2020-03-27 22:09:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,107330,cisatracurium,muscle_relaxant,2020-03-27 22:14:00,10.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,3758,hydromorphone,opioid,2020-03-27 22:34:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,8478,vasopressin,vasopressor,2020-03-28 00:27:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,8478,vasopressin,vasopressor,2020-03-28 00:43:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,107330,cisatracurium,muscle_relaxant,2020-03-28 00:52:00,6.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,1306,calcium chloride,rescue_or_correction,2020-03-28 01:24:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,3758,hydromorphone,opioid,2020-03-28 01:30:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,1306,calcium chloride,rescue_or_correction,2020-03-28 01:42:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,59059,ondansetron,antiemetic,2020-03-28 01:52:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,8478,vasopressin,vasopressor,2020-03-28 01:52:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,120326,glycopyrrolate,reversal,2020-03-28 02:25:00,0.9,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,117431,neostigmine,reversal,2020-03-28 02:25:00,4.5,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+b201dfc159ac60dd,c3a0a3e58b821fcf,3758,hydromorphone,opioid,2020-03-28 02:35:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

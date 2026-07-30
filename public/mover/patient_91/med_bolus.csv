@@ -1,2 +1,21 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-3d9aa5ad395a25d1,f44df296687a7307,ephedrine,vasopressor,2021-07-01 17:51:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 10:10:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,107341,glycopyrrolate,reversal,2021-07-01 10:21:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) injection,GLYCOPYRROLATE 1 MG/5ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10176,heparin,anticoagulant,2021-07-01 10:59:00,6000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10176,heparin,anticoagulant,2021-07-01 11:45:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 11:59:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10176,heparin,anticoagulant,2021-07-01 12:08:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 12:14:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10372,labetalol,vasodilator_or_rate_control,2021-07-01 12:26:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10176,heparin,anticoagulant,2021-07-01 12:32:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10372,labetalol,vasodilator_or_rate_control,2021-07-01 12:58:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,10176,heparin,anticoagulant,2021-07-01 14:07:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 14:35:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 14:46:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 14:48:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 15:09:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,119106,fentanyl,opioid,2021-07-01 15:22:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,500840,phenylephrine,vasopressor,2021-07-01 16:18:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,500840,phenylephrine,vasopressor,2021-07-01 16:40:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,2833,ephedrine,vasopressor,2021-07-01 17:51:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+3d9aa5ad395a25d1,f44df296687a7307,500840,phenylephrine,vasopressor,2021-07-01 17:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given

@@ -1,1 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+ebfd4838de236df7,1faf6d224f6a84eb,507200,heparin,anticoagulant,2020-05-21 08:19:00,2020-05-21 13:40:00,5.0,Units/hr,IntraARTERIAL,"heparin 5,000 units in 1000 mL NS infusion for interventional radiology ONLY","HEPARIN 5,000 UNITS/1000 ML NS INFUSION FOR INTERVENTIONAL RADIOLOGY ONLY PREMIX (UCI)",New Bag,anesthesia_end,False,True,2020-05-21 08:19:00

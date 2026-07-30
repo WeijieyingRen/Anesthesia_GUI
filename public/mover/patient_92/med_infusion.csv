@@ -1,1 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+7cb245b92f28d77b,28a0ece24a00ac9b,5599,nitroglycerin,vasodilator_or_rate_control,2022-06-05 11:07:00,2022-06-05 12:39:00,100.0,mcg/min,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,New Bag,anesthesia_end,False,True,2022-06-05 11:07:00

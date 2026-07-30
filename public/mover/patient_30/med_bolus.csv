@@ -1,3 +1,35 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-38cb9c58f6109fa3,0da61a2e3516f446,propofol,sedative,2020-09-29 07:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-38cb9c58f6109fa3,0da61a2e3516f446,hydromorphone,opioid,2020-09-29 18:10:00,10.0,ml,Epidural,hydromorphone (DILAUDID) 10 mcg/mL epidural injection,HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+38cb9c58f6109fa3,0da61a2e3516f446,119106,fentanyl,opioid,2020-09-29 07:21:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,500840,phenylephrine,vasopressor,2020-09-29 07:21:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,119103,propofol,sedative,2020-09-29 07:21:00,120.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 07:21:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,2332,dexamethasone,antiemetic,2020-09-29 08:07:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 08:33:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,119106,fentanyl,opioid,2020-09-29 08:50:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 09:47:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 10:45:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 10:57:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,119106,fentanyl,opioid,2020-09-29 11:00:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 12:10:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,3758,hydromorphone,opioid,2020-09-29 12:15:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 12:48:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 13:02:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 13:43:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,500840,phenylephrine,vasopressor,2020-09-29 13:47:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,1306,calcium chloride,rescue_or_correction,2020-09-29 13:51:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 14:25:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,3758,hydromorphone,opioid,2020-09-29 14:56:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,1306,calcium chloride,rescue_or_correction,2020-09-29 15:00:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 15:01:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,3758,hydromorphone,opioid,2020-09-29 15:25:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 15:49:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,500840,phenylephrine,vasopressor,2020-09-29 15:57:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 16:07:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,1306,calcium chloride,rescue_or_correction,2020-09-29 16:09:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,500840,phenylephrine,vasopressor,2020-09-29 16:27:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,3758,hydromorphone,opioid,2020-09-29 16:51:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,59728,rocuronium,muscle_relaxant,2020-09-29 17:08:00,5.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 17:08:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,7309,sodium bicarbonate,rescue_or_correction,2020-09-29 17:19:00,10.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+38cb9c58f6109fa3,0da61a2e3516f446,458846,hydromorphone,opioid,2020-09-29 18:10:00,5.0,mL,Epidural,hydromorphone (DILAUDID) 10 mcg/mL epidural injection,HYDROMORPHONE 10 MCG/ML AND BUPIVACAINE 0.1 % ANES EPIDURAL INJ (UCI),Bolus
+38cb9c58f6109fa3,0da61a2e3516f446,118625,sugammadex,reversal,2020-09-29 18:43:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

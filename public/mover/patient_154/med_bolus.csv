@@ -1,4 +1,16 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-e2fd216a72e53fc5,b179f5fe9d0172e3,propofol,sedative,2020-02-09 10:42:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-e2fd216a72e53fc5,b179f5fe9d0172e3,ephedrine,vasopressor,2020-02-09 11:09:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-e2fd216a72e53fc5,b179f5fe9d0172e3,ephedrine,vasopressor,2020-02-09 11:46:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+e2fd216a72e53fc5,b179f5fe9d0172e3,107330,cisatracurium,muscle_relaxant,2020-02-09 10:42:00,8.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,119106,fentanyl,opioid,2020-02-09 10:42:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,119103,propofol,sedative,2020-02-09 10:42:00,140.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,500840,phenylephrine,vasopressor,2020-02-09 10:52:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,500840,phenylephrine,vasopressor,2020-02-09 10:56:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,500840,phenylephrine,vasopressor,2020-02-09 11:02:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,2833,ephedrine,vasopressor,2020-02-09 11:09:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,2833,ephedrine,vasopressor,2020-02-09 11:46:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,59059,ondansetron,antiemetic,2020-02-09 13:03:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,120326,glycopyrrolate,reversal,2020-02-09 13:17:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,117431,neostigmine,reversal,2020-02-09 13:17:00,1.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,120326,glycopyrrolate,reversal,2020-02-09 13:20:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,117431,neostigmine,reversal,2020-02-09 13:20:00,1.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,120326,glycopyrrolate,reversal,2020-02-09 13:23:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e2fd216a72e53fc5,b179f5fe9d0172e3,117431,neostigmine,reversal,2020-02-09 13:23:00,0.5,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

@@ -1,12 +1,28 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 13:41:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 13:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 13:53:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 13:56:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 14:01:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,ephedrine,vasopressor,2021-07-02 14:20:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 14:50:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 14:52:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 15:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 15:42:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-18d143314cbd198b,8632034a1c628b4f,propofol,sedative,2021-07-02 16:08:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+18d143314cbd198b,8632034a1c628b4f,41381,midazolam,sedative,2021-07-02 13:21:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 13:34:00,25.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119106,fentanyl,opioid,2021-07-02 13:40:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 13:41:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,119106,fentanyl,opioid,2021-07-02 13:47:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 13:48:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 13:50:00,25.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 13:53:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 13:56:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 14:01:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,119106,fentanyl,opioid,2021-07-02 14:02:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 14:05:00,25.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119106,fentanyl,opioid,2021-07-02 14:19:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 14:19:00,25.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,500840,phenylephrine,vasopressor,2021-07-02 14:19:00,2000.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,2833,ephedrine,vasopressor,2021-07-02 14:20:00,25.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 14:29:00,30.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 14:50:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 14:52:00,30.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 14:52:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 15:16:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,4237,ketamine,sedative,2021-07-02 15:23:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 15:23:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 15:42:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+18d143314cbd198b,8632034a1c628b4f,119106,fentanyl,opioid,2021-07-02 15:44:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119106,fentanyl,opioid,2021-07-02 16:08:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+18d143314cbd198b,8632034a1c628b4f,119103,propofol,sedative,2021-07-02 16:08:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

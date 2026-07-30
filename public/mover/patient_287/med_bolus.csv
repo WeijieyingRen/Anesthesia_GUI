@@ -1,2 +1,23 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-f5bb599c0ec35fe1,358d115de14b9880,propofol,sedative,2021-11-01 08:45:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+f5bb599c0ec35fe1,358d115de14b9880,119106,fentanyl,opioid,2021-11-01 08:45:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 08:45:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,119103,propofol,sedative,2021-11-01 08:45:00,170.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+f5bb599c0ec35fe1,358d115de14b9880,119661,succinylcholine,muscle_relaxant,2021-11-01 08:45:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+f5bb599c0ec35fe1,358d115de14b9880,59728,rocuronium,muscle_relaxant,2021-11-01 08:48:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 08:57:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 09:28:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 09:43:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,59728,rocuronium,muscle_relaxant,2021-11-01 09:48:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,2332,dexamethasone,antiemetic,2021-11-01 10:04:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 10:05:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,120326,glycopyrrolate,reversal,2021-11-01 10:17:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 10:47:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 11:06:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,59728,rocuronium,muscle_relaxant,2021-11-01 11:08:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 11:26:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,120326,glycopyrrolate,reversal,2021-11-01 12:07:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+f5bb599c0ec35fe1,358d115de14b9880,59728,rocuronium,muscle_relaxant,2021-11-01 12:14:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,500840,phenylephrine,vasopressor,2021-11-01 12:58:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,59059,ondansetron,antiemetic,2021-11-01 14:17:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+f5bb599c0ec35fe1,358d115de14b9880,120326,glycopyrrolate,reversal,2021-11-01 14:46:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+f5bb599c0ec35fe1,358d115de14b9880,117431,neostigmine,reversal,2021-11-01 14:46:00,3.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

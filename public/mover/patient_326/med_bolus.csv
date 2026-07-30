@@ -1,8 +1,43 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-60036e9b1d4cfa95,4c78081f7523f158,propofol,sedative,2021-08-23 01:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-60036e9b1d4cfa95,4c78081f7523f158,propofol,sedative,2021-08-23 02:20:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-60036e9b1d4cfa95,4c78081f7523f158,propofol,sedative,2021-08-23 02:29:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-60036e9b1d4cfa95,4c78081f7523f158,epinephrine,vasopressor,2021-08-23 02:38:00,1.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
-60036e9b1d4cfa95,4c78081f7523f158,propofol,sedative,2021-08-23 03:44:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-60036e9b1d4cfa95,4c78081f7523f158,epinephrine,vasopressor,2021-08-23 04:10:00,1.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
-60036e9b1d4cfa95,4c78081f7523f158,epinephrine,vasopressor,2021-08-23 04:13:00,1.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 00:24:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,41381,midazolam,sedative,2021-08-23 00:26:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,48072,esmolol,vasodilator_or_rate_control,2021-08-23 00:30:00,30.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 00:32:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 00:39:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,41381,midazolam,sedative,2021-08-23 00:43:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 01:00:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 01:02:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119103,propofol,sedative,2021-08-23 01:10:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 01:20:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,5599,nitroglycerin,vasodilator_or_rate_control,2021-08-23 01:20:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 01:23:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 01:40:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,10181,heparin,anticoagulant,2021-08-23 01:56:00,7000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 02:06:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 02:19:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119103,propofol,sedative,2021-08-23 02:20:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+60036e9b1d4cfa95,4c78081f7523f158,10181,heparin,anticoagulant,2021-08-23 02:25:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119103,propofol,sedative,2021-08-23 02:29:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 02:37:00,800.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,509270,epinephrine,vasopressor,2021-08-23 02:38:00,20.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
+60036e9b1d4cfa95,4c78081f7523f158,1306,calcium chloride,rescue_or_correction,2021-08-23 02:49:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,1306,calcium chloride,rescue_or_correction,2021-08-23 02:51:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 02:58:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 03:05:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,10181,heparin,anticoagulant,2021-08-23 03:14:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 03:19:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 03:31:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 03:32:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 03:40:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119106,fentanyl,opioid,2021-08-23 03:44:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 03:44:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,119103,propofol,sedative,2021-08-23 03:44:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 03:51:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 03:57:00,400.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 04:07:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 04:08:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,509270,epinephrine,vasopressor,2021-08-23 04:10:00,5.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
+60036e9b1d4cfa95,4c78081f7523f158,509270,epinephrine,vasopressor,2021-08-23 04:13:00,5.0,mcg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE 1 MG/10ML IJ SOSY OPTIME (UCI),Given
+60036e9b1d4cfa95,4c78081f7523f158,1306,calcium chloride,rescue_or_correction,2021-08-23 04:15:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,7309,sodium bicarbonate,rescue_or_correction,2021-08-23 04:28:00,50.0,mL,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+60036e9b1d4cfa95,4c78081f7523f158,500840,phenylephrine,vasopressor,2021-08-23 04:50:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given

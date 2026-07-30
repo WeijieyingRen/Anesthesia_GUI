@@ -1,1 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+d1a9ea713f35cd80,cf023a7e9f8e3331,507565,hydromorphone,opioid,2019-10-27 07:20:00,2019-10-27 14:21:00,,,IntraVENOUS,HYDROmorphone (DILAUDID) 25 mg/50 mL PCA infusion – NAIVE,HYDROMORPHONE 0.5 MG/ML PREMIX PCA INFUSION - NAIVE (UCI),Rate Verify,anesthesia_end,True,True,2019-10-23 19:00:00

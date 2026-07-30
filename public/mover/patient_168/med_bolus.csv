@@ -1,12 +1,26 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 07:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 08:53:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-246a2575c7c2e30d,8bcd620005aba44b,ephedrine,vasopressor,2022-04-30 09:55:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-246a2575c7c2e30d,8bcd620005aba44b,ephedrine,vasopressor,2022-04-30 10:06:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 10:34:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-246a2575c7c2e30d,8bcd620005aba44b,ephedrine,vasopressor,2022-04-30 11:01:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-246a2575c7c2e30d,8bcd620005aba44b,ephedrine,vasopressor,2022-04-30 11:11:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-246a2575c7c2e30d,8bcd620005aba44b,ephedrine,vasopressor,2022-04-30 11:23:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 16:10:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-246a2575c7c2e30d,8bcd620005aba44b,propofol,sedative,2022-04-30 16:16:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-246a2575c7c2e30d,8bcd620005aba44b,sugammadex,reversal,2022-04-30 16:34:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 200 MG/2ML IV bolus,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+246a2575c7c2e30d,8bcd620005aba44b,119106,fentanyl,opioid,2022-04-30 07:30:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,120326,glycopyrrolate,reversal,2022-04-30 07:30:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+246a2575c7c2e30d,8bcd620005aba44b,119103,propofol,sedative,2022-04-30 07:30:00,60.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+246a2575c7c2e30d,8bcd620005aba44b,121005,rocuronium,muscle_relaxant,2022-04-30 07:30:00,70.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+246a2575c7c2e30d,8bcd620005aba44b,119106,fentanyl,opioid,2022-04-30 07:33:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,2332,dexamethasone,antiemetic,2022-04-30 07:43:00,10.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,121005,rocuronium,muscle_relaxant,2022-04-30 07:43:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+246a2575c7c2e30d,8bcd620005aba44b,119106,fentanyl,opioid,2022-04-30 08:09:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,119106,fentanyl,opioid,2022-04-30 08:25:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,500840,phenylephrine,vasopressor,2022-04-30 08:44:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,119103,propofol,sedative,2022-04-30 08:53:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+246a2575c7c2e30d,8bcd620005aba44b,500840,phenylephrine,vasopressor,2022-04-30 09:33:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,2833,ephedrine,vasopressor,2022-04-30 09:55:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,2833,ephedrine,vasopressor,2022-04-30 10:06:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,119103,propofol,sedative,2022-04-30 10:34:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+246a2575c7c2e30d,8bcd620005aba44b,119106,fentanyl,opioid,2022-04-30 10:35:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,2833,ephedrine,vasopressor,2022-04-30 11:01:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,2833,ephedrine,vasopressor,2022-04-30 11:11:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,2833,ephedrine,vasopressor,2022-04-30 11:23:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,121005,rocuronium,muscle_relaxant,2022-04-30 11:58:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+246a2575c7c2e30d,8bcd620005aba44b,121005,rocuronium,muscle_relaxant,2022-04-30 12:55:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+246a2575c7c2e30d,8bcd620005aba44b,119103,propofol,sedative,2022-04-30 16:10:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+246a2575c7c2e30d,8bcd620005aba44b,59059,ondansetron,antiemetic,2022-04-30 16:14:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+246a2575c7c2e30d,8bcd620005aba44b,119103,propofol,sedative,2022-04-30 16:16:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+246a2575c7c2e30d,8bcd620005aba44b,118625,sugammadex,reversal,2022-04-30 16:34:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 200 MG/2ML IV bolus,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

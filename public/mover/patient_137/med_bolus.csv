@@ -1,7 +1,21 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-72f64a3d4074a137,1f66c227766b6888,propofol,sedative,2020-04-20 12:42:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-72f64a3d4074a137,1f66c227766b6888,propofol,sedative,2020-04-20 12:53:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-72f64a3d4074a137,1f66c227766b6888,propofol,sedative,2020-04-20 12:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-72f64a3d4074a137,1f66c227766b6888,propofol,sedative,2020-04-20 14:14:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-72f64a3d4074a137,1f66c227766b6888,propofol,sedative,2020-04-20 14:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-72f64a3d4074a137,1f66c227766b6888,propofol,sedative,2020-04-20 14:16:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+72f64a3d4074a137,1f66c227766b6888,41381,midazolam,sedative,2020-04-20 12:42:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,119103,propofol,sedative,2020-04-20 12:42:00,120.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+72f64a3d4074a137,1f66c227766b6888,121005,rocuronium,muscle_relaxant,2020-04-20 12:42:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+72f64a3d4074a137,1f66c227766b6888,119103,propofol,sedative,2020-04-20 12:53:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+72f64a3d4074a137,1f66c227766b6888,119106,fentanyl,opioid,2020-04-20 12:55:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,119103,propofol,sedative,2020-04-20 12:55:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+72f64a3d4074a137,1f66c227766b6888,2332,dexamethasone,antiemetic,2020-04-20 13:06:00,6.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,118625,sugammadex,reversal,2020-04-20 13:09:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 13:22:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 13:29:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 13:37:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 13:46:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 14:05:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,119103,propofol,sedative,2020-04-20 14:14:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 14:15:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,119103,propofol,sedative,2020-04-20 14:15:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+72f64a3d4074a137,1f66c227766b6888,119103,propofol,sedative,2020-04-20 14:16:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 14:32:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 14:38:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+72f64a3d4074a137,1f66c227766b6888,500840,phenylephrine,vasopressor,2020-04-20 16:40:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given

@@ -1,5 +1,25 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-969d22efbc1e51f8,c2239627b9d5a60c,propofol,sedative,2021-12-19 07:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-969d22efbc1e51f8,c2239627b9d5a60c,propofol,sedative,2021-12-19 08:33:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-969d22efbc1e51f8,c2239627b9d5a60c,propofol,sedative,2021-12-19 09:06:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-969d22efbc1e51f8,c2239627b9d5a60c,ephedrine,vasopressor,2021-12-19 10:34:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+969d22efbc1e51f8,c2239627b9d5a60c,119106,fentanyl,opioid,2021-12-19 07:53:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,119103,propofol,sedative,2021-12-19 07:54:00,110.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 07:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,59727,rocuronium,muscle_relaxant,2021-12-19 07:56:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 08:02:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 08:11:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 08:22:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 08:29:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,119103,propofol,sedative,2021-12-19 08:33:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+969d22efbc1e51f8,c2239627b9d5a60c,119106,fentanyl,opioid,2021-12-19 09:06:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,41381,midazolam,sedative,2021-12-19 09:06:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,119103,propofol,sedative,2021-12-19 09:06:00,60.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+969d22efbc1e51f8,c2239627b9d5a60c,2332,dexamethasone,antiemetic,2021-12-19 09:21:00,6.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 10:00:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,500840,phenylephrine,vasopressor,2021-12-19 10:08:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,114429,vasopressin,vasopressor,2021-12-19 10:18:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,2833,ephedrine,vasopressor,2021-12-19 10:34:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,4237,ketamine,sedative,2021-12-19 11:22:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,4237,ketamine,sedative,2021-12-19 13:28:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,4237,ketamine,sedative,2021-12-19 14:24:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,4237,ketamine,sedative,2021-12-19 14:35:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,3758,hydromorphone,opioid,2021-12-19 16:06:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,59059,ondansetron,antiemetic,2021-12-19 16:08:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+969d22efbc1e51f8,c2239627b9d5a60c,3758,hydromorphone,opioid,2021-12-19 16:21:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

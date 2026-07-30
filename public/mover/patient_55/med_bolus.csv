@@ -1,3 +1,22 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-7ea0e424e347ff18,acc8ae1a34f124f6,propofol,sedative,2021-12-22 11:18:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-7ea0e424e347ff18,acc8ae1a34f124f6,ephedrine,vasopressor,2021-12-22 12:31:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+7ea0e424e347ff18,acc8ae1a34f124f6,119106,fentanyl,opioid,2021-12-22 11:18:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,119103,propofol,sedative,2021-12-22 11:18:00,140.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 11:18:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,2332,dexamethasone,antiemetic,2021-12-22 12:01:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 12:12:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,119106,fentanyl,opioid,2021-12-22 12:16:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,2833,ephedrine,vasopressor,2021-12-22 12:31:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 13:04:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,3758,hydromorphone,opioid,2021-12-22 13:26:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 13:31:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,3758,hydromorphone,opioid,2021-12-22 14:00:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 14:00:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,3758,hydromorphone,opioid,2021-12-22 14:42:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 14:52:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 15:36:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,3758,hydromorphone,opioid,2021-12-22 15:49:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59728,rocuronium,muscle_relaxant,2021-12-22 16:53:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,3758,hydromorphone,opioid,2021-12-22 18:12:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,59059,ondansetron,antiemetic,2021-12-22 19:07:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,120326,glycopyrrolate,reversal,2021-12-22 20:19:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+7ea0e424e347ff18,acc8ae1a34f124f6,117431,neostigmine,reversal,2021-12-22 20:19:00,3.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

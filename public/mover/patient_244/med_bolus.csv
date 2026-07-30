@@ -1,10 +1,25 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-9712871b9d8345ec,9b4b87aec172066f,propofol,sedative,2020-07-26 11:33:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-9712871b9d8345ec,9b4b87aec172066f,propofol,sedative,2020-07-26 13:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-9712871b9d8345ec,9b4b87aec172066f,propofol,sedative,2020-07-26 13:29:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-9712871b9d8345ec,9b4b87aec172066f,ephedrine,vasopressor,2020-07-26 13:30:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-9712871b9d8345ec,9b4b87aec172066f,propofol,sedative,2020-07-26 13:33:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-9712871b9d8345ec,9b4b87aec172066f,ephedrine,vasopressor,2020-07-26 13:45:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-9712871b9d8345ec,9b4b87aec172066f,ephedrine,vasopressor,2020-07-26 13:56:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-9712871b9d8345ec,9b4b87aec172066f,ephedrine,vasopressor,2020-07-26 14:00:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-9712871b9d8345ec,9b4b87aec172066f,propofol,sedative,2020-07-26 14:45:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+9712871b9d8345ec,9b4b87aec172066f,119103,propofol,sedative,2020-07-26 11:33:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9712871b9d8345ec,9b4b87aec172066f,119106,fentanyl,opioid,2020-07-26 11:34:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,121005,rocuronium,muscle_relaxant,2020-07-26 11:34:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+9712871b9d8345ec,9b4b87aec172066f,500840,phenylephrine,vasopressor,2020-07-26 11:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,2332,dexamethasone,antiemetic,2020-07-26 12:00:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,121005,rocuronium,muscle_relaxant,2020-07-26 12:00:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+9712871b9d8345ec,9b4b87aec172066f,500840,phenylephrine,vasopressor,2020-07-26 12:03:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,500840,phenylephrine,vasopressor,2020-07-26 12:07:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,500840,phenylephrine,vasopressor,2020-07-26 12:11:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,500840,phenylephrine,vasopressor,2020-07-26 12:18:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,500840,phenylephrine,vasopressor,2020-07-26 12:32:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,121005,rocuronium,muscle_relaxant,2020-07-26 13:02:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+9712871b9d8345ec,9b4b87aec172066f,119103,propofol,sedative,2020-07-26 13:26:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9712871b9d8345ec,9b4b87aec172066f,121005,rocuronium,muscle_relaxant,2020-07-26 13:28:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+9712871b9d8345ec,9b4b87aec172066f,119103,propofol,sedative,2020-07-26 13:29:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9712871b9d8345ec,9b4b87aec172066f,2833,ephedrine,vasopressor,2020-07-26 13:30:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,119103,propofol,sedative,2020-07-26 13:33:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9712871b9d8345ec,9b4b87aec172066f,2833,ephedrine,vasopressor,2020-07-26 13:45:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,2833,ephedrine,vasopressor,2020-07-26 13:56:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,2833,ephedrine,vasopressor,2020-07-26 14:00:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,121005,rocuronium,muscle_relaxant,2020-07-26 14:08:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+9712871b9d8345ec,9b4b87aec172066f,119103,propofol,sedative,2020-07-26 14:45:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9712871b9d8345ec,9b4b87aec172066f,119106,fentanyl,opioid,2020-07-26 14:55:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+9712871b9d8345ec,9b4b87aec172066f,121005,rocuronium,muscle_relaxant,2020-07-26 15:10:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given

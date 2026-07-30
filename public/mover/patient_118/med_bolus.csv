@@ -1,4 +1,31 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-b9d864a970bbe767,efaf9b053b35e04c,propofol,sedative,2019-11-11 15:58:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-b9d864a970bbe767,efaf9b053b35e04c,ephedrine,vasopressor,2019-11-11 17:42:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-b9d864a970bbe767,efaf9b053b35e04c,propofol,sedative,2019-11-11 19:20:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+b9d864a970bbe767,efaf9b053b35e04c,119106,fentanyl,opioid,2019-11-11 15:53:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119106,fentanyl,opioid,2019-11-11 15:56:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119106,fentanyl,opioid,2019-11-11 15:58:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119103,propofol,sedative,2019-11-11 15:58:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b9d864a970bbe767,efaf9b053b35e04c,119661,succinylcholine,muscle_relaxant,2019-11-11 15:58:00,80.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+b9d864a970bbe767,efaf9b053b35e04c,48072,esmolol,vasodilator_or_rate_control,2019-11-11 16:00:00,50.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,59727,rocuronium,muscle_relaxant,2019-11-11 16:04:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,500840,phenylephrine,vasopressor,2019-11-11 16:05:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,48072,esmolol,vasodilator_or_rate_control,2019-11-11 16:12:00,50.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,500840,phenylephrine,vasopressor,2019-11-11 16:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,59727,rocuronium,muscle_relaxant,2019-11-11 16:45:00,40.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,1306,calcium chloride,rescue_or_correction,2019-11-11 16:50:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,114429,vasopressin,vasopressor,2019-11-11 16:53:00,2.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,48072,esmolol,vasodilator_or_rate_control,2019-11-11 17:10:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,5599,nitroglycerin,vasodilator_or_rate_control,2019-11-11 17:15:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,2833,ephedrine,vasopressor,2019-11-11 17:42:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,500840,phenylephrine,vasopressor,2019-11-11 17:42:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,114429,vasopressin,vasopressor,2019-11-11 17:42:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,5599,nitroglycerin,vasodilator_or_rate_control,2019-11-11 17:45:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,59727,rocuronium,muscle_relaxant,2019-11-11 17:50:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,5599,nitroglycerin,vasodilator_or_rate_control,2019-11-11 18:08:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,5599,nitroglycerin,vasodilator_or_rate_control,2019-11-11 18:10:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,10181,heparin,anticoagulant,2019-11-11 18:27:00,3000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,59727,rocuronium,muscle_relaxant,2019-11-11 18:30:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119106,fentanyl,opioid,2019-11-11 19:09:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119106,fentanyl,opioid,2019-11-11 19:14:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119106,fentanyl,opioid,2019-11-11 19:20:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,119103,propofol,sedative,2019-11-11 19:20:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+b9d864a970bbe767,efaf9b053b35e04c,118625,sugammadex,reversal,2019-11-11 19:27:00,100.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+b9d864a970bbe767,efaf9b053b35e04c,41381,midazolam,sedative,2019-11-11 19:37:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given

@@ -1,2 +1,19 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-7911d5d59c3cc97b,2f3a73ecb9299582,propofol,sedative,2021-05-13 12:41:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+7911d5d59c3cc97b,2f3a73ecb9299582,41381,midazolam,sedative,2021-05-13 12:41:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,119103,propofol,sedative,2021-05-13 12:41:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,119106,fentanyl,opioid,2021-05-13 12:44:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,59728,rocuronium,muscle_relaxant,2021-05-13 12:44:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,2332,dexamethasone,antiemetic,2021-05-13 12:51:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,59059,ondansetron,antiemetic,2021-05-13 12:51:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 13:08:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 13:38:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,117433,ketamine,sedative,2021-05-13 13:43:00,25.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,117433,ketamine,sedative,2021-05-13 14:10:00,25.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,59728,rocuronium,muscle_relaxant,2021-05-13 14:10:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 14:29:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 15:29:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,107341,glycopyrrolate,reversal,2021-05-13 16:33:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) injection,GLYCOPYRROLATE 1 MG/5ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,117431,neostigmine,reversal,2021-05-13 16:33:00,2.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 16:42:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 16:44:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+7911d5d59c3cc97b,2f3a73ecb9299582,3758,hydromorphone,opioid,2021-05-13 16:46:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

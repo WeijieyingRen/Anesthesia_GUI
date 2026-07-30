@@ -1,3 +1,22 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-7606c7601f54db2f,63dc060a5326fd63,propofol,sedative,2019-07-13 13:59:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-7606c7601f54db2f,63dc060a5326fd63,propofol,sedative,2019-07-13 14:02:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+7606c7601f54db2f,63dc060a5326fd63,41381,midazolam,sedative,2019-07-13 13:38:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,120326,glycopyrrolate,reversal,2019-07-13 13:57:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+7606c7601f54db2f,63dc060a5326fd63,119106,fentanyl,opioid,2019-07-13 13:59:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,119103,propofol,sedative,2019-07-13 13:59:00,90.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7606c7601f54db2f,63dc060a5326fd63,121005,rocuronium,muscle_relaxant,2019-07-13 13:59:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+7606c7601f54db2f,63dc060a5326fd63,2332,dexamethasone,antiemetic,2019-07-13 14:00:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,119106,fentanyl,opioid,2019-07-13 14:02:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,119103,propofol,sedative,2019-07-13 14:02:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7606c7601f54db2f,63dc060a5326fd63,500840,phenylephrine,vasopressor,2019-07-13 16:49:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,121005,rocuronium,muscle_relaxant,2019-07-13 21:15:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+7606c7601f54db2f,63dc060a5326fd63,500840,phenylephrine,vasopressor,2019-07-13 21:56:00,20.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,1306,calcium chloride,rescue_or_correction,2019-07-13 22:45:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,1306,calcium chloride,rescue_or_correction,2019-07-13 22:48:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,1306,calcium chloride,rescue_or_correction,2019-07-13 22:51:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,1306,calcium chloride,rescue_or_correction,2019-07-13 22:54:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,1306,calcium chloride,rescue_or_correction,2019-07-13 22:58:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,48072,esmolol,vasodilator_or_rate_control,2019-07-13 23:43:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,121005,rocuronium,muscle_relaxant,2019-07-13 23:44:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+7606c7601f54db2f,63dc060a5326fd63,48072,esmolol,vasodilator_or_rate_control,2019-07-13 23:47:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+7606c7601f54db2f,63dc060a5326fd63,121005,rocuronium,muscle_relaxant,2019-07-13 23:55:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+7606c7601f54db2f,63dc060a5326fd63,119106,fentanyl,opioid,2019-07-14 00:06:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

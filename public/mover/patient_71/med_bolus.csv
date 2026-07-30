@@ -1,6 +1,54 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-7f7af9f6263aa649,42f7fb4d94d4e526,propofol,sedative,2020-03-26 08:22:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-7f7af9f6263aa649,42f7fb4d94d4e526,propofol,sedative,2020-03-26 08:25:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-7f7af9f6263aa649,42f7fb4d94d4e526,propofol,sedative,2020-03-26 09:07:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-7f7af9f6263aa649,42f7fb4d94d4e526,propofol,sedative,2020-03-26 19:17:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-7f7af9f6263aa649,42f7fb4d94d4e526,propofol,sedative,2020-03-26 19:29:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 08:22:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119103,propofol,sedative,2020-03-26 08:22:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 08:22:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119103,propofol,sedative,2020-03-26 08:25:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,48072,esmolol,vasodilator_or_rate_control,2020-03-26 08:29:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,48072,esmolol,vasodilator_or_rate_control,2020-03-26 08:44:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119103,propofol,sedative,2020-03-26 09:07:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 09:09:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 09:16:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 09:22:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 09:45:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 09:51:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 11:11:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 11:14:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 11:18:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 11:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 11:28:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 11:31:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 11:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 11:39:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,1306,calcium chloride,rescue_or_correction,2020-03-26 12:38:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 12:48:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 12:52:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 12:54:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 12:58:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,114429,vasopressin,vasopressor,2020-03-26 12:59:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 13:05:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,1306,calcium chloride,rescue_or_correction,2020-03-26 13:07:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 13:50:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 13:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 14:00:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 14:04:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 14:09:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,2332,dexamethasone,antiemetic,2020-03-26 14:29:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 14:29:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,1306,calcium chloride,rescue_or_correction,2020-03-26 14:45:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 15:04:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 15:06:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 15:09:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,1306,calcium chloride,rescue_or_correction,2020-03-26 15:13:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 15:35:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 16:05:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,1306,calcium chloride,rescue_or_correction,2020-03-26 16:22:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59727,rocuronium,muscle_relaxant,2020-03-26 16:28:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 16:39:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 18:05:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 19:15:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119103,propofol,sedative,2020-03-26 19:17:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,59059,ondansetron,antiemetic,2020-03-26 19:21:00,8.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119103,propofol,sedative,2020-03-26 19:29:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,119106,fentanyl,opioid,2020-03-26 19:31:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,500840,phenylephrine,vasopressor,2020-03-26 19:38:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+7f7af9f6263aa649,42f7fb4d94d4e526,118625,sugammadex,reversal,2020-03-26 19:44:00,150.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

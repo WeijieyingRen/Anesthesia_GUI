@@ -1,4 +1,39 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-8a963b9cd20b8a7c,bc0e14edd49ba5e9,propofol,sedative,2019-12-27 11:53:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8a963b9cd20b8a7c,bc0e14edd49ba5e9,propofol,sedative,2019-12-27 11:58:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8a963b9cd20b8a7c,bc0e14edd49ba5e9,propofol,sedative,2019-12-27 12:05:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119103,propofol,sedative,2019-12-27 11:53:00,70.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,120326,glycopyrrolate,reversal,2019-12-27 11:58:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119103,propofol,sedative,2019-12-27 11:58:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119106,fentanyl,opioid,2019-12-27 12:00:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119106,fentanyl,opioid,2019-12-27 12:05:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119103,propofol,sedative,2019-12-27 12:05:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 12:13:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 12:15:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 12:20:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 12:25:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 12:30:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 12:45:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 12:52:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,10181,heparin,anticoagulant,2019-12-27 13:03:00,8000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 13:40:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,10181,heparin,anticoagulant,2019-12-27 13:58:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,10181,heparin,anticoagulant,2019-12-27 14:49:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 14:58:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 15:24:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 15:54:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 16:59:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119106,fentanyl,opioid,2019-12-27 17:02:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,48072,esmolol,vasodilator_or_rate_control,2019-12-27 17:03:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,10181,heparin,anticoagulant,2019-12-27 17:05:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,10181,heparin,anticoagulant,2019-12-27 17:13:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 17:17:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,48072,esmolol,vasodilator_or_rate_control,2019-12-27 17:30:00,30.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,121005,rocuronium,muscle_relaxant,2019-12-27 18:20:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,48072,esmolol,vasodilator_or_rate_control,2019-12-27 18:23:00,30.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119106,fentanyl,opioid,2019-12-27 19:11:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119106,fentanyl,opioid,2019-12-27 19:23:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,119106,fentanyl,opioid,2019-12-27 19:34:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,118625,sugammadex,reversal,2019-12-27 19:34:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,2332,dexamethasone,antiemetic,2019-12-27 19:35:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,59059,ondansetron,antiemetic,2019-12-27 19:35:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 19:43:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,500840,phenylephrine,vasopressor,2019-12-27 19:45:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8a963b9cd20b8a7c,bc0e14edd49ba5e9,8478,vasopressin,vasopressor,2019-12-27 19:45:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given

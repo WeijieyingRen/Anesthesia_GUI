@@ -1,8 +1,41 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-aa9d6ef84e734e25,e17c64bc956e40f3,propofol,sedative,2019-05-02 13:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa9d6ef84e734e25,e17c64bc956e40f3,propofol,sedative,2019-05-02 16:01:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa9d6ef84e734e25,e17c64bc956e40f3,propofol,sedative,2019-05-02 16:07:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa9d6ef84e734e25,e17c64bc956e40f3,propofol,sedative,2019-05-02 16:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa9d6ef84e734e25,e17c64bc956e40f3,ephedrine,vasopressor,2019-05-02 16:49:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-aa9d6ef84e734e25,e17c64bc956e40f3,ephedrine,vasopressor,2019-05-02 17:57:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-aa9d6ef84e734e25,e17c64bc956e40f3,ephedrine,vasopressor,2019-05-02 18:29:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+aa9d6ef84e734e25,e17c64bc956e40f3,119103,propofol,sedative,2019-05-02 13:55:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,119661,succinylcholine,muscle_relaxant,2019-05-02 13:55:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,107330,cisatracurium,muscle_relaxant,2019-05-02 14:06:00,14.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,107330,cisatracurium,muscle_relaxant,2019-05-02 15:30:00,8.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 15:30:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,107330,cisatracurium,muscle_relaxant,2019-05-02 15:58:00,8.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,119103,propofol,sedative,2019-05-02 16:01:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,107330,cisatracurium,muscle_relaxant,2019-05-02 16:06:00,6.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,119103,propofol,sedative,2019-05-02 16:07:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,119103,propofol,sedative,2019-05-02 16:15:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 16:31:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 16:46:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,2833,ephedrine,vasopressor,2019-05-02 16:49:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,10181,heparin,anticoagulant,2019-05-02 17:09:00,5000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 17:16:00,400.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,107330,cisatracurium,muscle_relaxant,2019-05-02 17:17:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,2833,ephedrine,vasopressor,2019-05-02 17:57:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,2833,ephedrine,vasopressor,2019-05-02 18:29:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 19:04:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 19:12:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 19:27:00,400.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,107330,cisatracurium,muscle_relaxant,2019-05-02 19:35:00,6.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 20:25:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 20:43:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 20:47:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 20:58:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,3758,hydromorphone,opioid,2019-05-02 21:07:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 21:25:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 21:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,1306,calcium chloride,rescue_or_correction,2019-05-02 21:39:00,400.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,59059,ondansetron,antiemetic,2019-05-02 21:39:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 21:47:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 21:56:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,120326,glycopyrrolate,reversal,2019-05-02 21:58:00,0.8,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,3758,hydromorphone,opioid,2019-05-02 21:58:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,117431,neostigmine,reversal,2019-05-02 21:58:00,5.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,3758,hydromorphone,opioid,2019-05-02 22:00:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 22:03:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,500840,phenylephrine,vasopressor,2019-05-02 22:10:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa9d6ef84e734e25,e17c64bc956e40f3,3758,hydromorphone,opioid,2019-05-02 22:44:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

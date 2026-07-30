@@ -1,4 +1,17 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-fae5c5778cc1f222,31a860fd481cc790,propofol,sedative,2019-03-30 15:29:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-fae5c5778cc1f222,31a860fd481cc790,propofol,sedative,2019-03-30 22:39:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-fae5c5778cc1f222,31a860fd481cc790,propofol,sedative,2019-03-30 22:44:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+fae5c5778cc1f222,31a860fd481cc790,119106,fentanyl,opioid,2019-03-30 15:29:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,119103,propofol,sedative,2019-03-30 15:29:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fae5c5778cc1f222,31a860fd481cc790,119661,succinylcholine,muscle_relaxant,2019-03-30 15:29:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+fae5c5778cc1f222,31a860fd481cc790,121005,rocuronium,muscle_relaxant,2019-03-30 15:37:00,70.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+fae5c5778cc1f222,31a860fd481cc790,2332,dexamethasone,antiemetic,2019-03-30 15:40:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,121005,rocuronium,muscle_relaxant,2019-03-30 16:42:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+fae5c5778cc1f222,31a860fd481cc790,121005,rocuronium,muscle_relaxant,2019-03-30 17:07:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+fae5c5778cc1f222,31a860fd481cc790,121005,rocuronium,muscle_relaxant,2019-03-30 18:15:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+fae5c5778cc1f222,31a860fd481cc790,3758,hydromorphone,opioid,2019-03-30 18:28:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,3758,hydromorphone,opioid,2019-03-30 19:16:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,3758,hydromorphone,opioid,2019-03-30 19:55:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,121005,rocuronium,muscle_relaxant,2019-03-30 20:04:00,5.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+fae5c5778cc1f222,31a860fd481cc790,59059,ondansetron,antiemetic,2019-03-30 22:04:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,118625,sugammadex,reversal,2019-03-30 22:30:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+fae5c5778cc1f222,31a860fd481cc790,119103,propofol,sedative,2019-03-30 22:39:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fae5c5778cc1f222,31a860fd481cc790,119103,propofol,sedative,2019-03-30 22:44:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

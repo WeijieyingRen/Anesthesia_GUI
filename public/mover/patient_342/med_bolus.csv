@@ -1,7 +1,41 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-5fe5f1ae56c0e7b9,d74bca056df43a10,propofol,sedative,2022-02-09 06:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5fe5f1ae56c0e7b9,d74bca056df43a10,propofol,sedative,2022-02-09 10:11:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5fe5f1ae56c0e7b9,d74bca056df43a10,propofol,sedative,2022-02-09 11:05:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5fe5f1ae56c0e7b9,d74bca056df43a10,propofol,sedative,2022-02-09 15:52:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5fe5f1ae56c0e7b9,d74bca056df43a10,propofol,sedative,2022-02-09 15:57:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5fe5f1ae56c0e7b9,d74bca056df43a10,propofol,sedative,2022-02-09 16:02:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5fe5f1ae56c0e7b9,d74bca056df43a10,20472,etomidate,sedative,2022-02-09 06:54:00,10.0,mg,IntraVENOUS,etomidate (AMIDATE) injection,ETOMIDATE 2 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119106,fentanyl,opioid,2022-02-09 06:54:00,200.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119103,propofol,sedative,2022-02-09 06:54:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,121005,rocuronium,muscle_relaxant,2022-02-09 06:54:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,500840,phenylephrine,vasopressor,2022-02-09 07:05:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 07:06:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 07:08:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 07:29:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,403,aminocaproic acid,rescue_or_correction,2022-02-09 07:30:00,5.0,g,IntraVENOUS,aminocaproic acid (AMICAR) injection,AMINOCAPROIC ACID 250 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 07:39:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119106,fentanyl,opioid,2022-02-09 08:11:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,504715,heparin,anticoagulant,2022-02-09 08:40:00,7.0,mL,IntraVENOUS,heparin 5000 units in sodium chloride 0.9% 1000 mL 5000-0.9 UNIT/L-% solution,HEPARIN 5000 UNITS/1000 ML NS (IR)(UCI),Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,121005,rocuronium,muscle_relaxant,2022-02-09 08:55:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,504715,heparin,anticoagulant,2022-02-09 09:51:00,30.0,mL,IntraVENOUS,heparin 5000 units in sodium chloride 0.9% 1000 mL 5000-0.9 UNIT/L-% solution,HEPARIN 5000 UNITS/1000 ML NS (IR)(UCI),Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119103,propofol,sedative,2022-02-09 10:11:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119103,propofol,sedative,2022-02-09 11:05:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,121005,rocuronium,muscle_relaxant,2022-02-09 13:00:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 13:21:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,1306,calcium chloride,rescue_or_correction,2022-02-09 13:30:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,500840,phenylephrine,vasopressor,2022-02-09 13:32:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,500840,phenylephrine,vasopressor,2022-02-09 13:34:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,500840,phenylephrine,vasopressor,2022-02-09 13:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,1306,calcium chloride,rescue_or_correction,2022-02-09 14:00:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,7309,sodium bicarbonate,rescue_or_correction,2022-02-09 14:22:00,50.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,1306,calcium chloride,rescue_or_correction,2022-02-09 14:30:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,1306,calcium chloride,rescue_or_correction,2022-02-09 15:00:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,121005,rocuronium,muscle_relaxant,2022-02-09 15:03:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,1306,calcium chloride,rescue_or_correction,2022-02-09 15:30:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119103,propofol,sedative,2022-02-09 15:52:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119103,propofol,sedative,2022-02-09 15:57:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119103,propofol,sedative,2022-02-09 16:02:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 16:09:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,48072,esmolol,vasodilator_or_rate_control,2022-02-09 16:10:00,10.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 16:13:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,119106,fentanyl,opioid,2022-02-09 16:16:00,200.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,5599,nitroglycerin,vasodilator_or_rate_control,2022-02-09 16:16:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,500840,phenylephrine,vasopressor,2022-02-09 16:25:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,114429,vasopressin,vasopressor,2022-02-09 16:25:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,114429,vasopressin,vasopressor,2022-02-09 16:27:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+5fe5f1ae56c0e7b9,d74bca056df43a10,114429,vasopressin,vasopressor,2022-02-09 16:29:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given

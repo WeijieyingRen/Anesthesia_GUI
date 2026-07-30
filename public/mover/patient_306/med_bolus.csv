@@ -1,6 +1,18 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-fcd721b179d0c16e,e3c8707cdf6dabd9,propofol,sedative,2019-11-18 14:16:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-fcd721b179d0c16e,e3c8707cdf6dabd9,ephedrine,vasopressor,2019-11-18 15:02:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-fcd721b179d0c16e,e3c8707cdf6dabd9,propofol,sedative,2019-11-18 15:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-fcd721b179d0c16e,e3c8707cdf6dabd9,ephedrine,vasopressor,2019-11-18 16:47:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-fcd721b179d0c16e,e3c8707cdf6dabd9,propofol,sedative,2019-11-18 16:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+fcd721b179d0c16e,e3c8707cdf6dabd9,119106,fentanyl,opioid,2019-11-18 14:15:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119103,propofol,sedative,2019-11-18 14:16:00,140.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,121005,rocuronium,muscle_relaxant,2019-11-18 14:17:00,70.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,2332,dexamethasone,antiemetic,2019-11-18 14:35:00,6.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,2833,ephedrine,vasopressor,2019-11-18 15:02:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,500840,phenylephrine,vasopressor,2019-11-18 15:13:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119103,propofol,sedative,2019-11-18 15:19:00,60.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119106,fentanyl,opioid,2019-11-18 15:24:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119106,fentanyl,opioid,2019-11-18 16:14:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119106,fentanyl,opioid,2019-11-18 16:46:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,2833,ephedrine,vasopressor,2019-11-18 16:47:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,500840,phenylephrine,vasopressor,2019-11-18 16:47:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119103,propofol,sedative,2019-11-18 16:54:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119106,fentanyl,opioid,2019-11-18 17:00:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,59059,ondansetron,antiemetic,2019-11-18 17:11:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,119106,fentanyl,opioid,2019-11-18 17:17:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fcd721b179d0c16e,e3c8707cdf6dabd9,118625,sugammadex,reversal,2019-11-18 17:29:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

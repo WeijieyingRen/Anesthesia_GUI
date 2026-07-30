@@ -1,4 +1,18 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-fe109843f63e07be,ad367212c8d395df,propofol,sedative,2021-07-10 13:12:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-fe109843f63e07be,ad367212c8d395df,propofol,sedative,2021-07-10 14:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-fe109843f63e07be,ad367212c8d395df,metoclopramide,antiemetic,2021-07-10 17:26:00,10.0,mg,IntraVENOUS,metoclopramide (REGLAN) injection 10 mg,METOCLOPRAMIDE HCL 5 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+fe109843f63e07be,ad367212c8d395df,119103,propofol,sedative,2021-07-10 13:12:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fe109843f63e07be,ad367212c8d395df,119106,fentanyl,opioid,2021-07-10 13:16:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,2332,dexamethasone,antiemetic,2021-07-10 13:20:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,119106,fentanyl,opioid,2021-07-10 13:22:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 13:35:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 13:59:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 14:05:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 14:14:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 14:40:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,119103,propofol,sedative,2021-07-10 14:48:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+fe109843f63e07be,ad367212c8d395df,119106,fentanyl,opioid,2021-07-10 15:12:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 15:12:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,500840,phenylephrine,vasopressor,2021-07-10 15:20:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,119106,fentanyl,opioid,2021-07-10 15:56:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,119106,fentanyl,opioid,2021-07-10 16:04:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,5002,metoclopramide,antiemetic,2021-07-10 17:26:00,10.0,mg,IntraVENOUS,metoclopramide (REGLAN) injection 10 mg,METOCLOPRAMIDE HCL 5 MG/ML IJ SOLN,Given
+fe109843f63e07be,ad367212c8d395df,119106,fentanyl,opioid,2021-07-10 18:12:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

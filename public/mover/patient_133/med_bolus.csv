@@ -1,3 +1,22 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-baec7612c45a2167,d704e7e529e0a6c2,propofol,sedative,2021-09-11 07:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-baec7612c45a2167,d704e7e529e0a6c2,sugammadex,reversal,2021-09-11 13:30:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+baec7612c45a2167,d704e7e529e0a6c2,41381,midazolam,sedative,2021-09-11 07:12:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,119103,propofol,sedative,2021-09-11 07:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+baec7612c45a2167,d704e7e529e0a6c2,59728,rocuronium,muscle_relaxant,2021-09-11 07:28:00,70.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 07:51:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 08:02:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 08:05:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 08:09:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 08:13:00,400.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 08:17:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 08:23:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,2332,dexamethasone,antiemetic,2021-09-11 09:15:00,10.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 10:40:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 11:56:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 12:15:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,500840,phenylephrine,vasopressor,2021-09-11 12:23:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,59728,rocuronium,muscle_relaxant,2021-09-11 12:43:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,119106,fentanyl,opioid,2021-09-11 13:23:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,118627,sugammadex,reversal,2021-09-11 13:30:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,10372,labetalol,vasodilator_or_rate_control,2021-09-11 13:40:00,10.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,59059,ondansetron,antiemetic,2021-09-11 13:43:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+baec7612c45a2167,d704e7e529e0a6c2,17837,albuterol,pulmonary,2021-09-11 14:12:00,4.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given

@@ -1,8 +1,30 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-0c07bddc79a8dcd9,77d65ac33e6a95d3,propofol,sedative,2021-06-23 15:52:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-0c07bddc79a8dcd9,77d65ac33e6a95d3,ephedrine,vasopressor,2021-06-23 16:05:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0c07bddc79a8dcd9,77d65ac33e6a95d3,ephedrine,vasopressor,2021-06-23 16:32:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0c07bddc79a8dcd9,77d65ac33e6a95d3,propofol,sedative,2021-06-23 16:40:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-0c07bddc79a8dcd9,77d65ac33e6a95d3,ephedrine,vasopressor,2021-06-23 16:53:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-0c07bddc79a8dcd9,77d65ac33e6a95d3,tranexamic acid,rescue_or_correction,2021-06-23 19:52:00,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),Bolus
-0c07bddc79a8dcd9,77d65ac33e6a95d3,propofol,sedative,2021-06-23 20:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119106,fentanyl,opioid,2021-06-23 15:52:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119103,propofol,sedative,2021-06-23 15:52:00,110.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,59727,rocuronium,muscle_relaxant,2021-06-23 15:52:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119106,fentanyl,opioid,2021-06-23 15:57:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,2833,ephedrine,vasopressor,2021-06-23 16:05:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,117433,ketamine,sedative,2021-06-23 16:06:00,15.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,2833,ephedrine,vasopressor,2021-06-23 16:32:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,500840,phenylephrine,vasopressor,2021-06-23 16:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119103,propofol,sedative,2021-06-23 16:40:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,2833,ephedrine,vasopressor,2021-06-23 16:53:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,117433,ketamine,sedative,2021-06-23 17:01:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,59727,rocuronium,muscle_relaxant,2021-06-23 17:24:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,500840,phenylephrine,vasopressor,2021-06-23 17:31:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119106,fentanyl,opioid,2021-06-23 17:59:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,117433,ketamine,sedative,2021-06-23 18:01:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,59727,rocuronium,muscle_relaxant,2021-06-23 18:26:00,5.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,59727,rocuronium,muscle_relaxant,2021-06-23 18:35:00,5.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,117433,ketamine,sedative,2021-06-23 18:45:00,5.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119106,fentanyl,opioid,2021-06-23 18:48:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119106,fentanyl,opioid,2021-06-23 19:17:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,117433,ketamine,sedative,2021-06-23 19:52:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,453446,tranexamic acid,rescue_or_correction,2021-06-23 19:52:00,1000.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),Bolus
+0c07bddc79a8dcd9,77d65ac33e6a95d3,59059,ondansetron,antiemetic,2021-06-23 19:53:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,3758,hydromorphone,opioid,2021-06-23 19:58:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,3758,hydromorphone,opioid,2021-06-23 20:05:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,120326,glycopyrrolate,reversal,2021-06-23 20:25:00,0.4,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,117431,neostigmine,reversal,2021-06-23 20:25:00,3.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,3758,hydromorphone,opioid,2021-06-23 20:26:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+0c07bddc79a8dcd9,77d65ac33e6a95d3,119103,propofol,sedative,2021-06-23 20:26:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

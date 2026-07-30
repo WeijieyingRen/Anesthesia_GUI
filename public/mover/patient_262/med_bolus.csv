@@ -1,6 +1,41 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-a802ab5301e24084,e8dd6c1b4f3753c6,propofol,sedative,2019-09-13 07:27:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-a802ab5301e24084,e8dd6c1b4f3753c6,propofol,sedative,2019-09-13 08:31:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-a802ab5301e24084,e8dd6c1b4f3753c6,ephedrine,vasopressor,2019-09-13 08:47:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-a802ab5301e24084,e8dd6c1b4f3753c6,ephedrine,vasopressor,2019-09-13 09:01:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-a802ab5301e24084,e8dd6c1b4f3753c6,propofol,sedative,2019-09-13 12:06:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+a802ab5301e24084,e8dd6c1b4f3753c6,119106,fentanyl,opioid,2019-09-13 07:26:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,4237,ketamine,sedative,2019-09-13 07:27:00,50.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,119103,propofol,sedative,2019-09-13 07:27:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 07:28:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 08:15:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,119103,propofol,sedative,2019-09-13 08:31:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,500840,phenylephrine,vasopressor,2019-09-13 08:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,500840,phenylephrine,vasopressor,2019-09-13 08:40:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,2332,dexamethasone,antiemetic,2019-09-13 08:41:00,8.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,4237,ketamine,sedative,2019-09-13 08:45:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,2833,ephedrine,vasopressor,2019-09-13 08:47:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 08:50:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 08:53:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 08:57:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,2833,ephedrine,vasopressor,2019-09-13 09:01:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,500840,phenylephrine,vasopressor,2019-09-13 09:01:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 09:01:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 09:09:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 09:15:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 09:18:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,120326,glycopyrrolate,reversal,2019-09-13 09:39:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,4237,ketamine,sedative,2019-09-13 09:52:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,17837,albuterol,pulmonary,2019-09-13 10:33:00,5.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,4237,ketamine,sedative,2019-09-13 10:57:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 10:57:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,4237,ketamine,sedative,2019-09-13 12:02:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,119103,propofol,sedative,2019-09-13 12:06:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 12:31:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 13:10:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,121005,rocuronium,muscle_relaxant,2019-09-13 13:38:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,119106,fentanyl,opioid,2019-09-13 13:43:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,1306,calcium chloride,rescue_or_correction,2019-09-13 14:30:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,1306,calcium chloride,rescue_or_correction,2019-09-13 14:59:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,8478,vasopressin,vasopressor,2019-09-13 15:13:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,59059,ondansetron,antiemetic,2019-09-13 16:04:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,1306,calcium chloride,rescue_or_correction,2019-09-13 16:11:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,118625,sugammadex,reversal,2019-09-13 16:20:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,1306,calcium chloride,rescue_or_correction,2019-09-13 16:25:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,119106,fentanyl,opioid,2019-09-13 16:28:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+a802ab5301e24084,e8dd6c1b4f3753c6,119106,fentanyl,opioid,2019-09-13 16:36:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

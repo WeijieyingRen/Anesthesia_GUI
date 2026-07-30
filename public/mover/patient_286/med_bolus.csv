@@ -1,2 +1,20 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-fd50927fa58711ee,3561862f7d034af0,ephedrine,vasopressor,2022-05-16 10:20:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+fd50927fa58711ee,3561862f7d034af0,41381,midazolam,sedative,2022-05-16 07:19:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 07:20:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,120326,glycopyrrolate,reversal,2022-05-16 07:55:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+fd50927fa58711ee,3561862f7d034af0,119106,fentanyl,opioid,2022-05-16 08:13:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,120326,glycopyrrolate,reversal,2022-05-16 08:14:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+fd50927fa58711ee,3561862f7d034af0,2332,dexamethasone,antiemetic,2022-05-16 08:50:00,8.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,119106,fentanyl,opioid,2022-05-16 09:05:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 09:34:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 09:49:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,2833,ephedrine,vasopressor,2022-05-16 10:20:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 10:44:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,500840,phenylephrine,vasopressor,2022-05-16 11:17:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 11:20:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,500840,phenylephrine,vasopressor,2022-05-16 11:29:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 12:04:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,500840,phenylephrine,vasopressor,2022-05-16 12:16:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 12:26:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,119106,fentanyl,opioid,2022-05-16 13:46:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+fd50927fa58711ee,3561862f7d034af0,59728,rocuronium,muscle_relaxant,2022-05-16 14:11:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given

@@ -1,3 +1,25 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-5427ff28431cca78,6cb318785441e9d5,propofol,sedative,2020-05-03 15:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5427ff28431cca78,6cb318785441e9d5,ephedrine,vasopressor,2020-05-03 17:11:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5427ff28431cca78,6cb318785441e9d5,119106,fentanyl,opioid,2020-05-03 15:48:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,119103,propofol,sedative,2020-05-03 15:48:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5427ff28431cca78,6cb318785441e9d5,119661,succinylcholine,muscle_relaxant,2020-05-03 15:48:00,180.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,48072,esmolol,vasodilator_or_rate_control,2020-05-03 15:54:00,50.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 16:00:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 16:22:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,500840,phenylephrine,vasopressor,2020-05-03 16:53:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-03 17:08:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-03 17:10:00,200.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,2833,ephedrine,vasopressor,2020-05-03 17:11:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,2332,dexamethasone,antiemetic,2020-05-03 17:15:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 17:17:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,119106,fentanyl,opioid,2020-05-03 17:55:00,250.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 18:34:00,40.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,500840,phenylephrine,vasopressor,2020-05-03 18:41:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 19:03:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,500840,phenylephrine,vasopressor,2020-05-03 19:11:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 19:38:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,121005,rocuronium,muscle_relaxant,2020-05-03 20:07:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,59059,ondansetron,antiemetic,2020-05-03 20:36:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,119106,fentanyl,opioid,2020-05-03 20:50:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5427ff28431cca78,6cb318785441e9d5,120326,glycopyrrolate,reversal,2020-05-03 20:58:00,1.0,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,117431,neostigmine,reversal,2020-05-03 20:58:00,5.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+5427ff28431cca78,6cb318785441e9d5,10372,labetalol,vasodilator_or_rate_control,2020-05-03 21:21:00,10.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given

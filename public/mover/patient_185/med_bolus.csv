@@ -1,4 +1,74 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-4913216df955529d,98d8b8c63e2c8c3e,propofol,sedative,2022-01-01 07:51:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-4913216df955529d,98d8b8c63e2c8c3e,propofol,sedative,2022-01-01 07:53:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-4913216df955529d,98d8b8c63e2c8c3e,propofol,sedative,2022-01-01 07:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+4913216df955529d,98d8b8c63e2c8c3e,41381,midazolam,sedative,2022-01-01 07:39:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,4237,ketamine,sedative,2022-01-01 07:51:00,30.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 07:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,119103,propofol,sedative,2022-01-01 07:51:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+4913216df955529d,98d8b8c63e2c8c3e,119103,propofol,sedative,2022-01-01 07:53:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+4913216df955529d,98d8b8c63e2c8c3e,119103,propofol,sedative,2022-01-01 07:54:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 07:54:00,60.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 07:57:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 07:58:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,3758,hydromorphone,opioid,2022-01-01 08:30:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 08:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 09:17:00,150.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,4237,ketamine,sedative,2022-01-01 09:20:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 09:20:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 09:24:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 09:28:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,1306,calcium chloride,rescue_or_correction,2022-01-01 09:33:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 10:04:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 10:07:00,150.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 10:51:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 10:56:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 11:21:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 11:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 11:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,1306,calcium chloride,rescue_or_correction,2022-01-01 11:40:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,2332,dexamethasone,antiemetic,2022-01-01 11:46:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,2332,dexamethasone,antiemetic,2022-01-01 12:31:00,200.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 12:43:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 12:57:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 12:59:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 13:04:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 13:07:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 13:12:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,7309,sodium bicarbonate,rescue_or_correction,2022-01-01 13:50:00,50.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,7309,sodium bicarbonate,rescue_or_correction,2022-01-01 13:55:00,50.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:01:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:08:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:19:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,1306,calcium chloride,rescue_or_correction,2022-01-01 14:23:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 14:30:00,15.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:34:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:37:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:44:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,7309,sodium bicarbonate,rescue_or_correction,2022-01-01 14:52:00,50.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,3758,hydromorphone,opioid,2022-01-01 14:56:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 14:58:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 15:09:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 15:23:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 15:32:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 15:32:00,15.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 15:34:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,3758,hydromorphone,opioid,2022-01-01 15:42:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 15:50:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,1306,calcium chloride,rescue_or_correction,2022-01-01 15:58:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 16:00:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 16:13:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 16:13:00,15.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 16:16:00,300.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 16:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,3758,hydromorphone,opioid,2022-01-01 16:32:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,500840,phenylephrine,vasopressor,2022-01-01 16:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,114429,vasopressin,vasopressor,2022-01-01 16:35:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,1306,calcium chloride,rescue_or_correction,2022-01-01 16:40:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,7309,sodium bicarbonate,rescue_or_correction,2022-01-01 16:40:00,50.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,3758,hydromorphone,opioid,2022-01-01 17:14:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59728,rocuronium,muscle_relaxant,2022-01-01 17:27:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,1306,calcium chloride,rescue_or_correction,2022-01-01 17:49:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,114429,vasopressin,vasopressor,2022-01-01 17:49:00,0.5,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,114429,vasopressin,vasopressor,2022-01-01 18:18:00,0.5,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,3758,hydromorphone,opioid,2022-01-01 18:38:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,59059,ondansetron,antiemetic,2022-01-01 18:41:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,48072,esmolol,vasodilator_or_rate_control,2022-01-01 19:03:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+4913216df955529d,98d8b8c63e2c8c3e,48072,esmolol,vasodilator_or_rate_control,2022-01-01 19:04:00,30.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given

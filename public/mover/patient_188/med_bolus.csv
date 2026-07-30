@@ -1,10 +1,49 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 08:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 09:45:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 14:06:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 14:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 14:36:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 15:56:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 17:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 18:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-aa07034535eeed5c,51a58981da8724ca,propofol,sedative,2020-05-05 18:32:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+aa07034535eeed5c,51a58981da8724ca,119106,fentanyl,opioid,2020-05-05 08:30:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,500840,phenylephrine,vasopressor,2020-05-05 08:30:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 08:30:00,160.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,59727,rocuronium,muscle_relaxant,2020-05-05 08:31:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,59727,rocuronium,muscle_relaxant,2020-05-05 09:22:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,2332,dexamethasone,antiemetic,2020-05-05 09:45:00,10.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 09:45:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,119106,fentanyl,opioid,2020-05-05 10:05:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119106,fentanyl,opioid,2020-05-05 11:10:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,3758,hydromorphone,opioid,2020-05-05 11:34:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,10372,labetalol,vasodilator_or_rate_control,2020-05-05 12:03:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,3758,hydromorphone,opioid,2020-05-05 12:59:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,10372,labetalol,vasodilator_or_rate_control,2020-05-05 13:33:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,3758,hydromorphone,opioid,2020-05-05 14:00:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,59727,rocuronium,muscle_relaxant,2020-05-05 14:02:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 14:06:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 14:23:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 14:36:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,10372,labetalol,vasodilator_or_rate_control,2020-05-05 14:45:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,59727,rocuronium,muscle_relaxant,2020-05-05 15:43:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-05 15:49:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-05 15:51:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,3758,hydromorphone,opioid,2020-05-05 15:54:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-05 15:54:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 15:56:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,59727,rocuronium,muscle_relaxant,2020-05-05 16:45:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,59727,rocuronium,muscle_relaxant,2020-05-05 17:10:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-05 17:15:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 17:19:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,59059,ondansetron,antiemetic,2020-05-05 17:56:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,120326,glycopyrrolate,reversal,2020-05-05 18:00:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+aa07034535eeed5c,51a58981da8724ca,117431,neostigmine,reversal,2020-05-05 18:00:00,3.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+aa07034535eeed5c,51a58981da8724ca,1306,calcium chloride,rescue_or_correction,2020-05-05 18:17:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,17837,albuterol,pulmonary,2020-05-05 18:20:00,10.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+aa07034535eeed5c,51a58981da8724ca,1306,calcium chloride,rescue_or_correction,2020-05-05 18:20:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,1306,calcium chloride,rescue_or_correction,2020-05-05 18:24:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-05 18:24:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,7309,sodium bicarbonate,rescue_or_correction,2020-05-05 18:25:00,25.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,1306,calcium chloride,rescue_or_correction,2020-05-05 18:27:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,1306,calcium chloride,rescue_or_correction,2020-05-05 18:29:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 18:30:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,5599,nitroglycerin,vasodilator_or_rate_control,2020-05-05 18:31:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119103,propofol,sedative,2020-05-05 18:32:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+aa07034535eeed5c,51a58981da8724ca,10372,labetalol,vasodilator_or_rate_control,2020-05-05 18:37:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,10372,labetalol,vasodilator_or_rate_control,2020-05-05 19:21:00,5.0,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119106,fentanyl,opioid,2020-05-05 19:27:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119106,fentanyl,opioid,2020-05-05 19:35:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+aa07034535eeed5c,51a58981da8724ca,119106,fentanyl,opioid,2020-05-05 19:41:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

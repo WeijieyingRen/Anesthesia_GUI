@@ -1,2 +1,33 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-bfde91cef6f6db36,2b90308e62e27f9a,propofol,sedative,2021-08-23 07:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+bfde91cef6f6db36,2b90308e62e27f9a,119106,fentanyl,opioid,2021-08-23 07:21:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,119103,propofol,sedative,2021-08-23 07:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 07:21:00,70.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,2332,dexamethasone,antiemetic,2021-08-23 07:27:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59059,ondansetron,antiemetic,2021-08-23 07:28:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,119106,fentanyl,opioid,2021-08-23 07:33:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,117433,ketamine,sedative,2021-08-23 07:55:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 08:32:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,117433,ketamine,sedative,2021-08-23 09:18:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 09:23:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,119106,fentanyl,opioid,2021-08-23 09:27:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,119106,fentanyl,opioid,2021-08-23 09:54:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 10:33:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,117433,ketamine,sedative,2021-08-23 10:34:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 11:04:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 11:05:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 11:34:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 11:37:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 11:37:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,117433,ketamine,sedative,2021-08-23 11:58:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) syringe,KETAMINE HCL-SODIUM CHLORIDE 50-0.9 MG/5ML-% IV SOSY,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 12:40:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 12:40:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 13:05:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 13:54:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59728,rocuronium,muscle_relaxant,2021-08-23 13:54:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 13:59:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,48072,esmolol,vasodilator_or_rate_control,2021-08-23 14:16:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,59059,ondansetron,antiemetic,2021-08-23 15:07:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,48072,esmolol,vasodilator_or_rate_control,2021-08-23 15:13:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,3758,hydromorphone,opioid,2021-08-23 15:15:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,107341,glycopyrrolate,reversal,2021-08-23 15:33:00,0.4,mg,IntraVENOUS,glycopyrrolate (ROBINUL) injection,GLYCOPYRROLATE 1 MG/5ML IJ SOLN,Given
+bfde91cef6f6db36,2b90308e62e27f9a,117431,neostigmine,reversal,2021-08-23 15:33:00,4.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

@@ -1,3 +1,21 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-602113a339f37e59,db2594a3d37bf98f,propofol,sedative,2019-08-05 07:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-602113a339f37e59,db2594a3d37bf98f,propofol,sedative,2019-08-05 10:14:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+602113a339f37e59,db2594a3d37bf98f,119106,fentanyl,opioid,2019-08-05 07:24:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,119103,propofol,sedative,2019-08-05 07:26:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+602113a339f37e59,db2594a3d37bf98f,59727,rocuronium,muscle_relaxant,2019-08-05 07:27:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,119106,fentanyl,opioid,2019-08-05 08:12:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,59727,rocuronium,muscle_relaxant,2019-08-05 08:37:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,2332,dexamethasone,antiemetic,2019-08-05 08:57:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,119106,fentanyl,opioid,2019-08-05 09:22:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,119106,fentanyl,opioid,2019-08-05 10:10:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,119103,propofol,sedative,2019-08-05 10:14:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+602113a339f37e59,db2594a3d37bf98f,1306,calcium chloride,rescue_or_correction,2019-08-05 11:03:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,1306,calcium chloride,rescue_or_correction,2019-08-05 12:07:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,1306,calcium chloride,rescue_or_correction,2019-08-05 13:04:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,1306,calcium chloride,rescue_or_correction,2019-08-05 13:14:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,1306,calcium chloride,rescue_or_correction,2019-08-05 13:16:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,120326,glycopyrrolate,reversal,2019-08-05 13:56:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+602113a339f37e59,db2594a3d37bf98f,1306,calcium chloride,rescue_or_correction,2019-08-05 16:35:00,2000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,59059,ondansetron,antiemetic,2019-08-05 17:35:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,3758,hydromorphone,opioid,2019-08-05 17:36:00,0.25,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,3758,hydromorphone,opioid,2019-08-05 17:46:00,0.25,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+602113a339f37e59,db2594a3d37bf98f,3758,hydromorphone,opioid,2019-08-05 18:09:00,0.3,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

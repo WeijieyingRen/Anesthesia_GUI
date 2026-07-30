@@ -1,9 +1,37 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 18:57:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 19:54:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 20:28:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 22:31:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 22:39:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 22:41:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,propofol,sedative,2021-11-26 23:09:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-92ed1a6943c1dc4f,3528c97ccb3bc348,sugammadex,reversal,2021-11-27 00:06:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 200 MG/2ML IV bolus,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+92ed1a6943c1dc4f,3528c97ccb3bc348,41381,midazolam,sedative,2021-11-26 18:53:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119106,fentanyl,opioid,2021-11-26 18:57:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,4237,ketamine,sedative,2021-11-26 18:57:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 18:57:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,59728,rocuronium,muscle_relaxant,2021-11-26 18:59:00,40.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 19:11:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 19:18:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,59728,rocuronium,muscle_relaxant,2021-11-26 19:24:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119106,fentanyl,opioid,2021-11-26 19:33:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 19:37:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 19:54:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,59728,rocuronium,muscle_relaxant,2021-11-26 19:54:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 20:05:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,4237,ketamine,sedative,2021-11-26 20:10:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,59728,rocuronium,muscle_relaxant,2021-11-26 20:22:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119106,fentanyl,opioid,2021-11-26 20:27:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 20:28:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 21:07:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 21:19:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 21:55:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 22:16:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 22:23:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119106,fentanyl,opioid,2021-11-26 22:28:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 22:31:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 22:38:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 22:39:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 22:41:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,59059,ondansetron,antiemetic,2021-11-26 23:06:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,59728,rocuronium,muscle_relaxant,2021-11-26 23:07:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119103,propofol,sedative,2021-11-26 23:09:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119106,fentanyl,opioid,2021-11-26 23:30:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 23:34:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,500840,phenylephrine,vasopressor,2021-11-26 23:50:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,5599,nitroglycerin,vasodilator_or_rate_control,2021-11-27 00:04:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,118625,sugammadex,reversal,2021-11-27 00:06:00,100.0,mg,IntraVENOUS,sugammadex (BRIDION) 200 MG/2ML IV bolus,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+92ed1a6943c1dc4f,3528c97ccb3bc348,119106,fentanyl,opioid,2021-11-27 00:16:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

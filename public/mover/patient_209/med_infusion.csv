@@ -1,1 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+c54707dc149610c5,2a7542fa84c9dd72,455231,calcium gluconate,rescue_or_correction,2021-05-10 07:59:00,2021-05-10 10:09:00,1.0,g,IntraVENOUS,calcium gluconate 1 g in sodium chloride 0.9 % 100 mL IVPB,CALCIUM GLUCONATE 1 G IVPB (UCI),New Bag,anesthesia_end,True,True,2021-05-10 06:45:00

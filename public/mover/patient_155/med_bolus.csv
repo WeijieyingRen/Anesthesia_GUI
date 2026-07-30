@@ -1,7 +1,13 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-5eaddb875bac3cdd,965a47e97587e034,ephedrine,vasopressor,2019-12-07 11:28:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-5eaddb875bac3cdd,965a47e97587e034,propofol,sedative,2019-12-07 11:28:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5eaddb875bac3cdd,965a47e97587e034,propofol,sedative,2019-12-07 11:47:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5eaddb875bac3cdd,965a47e97587e034,ephedrine,vasopressor,2019-12-07 11:51:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-5eaddb875bac3cdd,965a47e97587e034,ephedrine,vasopressor,2019-12-07 12:51:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-5eaddb875bac3cdd,965a47e97587e034,ephedrine,vasopressor,2019-12-07 13:53:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5eaddb875bac3cdd,965a47e97587e034,119106,fentanyl,opioid,2019-12-07 11:00:00,40.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,41381,midazolam,sedative,2019-12-07 11:00:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,2833,ephedrine,vasopressor,2019-12-07 11:28:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,119103,propofol,sedative,2019-12-07 11:28:00,80.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5eaddb875bac3cdd,965a47e97587e034,119103,propofol,sedative,2019-12-07 11:47:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5eaddb875bac3cdd,965a47e97587e034,2833,ephedrine,vasopressor,2019-12-07 11:51:00,15.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,2332,dexamethasone,antiemetic,2019-12-07 11:52:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,120326,glycopyrrolate,reversal,2019-12-07 12:23:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+5eaddb875bac3cdd,965a47e97587e034,2833,ephedrine,vasopressor,2019-12-07 12:51:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,59059,ondansetron,antiemetic,2019-12-07 13:01:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,2833,ephedrine,vasopressor,2019-12-07 13:53:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+5eaddb875bac3cdd,965a47e97587e034,119106,fentanyl,opioid,2019-12-07 14:03:00,60.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

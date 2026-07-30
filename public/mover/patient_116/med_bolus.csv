@@ -1,2 +1,51 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-ce4b70be9c1fe66f,538796057335efd9,propofol,sedative,2019-08-08 08:08:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+ce4b70be9c1fe66f,538796057335efd9,41381,midazolam,sedative,2019-08-08 07:58:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,119106,fentanyl,opioid,2019-08-08 08:02:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,119103,propofol,sedative,2019-08-08 08:08:00,140.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ce4b70be9c1fe66f,538796057335efd9,121005,rocuronium,muscle_relaxant,2019-08-08 08:09:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:22:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:23:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:30:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:35:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 08:40:00,5.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 08:56:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,500840,phenylephrine,vasopressor,2019-08-08 08:58:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:03:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:04:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:07:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:13:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,10181,heparin,anticoagulant,2019-08-08 09:16:00,5000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:16:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,2332,dexamethasone,antiemetic,2019-08-08 09:27:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:30:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 09:31:00,5.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:40:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:44:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:46:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:48:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:52:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:55:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 09:58:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 10:00:00,10.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 10:01:00,3.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 10:04:00,3.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 10:06:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 10:08:00,3.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 10:10:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,8478,vasopressin,vasopressor,2019-08-08 10:13:00,3.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,10181,heparin,anticoagulant,2019-08-08 10:14:00,1000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,41381,midazolam,sedative,2019-08-08 10:19:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 10:37:00,7.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,119106,fentanyl,opioid,2019-08-08 11:04:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,10181,heparin,anticoagulant,2019-08-08 11:10:00,1000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 11:12:00,3.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 11:41:00,3.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,120334,vecuronium,muscle_relaxant,2019-08-08 12:03:00,3.0,mg,IntraVENOUS,vecuronium (PF) (NORCURON) syringe,VECURONIUM BROMIDE 10 MG/10ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,119106,fentanyl,opioid,2019-08-08 12:05:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,10181,heparin,anticoagulant,2019-08-08 12:13:00,500.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,120326,glycopyrrolate,reversal,2019-08-08 12:45:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,117431,neostigmine,reversal,2019-08-08 12:45:00,5.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+ce4b70be9c1fe66f,538796057335efd9,59059,ondansetron,antiemetic,2019-08-08 12:51:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+ce4b70be9c1fe66f,538796057335efd9,118625,sugammadex,reversal,2019-08-08 12:57:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

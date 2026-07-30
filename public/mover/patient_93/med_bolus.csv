@@ -1,7 +1,20 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-d88fb7f65c77980b,cf954e996f155b70,propofol,sedative,2019-09-15 07:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-d88fb7f65c77980b,cf954e996f155b70,ephedrine,vasopressor,2019-09-15 07:56:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-d88fb7f65c77980b,cf954e996f155b70,ephedrine,vasopressor,2019-09-15 08:05:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-d88fb7f65c77980b,cf954e996f155b70,ephedrine,vasopressor,2019-09-15 08:10:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-d88fb7f65c77980b,cf954e996f155b70,ephedrine,vasopressor,2019-09-15 08:26:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-d88fb7f65c77980b,cf954e996f155b70,ephedrine,vasopressor,2019-09-15 08:55:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+d88fb7f65c77980b,cf954e996f155b70,119106,fentanyl,opioid,2019-09-15 07:19:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,119106,fentanyl,opioid,2019-09-15 07:26:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,119103,propofol,sedative,2019-09-15 07:26:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+d88fb7f65c77980b,cf954e996f155b70,119661,succinylcholine,muscle_relaxant,2019-09-15 07:26:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+d88fb7f65c77980b,cf954e996f155b70,2332,dexamethasone,antiemetic,2019-09-15 07:37:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,59059,ondansetron,antiemetic,2019-09-15 07:37:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,2833,ephedrine,vasopressor,2019-09-15 07:56:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,2833,ephedrine,vasopressor,2019-09-15 08:05:00,7.5,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,2833,ephedrine,vasopressor,2019-09-15 08:10:00,7.5,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,500840,phenylephrine,vasopressor,2019-09-15 08:10:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,2833,ephedrine,vasopressor,2019-09-15 08:26:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,500840,phenylephrine,vasopressor,2019-09-15 08:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,10181,heparin,anticoagulant,2019-09-15 08:47:00,5000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,2833,ephedrine,vasopressor,2019-09-15 08:55:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,500840,phenylephrine,vasopressor,2019-09-15 08:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,500840,phenylephrine,vasopressor,2019-09-15 09:06:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,10181,heparin,anticoagulant,2019-09-15 09:13:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,500840,phenylephrine,vasopressor,2019-09-15 09:31:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+d88fb7f65c77980b,cf954e996f155b70,500840,phenylephrine,vasopressor,2019-09-15 09:42:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given

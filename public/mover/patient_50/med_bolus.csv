@@ -1,3 +1,29 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-478dff59dd3048a1,cd1096f687b47545,propofol,sedative,2020-09-05 14:00:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-478dff59dd3048a1,cd1096f687b47545,propofol,sedative,2020-09-05 15:18:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+478dff59dd3048a1,cd1096f687b47545,119106,fentanyl,opioid,2020-09-05 13:59:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,119103,propofol,sedative,2020-09-05 14:00:00,170.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 14:00:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 14:50:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,119103,propofol,sedative,2020-09-05 15:18:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+478dff59dd3048a1,cd1096f687b47545,119106,fentanyl,opioid,2020-09-05 15:21:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 15:25:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 16:17:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,119106,fentanyl,opioid,2020-09-05 16:19:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,3758,hydromorphone,opioid,2020-09-05 16:57:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 17:33:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,3758,hydromorphone,opioid,2020-09-05 18:06:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 18:35:00,40.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 19:33:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 20:22:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,119106,fentanyl,opioid,2020-09-05 21:15:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 21:35:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,500840,phenylephrine,vasopressor,2020-09-05 21:54:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,500840,phenylephrine,vasopressor,2020-09-05 22:24:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,500840,phenylephrine,vasopressor,2020-09-05 22:30:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59059,ondansetron,antiemetic,2020-09-05 22:47:00,8.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,41381,midazolam,sedative,2020-09-05 22:59:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59727,rocuronium,muscle_relaxant,2020-09-05 23:03:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,500840,phenylephrine,vasopressor,2020-09-05 23:09:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,3758,hydromorphone,opioid,2020-09-05 23:13:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,59059,ondansetron,antiemetic,2020-09-05 23:19:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,118625,sugammadex,reversal,2020-09-05 23:30:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+478dff59dd3048a1,cd1096f687b47545,119106,fentanyl,opioid,2020-09-05 23:33:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

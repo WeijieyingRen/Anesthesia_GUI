@@ -1,3 +1,14 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-e95166cf97bda3b1,c24691fc2d794ff2,propofol,sedative,2021-12-31 12:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-e95166cf97bda3b1,c24691fc2d794ff2,propofol,sedative,2021-12-31 17:40:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+e95166cf97bda3b1,c24691fc2d794ff2,119106,fentanyl,opioid,2021-12-31 12:55:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119103,propofol,sedative,2021-12-31 12:55:00,140.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119661,succinylcholine,muscle_relaxant,2021-12-31 12:56:00,60.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+e95166cf97bda3b1,c24691fc2d794ff2,2332,dexamethasone,antiemetic,2021-12-31 13:08:00,8.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,59059,ondansetron,antiemetic,2021-12-31 13:08:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119106,fentanyl,opioid,2021-12-31 13:13:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119106,fentanyl,opioid,2021-12-31 14:10:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,120326,glycopyrrolate,reversal,2021-12-31 14:16:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119106,fentanyl,opioid,2021-12-31 14:53:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119103,propofol,sedative,2021-12-31 17:40:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+e95166cf97bda3b1,c24691fc2d794ff2,119106,fentanyl,opioid,2021-12-31 19:51:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,3758,hydromorphone,opioid,2021-12-31 20:04:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+e95166cf97bda3b1,c24691fc2d794ff2,3758,hydromorphone,opioid,2021-12-31 20:31:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

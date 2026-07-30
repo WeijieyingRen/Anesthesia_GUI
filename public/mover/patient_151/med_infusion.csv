@@ -1,2 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
-0c07bddc79a8dcd9,77d65ac33e6a95d3,tranexamic acid,rescue_or_correction,2021-06-23 16:03:00,2021-06-23,2021-06-23,0.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),New Bag
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+0c07bddc79a8dcd9,77d65ac33e6a95d3,453446,tranexamic acid,rescue_or_correction,2021-06-23 16:03:00,2021-06-23 20:45:00,1000.0,mg,IntraVENOUS,"tranexamic Acid (CYKLOKAPRON) 1,000 mg in sodium chloride 0.9 % 100 mL IVPB",TRANEXAMIC ACID IVPB (OPTIME),New Bag,anesthesia_end,False,True,2021-06-23 16:03:00

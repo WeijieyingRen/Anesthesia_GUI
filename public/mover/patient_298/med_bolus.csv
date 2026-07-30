@@ -1,6 +1,35 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-8cf08d13a5156929,661a0abde89a87bd,propofol,sedative,2019-12-25 09:01:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8cf08d13a5156929,661a0abde89a87bd,propofol,sedative,2019-12-25 15:16:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8cf08d13a5156929,661a0abde89a87bd,propofol,sedative,2019-12-25 15:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8cf08d13a5156929,661a0abde89a87bd,propofol,sedative,2019-12-25 15:24:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-8cf08d13a5156929,661a0abde89a87bd,propofol,sedative,2019-12-25 15:33:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+8cf08d13a5156929,661a0abde89a87bd,119106,fentanyl,opioid,2019-12-25 08:33:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119106,fentanyl,opioid,2019-12-25 08:37:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119106,fentanyl,opioid,2019-12-25 08:45:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119106,fentanyl,opioid,2019-12-25 08:59:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,4237,ketamine,sedative,2019-12-25 09:01:00,50.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119103,propofol,sedative,2019-12-25 09:01:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8cf08d13a5156929,661a0abde89a87bd,500840,phenylephrine,vasopressor,2019-12-25 09:02:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119661,succinylcholine,muscle_relaxant,2019-12-25 09:02:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+8cf08d13a5156929,661a0abde89a87bd,107330,cisatracurium,muscle_relaxant,2019-12-25 09:20:00,10.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,5599,nitroglycerin,vasodilator_or_rate_control,2019-12-25 09:35:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,5599,nitroglycerin,vasodilator_or_rate_control,2019-12-25 10:30:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,5599,nitroglycerin,vasodilator_or_rate_control,2019-12-25 10:42:00,100.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,107330,cisatracurium,muscle_relaxant,2019-12-25 10:47:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,107330,cisatracurium,muscle_relaxant,2019-12-25 11:35:00,2.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,2332,dexamethasone,antiemetic,2019-12-25 11:45:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,107330,cisatracurium,muscle_relaxant,2019-12-25 12:33:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,107330,cisatracurium,muscle_relaxant,2019-12-25 13:11:00,2.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,5599,nitroglycerin,vasodilator_or_rate_control,2019-12-25 13:25:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,5599,nitroglycerin,vasodilator_or_rate_control,2019-12-25 13:28:00,50.0,mcg,IntraVENOUS,nitroGLYcerin injection,NITROGLYCERIN 5 MG/ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,114429,vasopressin,vasopressor,2019-12-25 13:41:00,0.5,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,107330,cisatracurium,muscle_relaxant,2019-12-25 13:50:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,59059,ondansetron,antiemetic,2019-12-25 14:34:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,120326,glycopyrrolate,reversal,2019-12-25 14:49:00,0.4,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+8cf08d13a5156929,661a0abde89a87bd,117431,neostigmine,reversal,2019-12-25 14:49:00,2.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+8cf08d13a5156929,661a0abde89a87bd,3758,hydromorphone,opioid,2019-12-25 14:57:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,120326,glycopyrrolate,reversal,2019-12-25 15:03:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+8cf08d13a5156929,661a0abde89a87bd,117431,neostigmine,reversal,2019-12-25 15:03:00,2.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+8cf08d13a5156929,661a0abde89a87bd,3758,hydromorphone,opioid,2019-12-25 15:05:00,0.8,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119103,propofol,sedative,2019-12-25 15:16:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8cf08d13a5156929,661a0abde89a87bd,17837,albuterol,pulmonary,2019-12-25 15:19:00,4.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+8cf08d13a5156929,661a0abde89a87bd,119103,propofol,sedative,2019-12-25 15:19:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8cf08d13a5156929,661a0abde89a87bd,119103,propofol,sedative,2019-12-25 15:24:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+8cf08d13a5156929,661a0abde89a87bd,3758,hydromorphone,opioid,2019-12-25 15:30:00,1.0,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+8cf08d13a5156929,661a0abde89a87bd,119103,propofol,sedative,2019-12-25 15:33:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

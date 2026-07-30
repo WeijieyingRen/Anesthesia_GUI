@@ -1,1 +1,15 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+ce4de11d3797a607,077922595174b679,59728,rocuronium,muscle_relaxant,2020-12-29 07:30:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ce4de11d3797a607,077922595174b679,119106,fentanyl,opioid,2020-12-29 08:25:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ce4de11d3797a607,077922595174b679,59728,rocuronium,muscle_relaxant,2020-12-29 08:38:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ce4de11d3797a607,077922595174b679,119106,fentanyl,opioid,2020-12-29 09:06:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ce4de11d3797a607,077922595174b679,500840,phenylephrine,vasopressor,2020-12-29 09:17:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4de11d3797a607,077922595174b679,59728,rocuronium,muscle_relaxant,2020-12-29 10:02:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ce4de11d3797a607,077922595174b679,17837,albuterol,pulmonary,2020-12-29 11:09:00,4.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+ce4de11d3797a607,077922595174b679,1306,calcium chloride,rescue_or_correction,2020-12-29 11:27:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+ce4de11d3797a607,077922595174b679,59728,rocuronium,muscle_relaxant,2020-12-29 11:32:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ce4de11d3797a607,077922595174b679,1306,calcium chloride,rescue_or_correction,2020-12-29 11:55:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+ce4de11d3797a607,077922595174b679,17837,albuterol,pulmonary,2020-12-29 12:46:00,4.0,puff,Inhalation,albuterol 108 (90 Base) MCG/ACT inhaler,ALBUTEROL SULFATE 108 (90 BASE) MCG/ACT IN AERS,Given
+ce4de11d3797a607,077922595174b679,59728,rocuronium,muscle_relaxant,2020-12-29 12:55:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ce4de11d3797a607,077922595174b679,500840,phenylephrine,vasopressor,2020-12-29 13:16:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ce4de11d3797a607,077922595174b679,500840,phenylephrine,vasopressor,2020-12-29 13:19:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given

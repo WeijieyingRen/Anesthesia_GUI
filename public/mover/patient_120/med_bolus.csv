@@ -1,1 +1,7 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,10372,labetalol,vasodilator_or_rate_control,2021-11-21 09:40:00,2.5,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,10372,labetalol,vasodilator_or_rate_control,2021-11-21 09:54:00,2.5,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,10372,labetalol,vasodilator_or_rate_control,2021-11-21 10:05:00,2.5,mg,IntraVENOUS,labetalol (NORMODYNE) injection,LABETALOL HCL 5 MG/ML IV SOLN,Given
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,41381,midazolam,sedative,2021-11-21 12:17:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,119106,fentanyl,opioid,2021-11-21 13:49:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2cf3a2bf6bdf912a,cbcb38d9543bf6e4,119106,fentanyl,opioid,2021-11-21 14:12:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

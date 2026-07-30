@@ -1,2 +1,44 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-5bd498b26897db00,b4a6d1254302facd,propofol,sedative,2020-02-21 08:04:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5bd498b26897db00,b4a6d1254302facd,41381,midazolam,sedative,2020-02-21 07:48:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,119106,fentanyl,opioid,2020-02-21 08:03:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,119103,propofol,sedative,2020-02-21 08:04:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 08:06:00,60.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,119106,fentanyl,opioid,2020-02-21 08:30:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 08:30:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,119106,fentanyl,opioid,2020-02-21 09:00:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 09:22:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 09:30:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 09:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,119106,fentanyl,opioid,2020-02-21 09:45:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 10:30:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 10:30:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 10:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 10:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,4237,ketamine,sedative,2020-02-21 10:56:00,50.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 11:00:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 11:15:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 11:28:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 11:30:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,4237,ketamine,sedative,2020-02-21 11:45:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 11:45:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 12:30:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,5168,morphine,opioid,2020-02-21 12:42:00,2.0,mg,IntraVENOUS,morphine injection,MORPHINE SULFATE 10 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,4237,ketamine,sedative,2020-02-21 12:44:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 12:48:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 12:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 13:15:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,5168,morphine,opioid,2020-02-21 13:30:00,2.0,mg,IntraVENOUS,morphine injection,MORPHINE SULFATE 10 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,4237,ketamine,sedative,2020-02-21 13:45:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,5168,morphine,opioid,2020-02-21 13:45:00,2.0,mg,IntraVENOUS,morphine injection,MORPHINE SULFATE 10 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 13:45:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,2332,dexamethasone,antiemetic,2020-02-21 14:15:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,121005,rocuronium,muscle_relaxant,2020-02-21 14:15:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+5bd498b26897db00,b4a6d1254302facd,4237,ketamine,sedative,2020-02-21 14:45:00,20.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 14:46:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,500840,phenylephrine,vasopressor,2020-02-21 14:53:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,1306,calcium chloride,rescue_or_correction,2020-02-21 14:57:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,1306,calcium chloride,rescue_or_correction,2020-02-21 15:05:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,1306,calcium chloride,rescue_or_correction,2020-02-21 15:56:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,59059,ondansetron,antiemetic,2020-02-21 15:57:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,118625,sugammadex,reversal,2020-02-21 16:00:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+5bd498b26897db00,b4a6d1254302facd,5168,morphine,opioid,2020-02-21 16:06:00,4.0,mg,IntraVENOUS,morphine injection,MORPHINE SULFATE 10 MG/ML IJ SOLN,Given

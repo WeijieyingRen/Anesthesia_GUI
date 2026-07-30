@@ -1,5 +1,21 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-5ffaeb1e19fb2051,a7ae89043035cf18,propofol,sedative,2021-11-20 14:02:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5ffaeb1e19fb2051,a7ae89043035cf18,propofol,sedative,2021-11-20 14:14:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5ffaeb1e19fb2051,a7ae89043035cf18,propofol,sedative,2021-11-20 14:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-5ffaeb1e19fb2051,a7ae89043035cf18,propofol,sedative,2021-11-20 14:57:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+5ffaeb1e19fb2051,a7ae89043035cf18,59728,rocuronium,muscle_relaxant,2021-11-20 09:28:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 09:44:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,59728,rocuronium,muscle_relaxant,2021-11-20 10:38:00,30.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 11:55:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 12:25:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,59728,rocuronium,muscle_relaxant,2021-11-20 12:27:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 12:32:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 12:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 12:36:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 12:45:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 12:50:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,59728,rocuronium,muscle_relaxant,2021-11-20 13:29:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 13:44:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,119103,propofol,sedative,2021-11-20 14:02:00,10.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,119103,propofol,sedative,2021-11-20 14:14:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,1306,calcium chloride,rescue_or_correction,2021-11-20 14:23:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,59728,rocuronium,muscle_relaxant,2021-11-20 14:40:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,119103,propofol,sedative,2021-11-20 14:55:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,119103,propofol,sedative,2021-11-20 14:57:00,40.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+5ffaeb1e19fb2051,a7ae89043035cf18,500840,phenylephrine,vasopressor,2021-11-20 14:59:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given

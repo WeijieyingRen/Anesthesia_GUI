@@ -1,2 +1,65 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-cdaa2d606a280090,8f85be1559640988,propofol,sedative,2019-04-27 07:45:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+cdaa2d606a280090,8f85be1559640988,41381,midazolam,sedative,2019-04-27 07:18:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,10429,epinephrine,vasopressor,2019-04-27 07:25:00,5.0,mL,Epidural,lidocaine-EPINEPHrine 1.5 %-1:200000 injection,LIDOCAINE-EPINEPHRINE 1.5 %-1:200000 IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119106,fentanyl,opioid,2019-04-27 07:45:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,500840,phenylephrine,vasopressor,2019-04-27 07:45:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119103,propofol,sedative,2019-04-27 07:45:00,130.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 07:45:00,90.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 07:52:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 09:07:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119106,fentanyl,opioid,2019-04-27 09:11:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 09:42:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,500840,phenylephrine,vasopressor,2019-04-27 09:50:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 09:50:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 10:22:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,500840,phenylephrine,vasopressor,2019-04-27 10:25:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 10:25:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 10:37:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,2332,dexamethasone,antiemetic,2019-04-27 10:41:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 10:44:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 10:51:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 10:57:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 11:03:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 11:07:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 11:12:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 11:21:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 11:30:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 11:39:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 11:42:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 11:43:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 11:58:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 12:35:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 12:35:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,7309,sodium bicarbonate,rescue_or_correction,2019-04-27 12:35:00,5.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 12:48:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,7309,sodium bicarbonate,rescue_or_correction,2019-04-27 12:49:00,5.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 13:04:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 13:06:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,7309,sodium bicarbonate,rescue_or_correction,2019-04-27 13:06:00,5.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 13:18:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,7309,sodium bicarbonate,rescue_or_correction,2019-04-27 13:18:00,5.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 13:22:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 13:23:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 13:26:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,7309,sodium bicarbonate,rescue_or_correction,2019-04-27 13:34:00,5.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 13:35:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 14:10:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,500840,phenylephrine,vasopressor,2019-04-27 14:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,500840,phenylephrine,vasopressor,2019-04-27 14:29:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 14:29:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 14:57:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 14:57:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 15:27:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 15:42:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 15:54:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119106,fentanyl,opioid,2019-04-27 16:14:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,8478,vasopressin,vasopressor,2019-04-27 16:25:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,500840,phenylephrine,vasopressor,2019-04-27 16:26:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59727,rocuronium,muscle_relaxant,2019-04-27 16:27:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119106,fentanyl,opioid,2019-04-27 16:45:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,59059,ondansetron,antiemetic,2019-04-27 17:46:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 18:10:00,200.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119106,fentanyl,opioid,2019-04-27 18:15:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,119106,fentanyl,opioid,2019-04-27 18:25:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+cdaa2d606a280090,8f85be1559640988,1306,calcium chloride,rescue_or_correction,2019-04-27 18:26:00,300.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+cdaa2d606a280090,8f85be1559640988,118625,sugammadex,reversal,2019-04-27 18:31:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

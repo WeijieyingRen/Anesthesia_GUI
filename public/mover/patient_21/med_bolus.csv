@@ -1,3 +1,23 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 13:59:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-768739b404eb125f,2bfcf8009624887e,propofol,sedative,2020-03-04 14:55:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+768739b404eb125f,2bfcf8009624887e,119107,fentanyl,opioid,2020-03-04 13:59:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 250 MCG/5ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,119103,propofol,sedative,2020-03-04 13:59:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+768739b404eb125f,2bfcf8009624887e,121005,rocuronium,muscle_relaxant,2020-03-04 14:01:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+768739b404eb125f,2bfcf8009624887e,4237,ketamine,sedative,2020-03-04 14:37:00,30.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,2332,dexamethasone,antiemetic,2020-03-04 14:40:00,12.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,119107,fentanyl,opioid,2020-03-04 14:45:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 250 MCG/5ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,121005,rocuronium,muscle_relaxant,2020-03-04 14:48:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+768739b404eb125f,2bfcf8009624887e,48072,esmolol,vasodilator_or_rate_control,2020-03-04 14:52:00,30.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+768739b404eb125f,2bfcf8009624887e,48072,esmolol,vasodilator_or_rate_control,2020-03-04 14:54:00,30.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+768739b404eb125f,2bfcf8009624887e,119103,propofol,sedative,2020-03-04 14:55:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+768739b404eb125f,2bfcf8009624887e,48072,esmolol,vasodilator_or_rate_control,2020-03-04 15:05:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+768739b404eb125f,2bfcf8009624887e,48072,esmolol,vasodilator_or_rate_control,2020-03-04 15:10:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+768739b404eb125f,2bfcf8009624887e,3758,hydromorphone,opioid,2020-03-04 15:19:00,0.6,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,4237,ketamine,sedative,2020-03-04 15:55:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,121005,rocuronium,muscle_relaxant,2020-03-04 15:55:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+768739b404eb125f,2bfcf8009624887e,4237,ketamine,sedative,2020-03-04 16:48:00,10.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,121005,rocuronium,muscle_relaxant,2020-03-04 17:16:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+768739b404eb125f,2bfcf8009624887e,3758,hydromorphone,opioid,2020-03-04 17:17:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+768739b404eb125f,2bfcf8009624887e,48072,esmolol,vasodilator_or_rate_control,2020-03-04 17:18:00,20.0,mg,IntraVENOUS,esmolol (BREVIBLOC) IV bolus,ESMOLOL HCL 100 MG/10ML IV SOLN,Given
+768739b404eb125f,2bfcf8009624887e,121005,rocuronium,muscle_relaxant,2020-03-04 18:15:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+768739b404eb125f,2bfcf8009624887e,59059,ondansetron,antiemetic,2020-03-04 19:05:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+768739b404eb125f,2bfcf8009624887e,118625,sugammadex,reversal,2020-03-04 19:40:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given

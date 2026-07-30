@@ -1,7 +1,42 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-42e2a1b92ff1028b,045ef66f85261334,propofol,sedative,2020-05-05 07:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-42e2a1b92ff1028b,045ef66f85261334,ephedrine,vasopressor,2020-05-05 07:30:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-42e2a1b92ff1028b,045ef66f85261334,propofol,sedative,2020-05-05 12:21:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-42e2a1b92ff1028b,045ef66f85261334,ephedrine,vasopressor,2020-05-05 13:12:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-42e2a1b92ff1028b,045ef66f85261334,ephedrine,vasopressor,2020-05-05 14:20:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-42e2a1b92ff1028b,045ef66f85261334,propofol,sedative,2020-05-05 15:49:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+42e2a1b92ff1028b,045ef66f85261334,119106,fentanyl,opioid,2020-05-05 07:21:00,100.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,119103,propofol,sedative,2020-05-05 07:21:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+42e2a1b92ff1028b,045ef66f85261334,59727,rocuronium,muscle_relaxant,2020-05-05 07:21:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,2833,ephedrine,vasopressor,2020-05-05 07:30:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,2332,dexamethasone,antiemetic,2020-05-05 07:49:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,59727,rocuronium,muscle_relaxant,2020-05-05 07:53:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 50 MG/5ML IV SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,119106,fentanyl,opioid,2020-05-05 07:54:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 08:25:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 08:27:00,3.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 08:34:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 08:43:00,2.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,120326,glycopyrrolate,reversal,2020-05-05 09:02:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 09:16:00,3.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 09:38:00,2.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 10:04:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 10:15:00,4.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 11:14:00,4.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 11:25:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 11:45:00,2.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 12:20:00,4.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,119103,propofol,sedative,2020-05-05 12:21:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 12:24:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 12:52:00,3.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 12:59:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,2833,ephedrine,vasopressor,2020-05-05 13:12:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 13:13:00,3.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 13:30:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 13:47:00,3.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 14:14:00,2.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,2833,ephedrine,vasopressor,2020-05-05 14:20:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 14:30:00,3.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,500840,phenylephrine,vasopressor,2020-05-05 14:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,1306,calcium chloride,rescue_or_correction,2020-05-05 14:44:00,500.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 14:47:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,119106,fentanyl,opioid,2020-05-05 15:02:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,59059,ondansetron,antiemetic,2020-05-05 15:02:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,11634,vecuronium,muscle_relaxant,2020-05-05 15:25:00,2.0,mg,IntraVENOUS,vecuronium (NORCURON) injection,VECURONIUM BROMIDE 10 MG IV SOLR,Given
+42e2a1b92ff1028b,045ef66f85261334,3758,hydromorphone,opioid,2020-05-05 15:43:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,119103,propofol,sedative,2020-05-05 15:49:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+42e2a1b92ff1028b,045ef66f85261334,118625,sugammadex,reversal,2020-05-05 15:52:00,200.0,mg,IntraVENOUS,sugammadex sodium (BRIDEON) injection,SUGAMMADEX SODIUM 200 MG/2ML IV SOLN,Given
+42e2a1b92ff1028b,045ef66f85261334,119106,fentanyl,opioid,2020-05-05 15:58:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

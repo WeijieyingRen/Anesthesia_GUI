@@ -1,8 +1,41 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-e9c538709cf900a5,824ba0e03173b8ae,propofol,sedative,2019-12-29 14:18:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-e9c538709cf900a5,824ba0e03173b8ae,propofol,sedative,2019-12-29 14:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-e9c538709cf900a5,824ba0e03173b8ae,ephedrine,vasopressor,2019-12-29 14:24:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-e9c538709cf900a5,824ba0e03173b8ae,ephedrine,vasopressor,2019-12-29 14:40:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-e9c538709cf900a5,824ba0e03173b8ae,ephedrine,vasopressor,2019-12-29 14:52:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-e9c538709cf900a5,824ba0e03173b8ae,ephedrine,vasopressor,2019-12-29 17:16:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-e9c538709cf900a5,824ba0e03173b8ae,ephedrine,vasopressor,2019-12-29 19:11:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+e9c538709cf900a5,824ba0e03173b8ae,41381,midazolam,sedative,2019-12-29 13:20:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,41381,midazolam,sedative,2019-12-29 14:10:00,1.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,119103,propofol,sedative,2019-12-29 14:18:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+e9c538709cf900a5,824ba0e03173b8ae,119661,succinylcholine,muscle_relaxant,2019-12-29 14:18:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+e9c538709cf900a5,824ba0e03173b8ae,500840,phenylephrine,vasopressor,2019-12-29 14:19:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,119103,propofol,sedative,2019-12-29 14:19:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+e9c538709cf900a5,824ba0e03173b8ae,2833,ephedrine,vasopressor,2019-12-29 14:24:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 14:25:00,12.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,114429,vasopressin,vasopressor,2019-12-29 14:27:00,1.0,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 14:40:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,2833,ephedrine,vasopressor,2019-12-29 14:40:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,2833,ephedrine,vasopressor,2019-12-29 14:52:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,114429,vasopressin,vasopressor,2019-12-29 15:04:00,0.5,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 15:14:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,114429,vasopressin,vasopressor,2019-12-29 15:40:00,0.5,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 15:42:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,10181,heparin,anticoagulant,2019-12-29 15:47:00,5000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,114429,vasopressin,vasopressor,2019-12-29 16:00:00,0.5,Units,IntraVENOUS,vasopressin injection,VASOPRESSIN 20 UNIT/ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 16:17:00,6.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 16:53:00,6.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,10181,heparin,anticoagulant,2019-12-29 16:54:00,2000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,500840,phenylephrine,vasopressor,2019-12-29 17:03:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,2833,ephedrine,vasopressor,2019-12-29 17:16:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,500840,phenylephrine,vasopressor,2019-12-29 17:23:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 17:25:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,500840,phenylephrine,vasopressor,2019-12-29 17:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,10181,heparin,anticoagulant,2019-12-29 17:37:00,1000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,500840,phenylephrine,vasopressor,2019-12-29 17:51:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,107330,cisatracurium,muscle_relaxant,2019-12-29 17:53:00,4.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,119106,fentanyl,opioid,2019-12-29 18:27:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,500840,phenylephrine,vasopressor,2019-12-29 18:51:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,59059,ondansetron,antiemetic,2019-12-29 18:54:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,119106,fentanyl,opioid,2019-12-29 19:00:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,2833,ephedrine,vasopressor,2019-12-29 19:11:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+e9c538709cf900a5,824ba0e03173b8ae,120326,glycopyrrolate,reversal,2019-12-29 19:30:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e9c538709cf900a5,824ba0e03173b8ae,117431,neostigmine,reversal,2019-12-29 19:30:00,1.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+e9c538709cf900a5,824ba0e03173b8ae,120326,glycopyrrolate,reversal,2019-12-29 19:32:00,0.2,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e9c538709cf900a5,824ba0e03173b8ae,117431,neostigmine,reversal,2019-12-29 19:32:00,1.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+e9c538709cf900a5,824ba0e03173b8ae,120326,glycopyrrolate,reversal,2019-12-29 19:34:00,0.3,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+e9c538709cf900a5,824ba0e03173b8ae,117431,neostigmine,reversal,2019-12-29 19:34:00,1.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

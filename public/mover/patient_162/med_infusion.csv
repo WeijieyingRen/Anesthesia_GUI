@@ -1,2 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
-54b586fa29611c93,284d00b762b7745b,hydromorphone,opioid,2020-02-01 22:15:00,2020-02-01,2020-02-01,10.0,ml/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+54b586fa29611c93,284d00b762b7745b,504710,hydromorphone,opioid,2020-02-01 22:15:00,2020-02-01 23:21:00,5.0,mL/hr,Epidural,HYDROmorphone 10 mcg/mL-bupivicaine 0.1% epidural infusion,HYDROMORPHONE-BUPIVACAINE-NACL 1000-0.1-0.9 MCG/100ML-% EPIDURAL,New Bag,anesthesia_end,False,True,2020-02-01 22:15:00

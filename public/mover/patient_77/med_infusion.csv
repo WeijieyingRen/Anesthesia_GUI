@@ -1,2 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
-5957bac91e66409a,643bb701cebbd319,hydromorphone,opioid,2021-06-01 16:00:00,2021-06-01,2021-06-05,10.0,mcg,Epidural,HYDROmorphone 10 mcg/mL bupivicaine 0.1% in sodium chloride 0.9% 100 mL Pain Management PCeA,HYDROMORPHONE 10 MCG/ML BUPIVACAINE 0.1% PAIN MANAGEMENT PCEA (UCI),Rate Verify
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+5957bac91e66409a,643bb701cebbd319,505985,hydromorphone,opioid,2021-06-01 16:00:00,2021-06-01 16:12:00,,,Epidural,HYDROmorphone 10 mcg/mL bupivicaine 0.1% in sodium chloride 0.9% 100 mL Pain Management PCeA,HYDROMORPHONE 10 MCG/ML BUPIVACAINE 0.1% PAIN MANAGEMENT PCEA (UCI),Rate Verify,anesthesia_end,False,True,2021-06-01 16:00:00

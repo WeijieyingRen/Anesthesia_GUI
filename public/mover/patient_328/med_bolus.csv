@@ -1,4 +1,18 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-ee1dc93671cc0539,06e22fdb1e77a248,propofol,sedative,2019-09-01 07:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-ee1dc93671cc0539,06e22fdb1e77a248,propofol,sedative,2019-09-01 10:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-ee1dc93671cc0539,06e22fdb1e77a248,propofol,sedative,2019-09-01 10:23:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+ee1dc93671cc0539,06e22fdb1e77a248,119103,propofol,sedative,2019-09-01 07:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ee1dc93671cc0539,06e22fdb1e77a248,119661,succinylcholine,muscle_relaxant,2019-09-01 07:30:00,200.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+ee1dc93671cc0539,06e22fdb1e77a248,107330,cisatracurium,muscle_relaxant,2019-09-01 07:36:00,10.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,107330,cisatracurium,muscle_relaxant,2019-09-01 08:15:00,10.0,mg,IntraVENOUS,cisatracurium (NIMBEX) IV bolus,CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,2332,dexamethasone,antiemetic,2019-09-01 08:55:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,10181,heparin,anticoagulant,2019-09-01 08:55:00,8000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,500840,phenylephrine,vasopressor,2019-09-01 09:18:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,500840,phenylephrine,vasopressor,2019-09-01 09:32:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,500840,phenylephrine,vasopressor,2019-09-01 09:38:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,500840,phenylephrine,vasopressor,2019-09-01 09:44:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,119106,fentanyl,opioid,2019-09-01 09:52:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,119106,fentanyl,opioid,2019-09-01 09:54:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,119106,fentanyl,opioid,2019-09-01 09:59:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ee1dc93671cc0539,06e22fdb1e77a248,120326,glycopyrrolate,reversal,2019-09-01 10:10:00,0.8,mg,IntraVENOUS,glycopyrrolate (ROBINUL) syringe,GLYCOPYRROLATE 1 MG/5ML IV SOSY,Given
+ee1dc93671cc0539,06e22fdb1e77a248,117431,neostigmine,reversal,2019-09-01 10:10:00,4.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given
+ee1dc93671cc0539,06e22fdb1e77a248,119103,propofol,sedative,2019-09-01 10:15:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ee1dc93671cc0539,06e22fdb1e77a248,119103,propofol,sedative,2019-09-01 10:23:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given

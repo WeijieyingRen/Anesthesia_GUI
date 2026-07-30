@@ -1,2 +1,29 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-9926138f02a851d4,01de11124c19f42d,propofol,sedative,2021-08-20 07:19:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+9926138f02a851d4,01de11124c19f42d,119106,fentanyl,opioid,2021-08-20 07:19:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,119103,propofol,sedative,2021-08-20 07:19:00,150.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+9926138f02a851d4,01de11124c19f42d,59728,rocuronium,muscle_relaxant,2021-08-20 07:19:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,500840,phenylephrine,vasopressor,2021-08-20 07:34:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,59059,ondansetron,antiemetic,2021-08-20 07:39:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,500840,phenylephrine,vasopressor,2021-08-20 07:53:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,110240,dexmedetomidine,sedative,2021-08-20 07:54:00,8.0,mcg,IntraVENOUS,dexMEDEtomidine (PRECEDEX) injection,DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,500840,phenylephrine,vasopressor,2021-08-20 08:04:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,500840,phenylephrine,vasopressor,2021-08-20 08:20:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,110240,dexmedetomidine,sedative,2021-08-20 09:00:00,4.0,mcg,IntraVENOUS,dexMEDEtomidine (PRECEDEX) injection,DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,500840,phenylephrine,vasopressor,2021-08-20 09:28:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,500840,phenylephrine,vasopressor,2021-08-20 09:42:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,110240,dexmedetomidine,sedative,2021-08-20 10:00:00,4.0,mcg,IntraVENOUS,dexMEDEtomidine (PRECEDEX) injection,DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,59728,rocuronium,muscle_relaxant,2021-08-20 10:29:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,110240,dexmedetomidine,sedative,2021-08-20 11:00:00,4.0,mcg,IntraVENOUS,dexMEDEtomidine (PRECEDEX) injection,DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,59728,rocuronium,muscle_relaxant,2021-08-20 11:45:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,110240,dexmedetomidine,sedative,2021-08-20 12:00:00,4.0,mcg,IntraVENOUS,dexMEDEtomidine (PRECEDEX) injection,DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,119106,fentanyl,opioid,2021-08-20 12:43:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,119106,fentanyl,opioid,2021-08-20 12:45:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,3758,hydromorphone,opioid,2021-08-20 12:48:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,107341,glycopyrrolate,reversal,2021-08-20 12:49:00,0.1,mg,IntraVENOUS,glycopyrrolate (ROBINUL) injection,GLYCOPYRROLATE 1 MG/5ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,3758,hydromorphone,opioid,2021-08-20 12:52:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,3758,hydromorphone,opioid,2021-08-20 12:56:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,110240,dexmedetomidine,sedative,2021-08-20 13:00:00,4.0,mcg,IntraVENOUS,dexMEDEtomidine (PRECEDEX) injection,DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN,Given
+9926138f02a851d4,01de11124c19f42d,3758,hydromorphone,opioid,2021-08-20 13:01:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,3758,hydromorphone,opioid,2021-08-20 13:09:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,107341,glycopyrrolate,reversal,2021-08-20 13:25:00,0.6,mg,IntraVENOUS,glycopyrrolate (ROBINUL) injection,GLYCOPYRROLATE 1 MG/5ML IJ SOLN,Given
+9926138f02a851d4,01de11124c19f42d,117431,neostigmine,reversal,2021-08-20 13:25:00,3.0,mg,IntraVENOUS,neostigmine (PROSTIGMINE) syringe,NEOSTIGMINE METHYLSULFATE 5 MG/5ML IV SOSY,Given

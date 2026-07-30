@@ -1,1 +1,2 @@
-case_id,patient_id,medication,med_group,observation_time,start_date,end_date,dose,unit,route,display_name,medication_name,mar_action
+case_id,patient_id,medication_id,medication,med_group,start_time,end_time,dose,unit,route,display_name,medication_name,start_action,end_action,carried_in,right_censored,source_start_time
+daa6330e82246dae,82afa87ca98b2fd6,507570,hydromorphone,opioid,2019-06-02 07:14:00,2019-06-02 17:10:00,,,IntraVENOUS,HYDROmorphone (DILAUDID) 25 mg/50 mL PCA infusion – TOLERANT,HYDROMORPHONE 0.5 MG/ML PREMIX PCA INFUSION - TOLERANT (UCI),Rate Verify,anesthesia_end,True,True,2019-06-01 08:24:00

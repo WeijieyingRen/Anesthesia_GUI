@@ -1,9 +1,45 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:00:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:06:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:10:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:22:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-b76487f0718ef266,156f52ab7e122c39,epinephrine,vasopressor,2020-05-20 06:31:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
-b76487f0718ef266,156f52ab7e122c39,ephedrine,vasopressor,2020-05-20 08:10:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-b76487f0718ef266,156f52ab7e122c39,ephedrine,vasopressor,2020-05-20 08:16:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-b76487f0718ef266,156f52ab7e122c39,ephedrine,vasopressor,2020-05-20 08:21:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+b76487f0718ef266,156f52ab7e122c39,129393,epinephrine,vasopressor,2020-05-20 06:00:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,129393,epinephrine,vasopressor,2020-05-20 06:06:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,129393,epinephrine,vasopressor,2020-05-20 06:10:00,0.05,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,4237,ketamine,sedative,2020-05-20 06:10:00,50.0,mg,IntraVENOUS,ketamine (KETALAR) injection,KETAMINE HCL 100 MG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,119661,succinylcholine,muscle_relaxant,2020-05-20 06:10:00,100.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 06:10:00,3.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,121005,rocuronium,muscle_relaxant,2020-05-20 06:15:00,100.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,129393,epinephrine,vasopressor,2020-05-20 06:22:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,129393,epinephrine,vasopressor,2020-05-20 06:31:00,1.0,mg,IntraVENOUS,EPINEPHrine (ADRENALIN) injection (1 mg/10mL),EPINEPHRINE PF 1 MG/10ML IJ SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,7309,sodium bicarbonate,rescue_or_correction,2020-05-20 06:37:00,50.0,mEq,IntraVENOUS,sodium bicarbonate 8.4% injection,SODIUM BICARBONATE 8.4 % IV SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,1306,calcium chloride,rescue_or_correction,2020-05-20 06:44:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,1306,calcium chloride,rescue_or_correction,2020-05-20 07:03:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 07:19:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 07:27:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,1306,calcium chloride,rescue_or_correction,2020-05-20 07:29:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 07:52:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 07:56:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 07:59:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 08:03:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 08:07:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,2833,ephedrine,vasopressor,2020-05-20 08:10:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,2833,ephedrine,vasopressor,2020-05-20 08:16:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 08:19:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,2833,ephedrine,vasopressor,2020-05-20 08:21:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,1306,calcium chloride,rescue_or_correction,2020-05-20 08:23:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 08:23:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 08:27:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 08:30:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,41381,midazolam,sedative,2020-05-20 08:40:00,2.0,mg,IntraVENOUS,midazolam (VERSED) injection,MIDAZOLAM HCL 2 MG/2ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,121005,rocuronium,muscle_relaxant,2020-05-20 10:00:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 10:01:00,2.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,10181,heparin,anticoagulant,2020-05-20 11:55:00,8000.0,Units,IntraVENOUS,heparin injection,HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 12:20:00,1.0,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,121005,rocuronium,muscle_relaxant,2020-05-20 12:23:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) syringe,ROCURONIUM BROMIDE 50 MG/5ML IV SOSY,Given
+b76487f0718ef266,156f52ab7e122c39,119106,fentanyl,opioid,2020-05-20 12:35:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,500840,phenylephrine,vasopressor,2020-05-20 12:40:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,500840,phenylephrine,vasopressor,2020-05-20 12:43:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,500840,phenylephrine,vasopressor,2020-05-20 13:50:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 13:53:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,500840,phenylephrine,vasopressor,2020-05-20 14:20:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,8478,vasopressin,vasopressor,2020-05-20 14:44:00,0.5,Units,IntraVENOUS,vasopressin (PITRESSIN) injection,VASOPRESSIN 20 UNIT/ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,119106,fentanyl,opioid,2020-05-20 15:30:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,119106,fentanyl,opioid,2020-05-20 16:15:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+b76487f0718ef266,156f52ab7e122c39,119106,fentanyl,opioid,2020-05-20 16:20:00,25.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given

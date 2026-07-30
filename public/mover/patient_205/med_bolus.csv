@@ -1,14 +1,36 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 08:30:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 08:50:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 09:00:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,ephedrine,vasopressor,2020-05-25 09:18:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,ephedrine,vasopressor,2020-05-25 09:29:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 09:33:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 09:57:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,ephedrine,vasopressor,2020-05-25 10:07:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 10:12:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 10:15:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 10:17:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,ephedrine,vasopressor,2020-05-25 12:10:00,50.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
-2a33a415ece8b93e,9c96f48e8d417e2c,propofol,sedative,2020-05-25 14:46:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+2a33a415ece8b93e,9c96f48e8d417e2c,119106,fentanyl,opioid,2020-05-25 08:30:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 08:30:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119106,fentanyl,opioid,2020-05-25 08:50:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 08:50:00,100.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119661,succinylcholine,muscle_relaxant,2020-05-25 08:51:00,70.0,mg,IntraVENOUS,succinylcholine (ANECTINE) syringe,SUCCINYLCHOLINE CHLORIDE 100 MG/5ML IV SOSY,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 09:00:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,2833,ephedrine,vasopressor,2020-05-25 09:18:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,2833,ephedrine,vasopressor,2020-05-25 09:29:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 09:33:00,50.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 09:57:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,2833,ephedrine,vasopressor,2020-05-25 10:07:00,10.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,500840,phenylephrine,vasopressor,2020-05-25 10:09:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 10:12:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119106,fentanyl,opioid,2020-05-25 10:13:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 10:15:00,30.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 10:17:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119106,fentanyl,opioid,2020-05-25 10:18:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,2332,dexamethasone,antiemetic,2020-05-25 10:22:00,4.0,mg,IntraVENOUS,dexamethasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,3758,hydromorphone,opioid,2020-05-25 10:30:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,500840,phenylephrine,vasopressor,2020-05-25 10:59:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,3758,hydromorphone,opioid,2020-05-25 12:03:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,2833,ephedrine,vasopressor,2020-05-25 12:10:00,5.0,mg,IntraVENOUS,ePHEDrine (PRETZ-D) 50 MG/ML injection,EPHEDRINE SULFATE 50 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,500840,phenylephrine,vasopressor,2020-05-25 12:35:00,50.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,3758,hydromorphone,opioid,2020-05-25 13:50:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 14:39:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 14:45:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,119103,propofol,sedative,2020-05-25 14:46:00,20.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 14:51:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 14:58:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 15:30:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,3758,hydromorphone,opioid,2020-05-25 16:29:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 17:40:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,1306,calcium chloride,rescue_or_correction,2020-05-25 17:45:00,100.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,59059,ondansetron,antiemetic,2020-05-25 18:08:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+2a33a415ece8b93e,9c96f48e8d417e2c,3758,hydromorphone,opioid,2020-05-25 18:12:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given

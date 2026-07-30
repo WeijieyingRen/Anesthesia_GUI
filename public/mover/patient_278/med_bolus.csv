@@ -1,3 +1,25 @@
-case_id,patient_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
-ae93a7a2e9025dcf,e1bc13760ea66222,propofol,sedative,2021-03-22 10:31:00,200.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
-ae93a7a2e9025dcf,e1bc13760ea66222,sugammadex,reversal,2021-03-22 16:58:00,500.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
+case_id,patient_id,medication_id,medication,med_group,observation_time,dose,unit,route,display_name,medication_name,mar_action
+ae93a7a2e9025dcf,e1bc13760ea66222,119106,fentanyl,opioid,2021-03-22 10:30:00,50.0,mcg,IntraVENOUS,fentaNYL injection,FENTANYL CITRATE (PF) 100 MCG/2ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,119103,propofol,sedative,2021-03-22 10:31:00,130.0,mg,IntraVENOUS,propofol (DIPRIVAN) injection (200 mg/20 mL),PROPOFOL 200 MG/20ML IV EMUL,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 10:33:00,50.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 11:10:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 11:10:00,10.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 11:38:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,2332,dexamethasone,antiemetic,2021-03-22 11:46:00,4.0,mg,IntraVENOUS,dexAMETHasone (DECADRON) injection,DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 12:10:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 12:58:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 13:03:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 13:17:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 13:33:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 14:02:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 14:04:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 14:45:00,500.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 14:49:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,1306,calcium chloride,rescue_or_correction,2021-03-22 15:07:00,1000.0,mg,IntraVENOUS,calcium chloride injection,CALCIUM CHLORIDE 10 % IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59728,rocuronium,muscle_relaxant,2021-03-22 15:24:00,20.0,mg,IntraVENOUS,rocuronium (ZEMURON) injection,ROCURONIUM BROMIDE 100 MG/10ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 16:07:00,100.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,3758,hydromorphone,opioid,2021-03-22 16:26:00,0.4,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,3758,hydromorphone,opioid,2021-03-22 16:32:00,0.2,mg,IntraVENOUS,HYDROmorphone (DILAUDID) injection,HYDROMORPHONE HCL 2 MG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,59059,ondansetron,antiemetic,2021-03-22 16:36:00,4.0,mg,IntraVENOUS,ondansetron (ZOFRAN) injection,ONDANSETRON HCL 4 MG/2ML IV SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,500840,phenylephrine,vasopressor,2021-03-22 16:39:00,200.0,mcg,IntraVENOUS,phenylephrine dilution (NEO-SYNEPHRINE) injection,PHENYLEPHRINE DILUTION 100 MCG/ML IJ SOLN,Given
+ae93a7a2e9025dcf,e1bc13760ea66222,118627,sugammadex,reversal,2021-03-22 16:58:00,200.0,mg,IntraVENOUS,sugammadex (BRIDION) 500 MG/5ML IV bolus,SUGAMMADEX SODIUM 500 MG/5ML IV SOLN,Given
